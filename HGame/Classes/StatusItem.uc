@@ -113,7 +113,7 @@ function float GetPotentialToMaxCountRatio ()
 {
 	if ( nMaxCount != 0 )
 	{
-		return nCurrCountPotential / nMaxCount;
+		return float(nCurrCountPotential) / float(nMaxCount);
 	} 
 	else 
 	{
@@ -126,7 +126,7 @@ function float GetCountToMaxCountRatio ()
 {
 	if ( nMaxCount > 0 )
 	{
-		return nCount / nMaxCount;
+		return float(nCount) / float(nMaxCount);
 	} 
 	else 
 	{
@@ -137,7 +137,7 @@ function float GetCountToMaxCountRatio ()
 
 function float GetCountToCurrPotentialRatio ()
 {
-	return nCount / nCurrCountPotential;
+	return float(nCount) / float(nCurrCountPotential);
 }
 
 function Color GetCountColor (optional bool bShadow)
@@ -279,19 +279,11 @@ function string GetToolTip ()
 defaultproperties
 {
     nCountMiddleX=50
-
     nCountMiddleY=58
-
     bDisplayWhenCountZero=True
-
     bIncrementPosWhenCountZero=True
-
     bTravelStatus=True
-
     CountColor=1
-
     bHidden=True
-
     DrawType=0
-
 }

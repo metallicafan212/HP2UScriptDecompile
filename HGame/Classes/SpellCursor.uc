@@ -60,7 +60,7 @@ function Destroyed ()
 
 function SetLOSDistance (float fNewDistance)
 {
-  if ( fNewDistance == byte(0) )
+  if ( fNewDistance == 0 )
   {
     fNewDistance = Default.fLOS_Distance;
   }

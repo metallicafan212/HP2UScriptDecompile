@@ -365,28 +365,34 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	nCanvasHalfY = smParent.nCanvasSizeY / 2.0;
 	if ( nHudX >= nCanvasHalfX )
 	{
-		fXVal = float(nHudX - nCanvasHalfX) / float(nCanvasHalfX);
+		// fXVal = float(nHudX - nCanvasHalfX) / float(nCanvasHalfX);
+		fXVal = (nHudX - nCanvasHalfX) / float(nCanvasHalfX); //removed wrong float casts -AdamJD
 	} 
 	else 
 	{
-		fXVal =  -1.0 - float(nHudX) / float(nCanvasHalfX);
+		// fXVal =  -1.0 - float(nHudX) / float(nCanvasHalfX);
+		fXVal =  -(1.0 - (nHudX / float(nCanvasHalfX))); //removed wrong float casts -AdamJD
 	}
 	if ( nHudY <= nCanvasHalfY )
 	{
-		fYVal = 1.0 - float(nHudY) / float(nCanvasHalfY);
+		// fYVal = 1.0 - float(nHudY) / float(nCanvasHalfY);
+		fYVal = 1.0 - (nHudY / float(nCanvasHalfY)); //removed wrong float casts -AdamJD
 	} 
 	else 
 	{
-		fYVal =  -1 - float((nHudY - nCanvasHalfY)) / float(nCanvasHalfY);
+		// fYVal =  -1 - float((nHudY - nCanvasHalfY)) / float(nCanvasHalfY);
+		fYVal =  -(1 - ((nHudY - nCanvasHalfY) / float(nCanvasHalfY))); //removed wrong float casts -AdamJD
 	}
 	fCameraPitch = Normalize(smParent.PlayerHarry.Cam.Rotation).Pitch;
 	if ( fCameraPitch > 32768 )
 	{
-		fYVal = fYVal - 1.0 - fCameraPitch / 65536;
+		// fYVal = fYVal - 1.0 - fCameraPitch / 65536;
+		fYVal = fYVal - (1.0 - (fCameraPitch / 65536)); //added BODMAS -AdamJD
 	} 
 	else 
 	{
-		fYVal = fYVal + fCameraPitch / 65536;
+		// fYVal = fYVal + fCameraPitch / 65536;
+		fYVal = fYVal + (fCameraPitch / 65536); //added BODMAS -AdamJD
 	}
 	vectReturn.X = fXVal;
 	vectReturn.Y = fYVal;
@@ -564,7 +570,7 @@ function float GetScaleFactor (int nCanvasSizeX)
 {
 	local float fScale;
 
-	fScale = float(nCanvasSizeX) / 640.0;
+	fScale = nCanvasSizeX / 640.0;
 	return fScale;
 }
 

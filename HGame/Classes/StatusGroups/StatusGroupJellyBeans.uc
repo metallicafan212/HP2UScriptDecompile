@@ -38,4 +38,6 @@ defaultproperties
 
     fTotalEffectOutTime=0.30
 
+	// Metallicafan212:	Missing for some reason
+	GameEffectType=ET_Fade
 }

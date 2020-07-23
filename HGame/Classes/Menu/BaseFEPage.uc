@@ -71,6 +71,7 @@ function CreateBackPageButton (optional int nX, optional int nY)
 }
 
 // Metallicafan212:	Don't think this is used, so I'm not going to fix the jump shit
+// This is used lol -AdamJD
 function CreateTitleButton (string strTitle, optional int nXPos, optional int nYPos)
 {
 	if ( nXPos == 0 )
@@ -82,6 +83,10 @@ function CreateTitleButton (string strTitle, optional int nXPos, optional int nY
 		nYPos = 40;
 		}
 		*/
+		
+		//align title to the centre of the page -AdamJD
+		nXPos = (WinWidth / 2) - 200;
+		nYPos = 40;
 	}
 	TitleButton = UWindowLabelControl(CreateControl(Class'UWindowLabelControl', nXPos, nYPos,400.0,30.0));
 	TitleButton.SetFont(4);

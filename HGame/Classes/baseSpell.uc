@@ -139,7 +139,7 @@ simulated function HitWall (Vector HitNormal, Actor Wall)
       PlayerHarry.ClientMessage("Spell: " $ string(self) $ " HitWall GridMover: " $ string(Wall));
     }
     CreateHitEffects(Wall,Location);
-  } else //{
+  } else {
     if ( bUseDebugMode )
     {
       PlayerHarry.ClientMessage("Spell: " $ string(self) $ " HitWall Other: " $ string(Wall));
@@ -148,7 +148,7 @@ simulated function HitWall (Vector HitNormal, Actor Wall)
     {
       return;
     }
-  //}
+  }
   OnSpellShutdown();
   Destroy();
 }

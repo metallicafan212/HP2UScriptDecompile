@@ -32,10 +32,13 @@ function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int
 
 defaultproperties
 {
+	//some of the default props weren't decompiled right -AdamJD
+	
     bDisplayHorizontally=False
+	
+	// GameEffectType=2 
+    GameEffectType=ET_Permanent 
 
-    GameEffectType=2
-
-    MenuProps=2
-
+	// MenuProps=2
+    MenuProps=Menu_IfCurrentlyHaveAny
 }

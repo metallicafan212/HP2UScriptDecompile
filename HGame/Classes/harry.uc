@@ -3,17 +3,17 @@
 //================================================================================ 
 
 class harry extends PlayerPawn    
-  Config(User);   
+  Config(User);    
 
 const nSPONGIFY_CHALLENGE_IDX= 3;
-const nDIFFINDO_CHALLENGE_IDX= 2; 
+const nDIFFINDO_CHALLENGE_IDX= 2;  
 const nSKURGE_CHALLENGE_IDX= 1;
 const nRICTUSEMPRA_CHALLENGE_IDX= 0;
 struct ChallengeScoreType  
-{
+{  
   var int nHighScore;
-  var int nMaxScore;
-}; 
+  var int nMaxScore; 
+};  
 
 struct QuidGameResult 
 {
@@ -525,11 +525,10 @@ function PostBeginPlay()
 	HarryAnimChannel.SetOwner( self );
 
 	fTimeLastDrank = -1.0;
-
+	
 	// Adding a timer to Harry. 
 	// Looping timer with a duration of 1 sec. Leave this as is. 
 	SetTimer(1.0, true);
-
 
 
 
@@ -800,7 +799,7 @@ function EctoRefAdd ()
   {
     GroundSpeed = GroundEctoSpeed;
     HarryAnimSet = HARRY_ANIM_SET_ECTO;
-    PlaySound(Sound'ecto_damage',SLOT_Interact,,,,,,True);
+    PlaySound(Sound'HPSounds.Ch2Skurge.ecto_damage',SLOT_Interact,0.75f,,,,,True);
   }
   iEctoRefCount++;
 }
@@ -815,7 +814,7 @@ function EctoRefSub ()
       HarryAnimSet = HARRY_ANIM_SET_MAIN;
       LeaveEcto();
       bEctoFlashed = False;
-      StopSound(Sound'ecto_damage',SLOT_Interact);
+      StopSound(Sound'HPSounds.Ch2Skurge.ecto_damage',SLOT_Interact);
     }
     iEctoRefCount--;
   }
@@ -914,7 +913,7 @@ function ListGroups ()
 }
 
 event PreSaveGame ()
-{
+{    
   PreviousLevelName = "";
   SloMo(1.0);
   CopyAllStatusFromManagerToHarry();
@@ -1027,8 +1026,9 @@ event TravelPostAccept ()
         Log("***Found SmartStart from:" $ PreviousLevelName);
         bFoundSmartStart = True;
       } 
-	  else {
-	}
+	  // else 
+	  // {
+	// }
     }
   }
   if (  !bFoundSmartStart )
@@ -1257,7 +1257,8 @@ function bool InFrontOfHarry (Actor A)
   adir.Z = 0.0;
   cdirsize = VSize2D(cdir);
   adirsize = VSize2D(adir);
-  Cos = cdir Dot adir / cdirsize * adirsize;
+  // Cos = cdir Dot adir / cdirsize * adirsize; 
+  Cos = (cdir Dot adir) / (cdirsize * adirsize); //UTPT forgot to add brackets -AdamJD
   if ( Cos > 0.5 )
   {
     return True;
@@ -1358,7 +1359,7 @@ function AttachCarryActor (optional name nameBone)
 
 function PickupActor (Actor Other)
 {
-  if ( Physics == PHYS_Walking && IsInState('PlayerWalking') && (CarryingActor == None) && (HPawn(Other) != None) && HPawn(Other).bObjectCanBePickedUp && HarryAnimChannel.CanPickSomethingUp() )
+  if ( Physics == PHYS_Walking && IsInState('PlayerWalking') && CarryingActor == None && HPawn(Other) != None && HPawn(Other).bObjectCanBePickedUp && HarryAnimChannel.CanPickSomethingUp() )
   {
     ClientMessage("Do Pickup");
     ActorToCarry = Other;
@@ -1401,14 +1402,14 @@ state statePickupItem
   
   begin:
   CurrIdleAnimName = GetCurrIdleAnimName();
-  PlayAnim(CurrIdleAnimName,,0.41,HarryAnimType);
+  PlayAnim(CurrIdleAnimName,,[TweenTime]0.4,[Type]HarryAnimType);
   if ( ActorToCarry != None )
   {
     TurnTo(ActorToCarry.Location * vect(1.00,1.00,0.00) + Location * vect(0.00,0.00,1.00));
   }
   HarryAnimType = AT_Combine;
   HarryAnimChannel.GotoState('statePickupItem');
-  PlayAnim('Pickup',1.0,0.151,HarryAnimType);
+  PlayAnim('Pickup',1.0,0.151,[Type]HarryAnimType);
   FinishAnim();
   Sleep(0.5);
   GotoState('PlayerWalking');
@@ -1476,7 +1477,7 @@ state statePotionMixingBegin
   
   begin:
   CurrIdleAnimName = GetCurrIdleAnimName();
-  LoopAnim(CurrIdleAnimName,,0.41,,HarryAnimType);
+  LoopAnim(CurrIdleAnimName,,[TweenTime]0.41,,[Type]HarryAnimType);
 }
 
 state statePotionMixingStir
@@ -1488,7 +1489,7 @@ state statePotionMixingStir
   
   begin:
   TurnToward(GetNearestMixingCauldron());
-  LoopAnim('MixPotion',,,,HarryAnimType);
+  LoopAnim('MixPotion',,,,[Type]HarryAnimType);
   switch (Rand(4))
   {
     case 0:
@@ -1515,7 +1516,7 @@ state statePotionMixingIdle
 {
 begin:
   CurrIdleAnimName = GetCurrIdleAnimName();
-  LoopAnim(CurrIdleAnimName,,0.41,,HarryAnimType);
+  LoopAnim(CurrIdleAnimName,,[TweenTime]0.41,, [Type]HarryAnimType);
 }
 
 function GotoLocation (Vector newLoc)
@@ -1571,6 +1572,7 @@ function int FindNearestSavePointID ()
       Str = Mid(string(SavePointInstance.Name),SearchStrLen);
       Log("Found ID Str = " $ Str);
       ReturnID = int(Str);
+	  
     } //else {
     //}
   }
@@ -1588,7 +1590,7 @@ function KillHarry (bool bImmediateDeath)
   {
     StopBossEncounter();
   }
-  if ( (baseBoss(BossTarget) != None) && (baseBoss(BossTarget).TrigEventWhenVictor != 'None') )
+  if ( (baseBoss(BossTarget) != None) && (baseBoss(BossTarget).TrigEventWhenVictor != '') )
   {
     baseBoss(BossTarget).SendVictoriousTrigger();
   } else {
@@ -1620,7 +1622,7 @@ function Died (Pawn Killer, name DamageType, Vector HitLocation)
 
 state stateDead
 {
-  ignores  TakeDamage, AltFire, Fire;
+  ignores  TakeDamage, AltFire, Tick, Fire;
   
   function BeginState ()
   {
@@ -1836,12 +1838,11 @@ state stateDead
 state stateInactive
 {
   ignores  DoJump, AltFire, Fire, TakeDamage;
-  
 }
 
 function StatusItem GetHealthStatusItem ()
 {
-  return managerStatus.GetStatusItem(Class'StatusGroupHealth',Class'StatusItemHealth');
+  return (managerStatus.GetStatusItem(Class'StatusGroupHealth',Class'StatusItemHealth'));
 }
 
 function SetHealth (int iHealth)
@@ -1886,7 +1887,7 @@ function int GetHealthCount ()
 
 function float GetHealth ()
 {
-  return GetHealthStatusItem().GetCountToCurrPotentialRatio();
+  return (GetHealthStatusItem().GetCountToCurrPotentialRatio());
 }
 
 function AddGryffindorPoints (int iPoints)
@@ -1916,11 +1917,11 @@ function int PotionsCount ()
 
 function managerStatus_PickupItem (HProp Item)
 {
-  if ( Item.IsA('Jellybean') && (TriggerToSendOnFirstBean != 'None') )
+  if ( Item.IsA('Jellybean') && (TriggerToSendOnFirstBean != '') )
   {
     ClientMessage("slkdjflsdkj sdlkfj sldkfj sldkj fsldkf jsdlkf jsdlfk j");
     TriggerEvent(TriggerToSendOnFirstBean,self,self);
-    TriggerToSendOnFirstBean = 'None';
+    TriggerToSendOnFirstBean = '';
   }
   managerStatus.PickupItem(Item);
 }
@@ -2030,6 +2031,8 @@ state wingspell
   LoopAnim(CurrIdleAnimName);
   SetPhysics(PHYS_Rotating);
   Sleep(0.1);
+  
+  loop:
   lookhere = focusActor.Location;
   lookhere.Z = Location.Z;
   TurnTo(lookhere);
@@ -2040,7 +2043,7 @@ state wingspell
   }
   PlayAnim('Cast');
   Sleep(0.31);
-  goto ('Loop');
+  goto 'Loop';
 }
 
 function KeyDownEvent (int Key)
@@ -2107,7 +2110,7 @@ function KeyDownEvent (int Key)
       // }
     // }
   // }
-  if ( _CurrentString ~= "ChrisMode" )
+  else if ( _CurrentString ~= "ChrisMode" )
   {
     if ( Opacity == 1.0 )
     {
@@ -2149,7 +2152,7 @@ function SpawnAndAttach (name Bone)
 {
   local Actor E;
 
-  E = Spawn(Class'TorchFire03',self);
+  E = Spawn(Class'TorchFire03',[SpawnOwner]self);
   E.AttachToOwner(Bone);
 }
 
@@ -2159,7 +2162,7 @@ function StartBossEncounter (baseBoss Boss, bool in_bHarryShouldLockOntoBoss, bo
 
   BossTarget = Boss;
   bLockedOnTarget = in_bHarryShouldLockOntoBoss;
-  if ( (in_vFixedFaceDirection.X != 0) || (in_vFixedFaceDirection.Y != 0) || (in_vFixedFaceDirection.Z != 0) )
+  if ( in_vFixedFaceDirection.X != 0 || in_vFixedFaceDirection.Y != 0 || in_vFixedFaceDirection.Z != 0 )
   {
     bFixedFaceDirection = True;
     vFixedFaceDirection = Normal(in_vFixedFaceDirection);
@@ -2181,7 +2184,7 @@ function StartBossEncounter (baseBoss Boss, bool in_bHarryShouldLockOntoBoss, bo
   }
   bCanCast = in_bCanCast;
   bTargettingError = False;
-  if ( ForceSpellType != 0 )
+  if ( ForceSpellType != SPELL_None )
   {
     baseWand(Weapon).ChooseSpell(ForceSpellType,True);
     baseWand(Weapon).bAutoSelectSpell = False;
@@ -2194,7 +2197,7 @@ function StartBossEncounter (baseBoss Boss, bool in_bHarryShouldLockOntoBoss, bo
     SpellCursor.SetLOSDistance(0.0);
   }
   // if (!(bStrafe == 0 )) goto JL014A;
-  if ( in_bHarryShouldLockOntoBoss && (Boss != None) )
+  if ( in_bHarryShouldLockOntoBoss && Boss != None )
   {
     if (  !Boss.SetCamMode() )
     {
@@ -2250,7 +2253,7 @@ function name HarryAtMapMarker ()
   foreach AllActors(Class'MenuMapLocationMarker',A)
   {
     D = VSize2D(A.Location - Location);
-    if ( (D < CollisionRadius + A.CollisionRadius) && (Location.Z > A.Location.Z - A.CollisionHeight - 80) && (Location.Z < A.Location.Z + A.CollisionHeight + 80) )
+    if ( D < CollisionRadius + A.CollisionRadius && Location.Z > A.Location.Z - A.CollisionHeight - 80 && Location.Z < A.Location.Z + A.CollisionHeight + 80 )
     {
       if ( D < closestD )
       {
@@ -2369,13 +2372,13 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
   switch (Difficulty)
   {
     case DifficultyEasy:
-    fDamageScaled = fDamageScaled * fDamageMultiplier_Easy;
+    fDamageScaled = (fDamageScaled * fDamageMultiplier_Easy);
     break;
     case DifficultyMedium:
-    fDamageScaled = fDamageScaled * fDamageMultiplier_Medium;
+    fDamageScaled = (fDamageScaled * fDamageMultiplier_Medium);
     break;
     case DifficultyHard:
-    fDamageScaled = fDamageScaled * fDamageMultiplier_Hard;
+    fDamageScaled = (fDamageScaled * fDamageMultiplier_Hard);
     break;
     default:
   }
@@ -2496,7 +2499,7 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
     if ( GetHealthCount() <= 0.0 )
     {
       siWiggenPotion = managerStatus.GetStatusItem(Class'StatusGroupPotions',Class'StatusItemWiggenwell');
-      if ( bAutoQuaff &&  !bFallDamage &&  !bInstantDeath &&  !bClubDeath && (siWiggenPotion.nCount >= 1) )
+      if ( bAutoQuaff &&  !bFallDamage &&  !bInstantDeath &&  !bClubDeath && siWiggenPotion.nCount >= 1 )
       {
         AddHealth(1);
         DoDrinkWiggenwell();
@@ -2681,23 +2684,21 @@ function DoJump (optional float f)
 	}
 	if ( iEctoRefCount > 0 )
 	{
-		PlayAnim(HarryAnims[HarryAnimSet].Jump,,0.1,HarryAnimType);
+		PlayAnim(HarryAnims[HarryAnimSet].Jump,,[TweenTime]0.1,[Type]HarryAnimType);
 		HarryAnimChannel.DoEctoJump();
 		return;
 	} 
-	else 
+	else if ( iSleepyAnimTimer > 0 )
 	{
-		if ( iSleepyAnimTimer > 0 )
-		{
-			PlayAnim(HarryAnims[HarryAnimSet].Jump,,0.1,HarryAnimType);
-			HarryAnimChannel.DoSleepyJump();
-			return;
-		}
+		PlayAnim(HarryAnims[HarryAnimSet].Jump,,[TweenTime]0.1,[Type]HarryAnimType);
+		HarryAnimChannel.DoSleepyJump();
+		return;
 	}
 	if ( Physics == PHYS_Walking )
 	{
 		log("JUMP FROM PHYS_WALKING!");
 		PlayJumpEmoteSound(); //decide which jump sound to play -AdamJD
+		PlayOwnedSound(JumpSound, SLOT_Talk, 1.5, true, 1200, 1.0 );
 		if ( (Level.Game != None) && Level.Game.Difficulty > 0 )
 		{
 		  MakeNoise(0.1 * Level.Game.Difficulty);
@@ -2705,11 +2706,11 @@ function DoJump (optional float f)
 		MountDelta = Location;
 		if ( VSize2D(Velocity) > 0 )
 		{
-		  PlayAnim(HarryAnims[HarryAnimSet].Jump2,,0.1,HarryAnimType);
+		  PlayAnim(HarryAnims[HarryAnimSet].Jump2,,[TweenTime]0.1,[Type]HarryAnimType);
 		} 
 		else 
 		{
-		  PlayAnim(HarryAnims[HarryAnimSet].Jump,,0.1,HarryAnimType);
+		  PlayAnim(HarryAnims[HarryAnimSet].Jump,,[TweenTime]0.1,[Type]HarryAnimType);
 		}
 		S = VSize2D(Velocity);
 		if ( S > GroundJumpSpeed )
@@ -3440,7 +3441,7 @@ function PlayLandedSound()
 
 function PlayTurning ()
 {
-  PlayAnim(HarryAnims[HarryAnimSet].StrafeLeft,,,HarryAnimType);
+  PlayAnim(HarryAnims[HarryAnimSet].StrafeLeft,,,[Type]HarryAnimType);
 }
 
 function TweenToRunning (float TweenTime)
@@ -3461,18 +3462,18 @@ function TweenToRunning (float TweenTime)
   {
     if ( Dir Dot X < -0.75 )
     {
-      LoopAnim(HarryAnims[HarryAnimSet].WalkBack,0.89999998,TweenTime,,HarryAnimType);
+      LoopAnim(HarryAnims[HarryAnimSet].WalkBack,0.89999998,[TweenTime]TweenTime,,[Type]HarryAnimType);
       bMovingBackwards = True;
     } else //{
       if ( Dir Dot Y > 0 )
       {
-        LoopAnim(HarryAnims[HarryAnimSet].StrafeRight,0.89999998,TweenTime,,HarryAnimType);
+        LoopAnim(HarryAnims[HarryAnimSet].StrafeRight,0.89999998,[TweenTime]TweenTime,,[Type]HarryAnimType);
       } else {
-        LoopAnim(HarryAnims[HarryAnimSet].StrafeLeft,0.89999998,TweenTime,,HarryAnimType);
+        LoopAnim(HarryAnims[HarryAnimSet].StrafeLeft,0.89999998,[TweenTime]TweenTime,,[Type]HarryAnimType);
       }
     //}
   } else {
-    LoopAnim(HarryAnims[HarryAnimSet].run,0.89999998,TweenTime,,HarryAnimType);
+    LoopAnim(HarryAnims[HarryAnimSet].run,0.89999998,[TweenTime]TweenTime,,[Type]HarryAnimType);
     bMovingBackwards = False;
   }
 }
@@ -3484,7 +3485,7 @@ function PlayRunning ()
 
 function PlayInAir ()
 {
-  LoopAnim(AnimFalling,,0.41,,HarryAnimType);
+  LoopAnim(AnimFalling,,[TweenTime]0.41,,[Type]HarryAnimType);
   ClientMessage(" animFalling = " $ string(AnimFalling));
 }
 
@@ -3554,7 +3555,7 @@ function TweenToWaiting (float TweenTime)
     return;
   }
   CurrIdleAnimName = GetCurrIdleAnimName();
-  LoopAnim(CurrIdleAnimName,,TweenTime,,HarryAnimType);
+  LoopAnim(CurrIdleAnimName,,[TweenTime]TweenTime,,[Type]HarryAnimType);
 }
 
 function Cast ()
@@ -3695,7 +3696,7 @@ function Cast ()
 
 function Fire (optional float f)
 {
-  if ( (Weapon != None) && (bJustFired == False) )
+  if ( Weapon != None && bJustFired == False )
   {
     Weapon.bPointing = True;
   }
@@ -3709,7 +3710,7 @@ exec function AltFire (optional float f)
 
   if ( HarryAnimChannel.IsCarryingActor() )
   {
-    if ( (bThrow == False) && IsInState('PlayerWalking') )
+    if ( bThrow == False && IsInState('PlayerWalking') )
     {
       ClientMessage("Throw!");
       HarryAnimChannel.GotoStateThrow();
@@ -3741,7 +3742,8 @@ state Mounting
   function BeginState ()
   {
     DebugState();
-    bFallingMount = Physics == PHYS_Walking;
+	// bFallingMount = Physics == PHYS_Walking;
+    bFallingMount = Physics != PHYS_Walking; //thanks to Metallicafan212 for finding this -AdamJD
     Velocity = vect(0.00,0.00,0.00);
     Acceleration = vect(0.00,0.00,0.00);
     SetPhysics(PHYS_Projectile);
@@ -3897,7 +3899,7 @@ state CelebrateCardSet
 	  FinishAnim();
 	  Cam.SetCameraMode(Cam.ECamMode.CM_Transition);
 	  nCelebrateProgress = 2;
-	  if ( Cam.CameraMode == Cam.ECamMode.CM_CutScene )
+	  while ( Cam.CameraMode == Cam.ECamMode.CM_CutScene )
 	  {
 		Sleep(0.1);
 		//goto JL011E;
@@ -4052,16 +4054,16 @@ function PlayerTick (float dtime)
   {
     if ( AnimSequence != 'run' )
     {
-      if ( (AnimFrame >= 0.5) && (LastAnimFrame < 0.5) || (AnimFrame < LastAnimFrame) )
+      if ( (AnimFrame >= 0.5) && (LastAnimFrame < 0.5) || AnimFrame < LastAnimFrame )
       {
         PlayFootStep();
       }
-    } else //{
+    } else {
       if ( (AnimFrame < LastAnimFrame) || (AnimFrame >= 0.25) && (LastAnimFrame < 0.25) || (AnimFrame >= 0.5) && (LastAnimFrame < 0.5) || (AnimFrame >= 0.75) && (LastAnimFrame < 0.75) )
       {
         PlayFootStep();
       }
-    //}
+    }
   }
   LastAnimFrame = AnimFrame;
   ViewRotation = BaseCam(ViewTarget).rCurrRotation;
@@ -4343,6 +4345,43 @@ state PlayerWalking
   //ignores  PlayerTick, Landed, TakeDamage, HitWall, Bump, UnTouch, Touch;
   ignores SeePlayer, HearNoise;
   
+  //UTPT didn't add these events... -AdamJD
+  event Touch( Actor Other )
+  {
+	// Let the director (if any) know when Harry touches things
+	if ( Director != None )
+		Director.OnTouchEvent( Self, Other );
+
+	Global.Touch( Other );
+  }
+
+  event UnTouch( Actor Other )
+  {
+	// Let the director (if any) know when Harry stops touching things
+	if ( Director != None )
+		Director.OnUnTouchEvent( Self, Other );
+
+	Global.UnTouch( Other );
+  }
+
+  event Bump( Actor Other )
+  {
+	// Let the director (if any) know when Harry bumps things
+	if ( Director != None )
+		Director.OnBumpEvent( Self, Other );
+
+	Global.Bump( Other );
+  }
+
+  event HitWall( vector HitNormal, Actor Wall )
+  {
+	// Let the director (if any) know when Harry hits things
+	if ( Director != None )
+		Director.OnHitEvent( Self );
+
+	Global.HitWall( HitNormal, Wall );
+  }
+  
   function ZoneChange (ZoneInfo NewZone)
   {
     if ( NewZone.bWaterZone )
@@ -4351,7 +4390,7 @@ state PlayerWalking
       GotoState('PlayerSwimming');
     }
   }
-  
+
   function AnimEnd ()
   {
     local name MyAnimGroup;
@@ -4362,7 +4401,7 @@ state PlayerWalking
     if (Physics == PHYS_Walking )
     {
       MyAnimGroup = MyGetAnimGroup(AnimSequence);
-      if ( Velocity.X * Velocity.X + Velocity.Y * Velocity.Y < 1000 )
+      if ( (Velocity.X * Velocity.X + Velocity.Y * Velocity.Y) < 1000 )
       {
         if ( MyAnimGroup == 'Waiting' )
         {
@@ -4431,6 +4470,221 @@ state PlayerWalking
     }
   }
   
+  function Landed(vector HitNormal)
+  {
+	local float fFallDistanceZ;
+	local int   i;
+
+	clientMessage("landed: jump dist = " $VSize(Location-MountDelta) $ "   tia="$fTimeInAir);
+		
+	Global.Landed(HitNormal);
+
+	PlayLandedSound();
+
+	playanim(HarryAnims[HarryAnimSet].land, [TweenTime]0.1, [Type] HarryAnimType);
+
+	//log("PLOG PWalking landed");
+
+	// Set our spell distance to the default if we landed from a spongify jump
+	if( !bExtendedTargetting && AnimFalling == SpongifyFallAnim )
+		SpellCursor.SetLOSDistance( 0 );
+		
+	// See if we laneded on spongify!
+	for(i=0; i<ArrayCount(Touching); i++)
+	{
+		if( Touching[i].IsA('SpongifyPad') &&
+			SpongifyPad(Touching[i]).IsEnabled() )
+		{
+			// We landed on a spongifyPad an
+			HitSpongifyPad = SpongifyPad(Touching[i]);
+				
+			// Set our spell distance longer so we can easily target the next spongify pad
+			// The spell distance will revert back to normal once we land from a spongify pad
+			if( !bExtendedTargetting )
+				SpellCursor.SetLOSDistance( 1024 );
+		}
+	}
+		
+	//if( AnimFalling == SpongifyFallAnim  &&  HitSpongifyPad == none )
+		StopSpongifyEffects();
+
+	// We didn't land on a spongify pad and we are not falling from a spongify pad bounce
+	if( AnimFalling != SpongifyFallAnim && HitSpongifyPad == None )
+	{
+		// we are doing a regular fall animation
+		ClientMessage("Z Fall Distance = " $(fHighestZ-location.z) $" TimeInAir = " $fTimeInAir
+						$"ZHighest = " $fHighestZ $"ZLoc = " $location.z );
+									
+		fFallDistanceZ = (fHighestZ-location.z);
+			
+		// if we fell for a long distance then hurt harry
+		if( fFallDistanceZ > FALL_DAMAGE_DISTANCE /*take damage if bNoFallingDamage is false -AdamJD*/ && !bNoFallingDamage )
+		{
+			// The farther you fall the more damage you get
+			if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 32 )	// 512 - 544
+				TakeDamage(20, self, location,vec(0,0,0), 'Falling' );
+			else
+			if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 64 )	// 
+				TakeDamage(30, self, location,vec(0,0,0), 'Falling' );
+			else
+			if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 256 )	// 
+				TakeDamage(50, self, location,vec(0,0,0), 'Falling' );
+			else
+			if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 512 )	// 
+				TakeDamage(100, self, location,vec(0,0,0), 'Falling' );
+			else
+			if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 1024 )	// 
+				TakeDamage(200, self, location,vec(0,0,0), 'Falling' );
+			else
+			{													// 768 - 
+				TakeDamage(99999, self, location,vec(0,0,0), 'Falling' );
+			}
+		}
+	}
+		
+	// Reset our falling animation
+	AnimFalling = HarryAnims[HarryAnimSet].fall;
+
+	// Reset our highestZ position
+	fHighestZ = default.fHighestZ;
+		
+	//turn bNoFallingDamage back off if it was turned on -AdamJD
+	if(bNoFallingDamage)
+	{
+		bNoFallingDamage = false;
+	}
+  }
+  
+  event PlayerTick( float DeltaTime )
+  {
+	local actor a;
+	local float d;
+	local actor ca;
+
+	Global.PlayerTick( DeltaTime );
+
+	//if(	GetHealthCount() < 5 )
+	//	DoDrinkWiggenwell();
+
+	//		d = 1000000;
+	//		ForEach AllActors(class'actor', a)
+	//		{
+	//			if( a == self )
+	//				continue;
+	//			//if( a.IsA('basewand') )
+	//			//	continue;
+	//			if( VSize( a.location - Location ) < 500 )
+	//			{
+	//				Log("*****:"$a$" a.h:"$a.bHidden$" dt:"$a.DrawType);
+	//				d = VSize( a.location - Location );
+	//				ca = a;
+	//			}
+	//		}
+	//		ClientMessage("ca:"$ca);
+
+	if( bTempKillHarry )// ||  lifePotions <= 0 )
+	{
+		bTempKillHarry = false;
+		KillHarry(true);
+	}
+
+	//Weird problem, not sure what's causing it, but sometimes when you touch a painzone, but start your climb
+	// you'll end up with no health, but not in the dying state.  This "safely" takes care of that.
+	if( GetHealthCount() <= 0 )
+	{
+		KillHarry(true);
+		return;
+	}
+
+	//if ( bUpdatePosition )   Might not be able to just remove this.
+	//	ClientUpdatePosition();
+
+	if( bIsAiming && HarryAnimChannel.IsInState('stateCasting') && bAltFire == 0 )
+	{
+		//HarryAnimChannel.
+
+		//if( HarryAnimChannel.AnimSequence == 'castaim' )
+		//{
+			ClientMessage("LoopAim done");
+			//PlaySound(sound'HPSounds.Magic_sfx.spell_loop_nl', [Volume]0);
+			StopAimSoundFX();
+				
+			if( bInDuelingMode )
+			{
+				if(DuelSpells[CurrentDuelSpell] == class'spellDuelExpelliarmus')
+				{
+				 	PlaySound( Sound'HPSounds.Magic_sfx.Dueling_EXP_swoosh' );
+					HarryAnimChannel.GotoState( 'stateDefenceCast' );
+				}
+				else
+					HarryAnimChannel.GotoState( 'stateDuelingCast' );
+				}
+			else
+			if(   SpellCursor.IsLockedOn() //If harry's locked on, he's in normal aim mode, so cast
+			   || bHarryUsingSword && baseWand(weapon).SwordChargedUpEnough() //if using sword, and sword is charged up enough
+			   || !baseWand(weapon).bAutoSelectSpell // if you're not in autoselect spell mode
+			  )
+			{
+				HarryAnimChannel.GotoState( 'stateCast' );//PlayAnim('cast', 2.0, 0.1);
+				if( bCastFastSpells )  //Old, may not be needed in HP2
+				{
+					AnimFrame = 0.09;
+					AnimRate = 3;
+				}
+			}
+			else
+			{
+				// We don't have a lock so lets stop casting
+				HarryAnimChannel.GotoState( 'stateCancelCasting' );
+
+				// Stop Aiming
+				StopAiming();					
+			}
+		//}
+	}
+
+	//Try and save how long you've been falling, and what you're original height was when you started falling
+	ProcessFalling( DeltaTime );
+
+	PlayerMove(DeltaTime);
+
+	if( CarryingActor != none )
+	{
+		//r = weaponRot;
+		//v = vect(0,0,1);
+		//v = v >> r;
+		CarryingActor.setLocation( weaponLoc );//- vect(0,0,1 );
+		CarryingActor.SetRotation( weaponRot );
+
+		//Also, look for a spacebar throw
+		if( hpconsole(player.console).bSpacePressed )
+		{
+			hpconsole(player.console).bSpacePressed = false;
+			AltFire(0);
+		}
+	}
+		
+	// If we landed on a spongify pad then bounce harry
+	if( HitSpongifyPad != None && HitSpongifyPad.IsEnabled() )
+	{
+		DoJump(0);
+		HitSpongifyPad.OnBounce( self );
+		AnimFalling = SpongifyFallAnim;
+		PlayinAir();
+		cam.SetPitch(-8000);
+		HitSpongifyPad = None;
+		CreateSpongifyEffects();
+	}
+		
+	// HP2 cam
+	if( cam.IsInState('StateStandardCam') )//|| cam.IsInState('StateBossCam') )
+	{
+		// Force our desired Yaw to what the camera's yaw is, in this way harry will
+		// always "lookAt" what the camera is looking at.
+			DesiredRotation.Yaw = cam.rotation.Yaw & 0xFFFF;
+	}
+  }
+  
   /*
   function ProcessFalling (float DeltaTime)
   {
@@ -4478,270 +4732,55 @@ state PlayerWalking
     eLastPhysState = Physics;
   }
   */
-  
-  function Landed(vector HitNormal)
-	{
-		local float fFallDistanceZ;
-		local int   i;
-
-		clientMessage("landed: jump dist = " $VSize(Location-MountDelta) $ "   tia="$fTimeInAir);
-		
-		Global.Landed(HitNormal);
-
-		PlayLandedSound();
-
-		playanim(HarryAnims[HarryAnimSet].land, [TweenTime]0.1, [Type] HarryAnimType);
-
-		//log("PLOG PWalking landed");
-
-		// Set our spell distance to the default if we landed from a spongify jump
-		if( !bExtendedTargetting && AnimFalling == SpongifyFallAnim )
-			SpellCursor.SetLOSDistance( 0 );
-		
-		// See if we laneded on spongify!
-		for(i=0; i<ArrayCount(Touching); i++)
-		{
-			if( Touching[i].IsA('SpongifyPad') &&
-				SpongifyPad(Touching[i]).IsEnabled() )
-			{
-				// We landed on a spongifyPad an
-				HitSpongifyPad = SpongifyPad(Touching[i]);
-				
-				// Set our spell distance longer so we can easily target the next spongify pad
-				// The spell distance will revert back to normal once we land from a spongify pad
-				if( !bExtendedTargetting )
-					SpellCursor.SetLOSDistance( 1024 );
-			}
-		}
-		
-		//if( AnimFalling == SpongifyFallAnim  &&  HitSpongifyPad == none )
-			StopSpongifyEffects();
-
-		// We didn't land on a spongify pad and we are not falling from a spongify pad bounce
-		if( AnimFalling != SpongifyFallAnim && HitSpongifyPad == None )
-		{
-			// we are doing a regular fall animation
-			ClientMessage("Z Fall Distance = " $(fHighestZ-location.z) $" TimeInAir = " $fTimeInAir
-							$"ZHighest = " $fHighestZ $"ZLoc = " $location.z );
-										
-			fFallDistanceZ = (fHighestZ-location.z);
-			
-			// if we fell for a long distance then hurt harry
-			if( fFallDistanceZ > FALL_DAMAGE_DISTANCE /*take damage if bNoFallingDamage is false -AdamJD*/ && !bNoFallingDamage )
-			{
-				// The farther you fall the more damage you get
-				if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 32 )	// 512 - 544
-					TakeDamage(20, self, location,vec(0,0,0), 'Falling' );
-				else
-				if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 64 )	// 
-					TakeDamage(30, self, location,vec(0,0,0), 'Falling' );
-				else
-				if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 256 )	// 
-					TakeDamage(50, self, location,vec(0,0,0), 'Falling' );
-				else
-				if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 512 )	// 
-					TakeDamage(100, self, location,vec(0,0,0), 'Falling' );
-				else
-				if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 1024 )	// 
-					TakeDamage(200, self, location,vec(0,0,0), 'Falling' );
-				else
-				{													// 768 - 
-					TakeDamage(99999, self, location,vec(0,0,0), 'Falling' );
-				}
-			}
-		}
-		
-		// Reset our falling animation
-		AnimFalling = HarryAnims[HarryAnimSet].fall;
-
-		// Reset our highestZ position
-		fHighestZ = default.fHighestZ;
-		
-		//turn bNoFallingDamage back off if it was turned on -AdamJD
-		if(bNoFallingDamage)
-		{
-			bNoFallingDamage = false;
-		}
-	}
 	
-	//Try and save how long you've been falling, and what you're original height was when you started falling
-	//When you land, it uses this info to set the sound volume.
-	function ProcessFalling( float DeltaTime )
-	{
-		local float fLastTimeInAir;
+  //Try and save how long you've been falling, and what you're original height was when you started falling
+  //When you land, it uses this info to set the sound volume.
+  function ProcessFalling( float DeltaTime )
+  {
+	local float fLastTimeInAir;
 		
-		if( Physics == PHYS_Falling )
+	if( Physics == PHYS_Falling )
+	{
+		if( eLastPhysState != PHYS_Falling )
 		{
-			if( eLastPhysState != PHYS_Falling )
-			{
-				fFallingZ = Location.z;
-				fHighestZ = location.z;
-			}
-			else // Save the highest z location for falling damage
-			if( fHighestZ < location.z )
-			{
-				fHighestZ = location.z;
-			}
+			fFallingZ = Location.z;
+			fHighestZ = location.z;
+		}
+		else // Save the highest z location for falling damage
+		if( fHighestZ < location.z )
+		{
+			fHighestZ = location.z;
+		}
 			
-			fLastTimeInAir = fTimeInAir;
-			fTimeInAir += DeltaTime;
+		fLastTimeInAir = fTimeInAir;
+		fTimeInAir += DeltaTime;
 
-			if( !bPlayedFallSound  &&  fTimeInAir > 1.2 )
-			{
-				bPlayedFallSound = true;
-
-				if( AnimFalling != SpongifyFallAnim )
-					// PlaySound( sound'HPSounds.HAR_emotes.falldeep2' );
-					PlayFallDeepEmoteSound(); //decide which fall deep sound to play -AdamJD
-			}
-
-			if( fLastTimeInAir <= 0.35   &&   fTimeInAir > 0.35 )
-				PlayInAir();
-		}
-		else
+		if( !bPlayedFallSound  &&  fTimeInAir > 1.5 )
 		{
-			bPlayedFallSound = false;
-			fTimeInAir = 0;
+			bPlayedFallSound = true;
+
+			if( AnimFalling != SpongifyFallAnim )
+				// PlaySound( sound'HPSounds.HAR_emotes.falldeep2' );
+				PlayFallDeepEmoteSound(); //decide which fall deep sound to play -AdamJD
 		}
 
-		eLastPhysState = Physics;
+		if( fLastTimeInAir <= 0.35   &&   fTimeInAir > 0.35 )
+			PlayInAir();
+		}
+	else
+	{
+		bPlayedFallSound = false;
+		fTimeInAir = 0;
 	}
+
+	eLastPhysState = Physics;
+  }
   
   function JumpOffPawn ()
   {
     fTimeInAir = 0.0;
     Super.JumpOffPawn();
   }
-  
-  event PlayerTick( float DeltaTime )
-	{
-		local actor a;
-		local float d;
-		local actor ca;
-
-		Global.PlayerTick( DeltaTime );
-
-		//if(	GetHealthCount() < 5 )
-		//	DoDrinkWiggenwell();
-
-		//		d = 1000000;
-		//		ForEach AllActors(class'actor', a)
-		//		{
-		//			if( a == self )
-		//				continue;
-		//			//if( a.IsA('basewand') )
-		//			//	continue;
-		//			if( VSize( a.location - Location ) < 500 )
-		//			{
-		//				Log("*****:"$a$" a.h:"$a.bHidden$" dt:"$a.DrawType);
-		//				d = VSize( a.location - Location );
-		//				ca = a;
-		//			}
-		//		}
-		//		ClientMessage("ca:"$ca);
-
-		if( bTempKillHarry )// ||  lifePotions <= 0 )
-		{
-			bTempKillHarry = false;
-			KillHarry(true);
-		}
-
-		//Weird problem, not sure what's causing it, but sometimes when you touch a painzone, but start your climb
-		// you'll end up with no health, but not in the dying state.  This "safely" takes care of that.
-		if( GetHealthCount() <= 0 )
-		{
-			KillHarry(true);
-			return;
-		}
-
-		//if ( bUpdatePosition )   Might not be able to just remove this.
-		//	ClientUpdatePosition();
-
-		if( bIsAiming && HarryAnimChannel.IsInState('stateCasting') && bAltFire == 0 )
-		{
-			//HarryAnimChannel.
-
-			//if( HarryAnimChannel.AnimSequence == 'castaim' )
-			//{
-				ClientMessage("LoopAim done");
-				//PlaySound(sound'HPSounds.Magic_sfx.spell_loop_nl', [Volume]0);
-				StopAimSoundFX();
-				
-				if( bInDuelingMode )
-				{
-					if(DuelSpells[CurrentDuelSpell] == class'spellDuelExpelliarmus')
-					{
-					 	PlaySound( Sound'HPSounds.Magic_sfx.Dueling_EXP_swoosh' );
-						HarryAnimChannel.GotoState( 'stateDefenceCast' );
-					}
-					else
-						HarryAnimChannel.GotoState( 'stateDuelingCast' );
-				}
-				else
-				if(   SpellCursor.IsLockedOn() //If harry's locked on, he's in normal aim mode, so cast
-				   || bHarryUsingSword && baseWand(weapon).SwordChargedUpEnough() //if using sword, and sword is charged up enough
-				   || !baseWand(weapon).bAutoSelectSpell // if you're not in autoselect spell mode
-				  )
-				{
-					HarryAnimChannel.GotoState( 'stateCast' );//PlayAnim('cast', 2.0, 0.1);
-					if( bCastFastSpells )  //Old, may not be needed in HP2
-					{
-						AnimFrame = 0.09;
-						AnimRate = 3;
-					}
-				}
-				else
-				{
-					// We don't have a lock so lets stop casting
-					HarryAnimChannel.GotoState( 'stateCancelCasting' );
-
-					// Stop Aiming
-					StopAiming();					
-				}
-			//}
-		}
-
-		//Try and save how long you've been falling, and what you're original height was when you started falling
-		ProcessFalling( DeltaTime );
-
-		PlayerMove(DeltaTime);
-
-		if( CarryingActor != none )
-		{
-			//r = weaponRot;
-			//v = vect(0,0,1);
-			//v = v >> r;
-			CarryingActor.setLocation( weaponLoc );//- vect(0,0,1 );
-			CarryingActor.SetRotation( weaponRot );
-
-			//Also, look for a spacebar throw
-			if( hpconsole(player.console).bSpacePressed )
-			{
-				hpconsole(player.console).bSpacePressed = false;
-				AltFire(0);
-			}
-		}
-		
-		// If we landed on a spongify pad then bounce harry
-		if( HitSpongifyPad != None && HitSpongifyPad.IsEnabled() )
-		{
-			DoJump(0);
-			HitSpongifyPad.OnBounce( self );
-			AnimFalling = SpongifyFallAnim;
-			PlayinAir();
-			cam.SetPitch(-8000);
-			HitSpongifyPad = None;
-			CreateSpongifyEffects();
-		}
-		
-		// HP2 cam
-		if( cam.IsInState('StateStandardCam') )//|| cam.IsInState('StateBossCam') )
-		{
-			// Force our desired Yaw to what the camera's yaw is, in this way harry will
-			// always "lookAt" what the camera is looking at.
-			DesiredRotation.Yaw = cam.rotation.Yaw & 0xFFFF;
-		}
-	}
   
   function PlayerMove (float DeltaTime)
   {
@@ -4825,7 +4864,7 @@ state PlayerWalking
         {
           CamRot = Cam.Rotation;
           CamRot.Pitch = 0;
-          ScreenRelativeMovementYaw = rotator(NewAccel).Yaw;
+          ScreenRelativeMovementYaw = (rotator(NewAccel)).Yaw;
         }
       } 
 	  else 
@@ -5002,9 +5041,8 @@ state PlayerWalking
     Acceleration = vect(0.00,0.00,0.00);
     Velocity = vect(0.00,0.00,0.00);
     CurrIdleAnimName = GetCurrIdleAnimName();
-    LoopAnim(CurrIdleAnimName,,0.41,,HarryAnimType);
+    LoopAnim(CurrIdleAnimName,,[TweenTime]0.41,,[Type]HarryAnimType);
   }
-  
 }
 
 function UpdateRotationToTarget ()
@@ -5062,7 +5100,7 @@ function Vector ProcessAccel ()
   } else {
     GetAxes(Rotation,X,Y,Z);
   }
-  if ( bLockedOnTarget && (BossRailMove(BossTarget) != None) )
+  if ( bLockedOnTarget && BossRailMove(BossTarget) != None )
   {
     B = BossRailMove(BossTarget);
     xMag = aForward;
@@ -5073,7 +5111,7 @@ function Vector ProcessAccel ()
     V = KeepPawnInsidePlane(V,B.v1,B.n1);
     V = KeepPawnInsidePlane(V,B.v2,B.n2);
     V = KeepPawnInsidePlane(V,B.v4, -B.n1);
-    if ( ((V.X != 0) || (V.Y != 0)) && (fLargestAForward != 0) )
+    if ( (V.X != 0) || (V.Y != 0) && fLargestAForward != 0 )
     {
       V = Normal(V) * fLargestAForward;
     }
@@ -5111,8 +5149,8 @@ function Vector KeepPawnInsidePlane (Vector vAccel, Vector vPlanePoint, Vector v
 
 state GameEnded
 {
-  ignores  Died, TakeDamage, KilledBy;
-  
+  // ignores  Died, TakeDamage, KilledBy;
+  ignores SeePlayer, HearNoise, KilledBy, Bump, HitWall, HeadZoneChange, FootZoneChange, ZoneChange, Falling, TakeDamage, PainTimer, Died; //UTPT forgot to add these... -AdamJD
 }
 
 function Rotator AdjustAim (float ProjSpeed, Vector projStart, int AimError, bool bLeadTarget, bool bWarnTarget)
@@ -5138,7 +5176,7 @@ function Rotator AdjustAim (float ProjSpeed, Vector projStart, int AimError, boo
   BestTarget = None;
   foreach VisibleActors(Class'Actor',HitActor)
   {
-    if ( HitActor.bProjTarget && (PlayerPawn(HitActor) != self) &&  !HitActor.IsA('BaseCam') )
+    if ( HitActor.bProjTarget && PlayerPawn(HitActor) != self &&  !HitActor.IsA('BaseCam') )
     {
       objectDir = Normal(HitActor.Location - projStart);
       checkAngle = rotator(objectDir);
@@ -5211,6 +5249,8 @@ state waitForDeath
 {
 	begin:
 		DebugState();
+		
+	loop:
 		if ( Abs(VSize(Location - bustedBy.Location)) < 150 )
 		{
 			MoveTo(Location);
@@ -5294,7 +5334,8 @@ state exittoMenu
 
 state harryfrozen
 {
-  ignores  AltFire, Fire;
+  // ignores  AltFire, Fire;
+  ignores Fire, AltFire, ZoneChange, AnimEnd, Landed, PlayerTick, SeePlayer, HearNoise, Bump; //UTPT forgot to add these... -AdamJD
   
   function BeginState ()
   {
@@ -5377,7 +5418,7 @@ function EndVendorEngagement ()
 
 function bool IsEngagedWithVendor ()
 {
-  return CurrVendorManager != None;
+  return (CurrVendorManager != None);
 }
 
 function Add60HousePointsToGryffindor ()
@@ -5441,7 +5482,6 @@ state stateCutIdle
     CurrIdleAnimName = GetCurrIdleAnimName();
     LoopAnim(CurrIdleAnimName,1.0,0.2);
   }
-  
 }
 
 /*
@@ -5578,8 +5618,8 @@ function bool CutQuestion(string question)
     else if (question ~= "ReadyForTransitionE")
     {        
         return (bHub9CeremonyFlag == true &&
-                managerStatus.GetStatusItem(class'StatusGroupPolyIngr',class'StatusItemBoomslang').nCount > 0 &&
-                managerStatus.GetStatusItem(class'StatusGroupPolyIngr',class'StatusItemBicorn').nCount > 0);
+                (managerStatus.GetStatusItem(class'StatusGroupPolyIngr',class'StatusItemBoomslang').nCount > 0) &&
+                (managerStatus.GetStatusItem(class'StatusGroupPolyIngr',class'StatusItemBicorn').nCount > 0));
     }
     else if (question ~= "HaveAllSilverCards")
     {
@@ -5597,113 +5637,115 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
   local string sSayText;
   local string sSayTextID;
   local Characters CurrCharacter;
+  
+  ClientMessage(self$" CutCommand:" $command $" Cue:" $cue);
 
-	sActualCommand = ParseDelimitedString(Command," ",1,False);
-	if ( sActualCommand ~= "Capture" )
+  sActualCommand = ParseDelimitedString(Command," ",1,False);
+  if ( sActualCommand ~= "Capture" )
+  {
+	if ( HarryIsDead() )
 	{
-		if ( HarryIsDead() )
-		{
+	  return False;
+	}
+	foreach AllActors(Class'Characters',CurrCharacter)
+	{
+	  CurrCharacter.OnHarryCaptured();
+	}
+	bIsCaptured = True;
+	myHUD.StartCutScene();
+	SendPlayerCaptureMessages(True);
+	GotoState('stateCutIdle');
+	return True;
+  } 
+  else if ( sActualCommand ~= "Release" )
+  {
+	myHUD.EndCutScene();
+	DestroyControllers();
+	SendPlayerCaptureMessages(False);
+	bIsCaptured = False;
+	GotoState('PlayerWalking');
+	RotationRate = Default.RotationRate;
+		
+	CM("M212:	Harry release!");
+		
+	return True;
+  } 
+  else if ( sActualCommand ~= "ToggleUseSword" )
+  {
+	ToggleUseSword();
+    CutCue(cue);
+    return True;
+  } 
+  else if ( sActualCommand ~= "ChangeGameState" )
+  {
+	sActualCommand = ParseDelimitedString(Command," ",2,False);
+	if (  !SetGameState(sActualCommand) )
+	{
+		CutErrorString = "!E!R!R!O!R! GameState " $ sActualCommand $ " is not a valid GameState in the *GameStateMasterList*!!!";
+		CutCue(cue);
 		return False;
-		}
-		foreach AllActors(Class'Characters',CurrCharacter)
-		{
-		CurrCharacter.OnHarryCaptured();
-		}
-		bIsCaptured = True;
-		myHUD.StartCutScene();
-		SendPlayerCaptureMessages(True);
-		GotoState('stateCutIdle');
-		return True;
-	} 
-	else if ( sActualCommand ~= "Release" )
-	{
-		myHUD.EndCutScene();
-		DestroyControllers();
-		SendPlayerCaptureMessages(False);
-		bIsCaptured = False;
-		GotoState('PlayerWalking');
-		RotationRate = Default.RotationRate;
-		
-		CM("M212:	Harry release!");
-		
-		return True;
-	} 
-	else if ( sActualCommand ~= "ToggleUseSword" )
-	{
-		ToggleUseSword();
-        CutCue(cue);
-        return True;
-	} 
-	else if ( sActualCommand ~= "ChangeGameState" )
-	{
-		sActualCommand = ParseDelimitedString(Command," ",2,False);
-		if (  !SetGameState(sActualCommand) )
-		{
-			CutErrorString = "!E!R!R!O!R! GameState " $ sActualCommand $ " is not a valid GameState in the *GameStateMasterList*!!!";
-			CutCue(cue);
-			return False;
-		}
-		CutCue(cue);
-		return True;
-	} 
-	else if ( sActualCommand ~= "HideWeapon" )
-	{
-		Weapon.bHidden = True;
-        CutCue(cue);
-        return True;
-    } 
-	else if ( sActualCommand ~= "ShowWeapon" )
+	}
+	CutCue(cue);
+	return True;
+  } 
+  else if ( sActualCommand ~= "HideWeapon" )
+  {
+	Weapon.bHidden = True;
+    CutCue(cue);
+    return True;
+  } 
+  else if ( sActualCommand ~= "ShowWeapon" )
+  {
+	Weapon.bHidden = False;
+    CutCue(cue);
+    return True;
+  } 
+  else if ( sActualCommand ~= "SetHub9CeremonyFlag" )
+  {
+	bHub9CeremonyFlag = True;
+	CutCue(cue);
+    return True;
+  } 
+  else if ( sActualCommand ~= "GiveHermioneBicorn" )
+  {
+	managerStatus.AddBicorn(-1);
+    CutCue(cue);
+    return True;
+  } 
+  else if ( sActualCommand ~= "GiveHermioneBoomslang" )
+  {
+	managerStatus.AddBoomslang(-1);
+    CutCue(cue);
+    return True;
+  } 
+  else if ( sActualCommand ~= "RunCredits" )
+  {
+	menuBook = HPConsole(Player.Console).menuBook;
+    if ( menuBook != None )
     {
-		Weapon.bHidden = False;
-        CutCue(cue);
-        return True;
-    } 
-	else if ( sActualCommand ~= "SetHub9CeremonyFlag" )
-	{
-		bHub9CeremonyFlag = True;
-		CutCue(cue);
-        return True;
-    } 
-	else if ( sActualCommand ~= "GiveHermioneBicorn" )
-    {
-		managerStatus.AddBicorn(-1);
-        CutCue(cue);
-        return True;
-    } 
-	else if ( sActualCommand ~= "GiveHermioneBoomslang" )
-    {
-		managerStatus.AddBoomslang(-1);
-        CutCue(cue);
-        return True;
-    } 
-	else if ( sActualCommand ~= "RunCredits" )
-    {
-		menuBook = HPConsole(Player.Console).menuBook;
-        if ( menuBook != None )
-        {
-			menuBook.RunTheCredits();
-            CutCue(cue);
-            return True;
-        }
-	} 
-	else if ( sActualCommand ~= "ResetLevel" )
-    {
-		return CutCommand_ResetLevel(Command,cue);
-    } 
-	else if ( sActualCommand ~= "PutGryffInLead" )
-    {
-		StatusGroupHousePoints(managerStatus.GetStatusGroup(Class'StatusGroupHousePoints')).PutGryffInLead();
-        CutCue(cue);
-        return True;
-    } 
-	else if ( sActualCommand ~= "AddHPointsG" )
-    {
-		sActualCommand = ParseDelimitedString(Command," ",2,False);
-        managerStatus.AddHPointsG(int(sActualCommand));
+		menuBook.RunTheCredits();
         CutCue(cue);
         return True;
     }
-	return Super.CutCommand(Command,cue,bFastFlag);
+  } 
+  else if ( sActualCommand ~= "ResetLevel" )
+  {
+	return CutCommand_ResetLevel(Command,cue);
+  } 
+  else if ( sActualCommand ~= "PutGryffInLead" )
+  {
+	StatusGroupHousePoints(managerStatus.GetStatusGroup(Class'StatusGroupHousePoints')).PutGryffInLead();
+    CutCue(cue);
+    return True;
+  } 
+  else if ( sActualCommand ~= "AddHPointsG" )
+  {
+	sActualCommand = ParseDelimitedString(Command," ",2,False);
+    managerStatus.AddHPointsG(int(sActualCommand));
+    CutCue(cue);
+    return True;
+  }
+  return Super.CutCommand(Command,cue,bFastFlag);
 }
 
 function bool SetGameState (string strNewGameState)
@@ -5786,7 +5828,6 @@ function bool MoveWhileCasting ()
 
 event PlayerInput (float DeltaTime)
 {
-  /*
   if ( bE3DemoLockout )
   {
     if ( myHUD.MainMenu != None )
@@ -5807,95 +5848,70 @@ event PlayerInput (float DeltaTime)
     aLookUp = 0.0;
     return;
   }
-  */
-	if ( bE3DemoLockout ) 
-	{
-		if ( myHud.MainMenu != None )
-			myHud.MainMenu.MenuTick( DeltaTime );
-		// clear inputs
-		bEdgeForward = false;
-		bEdgeBack = false;
-		bEdgeLeft = false;
-		bEdgeRight = false;
-		bWasForward = false;
-		bWasBack = false;
-		bWasLeft = false;
-		bWasRight = false;
-		aStrafe = 0;
-		aTurn = 0;
-		aForward = 0;
-		aLookUp = 0;
-		return;
-	}
   
-	if ( bInDuelingMode )
+  if ( bInDuelingMode )
+  {
+	bStrafe = 1;
+  }
+  Super.PlayerInput(DeltaTime);
+  if ( HPHud(myHUD).bCutSceneMode )
+  {
+	if (bSkipCutScene == 1)
 	{
-		bStrafe = 1;
+		HPConsole(Player.Console).StartFastForward();
 	}
-	Super.PlayerInput(DeltaTime);
-	if ( HPHud(myHUD).bCutSceneMode )
+  } 
+  else if ( bInDuelingMode )
+  {
+	if ( !(baseWand(Weapon).ChargingLevel() > 0 ) )
 	{
-		if (bSkipCutScene == 1)
-		{
-			HPConsole(Player.Console).StartFastForward();
-		}
-	} 
-	else if ( bInDuelingMode )
+		HandleDuelPlayerInput();
+	}
+  } 
+  else if ( bAltFire > 0 )
+  {
+	if ( GetCurrentKeyState(IK_LeftMouse) || GetCurrentKeyState(IK_RightMouse) || GetCurrentKeyState(IK_MiddleMouse) )
 	{
-		if ( !(baseWand(Weapon).ChargingLevel() > 0 ) )
-		{
-			HandleDuelPlayerInput();
-		}
+		bMoveWhileCasting = True;
+		//log("Move while casting!");
 	} 
 	else 
 	{
-		if ( bAltFire > 0 )
-		{
-			if ( GetCurrentKeyState(IK_LeftMouse) || GetCurrentKeyState(IK_RightMouse) || GetCurrentKeyState(IK_MiddleMouse) )
-			{
-				bMoveWhileCasting = True;
-				//log("Move while casting!");
-			} 
-			else 
-			{
-				bMoveWhileCasting = False;
-				//log("No move while casting!");
-			}
-		}
+		bMoveWhileCasting = False;
+		//log("No move while casting!");
+	}
+  }
 		
-		//this is not needed, the HarryAnimChannel deals with it -AdamJD
-		/*
-		else if( bIsAiming )
-		{
-			// Metallicafan212:	Turn off casting
-			//					IDK how they did it in the normal game, but this is the only way I know to do it
-			// StopAiming();
-			// HarryAnimChannel.Cast();
-			BaseWand(Weapon).Finish(); 
-		}
-		*/
-		
-		if ( bOpenMap == 1 &&  !bMapQuickLook )
-		{
-			bMapQuickLook = True;
-		} 
-		else if ( bOpenMap == 0 && bMapQuickLook )
-        {
-          cm("FEBook ToggleMap");
-          HPConsole(Player.Console).menuBook.ToggleMap();
-          bMapQuickLook = False;
-        }
-	}
-	
-	if ( bDrinkWiggenwell == 1 && IsInState('PlayerWalking') && Physics == PHYS_Walking &&  !IsA('BroomHarry') || (bDrinkWiggenwell == 1 && IsInState('PlayerWalking') && IsA('BroomHarry') ) )
-	{
-		DoDrinkWiggenwell();
-	}
-	
-	if ( CurrVendorManager != None )
-	{
-		CurrVendorManager.PlayerInput(DeltaTime);
-	}
+  //this is not really needed, state PlayerWalking and HarryAnimChannel deal with it -AdamJD
+  /*
+  else if( bIsAiming )
+  {
+	// Metallicafan212:	Turn off casting
+	//					IDK how they did it in the normal game, but this is the only way I know to do it
+	// StopAiming();
+	// HarryAnimChannel.Cast();
+	BaseWand(Weapon).Finish(); 
+  }
+  */
+  
+  if ( bOpenMap == 1 &&  !bMapQuickLook )
+  {
+	bMapQuickLook = True;
+  } 
+  else if ( bOpenMap == 0 && bMapQuickLook )
+  {
+    cm("FEBook ToggleMap");
+    HPConsole(Player.Console).menuBook.ToggleMap();
+    bMapQuickLook = False;
+  }
+  if ( bDrinkWiggenwell == 1 && IsInState('PlayerWalking') && Physics == PHYS_Walking &&  !IsA('BroomHarry') || (bDrinkWiggenwell == 1 && IsInState('PlayerWalking') && IsA('BroomHarry') ) )
+  {
+	DoDrinkWiggenwell();
+  }
+  if ( CurrVendorManager != None )
+  {
+	CurrVendorManager.PlayerInput(DeltaTime);
+  }
 }
 
 function DoDrinkWiggenwell ()
@@ -6191,9 +6207,10 @@ function CheckIfHarryLostDuel ()
     UpdateDuelingRanks(False);
     Duellist(DuelOpponent).SayComment(DC_DuelLose,Duellist(DuelOpponent).eHouse,True);
     Duellist(DuelOpponent).SentEvent(Duellist(DuelOpponent).LostEventName);
-  } else {
-    Duellist(DuelOpponent).SayComment(DC_DuelWin,Duellist(DuelOpponent).eHouse,True);
-  }
+   } else {
+    // Duellist(DuelOpponent).SayComment(DC_DuelWin,Duellist(DuelOpponent).eHouse,True);
+	Duellist(DuelOpponent).SayComment( DC_DuelOpp, Duellist(DuelOpponent).eHouse, true ); //the old code by UTPT made Snape say Harry had won when Harry got hit... -AdamJD
+ }
 }
 
 function bool HandleSpellDuelRictusempra (optional baseSpell spell, optional Vector vHitLocation)
@@ -6237,7 +6254,7 @@ function bool HandleSpellDuelRictusempra (optional baseSpell spell, optional Vec
   CheckIfHarryLostDuel();
   PlayHurtEmoteSound();
   HarryAnimChannel.DoReactRictusempra();
-  fTimeAfterHitNew = 1.0;
+  fTimeAfterHitNew = 1.0 /*UTPT didn't add this bit.. -AdamJD*/ * (1 + Duellist(DuelOpponent).Intellect);
   if ( fTimeAfterHitNew > fTimeAfterHit )
   {
     fTimeAfterHit = fTimeAfterHitNew;
@@ -6489,17 +6506,17 @@ defaultproperties
 
     AnimFalling=''
 
-    HarryAnims(0)=(Idle=Idle,Walk=Walk,run=run,WalkBack=runback,StrafeRight=StrafeRight,StrafeLeft=StrafeLeft,Jump=Jump,Jump2=Jump2,Fall=Fall,Land=Land),
+    HarryAnims(0)=(Idle=Idle,Walk=Walk,run=run,WalkBack=runback,StrafeRight=StrafeRight,StrafeLeft=StrafeLeft,Jump=Jump,Jump2=Jump2,Fall=Fall,Land=Land)
 
-    HarryAnims(1)=(Idle=Idle,Walk=ectowalk,run=ectowalk,WalkBack=EctoWalkback,StrafeRight=ectostraferight,StrafeLeft=ectostrafeleft,Jump=ectojump,Jump2=Jump2,Fall=Fall,Land=Land),
+    HarryAnims(1)=(Idle=Idle,Walk=ectowalk,run=ectowalk,WalkBack=EctoWalkback,StrafeRight=ectostraferight,StrafeLeft=ectostrafeleft,Jump=ectojump,Jump2=Jump2,Fall=Fall,Land=Land)
 
-    HarryAnims(2)=(Idle=idlesleepy,Walk=SleepyWalk,run=SleepyWalk,WalkBack=SleepyWalkBack,StrafeRight=sleepyStrafeRight,StrafeLeft=sleepyStrafeLeft,Jump=sleepyjump,Jump2=Jump2,Fall=Fall,Land=Land),
+    HarryAnims(2)=(Idle=idlesleepy,Walk=SleepyWalk,run=SleepyWalk,WalkBack=SleepyWalkBack,StrafeRight=sleepyStrafeRight,StrafeLeft=sleepyStrafeLeft,Jump=sleepyjump,Jump2=Jump2,Fall=Fall,Land=Land)
 
-    HarryAnims(3)=(Idle=SwordIdle,Walk=Walk,run=SwordRun,WalkBack=SwordRunback,StrafeRight=SwordStrafeRight,StrafeLeft=SwordStrafeLeft,Jump=SwordJump,Jump2=SwordJump2,Fall=SwordFall,Land=SwordLand),
+    HarryAnims(3)=(Idle=SwordIdle,Walk=Walk,run=SwordRun,WalkBack=SwordRunback,StrafeRight=SwordStrafeRight,StrafeLeft=SwordStrafeLeft,Jump=SwordJump,Jump2=SwordJump2,Fall=SwordFall,Land=SwordLand)
 
-    HarryAnims(4)=(Idle=Idle,Walk=webmove,run=webmove,WalkBack=webmove,StrafeRight=webmove,StrafeLeft=webmove,Jump=ectojump,Jump2=ectojump,Fall=Fall,Land=Land),
+    HarryAnims(4)=(Idle=Idle,Walk=webmove,run=webmove,WalkBack=webmove,StrafeRight=webmove,StrafeLeft=webmove,Jump=ectojump,Jump2=ectojump,Fall=Fall,Land=Land)
 
-    HarryAnims(5)=(Idle=duel_idle,Walk=duel_run,run=duel_run,WalkBack=duel_runback,StrafeRight=duel_strafe_right,StrafeLeft=duel_strafe_left,Jump=None,Jump2=None,Fall=None,Land=None),
+    HarryAnims(5)=(Idle=duel_idle,Walk=duel_run,run=duel_run,WalkBack=duel_runback,StrafeRight=duel_strafe_right,StrafeLeft=duel_strafe_left,Jump=None,Jump2=None,Fall=None,Land=None)
 
     bAllowHarryToDie=True
 
@@ -6519,17 +6536,17 @@ defaultproperties
 
     fHighestZ=-999999.00
 
-    quidGameResults(0)=(Opponent="Hufflepuff",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False),
+    quidGameResults(0)=(Opponent="Hufflepuff",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False)
 
-    quidGameResults(1)=(Opponent="Ravenclaw",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False),
+    quidGameResults(1)=(Opponent="Ravenclaw",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False)
 
-    quidGameResults(2)=(Opponent="Slytherin",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False),
+    quidGameResults(2)=(Opponent="Slytherin",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False)
 
-    quidGameResults(3)=(Opponent="Hufflepuff",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False),
+    quidGameResults(3)=(Opponent="Hufflepuff",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False)
 
-    quidGameResults(4)=(Opponent="Ravenclaw",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False),
+    quidGameResults(4)=(Opponent="Ravenclaw",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False)
 
-    quidGameResults(5)=(Opponent="Slytherin",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False),
+    quidGameResults(5)=(Opponent="Slytherin",myScore=0,OpponentScore=0,HousePoints=0,bLocked=True,bWon=False)
 
     curWizardDuelRank=10
 
@@ -6571,5 +6588,5 @@ defaultproperties
 
     Buoyancy=118.80
 
-    RotationRate=(Pitch=20000,Yaw=70000,Roll=3072),
+    RotationRate=(Pitch=20000,Yaw=70000,Roll=3072)
 }

@@ -39,5 +39,8 @@ defaultproperties
     fTotalEffectOutTime=0.20
 
     MenuProps=Menu_IfCurrentlyHaveAny
+	
+	// Metallicafan212:	Missing for some reason
+	GameEffectType=ET_Fade
 
 }

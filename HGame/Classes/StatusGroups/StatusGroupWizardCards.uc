@@ -399,7 +399,7 @@ function int GetLastObtainedCardTypeAsInt ()
 
 defaultproperties
 {
-    LastObtainedCardType=3
+    LastObtainedCardType=CardType_None
 
     bDisplayJustFirstItem=True
 
@@ -408,7 +408,8 @@ defaultproperties
     fTotalHoldTime=3.00
 
     fTotalEffectOutTime=0.20
-
-    MenuProps=3
+	
+	// Metallicafan212:	Missing for some reason
+	GameEffectType=ET_Fade
 
 }

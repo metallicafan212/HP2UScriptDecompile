@@ -341,7 +341,7 @@ event Tick (float fTimeDelta)
       WandEndPoint = Pawn(Owner).WeaponLoc - (Vec(0.0,0.0,fSwordLength * Scale) >> Pawn(Owner).WeaponRot);
       fxSwordParticles.SetLocation(WandEndPoint);
       ScaleParticles(fxSwordParticles,fSwordFXStartScale + (fSwordFXEndScale - fSwordFXStartScale) * Scale);
-    } else //{
+    } else {
       if ( fxChargeParticles.bEmit || TheLumosLight.bLumosOn )
       {
         if ( bSpellCharges && (fSpellCharge < 1.0) )
@@ -356,7 +356,7 @@ event Tick (float fTimeDelta)
           fxChargeParticles.SetLocation(WandEndPoint);
         }
       }
-    //}
+    }
   }
   if ( TheLumosLight.bLumosOn )
   {

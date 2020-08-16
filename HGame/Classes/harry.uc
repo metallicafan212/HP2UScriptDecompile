@@ -5102,6 +5102,7 @@ function Vector ProcessAccel ()
   }
   if ( bLockedOnTarget && BossRailMove(BossTarget) != None )
   {
+	//log("AdamJD: Locked onto Peeves");
     B = BossRailMove(BossTarget);
     xMag = aForward;
     yMag = aStrafe;
@@ -5111,7 +5112,8 @@ function Vector ProcessAccel ()
     V = KeepPawnInsidePlane(V,B.v1,B.n1);
     V = KeepPawnInsidePlane(V,B.v2,B.n2);
     V = KeepPawnInsidePlane(V,B.v4, -B.n1);
-    if ( (V.X != 0) || (V.Y != 0) && fLargestAForward != 0 )
+    // if ( (V.X != 0) || (V.Y != 0) && fLargestAForward != 0 )
+	if ( (V.X != 0 || V.Y != 0) && fLargestAForward != 0 ) //removed wrong brackets so Harry can move in the Peeves fight -AdamJD
     {
       V = Normal(V) * fLargestAForward;
     }
@@ -5136,8 +5138,10 @@ function Vector KeepPawnInsidePlane (Vector vAccel, Vector vPlanePoint, Vector v
   {
     x2 =  -vPlaneNormal;
     y2 = vect(0.00,0.00,1.00) Cross x2;
-    xMag = vAccel Dot x2;
-    yMag = vAccel Dot y2;
+    // xMag = vAccel Dot x2;
+    // yMag = vAccel Dot y2;
+	xMag = (vAccel Dot x2); //added brackets -AdamJD
+    yMag = (vAccel Dot y2); //added brackets -AdamJD
     if ( xMag < 0 )
     {
       xMag = D * 10;

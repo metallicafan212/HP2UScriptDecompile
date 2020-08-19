@@ -5018,6 +5018,7 @@ state PlayerWalking
     bIsCrouching = False;
     bIsTurning = False;
     bPressedJump = False;
+	DesiredRotation.Pitch = Default.DesiredRotation.Pitch; //sometimes after a cutscene or when Harry has picked something up he tilts, this fixes that -AdamJD 
     if ( Physics != PHYS_Falling )
     {
       SetPhysics(PHYS_WALKING);

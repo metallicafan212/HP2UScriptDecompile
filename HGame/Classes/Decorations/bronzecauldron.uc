@@ -1,167 +1,185 @@
-//===============================================================================
-//  [bronzecauldron] 
-//===============================================================================
+//================================================================================
+// bronzecauldron.
+//================================================================================
 
-//added from the proto because the game used to lag for a few seconds when a cauldron spawned beans -AdamJD
+class bronzecauldron extends HProp;
 
-class bronzecauldron extends hprop;
+const nMAX_EJECTED_OBJECTS= 3;
+var() int iNumberOfBeans;
+var() Class<Actor> EjectedObjects[3];
+var() Vector ObjectStartPoint[3];
+var() Vector ObjectStartVelocity[3];
+var() bool bRandomBean;
+var() bool bMakeSpawnPersistent;
+var bool bOpened;
 
-const nMAX_EJECTED_OBJECTS = 3;
-
-var()	int				iNumberOfBeans;
-var()	class<Actor>	EjectedObjects[3];	// Make sure matches nMAX_EJECTED_OBJECTS  
-                                            // Up to 3 new objects can appear
-                                            
-var()	vector			ObjectStartPoint[3];
-var()	vector			ObjectStartVelocity[3];
-var()   bool            bRandomBean;
-
-// Persistence support
-var     bool			bOpened;		// set to true once the chest has been opened.
- 
-
-function int GetMaxEjectedObjects()
+function int GetMaxEjectedObjects ()
 {
-	return (nMAX_EJECTED_OBJECTS);
+  // return 3;
+  return (nMAX_EJECTED_OBJECTS);
 }
 
-function SetupRandomBeans()
+function SetupRandomBeans ()
 {
-	local int	iBean;
+  local int iBean;
 
-	if (iNumberOfBeans > 3)
-		iNumberOfBeans = 3;
-
-	for( iBean = 0; iBean < iNumberOfBeans; iBean++ )
-	{
-		if( rand(100) < (30 - (playerHarry.GetHealth() * 30)) && iBean == 0)
-			EjectedObjects[iBean] = Class'ChocolateFrog';
-		else
-			EjectedObjects[iBean] = Class'JellyBean';
-	}
+  if ( iNumberOfBeans > 3 )
+  {
+    iNumberOfBeans = 3;
+  }
+  // iBean = 0;
+  // if ( iBean < iNumberOfBeans )
+  for(iBean = 0; iBean < iNumberOfBeans; iBean++)
+  {
+    if ( Rand(100) < (30 - PlayerHarry.GetHealth() * 30) && iBean == 0 )
+    {
+      EjectedObjects[iBean] = Class'ChocolateFrog';
+    } else {
+      EjectedObjects[iBean] = Class'Jellybean';
+    }
+    // iBean++;
+    // goto JL001B;
+  }
 }
 
-// Persistence support
 state stillOpen
 {
-begin:
-	//DEBUG
-//	Level.playerHarryActor.ClientMessage(" State StillOpen for cauldron " $self );
-	bProjTarget = false;
-	eVulnerableToSpell = SPELL_None;
-	loopanim('end');
+ begin:
+  bProjTarget = False;
+  eVulnerableToSpell = /*0*/ SPELL_None;
+  LoopAnim('End');
 }
 
 auto state waitforspell
 {
-	function BeginState()
-	{
-		//DEBUG
-//		Level.playerHarryActor.ClientMessage(" cauldron " $self $" is wainting for spell with bOpened = " $bOpened );
-		if( bOpened )
-			gotostate( 'stillOpen' );
-	}
-	
-	function bool HandleSpellFlipendo( optional baseSpell spell, optional vector vHitLocation )
-	{
-		gotostate('turnover');
-		return true;
-	}
+  function BeginState ()
+  {
+    if ( bOpened )
+    {
+      GotoState('stillOpen');
+    }
+  }
+  
+  function bool HandleSpellFlipendo (optional baseSpell spell, optional Vector vHitLocation)
+  {
+    GotoState('turnover');
+    return True;
+  }
+ 
+  begin:
 }
 
 state turnover
 {
-	function generateobject()
-	{
-		local vector dir, vel;
-		local actor newspawn;
-		local rotator	SpawnDirection;
-		local int  iBean;
-		local bool bPlayBeanSound;
-
-		bPlayBeanSound = true;
-
-		if (bRandomBean)
-			SetupRandomBeans();
-		//else
-		//if (TransformInto != none)
-		//	EjectedObjects[0] = TransformInto;
-
-		for (iBean = 0; iBean < iNumberOfBeans; iBean ++)
-		{
-			vel = ObjectStartVelocity[iBean];
-			vel.x +=  (rand(64));
-
-			SpawnDirection = rotation;
-			SpawnDirection.yaw += 5000;
-
-			vel = vel >> SpawnDirection;
-
-			dir = ObjectStartPoint[iBean];
-
-			dir = dir >> SpawnDirection;
-			dir = dir + location;
-
-			newspawn=spawn(class'Spawn_flash_2',,,dir,rot(0,0,0));
-			newSpawn=Spawn(EjectedObjects[iBean],,, dir);
-
-			if (newspawn.isa('chocolatefrog')) //|| newspawn.isa('wizardcardicon'))
-			{
-				// Special case with frogs, let them jump
-				vel.z *= 1.5;
-				newSpawn.Velocity = vel * 1.5;
-			}
-			else //if (newspawn.isa('jellybean'))
-			{
-				// Special case with beans, let them spill out		
-				newSpawn.Velocity = vel;
-				newSpawn.SetPhysics( PHYS_Falling );
-			}
-		}
-
-		//Play appropriate sound
-
-		if( bPlayBeanSound )
-		{
-			switch( Rand(3) )
-			{
-				case 0:   	PlaySound( sound'HPSounds.Magic_sfx.spawn_bean01');   break;
-				case 1:   	PlaySound( sound'HPSounds.Magic_sfx.spawn_bean02');   break;
-				case 2:   	PlaySound( sound'HPSounds.Magic_sfx.spawn_bean03');   break;
-			}
-		}
-	}
-
-  begin:
-	bProjTarget = false;  //Seems as though this isn't really being used anymore
-	eVulnerableToSpell = SPELL_None;
-
-	playsound(sound'HPSounds.General.cauldron_flip');
-
-	playanim('tipover',[RootBone] 'move');
-	finishanim();
-	generateobject();
-	loopanim('tipped',[RootBone] 'move');
+  function generateobject ()
+  {
+    local Vector Dir;
+    local Vector Vel;
+    local Actor newSpawn;
+    local Rotator SpawnDirection;
+    local int iBean;
+    local bool bPlayBeanSound;
+  
+    bPlayBeanSound = True;
+    if ( bRandomBean )
+    {
+      SetupRandomBeans();
+    }
+    // iBean = 0;
+    // if ( iBean < iNumberOfBeans )
+	for(iBean = 0; iBean < iNumberOfBeans; iBean++)
+    {
+      Vel = ObjectStartVelocity[iBean];
+      Vel.X += (Rand(64));
+      SpawnDirection = Rotation;
+      SpawnDirection.Yaw += 5000;
+      Vel = Vel >> SpawnDirection;
+      Dir = ObjectStartPoint[iBean];
+      Dir = Dir >> SpawnDirection;
+      Dir = Dir + Location;
+      newSpawn = Spawn(Class'Spawn_flash_2',,,Dir,rot(0,0,0));
+      // newSpawn = FancySpawn(EjectedObjects[iBean],,,Dir);
+	  newSpawn = Spawn(EjectedObjects[iBean],,,Dir); //using spawn instead of fancyspawn stops the game lagging -AdamJD
+      if ( newSpawn == None )
+      {
+        cm("* ERROR: cauldron spawn failed.");
+      }
+      if ( newSpawn.IsA('ChocolateFrog') || newSpawn.IsA('WizardCardIcon') )
+      {
+        Vel.Z *= 2;
+        newSpawn.Velocity = Vel * 2;
+      } else {
+        newSpawn.Velocity = Vel;
+        newSpawn.SetPhysics(/*2*/PHYS_Falling);
+      }
+      newSpawn.bPersistent = bMakeSpawnPersistent;
+      // iBean++;
+      // goto JL001E;
+    }
+    if ( bPlayBeanSound )
+    {
+      switch (Rand(3))
+      {
+        case 0:
+        PlaySound(Sound'spawn_bean01');
+        break;
+        case 1:
+        PlaySound(Sound'spawn_bean02');
+        break;
+        case 2:
+        PlaySound(Sound'spawn_bean03');
+        break;
+        default:
+      }
+    }
+  }
+  
+ begin:
+  bProjTarget = False;
+  eVulnerableToSpell = /*0*/ SPELL_None;
+  PlaySound(Sound'cauldron_flip');
+  PlayAnim('tipover', [RootBone] 'move');
+  FinishAnim();
+  generateobject();
+  LoopAnim('tipped', [RootBone] 'move');
 }
 
 defaultproperties
 {
-     iNumberOfBeans=3
-     EjectedObjects(0)=Class'HGame.Jellybean'
-     EjectedObjects(1)=Class'HGame.Jellybean'
-     EjectedObjects(2)=Class'HGame.Jellybean'
-     ObjectStartPoint(0)=(X=64,Z=-20)
-     ObjectStartPoint(1)=(X=64,Y=-20,Z=20)
-     ObjectStartPoint(2)=(X=64,Y=20,Z=20)
-     ObjectStartVelocity(0)=(X=64,Z=40)
-     ObjectStartVelocity(1)=(X=64,Y=40,Z=40)
-     ObjectStartVelocity(2)=(X=64,Y=-40,Z=40)
-     bRandomBean=True
-     eVulnerableToSpell=SPELL_Flipendo
-     CentreOffset=(Z=20)
-     Mesh=SkeletalMesh'HPModels.skbronzecauldronMesh'
-     DrawScale=1.0
-     AmbientGlow=200
-     CollisionRadius=28
-     CollisionHeight=50
+    iNumberOfBeans=3
+
+    EjectedObjects(0)=Class'Jellybean'
+
+    EjectedObjects(1)=Class'Jellybean'
+
+    EjectedObjects(2)=Class'Jellybean'
+
+    ObjectStartPoint(0)=(X=64.00,Y=0.00,Z=-20.00) 
+
+    ObjectStartPoint(1)=(X=64.00,Y=-20.00,Z=20.00)
+
+    ObjectStartPoint(2)=(X=64.00,Y=20.00,Z=20.00)
+
+    ObjectStartVelocity(0)=(X=64.00,Y=0.00,Z=40.00) 
+
+    ObjectStartVelocity(1)=(X=64.00,Y=40.00,Z=40.00)
+
+    ObjectStartVelocity(2)=(X=64.00,Y=-40.00,Z=40.00) 
+
+    bRandomBean=True
+
+    bMakeSpawnPersistent=True
+
+    // eVulnerableToSpell=13
+	eVulnerableToSpell=SPELL_Flipendo
+
+    CentreOffset=(X=0.00,Y=0.00,Z=20.00) 
+
+    Mesh=SkeletalMesh'HPModels.skbronzecauldronMesh'
+	
+    AmbientGlow=200
+
+    CollisionRadius=28.00
+
+    CollisionHeight=50.00
 }

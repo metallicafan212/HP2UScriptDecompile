@@ -13,6 +13,21 @@ var() bool bRandomBean;
 var() bool bMakeSpawnPersistent;
 var bool bOpened;
 
+//my failed attempt to fix floating cauldrons -AdamJD
+/*
+function PreBeginPlay()
+{ 
+	Super.PreBeginPlay();
+	
+	if( eVulnerableToSpell == SPELL_None ) 
+	{
+		Log("Setting new cauldron collision size and location...");
+		SetCollisionSize(Default.CollisionRadius, Default.CollisionHeight / 2);
+		SetLocation(Default.Location);
+	}
+}
+*/
+
 function int GetMaxEjectedObjects ()
 {
   // return 3;
@@ -46,7 +61,7 @@ state stillOpen
 {
  begin:
   bProjTarget = False;
-  eVulnerableToSpell = /*0*/ SPELL_None;
+  eVulnerableToSpell = /*0*/ SPELL_None; 
   LoopAnim('End');
 }
 
@@ -138,10 +153,10 @@ state turnover
   bProjTarget = False;
   eVulnerableToSpell = /*0*/ SPELL_None;
   PlaySound(Sound'cauldron_flip');
-  PlayAnim('tipover', [RootBone] 'move');
+  PlayAnim('tipover'/*, [RootBone] 'move'*/); //commenting out the rootbone stops floating cauldrons (thanks to MaxG for finding this) -AdamJD
   FinishAnim();
   generateobject();
-  LoopAnim('tipped', [RootBone] 'move');
+  LoopAnim('tipped'/*, [RootBone] 'move'*/); //commenting out the rootbone stops floating cauldrons (thanks to MaxG for finding this) -AdamJD
 }
 
 defaultproperties
@@ -154,7 +169,9 @@ defaultproperties
 
     EjectedObjects(2)=Class'Jellybean'
 
-    ObjectStartPoint(0)=(X=64.00,Y=0.00,Z=-20.00) 
+    // ObjectStartPoint(0)=(X=64.00,Y=0.00,Z=-20.00) 
+	ObjectStartPoint(0)=(X=64.00,Y=0.00,Z=20.00) //now that rootbone is no longer used we need to set the Z start point of the first ObjectStartPoint 
+												//to +20 otherwise beans/frogs fall through the floor when being spawned -AdamJD
 
     ObjectStartPoint(1)=(X=64.00,Y=-20.00,Z=20.00)
 

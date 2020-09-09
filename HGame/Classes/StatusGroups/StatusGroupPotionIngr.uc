@@ -50,6 +50,6 @@ defaultproperties
 
     fTotalEffectOutTime=0.20
 
-    MenuProps=1
-
+    // MenuProps=1
+	MenuProps=Menu_IfEverHadAny
 }

@@ -290,6 +290,8 @@ begin:
   }
   TimeUntilNextFire = 999999.0;
   LoopAnim('onback');
+  
+onBackloop: //UTPT didn't add this state label for some reason -AdamJD
   TimeUntilNextFire = 999999.0;
   Sleep(1.0);
   goto ('onBackloop');

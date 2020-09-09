@@ -760,6 +760,6 @@ defaultproperties
 
     bHidden=True
 
-    DrawType=0
-
+    // DrawType=0
+	DrawType=DT_None 
 }

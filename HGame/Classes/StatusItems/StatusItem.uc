@@ -285,5 +285,6 @@ defaultproperties
     bTravelStatus=True
     CountColor=1
     bHidden=True
-    DrawType=0
+    // DrawType=0
+	DrawType=DT_None
 }

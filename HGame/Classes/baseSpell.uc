@@ -207,12 +207,12 @@ function ProcessTouch (Actor Other, Vector HitLocation)
             PlayerHarry.ClientMessage("Spell: " $ string(self) $ " VALID Touch to spellTrigger:" $ string(Other));
           }
           CreateHitEffects(Other,HitLocation);
-        } else //{
+        } else {
           if ( bUseDebugMode )
           {
             PlayerHarry.ClientMessage("Spell: " $ string(self) $ " Touched ***UNCLASSIFIED***:" $ string(Other));
           }
-        // }
+         }
       // }
     // }
   // }
@@ -283,7 +283,25 @@ function CreateHitEffects (Actor ActorHit, Vector vHitLocation)
         {
           lTime = Duellist(PlayerHarry.DuelOpponent).fTimeAfterHit;
         }
+		
+		fxHitParticleEffect.LifeTime.Base = Max(1.0, lTime); //UTPT didn't add this -AdamJD
     }
+	
+	//UTPT didn't add this -AdamJD
+	if( SpellCharge > 0 && SpellWand != None )
+	{
+		ScaleParticles(fxHitParticleEffect, SpellWand.GetChargeParticleFXScale(SpellCharge));
+	}
+  }
+  
+  //UTPT didn't add this -AdamJD
+  if( fxReactParticleEffectClass != None )
+  {
+	  fxReactParticleEffect = spawn(fxReactParticleEffectClass);
+	  fxReactParticleEffect.SetLocation(vHitLocation);
+	  fxReactParticleEffect.SetRotation(fxHitParticleEffect.Default.Rotation);
+	  fxReactParticleEffect.SetOwner(ActorHit);
+	  fxReactParticleEffect.SourceWidth.Base = HProp(ActorHit).collisionRadius;
   }
 }
 
@@ -376,11 +394,13 @@ defaultproperties
 
     bNetTemporary=False
 
-    RemoteRole=2
+    // RemoteRole=2
+	RemoteRole=ROLE_SimulatedProxy
 
     LifeSpan=10.00
 
-    Style=3
+    // Style=3
+	Style=STY_Translucent 
 
     DrawScale=0.30
 
@@ -392,9 +412,11 @@ defaultproperties
 
     bProjTarget=True
 
-    LightType=1
+    // LightType=1
+	LightType=LT_Steady
 
-    LightEffect=13
+    // LightEffect=13
+	LightEffect=LE_NonIncidence
 
     LightBrightness=201
 
@@ -405,5 +427,4 @@ defaultproperties
     LightRadius=10
 
     bFixedRotationDir=True
-
 }

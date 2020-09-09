@@ -341,7 +341,7 @@ event Tick (float fTimeDelta)
       WandEndPoint = Pawn(Owner).WeaponLoc - (Vec(0.0,0.0,fSwordLength * Scale) >> Pawn(Owner).WeaponRot);
       fxSwordParticles.SetLocation(WandEndPoint);
       ScaleParticles(fxSwordParticles,fSwordFXStartScale + (fSwordFXEndScale - fSwordFXStartScale) * Scale);
-    } else {
+    } else //{
       if ( fxChargeParticles.bEmit || TheLumosLight.bLumosOn )
       {
         if ( bSpellCharges && (fSpellCharge < 1.0) )
@@ -356,7 +356,7 @@ event Tick (float fTimeDelta)
           fxChargeParticles.SetLocation(WandEndPoint);
         }
       }
-    }
+    //}
   }
   if ( TheLumosLight.bLumosOn )
   {
@@ -481,7 +481,7 @@ function CastSpell (optional Actor aTarget, optional Vector aTargetOffset, optio
   {
     LastCastedSpell.ProcessTouch(aTarget,aTarget.Location);
     PlayerHarry.cm("Spell AutoHit Target " $ string(aTarget) $ " because TargetDist " $ string(VSize(Location - aTarget.Location)) $ " < " $ string(fAutoHitDistance));
-  } else //{
+  } else {
     if ( aTarget.IsA('harry') )
     {
       if ( PlayerHarry.Difficulty == 1 )
@@ -494,7 +494,7 @@ function CastSpell (optional Actor aTarget, optional Vector aTargetOffset, optio
         }
       }
     //}
-  //}
+  }
 }
 
 function bool SwordChargedUpEnough ()
@@ -533,13 +533,13 @@ function Projectile ProjectileFire2 (Class<Projectile> ProjClass, float ProjSpee
     if ( bUseWeaponForProjRot )
     {
       R = Pawn(Owner).WeaponRot;
-    } else //{
+    } else {
       if ( vEnd == vect(0.00,0.00,0.00) )
       {
         R = harry(Owner).Cam.Rotation;
       } else {
         R = rotator(vEnd - vStart);
-      //}
+      }
     }
     proj = Spawn(ProjClass,Owner,,vStart,R);
   } else {
@@ -547,14 +547,14 @@ function Projectile ProjectileFire2 (Class<Projectile> ProjClass, float ProjSpee
     if ( bUseWeaponForProjRot )
     {
       R = Pawn(Owner).WeaponRot;
-    } else //{
+    } else {
       if ( Owner.IsA('harry') )
       {
         R = harry(Owner).Cam.Rotation;
       } else {
         R = Pawn(Owner).Rotation;
       }
-    //}
+    }
     proj = Spawn(ProjClass,Owner,,vStart,R);
     if ( aTarget.IsA('BossRailMove') )
     {

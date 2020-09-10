@@ -136,8 +136,10 @@ function Vector RandomPosition (Vector NewPos, float Accuracy)
   local Vector rv;
   local float spread;
 
-  // spread = (1.0 - Accuracy) * 8192;
-  spread = (1.0 - Accuracy) * 2048; //the bark used to get thrown way too wide -AdamJD
+  //spread = (1.0 - Accuracy) * 8192; //the bark used to get thrown way too wide -AdamJD
+  
+  //turned this down more because the bark was still getting thrown a bit too wide -AdamJD
+  spread = (1.0 - Accuracy) * 1024; //2048; 
   
   //UTPT original code, this made the Bowtruckle throw bark up in the air instead of at Harry -AdamJD
   /*

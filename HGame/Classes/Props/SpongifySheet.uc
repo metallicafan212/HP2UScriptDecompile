@@ -14,7 +14,7 @@ defaultproperties
 {
     AnimSequence=Idle
 
-    Style=3
+    Style=STYLE_Translucent
 
     Mesh=SkeletalMesh'HPModels.skSpongifyRugMesh'
 

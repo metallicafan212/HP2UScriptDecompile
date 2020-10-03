@@ -516,6 +516,96 @@ exec function DuelingMode ()
   }
 }
 
+function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
+{
+	local float FX;
+	local float fy;
+	local float Ratio;
+	local float CRTScale;
+	local float XOffset;
+	local float YOffset;
+	local float ResX;
+	local float ResY;
+
+	if ( Tex == None )
+	{
+		return;
+	}
+  /*
+  FX = C.SizeX / 640.0;
+  fy = C.SizeY / 480.0;
+  FX = C.SizeX / 640.0;
+  fy = C.SizeY / 480.0;
+  FX = 1.0;
+  fy = 1.0;
+  */
+	
+	FX = 1.0;
+ 	FY = 1.0;
+	
+	/*
+	// Metallicafan212:	Scale it to 4/3
+	//Ratio 	= C.SizeX / C.SizeY;
+	
+	//FX 		= Ratio; /// 1.3333;
+	
+	// Metallicafan212:	Center the loading screen and draw black behind it
+	//					TODO!
+	
+	// Metallicafan212:	Rewrite this whole fucking system
+	//					We want a perfect middle square
+	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
+	//					Figure out a resolution in the middle of the screen
+	if(C.SizeX > C.SizeY)
+	{
+		Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
+		// Metallicafan212:	Use the height as the basis of the square
+		ResY = C.SizeY;
+		ResX = C.SizeX * Ratio;
+	}
+	else
+	{
+		Ratio 		= (C.Size.X / C.SizeY) / 1.3333333;
+		ResX = C.SizeX;
+		ResY = C.SizeY * Ratio;
+	}
+	*/
+	
+	// Metallicafan212:	Now draw it in the correct place
+	//					We're considering the canvas a perfect 512x512 grid
+	//X = 
+	
+	
+	//FX 		= (C.SizeX / C.SizeY) / 1.33333;
+	
+	//log("X " $ C.SizeX $ " Y " $ C.SizeY);
+	
+	// Metallicafan212:	Check for thinner resolutions
+	//					On these we need to stretch outwards
+	
+	/*
+	if(FX < 1.0)
+	{
+		FX = 1.0;
+		FY = (C.SizeX / C.SizeY);
+		log("FY is " $ FY);
+	}
+	else
+	{
+		FY = 1.0;
+		log("FX is " $ FX);
+	}
+
+	
+		
+	//FY		= FX;
+	*/
+  
+	//C.DrawTileClipped(Tex, 
+  
+	Root.DrawStretchedTexture(C, (X * FX), (Y * FY), Tex.USize * FX, Tex.VSize * FY, Tex);
+}
+
 function ToggleDebugMode ()
 {
   if (  !Class'Version'.Default.bDebugEnabled )
@@ -591,6 +681,7 @@ function DrawLevelAction (Canvas C)
 		{
 			C.Font = LocalBigFont;
 		}
+		
 		ScaleAndDraw(C,0.0,0.0,LoadingBackground.p1);
 		ScaleAndDraw(C,256.0,0.0,LoadingBackground.p2);
 		ScaleAndDraw(C,512.0,0.0,LoadingBackground.p3);
@@ -874,257 +965,292 @@ function WarpHarryToCameraLocation ()
 
 event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 {
-  local byte k;
+	local EInputKey k;
+	//local EInputKey LocalConsoleKey;
+	
+	// Metallicafan212:	Force it to be typed
+	//LocalConsoleKey = enum(ConsoleKey);
+	
+	//log("Key event! " $ Key $ " " $ Action);
+	
+	if(Key == IK_Numpad4)
+	{
+		log(bLeftKeyDown);
+	}
+	
 
-  k = Key;
-  switch (Action)
-  {
-    case IST_Release:
-    switch (k)
-    {
-      case 46:
-      if ( bDebugMode )
-      {
-        if ( harry(Viewport.Actor).Cam.CameraMode != harry(Viewport.Actor).Cam.ECamMode.CM_CutScene )
-        {
-          harry(Viewport.Actor).Cam.SetCameraMode(harry(Viewport.Actor).Cam.ECamMode.CM_CutScene);
-        } 
-		else 
+	if(Action == IST_Press && int(key) == ConsoleKey)
+	{
+		if ( bLocked )
 		{
-          WarpHarryToCameraLocation();
-          harry(Viewport.Actor).Cam.SetCameraMode(harry(Viewport.Actor).Cam.LastCamMode);
-        }
-      }
-      break;
-      case 1:
-      bSpaceReleased = True;
-      break;
-      case 32:
-      bSpacePressed = False;
-      bBoostKeyPressed = False;
-      break;
-      case 19:
-      case 3:
-      if ( bDebugMode )
-      {
-        harry(Viewport.Actor).ConsoleCommand("pause");
-      }
-      break;
-      case 33:
-      if ( bDebugMode )
-      {
-        if ( fSlomoSpeed >= 1.0 )
-        {
-          if ( fSlomoSpeed < 20 )
-          {
-            fSlomoSpeed += 0.5;
-          }
-        } 
-		else 
+			return True;
+		}
+		Root.bAllowConsole = Class'Version'.Default.bDebugEnabled;
+		if (  !bDebugMode )
 		{
-          fSlomoSpeed = 1.0;
-        }
-        harry(Viewport.Actor).SloMo(fSlomoSpeed);
-        harry(Viewport.Actor).ClientMessage(" ^^^ Setting GameSpeed to: X" $ string(fSlomoSpeed));
-      }
-      break;
-      case 34:
-      if ( bDebugMode )
-      {
-        if ( fSlomoSpeed <= 1.0 )
-        {
-          fSlomoSpeed *= 0.5;
-        } 
-		else 
+			return True;
+		}
+		if ( bShiftDown )
 		{
-          fSlomoSpeed = 1.0;
-        }
-        harry(Viewport.Actor).SloMo(fSlomoSpeed);
-        harry(Viewport.Actor).ClientMessage(" ^^^ Setting GameSpeed to: X" $ string(fSlomoSpeed));
-      }
-      break;
-      case 37:
-      case 100:
-      bLeftKeyDown = False;
-      break;
-      case 39:
-      case 102:
-      bRightKeyDown = False;
-      break;
-      case 38:
-      case 104:
-      bForwardKeyDown = False;
-      break;
-      case 40:
-      case 98:
-      bBackKeyDown = False;
-      break;
-      case 97:
-      bRotateLeftKeyDown = False;
-      break;
-      case 99:
-      bRotateRightKeyDown = False;
-      break;
-      case 96:
-      bRotateUpKeyDown = False;
-      break;
-      case 110:
-      bRotateDownKeyDown = False;
-      break;
-      case 103:
-      bUpKeyDown = False;
-      break;
-      case 105:
-      bDownKeyDown = False;
-      case 16:
-      bShiftDown = False;
-      break;
-      default:
-    }
-    break;
-    case IST_Axis:
-    if ( bVendorBar )
-    {
-      switch (Key)
-      {
-        case IK_MouseX:
-        MouseX = MouseX + MouseScale * Delta;
-        break;
-        case IK_MouseY:
-        MouseY = MouseY - MouseScale * Delta;
-        break;
-        default:
-      }
-    }
-    break;
-    case IST_Press:
-    if ( harry(Viewport.Actor) != None )
-    {
-      harry(Viewport.Actor).KeyDownEvent(Key);
-    }
-    switch (k)
-    {
-      case 16:
-      bShiftDown = True;
-      break;
-      case 8:
-      if ( bDebugMode )
-      {
-        LangBrowser();
-        return True;
-      }
-      break;
-      case 9:
-      break;
-      case 37:
-      case 100:
-      bLeftKeyDown = True;
-      break;
-      case 39:
-      case 102:
-      bRightKeyDown = True;
-      break;
-      case 38:
-      case 104:
-      bForwardKeyDown = True;
-      break;
-      case 40:
-      case 98:
-      bBackKeyDown = True;
-      break;
-      case 97:
-      bRotateLeftKeyDown = True;
-      break;
-      case 99:
-      bRotateRightKeyDown = True;
-      break;
-      case 96:
-      bRotateUpKeyDown = True;
-      break;
-      case 110:
-      bRotateDownKeyDown = True;
-      break;
-      case 103:
-      bUpKeyDown = True;
-      break;
-      case 105:
-      bDownKeyDown = True;
-      break;
-      case 45:
-      if ( bDebugMode )
-      {
-        Viewport.Actor.SShot();
-      }
-      break;
-      case 2:
-      break;
-      case 27:
-      menuBook.EscFromConsole();
-      return True;
-      case ConsoleKey:
-      if ( bLocked )
-      {
-        return True;
-      }
-      Root.bAllowConsole = Class'Version'.Default.bDebugEnabled;
-      if (  !bDebugMode )
-      {
-        return True;
-      }
-      if ( bShiftDown )
-      {
-        ShowCutConsole( !bShowCutConsole);
-        return True;
-      }
-      bQuickKeyEnable = True;
-      LaunchUWindow();
-      if (  !bShowConsole )
-      {
-        ShowConsole();
-      }
-      return True;
-      case 1:
-      bSpaceReleased = False;
-      break;
-      break;
-      case 32:
-      bSpacePressed = True;
-      bBoostKeyPressed = True;
-      break;
-      case 115:
-      if ( bDebugMode )
-      {
-        LaunchUWindow();
-        ShortCut();
-      }
-      break;
-      case 117:
-      if ( bDebugMode )
-      {
-        harry(Viewport.Actor).GetHealthStatusItem().SetCountToMaxPotential();
-      }
-      break;
-      case 118:
-      ToggleDebugMode();
-      break;
-      case 119:
-      break;
-      case 120:
-      if ( bDebugMode )
-      {
-        harry(Viewport.Actor).AddAllSpellsToSpellBook();
-      }
-      break;
-      case 121:
-      break;
-      case 123:
-      break;
-      default:
-    }
-    break;
-    default:
-  }
-  return False;
+			ShowCutConsole( !bShowCutConsole);
+			return True;
+		}
+		bQuickKeyEnable = True;
+		LaunchUWindow();
+		if (  !bShowConsole )
+		{
+			ShowConsole();
+		}
+		return True;
+	}
+
+	k = Key;
+	switch (Action)
+	{
+		case IST_Release:
+			switch (k)
+			{
+				case IK_Delete:
+					if ( bDebugMode )
+					{
+						if ( harry(Viewport.Actor).Cam.CameraMode != harry(Viewport.Actor).Cam.ECamMode.CM_Free )
+						{
+							harry(Viewport.Actor).Cam.SetCameraMode(harry(Viewport.Actor).Cam.ECamMode.CM_Free);
+						} 
+						else 
+						{
+							WarpHarryToCameraLocation();
+							harry(Viewport.Actor).Cam.SetCameraMode(harry(Viewport.Actor).Cam.LastCamMode);
+						}
+					}
+					break;
+				case IK_LeftMouse:
+					bSpaceReleased = True;
+					break;
+				case IK_Space:
+					bSpacePressed = False;
+					bBoostKeyPressed = False;
+					break;
+				case IK_Pause:
+				case IK_Cancel:
+					if ( bDebugMode )
+					{
+						harry(Viewport.Actor).ConsoleCommand("pause");
+					}
+					break;
+				case IK_PageUp:
+					if ( bDebugMode )
+					{
+						if ( fSlomoSpeed >= 1.0 )
+						{
+							if ( fSlomoSpeed < 20 )
+							{
+								fSlomoSpeed += 0.5;
+							}
+						}	 
+						else 
+						{
+							fSlomoSpeed = 1.0;
+						}
+						harry(Viewport.Actor).SloMo(fSlomoSpeed);
+						harry(Viewport.Actor).ClientMessage(" ^^^ Setting GameSpeed to: X" $ string(fSlomoSpeed));
+					}
+					break;
+				case IK_PageDown:
+					if ( bDebugMode )
+					{
+						if ( fSlomoSpeed <= 1.0 )
+						{
+							fSlomoSpeed *= 0.5;
+						} 
+						else 
+						{
+							fSlomoSpeed = 1.0;
+						}
+						harry(Viewport.Actor).SloMo(fSlomoSpeed);
+						harry(Viewport.Actor).ClientMessage(" ^^^ Setting GameSpeed to: X" $ string(fSlomoSpeed));
+					}
+					break;
+				case IK_Left:
+				case IK_Numpad4:
+					bLeftKeyDown = False;
+					break;
+				case IK_Down:
+				case IK_Numpad6:
+					bRightKeyDown = False;
+					break;
+				case IK_Up:
+				case IK_NumPad8:
+					bForwardKeyDown = False;
+					break;
+				case IK_Down:
+				case IK_Numpad2:
+					bBackKeyDown = False;
+					break;
+				case IK_Numpad1:
+					bRotateLeftKeyDown = False;
+					break;
+				case IK_Numpad3:
+					bRotateRightKeyDown = False;
+					break;
+				case IK_Numpad0:
+					bRotateUpKeyDown = False;
+					break;
+				case IK_NumPadPeriod:
+					bRotateDownKeyDown = False;
+					break;
+				case IK_Numpad7:
+					bUpKeyDown = False;
+					break;
+				case IK_Numpad9:
+					bDownKeyDown = False;
+					break;
+				case IK_Shift:
+					bShiftDown = False;
+					break;
+			}
+			break;
+		case IST_Axis:
+			if ( bVendorBar )
+			{
+				switch (Key)
+				{
+					case IK_MouseX:
+						MouseX = MouseX + MouseScale * Delta;
+						break;
+					case IK_MouseY:
+						MouseY = MouseY - MouseScale * Delta;
+						break;
+				}
+			}
+			break;
+		case IST_Press:
+			if ( harry(Viewport.Actor) != None )
+			{
+				harry(Viewport.Actor).KeyDownEvent(int(Key));
+			}
+			switch (k)
+			{
+				case IK_Shift:
+					bShiftDown = True;
+					break;
+				case IK_Backspace:
+					if ( bDebugMode )
+					{
+						LangBrowser();
+						return True;
+					}
+					break;
+				case IK_Tab:
+					break;
+				case IK_Left:
+				case IK_Numpad4:
+					bLeftKeyDown = True;
+					break;
+				case IK_Right:
+				case IK_Numpad6:
+					bRightKeyDown = True;
+					break;
+				case IK_Up:
+				case IK_Numpad8:
+					bForwardKeyDown = True;
+					break;
+				case IK_Down:
+				case IK_Numpad2:
+					bBackKeyDown = True;
+					break;
+				case IK_Numpad1:
+					bRotateLeftKeyDown = True;
+					break;
+				case IK_Numpad3:
+					bRotateRightKeyDown = True;
+					break;
+				case IK_Numpad0:
+					bRotateUpKeyDown = True;
+					break;
+				case IK_NumPadPeriod:
+					bRotateDownKeyDown = True;
+					break;
+				case IK_NumPad7:
+					bUpKeyDown = True;
+					break;
+				case IK_Numpad9:
+					bDownKeyDown = True;
+					break;
+				case IK_Insert:
+					if ( bDebugMode )
+					{
+						Viewport.Actor.SShot();
+					}
+					break;
+				case IK_RightMouse:
+					break;
+				case IK_Escape:
+					menuBook.EscFromConsole();
+					return True;
+				/*
+				case LocalConsoleKey:
+					if ( bLocked )
+					{
+						return True;
+					}
+					Root.bAllowConsole = Class'Version'.Default.bDebugEnabled;
+					if (  !bDebugMode )
+					{
+						return True;
+					}
+					if ( bShiftDown )
+					{
+						ShowCutConsole( !bShowCutConsole);
+						return True;
+					}
+					bQuickKeyEnable = True;
+					LaunchUWindow();
+					if (  !bShowConsole )
+					{
+						ShowConsole();
+					}
+					return True;
+				*/
+				case IK_LeftMouse:
+					bSpaceReleased = False;
+					break;
+				case IK_Space:
+					bSpacePressed = True;
+					bBoostKeyPressed = True;
+					break;
+				case IK_F4:
+					if ( bDebugMode )
+					{
+						LaunchUWindow();
+						ShortCut();
+					}
+					break;
+				case IK_F6:
+					if ( bDebugMode )
+					{
+						harry(Viewport.Actor).GetHealthStatusItem().SetCountToMaxPotential();
+					}
+					break;
+				case IK_F7:
+					ToggleDebugMode();
+					break;
+				case IK_F8:
+					break;
+				case IK_F9:
+					if ( bDebugMode )
+					{
+						harry(Viewport.Actor).AddAllSpellsToSpellBook();
+					}
+					break;
+				case IK_F10:
+					break;
+				case IK_F12:
+					break;
+			}
+			break;
+	}
+	return False;
 }
 
 function handleMenuEvent ()

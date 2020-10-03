@@ -1074,96 +1074,92 @@ state StateFreeCam
   //ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
 	ignores TakeDamage, SeePlayer, EnemyNotVisible, HearNoise, KilledBy, Trigger, Bump, HitWall, HeadZoneChange, FootZoneChange, ZoneChange, Falling, WarnTarget, Died, LongFall, PainTimer; //UTPT left all these out... -AdamJD
   
-  function BeginState ()
-  {
-    if ( /*True*/USE_DEBUG_MODE )
-    {
-      PlayerHarry.ClientMessage("Camera: BeginState -> FreeCam");
-    }
-    CurrentSet = CamSetFree;
-    fDistanceScalar = 1.0;
-    rRotationStep = rot(0,0,0);
-    rSavedRotation = Rotation;
-    bSyncPositionWithTarget = False;
-    bSyncRotationWithTarget = False;
-  }
-  
-  function Tick (float fTimeDelta)
-  {
-    fMouseDeltaX = PlayerHarry.SmoothMouseX * fTimeDelta;
-    fMouseDeltaY = PlayerHarry.SmoothMouseY * fTimeDelta;
-    if ( fMouseDeltaX > 20000.0 )
-    {
-      fMouseDeltaX = 20000.0;
-    } else //{
-      if ( fMouseDeltaX < -20000.0 )
-      {
-        fMouseDeltaX = -20000.0;
-      }
-    //}
-    if ( fMouseDeltaY > 10000.0 )
-    {
-      fMouseDeltaY = 10000.0;
-    } else //{
-      if ( fMouseDeltaY < -10000.0 )
-      {
-        fMouseDeltaY = -10000.0;
-      }
-    //}
-    if ( baseConsole(PlayerHarry.Player.Console).bForwardKeyDown )
-    {
-      vDestPosition += (vect(1.00,0.00,0.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
-    } else //{
-      if ( baseConsole(PlayerHarry.Player.Console).bBackKeyDown )
-      {
-        vDestPosition += (vect(-1.00,0.00,0.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
-      }
-    //}
-    if ( baseConsole(PlayerHarry.Player.Console).bRightKeyDown )
-    {
-      vDestPosition += (vect(0.00,1.00,0.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
-    } else //{
-      if ( baseConsole(PlayerHarry.Player.Console).bLeftKeyDown )
-      {
-        vDestPosition += (vect(0.00,-1.00,0.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
-      }
-    //}
-    if ( baseConsole(PlayerHarry.Player.Console).bUpKeyDown )
-    {
-      vDestPosition += (vect(0.00,0.00,1.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
-    } else //{
-      if ( baseConsole(PlayerHarry.Player.Console).bDownKeyDown )
-      {
-        vDestPosition += (vect(0.00,0.00,-1.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
-      }
-    //}
-    vCurrPosition += (vDestPosition - vCurrPosition) * FMin(1.0,CurrentSet.fMoveTightness * fTimeDelta);
-    SetLocation(vCurrPosition);
-    if ( baseConsole(PlayerHarry.Player.Console).bRotateRightKeyDown )
-    {
-      rDestRotation.Yaw += CurrentSet.fRotSpeed * fTimeDelta;
-	}
-	  else if ( baseConsole(PlayerHarry.Player.Console).bRotateLeftKeyDown )
-      {
-        rDestRotation.Yaw -= CurrentSet.fRotSpeed * fTimeDelta;
-	  }
-    if( baseconsole(playerHarry.player.console).bRotateUpKeyDown)
+	function BeginState ()
 	{
-      rDestRotation.Pitch += CurrentSet.fRotSpeed * fTimeDelta;
-    }
-	  else if ( baseConsole(PlayerHarry.Player.Console).bRotateDownKeyDown )
-      {
-        rDestRotation.Pitch -= CurrentSet.fRotSpeed * fTimeDelta;
-      }
+		if ( USE_DEBUG_MODE )
+		{
+			PlayerHarry.ClientMessage("Camera: BeginState -> FreeCam");
+		}
+		CurrentSet = CamSetFree;
+		fDistanceScalar = 1.0;
+		rRotationStep = rot(0,0,0);
+		rSavedRotation = Rotation;
+		bSyncPositionWithTarget = False;
+		bSyncRotationWithTarget = False;
+	}
+  
+	function Tick (float fTimeDelta)
+	{
+		fMouseDeltaX = PlayerHarry.SmoothMouseX * fTimeDelta;
+		fMouseDeltaY = PlayerHarry.SmoothMouseY * fTimeDelta;
+		if ( fMouseDeltaX > 20000.0 )
+		{
+			fMouseDeltaX = 20000.0;
+		}
+		else if ( fMouseDeltaX < -20000.0 )
+		{
+			fMouseDeltaX = -20000.0;
+		}
+		if ( fMouseDeltaY > 10000.0 )
+		{
+			fMouseDeltaY = 10000.0;
+		} 
+		else
+		if ( fMouseDeltaY < -10000.0 )
+		{
+			fMouseDeltaY = -10000.0;
+		}
+		if ( baseConsole(PlayerHarry.Player.Console).bForwardKeyDown )
+		{
+			vDestPosition += (vect(1.00,0.00,0.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
+		} 
+		else if ( baseConsole(PlayerHarry.Player.Console).bBackKeyDown )
+		{
+			vDestPosition += (vect(-1.00,0.00,0.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
+		}
+		if ( baseConsole(PlayerHarry.Player.Console).bRightKeyDown )
+		{
+			vDestPosition += (vect(0.00,1.00,0.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
+		} 
+		else if ( baseConsole(PlayerHarry.Player.Console).bLeftKeyDown )
+		{
+			vDestPosition += (vect(0.00,-1.00,0.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
+		}
+		if ( baseConsole(PlayerHarry.Player.Console).bUpKeyDown )
+		{
+			vDestPosition += (vect(0.00,0.00,1.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
+		} 
+		else if ( baseConsole(PlayerHarry.Player.Console).bDownKeyDown )
+		{
+			vDestPosition += (vect(0.00,0.00,-1.00) >> Rotation) * CurrentSet.fMoveSpeed * fTimeDelta;
+		}
+		vCurrPosition += (vDestPosition - vCurrPosition) * FMin(1.0,CurrentSet.fMoveTightness * fTimeDelta);
+		SetLocation(vCurrPosition);
+		if ( baseConsole(PlayerHarry.Player.Console).bRotateRightKeyDown )
+		{
+			rDestRotation.Yaw += CurrentSet.fRotSpeed * fTimeDelta;
+		}
+		else if ( baseConsole(PlayerHarry.Player.Console).bRotateLeftKeyDown )
+		{
+			rDestRotation.Yaw -= CurrentSet.fRotSpeed * fTimeDelta;
+		}
+		if( baseconsole(playerHarry.player.console).bRotateUpKeyDown)
+		{
+			rDestRotation.Pitch += CurrentSet.fRotSpeed * fTimeDelta;
+		}
+		else if ( baseConsole(PlayerHarry.Player.Console).bRotateDownKeyDown )
+		{
+			rDestRotation.Pitch -= CurrentSet.fRotSpeed * fTimeDelta;
+		}
 
-	//these 2 lines weren't added for some reason which stopped freecam working -AdamJD
-	rDestRotation.Yaw   += fMouseDeltaX * CurrentSet.fRotSpeed;
-	rDestRotation.Pitch += fMouseDeltaY * CurrentSet.fRotSpeed;
+		//these 2 lines weren't added for some reason which stopped freecam working -AdamJD
+		rDestRotation.Yaw   += fMouseDeltaX * CurrentSet.fRotSpeed;
+		rDestRotation.Pitch += fMouseDeltaY * CurrentSet.fRotSpeed;
 	
-	rCurrRotation += (rDestRotation - rCurrRotation ) * FMin( 1.0f, CurrentSet.fRotTightness * fTimeDelta );
-    DesiredRotation = rCurrRotation;
-    SetRotation(DesiredRotation);
-  }
+		rCurrRotation += (rDestRotation - rCurrRotation ) * FMin( 1.0f, CurrentSet.fRotTightness * fTimeDelta );
+		DesiredRotation = rCurrRotation;
+		SetRotation(DesiredRotation);
+	}
 }
 
 function bool CutCommand (string Command, optional string cue, optional bool bFastFlag)

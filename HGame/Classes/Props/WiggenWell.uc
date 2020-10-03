@@ -64,13 +64,15 @@ defaultproperties
 
     bPickupOnTouch=True
 
-    PickupFlyTo=2
+    //PickupFlyTo=2
+	PickupFlyTo=FT_HudPosition
 
     classStatusGroup=Class'StatusGroupPotions'
 
     classStatusItem=Class'StatusItemWiggenwell'
 
-    Physics=1
+    //Physics=1
+	Physics=PHYS_Walking
 
     CollisionRadius=13.00
 
@@ -85,5 +87,4 @@ defaultproperties
     bBlockCamera=False
 
     bBounce=True
-
 }

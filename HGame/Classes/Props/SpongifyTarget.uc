@@ -15,7 +15,8 @@ defaultproperties
 
     bHidden=True
 
-    DrawType=1
+    //DrawType=1
+	DrawType=DT_Sprite
 
     Texture=Texture'HGame.SpongifyTargetTexture'
 
@@ -34,5 +35,4 @@ defaultproperties
     bBlockActors=False
 
     bBlockPlayers=False
-
 }

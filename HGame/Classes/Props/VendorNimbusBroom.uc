@@ -4,7 +4,7 @@
 
 class VendorNimbusBroom extends HProp;
 
-auto state BounceIntoPlace extends BounceIntoPlace
+auto state BounceIntoPlace //extends BounceIntoPlace
 {
 }
 
@@ -14,7 +14,8 @@ defaultproperties
 
     bPickupOnTouch=True
 
-    PickupFlyTo=2
+    //PickupFlyTo=2
+	PickupFlyTo=FT_HudPosition
 
     classStatusGroup=Class'StatusGroupQGear'
 
@@ -24,7 +25,8 @@ defaultproperties
 
     soundBounce=Sound'HPSounds.Magic_sfx.bean_bounce'
 
-    Physics=1
+    //Physics=1
+	Physics=PHYS_Walking
 
     bPersistent=True
 
@@ -36,10 +38,10 @@ defaultproperties
 
     CollisionHeight=5.00
 
-    CollideType=2
+    //CollideType=2
+	CollideType=CT_Box
 
     bBlockPlayers=False
 
     bBlockCamera=False
-
 }

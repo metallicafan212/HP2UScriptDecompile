@@ -14,6 +14,6 @@ defaultproperties
 
     CollisionHeight=40.00
 
-    CollideType=2
-
+    //CollideType=2
+	CollideType=CT_Box
 }

@@ -60,20 +60,112 @@ function ChangeLevel (string lev, bool flag)
 
 function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
 {
-  local float FX;
-  local float fy;
+//orginal code -AdamJD
+/*
+    local float FX;
+    local float fy;
 
-  if ( Tex == None )
-  {
-    return;
-  }
+    if ( Tex == None )
+    {
+      return;
+    }
+    FX = C.SizeX / 640.0;
+    fy = C.SizeY / 480.0;
+    FX = C.SizeX / 640.0;
+    fy = C.SizeY / 480.0;
+    FX = 1.0;
+    fy = 1.0;
+    Root.DrawStretchedTexture(C, X * FX, Y * fy, Tex.USize * FX, Tex.VSize * fy, Tex);
+*/
+ 
+    //Metallicafan212s code -AdamJD
+    //
+    local float FX;
+    local float fy;
+    local float Ratio;
+    local float CRTScale;
+    local float XOffset;
+    local float YOffset;
+    local float ResX;
+    local float ResY;
+
+    if ( Tex == None )
+    {
+	  return;
+    }
+
+  /*
   FX = C.SizeX / 640.0;
   fy = C.SizeY / 480.0;
   FX = C.SizeX / 640.0;
   fy = C.SizeY / 480.0;
   FX = 1.0;
   fy = 1.0;
-  Root.DrawStretchedTexture(C, X * FX, Y * fy, Tex.USize * FX, Tex.VSize * fy, Tex);
+  */
+	
+	FX = 1.0;
+ 	FY = 1.0;
+	
+	/*
+	// Metallicafan212:	Scale it to 4/3
+	//Ratio 	= C.SizeX / C.SizeY;
+	
+	//FX 		= Ratio; /// 1.3333;
+	
+	// Metallicafan212:	Center the loading screen and draw black behind it
+	//					TODO!
+	
+	// Metallicafan212:	Rewrite this whole fucking system
+	//					We want a perfect middle square
+	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
+	//					Figure out a resolution in the middle of the screen
+	if(C.SizeX > C.SizeY)
+	{
+		Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
+		// Metallicafan212:	Use the height as the basis of the square
+		ResY = C.SizeY;
+		ResX = C.SizeX * Ratio;
+	}
+	else
+	{
+		Ratio 		= (C.Size.X / C.SizeY) / 1.3333333;
+		ResX = C.SizeX;
+		ResY = C.SizeY * Ratio;
+	}
+	*/
+	
+	// Metallicafan212:	Now draw it in the correct place
+	//					We're considering the canvas a perfect 512x512 grid
+	//X = 
+	
+	
+	//FX 		= (C.SizeX / C.SizeY) / 1.33333;
+	
+	//log("X " $ C.SizeX $ " Y " $ C.SizeY);
+	
+	// Metallicafan212:	Check for thinner resolutions
+	//					On these we need to stretch outwards
+	
+	/*
+	if(FX < 1.0)
+	{
+		FX = 1.0;
+		FY = (C.SizeX / C.SizeY);
+		log("FY is " $ FY);
+	}
+	else
+	{
+		FY = 1.0;
+		log("FX is " $ FX);
+	}
+	
+		
+	//FY		= FX;
+	*/
+  
+	//C.DrawTileClipped(Tex, 
+  
+	Root.DrawStretchedTexture(C, (X * FX), (Y * FY), Tex.USize * FX, Tex.VSize * FY, Tex);
 }
 
 function PrintActionMessageInUpperLeft (Canvas C, string BigMessage)
@@ -139,21 +231,21 @@ function DrawLevelAction (Canvas C)
 		PrintActionMessageInUpperLeft(C,BigMessage);
 		return;
 	} 
-	else 
+	//else 
+	//{
+	else if ( Viewport.Actor.Level.LevelAction == LEVACT_Saving )
 	{
-		if ( Viewport.Actor.Level.LevelAction == LEVACT_Saving )
-		{
-			BigMessage = Localize("all","Options_0057","HPMenu");
-		} 
-		else if ( Viewport.Actor.Level.LevelAction == LEVACT_Connecting )
-		{
-			BigMessage = ConnectingMessage;
-		} 
-		else if ( Viewport.Actor.Level.LevelAction == LEVACT_Precaching )
-		{
-			BigMessage = PrecachingMessage;
-		}
+		BigMessage = Localize("all","Options_0057","HPMenu");
+	} 
+	else if ( Viewport.Actor.Level.LevelAction == LEVACT_Connecting )
+	{
+		BigMessage = ConnectingMessage;
 	}
+	else if ( Viewport.Actor.Level.LevelAction == LEVACT_Precaching )
+	{
+		BigMessage = PrecachingMessage;
+	}
+	//}
 	if ( BigMessage != "" )
 	{
 		C.Style = 1;
@@ -172,8 +264,8 @@ function DrawLevelAction (Canvas C)
 
 defaultproperties
 {
-    LoadingBackground=(p1=Texture'Icons.FELoadingBackground1',p2=Texture'Icons.FELoadingBackground2',p3=Texture'Icons.FELoadingBackground3',p4=Texture'Icons.FELoadingBackground4',p5=Texture'Icons.FELoadingBackground5',p6=Texture'Icons.FELoadingBackground6',durration=999999.00),
+	//this only seems to work properly in HPConsole -AdamJD
+    //LoadingBackground=(p1=Texture'Icons.FELoadingBackground1',p2=Texture'Icons.FELoadingBackground2',p3=Texture'Icons.FELoadingBackground3',p4=Texture'Icons.FELoadingBackground4',p5=Texture'Icons.FELoadingBackground5',p6=Texture'Icons.FELoadingBackground6',durration=999999.00)
 
     bUseSystemFonts=True
-
 }

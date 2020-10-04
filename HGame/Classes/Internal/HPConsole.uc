@@ -516,6 +516,8 @@ exec function DuelingMode ()
   }
 }
 
+//KW implemented this in baseConsole -AdamJD
+/*
 function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
 {
 	local float FX;
@@ -531,19 +533,17 @@ function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
 	{
 		return;
 	}
-  /*
-  FX = C.SizeX / 640.0;
-  fy = C.SizeY / 480.0;
-  FX = C.SizeX / 640.0;
-  fy = C.SizeY / 480.0;
-  FX = 1.0;
-  fy = 1.0;
-  */
+
+  //FX = C.SizeX / 640.0;
+  //fy = C.SizeY / 480.0;
+  //FX = C.SizeX / 640.0;
+  //fy = C.SizeY / 480.0;
+  //FX = 1.0;
+  //fy = 1.0;
 	
 	FX = 1.0;
  	FY = 1.0;
 	
-	/*
 	// Metallicafan212:	Scale it to 4/3
 	//Ratio 	= C.SizeX / C.SizeY;
 	
@@ -554,22 +554,21 @@ function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
 	
 	// Metallicafan212:	Rewrite this whole fucking system
 	//					We want a perfect middle square
-	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
+	//Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
 	//					Figure out a resolution in the middle of the screen
-	if(C.SizeX > C.SizeY)
-	{
-		Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
+	//if(C.SizeX > C.SizeY)
+	//{
+	//	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
 		// Metallicafan212:	Use the height as the basis of the square
-		ResY = C.SizeY;
-		ResX = C.SizeX * Ratio;
-	}
-	else
-	{
-		Ratio 		= (C.Size.X / C.SizeY) / 1.3333333;
-		ResX = C.SizeX;
-		ResY = C.SizeY * Ratio;
-	}
-	*/
+	//	ResY = C.SizeY;
+	//	ResX = C.SizeX * Ratio;
+	//}
+	//else
+	//{
+	//	Ratio 		= (C.Size.X / C.SizeY) / 1.3333333;
+	//	ResX = C.SizeX;
+	//	ResY = C.SizeY * Ratio;
+	//}
 	
 	// Metallicafan212:	Now draw it in the correct place
 	//					We're considering the canvas a perfect 512x512 grid
@@ -583,28 +582,25 @@ function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
 	// Metallicafan212:	Check for thinner resolutions
 	//					On these we need to stretch outwards
 	
-	/*
-	if(FX < 1.0)
-	{
-		FX = 1.0;
-		FY = (C.SizeX / C.SizeY);
-		log("FY is " $ FY);
-	}
-	else
-	{
-		FY = 1.0;
-		log("FX is " $ FX);
-	}
-
-	
-		
+	//if(FX < 1.0)
+	//{
+	//	FX = 1.0;
+	//	FY = (C.SizeX / C.SizeY);
+	//	log("FY is " $ FY);
+	//}
+	//else
+	//{
+	//	FY = 1.0;
+	//	log("FX is " $ FX);
+	//}
+			
 	//FY		= FX;
-	*/
-  
+	
 	//C.DrawTileClipped(Tex, 
   
 	Root.DrawStretchedTexture(C, (X * FX), (Y * FY), Tex.USize * FX, Tex.VSize * FY, Tex);
 }
+*/
 
 function ToggleDebugMode ()
 {
@@ -649,6 +645,8 @@ function HideConsole ()
   }
 }
 
+//KW implemented this in baseConsole -AdamJD
+/*
 function DrawLevelAction (Canvas C)
 {
 	local string BigMessage;
@@ -721,6 +719,7 @@ function DrawLevelAction (Canvas C)
 		PrintActionMessage(C,BigMessage);
 	}
 }
+*/
 
 function ChangeLevel (string lev, bool flag)
 {
@@ -876,7 +875,7 @@ function DrawE3DemoLockout (Canvas Canvas)
   Canvas.Font = saveFont;
 }
 
-state UWindow extends UWindow
+state UWindow //extends UWindow
 {
 	event bool KeyType (EInputKey Key)
 	{
@@ -1072,18 +1071,30 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 					}
 					break;
 				case IK_Left:
+					//stop free cam zooming off when using arrow keys -AdamJD
+					bLeftKeyDown = False;
+					break;
 				case IK_Numpad4:
 					bLeftKeyDown = False;
 					break;
 				case IK_Down:
+					//stop free cam zooming off when using arrow keys -AdamJD
+					bBackKeyDown = False;
+					break;
 				case IK_Numpad6:
 					bRightKeyDown = False;
 					break;
 				case IK_Up:
+					//stop free cam zooming off when using arrow keys -AdamJD
+					bForwardKeyDown = False;
+					break;
 				case IK_NumPad8:
 					bForwardKeyDown = False;
 					break;
-				case IK_Down:
+				case IK_Right:
+					//stop free cam zooming off when using arrow keys -AdamJD
+					bRightKeyDown = False;
+					break;
 				case IK_Numpad2:
 					bBackKeyDown = False;
 					break;
@@ -1144,18 +1155,30 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 				case IK_Tab:
 					break;
 				case IK_Left:
+					//stop free cam zooming off when using arrow keys -AdamJD
+					bLeftKeyDown = True;
+					break;
 				case IK_Numpad4:
 					bLeftKeyDown = True;
 					break;
 				case IK_Right:
+					//stop free cam zooming off when using arrow keys -AdamJD
+					bRightKeyDown = True;
+					break;
 				case IK_Numpad6:
 					bRightKeyDown = True;
 					break;
 				case IK_Up:
+					//stop free cam zooming off when using arrow keys -AdamJD
+					bForwardKeyDown = True;
+					break;
 				case IK_Numpad8:
 					bForwardKeyDown = True;
 					break;
 				case IK_Down:
+					//stop free cam zooming off when using arrow keys -AdamJD
+					bBackKeyDown = True;
+					break;
 				case IK_Numpad2:
 					bBackKeyDown = True;
 					break;
@@ -1525,9 +1548,13 @@ defaultproperties
     PausedMessage="PRESS ESC TO EXIT"
 
     PrecachingMessage="ENTERING"
-	bUseSystemFonts=True
+	
+	//is in baseConsole -AdamJD
+	//bUseSystemFonts=True
 	
 	// Metallicafan212:	Fix this, as baseconsole just doesn't want to be compiled for some strange reason
-	LoadingBackground=(p1=Texture'HGame.Icons.FELoadingBackground1',p2=Texture'HGame.Icons.FELoadingBackground2',p3=Texture'HGame.Icons.FELoadingBackground3',p4=Texture'HGame.Icons.FELoadingBackground4',p5=Texture'HGame.Icons.FELoadingBackground5',p6=Texture'HGame.Icons.FELoadingBackground6',durration=999999.00),
+	//
+	//this needs to be here for the loading background texture to load properly -AdamJD
+	LoadingBackground=(p1=Texture'HGame.Icons.FELoadingBackground1',p2=Texture'HGame.Icons.FELoadingBackground2',p3=Texture'HGame.Icons.FELoadingBackground3',p4=Texture'HGame.Icons.FELoadingBackground4',p5=Texture'HGame.Icons.FELoadingBackground5',p6=Texture'HGame.Icons.FELoadingBackground6',durration=999999.00)
 
 }

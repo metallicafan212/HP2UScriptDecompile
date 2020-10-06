@@ -1745,6 +1745,7 @@ function bool CameraCanSeeYou (Vector Pos)
   return False;
 }
 */
+
 function bool CameraCanSeeYou(vector pos)
 {
 	local vector normal;
@@ -1752,10 +1753,12 @@ function bool CameraCanSeeYou(vector pos)
 
 	normal = vector(Rotation);
 
-	// checking if you are on the same side of plane, where rotator points
 	dotpr = normal.X * (pos.X - Location.X) + normal.Y * (pos.Y - Location.Y) + normal.Z * (pos.Z - Location.Z);
+	
 	if(dotpr > 0)
+	{
 		return true;
+	}
 
 	return false;
 }

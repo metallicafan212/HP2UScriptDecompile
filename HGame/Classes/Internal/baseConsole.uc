@@ -264,8 +264,10 @@ function DrawLevelAction (Canvas C)
 
 defaultproperties
 {
-	//this only seems to work properly in HPConsole -AdamJD
+	//UTPT didn't decompile the texture paths correctly -AdamJD
+	//
     //LoadingBackground=(p1=Texture'Icons.FELoadingBackground1',p2=Texture'Icons.FELoadingBackground2',p3=Texture'Icons.FELoadingBackground3',p4=Texture'Icons.FELoadingBackground4',p5=Texture'Icons.FELoadingBackground5',p6=Texture'Icons.FELoadingBackground6',durration=999999.00)
+	LoadingBackground=(p1=Texture'HGame.Icons.FELoadingBackground1',p2=Texture'HGame.Icons.FELoadingBackground2',p3=Texture'HGame.Icons.FELoadingBackground3',p4=Texture'HGame.Icons.FELoadingBackground4',p5=Texture'HGame.Icons.FELoadingBackground5',p6=Texture'HGame.Icons.FELoadingBackground6',durration=999999.00)
 
     bUseSystemFonts=True
 }

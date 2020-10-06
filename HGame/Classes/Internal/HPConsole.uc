@@ -554,7 +554,7 @@ function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
 	
 	// Metallicafan212:	Rewrite this whole fucking system
 	//					We want a perfect middle square
-	//Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
+	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
 	//					Figure out a resolution in the middle of the screen
 	//if(C.SizeX > C.SizeY)
 	//{
@@ -1554,7 +1554,6 @@ defaultproperties
 	
 	// Metallicafan212:	Fix this, as baseconsole just doesn't want to be compiled for some strange reason
 	//
-	//this needs to be here for the loading background texture to load properly -AdamJD
-	LoadingBackground=(p1=Texture'HGame.Icons.FELoadingBackground1',p2=Texture'HGame.Icons.FELoadingBackground2',p3=Texture'HGame.Icons.FELoadingBackground3',p4=Texture'HGame.Icons.FELoadingBackground4',p5=Texture'HGame.Icons.FELoadingBackground5',p6=Texture'HGame.Icons.FELoadingBackground6',durration=999999.00)
-
+	//fixed the one in baseConsole -AdamJD
+	//LoadingBackground=(p1=Texture'HGame.Icons.FELoadingBackground1',p2=Texture'HGame.Icons.FELoadingBackground2',p3=Texture'HGame.Icons.FELoadingBackground3',p4=Texture'HGame.Icons.FELoadingBackground4',p5=Texture'HGame.Icons.FELoadingBackground5',p6=Texture'HGame.Icons.FELoadingBackground6',durration=999999.00)
 }

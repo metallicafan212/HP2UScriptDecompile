@@ -6,7 +6,7 @@ class FredWeasley extends Characters;
 
 defaultproperties
 {
-    VendorDialogSet=VDialog_FredWeasly
+    VendorDialogSet=VDialog_FredWeasley
 
     BumpLineSetPrefix="Frd"
 

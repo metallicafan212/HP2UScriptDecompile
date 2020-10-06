@@ -6,7 +6,7 @@ class GeorgeWeasley extends Characters;
 
 defaultproperties
 {
-    VendorDialogSet=VDialog_GeorgeWeasly
+    VendorDialogSet=VDialog_GeorgeWeasley
 
     bLuringEnabled=True
 

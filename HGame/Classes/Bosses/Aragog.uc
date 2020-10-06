@@ -1272,5 +1272,5 @@ defaultproperties
 	
 	bOnMyWeb=False
 
-    RotationRate=(Pitch=40000,Yaw=40000,Roll=40000),
+    RotationRate=(Pitch=40000,Yaw=40000,Roll=40000)
 }

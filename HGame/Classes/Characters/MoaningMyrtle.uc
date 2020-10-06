@@ -8,7 +8,7 @@ defaultproperties
 {
     ShadowClass=None
 
-    Style=3
+    Style=STY_Translucent
 
     Mesh=SkeletalMesh'HPModels.skmoaningmyrtleMesh'
 

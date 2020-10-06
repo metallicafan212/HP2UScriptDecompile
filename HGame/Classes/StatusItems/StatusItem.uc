@@ -283,7 +283,7 @@ defaultproperties
     bDisplayWhenCountZero=True
     bIncrementPosWhenCountZero=True
     bTravelStatus=True
-    CountColor=1
+    CountColor=CountColor_NearWhite
     bHidden=True
     // DrawType=0
 	DrawType=DT_None

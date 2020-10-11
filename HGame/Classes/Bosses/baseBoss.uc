@@ -248,5 +248,6 @@ defaultproperties
 	
 	Buoyancy=118.800003
 	
-	RotationRate=18000
+	//RotationRate=18000
+	RotationRate=(Pitch=4096,Yaw=50000,Roll=3072) //taken from the editor to remove "ImportText: Struct missing ('(')" UCC log warning -AdamJD
 }

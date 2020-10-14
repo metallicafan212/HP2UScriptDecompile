@@ -3,7 +3,7 @@
 //================================================================================ 
 
 class harry extends PlayerPawn;
-  //Config(User);    
+  Config(User);    
 
 const nSPONGIFY_CHALLENGE_IDX= 3;
 const nDIFFINDO_CHALLENGE_IDX= 2;  

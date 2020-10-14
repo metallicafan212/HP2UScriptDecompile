@@ -2,8 +2,8 @@
 // baseHUD.
 //================================================================================
 
-class baseHUD extends HUD
-  Config(User);
+class baseHUD extends HUD;
+  //Config(User);
 
 struct IconMessage
 {

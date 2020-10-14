@@ -281,7 +281,7 @@ state throwing
   while ( LineOfSightTo(PlayerHarry) && (iNumShots > 0) )
   {
     iNumShots--;
-    TurnTo(Location + Location - PlayerHarry.Location);
+    TurnTo(Location + (Location - PlayerHarry.Location));
     Target = PlayerHarry;
     SetRotation(Rotation + rot(0,32768,0));
     smallSpell = spellFireSmall(SpawnSpell(Class'spellFireSmall',PlayerHarry));
@@ -296,7 +296,7 @@ state throwing
     FinishAnim();
     if (  !LineOfSightTo(PlayerHarry) && (bMoveAround == True) )
     {
-      TurnTo(Location + Location - PlayerHarry.Location);
+      TurnTo(Location + (Location - PlayerHarry.Location));
       vTemp = Normal(PlayerHarry.Location - Location);
       vTemp2 = Location Cross PlayerHarry.Location;
       if ( True )

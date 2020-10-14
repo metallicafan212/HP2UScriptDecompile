@@ -158,7 +158,7 @@ state throwing
  begin:
   Velocity = vect(0.00,0.00,0.00);
   Acceleration = vect(0.00,0.00,0.00);
-  TurnTo(Location + Location - PlayerHarry.Location);
+  TurnTo(Location + (Location - PlayerHarry.Location));
   if ( VSize(PlayerHarry.Location - Location) < GrenadeOnlyDistance )
   {
     PlaySound(Sound'firecrab_preattack',/*0*/SLOT_None);

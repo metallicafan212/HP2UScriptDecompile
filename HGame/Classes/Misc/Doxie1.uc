@@ -2,6 +2,8 @@
 // Doxie1.
 //================================================================================
 
+//this is a HP1 leftover file -AdamJD
+
 class Doxie1 extends HChar;
 
 var() bool bLookForHarry;

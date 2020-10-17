@@ -38,17 +38,17 @@ function ShootFireballs ()
 	NumFireballs 			= 10;
 	rotate_fireball 		= rotator(harrys_head - Location);
 	rotate_fireball.Roll 	= 0;
-	rotate_fireball.Pitch  += 65536 * 10 / 4;
+	rotate_fireball.Pitch  += (65536 * 10) / 4;
 	if ( VSize(PlayerHarry.Location - Location) < GrenadeRadius )
 	{
 		PlayerHarry.ShakeView(0.31,200.0,200.0);
 		ratio 			= VSize(PlayerHarry.Location - Location) / GrenadeRadius;
-		grenadeDamage 	= iDamage - iDamage * ratio;
+		grenadeDamage 	= iDamage - (iDamage * ratio);
 		PlayerHarry.TakeDamage(grenadeDamage,None,vect(0.00,0.00,0.00),vect(0.00,0.00,0.00),'None');
 	}
 	for(i = 0; i < NumFireballs; i++)
 	{
-		rotate_fireball.Yaw 				= 65536 / NumFireballs * I + Rand(10000);
+		rotate_fireball.Yaw 				= (65536 / NumFireballs) * I + Rand(10000);
 		fireball_locn 						= Location + vect(0.00,0.00,5.00);
 		smallFire 							= Spawn(Class'spellFireSmall',Owner,,fireball_locn,rotate_fireball);
 		smallFire.iDamage 					= smallDamage;

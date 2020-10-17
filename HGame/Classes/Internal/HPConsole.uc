@@ -972,10 +972,10 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 	
 	//log("Key event! " $ Key $ " " $ Action);
 	
-	if(Key == IK_Numpad4)
-	{
-		log(bLeftKeyDown);
-	}
+	//if(Key == IK_Numpad4)
+	//{
+	//	log(bLeftKeyDown);
+	//}
 	
 
 	if(Action == IST_Press && int(key) == ConsoleKey)

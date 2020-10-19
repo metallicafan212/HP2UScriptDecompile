@@ -49,17 +49,17 @@ exec function ShortCut ()
   {
     SCWindow = ShortCutWindow(Root.CreateWindow(Class'ShortCutWindow',64.0,64.0,320.0,320.0));
   } 
+  //else 
+  //{
+  else if ( SCWindow.bUWindowActive )
+  {
+    SCWindow.Close();
+  } 
   else 
   {
-    if ( SCWindow.bUWindowActive )
-    {
-      SCWindow.Close();
-    } 
-	else 
-	{
-      SCWindow.ActivateWindow(0,False);
-    }
+    SCWindow.ActivateWindow(0,False);
   }
+  //}
 }
 
 function CutConsoleLog (string Msg)

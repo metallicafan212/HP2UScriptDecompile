@@ -255,7 +255,7 @@ state stateTail
   
 }
 
-state stateTailSwing //extends stateTail
+state stateTailSwing extends stateTail
 {
 begin:
   MoveToRandomVisibleHole();
@@ -281,7 +281,7 @@ begin:
   GotoState('stateWaiting');
 }
 
-state stateTailWiggle //extends stateTail
+state stateTailWiggle extends stateTail
 {
 begin:
   MoveToRandomVisibleHole();
@@ -291,7 +291,7 @@ begin:
   GotoState('stateWaiting');
 }
 
-state stateTailPound //extends stateTail
+state stateTailPound extends stateTail
 {
 begin:
   MoveToRandomVisibleHole();

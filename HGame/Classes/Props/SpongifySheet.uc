@@ -4,7 +4,7 @@
 
 class SpongifySheet extends HProp;
 
-auto state stateIdle extends stateIdle
+auto state stateIdle //extends stateIdle
 {
 	begin:
 		LoopAnim(AnimSequence);

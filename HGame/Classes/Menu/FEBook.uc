@@ -631,26 +631,26 @@ function bool DoEscapeFromPage ()
     CloseBook();
     return True;
   } 
-  else 
+  //else 
+  //{
+  else if ( curPage != MainPage )
   {
-    if ( curPage != MainPage )
+    if ( prevPage == None )
     {
-      if ( prevPage == None )
-      {
-        CloseBook();
-      } 
-	  else 
-	  {
-        ChangePagePrevious();
-      }
-      Log("FEBook: curPage == " $ string(curPage) $ " prevPage == " $ string(prevPage));
-      return True;
+      CloseBook();
     } 
 	else 
 	{
-      return True;
+      ChangePagePrevious();
     }
+    Log("FEBook: curPage == " $ string(curPage) $ " prevPage == " $ string(prevPage));
+    return True;
+  } 
+  else 
+  {
+    return True;
   }
+  //}
 }
 
 function RunURL (string levURL, bool bTravelItems)
@@ -695,8 +695,7 @@ function DoStoryBookInterlude (int StoryBookIdx, name EventWhenDone)
 
 defaultproperties
 {
-    InGameBackground=(p1=Texture'HGame.Icons.FEInGameBackTexture1',p2=Texture'HGame.Icons.FEInGameBackTexture2',p3=Texture'HGame.Icons.FEInGameBackTexture3',p4=Texture'HGame.Icons.FEInGameBackTexture4',p5=Texture'HGame.Icons.FEInGameBackTexture5',p6=Texture'HGame.Icons.FEInGameBackTexture6',durration=999999.00),
+    InGameBackground=(p1=Texture'HGame.Icons.FEInGameBackTexture1',p2=Texture'HGame.Icons.FEInGameBackTexture2',p3=Texture'HGame.Icons.FEInGameBackTexture3',p4=Texture'HGame.Icons.FEInGameBackTexture4',p5=Texture'HGame.Icons.FEInGameBackTexture5',p6=Texture'HGame.Icons.FEInGameBackTexture6',durration=999999.00)
 
-    Back1Background=(p1=Texture'HGame.Icons.FEBack1Texture1',p2=Texture'HGame.Icons.FEBack1Texture2',p3=Texture'HGame.Icons.FEBack1Texture3',p4=Texture'HGame.Icons.FEBack1Texture4',p5=Texture'HGame.Icons.FEBack1Texture5',p6=Texture'HGame.Icons.FEBack1Texture6',durration=999999.00),
-
+    Back1Background=(p1=Texture'HGame.Icons.FEBack1Texture1',p2=Texture'HGame.Icons.FEBack1Texture2',p3=Texture'HGame.Icons.FEBack1Texture3',p4=Texture'HGame.Icons.FEBack1Texture4',p5=Texture'HGame.Icons.FEBack1Texture5',p6=Texture'HGame.Icons.FEBack1Texture6',durration=999999.00)
 }

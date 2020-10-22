@@ -110,12 +110,12 @@ function SetTrailEnd (int NewTrailEnd)
   I = NewTrailEnd;
   // HoopsToDo = 5 - TrailLen;
   // if ( HoopsToDo > 0 )
-  for(HoopsToDo = 5 - TrailLen; HoopsToDo > 0; --HoopsToDo)
+  for(HoopsToDo = MaxHoops - TrailLen; HoopsToDo > 0; --HoopsToDo)
   {
     --I;
     if ( I < 0 )
     {
-      I += 5;
+      I += MaxHoops;
     }
     Hoop = Hoops[I];
     if (  !Hoop.IsInState('HoopInvisible') || Hoop.IsInState('HoopDisappearing') )
@@ -174,7 +174,7 @@ state TrailOff
   
     // I = 0;
     // if ( I < 5 )
-	for(I = 0; I < 5; ++I)
+	for(I = 0; I < MaxHoops; ++I)
     {
       Hoops[I].GotoState('HoopInvisible');
       // ++I;

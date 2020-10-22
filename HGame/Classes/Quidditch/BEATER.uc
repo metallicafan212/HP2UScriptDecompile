@@ -36,14 +36,14 @@ loop:
           } else //{
             if ( FRand() < 0.81 )
             {
-              if ( eHouse == /*HouseAffiliation.*/HA_Gryffindor )
+              if ( eHouse == HA_Gryffindor )
               {
                 LoopAnim('throw_left',,0.5);
               } else {
                 LoopAnim('hit_bludger_left',,0.5);
               }
             } else //{
-              if ( eHouse == /*HouseAffiliation.*/HA_Gryffindor )
+              if ( eHouse == HA_Gryffindor )
               {
                 LoopAnim('throw_right',,0.5);
               } else {

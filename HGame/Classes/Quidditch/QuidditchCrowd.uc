@@ -89,11 +89,11 @@ function Cheer (CheerType eCheerType)
   {
     // case 0:
 	case CT_Cheer:
-		fRadius = CheerRadius * 5.0; //UTPT didn't add anything so this is just an educated guess -AdamJD
+		fRadius = CheerRadius * 5.0; //UTPT didn't add anything so this is an educated guess -AdamJD
 		break;
     // case 2:
 	case CT_Boo:
-		fRadius = CheerRadius * 5.0; //UTPT didn't add anything so this is just an educated guess -AdamJD
+		fRadius = CheerRadius * 5.0; //UTPT didn't add anything so this is an educated guess -AdamJD
 		break;
     // case 4:
 	case CT_Coax:
@@ -101,7 +101,7 @@ function Cheer (CheerType eCheerType)
 		break;
     // case 1:
 	case CT_CheerLong:
-		fRadius = CheerRadius * 10.0; //UTPT didn't add anything so this is just an educated guess -AdamJD
+		fRadius = CheerRadius * 10.0; //UTPT didn't add anything so this is an educated guess -AdamJD
 		break;
     // case 3:
 	case CT_BooLong:

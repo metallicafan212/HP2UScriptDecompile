@@ -277,8 +277,12 @@ event Tick (float DeltaTime)
       if ( Dist > 0.01 )
       {
         JerkOffset += Normal(Dir) * Min(Dist,JerkSpeed * DeltaTime);
-        JerkOffset = DestJerkOffset;
       }
+	  //UTPT added this in the if statement above, the snitch used to be too snappy/unnatural looking -AdamJD
+	  else
+	  {
+		JerkOffset = DestJerkOffset;
+	  }
       if ( Halo != None )
       {
         Halo.PrePivot = NormalHaloPrePivot + JerkOffset;
@@ -326,7 +330,7 @@ function Vector GetTargetVector (Vector vActor, float BestDistance)
   cd = 999999.0;
   // I = 0;
   // if ( I < 4 )
-  for(I = 0; I < 4; I++)
+  for(I = 0; I < NUM_POSITION_HISTORY; I++)
   {
     D = Abs(VSize(vPositionHistory[I] - vActor) - BestDistance);
     if ( D < cd )

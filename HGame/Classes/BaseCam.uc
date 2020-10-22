@@ -606,7 +606,7 @@ function UpdateDistance (float fTimeDelta)
   if( rCurrRotation.Pitch > fPitchMovingInThreshold )
   {
 	// Calculate our DistanceScalar
-	fDistanceScalar = 1.0f - ( rCurrRotation.Pitch / fPitchMovingInSpread );
+	fDistanceScalar = 1.0 - ( rCurrRotation.Pitch / fPitchMovingInSpread );
 	if ( fDistanceScalar < fDistanceScalarMin )
 	{
 		 fDistanceScalar = fDistanceScalarMin;
@@ -827,7 +827,7 @@ function bool CheckCollisionWithWorld ()
     if ( HitActor == Owner )
     {
       continue;
-    } //else {
+    } else //{
       if ( HitActor.IsA('LevelInfo') || HitActor.bBlockCamera )
       {
         vDestPosition = HitLocation + vCusionFromWorld;
@@ -835,8 +835,8 @@ function bool CheckCollisionWithWorld ()
         fCurrLookAtDistance = fDestLookAtDistance;
         return True;
       }
-    //}
-  }
+    }
+  //}
   return False;
 }
  
@@ -947,7 +947,8 @@ state StateQuidditchCam
   
     rSavedCurrRotation = rCurrRotation;
     rCurrRotation = rotator(CamTarget.Location - vCurrPosition);
-    UpdatePosition(fTimeDelta/*,True*/);
+	// UpdatePosition(fTimeDelta,/*True*/);
+	UpdatePosition(fTimeDelta,True); //turns out uncommenting the second parameter makes quidditch cam smoother... -AdamJD
     rCurrRotation = rSavedCurrRotation;
     lookDir = 0.5 * (PlayerHarry.Location - vCurrPosition) + 0.5 * (CamTarget.Location - vCurrPosition);
     rDestRotation = rotator(lookDir);
@@ -1297,7 +1298,7 @@ function bool CutCommand_ProcessFOV (string Command, optional string cue, option
   fTime = 0.0;
   // I = 2;
   // if ( I < 8 )
-  for( i = 2; i < 8; i++ )
+  for( I = 2; I < 8; I++ )
   {
     sString = ParseDelimitedString(Command," ",I,False);
     if ( sString ~= "EaseTo" )
@@ -1352,7 +1353,7 @@ function bool CutCommand_ProcessFlash (string Command, optional string cue, opti
   fTime = 0.25;
   // I = 2;
   // if ( I < 8 )
-  for( i = 2; i < 8; i++ )
+  for( I = 2; I < 8; I++ )
   {
     sString = ParseDelimitedString(Command," ",I,False);
     if ( Left(sString,2) ~= "A=" )
@@ -1428,7 +1429,7 @@ function bool CutCommand_ProcessShake (string Command, optional string cue, opti
   fTime = 0.5;
   // I = 2;
   // if ( I < 8 )
-  for( i = 2; i < 8; i++ )
+  for( I = 2; I < 8; I++ )
   {
     sString = ParseDelimitedString(Command," ",I,False);
     if ( Left(sString,10) ~= "Magnitude=" )
@@ -1464,8 +1465,9 @@ function bool CutCommand_ProcessShake (string Command, optional string cue, opti
 function DoSimpleFade (bool bFadeIn)
 {
   local FadeViewController FadeController;
-
-  return;
+	
+  //IDK how I didn't notice this... -AdamJD
+  // return;
   FadeController = Spawn(Class'FadeViewController');
   if ( bFadeIn )
   {
@@ -1494,7 +1496,7 @@ function bool CutCommand_ProcessFade (bool bFadeOut, string Command, optional st
   fTime = 1.0;
   // I = 2;
   // if ( I < 8 )
-  for( i = 2; i < 8; i++ )
+  for( I = 2; I < 8; I++ )
   {
     sString = ParseDelimitedString(Command," ",I,False);
     if ( (Left(sString,2) ~= "A=") && bFadeOut )
@@ -1561,7 +1563,7 @@ function bool CutCommand_ProcessLocked (string Command, optional string cue, opt
   vCurrPosition = Location;
   // I = 2;
   // if ( I < 15 )
-  for( i = 2; i < 15; i++ )
+  for( I = 2; I < 15; I++ )
   {
     sString = ParseDelimitedString(Command," ",I,False);
     if ( Left(sString,9) ~= "distance=" )
@@ -1645,7 +1647,7 @@ function bool CutCommand_ProcessTarget (string Command, optional string cue, opt
     } else {
       // I = 2;
       // if ( I < 20 )
-	  for( i = 2; i < 20; i++ )
+	  for( I = 2; I < 20; I++ )
       {
         sString = ParseDelimitedString(Command," ",I,False);
         if ( Left(sString,11) ~= "attachedto=" )
@@ -1803,5 +1805,5 @@ defaultproperties
 
     bRotateToDesired=False
 
-    CutName="BaseCam"
+    CutName="baseCam"
 }

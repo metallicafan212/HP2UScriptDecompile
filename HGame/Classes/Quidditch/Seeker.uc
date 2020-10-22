@@ -79,7 +79,7 @@ defaultproperties
 
     HouseDisplayInfo(2)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skQuidPlayerMMesh',MultiSkins=Texture'HPModels.Skins.skQuidPlayerM_HTex0')
 
-    HouseDisplayInfo(3)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skDracoQuidMesh',MultiSkins=Texture'HPModels.Skins.skDracoQuidTex0'),
+    HouseDisplayInfo(3)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skDracoQuidMesh',MultiSkins=Texture'HPModels.Skins.skDracoQuidTex0')
 
     // EnemyHealthBar=4
 	EnemyHealthBar=EnemyBar_Seeker

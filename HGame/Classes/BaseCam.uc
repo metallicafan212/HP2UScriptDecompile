@@ -5,12 +5,12 @@
 class BaseCam extends HPawn;  
 
 const DISTANCE_SCALAR_MIN= 0.15; 
-const PITCH_MOVING_IN_SPREAD= 10000.0f;
-const PITCH_MOVING_IN_THRESHOLD= 0.0f;
-const MAX_MOUSE_DELTA_Y=  10000.0f;
-const MIN_MOUSE_DELTA_Y= -10000.0f;
-const MAX_MOUSE_DELTA_X=  20000.0f;
-const MIN_MOUSE_DELTA_X= -20000.0f; 
+const PITCH_MOVING_IN_SPREAD= 10000.0;
+const PITCH_MOVING_IN_THRESHOLD= 0.0;
+const MAX_MOUSE_DELTA_Y=  10000.0;
+const MIN_MOUSE_DELTA_Y= -10000.0;
+const MAX_MOUSE_DELTA_X=  20000.0;
+const MIN_MOUSE_DELTA_X= -20000.0; 
 const USE_DEBUG_MODE= true;
 const NUM_USER_SETTINGS= 4;
 enum ECamMode {
@@ -519,9 +519,9 @@ function PreBeginPlay ()
 {
   SetCollision(False,False,False);
   bCollideWorld = False;
-  fPitchMovingInThreshold = 0.0;
-  fPitchMovingInSpread = 10000.0;
-  fDistanceScalarMin = 0.151;
+  fPitchMovingInThreshold = PITCH_MOVING_IN_THRESHOLD;
+  fPitchMovingInSpread = PITCH_MOVING_IN_SPREAD;
+  fDistanceScalarMin = DISTANCE_SCALAR_MIN;
 }
 
 function PostBeginPlay ()
@@ -573,7 +573,7 @@ function InitSettings (CamSettings CamSet, bool bSyncWithTargetPos, bool bSyncWi
   rSavedRotation = Rotation;
   bSyncRotationWithTarget = bSyncWithTargetRot;
   bSyncPositionWithTarget = bSyncWithTargetPos;
-  fDistanceScalarMin = 0.151;
+  fDistanceScalarMin = DISTANCE_SCALAR_MIN;
   fCurrLookAtDistance = CurrentSet.fLookAtDistance;
 }
 
@@ -588,10 +588,10 @@ function InitPositionAndRotation (bool bSnapToNewPosAndRot)
   if ( bSnapToNewPosAndRot )
   {
     InitRotation(CamTarget.Rotation);
-    InitPosition(CamTarget.Location + (Vec( -CurrentSet.fLookAtDistance,0.0,0.0) >> rDestRotation));
+    InitPosition(CamTarget.Location + ((Vec( -CurrentSet.fLookAtDistance,0.0,0.0)) >> rDestRotation));
   } else {
     SetDestRotation(CamTarget.Rotation);
-    vDestPosition = CamTarget.Location + (Vec( -CurrentSet.fLookAtDistance,0.0,0.0) >> rDestRotation);
+    vDestPosition = CamTarget.Location + ((Vec( -CurrentSet.fLookAtDistance,0.0,0.0)) >> rDestRotation);
     CheckCollisionWithWorld();
   }
   rDestRotation.Roll = 0;
@@ -652,13 +652,13 @@ function UpdateRotationUsingVectors (float fTimeDelta)
 function ApplyMouseXToDestYaw (float fTimeDelta, optional bool bApplyToBossOffset)
 {
   fMouseDeltaX = PlayerHarry.SmoothMouseX * fTimeDelta;
-  if ( fMouseDeltaX > 20000.0 )
+  if ( fMouseDeltaX > MAX_MOUSE_DELTA_X )
   {
-    fMouseDeltaX = 20000.0;
+    fMouseDeltaX = MAX_MOUSE_DELTA_X;
   } else //{
-    if ( fMouseDeltaX < -20000.0 )
+    if ( fMouseDeltaX < MIN_MOUSE_DELTA_X )
     {
-      fMouseDeltaX = -20000.0;
+      fMouseDeltaX = MIN_MOUSE_DELTA_X;
     }
   //}
   
@@ -688,13 +688,13 @@ function ApplyMouseYToDestPitch (float fTimeDelta, optional bool bApplyToBossOff
   {
     fMouseDeltaY =  -fMouseDeltaY;
   }
-  if ( fMouseDeltaY > 10000.0 )
+  if ( fMouseDeltaY > MAX_MOUSE_DELTA_Y )
   {
-    fMouseDeltaY = 10000.0;
+    fMouseDeltaY = MAX_MOUSE_DELTA_Y;
   } else //{
-    if ( fMouseDeltaY < -10000.0 )
+    if ( fMouseDeltaY < MIN_MOUSE_DELTA_Y )
     {
-      fMouseDeltaY = -10000.0;
+      fMouseDeltaY = MIN_MOUSE_DELTA_Y;
     }
   //}
   
@@ -784,7 +784,7 @@ function UpdatePosition (float fTimeDelta, optional bool bSkipWorldCheck)
 
   if ( bSyncPositionWithTarget )
   {
-    vDestPosition = CamTarget.Location + (Vec( -fCurrLookAtDistance,0.0,0.0) >> rCurrRotation);
+    vDestPosition = CamTarget.Location + ((Vec( -fCurrLookAtDistance,0.0,0.0)) >> rCurrRotation);
   }
   if (  !bSkipWorldCheck )
   {
@@ -816,7 +816,7 @@ function bool CheckCollisionWithWorld ()
     HitActor = Trace(HitLocation,HitNormal,CamTarget.Location,CamTarget.aAttachedTo.Location,False);
     if ( (HitActor != None) && HitActor.IsA('LevelInfo') )
     {
-      LookAtPoint = HitLocation + Normal(CamTarget.aAttachedTo.Location - HitLocation) * 5.0 + HitNormal;
+      LookAtPoint = HitLocation + (Normal(CamTarget.aAttachedTo.Location - HitLocation) * 5.0) + HitNormal;
       PlayerHarry.ClientMessage("CamTarget HitLoc:" $ string(HitLocation) $ " HitNorm: " $ string(HitNormal));
 	}
   }
@@ -827,7 +827,7 @@ function bool CheckCollisionWithWorld ()
     if ( HitActor == Owner )
     {
       continue;
-    } else //{
+    } //else {
       if ( HitActor.IsA('LevelInfo') || HitActor.bBlockCamera )
       {
         vDestPosition = HitLocation + vCusionFromWorld;
@@ -835,8 +835,8 @@ function bool CheckCollisionWithWorld ()
         fCurrLookAtDistance = fDestLookAtDistance;
         return True;
       }
-    }
-  //}
+    //}
+  }
   return False;
 }
  
@@ -869,7 +869,7 @@ state StateTransition
 	InitSettings(CamSetStandard,False,True);
     InitRotation(PlayerHarry.Rotation);
     CurrentSet.fMoveTightness = 0.1;
-    vDestPosition = PlayerHarry.Location + CamSetStandard.vLookAtOffset + (Vec( -CurrentSet.fLookAtDistance,0.0,0.0) >> rDestRotation);
+    vDestPosition = PlayerHarry.Location + CamSetStandard.vLookAtOffset + ((Vec( -CurrentSet.fLookAtDistance,0.0,0.0)) >> rDestRotation);
     PlayerHarry.ClientMessage(" 1 DestRot = " $ string(rDestRotation) $ " CurRot = " $ string(rCurrRotation));
   }
   
@@ -947,7 +947,7 @@ state StateQuidditchCam
   
     rSavedCurrRotation = rCurrRotation;
     rCurrRotation = rotator(CamTarget.Location - vCurrPosition);
-	// UpdatePosition(fTimeDelta,/*True*/);
+	// UpdatePosition(fTimeDelta/*,True*/);
 	UpdatePosition(fTimeDelta,True); //turns out uncommenting the second parameter makes quidditch cam smoother... -AdamJD
     rCurrRotation = rSavedCurrRotation;
     lookDir = 0.5 * (PlayerHarry.Location - vCurrPosition) + 0.5 * (CamTarget.Location - vCurrPosition);
@@ -1093,22 +1093,22 @@ state StateFreeCam
 	{
 		fMouseDeltaX = PlayerHarry.SmoothMouseX * fTimeDelta;
 		fMouseDeltaY = PlayerHarry.SmoothMouseY * fTimeDelta;
-		if ( fMouseDeltaX > 20000.0 )
+		if ( fMouseDeltaX > MAX_MOUSE_DELTA_X )
 		{
-			fMouseDeltaX = 20000.0;
+			fMouseDeltaX = MAX_MOUSE_DELTA_X;
 		}
-		else if ( fMouseDeltaX < -20000.0 )
+		else if ( fMouseDeltaX < MIN_MOUSE_DELTA_X )
 		{
-			fMouseDeltaX = -20000.0;
+			fMouseDeltaX = MIN_MOUSE_DELTA_X;
 		}
-		if ( fMouseDeltaY > 10000.0 )
+		if ( fMouseDeltaY > MAX_MOUSE_DELTA_Y )
 		{
-			fMouseDeltaY = 10000.0;
+			fMouseDeltaY = MAX_MOUSE_DELTA_Y;
 		} 
 		else
-		if ( fMouseDeltaY < -10000.0 )
+		if ( fMouseDeltaY < MIN_MOUSE_DELTA_Y )
 		{
-			fMouseDeltaY = -10000.0;
+			fMouseDeltaY = MIN_MOUSE_DELTA_Y;
 		}
 		if ( baseConsole(PlayerHarry.Player.Console).bForwardKeyDown )
 		{
@@ -1157,7 +1157,7 @@ state StateFreeCam
 		rDestRotation.Yaw   += fMouseDeltaX * CurrentSet.fRotSpeed;
 		rDestRotation.Pitch += fMouseDeltaY * CurrentSet.fRotSpeed;
 	
-		rCurrRotation += (rDestRotation - rCurrRotation ) * FMin( 1.0f, CurrentSet.fRotTightness * fTimeDelta );
+		rCurrRotation += (rDestRotation - rCurrRotation ) * FMin( 1.0, CurrentSet.fRotTightness * fTimeDelta );
 		DesiredRotation = rCurrRotation;
 		SetRotation(DesiredRotation);
 	}

@@ -86,14 +86,28 @@ function float ConvertDegToRot (float fDeg)
 }
 */
 
+// Metallicafan212:	Quick clamp
+function int ClampRotVal(int val)
+{
+	if(val < 0)
+	{
+		return val & -65535;
+	}
+	else
+	{
+		return val & 65535;
+	}
+}
+
+
 function float ConvertRotToDeg	( int iRot )		
 {
-  return ((float(iRot & 0xFFFF)) / 65536) * 360; 
+  return ((float(iRot & 0xFFFF)) / 65536.0) * 360.0; 
 }
 
 function float ConvertDegToRot	( float fDeg )		
 { 
-  return (fDeg / 360) * 65536; 
+  return (fDeg / 360.0) * 65536.0; 
 }
 
 function SetYaw (float fYaw)
@@ -547,14 +561,14 @@ function PostBeginPlay ()
 
 function InitRotation (Rotator Rot)
 {
-  rDestRotation.Yaw = Rot.Yaw & 65535;
-  rDestRotation.Pitch = Rot.Pitch & 65535;
-  rDestRotation.Roll = Rot.Roll & 65535;
-  // vForward = Normal(DesiredRotation);
-  vForward = normal(vector(DesiredRotation));
-  rCurrRotation = rDestRotation;
-  DesiredRotation = rDestRotation;
-  SetRotation(DesiredRotation);
+	rDestRotation.Yaw = Rot.Yaw & 65535;
+	rDestRotation.Pitch = Rot.Pitch & 65535;
+	rDestRotation.Roll = Rot.Roll & 65535;
+	// vForward = Normal(DesiredRotation);
+	vForward = normal(vector(DesiredRotation));
+	rCurrRotation = rDestRotation;
+	DesiredRotation = rDestRotation;
+	SetRotation(DesiredRotation);
 }
 
 function InitPosition (Vector Pos)
@@ -600,103 +614,107 @@ function InitPositionAndRotation (bool bSnapToNewPosAndRot)
 
 function UpdateDistance (float fTimeDelta)
 {
-  /*if ( byte(rCurrRotation.Pitch) > fPitchMovingInThreshold )
-  {
-    fDistanceScalar = 1.0 - byte(rCurrRotation.Pitch) / fPitchMovingInSpread;*/
-  if( rCurrRotation.Pitch > fPitchMovingInThreshold )
-  {
-	// Calculate our DistanceScalar
-	fDistanceScalar = 1.0 - ( rCurrRotation.Pitch / fPitchMovingInSpread );
-	if ( fDistanceScalar < fDistanceScalarMin )
+	/*if ( byte(rCurrRotation.Pitch) > fPitchMovingInThreshold )
 	{
-		 fDistanceScalar = fDistanceScalarMin;
+		fDistanceScalar = 1.0 - byte(rCurrRotation.Pitch) / fPitchMovingInSpread;*/
+	if( rCurrRotation.Pitch > fPitchMovingInThreshold )
+	{
+		// Calculate our DistanceScalar
+		fDistanceScalar = 1.0 - ( rCurrRotation.Pitch / fPitchMovingInSpread );
+		if ( fDistanceScalar < fDistanceScalarMin )
+		{
+			fDistanceScalar = fDistanceScalarMin;
+		}	
+		fDestLookAtDistance = CurrentSet.fLookAtDistance * fDistanceScalar;
+	} 
+	else 
+	{
+		fDestLookAtDistance = CurrentSet.fLookAtDistance;
 	}
-    fDestLookAtDistance = CurrentSet.fLookAtDistance * fDistanceScalar;
-  } else {
-    fDestLookAtDistance = CurrentSet.fLookAtDistance;
-  }
-  if ( (fMoveBackTightness > 0.0) && (fCurrLookAtDistance != fDestLookAtDistance) )
-  {
-    fCurrLookAtDistance += (fDestLookAtDistance - fCurrLookAtDistance) * FMin(1.0,fMoveBackTightness * fTimeDelta);
-  }
+	if ( (fMoveBackTightness > 0.0) && (fCurrLookAtDistance != fDestLookAtDistance) )
+	{
+		fCurrLookAtDistance += (fDestLookAtDistance - fCurrLookAtDistance) * FMin(1.0,fMoveBackTightness * fTimeDelta);
+	}
 }
 
 function UpdateRotationUsingVectors (float fTimeDelta)
 {
-  local float fTravelScalar;
-  local Vector vDestRotation;
-  local Vector vCurrRotation;
+	local float fTravelScalar;
+	local Vector vDestRotation;
+	local Vector vCurrRotation;
 
-  // vDestRotation = Normal(rDestRotation);
-  vDestRotation = normal(vector(rDestRotation));
-  vCurrRotation = vForward;
-  if ( bSyncRotationWithTarget )
-  {
-    vDestRotation = CamTarget.Location - Location;
-    vCurrRotation = vDestRotation;
-  } else {
-    if ( CurrentSet.fRotTightness > 0.0 )
-    {
-      fTravelScalar = FMin(1.0,CurrentSet.fRotTightness * fTimeDelta);
-    } else {
-      fTravelScalar = 1.0;
-    }
-    vCurrRotation += (vDestRotation - vCurrRotation) * fTravelScalar;
-  }
-  vCurrRotation = Normal(vCurrRotation);
-  rCurrRotation = rotator(vCurrRotation);
-  vForward = vCurrRotation;
-  SetFinalRotation(rotator(vCurrRotation));
+	// vDestRotation = Normal(rDestRotation);
+	vDestRotation = normal(vector(rDestRotation));
+	vCurrRotation = vForward;
+	if ( bSyncRotationWithTarget )
+	{
+		vDestRotation = CamTarget.Location - Location;
+		vCurrRotation = vDestRotation;
+	} 
+	else 
+	{
+		if ( CurrentSet.fRotTightness > 0.0 )
+		{
+			fTravelScalar = FMin(1.0,CurrentSet.fRotTightness * fTimeDelta);
+		} 
+		else 
+		{
+			fTravelScalar = 1.0;
+		}
+		vCurrRotation += (vDestRotation - vCurrRotation) * fTravelScalar;
+	}
+	vCurrRotation = Normal(vCurrRotation);
+	rCurrRotation = rotator(vCurrRotation);
+	vForward = vCurrRotation;
+	SetFinalRotation(rotator(vCurrRotation));
 }
 
 function ApplyMouseXToDestYaw (float fTimeDelta, optional bool bApplyToBossOffset)
 {
-  fMouseDeltaX = PlayerHarry.SmoothMouseX * fTimeDelta;
-  if ( fMouseDeltaX > MAX_MOUSE_DELTA_X )
-  {
-    fMouseDeltaX = MAX_MOUSE_DELTA_X;
-  } else //{
-    if ( fMouseDeltaX < MIN_MOUSE_DELTA_X )
-    {
-      fMouseDeltaX = MIN_MOUSE_DELTA_X;
-    }
-  //}
-  
-  if (  !bApplyToBossOffset )
-  {
-    rDestRotation.Yaw += fMouseDeltaX * CurrentSet.fRotSpeed;
-  }
-  else
-  {
-    rBossRotationOffset.Yaw += fMouseDeltaX * CurrentSet.fRotSpeed;
-    if( rBossRotationOffset.Yaw >  MaxBossAimRot )
+	fMouseDeltaX = PlayerHarry.SmoothMouseX * fTimeDelta;
+	if ( fMouseDeltaX > MAX_MOUSE_DELTA_X )
 	{
-      rBossRotationOffset.Yaw = MaxBossAimRot;
-    } else //{
-      if ( rBossRotationOffset.Yaw <  -MaxBossAimRot )
-      {
-        rBossRotationOffset.Yaw =  -MaxBossAimRot;
-      }
-    //}
-  }
+		fMouseDeltaX = MAX_MOUSE_DELTA_X;
+	} 
+	else if ( fMouseDeltaX < MIN_MOUSE_DELTA_X )
+    {
+		fMouseDeltaX = MIN_MOUSE_DELTA_X;
+    }
+	
+	if (  !bApplyToBossOffset )
+	{
+		rDestRotation.Yaw  += fMouseDeltaX * CurrentSet.fRotSpeed;
+		//rDestRotation.Yaw 	= rDestRotation.Yaw & 65535;
+	}
+	else
+	{
+		rBossRotationOffset.Yaw += fMouseDeltaX * CurrentSet.fRotSpeed;
+		if( rBossRotationOffset.Yaw >  MaxBossAimRot )
+		{
+			rBossRotationOffset.Yaw = MaxBossAimRot;
+		} 
+		else if ( rBossRotationOffset.Yaw <  -MaxBossAimRot )
+		{
+			rBossRotationOffset.Yaw =  -MaxBossAimRot;
+		}
+	}
 }
 
 function ApplyMouseYToDestPitch (float fTimeDelta, optional bool bApplyToBossOffset)
 {
-  fMouseDeltaY = PlayerHarry.SmoothMouseY * fTimeDelta;
-  if ( PlayerHarry.bInvertMouse )
-  {
-    fMouseDeltaY =  -fMouseDeltaY;
-  }
-  if ( fMouseDeltaY > MAX_MOUSE_DELTA_Y )
-  {
-    fMouseDeltaY = MAX_MOUSE_DELTA_Y;
-  } else //{
-    if ( fMouseDeltaY < MIN_MOUSE_DELTA_Y )
+	fMouseDeltaY = PlayerHarry.SmoothMouseY * fTimeDelta;
+	if ( PlayerHarry.bInvertMouse )
+	{
+		fMouseDeltaY =  -fMouseDeltaY;
+	}
+	if ( fMouseDeltaY > MAX_MOUSE_DELTA_Y )
+	{
+		fMouseDeltaY = MAX_MOUSE_DELTA_Y;
+	} 
+	else if ( fMouseDeltaY < MIN_MOUSE_DELTA_Y )
     {
-      fMouseDeltaY = MIN_MOUSE_DELTA_Y;
+		fMouseDeltaY = MIN_MOUSE_DELTA_Y;
     }
-  //}
   
   /*
   if (  !bApplyToBossOffset )
@@ -713,58 +731,71 @@ function ApplyMouseYToDestPitch (float fTimeDelta, optional bool bApplyToBossOff
   }
   */
   
-  //all this is added by me because the original commented out decompiled code above is broken -AdamJD
-  if (  !bApplyToBossOffset )
-  {
-    rDestRotation.Pitch += fMouseDeltaY * CurrentSet.fRotSpeed;
-	
-	if( rDestRotation.Pitch > fCurrentMaxPitch )	
-	{	
-		rDestRotation.Pitch  = fCurrentMaxPitch;
-	}
-	else if( rDestRotation.Pitch < fCurrentMinPitch )
-	{	
-		rDestRotation.Pitch  = fCurrentMinPitch;
-	}
-  }
-  
-  else
-  {
-    rBossRotationOffset.Pitch += fMouseDeltaY * CurrentSet.fRotSpeed;
-	
-    if( rBossRotationOffset.Pitch >  MaxBossAimRot )
+	//all this is added by me because the original commented out decompiled code above is broken -AdamJD
+	if (  !bApplyToBossOffset )
 	{
-      rBossRotationOffset.Pitch = MaxBossAimRot;
-    } 
-	else if ( rBossRotationOffset.Pitch <  -MaxBossAimRot )
-    {
-		rBossRotationOffset.Pitch =  -MaxBossAimRot;
-    }
-  }
+		rDestRotation.Pitch += fMouseDeltaY * CurrentSet.fRotSpeed;
+	
+		if( rDestRotation.Pitch > fCurrentMaxPitch )	
+		{	
+			rDestRotation.Pitch  = fCurrentMaxPitch;
+		}
+		else if( rDestRotation.Pitch < fCurrentMinPitch )
+		{	
+			rDestRotation.Pitch  = fCurrentMinPitch;
+		}
+	}
+	else
+	{
+		rBossRotationOffset.Pitch += fMouseDeltaY * CurrentSet.fRotSpeed;
+	
+		if( rBossRotationOffset.Pitch >  MaxBossAimRot )
+		{
+			rBossRotationOffset.Pitch = MaxBossAimRot;
+		} 
+		else if ( rBossRotationOffset.Pitch <  -MaxBossAimRot )
+		{
+			rBossRotationOffset.Pitch =  -MaxBossAimRot;
+		}
+	}
 }
 
 function SetDestRotation (Rotator NewRot)
 {
-  rDestRotation = NewRot;
+	rDestRotation = NewRot;
 }
 
 function UpdateRotation (float fTimeDelta)
 {
-  local float fTravelScalar;
+	local float fTravelScalar;
 
-  rDestRotation += rRotationStep * fTimeDelta;
-  if ( bSyncRotationWithTarget )
-  {
-    rCurrRotation = rotator(CamTarget.Location - Location);
-  } else {
-    if ( CurrentSet.fRotTightness > 0.0 )
-    {
-      fTravelScalar = FMin(1.0,CurrentSet.fRotTightness * fTimeDelta);
-    } else {
-      fTravelScalar = 1.0;
-    }
-    rCurrRotation += (rDestRotation - rCurrRotation) * fTravelScalar;
-  }
+	rDestRotation += rRotationStep * fTimeDelta;
+	
+	// Metallicafan212:	Force to USHORT bounds
+	//rDestRotation.Yaw 	= ClampRotVal(rDestRotation.Yaw);
+	//rDestRotation.Pitch = ClampRotVal(rDestRotation.Pitch);
+	//rDestRotation.Roll 	= ClampRotVal(rDestRotation.Roll);
+	
+	//rCurrRotation.Yaw 	= ClampRotVal(rCurrRotation.Yaw);
+	//rCurrRotation.Pitch = ClampRotVal(rCurrRotation.Pitch);
+	//rCurrRotation.Roll 	= ClampRotVal(rCurrRotation.Roll);
+	
+	if ( bSyncRotationWithTarget )
+	{
+		rCurrRotation = rotator(CamTarget.Location - Location);
+	} 
+	else 
+	{
+		if ( CurrentSet.fRotTightness > 0.0 )
+		{
+			fTravelScalar = FMin(1.0,CurrentSet.fRotTightness * fTimeDelta);
+		} 
+		else 
+		{
+			fTravelScalar = 1.0;
+		}
+		rCurrRotation += (rDestRotation - rCurrRotation) * fTravelScalar;
+	}
   // vForward = Normal(rCurrRotation);
   vForward = normal(vector(rCurrRotation));
   SetFinalRotation(rCurrRotation);
@@ -772,10 +803,16 @@ function UpdateRotation (float fTimeDelta)
 
 function SetFinalRotation (Rotator R)
 {
-  R += rExtraRotation;
-  rExtraRotation = rot(0,0,0);
-  DesiredRotation = R;
-  SetRotation(R);
+	R += rExtraRotation;
+	rExtraRotation = rot(0,0,0);
+  
+	// Metallicafan212: Test?
+	R.Pitch 	= R.Pitch & 65535;
+	R.Roll 		= R.Roll & 65535;
+	R.Yaw 		= R.Yaw & 65535;
+  
+	DesiredRotation = R;
+	SetRotation(R);
 }
 
 function UpdatePosition (float fTimeDelta, optional bool bSkipWorldCheck)

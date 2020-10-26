@@ -107,11 +107,20 @@ function bool SetAttachedToByCutName (string sCutName)
 
 function SetNewRotation (Rotator Rot)
 {
-  DesiredRotation = Rot;
-  DesiredRotation.Yaw = DesiredRotation.Yaw & 65535;
-  DesiredRotation.Pitch = DesiredRotation.Pitch & 65535;
-  DesiredRotation.Roll = DesiredRotation.Roll & 65535;
-  SetRotation(DesiredRotation);
+	/*
+	DesiredRotation = Rot;
+	DesiredRotation.Yaw = DesiredRotation.Yaw & 65535;
+	DesiredRotation.Pitch = DesiredRotation.Pitch & 65535;
+	DesiredRotation.Roll = DesiredRotation.Roll & 65535;
+	SetRotation(DesiredRotation);
+	*/
+	
+	Rot.Yaw 	= Rot.Yaw & 65535;
+	Rot.Pitch	= Rot.Pitch & 65535;
+	Rot.Roll	= Rot.Roll& 65535;
+	DesiredRotation = Rot;
+	SetRotation(Rot);
+	
 }
 
 event Tick (float fTimeDelta)

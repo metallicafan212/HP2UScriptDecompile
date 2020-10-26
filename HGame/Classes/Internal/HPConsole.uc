@@ -759,22 +759,22 @@ event Tick (float Delta)
 
 function StartFastForward ()
 {
-  local CutScene cut;
+	local CutScene cut;
 
-  if ( bFastForwarding )
-  {
-    return;
-  }
-  harry(Viewport.Actor).ClientMessage("*****STARING FASTFORWARD****************************");
-  Log("*****STARING FASTFORWARD****************************");
-  foreach Viewport.Actor.AllActors(Class'CutScene',cut)
-  {
-    if ( cut.bPlaying && cut.bSkipAllowed)
-    {
-      cut.FastForward();
-      bFastForwarding = True;
-    }
-  }
+	if ( bFastForwarding )
+	{
+		return;
+	}
+	harry(Viewport.Actor).ClientMessage("*****STARING FASTFORWARD****************************");
+	Log("*****STARING FASTFORWARD****************************");
+	foreach Viewport.Actor.AllActors(Class'CutScene',cut)
+	{
+		if ( cut.bPlaying && cut.bSkipAllowed)
+		{
+			cut.FastForward();
+			bFastForwarding = True;
+		}
+	}
 }
 
 function HandleFastForward ()

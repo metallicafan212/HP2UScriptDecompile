@@ -6,7 +6,7 @@ class CutCameraPos extends NavigationPoint;
 
 defaultproperties
 {
-    Texture=Texture'Icons.CutCamIcon'
+    Texture=Texture'HGame.Icons.CutCamIcon'
 
     DrawScale=0.50
 

@@ -972,6 +972,14 @@ state StateQuidditchCam
 		rDestRotation = rotator(lookDir);
 		UpdateRotationUsingVectors(fTimeDelta);
 	}
+	
+	//force camera to focus on Harry before going to the cutscene cam -AdamJD
+	function EndState()
+	{
+		Log("AdamJD:	Ended quidditch cam");
+		InitTarget(PlayerHarry);
+		InitPositionAndRotation(True);
+	}
 }
 
 state StateFlyingCarCam

@@ -13,26 +13,27 @@ const MAX_MOUSE_DELTA_X=  20000.0;
 const MIN_MOUSE_DELTA_X= -20000.0; 
 const USE_DEBUG_MODE= true;
 const NUM_USER_SETTINGS= 4;
-enum ECamMode {
-  CM_Startup,
-  CM_Idle,
-  CM_Transition,
-  CM_Standard,
-  CM_Quidditch,
-  CM_FlyingCar,
-  CM_Dueling,
-  CM_CutScene,
-  CM_Boss,
-  CM_Free
+enum ECamMode 
+{
+	CM_Startup,
+	CM_Idle,
+	CM_Transition,
+	CM_Standard,
+	CM_Quidditch,
+	CM_FlyingCar,
+	CM_Dueling,
+	CM_CutScene,
+	CM_Boss,
+	CM_Free
 };
 struct CamSettings
 {
-  var Vector vLookAtOffset;
-  var float fLookAtDistance;
-  var float fRotTightness;
-  var float fRotSpeed;
-  var float fMoveTightness;
-  var float fMoveSpeed;
+	var Vector vLookAtOffset;
+	var float fLookAtDistance;
+	var float fRotTightness;
+	var float fRotSpeed;
+	var float fMoveTightness;
+	var float fMoveSpeed;
 };
 var float fMouseDeltaX;
 var float fMouseDeltaY;
@@ -74,180 +75,156 @@ var() int MaxBossAimRot;
 var ECamMode LastCamMode;
 var string cue;
 
-/*
-function float ConvertRotToDeg (int iRot)
-{
-  return byte((iRot & 65535)) / byte(65536) * byte(360);
-}
-
-function float ConvertDegToRot (float fDeg)
-{
-  return fDeg / byte(360) * byte(65536);
-}
-*/
-
-// Metallicafan212:	Quick clamp
-function int ClampRotVal(int val)
-{
-	if(val < 0)
-	{
-		return val & -65535;
-	}
-	else
-	{
-		return val & 65535;
-	}
-}
-
-
 function float ConvertRotToDeg	( int iRot )		
 {
-  return ((float(iRot & 0xFFFF)) / 65536.0) * 360.0; 
+	return ((float(iRot & 0xFFFF)) / 65536.0) * 360.0; 
 }
 
 function float ConvertDegToRot	( float fDeg )		
 { 
-  return (fDeg / 360.0) * 65536.0; 
+	return (fDeg / 360.0) * 65536.0; 
 }
 
 function SetYaw (float fYaw)
 {
-  rDestRotation.Yaw = fYaw;
+	rDestRotation.Yaw = fYaw;
 }
 
 function SetPitch (float fPitch)
 {
-  rDestRotation.Pitch = fPitch;
+	rDestRotation.Pitch = fPitch;
 }
 
 function SetRoll (float fRoll)
 {
-  rDestRotation.Roll = fRoll;
+	rDestRotation.Roll = fRoll;
 }
 
 function SetMinPitch (float fPitch)
 {
-  fCurrentMinPitch = fPitch;
+	fCurrentMinPitch = fPitch;
 }
 
 function SetMaxPitch (float fPitch)
 {
-  fCurrentMaxPitch = fPitch;
+	fCurrentMaxPitch = fPitch;
 }
 
 function SetRotStep (Rotator Step)
 {
-  rRotationStep = Step;
+	rRotationStep = Step;
 }
 
 function SetRotStepYaw (float fYaw)
 {
-  rRotationStep.Yaw = fYaw;
+	rRotationStep.Yaw = fYaw;
 }
 
 function SetRotStepPitch (float fPitch)
 {
-  rRotationStep.Pitch = fPitch;
+	rRotationStep.Pitch = fPitch;
 }
 
 function SetRotStepRoll (float fRoll)
 {
-  rRotationStep.Roll = fRoll;
+	rRotationStep.Roll = fRoll;
 }
 
 function SetMoveBackTightness (float fTight)
 {
-  fMoveBackTightness = fTight;
+	fMoveBackTightness = fTight;
 }
 
 function SetRotTightness (float fTight)
 {
-  CurrentSet.fRotTightness = fTight;
+	CurrentSet.fRotTightness = fTight;
 }
 
 function SetRotSpeed (float fSpeed)
 {
-  CurrentSet.fRotSpeed = fSpeed;
+	CurrentSet.fRotSpeed = fSpeed;
 }
 
 function SetMoveTightness (float fTight)
 {
-  CurrentSet.fMoveTightness = fTight;
+	CurrentSet.fMoveTightness = fTight;
 }
 
 function SetMoveSpeed (float fSpeed)
 {
-  CurrentSet.fMoveSpeed = fSpeed;
+	CurrentSet.fMoveSpeed = fSpeed;
 }
 
 function SetDistance (float fDist)
 {
-  CurrentSet.fLookAtDistance = fDist;
-  fCurrLookAtDistance = fDist;
+	CurrentSet.fLookAtDistance = fDist;
+	fCurrLookAtDistance = fDist;
 }
 
 function SetTargetActor (name Target)
 {
-  CamTarget.SetAttachedToByName(Target);
+	CamTarget.SetAttachedToByName(Target);
 }
 
 function SetOffset (Vector V)
 {
-  CamTarget.SetOffset(V);
+	CamTarget.SetOffset(V);
 }
 
 function SetXOffset (float X)
 {
-  CamTarget.SetXOffset(X);
+	CamTarget.SetXOffset(X);
 }
 
 function SetYOffset (float Y)
 {
-  CamTarget.SetYOffset(Y);
+	CamTarget.SetYOffset(Y);
 }
 
 function SetZOffset (float Z)
 {
-  CamTarget.SetZOffset(Z);
+	CamTarget.SetZOffset(Z);
 }
 
 function SetModeByString (string Str)
 {
-  SetCameraMode(GetModeFromString(Str));
+	SetCameraMode(GetModeFromString(Str));
 }
 
 function SetSyncPosWithTarget (bool bSyncPos)
 {
-  bSyncPositionWithTarget = bSyncPos;
+	bSyncPositionWithTarget = bSyncPos;
 }
 
 function SetSyncRotWithTarget (bool bSyncRot)
 {
-  bSyncRotationWithTarget = bSyncRot;
+	bSyncRotationWithTarget = bSyncRot;
 }
 
 function SetFOV (float fFOV, optional float fTime, optional bool bEaseTo)
 {
-  local FOVController FOVControl;
+	local FOVController FOVControl;
 
-  FOVControl = Spawn(Class'FOVController');
-  FOVControl.Init(fFOV,fTime,bEaseTo);
+	FOVControl = Spawn(Class'FOVController');
+	FOVControl.Init(fFOV,fTime,bEaseTo);
 }
 
 function SetPosition (Vector Pos)
 {
-  if ( bSyncPositionWithTarget )
-  {
-    CurrentSet.fLookAtDistance = VSize(CamTarget.Location - Location);
-    rDestRotation = Rotation;
-    rCurrRotation = Rotation;
-    vDestPosition = Location;
-    vCurrPosition = Location;
-    CurrentSet.fLookAtDistance = VSize(CamTarget.Location - Pos);
-    rDestRotation = rotator(Normal(CamTarget.Location - Pos));
-  } else {
-    vDestPosition = Pos;
-  }
+	if ( bSyncPositionWithTarget )
+	{
+		CurrentSet.fLookAtDistance = VSize(CamTarget.Location - Location);
+		rDestRotation = Rotation;
+		rCurrRotation = Rotation;
+		vDestPosition = Location;
+		vCurrPosition = Location;
+		CurrentSet.fLookAtDistance = VSize(CamTarget.Location - Pos);
+		rDestRotation = rotator(Normal(CamTarget.Location - Pos));
+	} 
+	else 
+	{
+		vDestPosition = Pos;
+	}
 }
 
 /*
@@ -396,8 +373,8 @@ function SetCameraMode( ECamMode eMode )
 
 function TransitionToCameraMode (ECamMode eMode)
 {
-  CameraModeTransition = eMode;
-  GotoState('StateTransition');
+	CameraModeTransition = eMode;
+	GotoState('StateTransition');
 }
 
 /*
@@ -531,39 +508,39 @@ function SaveUserSettings( int i )
 
 function PreBeginPlay ()
 {
-  SetCollision(False,False,False);
-  bCollideWorld = False;
-  fPitchMovingInThreshold = PITCH_MOVING_IN_THRESHOLD;
-  fPitchMovingInSpread = PITCH_MOVING_IN_SPREAD;
-  fDistanceScalarMin = DISTANCE_SCALAR_MIN;
+	SetCollision(False,False,False);
+	bCollideWorld = False;
+	fPitchMovingInThreshold = PITCH_MOVING_IN_THRESHOLD;
+	fPitchMovingInSpread = PITCH_MOVING_IN_SPREAD;
+	fDistanceScalarMin = DISTANCE_SCALAR_MIN;
 }
 
 function PostBeginPlay ()
 {
-  Super.PostBeginPlay();
-  PlayerHarry = harry(Level.PlayerHarryActor);
-  if ( PlayerHarry == None )
-  {
-    Log("CAMERA CAN NOT FIND HARRY!!!!!!!! in baseCam::PostBeginPlay()");
-  }
-  if ( CamTarget == None )
-  {
-    CamTarget = Spawn(Class'BaseCamTarget');
-  }
-  SetOwner(CamTarget);
-  CamTarget.Cam = self;
-  if ( CamTarget == None )
-  {
-    PlayerHarry.ClientMessage("baseCam could not create the hiddenPawn CamTarget!");
-    Log("CutSceneCam could not create the hiddenPawn CamTarget!");
-  }
+	Super.PostBeginPlay();
+	PlayerHarry = harry(Level.PlayerHarryActor);
+	if ( PlayerHarry == None )
+	{
+		Log("CAMERA CAN NOT FIND HARRY!!!!!!!! in baseCam::PostBeginPlay()");
+	}
+	if ( CamTarget == None )
+	{
+		CamTarget = Spawn(Class'BaseCamTarget');
+	}
+	SetOwner(CamTarget);
+	CamTarget.Cam = self;
+	if ( CamTarget == None )
+	{
+		PlayerHarry.ClientMessage("baseCam could not create the hiddenPawn CamTarget!");
+		Log("CutSceneCam could not create the hiddenPawn CamTarget!");
+	}
 }
 
 function InitRotation (Rotator Rot)
 {
-	rDestRotation.Yaw = Rot.Yaw & 65535;
-	rDestRotation.Pitch = Rot.Pitch & 65535;
-	rDestRotation.Roll = Rot.Roll & 65535;
+	rDestRotation.Yaw = Rot.Yaw; //& 65535;
+	rDestRotation.Pitch = Rot.Pitch;// & 65535;
+	rDestRotation.Roll = Rot.Roll;// & 65535;
 	// vForward = Normal(DesiredRotation);
 	vForward = normal(vector(DesiredRotation));
 	rCurrRotation = rDestRotation;
@@ -573,43 +550,45 @@ function InitRotation (Rotator Rot)
 
 function InitPosition (Vector Pos)
 {
-  vDestPosition = Pos;
-  CheckCollisionWithWorld();
-  vCurrPosition = vDestPosition;
-  SetLocation(vDestPosition);
+	vDestPosition = Pos;
+	CheckCollisionWithWorld();
+	vCurrPosition = vDestPosition;
+	SetLocation(vDestPosition);
 }
 
 function InitSettings (CamSettings CamSet, bool bSyncWithTargetPos, bool bSyncWithTargetRot)
 {
-  CurrentSet = CamSet;
-  fDistanceScalar = 1.0;
-  rRotationStep = rot(0,0,0);
-  rSavedRotation = Rotation;
-  bSyncRotationWithTarget = bSyncWithTargetRot;
-  bSyncPositionWithTarget = bSyncWithTargetPos;
-  fDistanceScalarMin = DISTANCE_SCALAR_MIN;
-  fCurrLookAtDistance = CurrentSet.fLookAtDistance;
+	CurrentSet = CamSet;
+	fDistanceScalar = 1.0;
+	rRotationStep = rot(0,0,0);
+	rSavedRotation = Rotation;
+	bSyncRotationWithTarget = bSyncWithTargetRot;
+	bSyncPositionWithTarget = bSyncWithTargetPos;
+	fDistanceScalarMin = DISTANCE_SCALAR_MIN;
+	fCurrLookAtDistance = CurrentSet.fLookAtDistance;
 }
 
 function InitTarget (Actor A)
 {
-  CamTarget.SetAttachedTo(A);
-  CamTarget.SetOffset(CurrentSet.vLookAtOffset);
+	CamTarget.SetAttachedTo(A);
+	CamTarget.SetOffset(CurrentSet.vLookAtOffset);
 }
 
 function InitPositionAndRotation (bool bSnapToNewPosAndRot)
 {
-  if ( bSnapToNewPosAndRot )
-  {
-    InitRotation(CamTarget.Rotation);
-    InitPosition(CamTarget.Location + ((Vec( -CurrentSet.fLookAtDistance,0.0,0.0)) >> rDestRotation));
-  } else {
-    SetDestRotation(CamTarget.Rotation);
-    vDestPosition = CamTarget.Location + ((Vec( -CurrentSet.fLookAtDistance,0.0,0.0)) >> rDestRotation);
-    CheckCollisionWithWorld();
-  }
-  rDestRotation.Roll = 0;
-  rCurrRotation.Roll = 0;
+	if ( bSnapToNewPosAndRot )
+	{
+		InitRotation(CamTarget.Rotation);
+		InitPosition(CamTarget.Location + ((Vec( -CurrentSet.fLookAtDistance,0.0,0.0)) >> rDestRotation));
+	} 
+	else 
+	{
+		SetDestRotation(CamTarget.Rotation);
+		vDestPosition = CamTarget.Location + ((Vec( -CurrentSet.fLookAtDistance,0.0,0.0)) >> rDestRotation);
+		CheckCollisionWithWorld();
+	}
+	rDestRotation.Roll = 0;
+	rCurrRotation.Roll = 0;
 }
 
 function UpdateDistance (float fTimeDelta)
@@ -796,9 +775,9 @@ function UpdateRotation (float fTimeDelta)
 		}
 		rCurrRotation += (rDestRotation - rCurrRotation) * fTravelScalar;
 	}
-  // vForward = Normal(rCurrRotation);
-  vForward = normal(vector(rCurrRotation));
-  SetFinalRotation(rCurrRotation);
+	// vForward = Normal(rCurrRotation);
+	vForward = normal(vector(rCurrRotation));
+	SetFinalRotation(rCurrRotation);
 }
 
 function SetFinalRotation (Rotator R)
@@ -817,79 +796,81 @@ function SetFinalRotation (Rotator R)
 
 function UpdatePosition (float fTimeDelta, optional bool bSkipWorldCheck)
 {
-  local float fTravelScalar;
+	local float fTravelScalar;
 
-  if ( bSyncPositionWithTarget )
-  {
-    vDestPosition = CamTarget.Location + ((Vec( -fCurrLookAtDistance,0.0,0.0)) >> rCurrRotation);
-  }
-  if (  !bSkipWorldCheck )
-  {
-    CheckCollisionWithWorld();
-  }
-  if ( CurrentSet.fMoveTightness > 0.0 )
-  {
-    fTravelScalar = FMin(1.0,CurrentSet.fMoveTightness * fTimeDelta);
-  } else {
-    fTravelScalar = 1.0;
-  }
-  vCurrPosition += (vDestPosition - vCurrPosition) * fTravelScalar;
-  SetLocation(vCurrPosition);
+	if ( bSyncPositionWithTarget )
+	{
+		vDestPosition = CamTarget.Location + ((Vec( -fCurrLookAtDistance,0.0,0.0)) >> rCurrRotation);
+	}
+	if (  !bSkipWorldCheck )
+	{
+		CheckCollisionWithWorld();
+	}
+	if ( CurrentSet.fMoveTightness > 0.0 )
+	{
+		fTravelScalar = FMin(1.0,CurrentSet.fMoveTightness * fTimeDelta);
+	} 
+	else 
+	{
+		fTravelScalar = 1.0;
+	}
+	vCurrPosition += (vDestPosition - vCurrPosition) * fTravelScalar;
+	SetLocation(vCurrPosition);
 }
 
 function bool CheckCollisionWithWorld ()
 {
-  local Vector HitLocation;
-  local Vector HitNormal;
-  local Actor HitActor;
-  local Vector LookAtPoint;
-  local Vector LookFromPoint;
-  local Vector vCusionFromWorld;
+	local Vector HitLocation;
+	local Vector HitNormal;
+	local Actor HitActor;
+	local Vector LookAtPoint;
+	local Vector LookFromPoint;
+	local Vector vCusionFromWorld;
 
-  LookAtPoint = CamTarget.Location;
-  // if ( (CamTarget.aAttachedTo != None) && ((CamTarget.vOffset.X != byte(0)) || (CamTarget.vOffset.Y != byte(0)) || (CamTarget.vOffset.Z != byte(0))) )
-  if( CamTarget.aAttachedTo != None && (CamTarget.vOffset.x != 0 || CamTarget.vOffset.y != 0 || CamTarget.vOffset.z != 0) )
-  {
-    HitActor = Trace(HitLocation,HitNormal,CamTarget.Location,CamTarget.aAttachedTo.Location,False);
-    if ( (HitActor != None) && HitActor.IsA('LevelInfo') )
-    {
-      LookAtPoint = HitLocation + (Normal(CamTarget.aAttachedTo.Location - HitLocation) * 5.0) + HitNormal;
-      PlayerHarry.ClientMessage("CamTarget HitLoc:" $ string(HitLocation) $ " HitNorm: " $ string(HitNormal));
+	LookAtPoint = CamTarget.Location;
+	// if ( (CamTarget.aAttachedTo != None) && ((CamTarget.vOffset.X != byte(0)) || (CamTarget.vOffset.Y != byte(0)) || (CamTarget.vOffset.Z != byte(0))) )
+	if( CamTarget.aAttachedTo != None && (CamTarget.vOffset.x != 0 || CamTarget.vOffset.y != 0 || CamTarget.vOffset.z != 0) )
+	{
+		HitActor = Trace(HitLocation,HitNormal,CamTarget.Location,CamTarget.aAttachedTo.Location,False);
+		if ( (HitActor != None) && HitActor.IsA('LevelInfo') )
+		{
+			LookAtPoint = HitLocation + (Normal(CamTarget.aAttachedTo.Location - HitLocation) * 5.0) + HitNormal;
+			PlayerHarry.ClientMessage("CamTarget HitLoc:" $ string(HitLocation) $ " HitNorm: " $ string(HitNormal));
+		}
 	}
-  }
-  vCusionFromWorld = Normal(LookAtPoint - vDestPosition) * 10.0;
-  LookFromPoint = vDestPosition - vCusionFromWorld;
-  foreach TraceActors(Class'Actor',HitActor,HitLocation,HitNormal,LookFromPoint,LookAtPoint)
-  {
-    if ( HitActor == Owner )
-    {
-      continue;
-    } //else {
-      if ( HitActor.IsA('LevelInfo') || HitActor.bBlockCamera )
-      {
-        vDestPosition = HitLocation + vCusionFromWorld;
-        fDestLookAtDistance = VSize(vDestPosition - LookAtPoint);
-        fCurrLookAtDistance = fDestLookAtDistance;
-        return True;
-      }
-    //}
-  }
-  return False;
+	vCusionFromWorld = Normal(LookAtPoint - vDestPosition) * 10.0;
+	LookFromPoint = vDestPosition - vCusionFromWorld;
+	foreach TraceActors(Class'Actor',HitActor,HitLocation,HitNormal,LookFromPoint,LookAtPoint)
+	{
+		if ( HitActor == Owner )
+		{
+			continue;
+		} //else {
+		if ( HitActor.IsA('LevelInfo') || HitActor.bBlockCamera )
+		{
+			vDestPosition = HitLocation + vCusionFromWorld;
+			fDestLookAtDistance = VSize(vDestPosition - LookAtPoint);
+			fCurrLookAtDistance = fDestLookAtDistance;
+			return True;
+		}
+		//}
+	}
+	return False;
 }
  
 auto state StateStartup
 {
-  function BeginState ()
-  {
-  }
+	function BeginState ()
+	{
+	}
   
-  begin:
+	begin:
   
-  InitSettings(CamSetStandard,True,False);
-  InitTarget(PlayerHarry);
-  InitPositionAndRotation(True);
-  // SetCameraMode(3);
-  SetCameraMode( CM_Standard );
+		InitSettings(CamSetStandard,True,False);
+		InitTarget(PlayerHarry);
+		InitPositionAndRotation(True);
+		// SetCameraMode(3);
+		SetCameraMode( CM_Standard );
 }
 
 state stateIdle //extends stateIdle
@@ -898,218 +879,220 @@ state stateIdle //extends stateIdle
 
 state StateTransition
 {
-  function BeginState ()
-  {
-    CamTarget.SetAttachedTo(None);
-    // CamTarget.DoFlyTo(PlayerHarry.Location + CamSetStandard.vLookAtOffset,3,1.0);
-    CamTarget.DoFlyTo( playerHarry.location + CamSetStandard.vLookAtOffset, MOVE_TYPE_EASE_TO, 1.0);
-	InitSettings(CamSetStandard,False,True);
-    InitRotation(PlayerHarry.Rotation);
-    CurrentSet.fMoveTightness = 0.1;
-    vDestPosition = PlayerHarry.Location + CamSetStandard.vLookAtOffset + ((Vec( -CurrentSet.fLookAtDistance,0.0,0.0)) >> rDestRotation);
-    PlayerHarry.ClientMessage(" 1 DestRot = " $ string(rDestRotation) $ " CurRot = " $ string(rCurrRotation));
-  }
+	function BeginState ()
+	{
+		CamTarget.SetAttachedTo(None);
+		// CamTarget.DoFlyTo(PlayerHarry.Location + CamSetStandard.vLookAtOffset,3,1.0);
+		CamTarget.DoFlyTo( playerHarry.location + CamSetStandard.vLookAtOffset, MOVE_TYPE_EASE_TO, 1.0);
+		InitSettings(CamSetStandard,False,True);
+		InitRotation(PlayerHarry.Rotation);
+		CurrentSet.fMoveTightness = 0.1;
+		vDestPosition = PlayerHarry.Location + CamSetStandard.vLookAtOffset + ((Vec( -CurrentSet.fLookAtDistance,0.0,0.0)) >> rDestRotation);
+		PlayerHarry.ClientMessage(" 1 DestRot = " $ string(rDestRotation) $ " CurRot = " $ string(rCurrRotation));
+	}
   
-  function CutBypass ()
-  {
-    PlayerHarry.ClientMessage(" Transition DestRot = " $ string(rDestRotation) $ " CurRot = " $ string(rCurrRotation) $ "TargetLoc = " $ string(CamTarget.Location));
-    CamTarget.SetAttachedTo(PlayerHarry);
-    CamTarget.SetOffset(CamSetStandard.vLookAtOffset);
-    DoCutCueNotify();
-    SetCameraMode(CameraModeTransition);
-    Super.CutBypass();
-  }
+	function CutBypass ()
+	{
+		PlayerHarry.ClientMessage(" Transition DestRot = " $ string(rDestRotation) $ " CurRot = " $ string(rCurrRotation) $ "TargetLoc = " $ string(CamTarget.Location));
+		CamTarget.SetAttachedTo(PlayerHarry);
+		CamTarget.SetOffset(CamSetStandard.vLookAtOffset);
+		DoCutCueNotify();
+		SetCameraMode(CameraModeTransition);
+		Super.CutBypass();
+	}
   
-  function Tick (float fTimeDelta)
-  {
-    CurrentSet.fMoveTightness += fTimeDelta * 4.0;
-    UpdateRotation(fTimeDelta);
-    UpdatePosition(fTimeDelta);
-    if ( VSize(vCurrPosition - vDestPosition) <= 0.01 )
-    {
-      CutBypass();
-    }
-  }
+	function Tick (float fTimeDelta)
+	{
+		CurrentSet.fMoveTightness += fTimeDelta * 4.0;
+		UpdateRotation(fTimeDelta);
+		UpdatePosition(fTimeDelta);
+		if ( VSize(vCurrPosition - vDestPosition) <= 0.01 )
+		{
+			CutBypass();
+		}
+	}
 }
 
 state StateStandardCam
 {
-  //ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
+	//ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
 	ignores TakeDamage, SeePlayer, EnemyNotVisible, HearNoise, KilledBy, Trigger, Bump, HitWall, HeadZoneChange, FootZoneChange, ZoneChange, Falling, WarnTarget, Died, LongFall, PainTimer; //UTPT left all these out... -AdamJD
   
-  function BeginState ()
-  {
-    if ( /*True*/USE_DEBUG_MODE )
-    {
-      PlayerHarry.ClientMessage("Camera: BeginState -> StandardCam");
-    }
-    InitSettings(CamSetStandard,True,False);
-    InitTarget(PlayerHarry);
-    InitPositionAndRotation(True);
-  }
+	function BeginState ()
+	{
+		if ( /*True*/USE_DEBUG_MODE )
+		{
+			PlayerHarry.ClientMessage("Camera: BeginState -> StandardCam");
+		}
+		InitSettings(CamSetStandard,True,False);
+		InitTarget(PlayerHarry);
+		InitPositionAndRotation(True);
+	}
   
-  function EndState ()
-  {
-    rSavedRotation = rCurrRotation;
-  }
+	function EndState ()
+	{
+		rSavedRotation = rCurrRotation;
+	}
   
-  function Tick (float fTimeDelta)
-  {
-    ApplyMouseXToDestYaw(fTimeDelta);
-    ApplyMouseYToDestPitch(fTimeDelta);
-    UpdateDistance(fTimeDelta);
-    UpdateRotation(fTimeDelta);
-    UpdatePosition(fTimeDelta);
-  }
+	function Tick (float fTimeDelta)
+	{
+		ApplyMouseXToDestYaw(fTimeDelta);
+		ApplyMouseYToDestPitch(fTimeDelta);
+		UpdateDistance(fTimeDelta);
+		UpdateRotation(fTimeDelta);
+		UpdatePosition(fTimeDelta);
+	}
 }
 
 state StateQuidditchCam
 {
-  function BeginState ()
-  {
-    if ( /*True*/USE_DEBUG_MODE )
-    {
-      PlayerHarry.ClientMessage("Camera: BeginState -> QuidditchCam");
-    }
-    Log(string(Name) $ " Entered " $ string(GetStateName()) $ " State");
-    InitSettings(CamSetQuidditch,True,False);
-    InitTarget(PlayerHarry);
-    InitPositionAndRotation(True);
-  }
+	function BeginState ()
+	{
+		if ( /*True*/USE_DEBUG_MODE )
+		{
+			PlayerHarry.ClientMessage("Camera: BeginState -> QuidditchCam");
+		}
+		Log(string(Name) $ " Entered " $ string(GetStateName()) $ " State");
+		InitSettings(CamSetQuidditch,True,False);
+		InitTarget(PlayerHarry);
+		InitPositionAndRotation(True);
+	}
   
-  function Tick (float fTimeDelta)
-  {
-    local Vector lookDir;
-    local Rotator rSavedCurrRotation;
+	function Tick (float fTimeDelta)
+	{
+		local Vector lookDir;
+		local Rotator rSavedCurrRotation;
   
-    rSavedCurrRotation = rCurrRotation;
-    rCurrRotation = rotator(CamTarget.Location - vCurrPosition);
-	// UpdatePosition(fTimeDelta/*,True*/);
-	UpdatePosition(fTimeDelta,True); //turns out uncommenting the second parameter makes quidditch cam smoother... -AdamJD
-    rCurrRotation = rSavedCurrRotation;
-    lookDir = 0.5 * (PlayerHarry.Location - vCurrPosition) + 0.5 * (CamTarget.Location - vCurrPosition);
-    rDestRotation = rotator(lookDir);
-    UpdateRotationUsingVectors(fTimeDelta);
-  }
+		rSavedCurrRotation = rCurrRotation;
+		rCurrRotation = rotator(CamTarget.Location - vCurrPosition);
+		// UpdatePosition(fTimeDelta/*,True*/);
+		UpdatePosition(fTimeDelta,True); //turns out uncommenting the second parameter makes quidditch cam smoother... -AdamJD
+		rCurrRotation = rSavedCurrRotation;
+		lookDir = 0.5 * (PlayerHarry.Location - vCurrPosition) + 0.5 * (CamTarget.Location - vCurrPosition);
+		rDestRotation = rotator(lookDir);
+		UpdateRotationUsingVectors(fTimeDelta);
+	}
 }
 
 state StateFlyingCarCam
 {
-  function BeginState ()
-  {
-    if ( /*True*/USE_DEBUG_MODE )
-    {
-      PlayerHarry.ClientMessage("Camera: BeginState -> FlyingCarCam");
-    }
-    InitSettings(CamSetFlyingCar,True,False);
-    InitTarget(PlayerHarry);
-    InitPositionAndRotation(True);
-  }
+	function BeginState ()
+	{
+		if ( /*True*/USE_DEBUG_MODE )
+		{
+			PlayerHarry.ClientMessage("Camera: BeginState -> FlyingCarCam");
+		}
+		InitSettings(CamSetFlyingCar,True,False);
+		InitTarget(PlayerHarry);
+		InitPositionAndRotation(True);
+	}
   
-  function Tick (float fTimeDelta)
-  {
-    local Rotator Rot;
+	function Tick (float fTimeDelta)
+	{
+		local Rotator Rot;
   
-    Rot.Yaw = PlayerHarry.Rotation.Yaw & 65535;
-    Rot.Pitch = PlayerHarry.Rotation.Pitch & 65535;
-    SetDestRotation(Rot);
-    UpdateRotationUsingVectors(fTimeDelta);
-    UpdatePosition(fTimeDelta);
-  }
+		Rot.Yaw = PlayerHarry.Rotation.Yaw & 65535;
+		Rot.Pitch = PlayerHarry.Rotation.Pitch & 65535;
+		SetDestRotation(Rot);
+		UpdateRotationUsingVectors(fTimeDelta);
+		UpdatePosition(fTimeDelta);
+	}
 }
 
 state StateDuelingCam
 {
-  //ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
+	//ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
 	ignores TakeDamage, SeePlayer, EnemyNotVisible, HearNoise, KilledBy, Trigger, Bump, HitWall, HeadZoneChange, FootZoneChange, ZoneChange, Falling, WarnTarget, Died, LongFall, PainTimer; //UTPT left all these out... -AdamJD
   
-  function BeginState ()
-  {
-    local Rotator Rot;
+	function BeginState ()
+	{
+		local Rotator Rot;
   
-    if ( /*True*/USE_DEBUG_MODE )
-    {
-      PlayerHarry.ClientMessage("Camera: BeginState -> StandardCam");
-    }
-    InitSettings(CamSetDueling,True,False);
-    InitTarget(PlayerHarry);
-    InitPositionAndRotation(True);
-  }
+		if ( /*True*/USE_DEBUG_MODE )
+		{
+			PlayerHarry.ClientMessage("Camera: BeginState -> StandardCam");
+		}
+		InitSettings(CamSetDueling,True,False);
+		InitTarget(PlayerHarry);
+		InitPositionAndRotation(True);
+	}
   
-  function Tick (float fTimeDelta)
-  {
-    UpdateDistance(fTimeDelta);
-    UpdateRotation(fTimeDelta);
-    UpdatePosition(fTimeDelta);
-  }
+	function Tick (float fTimeDelta)
+	{
+		UpdateDistance(fTimeDelta);
+		UpdateRotation(fTimeDelta);
+		UpdatePosition(fTimeDelta);
+	}
 }
 
 state StateCutSceneCam
 {
-  function BeginState ()
-  {
-    if ( /*True*/USE_DEBUG_MODE )
-    {
-      PlayerHarry.ClientMessage("Camera: BeginState -> StateCutSceneCam");
-    }
-    fDistanceScalar = 1.0;
-    rRotationStep = rot(0,0,0);
-    CamTarget.SetLocation(CamTarget.aAttachedTo.Location + CamTarget.vOffset);
-    CamTarget.aAttachedTo = None;
-    CurrentSet = CamSetCutScene;
-    CamTarget.SetOffset(CurrentSet.vLookAtOffset);
-    rDestRotation.Roll = 0;
-    rCurrRotation.Roll = 0;
-    bSyncPositionWithTarget = False;
-    bSyncRotationWithTarget = True;
-  }
+	function BeginState ()
+	{
+		if ( /*True*/USE_DEBUG_MODE )
+		{
+			PlayerHarry.ClientMessage("Camera: BeginState -> StateCutSceneCam");
+		}
+		fDistanceScalar = 1.0;
+		rRotationStep = rot(0,0,0);
+		CamTarget.SetLocation(CamTarget.aAttachedTo.Location + CamTarget.vOffset);
+		CamTarget.aAttachedTo = None;
+		CurrentSet = CamSetCutScene;
+		CamTarget.SetOffset(CurrentSet.vLookAtOffset);
+		rDestRotation.Roll = 0;
+		rCurrRotation.Roll = 0;
+		bSyncPositionWithTarget = False;
+		bSyncRotationWithTarget = True;
+	}
   
-  function Tick (float fTimeDelta)
-  {
-    Super.Tick(fTimeDelta);
-    UpdateRotation(fTimeDelta);
-    if ( bSyncPositionWithTarget )
-    {
-      UpdatePosition(fTimeDelta);
-    }
-  }
+	function Tick (float fTimeDelta)
+	{
+		Super.Tick(fTimeDelta);
+		UpdateRotation(fTimeDelta);
+		if ( bSyncPositionWithTarget )
+		{
+			UpdatePosition(fTimeDelta);
+		}
+	}
 }
 
 state StateBossCam
 {
-  function BeginState ()
-  {
-    if ( /*True*/USE_DEBUG_MODE )
-    {
-      PlayerHarry.ClientMessage("Camera: BeginState -> BossCam");
-    }
-    InitSettings(CamSetBoss,True,False);
-    InitTarget(PlayerHarry);
-    InitPositionAndRotation(False);
-  }
+	function BeginState ()
+	{
+		if ( /*True*/USE_DEBUG_MODE )
+		{
+			PlayerHarry.ClientMessage("Camera: BeginState -> BossCam");
+		}
+		InitSettings(CamSetBoss,True,False);
+		InitTarget(PlayerHarry);
+		InitPositionAndRotation(False);
+	}
   
-  function Tick (float fTimeDelta)
-  {
-    local Vector V;
+	function Tick (float fTimeDelta)
+	{
+		local Vector V;
   
-    ApplyMouseXToDestYaw(fTimeDelta,True);
-    ApplyMouseYToDestPitch(fTimeDelta,True);
-    if ( baseBoss(PlayerHarry.BossTarget) != None )
-    {
-      V = baseBoss(PlayerHarry.BossTarget).GetCamTargetLoc();
-    } else {
-      V = PlayerHarry.BossTarget.Location;
-    }
-    rDestRotation = rotator(Normal(V - Location));
-    rDestRotation += rBossRotationOffset;
-    UpdateRotationUsingVectors(fTimeDelta);
-    UpdatePosition(fTimeDelta);
-  }
+		ApplyMouseXToDestYaw(fTimeDelta,True);
+		ApplyMouseYToDestPitch(fTimeDelta,True);
+		if ( baseBoss(PlayerHarry.BossTarget) != None )
+		{
+			V = baseBoss(PlayerHarry.BossTarget).GetCamTargetLoc();
+		} 
+		else 
+		{
+			V = PlayerHarry.BossTarget.Location;
+		}
+		rDestRotation = rotator(Normal(V - Location));
+		rDestRotation += rBossRotationOffset;
+		UpdateRotationUsingVectors(fTimeDelta);
+		UpdatePosition(fTimeDelta);
+	}
 }
 
 state StateFreeCam
 {
-  //ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
+	//ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
 	ignores TakeDamage, SeePlayer, EnemyNotVisible, HearNoise, KilledBy, Trigger, Bump, HitWall, HeadZoneChange, FootZoneChange, ZoneChange, Falling, WarnTarget, Died, LongFall, PainTimer; //UTPT left all these out... -AdamJD
   
 	function BeginState ()
@@ -1202,29 +1185,29 @@ state StateFreeCam
 
 function bool CutCommand (string Command, optional string cue, optional bool bFastFlag)
 {
-  local string sActualCommand;
-  local string sString;
-  local int I;
-  local bool B;
+	local string sActualCommand;
+	local string sString;
+	local int I;
+	local bool B;
 
-  sActualCommand = ParseDelimitedString(Command," ",1,False);
-  if ( sActualCommand ~= "Capture" )
-  {
-    PlayerHarry.ClientMessage("Camera Captured");
-    // SetCameraMode(7);
-	SetCameraMode( CM_CutScene );
-    return True;
-  } else //{
-    if ( sActualCommand ~= "Release" )
+	sActualCommand = ParseDelimitedString(Command," ",1,False);
+	if ( sActualCommand ~= "Capture" )
+	{
+		PlayerHarry.ClientMessage("Camera Captured");
+		// SetCameraMode(7);
+		SetCameraMode( CM_CutScene );
+		return True;
+	} 
+	else if ( sActualCommand ~= "Release" )
     {
-      PlayerHarry.ClientMessage("Camera Released");
-      CamTarget.CutCommand("Release","",False);
-      // SetCameraMode(3);
-	  SetCameraMode( CM_Standard );
-    } else //{
-      if ( sActualCommand ~= "GoHome" )
-      {
-        Log("*** GoHome CALLED!!!!  loc = " $ string(Location) $ " rot = " $ string(Rotation));
+		PlayerHarry.ClientMessage("Camera Released");
+		CamTarget.CutCommand("Release","",False);
+		// SetCameraMode(3);
+		SetCameraMode( CM_Standard );
+	} 
+	else if ( sActualCommand ~= "GoHome" )
+	{
+		Log("*** GoHome CALLED!!!!  loc = " $ string(Location) $ " rot = " $ string(Rotation));
         bSyncPositionWithTarget = True;
         SetPosition(Location);
         // SetCameraMode(2);
@@ -1232,541 +1215,479 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
         sCutNotifyCue = cue;
         if ( bFastFlag )
         {
-          InitSettings(CamSetStandard,False,True);
-          InitRotation(PlayerHarry.Rotation);
-          InitPosition(PlayerHarry.Location + CamSetStandard.vLookAtOffset + (Vec( -CurrentSet.fLookAtDistance,0.0,0.0) >> rDestRotation));
-          CamTarget.SetAttachedTo(PlayerHarry);
-          CamTarget.SetOffset(CamSetStandard.vLookAtOffset);
-          SetCameraMode(CameraModeTransition);
-          DoCutCueNotify();
+			InitSettings(CamSetStandard,False,True);
+			InitRotation(PlayerHarry.Rotation);
+			InitPosition(PlayerHarry.Location + CamSetStandard.vLookAtOffset + (Vec( -CurrentSet.fLookAtDistance,0.0,0.0) >> rDestRotation));
+			CamTarget.SetAttachedTo(PlayerHarry);
+			CamTarget.SetOffset(CamSetStandard.vLookAtOffset);
+			SetCameraMode(CameraModeTransition);
+			DoCutCueNotify();
         }
         return True;
-      } else //{
-        if ( sActualCommand ~= "FlyTo" )
-        {
-          bSyncPositionWithTarget = False;
-          if (  !bIgnoreTarget )
-          {
-            bSyncRotationWithTarget = True;
-          }
-        } else //{
-          if ( sActualCommand ~= "Target" )
-          {
-            return CutCommand_ProcessTarget(Command,cue,bFastFlag);
-          } else// {
-            if ( sActualCommand ~= "IgnoreTargetOn" )
-            {
-              bIgnoreTarget = True;
-              bSyncPositionWithTarget = False;
-              bSyncRotationWithTarget = False;
-              sCutNotifyCue = cue;
-              DoCutCueNotify();
-              return True;
-            } else //{
-              if ( sActualCommand ~= "IgnoreTargetOff" )
-              {
-                bIgnoreTarget = False;
-                sCutNotifyCue = cue;
-                DoCutCueNotify();
-                return True;
-              } else //{
-                if ( sActualCommand ~= "Locked" )
-                {
-                  bSyncPositionWithTarget = True;
-                  bSyncRotationWithTarget = True;
-                  return CutCommand_ProcessLocked(Command,cue,bFastFlag);
-                } else //{
-                  if ( sActualCommand ~= "UnLock" )
-                  {
-                    bSyncPositionWithTarget = False;
-                    bSyncRotationWithTarget = True;
-                    sCutNotifyCue = cue;
-                    DoCutCueNotify();
-                    return True;
-                  } else //{
-                    if ( sActualCommand ~= "FOV" )
-                    {
-                      return CutCommand_ProcessFOV(Command,cue,bFastFlag);
-                    } else //{
-                      if ( sActualCommand ~= "Shake" )
-                      {
-                        return CutCommand_ProcessShake(Command,cue,bFastFlag);
-                      } else //{
-                        if ( sActualCommand ~= "Flash" )
-                        {
-                          return CutCommand_ProcessFlash(Command,cue,bFastFlag);
-                        } else //{
-                          if ( sActualCommand ~= "FadeOut" )
-                          {
-                            return CutCommand_ProcessFade(True,Command,cue,bFastFlag);
-                          } else// {
-                            if ( sActualCommand ~= "FadeIn" )
-                            {
-                              return CutCommand_ProcessFade(False,Command,cue,bFastFlag);
-                            }
-							//UTPT has a weird obsession with nested ifs... -AdamJD
-                          // }
-                        // }
-                      // }
-                    // }
-                  // }
-                // }
-              // }
-            // }
-          // }
-        // }
-      // }
-    // }
-  // }
-  return Super.CutCommand(Command,cue,bFastFlag);
+	} 
+	else if ( sActualCommand ~= "FlyTo" )
+	{
+		bSyncPositionWithTarget = False;
+        if (  !bIgnoreTarget )
+		{
+			bSyncRotationWithTarget = True;
+        }
+	} 
+	else if ( sActualCommand ~= "Target" )
+	{
+		return CutCommand_ProcessTarget(Command,cue,bFastFlag);
+	} 
+	else if ( sActualCommand ~= "IgnoreTargetOn" )
+	{
+		bIgnoreTarget = True;
+        bSyncPositionWithTarget = False;
+		bSyncRotationWithTarget = False;
+		sCutNotifyCue = cue;
+		DoCutCueNotify();
+		return True;
+	} 
+	else if ( sActualCommand ~= "IgnoreTargetOff" )
+	{
+		bIgnoreTarget = False;
+		sCutNotifyCue = cue;
+		DoCutCueNotify();
+		return True;
+	} 
+	else if ( sActualCommand ~= "Locked" )
+	{
+		bSyncPositionWithTarget = True;
+		bSyncRotationWithTarget = True;
+        return CutCommand_ProcessLocked(Command,cue,bFastFlag);
+	} 
+	else if ( sActualCommand ~= "UnLock" )
+	{
+		bSyncPositionWithTarget = False;
+		bSyncRotationWithTarget = True;
+		sCutNotifyCue = cue;
+		DoCutCueNotify();
+		return True;
+	} 
+	else if ( sActualCommand ~= "FOV" )
+	{
+		return CutCommand_ProcessFOV(Command,cue,bFastFlag);
+	} 
+	else if ( sActualCommand ~= "Shake" )
+	{
+		return CutCommand_ProcessShake(Command,cue,bFastFlag);
+	} 
+	else if ( sActualCommand ~= "Flash" )
+	{
+		return CutCommand_ProcessFlash(Command,cue,bFastFlag);
+	} 
+	else if ( sActualCommand ~= "FadeOut" )
+	{
+		return CutCommand_ProcessFade(True,Command,cue,bFastFlag);
+	} 
+	else if ( sActualCommand ~= "FadeIn" )
+	{
+		return CutCommand_ProcessFade(False,Command,cue,bFastFlag);
+	}
+	return Super.CutCommand(Command,cue,bFastFlag);
 }
 
 function bool CutCommand_ProcessFOV (string Command, optional string cue, optional bool bFastFlag)
 {
-  local FOVController FOVControl;
-  local TimedCue tcue;
-  local string sString;
-  local bool bEaseTo;
-  local float fAngle;
-  local float fTime;
-  local int I;
+	local FOVController FOVControl;
+	local TimedCue tcue;
+	local string sString;
+	local bool bEaseTo;
+	local float fAngle;
+	local float fTime;
+	local int I;
 
-  fAngle = 90.0;
-  fTime = 0.0;
-  // I = 2;
-  // if ( I < 8 )
-  for( I = 2; I < 8; I++ )
-  {
-    sString = ParseDelimitedString(Command," ",I,False);
-    if ( sString ~= "EaseTo" )
-    {
-      bEaseTo = True;
-    } else //{
-      if ( Left(sString,6) ~= "Angle=" )
-      {
-        fAngle = float(Mid(sString,6));
-      } else //{
-        if ( Left(sString,5) ~= "Time=" )
+	fAngle = 90.0;
+	fTime = 0.0;
+
+	for( I = 2; I < 8; I++ )
+	{
+		sString = ParseDelimitedString(Command," ",I,False);
+		if ( sString ~= "EaseTo" )
+		{
+			bEaseTo = True;
+		} 
+		else if ( Left(sString,6) ~= "Angle=" )
+		{
+			fAngle = float(Mid(sString,6));
+		} 
+		else if ( Left(sString,5) ~= "Time=" )
         {
-          fTime = float(Mid(sString,5));
+			fTime = float(Mid(sString,5));
         }
-      //}
-    //}
-    if ( sString == "" )
-    {
-      // goto JL00C8;
-	  break;
-    }
-    // I++;
-    // goto JL001E;
-  }
-  if ( bFastFlag )
-  {
-    fTime = 0.0;
-  }
-  FOVControl = Spawn(Class'FOVController');
-  FOVControl.Init(fAngle,fTime,bEaseTo);
-  tcue = Spawn(Class'TimedCue');
-  tcue.CutNotifyActor = self;
-  tcue.SetupTimer(fTime,cue);
-  return True;
+		if ( sString == "" )
+		{
+			break;
+		}
+	}
+	if ( bFastFlag )
+	{
+		fTime = 0.0;
+	}
+	FOVControl = Spawn(Class'FOVController');
+	FOVControl.Init(fAngle,fTime,bEaseTo);
+	tcue = Spawn(Class'TimedCue');
+	tcue.CutNotifyActor = self;
+	tcue.SetupTimer(fTime,cue);
+	return True;
 }
 
 function bool CutCommand_ProcessFlash (string Command, optional string cue, optional bool bFastFlag)
 {
-  local FadeViewController FadeController;
-  local TimedCue tcue;
-  local string sString;
-  local bool bUseDefault;
-  local float A;
-  local float R;
-  local float G;
-  local float B;
-  local float fTime;
-  local int I;
+	local FadeViewController FadeController;
+	local TimedCue tcue;
+	local string sString;
+	local bool bUseDefault;
+	local float A;
+	local float R;
+	local float G;
+	local float B;
+	local float fTime;
+	local int I;
 
-  A = 255.0;
-  bUseDefault = True;
-  fTime = 0.25;
-  // I = 2;
-  // if ( I < 8 )
-  for( I = 2; I < 8; I++ )
-  {
-    sString = ParseDelimitedString(Command," ",I,False);
-    if ( Left(sString,2) ~= "A=" )
-    {
-      A = float(Mid(sString,2));
-      bUseDefault = False;
-    } else //{
-      if ( Left(sString,2) ~= "R=" )
-      {
-        R = float(Mid(sString,2));
-        bUseDefault = False;
-      } else //{
-        if ( Left(sString,2) ~= "G=" )
+	A = 255.0;
+	bUseDefault = True;
+	fTime = 0.25;
+	for( I = 2; I < 8; I++ )
+	{
+		sString = ParseDelimitedString(Command," ",I,False);
+		if ( Left(sString,2) ~= "A=" )
+		{
+			A = float(Mid(sString,2));
+			bUseDefault = False;
+		} 
+		else if ( Left(sString,2) ~= "R=" )
+		{
+			R = float(Mid(sString,2));
+			bUseDefault = False;
+		} 
+		else if ( Left(sString,2) ~= "G=" )
         {
-          G = float(Mid(sString,2));
-          bUseDefault = False;
-        } else //{
-          if ( Left(sString,2) ~= "B=" )
-          {
-            B = float(Mid(sString,2));
-            bUseDefault = False;
-          } else //{
-            if ( Left(sString,5) ~= "Time=" )
-            {
-              fTime = float(Mid(sString,5));
-            } else //{
-              if ( sString == "" )
-              {
-                // goto JL0141;
-				break;
-              }
-            // }
-          // }
-        // }
-      // }
-    // }
-    // I++;
-    // goto JL0026;
-  }
-  A = FClamp(A / 255,0.0,1.0);
-  R = FClamp(R / 255,0.0,1.0);
-  G = FClamp(G / 255,0.0,1.0);
-  B = FClamp(B / 255,0.0,1.0);
-  FadeController = Spawn(Class'FadeViewController');
-  if ( bUseDefault )
-  {
-    R = 1.0;
-    G = 1.0;
-    B = 1.0;
-  }
-  if ( bFastFlag )
-  {
-    FadeController.Init(A,R,G,B,0.0,True);
-    CutCue(cue);
-    return True;
-  }
-  FadeController.Init(A,R,G,B,fTime,True);
-  tcue = Spawn(Class'TimedCue');
-  tcue.CutNotifyActor = self;
-  tcue.SetupTimer(fTime,cue);
-  return True;
+			G = float(Mid(sString,2));
+			bUseDefault = False;
+        } 
+		else if ( Left(sString,2) ~= "B=" )
+		{
+			B = float(Mid(sString,2));
+			bUseDefault = False;
+		} 
+		else if ( Left(sString,5) ~= "Time=" )
+		{
+			fTime = float(Mid(sString,5));
+		} 
+		else if ( sString == "" )
+		{
+			break;
+		}
+	}
+	A = FClamp(A / 255,0.0,1.0);
+	R = FClamp(R / 255,0.0,1.0);
+	G = FClamp(G / 255,0.0,1.0);
+	B = FClamp(B / 255,0.0,1.0);
+	FadeController = Spawn(Class'FadeViewController');
+	if ( bUseDefault )
+	{
+		R = 1.0;
+		G = 1.0;
+		B = 1.0;
+	}
+	if ( bFastFlag )
+	{
+		FadeController.Init(A,R,G,B,0.0,True);
+		CutCue(cue);
+		return True;
+	}
+	FadeController.Init(A,R,G,B,fTime,True);
+	tcue = Spawn(Class'TimedCue');
+	tcue.CutNotifyActor = self;
+	tcue.SetupTimer(fTime,cue);
+	return True;
 }
 
 function bool CutCommand_ProcessShake (string Command, optional string cue, optional bool bFastFlag)
 {
-  local TimedCue tcue;
-  local string sString;
-  local float fMagnitude;
-  local float fTime;
-  local int I;
+	local TimedCue tcue;
+	local string sString;
+	local float fMagnitude;
+	local float fTime;
+	local int I;
 
-  fMagnitude = 100.0;
-  fTime = 0.5;
-  // I = 2;
-  // if ( I < 8 )
-  for( I = 2; I < 8; I++ )
-  {
-    sString = ParseDelimitedString(Command," ",I,False);
-    if ( Left(sString,10) ~= "Magnitude=" )
-    {
-      fMagnitude = float(Mid(sString,10));
-    } else //{
-      if ( Left(sString,5) ~= "Time=" )
-      {
-        fTime = float(Mid(sString,5));
-      } else //{
-        if ( sString == "" )
+	fMagnitude = 100.0;
+	fTime = 0.5;
+	for( I = 2; I < 8; I++ )
+	{
+		sString = ParseDelimitedString(Command," ",I,False);
+		if ( Left(sString,10) ~= "Magnitude=" )
+		{
+			fMagnitude = float(Mid(sString,10));
+		} 
+		else if ( Left(sString,5) ~= "Time=" )
+		{
+			fTime = float(Mid(sString,5));
+		} 
+		else if ( sString == "" )
         {
-          // goto JL00B2;
-		  break;
+			break;
         }
-      // }
-    // }
-    // I++;
-    // goto JL001E;
-  }
-  if ( bFastFlag )
-  {
-    CutCue(cue);
-  } else {
-    tcue = Spawn(Class'TimedCue');
-    tcue.CutNotifyActor = self;
-    tcue.SetupTimer(fTime,cue);
-  }
-  PlayerHarry.ShakeView(fTime,fMagnitude,fMagnitude);
-  return True;
+	}
+	if ( bFastFlag )
+	{
+		CutCue(cue);
+	} 
+	else 
+	{
+		tcue = Spawn(Class'TimedCue');
+		tcue.CutNotifyActor = self;
+		tcue.SetupTimer(fTime,cue);
+	}
+	PlayerHarry.ShakeView(fTime,fMagnitude,fMagnitude);
+	return True;
 }
 
 function DoSimpleFade (bool bFadeIn)
 {
-  local FadeViewController FadeController;
+	local FadeViewController FadeController;
 	
-  //IDK how I didn't notice this... -AdamJD
-  // return;
-  FadeController = Spawn(Class'FadeViewController');
-  if ( bFadeIn )
-  {
-    FadeController.Init(0.0,0.0,0.0,0.0,1.0,False);
-  } else {
-    FadeController.Init(1.0,0.0,0.0,0.0,1.0,False);
-  }
+	//IDK how I didn't notice this... -AdamJD
+	// return;
+	FadeController = Spawn(Class'FadeViewController');
+	if ( bFadeIn )
+	{
+		FadeController.Init(0.0,0.0,0.0,0.0,1.0,False);
+	} 
+	else 
+	{
+		FadeController.Init(1.0,0.0,0.0,0.0,1.0,False);
+	}
 }
 
 function bool CutCommand_ProcessFade (bool bFadeOut, string Command, optional string cue, optional bool bFastFlag)
 {
-  local FadeViewController FadeController;
-  local TimedCue tcue;
-  local string sString;
-  local float A;
-  local float R;
-  local float G;
-  local float B;
-  local float fTime;
-  local int I;
+	local FadeViewController FadeController;
+	local TimedCue tcue;
+	local string sString;
+	local float A;
+	local float R;
+	local float G;
+	local float B;
+	local float fTime;
+	local int I;
 
-  if ( bFadeOut )
-  {
-    A = 255.0;
-  }
-  fTime = 1.0;
-  // I = 2;
-  // if ( I < 8 )
-  for( I = 2; I < 8; I++ )
-  {
-    sString = ParseDelimitedString(Command," ",I,False);
-    if ( (Left(sString,2) ~= "A=") && bFadeOut )
-    {
-      A = float(Mid(sString,2));
-    } else //{
-      if ( (Left(sString,2) ~= "R=") && bFadeOut )
-      {
-        R = float(Mid(sString,2));
-      } else //{
-        if ( (Left(sString,2) ~= "G=") && bFadeOut )
+	if ( bFadeOut )
+	{
+		A = 255.0;
+	}
+	fTime = 1.0;
+	for( I = 2; I < 8; I++ )
+	{
+		sString = ParseDelimitedString(Command," ",I,False);
+		if ( (Left(sString,2) ~= "A=") && bFadeOut )
+		{
+			A = float(Mid(sString,2));
+		} 
+		else if ( (Left(sString,2) ~= "R=") && bFadeOut )
+		{
+			R = float(Mid(sString,2));
+		} 
+		else if ( (Left(sString,2) ~= "G=") && bFadeOut )
         {
-          G = float(Mid(sString,2));
-        } else //{
-          if ( (Left(sString,2) ~= "B=") && bFadeOut )
-          {
-            B = float(Mid(sString,2));
-          } else //{
-            if ( Left(sString,5) ~= "Time=" )
-            {
-              fTime = float(Mid(sString,5));
-            } else //{
-              if ( sString == "" )
-              {
-                // goto JL014E;
-				break;
-              }
-            // }
-          // }
-        // }
-      // }
-    // }
-    // I++;
-    // goto JL0027;
-  }
-  A = FClamp(A / 255,0.0,1.0);
-  R = FClamp(R / 255,0.0,1.0);
-  G = FClamp(G / 255,0.0,1.0);
-  B = FClamp(B / 255,0.0,1.0);
-  FadeController = Spawn(Class'FadeViewController');
-  if ( bFastFlag )
-  {
-    FadeController.Init(A,R,G,B,0.0,False);
-    CutCue(cue);
-    return True;
-  }
-  FadeController.Init(A,R,G,B,fTime,False);
-  tcue = Spawn(Class'TimedCue');
-  tcue.CutNotifyActor = self;
-  tcue.SetupTimer(fTime,cue);
-  return True;
+			G = float(Mid(sString,2));
+        } 
+		else if ( (Left(sString,2) ~= "B=") && bFadeOut )
+		{
+			B = float(Mid(sString,2));
+		} 
+		else if ( Left(sString,5) ~= "Time=" )
+		{
+			fTime = float(Mid(sString,5));
+		} 
+		else if ( sString == "" )
+		{
+			break;
+		}
+	}
+	A = FClamp(A / 255,0.0,1.0);
+	R = FClamp(R / 255,0.0,1.0);
+	G = FClamp(G / 255,0.0,1.0);
+	B = FClamp(B / 255,0.0,1.0);
+	FadeController = Spawn(Class'FadeViewController');
+	if ( bFastFlag )
+	{
+		FadeController.Init(A,R,G,B,0.0,False);
+		CutCue(cue);
+		return True;
+	}
+	FadeController.Init(A,R,G,B,fTime,False);
+	tcue = Spawn(Class'TimedCue');
+	tcue.CutNotifyActor = self;
+	tcue.SetupTimer(fTime,cue);
+	return True;
 }
 
 function bool CutCommand_ProcessLocked (string Command, optional string cue, optional bool bFastFlag)
 {
-  local string sString;
-  local int I;
-  local bool B;
+	local string sString;
+	local int I;
+	local bool B;
 
-  CurrentSet.fLookAtDistance = VSize(CamTarget.Location - Location);
-  rDestRotation = Rotation;
-  rCurrRotation = Rotation;
-  vDestPosition = Location;
-  vCurrPosition = Location;
-  // I = 2;
-  // if ( I < 15 )
-  for( I = 2; I < 15; I++ )
-  {
-    sString = ParseDelimitedString(Command," ",I,False);
-    if ( Left(sString,9) ~= "distance=" )
-    {
-      SetDistance(float(Mid(sString,9)));
-    } else //{
-      if ( Left(sString,4) ~= "yaw=" )
-      {
-        SetYaw(ConvertDegToRot(float(Mid(sString,4))));
-      } else //{
-        if ( Left(sString,6) ~= "pitch=" )
+	CurrentSet.fLookAtDistance = VSize(CamTarget.Location - Location);
+	rDestRotation = Rotation;
+	rCurrRotation = Rotation;
+	vDestPosition = Location;
+	vCurrPosition = Location;
+
+	for( I = 2; I < 15; I++ )
+	{
+		sString = ParseDelimitedString(Command," ",I,False);
+		if ( Left(sString,9) ~= "distance=" )
+		{
+			SetDistance(float(Mid(sString,9)));
+		} 
+		else if ( Left(sString,4) ~= "yaw=" )
+		{
+			SetYaw(ConvertDegToRot(float(Mid(sString,4))));
+		} 
+		else if ( Left(sString,6) ~= "pitch=" )
         {
-          SetPitch(ConvertDegToRot(float(Mid(sString,6))));
-        } else //{
-          if ( Left(sString,5) ~= "roll=" )
-          {
-            SetRoll(ConvertDegToRot(float(Mid(sString,5))));
-          } else //{
-            if ( Left(sString,8) ~= "yawStep=" )
-            {
-              // rRotationStep.Yaw = ConvertDegToRot(float(Mid(sString,8))) = bSyncRotationWithTarget = False;
-				rRotationStep.yaw = ConvertDegToRot( float(Mid(sString,8))); bSyncRotationWithTarget = false;
-			} else //{
-              if ( Left(sString,10) ~= "pitchStep=" )
-              {
-                // rRotationStep.Pitch = ConvertDegToRot(float(Mid(sString,10))) = bSyncRotationWithTarget = False;
-				rRotationStep.pitch = ConvertDegToRot( float(Mid(sString,10))); bSyncRotationWithTarget = false;
-			  } else //{
-                if ( Left(sString,9) ~= "rollStep=" )
-                {
-                  // rRotationStep.Roll = ConvertDegToRot(float(Mid(sString,9))) = bSyncRotationWithTarget = False;
-				  rRotationStep.roll = ConvertDegToRot( float(Mid(sString,9))); bSyncRotationWithTarget = false;
-				} else //{
-                  if ( Left(sString,13) ~= "rotTightness=" )
-                  {
-                    SetRotTightness(float(Mid(sString,13)));
-                  } else //{
-                    if ( Left(sString,14) ~= "moveTightness=" )
-                    {
-                      SetMoveTightness(float(Mid(sString,14)));
-                    } else //{
-                      if ( sString == "" )
-                      {
-                        // goto JL026C;
-						break;
-                      }
-                    // }
-                  // }
-                // }
-              // }
-            // }
-          // }
-        // }
-      // }
-    // }
-    // I++;
-    // goto JL0056;
-  }
-  sCutNotifyCue = cue;
-  DoCutCueNotify();
-  return True;
+			SetPitch(ConvertDegToRot(float(Mid(sString,6))));
+        } 
+		else if ( Left(sString,5) ~= "roll=" )
+		{
+			SetRoll(ConvertDegToRot(float(Mid(sString,5))));
+		} 
+		else if ( Left(sString,8) ~= "yawStep=" )
+		{
+			// rRotationStep.Yaw = ConvertDegToRot(float(Mid(sString,8))) = bSyncRotationWithTarget = False;
+			rRotationStep.yaw = ConvertDegToRot( float(Mid(sString,8))); 
+			bSyncRotationWithTarget = false;
+		} 
+		else if ( Left(sString,10) ~= "pitchStep=" )
+		{
+			// rRotationStep.Pitch = ConvertDegToRot(float(Mid(sString,10))) = bSyncRotationWithTarget = False;
+			rRotationStep.pitch = ConvertDegToRot( float(Mid(sString,10))); 
+			bSyncRotationWithTarget = false;
+		} 
+		else if ( Left(sString,9) ~= "rollStep=" )
+		{
+			// rRotationStep.Roll = ConvertDegToRot(float(Mid(sString,9))) = bSyncRotationWithTarget = False;
+			rRotationStep.roll = ConvertDegToRot( float(Mid(sString,9))); 
+			bSyncRotationWithTarget = false;
+		} 
+		else if ( Left(sString,13) ~= "rotTightness=" )
+		{
+			SetRotTightness(float(Mid(sString,13)));
+		} 
+		else if ( Left(sString,14) ~= "moveTightness=" )
+		{
+			SetMoveTightness(float(Mid(sString,14)));
+		} 
+		else if ( sString == "" )
+		{
+			break;
+		}
+	}
+	sCutNotifyCue = cue;
+	DoCutCueNotify();
+	return True;
 }
 
 function bool CutCommand_ProcessTarget (string Command, optional string cue, optional bool bFastFlag)
 {
-  local string sActualCommand;
-  local string sString;
-  local int I;
-  local bool B;
-  local bool bPassToTarget;
+	local string sActualCommand;
+	local string sString;
+	local int I;
+	local bool B;
+	local bool bPassToTarget;
 
-  bPassToTarget = True;
-  sString = ParseDelimitedString(Command," ",2,False);
-  if ( sString ~= "flyto" )
-  {
-    CamTarget.aAttachedTo = None;
-  } else //{
-    if ( sString ~= "teleport" )
+	bPassToTarget = True;
+	sString = ParseDelimitedString(Command," ",2,False);
+	if ( sString ~= "flyto" )
+	{
+		CamTarget.aAttachedTo = None;
+	} 
+	else if ( sString ~= "teleport" )
     {
-      CamTarget.aAttachedTo = None;
-    } else {
-      // I = 2;
-      // if ( I < 20 )
-	  for( I = 2; I < 20; I++ )
-      {
-        sString = ParseDelimitedString(Command," ",I,False);
-        if ( Left(sString,11) ~= "attachedto=" )
-        {
-          bPassToTarget = False;
-          if (  !CamTarget.SetAttachedToByCutName(Mid(sString,11)) )
-          {
-            PlayerHarry.ClientMessage("!*!*!* COULD NOT ATTACH TARGET TO: " $ Mid(sString,11));
-            return False;
-          }
-        } else //{
-          if ( Left(sString,2) ~= "x=" )
-          {
-            CamTarget.vOffset.X = float(Mid(sString,2));
-            SetZOffset(CamTarget.vOffset.X);
-            bPassToTarget = False;
-          } else //{
-            if ( Left(sString,2) ~= "y=" )
+		CamTarget.aAttachedTo = None;
+    } 
+	else 
+	{
+		for( I = 2; I < 20; I++ )
+		{
+			sString = ParseDelimitedString(Command," ",I,False);
+			if ( Left(sString,11) ~= "attachedto=" )
+			{
+				bPassToTarget = False;
+				if (  !CamTarget.SetAttachedToByCutName(Mid(sString,11)) )
+				{
+					PlayerHarry.ClientMessage("!*!*!* COULD NOT ATTACH TARGET TO: " $ Mid(sString,11));
+					return False;
+				}
+			} 
+			else if ( Left(sString,2) ~= "x=" )
+			{
+				CamTarget.vOffset.X = float(Mid(sString,2));
+				SetZOffset(CamTarget.vOffset.X);
+				bPassToTarget = False;
+			} 
+			else if ( Left(sString,2) ~= "y=" )
             {
-              CamTarget.vOffset.Y = float(Mid(sString,2));
-              SetZOffset(CamTarget.vOffset.Y);
-              bPassToTarget = False;
-            } else //{
-              if ( Left(sString,2) ~= "z=" )
-              {
-                CamTarget.vOffset.Z = float(Mid(sString,2));
-                SetZOffset(CamTarget.vOffset.Z);
-                bPassToTarget = False;
-              } else //{
-                if ( sString ~= "relative" )
-                {
-                  CamTarget.bRelative = True;
-                  bPassToTarget = False;
-                } else //{
-                  if ( sString ~= "fixed" )
-                  {
-                    CamTarget.bRelative = False;
-                    bPassToTarget = False;
-                  } else //{
-                    if ( sString == "" )
-                    {
-                      // goto JL028E;
-					  break;
-                    }
-                  // }
-                // }
-              // }
-            // }
-          // }
-        // }
-        // I++;
-        // goto JL0072;
-      //}
-    }
-  }
-  if ( bPassToTarget )
-  {
-    CamTarget.CutNotifyActor = CutNotifyActor;
-    B = CamTarget.CutCommand(ParseDelimitedString(Command," ",2,True),cue,bFastFlag);
-    if (  !B )
-    {
-      CutErrorString = CamTarget.CutErrorString;
-    }
-    return B;
-  }
-  sCutNotifyCue = cue;
-  DoCutCueNotify();
-  return True;
+				CamTarget.vOffset.Y = float(Mid(sString,2));
+				SetZOffset(CamTarget.vOffset.Y);
+				bPassToTarget = False;
+            } 
+			else if ( Left(sString,2) ~= "z=" )
+			{
+				CamTarget.vOffset.Z = float(Mid(sString,2));
+				SetZOffset(CamTarget.vOffset.Z);
+				bPassToTarget = False;
+			} 
+			else if ( sString ~= "relative" )
+			{
+				CamTarget.bRelative = True;
+				bPassToTarget = False;
+			} 
+			else if ( sString ~= "fixed" )
+			{
+				CamTarget.bRelative = False;
+				bPassToTarget = False;
+			} 
+			else
+			if ( sString == "" )
+			{
+				break;
+			}
+		}
+	}
+	if ( bPassToTarget )
+	{
+		CamTarget.CutNotifyActor = CutNotifyActor;
+		B = CamTarget.CutCommand(ParseDelimitedString(Command," ",2,True),cue,bFastFlag);
+		if (  !B )
+		{
+			CutErrorString = CamTarget.CutErrorString;
+		}
+		return B;
+	}
+	sCutNotifyCue = cue;
+	DoCutCueNotify();
+	return True;
 }
 
 function CutBypass ()
 {
-  cm("******** baseCam CutBypass.");
-  Super.CutBypass();
-  CamTarget.CutBypass();
+	cm("******** baseCam CutBypass.");
+	Super.CutBypass();
+	CamTarget.CutBypass();
 }
 
 function GlobalCutBypass ()
 {
-  cm("******** baseCam GlobalCutBypass.");
-  Super.GlobalCutBypass();
-  CamTarget.GlobalCutBypass();
+	cm("******** baseCam GlobalCutBypass.");
+	Super.GlobalCutBypass();
+	CamTarget.GlobalCutBypass();
 }
 
 /*

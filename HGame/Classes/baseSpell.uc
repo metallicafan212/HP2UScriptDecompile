@@ -378,7 +378,7 @@ function Reflect (Actor aNewOwner, float fNewCharge, float fNewSpeed)
 
 defaultproperties
 {
-    SpellIcon=Texture'Icons.defaultSpellIcon'
+    SpellIcon=Texture'HGame.Icons.defaultSpellIcon'
 
     SpellLifeTime=8.00
 

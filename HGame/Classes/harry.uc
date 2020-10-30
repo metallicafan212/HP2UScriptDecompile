@@ -4376,7 +4376,7 @@ state PlayerWalking
 
 	Global.Bump( Other );
   }
-
+  
   event HitWall( vector HitNormal, Actor Wall )
   {
 	// Let the director (if any) know when Harry hits things
@@ -4384,6 +4384,17 @@ state PlayerWalking
 		Director.OnHitEvent( Self );
 
 	Global.HitWall( HitNormal, Wall );
+  }
+  
+  //update the director about damage types (UTPT didn't add this) -AdamJD
+  event TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector Momentum, name DamageType)
+  {
+	if ( Director != None )
+	{
+		Director.OnTakeDamage( Self, Damage, InstigatedBy, DamageType );
+	}
+	
+	Global.TakeDamage(Damage, InstigatedBy, HitLocation, Momentum, DamageType);
   }
   
   function ZoneChange (ZoneInfo NewZone)

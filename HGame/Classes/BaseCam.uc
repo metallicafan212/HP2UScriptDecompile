@@ -973,7 +973,7 @@ state StateQuidditchCam
 		UpdateRotationUsingVectors(fTimeDelta);
 	}
 	
-	//force camera to focus on Harry before going to the cutscene cam -AdamJD
+	//force camera to focus on Harry before going to the cutscene cam(TEMP) -AdamJD
 	function EndState()
 	{
 		Log("AdamJD:	Ended quidditch cam");

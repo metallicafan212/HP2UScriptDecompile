@@ -192,7 +192,8 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 			// Metallicafan212:	From the proto
 			if (bDisplayJustFirstItem)
             {
-                log("displayjustfirst");
+				//the log bit got removed between proto and retail(probably because it spams the log) -AdamJD
+                //log("displayjustfirst");
 			    break;
             }
 			

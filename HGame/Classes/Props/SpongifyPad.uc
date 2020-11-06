@@ -145,19 +145,21 @@ function UpdateSpecialFX (float fTimeDelta)
 
 function OnBounce (Actor Other)
 {
-  PlayerHarry.ClientMessage(" ONBounce called " $ string(Other));
-  if ( Other.IsA('harry') )
-  {
-    if ( Target != None )
-    {
-      Other.Velocity = ComputeTrajectoryByTime(Location,Target.Location,fTimeToHitTarget);
-    } else {
-      Other.Velocity = PadDir * PadSpeed;
-    }
-    fxSheet.DrawScale = fxSheet.Default.DrawScale * 2;
-    bBouncing = True;
-    PlaySound(Sound'SPN_bounce_on',/*0*/SLOT_None,,True);
-  }
+	PlayerHarry.ClientMessage(" ONBounce called " $ string(Other));
+	if ( Other.IsA('harry') )
+	{
+		if ( Target != None )
+		{
+			Other.Velocity = ComputeTrajectoryByTime(Location,Target.Location,fTimeToHitTarget);
+		} 
+		else 
+		{
+			Other.Velocity = PadDir * PadSpeed;
+		}
+		fxSheet.DrawScale = fxSheet.Default.DrawScale * 2;
+		bBouncing = True;
+		PlaySound(Sound'SPN_bounce_on',/*0*/SLOT_None,,True);
+	}
 }
 
 function Trigger (Actor Other, Pawn EventInstigator)

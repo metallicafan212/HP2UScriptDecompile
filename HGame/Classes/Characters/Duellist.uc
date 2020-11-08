@@ -8,6 +8,9 @@ const fMinTimeBeforeCommentRepeat= 30.0;
 const fMaxGapTimeBetweenComments= 2.4;
 const fMinGapTimeBetweenComments= 1.0;
 const fNoGapTimeBetweenComments= 0.1;
+const MAX_DUEL_COMMENT_VARIANTS= 10;
+const MAX_DUEL_COMMENT_HOUSE_NAMES= 6;
+const MAX_DUEL_COMMENT_NAMES= 10;
 
 struct CommentInfo
 {
@@ -79,10 +82,6 @@ var bool bReboundingSpells;
 var Class<baseSpell> CurrentSpellClass;
 
 
-const MAX_DUEL_COMMENT_VARIANTS= 10;
-const MAX_DUEL_COMMENT_HOUSE_NAMES= 6;
-const MAX_DUEL_COMMENT_NAMES= 10;
-
 function bool HarrySpellAboutToHitMe ()
 {
 	local int I;
@@ -128,12 +127,12 @@ function bool HarrySpellGoesInMyDirection ()
 		Vel = CurrCastedSpell.Velocity;
 		if ( Vel.X == 0 )
 		{
-			break;
+			continue;
 		}
 		t = (Location.X - Loc.X) / Vel.X;
 		if ( t < 0 )
 		{
-			break;
+			continue;
 		}
 		Y = Loc.Y + Vel.Y * t;
 		if ( Abs(Y - Location.Y) < CollisionRadius * (1 + Intellect * 0.5) )
@@ -212,10 +211,10 @@ function float TimeLeftUntilSafeToSayAComment (optional bool bNoGap)
 {
 	local float fTimeLeft;
 
-	fTimeLeft = fNextTimeACommentCanBeSaid - Level.TimeSeconds + 0.1;
+	fTimeLeft = fNextTimeACommentCanBeSaid - Level.TimeSeconds + fNoGapTimeBetweenComments;
 	if ( bNoGap )
 	{
-		fTimeLeft += 0.1;
+		fTimeLeft += fNoGapTimeBetweenComments;
 	} 
 	else 
 	{
@@ -253,7 +252,7 @@ function bool SayComment (DuelComment eComment, optional HouseAffiliation eHouse
 	}
 	if ( bNoGap )
 	{
-		if ( Level.TimeSeconds < fNextTimeACommentCanBeSaid + 0.1 )
+		if ( Level.TimeSeconds < fNextTimeACommentCanBeSaid + fNoGapTimeBetweenComments )
 		{
 			return False;
 		}
@@ -269,7 +268,7 @@ function bool SayComment (DuelComment eComment, optional HouseAffiliation eHouse
 	OldestTime = Level.TimeSeconds;
 	Tied = 0;
 	Variant = 0;
-	for(Variant = 0; (Variant < 10) && (Comments[eComment].House.Variant[Variant].DlgName != ""); Variant++)
+	while( Variant < MAX_DUEL_COMMENT_VARIANTS && (Comments[eComment].House.Variant[Variant].DlgName != "") )
 	{
 		if ( Comments[eComment].House.Variant[Variant].bHasBeenSaid )
 		{
@@ -288,10 +287,12 @@ function bool SayComment (DuelComment eComment, optional HouseAffiliation eHouse
 				OldestTime = -1.0;
 			}
 		}
+		
+		++Variant;
 	}
 	Comments[eComment].House.Variations = Variant;
 	Variant = OldestVariant;
-	if (  !Comments[eComment].House.Variant[Variant].bHasBeenSaid || (Level.TimeSeconds > Comments[eComment].House.Variant[Variant].fTimeLastSaid + 30.0) )
+	if (  !Comments[eComment].House.Variant[Variant].bHasBeenSaid || (Level.TimeSeconds > Comments[eComment].House.Variant[Variant].fTimeLastSaid + fMinTimeBeforeCommentRepeat) )
 	{
 		dlgSound 													= Comments[eComment].House.Variant[Variant].dlgSound;
 		Comments[eComment].House.Variant[Variant].fTimeLastSaid 	= Level.TimeSeconds;
@@ -300,7 +301,7 @@ function bool SayComment (DuelComment eComment, optional HouseAffiliation eHouse
 		Comments[eComment].House.Variant[Variant].bHasBeenSaid 		= True;
 		Comments[eComment].House.bHasBeenSaid 						= True;
 		Comments[eComment].bHasBeenSaid 							= True;
-		fGapTime 													= FRand() * (2.41 - 1.0) + 1.0;
+		fGapTime 													= FRand() * (fMaxGapTimeBetweenComments - fMinGapTimeBetweenComments) + fMinGapTimeBetweenComments;
 		if ( dlgSound != None )
 		{
 			if ( pSnape != None )
@@ -322,11 +323,10 @@ function bool SayComment (DuelComment eComment, optional HouseAffiliation eHouse
 		}
 	} 
 	// Metallicafan212:	This was blank in UTPT, so IDK if something is supposed to be here
-	/*
 	else 
 	{
+		//looks like KW left it empty -AdamJD
 	}
-	*/
 	return bSaid;
 }
 
@@ -363,9 +363,9 @@ function fillCommentArray ()
 	local DuelComment vvv;
 
 	H = eHouse;
-	for(c = 0; c < 10; c++)
+	for(c = 0; c < MAX_DUEL_COMMENT_NAMES; c++)
 	{
-		for(v = 0; v < 10; v++)
+		for(v = 0; v < MAX_DUEL_COMMENT_VARIANTS; v++)
 		{
 			sndId = GetCommentId(C,H,V);
 			if ( sndId != "" )
@@ -488,7 +488,7 @@ function int DeltaHealth (bool HarryHealth, int SpellType, float SpellCharge)
 
 function float GetHealth ()
 {
-	return float(Health) / float(nMaxHealth);
+	return float(Health) / nMaxHealth;
 }
 
 function PlayIdle ()
@@ -661,13 +661,13 @@ function bool HandleSpellDuelMimblewimble (optional baseSpell spell, optional Ve
 		SayComment(DC_DuelWin,eHouse,True);
 		HarryWonDuel();
 	}
-	fTimeAfterHit = 4.0 - 2 * Intellect;
+	fTimeAfterHit = 4.0 - (2 * Intellect);
 	return True;
 }
 
 function bool CouldTauntHarry ()
 {
-	if ( PlayerHarry.fTimeAfterHit < 1 + 4 * Intellect )
+	if ( PlayerHarry.fTimeAfterHit < 1 + (4 * Intellect) )
 	{
 		return False;
 	}
@@ -848,12 +848,9 @@ state stateFollowHarry_In_Y_Dir
 		{
 			GotoState('stateGoLeft');
 		} 
-		else 
+		else if ( vNewLoc.Y < Location.Y )
 		{
-			if ( vNewLoc.Y < Location.Y )
-			{
 			GotoState('stateGoRight');
-			}
 		}
 		GotoState('statePatrol');
 }
@@ -896,12 +893,9 @@ state stateRunFromHarry
 		{
 			GotoState('stateGoLeft');
 		} 
-		else 
+		else if ( vNewLoc.Y < Location.Y )
 		{
-			if ( vNewLoc.Y < Location.Y )
-			{
-				GotoState('stateGoRight');
-			}
+			GotoState('stateGoRight');
 		}
 		GotoState('statePatrol');
 }
@@ -929,15 +923,18 @@ state statePatrol
 				//log("Shot");
 				GotoState('stateShot');
 			}
-			else if ( Rand(5) == 0 )
-			{
-				//log("FollowX");
-				GotoState('stateFollowHarry_In_X_Dir');
-			} 
-			else 
-			{
-				//log("Stay");
-				GotoState('stateStay');
+			else
+			{			
+				if ( Rand(5) == 0 )
+				{
+					//log("FollowX");
+					GotoState('stateFollowHarry_In_X_Dir');
+				} 
+				else 
+				{
+					//log("Stay");
+					GotoState('stateStay');
+				}
 			}
 		} 
 		else 
@@ -1004,10 +1001,10 @@ function Tick (float deltaT)
 	if ( (savedTimeAfterHit > 0) && (fTimeAfterHit <= 0) )
 	{
 		StartCharging();
-		//if (  !PlayerHarry.bDuelIsOver )
-		//{
-		//	GotoState('statePatrol');
-		//}
+		if (  !PlayerHarry.bDuelIsOver )
+		{
+			GotoState('statePatrol');
+		}
 	}
 	if ( PlayerHarry.bInDuelingMode &&  !LineOfSightTo(PlayerHarry) )
 	{
@@ -1020,10 +1017,10 @@ function Tick (float deltaT)
 	{
 		TurnOffSpellCursor();
 		StartCharging();
-		//if (  !PlayerHarry.bDuelIsOver )
-		//{
-		//	GotoState('statePatrol');
-		//}
+		if (  !PlayerHarry.bDuelIsOver )
+		{
+			GotoState('statePatrol');
+		}
 	}
 	if ( HarrySpellGoesInMyDirection() )
 	{
@@ -1098,5 +1095,4 @@ defaultproperties
     CollisionHeight=44.00
 
     bRotateToDesired=False
-
 }

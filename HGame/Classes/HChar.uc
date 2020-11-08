@@ -67,7 +67,6 @@ var Actor aListenToMe;
 var bool bCapturedFromStateIdle;
 
 
-
 function bool ShouldStartLookingForHarry ()
 {
 	return True;
@@ -100,16 +99,16 @@ function bool CanSeeHarry (optional bool bLookingForHarry, optional bool bDontCa
 	{
 		bDontCareAboutFOV = True;
 	}
-	if (  !bDontCareAboutFOV && (Normal((PlayerHarry.Location - Location) * vect(1.00,1.00,0.00)) Dot Vector(Rotation) < -0.69999999) )
+	if (  !bDontCareAboutFOV && (Normal((PlayerHarry.Location - Location) * vect(1.00,1.00,0.00)) Dot Vector(Rotation)) < -0.69999999 )
 	{
 		return False;
 	}
 	V = Normal(V Cross vect(0.00,0.00,1.00));
-	if (  !FastTrace(PlayerHarry.Location + V * PlayerHarry.CollisionRadius * 0.5) )
+	if (  !FastTrace(PlayerHarry.Location + (V * PlayerHarry.CollisionRadius) * 0.5) )
 	{
 		return False;
 	}
-	if (  !FastTrace(PlayerHarry.Location - V * PlayerHarry.CollisionRadius * 0.5) )
+	if (  !FastTrace(PlayerHarry.Location - (V * PlayerHarry.CollisionRadius) * 0.5) )
 	{
 		return False;
 	}
@@ -166,7 +165,8 @@ function float PlayRandomSoundAndAnimSecondTime ()
 
 state StartFollowingHarry
 {
-	ignores  Tick;
+	//UTPT added this for some reason -AdamJD
+	//ignores  Tick;
   
 	function bool ShouldStartLookingForHarry ()
 	{
@@ -177,7 +177,16 @@ state StartFollowingHarry
 	{
 		return True;
 	}
+	
+	//UTPT didn't add this for some reason -AdamJD
+	function Tick(float DeltaTime)
+	{
+		Global.Tick(DeltaTime);
+		DesiredRotation.Yaw = rotator(aListenToMe.Location - Location).Yaw;
+	}
+	
 	begin:
+		//Log("In state " $GetStateName()); 
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);
 		LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.2);
@@ -208,7 +217,7 @@ state followHarry
 		TriggerEvent('SilenceTwo',None,None);
 		TriggerEvent('ChaseMusic',None,None);
 	}
-  
+	
 	function Tick (float dtime)
 	{
 		if ( VSize2D(Location - vLastPosition) < 1 )
@@ -217,7 +226,8 @@ state followHarry
 			if ( iStuckCounter > 4 )
 			{
 				bTempDontLookForHarry = True;
-				GotoState('RandomLookForHarry');
+				//don't go to this state until it's fixed -AdamJD
+				//GotoState('RandomLookForHarry');
 			}
 		} 
 		else 
@@ -227,13 +237,17 @@ state followHarry
 		vLastPosition = Location;
 	}
 	begin:
+		//Log("In state " $GetStateName()); 
 		GroundSpeed = GroundRunSpeed + 175;
 		LoopAnim(RunAnimName,,0.75);
 		vTemp = PlayerHarry.Location - Location;
 		vTemp = Location + 2 * vTemp / VSize(vTemp);
 		MoveTo(vTemp);
 		DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
-		if (  !CanSeeHarry(True,True) )
+		//commenting out for the time being because of a weird problem I can't fix
+		//the students just stand there turning in a circle if they see Harry when going to state RandomLookForHarry so I've made them chase Harry no matter what as a temp solution -AdamJD
+		/*
+		if (  CanSeeHarry(True,True) )
 		{
 			iCanSeeHarryCounter++;
 			if ( iCanSeeHarryCounter > 2 )
@@ -241,12 +255,18 @@ state followHarry
 				GotoState('RandomLookForHarry');
 			}
 		}
-		GotoState('followHarry');
+		else
+		{
+		*/
+			GotoState('followHarry');
+		//}
 }
 
+//this isn't working right so I've stopped it being possible to get here for now -AdamJD 
 state RandomLookForHarry
 {
-	ignores  Tick;
+	//UTPT added this for some reason -AdamJD
+	//ignores  Tick;
   
 	function bool ShouldStartLookingForHarry ()
 	{
@@ -266,6 +286,29 @@ state RandomLookForHarry
 		iCanSeeHarryCounter = 0;
 		bPlayRunAnim = True;
 		FindNewVTempBasedOnNormal((PlayerHarry.Location - Location) * vect(1.00,1.00,0.00));
+	}
+	
+	//UTPT didn't add this for some reason -AdamJD
+	function Tick (float dtime)
+	{
+	  if ( (Rand(6) == 0) &&  !bTempDontLookForHarry && CanSeeHarry(True,True) )
+	  {
+		if ( bDoStuckChecking )
+		{
+		  if ( VSize2D(Location - vLastPosition) < 1 )
+		  {
+			iStuckCounter++;
+			if ( iStuckCounter > 4 )
+			{
+			  vLastPosition = vect(0.00,0.00,0.00);
+			  iStuckCounter = 0;
+			  FindNewVTempBasedOnNormal(PlayerHarry.Location - Location);
+			  GotoState('RandomLookForHarry');
+			}
+		  }
+		}
+	  }
+	  vLastPosition = Location;
 	}
   
 	function EndState ()
@@ -288,6 +331,7 @@ state RandomLookForHarry
 	}
   
 	begin:
+		//Log("In state " $GetStateName());
 		if ( bPlayRunAnim )
 		{
 			GroundSpeed = GroundRunSpeed + 175;
@@ -298,7 +342,6 @@ state RandomLookForHarry
 			GroundSpeed = GroundWalkSpeed;
 			LoopAnim(WalkAnimName,,0.75);
 		}
-	
 		MoveTo(vTemp);
 		bTempDontLookForHarry = False;
 		bDoStuckChecking = False;
@@ -338,6 +381,7 @@ state LookForHarryIdle
 		return False;
 	}
 	begin:
+		//Log("In state " $GetStateName()); 
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);
 		LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.2);
@@ -368,6 +412,7 @@ state CaughtHarry
 		}
 	}
 	begin:
+		//Log("In state " $GetStateName());
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);
 		LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.2);
@@ -385,7 +430,8 @@ state CaughtHarry
 
 state SaySomethingFirstTime
 {
-	ignores  Tick;
+	//UTPT added this for some reason -AdamJD
+	//ignores  Tick;
   
 	function bool ShouldStartLookingForHarry ()
 	{
@@ -402,7 +448,17 @@ state SaySomethingFirstTime
 		Acceleration = vect(0.00,0.00,0.00);
 		Velocity = vect(0.00,0.00,0.00);
 	}
+	
+	//UTPT didn't add this for some reason -AdamJD
+	function Tick(float DeltaTime)
+	{
+		Global.Tick(DeltaTime);
+		DesiredRotation.Yaw = rotator(playerHarry.Location - Location).yaw;
+		CM(name$" Tick 1");
+	}
+	
 	begin:
+		//Log("In state " $GetStateName());
 		PlayerHarry.ClientMessage("Start to say something first time................." $ string(self));
 		fDuration = PlayRandomSoundAndAnimFirstTime();
 		fDuration -= 1.5;
@@ -419,10 +475,10 @@ function NotifyOthersOfHarry ()
 
 	foreach AllActors(Class'HChar',A)
 	{
-		if ( A.bCouldWatchForHarry && (VSize(Location - A.Location) < fNotifyOthersHearDistance) && A.ShouldStartLookingForHarry() )
+		if ( A.bCouldWatchForHarry && VSize(Location - A.Location) < fNotifyOthersHearDistance && A.ShouldStartLookingForHarry() )
 		{
 			aListenToMe = self;
-		A.GotoState('StartFollowingHarry');
+			A.GotoState('StartFollowingHarry');
 		}
 	}
 }
@@ -496,7 +552,7 @@ function PreBeginPlay ()
 		return;
 	}
 	
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < WATCH_FOR_HARRY_ARRAY_SIZE; i++)
 	{
 		if ( BaseWatchAnim[I] == 'None' )
 		{
@@ -505,7 +561,7 @@ function PreBeginPlay ()
 	}
 	HowManyBaseAnims = I;
 	
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < WATCH_FOR_HARRY_ARRAY_SIZE; i++)
 	{
 		if ( BaseWatchSound[I] == "" )
 		{
@@ -514,7 +570,7 @@ function PreBeginPlay ()
 	}
 	HowManyBaseSounds = I;
 	
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < WATCH_FOR_HARRY_ARRAY_SIZE; i++)
 	{
 		if ( BaseAlarmAnim[I] == 'None' )
 		{
@@ -523,7 +579,7 @@ function PreBeginPlay ()
 	}
 	HowManyAlarmAnims = I;
 	
-	for(i = 0; i < 3; i++)
+	for(i = 0; i < WATCH_FOR_HARRY_ARRAY_SIZE; i++)
 	{
 		if ( BaseAlarmSound[I] == "" )
 		{
@@ -552,7 +608,7 @@ function name GetCurrFidgetAnimName ()
 		return IdleAnimName;
 	}
 	Index = 1 + Rand(FidgetNums);
-	AnimName = "fidget_" $ string(Index);
+	AnimName = "fidget_" $Index;
 	nm = StringToAnimName(AnimName);
 	return nm;
 }
@@ -574,7 +630,7 @@ function name GetCurrIdleAnimName ()
 	} 
 	else 
 	{
-		AnimName = "idle_" $ string(Index);
+		AnimName = "idle_" $Index;
 	}
 	nm = StringToAnimName(AnimName);
 	return nm;
@@ -603,10 +659,11 @@ event Bump (Actor Other)
 			if ( A.IsInState('DoingBumpLine') )
 			{
 				bDoBump = False;
+				break;
 			} 
-			else 
-			{
-			}
+			//else 
+			//{
+			//}
 		}
 		if ( bDoBump && (Level.TimeSeconds - LastBumpTime > 0.75) )
 		{
@@ -645,13 +702,13 @@ function DoBumpLine (optional bool bJustTalk, optional string AlternateBumpLineS
 	{
 		sSetID = AlternateBumpLineSet;
 		Level.PlayerHarryActor.ClientMessage("BUMPLINES:" $ string(self) $ " looking for BumpLineSet:" $ sSetID);
-		sSayTextID = Localize(sSetID, "line" $ string(Rand(int(Localize(sSetID, "Count", "BumpSet")))), "BumpSet");
+		sSayTextID = Localize(sSetID, "line" $(Rand(int(Localize(sSetID, "Count", "BumpSet")))), "BumpSet");
 	} 
 	else 
 	{
 		if ( BumpLineSetPrefix != "" )
 		{
-			sSetID = BumpLineSetPrefix $ "_" $ BumpLineSet;
+			sSetID = BumpLineSetPrefix $"_" $BumpLineSet;
 		} 
 		else 
 		{
@@ -668,16 +725,16 @@ function DoBumpLine (optional bool bJustTalk, optional string AlternateBumpLineS
 				ri = (ri + 1) % rm;
 				lastRandomBumpLine = ri;
 			}
-			sSayTextID = Localize(sSetID, "line" $ string(ri),"BumpSet");
+			sSayTextID = Localize(sSetID, "line" $ri,"BumpSet");
 		} 
 		else 
 		{
-			sSayTextID = Localize(sSetID, "line" $ string(curBumpLine),"BumpSet");
+			sSayTextID = Localize(sSetID, "line" $curBumpLine,"BumpSet");
 			curBumpLine++ ;
 			if ( InStr(sSayTextID,"<") > -1 )
 			{
 				curBumpLine = 0;
-				sSayTextID = Localize(sSetID,"line" $ string(curBumpLine),"BumpSet");
+				sSayTextID = Localize(sSetID,"line" $curBumpLine,"BumpSet");
 			}
 		}
 		if ( InStr(sSayTextID, "<") > -1 )
@@ -701,7 +758,7 @@ function DoBumpLine (optional bool bJustTalk, optional string AlternateBumpLineS
 		Level.PlayerHarryActor.CutCommand("capture");
 	}
 	CutNotifyActor = self;
-	dlgSound = Sound(DynamicLoadObject("AllDialog." $ sSayTextID,Class'Sound'));
+	dlgSound = Sound(DynamicLoadObject("AllDialog." $sSayTextID,Class'Sound'));
 	if ( dlgSound != None )
 	{
 		sndLen = GetSoundDuration(dlgSound);
@@ -728,7 +785,9 @@ function DoBumpLine (optional bool bJustTalk, optional string AlternateBumpLineS
 	level.playerHarryActor.MyHud.SetSubtitleText(sSayText, sndLen);
 	
 	if( !bJustTalk )
+	{
 		GotoState('DoingBumpLine');
+	}
 }
 
 state DoingBumpLine
@@ -849,7 +908,11 @@ function OnTouch ()
 //					May need to investigate
 function OnEvent (name EventName)
 {
-	if (EventName != 'ActionDone' ) return;
+	if (EventName != 'ActionDone' )
+	{
+		//looks like KW left this empty -AdamJD
+	}
+	return;
 }
 
 function bool CutCommand (string Command, optional string cue, optional bool bFastFlag)
@@ -867,14 +930,11 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
 			GotoState('stateCutCapture');
 		}
 	} 
-	else 
+	else if ( sActualCommand ~= "Release" )
 	{
-		if ( sActualCommand ~= "Release" )
+		if ( bCapturedFromStateIdle && IsInState('stateCutCapture') )
 		{
-			if ( bCapturedFromStateIdle && IsInState('stateCutCapture') )
-			{
-				GotoState('stateIdle');
-			}
+			GotoState('stateIdle');
 		}
 	}
 	if ( sActualCommand ~= "Set" )
@@ -910,13 +970,15 @@ function bool CutCommand_HandleSet (string Command, optional string cue, optiona
 	return True;
 }
 
-auto state patrol extends patrol
+auto state patrol //extends patrol
 {
 }
 
-state stateIdle extends stateIdle
-{
+//If vendor is Fred/George then whoever is not speaking does an A pose while the other is talking and it seems to be something to do with this state (look into this) -AdamJD 
+state stateIdle //extends stateIdle
+{	
 	begin:
+		//Log("In state " $GetStateName());
 		if ( bPlayFidgetAnims )
 		{
 			CurrFidgetAnimName = GetCurrFidgetAnimName();
@@ -1154,5 +1216,4 @@ defaultproperties
     bGestureFaceHorizOnly=False
 
     Buoyancy=118.80
-
 }

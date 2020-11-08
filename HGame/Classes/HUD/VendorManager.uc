@@ -312,7 +312,7 @@ state EngageVendor
 	begin:
 		Level.PlayerHarryActor.Acceleration = vect(0.00,0.00,0.00);
 		Level.PlayerHarryActor.Velocity *= vect(0.00,0.00,1.00);
-		harry(Level.PlayerHarryActor).TurnTo(Level.PlayerHarryActor.Location + (Vendor.Location - Level.PlayerHarryActor.Location) * vect(1.00,1.00,0.00));
+		harry(Level.PlayerHarryActor).TurnTo(Level.PlayerHarryActor.Location + (Vendor.Location - Level.PlayerHarryActor.Location) * vect(1.00,1.00,0.00)); //this doesn't get called for some reason, Harry doesn't turn towards a vendor (investigate) -AdamJD 
 		Vendor.CutCommand(strFACE_HARRY_COMMAND,strCUE_VENDOR_TURN_DONE);
 		//WeasleyTwin = Vendor.GetWeasleyTwin();
 		WeasleyTwin = WeasTwin;
@@ -606,13 +606,13 @@ function DrawVendorBar (Canvas canvas)
   
 	canvas.DrawIcon(textureVendorBarLeft,fScaleFactor);
 	canvas.SetPos(fBarX + (256 * fScaleFactor),fBarY);
-	canvas.DrawIcon(textureVendorBarRight,fScaleFactor); //this crashes the game -AdamJD
+	canvas.DrawIcon(textureVendorBarRight,fScaleFactor); 
 	canvas.SetPos(fBarX + (fVENDORBAR_PURCHASE_ITEM_X * fScaleFactor),fBarY + (fVENDORBAR_PURCHASE_ITEM_Y * fScaleFactor));
 	canvas.DrawIcon(textureItemToSell,fScaleFactor);
 	canvas.SetPos(fBarX + (fVENDORBAR_YESBUTTON_X * fScaleFactor),fBarY + (fVENDORBAR_YESBUTTON_Y * fScaleFactor));
-	canvas.DrawIcon(textureYesButton,fScaleFactor); //this crashes the game -AdamJD
+	canvas.DrawIcon(textureYesButton,fScaleFactor); 
 	canvas.SetPos(fBarX + (fVENDORBAR_NOBUTTON_X * fScaleFactor),fBarY + (fVENDORBAR_NOBUTTON_Y * fScaleFactor));
-	canvas.DrawIcon(textureNoButton,fScaleFactor); //this crashes the game -AdamJD
+	canvas.DrawIcon(textureNoButton,fScaleFactor);
 	siJellybeans = harry(Level.PlayerHarryActor).managerStatus.GetStatusItem(Class'StatusGroupStars',Class'StatusItemStars');
 	Canvas.Font = siJellybeans.GetCountFont(Canvas);
 	colorText = siJellybeans.GetCountColor();

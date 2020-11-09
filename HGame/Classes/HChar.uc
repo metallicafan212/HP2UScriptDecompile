@@ -4,6 +4,7 @@
 
 class HChar extends HPawn;
 
+const WATCH_FOR_HARRY_ARRAY_SIZE= 3;
 enum EEnemyBar 
 {
 	EnemyBar_Aragog,
@@ -13,8 +14,6 @@ enum EEnemyBar
 	EnemyBar_Seeker,
 	EnemyBar_None
 };
-
-const WATCH_FOR_HARRY_ARRAY_SIZE= 3;
 var(EnemyHealth) EEnemyBar EnemyHealthBar;
 var name SavedState;
 var(Movement) float RunSpeed;
@@ -226,8 +225,7 @@ state followHarry
 			if ( iStuckCounter > 4 )
 			{
 				bTempDontLookForHarry = True;
-				//don't go to this state until it's fixed -AdamJD
-				//GotoState('RandomLookForHarry');
+				GotoState('RandomLookForHarry');
 			}
 		} 
 		else 
@@ -244,9 +242,6 @@ state followHarry
 		vTemp = Location + 2 * vTemp / VSize(vTemp);
 		MoveTo(vTemp);
 		DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
-		//commenting out for the time being because of a weird problem I can't fix
-		//the students just stand there turning in a circle if they see Harry when going to state RandomLookForHarry so I've made them chase Harry no matter what as a temp solution -AdamJD
-		/*
 		if (  CanSeeHarry(True,True) )
 		{
 			iCanSeeHarryCounter++;
@@ -257,17 +252,15 @@ state followHarry
 		}
 		else
 		{
-		*/
 			GotoState('followHarry');
-		//}
+		}
 }
 
-//this isn't working right so I've stopped it being possible to get here for now -AdamJD 
 state RandomLookForHarry
 {
 	//UTPT added this for some reason -AdamJD
 	//ignores  Tick;
-  
+	
 	function bool ShouldStartLookingForHarry ()
 	{
 		return False;
@@ -306,9 +299,9 @@ state RandomLookForHarry
 			  GotoState('RandomLookForHarry');
 			}
 		  }
+		  vLastPosition = Location;
 		}
 	  }
-	  vLastPosition = Location;
 	}
   
 	function EndState ()
@@ -328,6 +321,10 @@ state RandomLookForHarry
   
 		R.Yaw = rotator(HitNormal).Yaw;
 		R.Yaw = (R.Yaw + RandRange(-15000.0,15000.0)) & 65535;
+		
+		//Figured this bit out for the students to move towards Harry when they see him like in the retail game because it wasn't here (might need some work in the future) -AdamJD
+		vTemp = Location + Normal(vector(R) * 75) * 80;
+		DesiredRotation.Yaw = R.Yaw + rotator(vTemp).Yaw & 65535;
 	}
   
 	begin:
@@ -349,7 +346,8 @@ state RandomLookForHarry
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);
 		LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.25);
-		Sleep(RandRange(0.75,1.5));
+		// this seems to cause the most problems so I'm commenting it out -AdamJD
+		//Sleep(RandRange(0.75,1.5));
 		FindNewVTempBasedOnNormal((PlayerHarry.Location - Location) * vect(1.00,1.00,0.00));
 		TurnTo(vTemp);
 		bDoStuckChecking = True;
@@ -454,7 +452,7 @@ state SaySomethingFirstTime
 	{
 		Global.Tick(DeltaTime);
 		DesiredRotation.Yaw = rotator(playerHarry.Location - Location).yaw;
-		CM(name$" Tick 1");
+		//CM(name$" Tick 1");
 	}
 	
 	begin:
@@ -974,7 +972,6 @@ auto state patrol //extends patrol
 {
 }
 
-//If vendor is Fred/George then whoever is not speaking does an A pose while the other is talking and it seems to be something to do with this state (look into this) -AdamJD 
 state stateIdle //extends stateIdle
 {	
 	begin:
@@ -988,8 +985,13 @@ state stateIdle //extends stateIdle
 				LoopAnim(CurrIdleAnimName,RandRange(0.81,1.25),0.5);
 				Sleep(RandRange(iMinIdleSeconds,iMaxIdleSeconds));
 				FinishAnim();
-				PlayAnim(CurrFidgetAnimName,RandRange(0.81,1.25),0.2);
-				FinishAnim();
+				
+				//stop Fred/George A posing when they are vendors -AdamJD
+				if(!HasAnim('vendor_idle'))
+				{
+					PlayAnim(CurrFidgetAnimName,RandRange(0.81,1.25),0.2);
+					FinishAnim();
+				}
 			} 
 			else 
 			{

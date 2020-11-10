@@ -910,7 +910,6 @@ function OnEvent (name EventName)
 	{
 		//looks like KW left this empty -AdamJD
 	}
-	return;
 }
 
 function bool CutCommand (string Command, optional string cue, optional bool bFastFlag)
@@ -975,6 +974,8 @@ auto state patrol //extends patrol
 state stateIdle //extends stateIdle
 {	
 	begin:
+	//commenting out for now because this causes more problems than orginally thought such as Willow breaking -AdamJD
+	/*
 		//Log("In state " $GetStateName());
 		if ( bPlayFidgetAnims )
 		{
@@ -1009,6 +1010,7 @@ state stateIdle //extends stateIdle
 		}
 		Sleep(0.01);
 		goto ('Begin');
+	*/
 }
 
 state stateCutCapture

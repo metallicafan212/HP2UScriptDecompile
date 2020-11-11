@@ -521,9 +521,9 @@ function PreBeginPlay ()
 	FidgetNums = 0;
 	for(i = 0; i <= 16; i++)
 	{
-		AnimName = "fidget_" $ string(I);
+		AnimName = "fidget_" $I;
 		nm = StringToAnimName(AnimName);
-		if ( nm == 'None' )
+		if ( nm == '' )
 		{
 			FidgetNums = I - 1;
 			break;
@@ -533,7 +533,7 @@ function PreBeginPlay ()
 	
 	for(i = 0; i <= 16; i++)
 	{
-		AnimName = "idle_" $ string(I);
+		AnimName = "idle_" $I;
 		nm = StringToAnimName(AnimName);
 		if ( nm == 'None' )
 		{
@@ -974,8 +974,6 @@ auto state patrol //extends patrol
 state stateIdle //extends stateIdle
 {	
 	begin:
-	//commenting out for now because this causes more problems than orginally thought such as Willow breaking -AdamJD
-	/*
 		//Log("In state " $GetStateName());
 		if ( bPlayFidgetAnims )
 		{
@@ -983,15 +981,25 @@ state stateIdle //extends stateIdle
 			CurrIdleAnimName = GetCurrIdleAnimName();
 			if ( FidgetNums != 0 )
 			{
-				LoopAnim(CurrIdleAnimName,RandRange(0.81,1.25),0.5);
-				Sleep(RandRange(iMinIdleSeconds,iMaxIdleSeconds));
-				FinishAnim();
+				//only play the current idle anim if an actor has one otherwise you get T/A posing and things breaking -AdamJD
+				if( HasAnim(CurrIdleAnimName) )
+				{
+					LoopAnim(CurrIdleAnimName,RandRange(0.81,1.25),0.5);
+					Sleep(RandRange(iMinIdleSeconds,iMaxIdleSeconds));
+					FinishAnim();
+				}
 				
-				//stop Fred/George A posing when they are vendors -AdamJD
-				if(!HasAnim('vendor_idle'))
+				//only play the current fidget anim if an actor has one otherwise you get T/A posing and things breaking -AdamJD
+				if( HasAnim(CurrFidgetAnimName) )
 				{
 					PlayAnim(CurrFidgetAnimName,RandRange(0.81,1.25),0.2);
 					FinishAnim();
+				}
+				
+				//we need to make actors with fidget anims automatically play an idle/fidget anim if they are not setup (eg. adding an actor from the editor for custom maps) -AdamJD 
+				else
+				{
+					//don't know what to add here without breaking the other animations yet -AdamJD
 				}
 			} 
 			else 
@@ -1010,7 +1018,6 @@ state stateIdle //extends stateIdle
 		}
 		Sleep(0.01);
 		goto ('Begin');
-	*/
 }
 
 state stateCutCapture

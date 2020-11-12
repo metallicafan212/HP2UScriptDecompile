@@ -64,6 +64,7 @@ var(WatchForHarry) float fNotifyOthersHearDistance;
 var(WatchForHarry) name EventName;
 var Actor aListenToMe;
 var bool bCapturedFromStateIdle;
+var float fDistanceToHarry; //added by me to find the distance between Slytherin students and Harry -AdamJD
 
 
 function bool ShouldStartLookingForHarry ()
@@ -239,7 +240,20 @@ state followHarry
 		GroundSpeed = GroundRunSpeed + 175;
 		LoopAnim(RunAnimName,,0.75);
 		vTemp = PlayerHarry.Location - Location;
-		vTemp = Location + 2 * vTemp / VSize(vTemp);
+		
+		fDistanceToHarry = VSize(vTemp); //get Harrys current location from Slytherin students -AdamJD
+		
+		//chase after Harry if close enough! -AdamJD 
+		if(fDistanceToHarry <= 250)
+		{
+			vTemp = Location + 30 * vTemp / VSize(vTemp);
+		}
+		//otherwise randomly look for Harry if too far away -AdamJD
+		else
+		{
+			vTemp = Location + 2 * vTemp / VSize(vTemp);
+		}
+		
 		MoveTo(vTemp);
 		DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
 		if (  CanSeeHarry(True,True) )
@@ -283,7 +297,7 @@ state RandomLookForHarry
 	
 	//UTPT didn't add this for some reason -AdamJD
 	function Tick (float dtime)
-	{
+	{ 
 	  if ( (Rand(6) == 0) &&  !bTempDontLookForHarry && CanSeeHarry(True,True) )
 	  {
 		if ( bDoStuckChecking )
@@ -301,6 +315,15 @@ state RandomLookForHarry
 		  }
 		  vLastPosition = Location;
 		}
+	  }
+	  
+	  fDistanceToHarry = VSize(PlayerHarry.Location - Location); //get Harrys current location from Slytherin students -AdamJD
+	  
+	  //go to the followHarry state if current distance is 250 or less (fWatchForHarryDist is 512) -AdamJD
+	  if(fDistanceToHarry <= 250)
+	  {
+		//Log("Close to Harry!"); 
+		GotoState('followHarry');
 	  }
 	}
   
@@ -322,7 +345,7 @@ state RandomLookForHarry
 		R.Yaw = rotator(HitNormal).Yaw;
 		R.Yaw = (R.Yaw + RandRange(-15000.0,15000.0)) & 65535;
 		
-		//Figured this bit out for the students to move towards Harry when they see him like in the retail game because it wasn't here (might need some work in the future) -AdamJD
+		//Figured this bit out for the students to move towards Harry when they see him like in the retail game because it wasn't here -AdamJD
 		vTemp = Location + Normal(vector(R) * 75) * 80;
 		DesiredRotation.Yaw = R.Yaw + rotator(vTemp).Yaw & 65535;
 	}

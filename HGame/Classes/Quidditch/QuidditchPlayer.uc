@@ -773,7 +773,6 @@ state Pursue
 	local vector	TargetDir;
 	local float		TargetDist;
 	local float		TargetSpeed;
-	local float		fNextTimeSafeToWoosh;
 	local float		fPitch;
 	local sound		Woosh;
 

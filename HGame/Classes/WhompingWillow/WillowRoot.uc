@@ -69,7 +69,8 @@ state stateAngry
     local int Frame;
     local Sound snd;
     local bool bPlaySound;
-    local float Scale;
+    //local float Scale;
+	local float fScale;
   
     Frame = AnimFrame * NumWillowRootFrames;
 	if ( (Frame >= 23) && (LastAnimFrame < 23) || (Frame >= 68) && (LastAnimFrame < 68) || (Frame >= 124) && (LastAnimFrame < 124) || (Frame >= 165) && (LastAnimFrame < 165) )
@@ -108,10 +109,10 @@ state stateAngry
     if ( (Frame >= 28) && (LastAnimFrame < 28) || (Frame >= 73) && (LastAnimFrame < 73) || (Frame >= 127) && (LastAnimFrame < 127) || (Frame >= 169) && (LastAnimFrame < 169) )
     {
       snd = Sound'Big_whomp2';
-      Scale = -2.0 / fGetAngryDistance * VSize2D(PlayerHarry.Location - Location) + 2.5;
-      Scale = Clamp(Scale, 0,1);
+      fScale = -2.0 / fGetAngryDistance * VSize2D(PlayerHarry.Location - Location) + 2.5;
+      fScale = Clamp(fScale, 0,1);
       PlaySound(snd,/*0*/SLOT_None,RandRange(0.41,1.0),False,WillowSoundRadius,RandRange(0.2,0.89999998));
-      PlayerHarry.ShakeView(0.5,50.0 * Scale,50.0 * Scale);
+      PlayerHarry.ShakeView(0.5,50.0 * fScale,50.0 * fScale);
     }
     LastAnimFrame = Frame;
   }

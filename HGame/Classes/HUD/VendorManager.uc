@@ -526,7 +526,7 @@ state NotEnoughBeans
 function DoDisengageVendor ()
 {
 	local StatusGroup sgJellyBeans;
-	local Characters WeasleyTwin;
+	//local Characters WeasleyTwin;
 
 	harry(Level.PlayerHarryActor).Cam.CutCommand(strRELEASE_COMMAND);
 	harry(Level.PlayerHarryActor).Cam.CutNotifyActor = None;

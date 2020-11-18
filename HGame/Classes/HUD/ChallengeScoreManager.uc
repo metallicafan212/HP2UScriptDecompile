@@ -150,7 +150,8 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
 
 function bool CutQuestion (string question)
 {
-  local StatusItem siStars;
+  //local StatusItem siStars;
+  local StatusItem stiStars;
 
   CutErrorString = "";
   if ( question ~= "ChallengeIsFirstTime" )
@@ -183,14 +184,14 @@ function bool CutQuestion (string question)
               } else //{
                 if ( question ~= "ChallengeMissedStars" )
                 {
-                  siStars = PlayerHarry.managerStatus.GetStatusItem(Class'StatusGroupStars',Class'StatusItemStars');
-                  if ( siStars != None )
+                  stiStars = PlayerHarry.managerStatus.GetStatusItem(Class'StatusGroupStars',Class'StatusItemStars');
+                  if ( stiStars != None )
                   {
-                    if ( (siStars.nCount == 0) && (siStars.nMaxCount == 0) )
+                    if ( (stiStars.nCount == 0) && (stiStars.nMaxCount == 0) )
                     {
                       return True;
                     } else {
-                      return siStars.nCount != siStars.nMaxCount;
+                      return stiStars.nCount != stiStars.nMaxCount;
                     }
                   } else {
                     return True;

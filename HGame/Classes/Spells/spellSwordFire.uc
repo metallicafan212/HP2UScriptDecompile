@@ -104,7 +104,8 @@ auto state StateFlying
   
   event Tick (float fTimeDelta)
   {
-    local float Scale;
+    //local float Scale;
+	local float fScale;
   
     Super.Tick(fTimeDelta);
     if ( fxFlyParticleEffect != None )
@@ -112,17 +113,17 @@ auto state StateFlying
       fxFlyParticleEffect.SetLocation(Location);
       if ( False )
       {
-        Scale = 1.0 / Exp(fTimeDelta / fHalfLife);
-        fCurrentScale *= Scale;
-        fxFlyParticleEffect.SizeWidth.Base *= Scale;
-        fxFlyParticleEffect.SizeLength.Base *= Scale;
-        fxFlyParticleEffect.ParticlesPerSec.Base *= Scale;
-        fxFlyParticleEffect.SourceHeight.Base *= Scale;
-        fxFlyParticleEffect.SourceWidth.Base *= Scale;
-        fxFlyParticleEffect.SourceDepth.Base *= Scale;
-        fxFlyParticleEffect.AlphaStart.Base *= Scale;
-        fxFlyParticleEffect.AlphaEnd.Base *= Scale;
-        Damage *= Scale;
+        fScale = 1.0 / Exp(fTimeDelta / fHalfLife);
+        fCurrentScale *= fScale;
+        fxFlyParticleEffect.SizeWidth.Base *= fScale;
+        fxFlyParticleEffect.SizeLength.Base *= fScale;
+        fxFlyParticleEffect.ParticlesPerSec.Base *= fScale;
+        fxFlyParticleEffect.SourceHeight.Base *= fScale;
+        fxFlyParticleEffect.SourceWidth.Base *= fScale;
+        fxFlyParticleEffect.SourceDepth.Base *= fScale;
+        fxFlyParticleEffect.AlphaStart.Base *= fScale;
+        fxFlyParticleEffect.AlphaEnd.Base *= fScale;
+        Damage *= fScale;
       }
     }
   }

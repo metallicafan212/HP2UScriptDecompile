@@ -51,7 +51,7 @@ function Touch (Actor Other)
 {
   local harry harry;
   local StatusGroupWizardCards sgCards;
-  local Class<StatusItem> classStatusItem;
+  //local Class<StatusItem> classStatusItem;
   local StatusItemWizardCards siCard;
   local int nNewCardCount;
   local int nOldCardCount;

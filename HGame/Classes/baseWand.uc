@@ -321,7 +321,8 @@ function ScaleParticles (ParticleFX FX, float Scale)
 event Tick (float fTimeDelta)
 {
   local Vector WandEndPoint;
-  local float Scale;
+  //local float Scale;
+  local float fScale;
 
   Super.Tick(fTimeDelta);
   if ( (Pawn(Owner) != None) && (Pawn(Owner).Weapon == self) )
@@ -337,10 +338,10 @@ event Tick (float fTimeDelta)
       {
         PlaySound(Sound'sword_loop',SLOT_Interact);
       }
-      Scale = fSwordFXTime / fSwordFXTimeSpan;
-      WandEndPoint = Pawn(Owner).WeaponLoc - (Vec(0.0,0.0,fSwordLength * Scale) >> Pawn(Owner).WeaponRot);
+      fScale = fSwordFXTime / fSwordFXTimeSpan;
+      WandEndPoint = Pawn(Owner).WeaponLoc - (Vec(0.0,0.0,fSwordLength * fScale) >> Pawn(Owner).WeaponRot);
       fxSwordParticles.SetLocation(WandEndPoint);
-      ScaleParticles(fxSwordParticles,fSwordFXStartScale + (fSwordFXEndScale - fSwordFXStartScale) * Scale);
+      ScaleParticles(fxSwordParticles,fSwordFXStartScale + (fSwordFXEndScale - fSwordFXStartScale) * fScale);
     } else //{
       if ( fxChargeParticles.bEmit || TheLumosLight.bLumosOn )
       {

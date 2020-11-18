@@ -324,11 +324,12 @@ function string EventNumToEventName (int Num)
 function string GetCommentId (int eventNum, int House, int Variant)
 {
   local string Key;
-  local string EventName;
+  //local string EventName;
+  local string sEventName;
   local string Id;
 
-  EventName = EventNumToEventName(eventNum);
-  Key = QuidCommentHouseNames[House]$"_"$EventName;
+  sEventName = EventNumToEventName(eventNum);
+  Key = QuidCommentHouseNames[House]$"_"$sEventName;
   Id = Localize(Key,"line" $Variant,"QuidSet");
   if ( InStr(Id,"<") > -1 )
   {

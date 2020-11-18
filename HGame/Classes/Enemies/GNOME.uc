@@ -64,23 +64,24 @@ function bool MyLineOfSightTo (Actor End)
 {
   local Vector HitLocation;
   local Vector HitNormal;
-  local Actor HitActor;
+  //local Actor HitActor;
+  local Actor aHitActor;
 
-  foreach TraceActors(Class'Actor',HitActor,HitLocation,HitNormal,End.Location,Location)
+  foreach TraceActors(Class'Actor',aHitActor,HitLocation,HitNormal,End.Location,Location)
   {
-    if ( HitActor == End )
+    if ( aHitActor == End )
     {
       return True;
     }
-    if ( HitActor == self )
+    if ( aHitActor == self )
     {
       continue;
     } //else {
-      if ( HitActor == Level )
+      if ( aHitActor == Level )
       {
         return False;
       }
-      if ( HitActor.bBlockActors )
+      if ( aHitActor.bBlockActors )
       {
         return False;
       }

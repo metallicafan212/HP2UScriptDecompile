@@ -613,7 +613,7 @@ function AnchorHitBySpell (int iLocation)
 
 function AragogAttendentSpawner FindClosestSpawner (Vector Loc)
 {
-  local int Counter;
+  //local int Counter;
   local float Dist;
   local float farthestDist;
   local AragogAttendentSpawner ss;

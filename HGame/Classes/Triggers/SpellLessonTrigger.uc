@@ -716,7 +716,7 @@ function SayTryAgain (bool bLastTimeAround)
 {
   local int nTryLastTimeEntries;
   local int nTryAgainEntries;
-  local int I;
+  //local int I;
 
   if ( bLastTimeAround )
   {
@@ -768,7 +768,7 @@ function SayEncouragement ()
   local int nDoingGoodEntries;
   local int nEncourageAnyEntries;
   local bool bDoingGood;
-  local int I;
+  //local int I;
 
   if ( nHitPointsPassed > 1 )
   {

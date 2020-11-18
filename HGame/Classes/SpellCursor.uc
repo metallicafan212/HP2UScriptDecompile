@@ -126,7 +126,8 @@ function TurnOnSpellGestureFX (ESpellType SpellType, Vector vLocation, float fFX
 
 function bool CanCameraSeeYouInFOV (int rOutsideFOV, Vector Pos)
 {
-  local Vector Normal;
+  //local Vector Normal;
+  local Vector vNormal;
   local Vector Dir;
   local Rotator OutsideFOV;
 
@@ -140,12 +141,12 @@ function bool CanCameraSeeYouInFOV (int rOutsideFOV, Vector Pos)
     return False;
   }
   OutsideFOV.Yaw = PlayerHarry.Cam.Rotation.Yaw - rOutsideFOV;
-  Normal = vector(OutsideFOV);
-  if ( Normal Dot Dir > 0.0 )
+  vNormal = vector(OutsideFOV);
+  if ( vNormal Dot Dir > 0.0 )
   {
     OutsideFOV.Yaw = PlayerHarry.Cam.Rotation.Yaw + rOutsideFOV;
-    Normal = vector(OutsideFOV);
-    if ( Normal Dot Dir > 0.0 )
+    vNormal = vector(OutsideFOV);
+    if ( vNormal Dot Dir > 0.0 )
     {
       return True;
     }
@@ -172,7 +173,8 @@ function bool IsHarryFacingTarget (Actor aTarget)
 
 function UpdateCursor (optional bool bJustStopAtClosestPawnOrWall)
 {
-  local Actor HitActor;
+  //local Actor HitActor;
+  local Actor aHitActor;
   local bool bHitActor;
   local Vector vFirstHitPos;
   local float fDotProduct;
@@ -196,15 +198,15 @@ function UpdateCursor (optional bool bJustStopAtClosestPawnOrWall)
     }
   //}
   vLOS_Dir = Normal(vLOS_End - vLOS_Start);
-  HitActor = Trace(vHitLocation,vHitNormal,vLOS_End,PlayerHarry.Cam.Location);
-  if ( (HitActor != None) &&  !HitActor.IsA('BaseHarry') )
+  aHitActor = Trace(vHitLocation,vHitNormal,vLOS_End,PlayerHarry.Cam.Location);
+  if ( (aHitActor != None) &&  !aHitActor.IsA('harry') )
   {
     bHitSomething = True;
     vLOS_End = vHitLocation + (vLOS_Dir * 5.0);
   }
-  foreach TraceActors(Class'Actor',HitActor,vHitLocation,vHitNormal,vLOS_End,vLOS_Start)
+  foreach TraceActors(Class'Actor',aHitActor,vHitLocation,vHitNormal,vLOS_End,vLOS_Start)
   {
-    if ( HitActor == Owner || HitActor.IsA('harry') ||  (!HitActor.IsA('Pawn') &&  !HitActor.IsA('GridMover') &&  !HitActor.IsA('spellTrigger')) )
+    if ( aHitActor == Owner || aHitActor.IsA('harry') ||  (!aHitActor.IsA('Pawn') &&  !aHitActor.IsA('GridMover') &&  !aHitActor.IsA('spellTrigger')) )
     {
       continue;
     } //else {
@@ -212,29 +214,29 @@ function UpdateCursor (optional bool bJustStopAtClosestPawnOrWall)
       {
         PlayerHarry.ClientMessage(" TraceActors Hit actor -> " $ string(HitActor));
       }
-      if (  !bHitActor &&  !HitActor.bHidden )
+      if (  !bHitActor &&  !aHitActor.bHidden )
       {
         bHitSomething = True;
         bHitActor = True;
         vFirstHitPos = vHitLocation;
       }
-      if ( HitActor.eVulnerableToSpell == SPELL_None )
+      if ( aHitActor.eVulnerableToSpell == SPELL_None )
       {
         continue;
       } //else {
-        if ( PlayerHarry.IsInSpellBook(HitActor.eVulnerableToSpell) || (bJustStopAtClosestPawnOrWall) )
+        if ( PlayerHarry.IsInSpellBook(aHitActor.eVulnerableToSpell) || (bJustStopAtClosestPawnOrWall) )
         {
-          if ( HitActor.IsA('spellTrigger') && !spellTrigger(HitActor).bInitiallyActive )
+          if ( aHitActor.IsA('spellTrigger') && !spellTrigger(aHitActor).bInitiallyActive )
           {
             continue;
           } //else {
-              if ( spellTrigger(HitActor).bHitJustFromFront &&  !IsHarryFacingTarget(HitActor) )
+              if ( spellTrigger(aHitActor).bHitJustFromFront &&  !IsHarryFacingTarget(HitActor) )
               {
                 continue;
               } //else {
                 if (  !bJustStopAtClosestPawnOrWall )
                 {
-                  aPossibleTarget = HitActor;
+                  aPossibleTarget = aHitActor;
                   vTargetOffset = vHitLocation - aPossibleTarget.Location;
                 }
                 vLastValidHitPos = vHitLocation;

@@ -34,7 +34,7 @@ function SetDebugMode (bool bOn)
 
 function InitSpell (Actor CastedBy, Actor CastedAt, optional Vector CastedAtOffset, optional float CastedChargeAmount, optional baseWand CastedFromWand)
 {
-  local float Scale;
+  //local float Scale;
 
   SetOwner(CastedBy);
   TargetActor = CastedAt;
@@ -56,7 +56,7 @@ function InitSpell (Actor CastedBy, Actor CastedAt, optional Vector CastedAtOffs
 
 simulated function PostBeginPlay ()
 {
-  local float Scale;
+  //local float Scale;
 
   Super.PostBeginPlay();
   PlayerHarry = harry(Level.PlayerHarryActor);
@@ -246,7 +246,7 @@ function ScaleParticles (ParticleFX FX, float Scale)
 
 function CreateHitEffects (Actor ActorHit, Vector vHitLocation)
 {
-  local float Scale;
+  //local float Scale;
   local float lTime;
 
   if ( ImpactSound != None )
@@ -336,7 +336,7 @@ function UpdateRotationWithSeeking (float fTimeDelta)
 
 function SetSpellCharge (float fNewCharge)
 {
-  local float Scale;
+  //local float Scale;
 
   SpellCharge = fNewCharge;
   if ( (SpellCharge > 0) && (SpellWand != None) )

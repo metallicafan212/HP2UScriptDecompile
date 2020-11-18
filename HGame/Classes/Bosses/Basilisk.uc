@@ -1868,7 +1868,7 @@ function PlayRoarSound ()
 
 function PlayLungeSound ()
 {
-  local Sound tempSound;
+  //local Sound tempSound;
 
   switch (Rand(6))
   {
@@ -2333,7 +2333,7 @@ function ColObjTouch (Actor Other, GenericColObj ColObj)
 function MoveToRandomVisibleHole ()
 {
   local int NumVisibleHoles;
-  local int NumHoles;
+  //local int NumHoles;
   local Actor Holes[20];
   local Actor VisibleHoles[20];
   local Vector vDir;

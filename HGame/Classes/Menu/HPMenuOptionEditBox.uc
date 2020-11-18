@@ -12,7 +12,7 @@ function Paint (Canvas C, float X, float Y)
 {
   local float W;
   local float H;
-  local float TextY;
+  //local float TextY;
 
   C.Font = Root.Fonts[Font];
   TextSize(C,"A",W,H);

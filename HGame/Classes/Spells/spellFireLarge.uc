@@ -74,7 +74,7 @@ function bool OnSpellHitHPawn (Actor aHit, Vector vHitLocation)
 function ShootFireballs ()
 {
   local int I;
-  local Crabfire Fireball;
+  //local Crabfire Fireball;
   local spellFireSmall smallFire;
   local int NumFireballs;
   local Rotator rotate_fireball;
@@ -130,16 +130,18 @@ function SetTargetZone (int Z)
 
 function float SetAngle ()
 {
-  local float Speed;
+  //local float Speed;
+  local float fSpeed;
   local float Gravity;
   local float Distance;
   local float angle;
   local Rotator BehindHarry;
-  local Vector Target;
+  //local Vector Target;
+  local Vector vTarget;
 
   BehindHarry = rotator(Location - PlayerHarry.Location);
-  Target = PlayerHarry.Location + vector(BehindHarry) * (2 * PlayerHarry.CollisionRadius); //UTPT forgot to add BODMAS which made firecrab fire go above Harry's head instead of hitting him -AdamJD 
-  Distance = VSize(Location - Target);
+  vTarget = PlayerHarry.Location + vector(BehindHarry) * (2 * PlayerHarry.CollisionRadius); //UTPT forgot to add BODMAS which made firecrab fire go above Harry's head instead of hitting him -AdamJD 
+  Distance = VSize(Location - vTarget);
   GlobalSpeed = 300.0;
   if ( Distance > 550 )
   {
@@ -152,8 +154,8 @@ function float SetAngle ()
       Gravity = 0.0;
     }
   //}
-  Speed = GlobalSpeed;
-  angle = Sin(Distance * Gravity / Speed * Speed) / 2;
+  fSpeed = GlobalSpeed;
+  angle = Sin(Distance * Gravity / fSpeed * fSpeed) / 2;
   return angle;
 }
 

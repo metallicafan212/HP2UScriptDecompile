@@ -22,7 +22,7 @@ function int GetMaxEjectedObjects ()
 
 function SetupRandomBeans ()
 {
-  local int iBean;
+  //local int iBean;
 
   // iBean = 0;
   // if ( iBean < iNumberOfBeans )

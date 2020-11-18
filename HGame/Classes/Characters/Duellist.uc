@@ -338,11 +338,12 @@ function string EventNumToEventName (int Num)
 function string GetCommentId (int eventNum, int House, int Variant)
 {
 	local string Key;
-	local string EventName;
+	//local string EventName;
+	local string sEventName;
 	local string Id;
 
-	EventName = EventNumToEventName(eventNum);
-	Key = DuelCommentHouseNames[House] $ "_" $ EventName;
+	sEventName = EventNumToEventName(eventNum);
+	Key = DuelCommentHouseNames[House] $"_" $sEventName;
 	Id = Localize(Key,"line" $ string(Variant),"DuelSet");
 	if ( InStr(Id,"<") > -1 )
 	{

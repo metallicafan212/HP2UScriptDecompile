@@ -66,12 +66,13 @@ function bounce (Vector HitNormal)
 function Vector GetTarget ()
 {
   local Rotator AroundHarry;
-  local Vector Target;
+  //local Vector Target;
+  local Vector vTarget;
 
   AroundHarry = rotator(Location - PlayerHarry.Location);
   AroundHarry.Yaw = Rand(65534) + 1;
-  Target = PlayerHarry.Location + vector(AroundHarry) * PlayerHarry.CollisionRadius;
-  return Target;
+  vTarget = PlayerHarry.Location + vector(AroundHarry) * PlayerHarry.CollisionRadius;
+  return vTarget;
 }
 
 function float getTime ()
@@ -86,17 +87,19 @@ function float getTime ()
 
 function float SetAngle ()
 {
-  local float Speed;
+  //local float Speed;
+  local float fSpeed;
   local float Gravity;
   local float Distance;
   local float angle;
   local Rotator AroundHarry;
-  local Vector Target;
+  //local Vector Target;
+  local Vector vTarget;
 
   AroundHarry = rotator(Location - PlayerHarry.Location);
   AroundHarry.Yaw = Rand(65534) + 1;
-  Target = PlayerHarry.Location + vector(AroundHarry) * PlayerHarry.CollisionRadius;
-  Distance = VSize(Location - Target);
+  vTarget = PlayerHarry.Location + vector(AroundHarry) * PlayerHarry.CollisionRadius;
+  Distance = VSize(Location - vTarget);
   GlobalSpeed = 300.0;
   if ( Distance > 550 )
   {
@@ -109,8 +112,8 @@ function float SetAngle ()
       Gravity = 0.0;
     }
   //}
-  Speed = GlobalSpeed;
-  angle = Sin(Distance * Gravity / Speed * Speed) / 2;
+  fSpeed = GlobalSpeed;
+  angle = Sin(Distance * Gravity / fSpeed * fSpeed) / 2;
   return angle;
 }
 

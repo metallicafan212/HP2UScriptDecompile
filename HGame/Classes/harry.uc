@@ -1243,7 +1243,8 @@ function bool InFrontOfHarry (Actor A)
 {
   local Vector cdir;
   local Vector adir;
-  local float Cos;
+  //local float Cos;
+  local float fCos;
   local float cdirsize;
   local float adirsize;
 
@@ -1262,8 +1263,8 @@ function bool InFrontOfHarry (Actor A)
   cdirsize = VSize2D(cdir);
   adirsize = VSize2D(adir);
   // Cos = cdir Dot adir / cdirsize * adirsize; 
-  Cos = (cdir Dot adir) / (cdirsize * adirsize); //UTPT forgot to add brackets -AdamJD
-  if ( Cos > 0.5 )
+  fCos = (cdir Dot adir) / (cdirsize * adirsize); //UTPT forgot to add brackets -AdamJD
+  if ( fCos > 0.5 )
   {
     return True;
   }
@@ -1296,14 +1297,15 @@ function Actor FindClosestTargetPoint ()
 
 function Actor AccurateThrowing (Actor A)
 {
-  local Actor Target;
+  //local Actor Target;
+  local Actor aTarget;
 
   if (  !HPawn(A).bAccurateThrowing )
   {
     return None;
   }
-  Target = FindClosestTargetPoint();
-  return Target;
+  aTarget = FindClosestTargetPoint();
+  return aTarget;
 }
 
 function HarryAccurateThrowObject (Actor A, Actor Target, bool bCollideActors, bool bCollideWorld)
@@ -1324,7 +1326,8 @@ function ThrowCarryingActor ()
   local Vector v2;
   local Rotator R;
   local Actor A;
-  local Actor Target;
+  //local Actor Target;
+  local Actor aTarget;
   local float ThrowVelocity;
 
   if ( bThrow && (CarryingActor != None) )
@@ -1332,10 +1335,10 @@ function ThrowCarryingActor ()
     bThrow = False;
     A = CarryingActor;
     DropCarryingActor(True);
-    Target = AccurateThrowing(A);
-    if ( Target != None )
+    aTarget = AccurateThrowing(A);
+    if ( aTarget != None )
     {
-      HarryAccurateThrowObject(A,Target,True,True);
+      HarryAccurateThrowObject(A,aTarget,True,True);
     } else {
       V = Normal(Cam.vForward + vect(0.00,0.00,0.50));
       if ( HPawn(A) != None )
@@ -3565,7 +3568,7 @@ function TweenToWaiting (float TweenTime)
 function Cast ()
 {
   local Actor BestTarget;
-  local Actor HitActor;
+  //local Actor HitActor;
   local Rotator defaultAngle;
   local Rotator checkAngle;
   local Pawn hitPawn;
@@ -4252,7 +4255,8 @@ function SpawnParticles (Class<ParticleFX> Particles)
 function AutoHitAreaEffect (float fRadius)
 {
 	local HPawn Pawn;
-	local spellTrigger Trigger;
+	//local spellTrigger Trigger;
+	local spellTrigger spTrigger;
 
 	foreach AllActors(Class'HPawn',Pawn)
 	{
@@ -4269,11 +4273,11 @@ function AutoHitAreaEffect (float fRadius)
 			}
 		}	
 	}
-	foreach AllActors(Class'spellTrigger',Trigger)
+	foreach AllActors(Class'spellTrigger',spTrigger)
 	{
-		if ( Trigger.eVulnerableToSpell != 0 && (VSize(Trigger.Location - Location) < fRadius) )
+		if ( spTrigger.eVulnerableToSpell != SPELL_None && (VSize(spTrigger.Location - Location) < fRadius) )
 		{
-		Trigger.Activate(self,self);
+			spTrigger.Activate(self,self);
 		}
 	}
   
@@ -5177,7 +5181,8 @@ function Rotator AdjustAim (float ProjSpeed, Vector projStart, int AimError, boo
 {
   local Vector FireDir;
   local Actor BestTarget;
-  local Actor HitActor;
+  //local Actor HitActor;
+  local Actor aHitActor;
   local Rotator defaultAngle;
   local Rotator checkAngle;
   local Pawn hitPawn;
@@ -5194,17 +5199,17 @@ function Rotator AdjustAim (float ProjSpeed, Vector projStart, int AimError, boo
   FireDir = vector(defaultAngle);
   FireDir = Normal(FireDir);
   BestTarget = None;
-  foreach VisibleActors(Class'Actor',HitActor)
+  foreach VisibleActors(Class'Actor',aHitActor)
   {
-    if ( HitActor.bProjTarget && PlayerPawn(HitActor) != self &&  !HitActor.IsA('BaseCam') )
+    if ( aHitActor.bProjTarget && PlayerPawn(aHitActor) != self &&  !aHitActor.IsA('BaseCam') )
     {
-      objectDir = Normal(HitActor.Location - projStart);
+      objectDir = Normal(aHitActor.Location - projStart);
       checkAngle = rotator(objectDir);
       if ( BestTarget == None )
       {
         bestYaw = checkAngle.Yaw;
         bestYaw = bestYaw & 0xFFFF;
-        BestTarget = HitActor;
+        BestTarget = aHitActor;
         bestZ = objectDir.Z;
       } else {
         tempYaw = checkAngle.Yaw;
@@ -5212,7 +5217,7 @@ function Rotator AdjustAim (float ProjSpeed, Vector projStart, int AimError, boo
         if ( Abs(tempYaw - defaultYaw) < Abs(bestYaw - defaultYaw) )
         {
           bestYaw = tempYaw;
-          BestTarget = HitActor;
+          BestTarget = aHitActor;
           bestZ = objectDir.Z;
         }
       }
@@ -5382,12 +5387,13 @@ event PlayerCalcView (out Actor ViewActor, out Vector CameraLocation, out Rotato
 function makeTarget ()
 {
   local Vector tloc;
-  local Vector TargetOffset;
+  //local Vector TargetOffset;
+  local Vector vTargetOffsetMT; 
 
-  TargetOffset.Y = 0.0;
-  TargetOffset.X = 50.0;
-  TargetOffset.Z = 0.0;
-  tloc = TargetOffset >> ViewRotation;
+  vTargetOffsetMT.Y = 0.0;
+  vTargetOffsetMT.X = 50.0;
+  vTargetOffsetMT.Z = 0.0;
+  tloc = vTargetOffsetMT >> ViewRotation;
   tloc = tloc + Location;
   if ( SpellCursor == None )
   {

@@ -392,7 +392,8 @@ function SetKickTargetClass (name NewKickTargetClassName)
 
 function UpdateKickTarget ()
 {
-  local Pawn Target;
+  //local Pawn Target;
+  local Pawn pTarget;
   local Vector Dir;
   local float Dist;
 
@@ -401,15 +402,15 @@ function UpdateKickTarget ()
   {
     return;
   }
-  foreach AllActors(Class'Pawn',Target)
+  foreach AllActors(Class'Pawn',pTarget)
   {
-    if ( Target.IsA(KickTargetClassName) )
+    if ( pTarget.IsA(KickTargetClassName) )
     {
-      Dir = Target.Location - Location;
+      Dir = pTarget.Location - Location;
       Dist = VSize(Dir);
       if ( (KickTarget == None) || (Dist < KickTargetDist) )
       {
-        KickTarget = Target;
+        KickTarget = pTarget;
         KickTargetDist = Dist;
       }
     }
@@ -563,10 +564,11 @@ event Tick (float DeltaTime)
 
 function Bump (Actor Other)
 {
-  local Pawn Target;
+  //local Pawn Target;
+  local Pawn pTarget;
 
-  Target = Pawn(Other);
-  if (  !bHit &&  !bCatchingTarget && (Other != LookForTarget) && (Target != None) &&  !Target.bHidden )
+  pTarget = Pawn(Other);
+  if (  !bHit &&  !bCatchingTarget && (Other != LookForTarget) && (pTarget != None) &&  !pTarget.bHidden )
   {
     if ( FRand() < 0.81 )
     {
@@ -575,7 +577,7 @@ function Bump (Actor Other)
       PlayAnim('Bump');
     }
     PlaySound(HitSounds[Rand(3)],/*3*/SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
-    Target.TakeDamage(Damage,self,Location,100 * Normal(Velocity),'Collided');
+    pTarget.TakeDamage(Damage,self,Location,100 * Normal(Velocity),'Collided');
     Velocity = vect(0.00,0.00,1.00);
     bHit = True;
   }

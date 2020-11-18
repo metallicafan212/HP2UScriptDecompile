@@ -456,7 +456,8 @@ function SetKickTargetClass (name NewKickTargetClassName)
 
 function UpdateKickTarget ()
 {
-  local Pawn Target;
+  //local Pawn Target;
+  local Pawn pTarget;
   local Vector Dir;
   local float Dist;
 
@@ -465,15 +466,15 @@ function UpdateKickTarget ()
   {
     return;
   }
-  foreach AllActors(Class'Pawn',Target)
+  foreach AllActors(Class'Pawn',pTarget)
   {
-    if ( Target.IsA(KickTargetClassName) &&  !Target.bHidden )
+    if ( pTarget.IsA(KickTargetClassName) &&  !pTarget.bHidden )
     {
-      Dir = Target.Location - Location;
+      Dir = pTarget.Location - Location;
       Dist = VSize(Dir);
       if ( (KickTarget == None) || (Dist < KickTargetDist) )
       {
-        KickTarget = Target;
+        KickTarget = pTarget;
         KickTargetDist = Dist;
       }
     }
@@ -1070,7 +1071,7 @@ state PlayerWalking //extends PlayerWalking
   function BeginState ()
   {
     local BaseCam Camera;
-    local Seeker WatchTarget;
+    //local Seeker WatchTarget;
   
     ClientMessage("BroomHarry: Entered " $ string(GetStateName()) $ " State");
     Log("BroomHarry: Entered " $ string(GetStateName()) $ " State");
@@ -1541,13 +1542,14 @@ state PlayerWalking //extends PlayerWalking
   
   function Bump (Actor Other)
   {
-    local Pawn Target;
+    //local Pawn Target;
+	local Pawn pTarget;
   
-    Target = Pawn(Other);
-    if ( (!bHit && !Target.IsA('QuidditchPlayer')) && !Target.IsA('Bludger') )
+    pTarget = Pawn(Other);
+    if ( (!bHit && !pTarget.IsA('QuidditchPlayer')) && !pTarget.IsA('Bludger') )
     {
       PlayAnim('React');
-      if ( Target.IsA('QuidGoal') )
+      if ( pTarget.IsA('QuidGoal') )
       {
         PlaySound(Sound'Q_BRM_HitPole_01',/*3*/SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
       } else {

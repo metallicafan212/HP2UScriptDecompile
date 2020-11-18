@@ -259,7 +259,7 @@ event Tick (float DeltaTime)
 {
   local Vector Dir;
   local Vector RelJerkOffset;
-  local float Dist;
+  //local float Dist;
 
   if ( bJerking && (Level.TimeSeconds > fTimeForNextJerk) )
   {

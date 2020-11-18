@@ -35,11 +35,12 @@ var float rYaw[4];
 function name GetBoneName (int Index)
 {
   local string sName;
-  local name bName;
+  //local name bName;
+  local name boName;
 
-  sName = "Attach_0" $ string(Index);
-  bName = name(sName);
-  return bName;
+  sName = "Attach_0" $Index;
+  boName = name(sName);
+  return boName;
 }
 
 function MyAttachActor (Actor A, Actor aOwner, name Bone)
@@ -243,7 +244,8 @@ function int ClosestLimb ()
 {
   local int I;
   local int maxi;
-  local float Cos;
+  //local float Cos;
+  local float fCos;
   local float maxcos;
   local Vector V;
   local Vector v1;
@@ -263,10 +265,10 @@ function int ClosestLimb ()
 	  R.Roll = 0;
       R.Pitch = 0;
       V = vector(R);
-      Cos = V Dot v1 / VSize(v1);
-      if ( Cos > maxcos )
+      fCos = V Dot v1 / VSize(v1);
+      if ( fCos > maxcos )
       {
-        maxcos = Cos;
+        maxcos = fCos;
         maxi = I;
       }
     }

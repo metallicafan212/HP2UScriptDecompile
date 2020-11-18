@@ -822,7 +822,8 @@ function bool CheckCollisionWithWorld ()
 {
 	local Vector HitLocation;
 	local Vector HitNormal;
-	local Actor HitActor;
+	//local Actor HitActor;
+	local Actor aHitActor;
 	local Vector LookAtPoint;
 	local Vector LookFromPoint;
 	local Vector vCusionFromWorld;
@@ -831,8 +832,8 @@ function bool CheckCollisionWithWorld ()
 	// if ( (CamTarget.aAttachedTo != None) && ((CamTarget.vOffset.X != byte(0)) || (CamTarget.vOffset.Y != byte(0)) || (CamTarget.vOffset.Z != byte(0))) )
 	if( CamTarget.aAttachedTo != None && (CamTarget.vOffset.x != 0 || CamTarget.vOffset.y != 0 || CamTarget.vOffset.z != 0) )
 	{
-		HitActor = Trace(HitLocation,HitNormal,CamTarget.Location,CamTarget.aAttachedTo.Location,False);
-		if ( (HitActor != None) && HitActor.IsA('LevelInfo') )
+		aHitActor = Trace(HitLocation,HitNormal,CamTarget.Location,CamTarget.aAttachedTo.Location,False);
+		if ( (aHitActor != None) && aHitActor.IsA('LevelInfo') )
 		{
 			LookAtPoint = HitLocation + (Normal(CamTarget.aAttachedTo.Location - HitLocation) * 5.0) + HitNormal;
 			PlayerHarry.ClientMessage("CamTarget HitLoc:" $ string(HitLocation) $ " HitNorm: " $ string(HitNormal));
@@ -840,13 +841,13 @@ function bool CheckCollisionWithWorld ()
 	}
 	vCusionFromWorld = Normal(LookAtPoint - vDestPosition) * 10.0;
 	LookFromPoint = vDestPosition - vCusionFromWorld;
-	foreach TraceActors(Class'Actor',HitActor,HitLocation,HitNormal,LookFromPoint,LookAtPoint)
+	foreach TraceActors(Class'Actor',aHitActor,HitLocation,HitNormal,LookFromPoint,LookAtPoint)
 	{
-		if ( HitActor == Owner )
+		if ( aHitActor == Owner )
 		{
 			continue;
 		} //else {
-		if ( HitActor.IsA('LevelInfo') || HitActor.bBlockCamera )
+		if ( aHitActor.IsA('LevelInfo') || aHitActor.bBlockCamera )
 		{
 			vDestPosition = HitLocation + vCusionFromWorld;
 			fDestLookAtDistance = VSize(vDestPosition - LookAtPoint);
@@ -1714,21 +1715,22 @@ function bool CameraCanSeeYou (Vector Pos)
 }
 */
 
-function bool CameraCanSeeYou(vector pos)
+function bool CameraCanSeeYou(Vector Pos)
 {
-	local vector normal;
-	local float dotpr;
+	//local vector normal;
+	local Vector vNormal;
+	local Float dotpr;
 
-	normal = vector(Rotation);
+	vNormal = Vector(Rotation);
 
-	dotpr = normal.X * (pos.X - Location.X) + normal.Y * (pos.Y - Location.Y) + normal.Z * (pos.Z - Location.Z);
+	dotpr = vNormal.X * (Pos.X - Location.X) + vNormal.Y * (Pos.Y - Location.Y) + vNormal.Z * (Pos.Z - Location.Z);
 	
 	if(dotpr > 0)
 	{
-		return true;
+		return True;
 	}
 
-	return false;
+	return False;
 }
 
 defaultproperties

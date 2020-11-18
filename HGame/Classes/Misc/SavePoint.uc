@@ -50,7 +50,8 @@ function PreBeginPlay ()
 
 function OnSaveGame ()
 {
-  local int Health;
+  //local int Health;
+  local int iHarryHealth;
 
   if ( PlayerHarry.GetHealthCount() <= 0 )
   {
@@ -63,13 +64,13 @@ function OnSaveGame ()
   }
   fWaitTime = Default.fWaitTime;
   Opacity = 0.0;
-  Health = PlayerHarry.GetHealthCount();
-  if ( Health < PlayerHarry.iMinHealthAfterDeath )
+  iHarryHealth = PlayerHarry.GetHealthCount();
+  if ( iHarryHealth < PlayerHarry.iMinHealthAfterDeath )
   {
     PlayerHarry.SetHealth(PlayerHarry.iMinHealthAfterDeath);
   }
   PlayerHarry.SaveGame();
-  PlayerHarry.SetHealth(Health);
+  PlayerHarry.SetHealth(iHarryHealth);
 }
 
 function Touch (Actor Other)

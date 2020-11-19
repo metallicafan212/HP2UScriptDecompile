@@ -5,7 +5,9 @@ from PIL import Image;
 # Metallicafan212: List of texture files to exclude
 #texExclude = ["Texture0.png", "Texture1.png", "Texture2.png", "Texture3.png", "Texture4.png", "Texture5.png", "Texture6.png", "Texture7.png", "Texture8.png",];
 
-texExclude = [];
+texExclude = ["HiddenPawn.PNG", "ica.PNG", "icb.PNG", "icc.PNG", "icd.PNG", "ice.PNG", "icf.PNG", "icg.PNG", "ich.PNG", "SecretTexture.PNG", "spell_trigger.PNG",
+              "SpongifyTargetTexture.PNG", "SpongifyTexture.PNG", "SthingE.PNG"
+             ];
 
 def HasAlpha(Img):
     if Img.mode == "P":

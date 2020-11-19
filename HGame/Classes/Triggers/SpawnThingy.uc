@@ -4,6 +4,9 @@
 
 class SpawnThingy extends Triggers;
 
+//texture import -AdamJD
+#exec Texture Import File=Textures\SthingE.PNG Name=SthingE COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+
 var() Class<Actor> SpawnClass;
 var() float fVelocityModifier;
 var() name SpawnTag;

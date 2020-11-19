@@ -4,6 +4,9 @@
 
 class SpellCursor extends ParticleFX; 
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\SpellShapes.utx PACKAGE=SpellShapes.SpellFX
+
 const MAX_GESTURE_SIZE= 100.0f;
 const MIN_GESTURE_SIZE= 50.0f;
 var harry PlayerHarry;
@@ -24,6 +27,16 @@ var GestureSprite SpellGesture;
 var Vector vGestureOffset;
 var float fFinalGestureDistance;
 var bool bDebugMode;
+
+//wet texture variables -AdamJD
+var WetTexture FlipendoWetTexture;
+var WetTexture LumosWetTexture;
+var WetTexture AlohomoraWetTexture;
+var WetTexture SkurgeWetTexture;
+var WetTexture RictusempraWetTexture;
+var WetTexture DiffindoWetTexture;
+var WetTexture SpongifyWetTexture;
+
 
 function SetDebugMode (bool bOn)
 {
@@ -72,26 +85,7 @@ function WetTexture GetGestureTexture (ESpellType SpellType)
 {
   switch (SpellType)
   {
-  /*
-    case 0:
-    return None;
-    case 13:
-    return WetTexture'FlipendoWet1';
-    case 4:
-    return WetTexture'LumosWet1';
-    case 1:
-    return WetTexture'AlohomoraWet1';
-    case 20:
-    return WetTexture'SkurgeWet1';
-    case 22:
-    return WetTexture'RictusWet1';
-    case 19:
-    return WetTexture'DiffindoWet1';
-    case 21:
-    return WetTexture'SpongifyWet1';
-    default:
-  */
-  
+	/*
     case SPELL_None:			return None;
 	case SPELL_Flipendo:		return WetTexture'SpellShapes.SpellFX.FlipendoWet1';
 	case SPELL_Lumos:			return WetTexture'SpellShapes.SpellFX.LumosWet1';
@@ -100,6 +94,17 @@ function WetTexture GetGestureTexture (ESpellType SpellType)
 	case SPELL_Rictusempra:		return WetTexture'SpellShapes.SpellFX.RictusWet1';
 	case SPELL_Diffindo:		return WetTexture'SpellShapes.SpellFX.DiffindoWet1';
 	case SPELL_Spongify:		return WetTexture'SpellShapes.SpellFX.SpongifyWet1';
+	*/
+	
+	//return the correct imported wet texture -AdamJD
+	case SPELL_None:			return None;
+	case SPELL_Flipendo:		return FlipendoWetTexture;
+	case SPELL_Lumos:			return LumosWetTexture;
+	case SPELL_Alohomora:		return AlohomoraWetTexture;
+	case SPELL_Skurge:			return SkurgeWetTexture;
+	case SPELL_Rictusempra:		return RictusempraWetTexture;
+	case SPELL_Diffindo:		return DiffindoWetTexture;
+	case SPELL_Spongify:		return SpongifyWetTexture;
   }
 }
 
@@ -613,5 +618,20 @@ defaultproperties
     Rotation=(Pitch=16640,Yaw=0,Roll=0)
 
     bRotateToDesired=True
-
+	
+	//wet texture paths, only way I can get these imported is to set them up here in the default properties -AdamJD
+	//
+	FlipendoWetTexture=WetTexture'SpellShapes.SpellFX.FlipendoWet1'
+	
+	LumosWetTexture=WetTexture'SpellShapes.SpellFX.LumosWet1'
+	
+	AlohomoraWetTexture=WetTexture'SpellShapes.SpellFX.AlohomoraWet1'
+	
+	SkurgeWetTexture=WetTexture'SpellShapes.SpellFX.SkurgeWet1'
+	
+	RictusempraWetTexture=WetTexture'SpellShapes.SpellFX.RictusWet1'
+	
+	DiffindoWetTexture=WetTexture'SpellShapes.SpellFX.DiffindoWet1'
+	
+	SpongifyWetTexture=WetTexture'SpellShapes.SpellFX.SpongifyWet1'
 }

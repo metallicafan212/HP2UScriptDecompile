@@ -4,6 +4,9 @@
 
 class TriggeredViewFlash extends Triggers;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\HPEdit.utx PACKAGE=HPEdit.Icons
+
 var PlayerPawn Player;
 
 function FIndPlayer ()

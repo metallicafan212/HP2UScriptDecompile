@@ -6,7 +6,13 @@ from PIL import Image;
 #texExclude = ["Texture0.png", "Texture1.png", "Texture2.png", "Texture3.png", "Texture4.png", "Texture5.png", "Texture6.png", "Texture7.png", "Texture8.png",];
 
 texExclude = ["HiddenPawn.PNG", "ica.PNG", "icb.PNG", "icc.PNG", "icd.PNG", "ice.PNG", "icf.PNG", "icg.PNG", "ich.PNG", "SecretTexture.PNG", "spell_trigger.PNG",
-              "SpongifyTargetTexture.PNG", "SpongifyTexture.PNG", "SthingE.PNG"
+              "SpongifyTargetTexture.PNG", "SpongifyTexture.PNG", "SthingE.PNG", "CutCamIcon.PNG", "CutMarkIcon.PNG", "defaultSpellIcon.PNG", "ButtonDownTexture.PNG", "ButtonUpTexture.PNG",
+              "FELoadingBackground1.PNG", "FELoadingBackground2.PNG", "FELoadingBackground3.PNG", "FELoadingBackground4.PNG", "FELoadingBackground5.PNG", "FELoadingBackground6.PNG", "leftPanel.PNG",
+              "EnemyBarEmpty.PNG", "EnemyBarFull.PNG", "EnemyHead1.PNG", "EnemyHead2.PNG", "EnemyHead3.PNG", "EnemyHead4.PNG", "EnemyHead5.PNG", "EnemyHead6.PNG", #these are not used -AdamJD
+              "DemoDown.PNG", "DemoOver.PNG", "DemoUp.PNG", "FluffyHeadMAsleep.PNG", "FluffyHeadMAwake.PNG", "frogIcon.PNG", "fullPotionIcon.PNG", "GryfCrestGreyTexture.PNG", "GryfCrestTexture.PNG", "halfPotionIcon.PNG", #these are not used -AdamJD
+              "HPLogoTexture.PNG", "HuffCrestGreyTexture.PNG", "HuffCrestTexture.PNG", "LevelDown.PNG", "LevelOver.PNG", "LevelUp.PNG", "LumosLightIcon.PNG", #these are not used -AdamJD
+              "MainBack1.PNG", "MainBack2.PNG", "MainBack3.PNG", "MainBack4.PNG", "MainBack5.PNG", "MainBack6.PNG", "MainBackDown.PNG", "MainBackOver.PNG", "MainBackUp.PNG", "MalfoyHead.PNG", #these are not used -AdamJD
+              "middlePanel.PNG", "PeevesHead.PNG", "QuidMatchLockTexture.PNG", "RaveCrestGreyTexture.PNG", "RaveCrestTexture.PNG", "rightPanel.PNG", "skgoldchestTex0.PNG", "SlytCrestGreyTexture.PNG", "SlytCrestTexture.PNG", "VoldemortHead.PNG", #these are not used -AdamJD
              ];
 
 def HasAlpha(Img):

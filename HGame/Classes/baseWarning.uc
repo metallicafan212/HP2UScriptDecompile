@@ -4,6 +4,9 @@
 
 class baseWarning extends basePopup;
 
+//texture import -AdamJD
+#exec Texture Import File=Textures\Icons\leftPanel.PNG	GROUP=Icons	Name=leftPanel COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+
 var string DisplayText;
 var float fFlashTime;
 var bool bShow;

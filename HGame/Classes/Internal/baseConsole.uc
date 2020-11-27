@@ -4,6 +4,14 @@
 
 class baseConsole extends WindowConsole;
 
+//texture imports -AdamJD
+#exec Texture Import File=Textures\Icons\FELoadingBackground1.PNG	GROUP=Icons	Name=FELoadingBackground1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground2.PNG	GROUP=Icons	Name=FELoadingBackground2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground3.PNG	GROUP=Icons	Name=FELoadingBackground3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground4.PNG	GROUP=Icons	Name=FELoadingBackground4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground5.PNG	GROUP=Icons	Name=FELoadingBackground5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground6.PNG	GROUP=Icons	Name=FELoadingBackground6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+
 struct BackgroundBitmap
 {
   var Texture p1;

@@ -4,6 +4,20 @@
 
 class FEBook extends baseFEBook; 
 
+//texture imports -AdamJD
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture1.PNG	GROUP=Icons	Name=FEInGameBackTexture1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture2.PNG	GROUP=Icons	Name=FEInGameBackTexture2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture3.PNG	GROUP=Icons	Name=FEInGameBackTexture3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture4.PNG	GROUP=Icons	Name=FEInGameBackTexture4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture5.PNG	GROUP=Icons	Name=FEInGameBackTexture5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture6.PNG	GROUP=Icons	Name=FEInGameBackTexture6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture1.PNG	GROUP=Icons	Name=FEBack1Texture1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture2.PNG	GROUP=Icons	Name=FEBack1Texture2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture3.PNG	GROUP=Icons	Name=FEBack1Texture3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture4.PNG	GROUP=Icons	Name=FEBack1Texture4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture5.PNG	GROUP=Icons	Name=FEBack1Texture5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture6.PNG	GROUP=Icons	Name=FEBack1Texture6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+
 struct Background
 {
   var Texture p1;

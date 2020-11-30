@@ -4,6 +4,14 @@
 
 class FEFolioPage extends baseFEPage;
 
+//texture imports -AdamJD
+#exec Texture Import File=Textures\Icons\CardGlowBronze.PNG	GROUP=Icons	Name=CardGlowBronze COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\CardGlowGold.PNG	GROUP=Icons	Name=CardGlowGold COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\CardGlowGoldBig.PNG	GROUP=Icons	Name=CardGlowGoldBig COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\CardGlowSilver.PNG	GROUP=Icons	Name=CardGlowSilver COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardMissingBigTexture.PNG	GROUP=Icons	Name=WizCardMissingBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardMissingSmallTexture.PNG	GROUP=Icons	Name=WizCardMissingSmallTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+
 const nCARDGLOW_BIG_OFFSET_Y= -64;
 const nCARDGLOW_BIG_OFFSET_X= -64;
 const nCARDGLOW_OFFSET_Y= -34;
@@ -84,6 +92,14 @@ var string strCurrDesc;
 var int nCardGlowLeft;
 var int nCardGlowTop;
 var Texture textureCurrGlow;
+
+//specific card glow textures and empty wizard card textures -AdamJD
+var Texture textureBronzeGlow;
+var Texture textureSilverGlow;
+var Texture textureGoldGlow;
+var Texture textureGoldBigGlow;
+var Texture textureBigEmptyCard;
+var Texture textureSmallEmptyCard;
 
 
 function Created ()
@@ -321,7 +337,7 @@ function UpdatePageCards ()
     Log("ERROR: Invalid card group in FEFoliPage " $ string(CurrCardGroup));
     break;
   }
-  textureCurrLargeCard = Texture'WizCardMissingBigTexture';
+  textureCurrLargeCard = textureBigEmptyCard;	 //Texture'WizCardMissingBigTexture';
   classCurWC = None;
   strCurrDesc = "";
   // I = 0;
@@ -351,10 +367,10 @@ function UpdatePageCards ()
           SetLargeCardProps(Class<WizardCardIcon>(classWC));
         }
       } else {
-        SmallCardBmp[I].UpTexture = Texture'WizCardMissingSmallTexture';
+        SmallCardBmp[I].UpTexture = textureSmallEmptyCard; 		//Texture'WizCardMissingSmallTexture';
       }
     } else {
-      SmallCardBmp[I].UpTexture = Texture'WizCardMissingSmallTexture';
+      SmallCardBmp[I].UpTexture = textureSmallEmptyCard;		//Texture'WizCardMissingSmallTexture';
     }
     SmallCardBmp[I].DownTexture = SmallCardBmp[I].UpTexture;
     SmallCardBmp[I].OverTexture = SmallCardBmp[I].UpTexture;
@@ -554,18 +570,18 @@ function HiliteCurrCard ()
 	switch (CurrCardGroup)
     {
       case CardGroup_Bronze:
-      textureCurrGlow = Texture'CardGlowBronze';
+      textureCurrGlow = textureBronzeGlow;	//Texture'CardGlowBronze';
       break;
       case CardGroup_Silver:
-      textureCurrGlow = Texture'CardGlowSilver';
+      textureCurrGlow = textureSilverGlow;	//Texture'CardGlowSilver';
       break;
       case CardGroup_Gold:
-      textureCurrGlow = Texture'CardGlowGold';
+      textureCurrGlow = textureGoldGlow;	//Texture'CardGlowGold';
       break;
       default:
     }
     HilitedCard = SmallCardBmp[nCurrItemOnPage];
-    if ( SmallCardBmp[nCurrItemOnPage].UpTexture == Texture'WizCardMissingSmallTexture' )
+    if ( SmallCardBmp[nCurrItemOnPage].UpTexture == textureSmallEmptyCard ) 	//Texture'WizCardMissingSmallTexture' )
     {
       fHilitedCardScale = -0.53125;
     } else {
@@ -574,7 +590,7 @@ function HiliteCurrCard ()
   } else {
     nCardGlowLeft = HarryCardBmp.WinLeft + -64;
 	nCardGlowTop = HarryCardBmp.WinTop + -64;
-	textureCurrGlow = Texture'CardGlowGoldBig';
+	textureCurrGlow = textureGoldBigGlow;	//Texture'CardGlowGoldBig';
     HilitedCard = HarryCardBmp;
     fHilitedCardScale = -0.5;
   }
@@ -960,5 +976,18 @@ defaultproperties
     colorGold=(R=181,G=115,B=0,A=0)
 
     nCurrNumPages=5
-
+	
+	//set the card glow textures and empty card textures -AdamJD
+	//
+	textureBronzeGlow=CardGlowBronze
+	
+	textureSilverGlow=CardGlowSilver
+	
+	textureGoldGlow=CardGlowGold
+	
+	textureGoldBigGlow=CardGlowGoldBig
+	
+	textureBigEmptyCard=WizCardMissingBigTexture
+	
+	textureSmallEmptyCard=WizCardMissingSmallTexture
 }

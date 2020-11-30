@@ -4,6 +4,19 @@
 
 class HPMenuOptionCheckBox extends UWindowCheckbox;
 
+//texture imports -AdamJD
+#exec Texture Import File=Textures\Icons\FEOptionTickCheckedTex.PNG	GROUP=Icons	Name=FEOptionTickCheckedTex COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEOptionTickCheckedOverTex.PNG	GROUP=Icons	Name=FEOptionTickCheckedOverTex COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEOptionTickUncheckedTex.PNG	GROUP=Icons	Name=FEOptionTickUncheckedTex COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEOptionTickUncheckedOverTex.PNG	GROUP=Icons	Name=FEOptionTickUncheckedOverTex COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+
+//texture vars for importing -AdamJD
+var Texture TBoxChecked;
+var Texture TBoxCheckedOver;
+var Texture TBoxUnchecked;
+var Texture TBoxUncheckedOver;
+
+
 function Checkbox_SetupSizes (UWindowCheckbox W, Canvas C)
 {
   local float TW;
@@ -17,14 +30,14 @@ function Checkbox_SetupSizes (UWindowCheckbox W, Canvas C)
   W.TextY = (W.WinHeight - TH) / 2;
   if ( W.bChecked )
   {
-    W.UpTexture = Texture'FEOptionTickCheckedTex';
-    W.DownTexture = Texture'FEOptionTickCheckedOverTex';
-    W.OverTexture = Texture'FEOptionTickCheckedOverTex';
+    W.UpTexture = TBoxChecked; 			//Texture'FEOptionTickCheckedTex';
+    W.DownTexture = TBoxCheckedOver; 	//Texture'FEOptionTickCheckedOverTex';
+    W.OverTexture = TBoxCheckedOver;	//Texture'FEOptionTickCheckedOverTex';
     W.DisabledTexture = None;
   } else {
-    W.UpTexture = Texture'FEOptionTickUncheckedTex';
-    W.DownTexture = Texture'FEOptionTickUncheckedOverTex';
-    W.OverTexture = Texture'FEOptionTickUncheckedOverTex';
+    W.UpTexture = TBoxUnchecked; 		//Texture'FEOptionTickUncheckedTex';
+    W.DownTexture = TBoxUncheckedOver; 	//Texture'FEOptionTickUncheckedOverTex';
+    W.OverTexture = TBoxUncheckedOver; 	//Texture'FEOptionTickUncheckedOverTex';
     W.DisabledTexture = None;
   }
 }
@@ -39,3 +52,14 @@ function Paint (Canvas C, float X, float Y)
   Super.Paint(C,X,Y);
 }
 
+//get the imported textures -AdamJD
+defaultproperties
+{
+	TBoxChecked=FEOptionTickCheckedTex
+	
+	TBoxCheckedOver=FEOptionTickCheckedOverTex
+	
+	TBoxUnchecked=FEOptionTickUncheckedTex
+	
+	TBoxUncheckedOver=FEOptionTickUncheckedOverTex
+}

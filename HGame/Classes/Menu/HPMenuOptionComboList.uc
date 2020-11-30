@@ -4,7 +4,18 @@
 
 class HPMenuOptionComboList extends UWindowComboList;
 
+//texture imports -AdamJD
+#exec Texture Import File=Textures\Icons\FEComboListBox.PNG	GROUP=Icons	Name=FEComboListBox COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEComboListLarge.PNG	GROUP=Icons	Name=FEComboListLarge COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEComboListSmall.PNG	GROUP=Icons	Name=FEComboListSmall COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+
 var Texture bgImage;
+
+//texture vars for importing -AdamJD
+var Texture CListBox;
+var Texture CListLarge;
+var Texture CListSmall;
+
 
 function Created ()
 {
@@ -30,10 +41,10 @@ function BeforePaint (Canvas C, float X, float Y)
   if ( Count > 3 )
   {
     WinHeight = 89.0;
-    bgImage = Texture'FEComboListLarge';
+    bgImage = CListLarge;		//Texture'FEComboListLarge';
   } else {
     WinHeight = 61.0;
-    bgImage = Texture'FEComboListSmall';
+    bgImage = CListSmall; 		//Texture'FEComboListSmall';
   }
   ItemHeight = (WinHeight - 7) / Count;
   I = UWindowComboListItem(Items.Next);
@@ -67,7 +78,7 @@ function ComboList_DrawItem (UWindowComboList Combo, Canvas C, float X, float Y,
   C.DrawColor.B = 255;
   if ( bSelected )
   {
-    Combo.DrawStretchedTexture(C,X + 2,Y,W - 11,H,Texture'FEComboListBox');
+    Combo.DrawStretchedTexture(C,X + 2,Y,W - 11,H,CListBox);	//Texture'FEComboListBox');
     C.DrawColor.R = 0;
     C.DrawColor.G = 0;
     C.DrawColor.B = 0;
@@ -84,3 +95,12 @@ function DrawItem (Canvas C, UWindowList Item, float X, float Y, float W, float 
   ComboList_DrawItem(self,C,X,Y,W,H,UWindowComboListItem(Item).Value,Selected == Item);
 }
 
+//get the imported textures -AdamJD
+defaultproperties
+{
+	CListBox=FEComboListBox
+	
+	CListLarge=FEComboListLarge
+	
+	CListSmall=FEComboListSmall
+}

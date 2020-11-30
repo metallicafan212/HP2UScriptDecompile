@@ -4,18 +4,29 @@
 
 class HPMenuOptionHSlider extends UWindowHSliderControl;
 
+//texture imports -AdamJD
+#exec Texture Import File=Textures\Icons\FESliderTexture.PNG	GROUP=Icons	Name=FESliderTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEOverSliderTexture.PNG	GROUP=Icons	Name=FEOverSliderTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FESliderKnobTexture.PNG	GROUP=Icons	Name=FESliderKnobTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+
 var Texture Image;
 var Texture overImage;
 var Texture knobImage;
 var float fSliderOffsetX;
 
+//texture vars for importing -AdamJD
+var Texture textureSlider;
+Var Texture textureOverSlider;
+var Texture textureSliderKnob;
+
+
 function Created ()
 {
   Super.Created();
   SliderWidth = 145.0;
-  Image = Texture'FESliderTexture';
-  overImage = Texture'FEOverSliderTexture';
-  knobImage = Texture'FESliderKnobTexture';
+  Image = textureSlider;			//Texture'FESliderTexture';
+  overImage = textureOverSlider;	//Texture'FEOverSliderTexture';
+  knobImage = textureSliderKnob;	//Texture'FESliderKnobTexture';
   WinHeight = 24.0;
   fSliderOffsetX = 2.0;
   TrackWidth = 22.0;
@@ -57,3 +68,12 @@ function Paint (Canvas C, float X, float Y)
   DrawClippedTexture(C,TrackStart,0.0,knobImage);
 }
 
+//get the imported textures -AdamJD
+defaultproperties
+{
+	textureSlider=FESliderTexture
+	
+	textureOverSlider=FEOverSliderTexture
+	
+	textureSliderKnob=FESliderKnobTexture
+}

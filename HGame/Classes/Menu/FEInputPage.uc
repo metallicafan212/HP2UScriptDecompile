@@ -4,6 +4,11 @@
 
 class FEInputPage extends baseFEPage;
 
+//texture imports -AdamJD
+#exec Texture Import File=Textures\Icons\FEOverOption5Texture.PNG	GROUP=Icons	Name=FEOverOption5Texture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEOverOptionTexture.PNG	GROUP=Icons	Name=FEOverOptionTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEOverOption3Texture.PNG	GROUP=Icons	Name=FEOverOption3Texture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+
 const InWizardDuel_LastBoundKeyIndex= 13;
 const InWizardDuel_FirstBoundKeyIndex= 12;
 const InQuidditch_LastBoundKeyIndex= 12;
@@ -92,6 +97,12 @@ var Color LabelTextColor;
 var Color GoupLabelTextColor;
 var Color ButtonTextColor;
 var Sound buttonClickSound;
+
+//texture vars for importing -AdamJD
+var Texture HoverImage5;
+var Texture HoverImage;
+var Texture HoverImage3;
+
 
 function LocalizeStrings ()
 {
@@ -273,10 +284,10 @@ function Created ()
       InQuidditch_KeyNames[I].SetFont(1);
       InQuidditch_KeyNames[I].TextColor = LabelTextColor;
       InQuidditch_KeyButtons[I] = HPMenuRaisedButton(CreateControl(class'HPMenuRaisedButton', ctlX, ctlY, buttonWidth, ctlH));
-      InQuidditch_KeyButtons[I].UpTexture = texture'FEOverOption5Texture';
-      InQuidditch_KeyButtons[I].DownTexture = texture'FEOverOptionTexture';
-      InQuidditch_KeyButtons[I].DisabledTexture = texture'FEOverOptionTexture';
-      InQuidditch_KeyButtons[I].OverTexture = texture'FEOverOption3Texture';
+      InQuidditch_KeyButtons[I].UpTexture = HoverImage5;		//texture'FEOverOption5Texture';
+      InQuidditch_KeyButtons[I].DownTexture = HoverImage;		//texture'FEOverOptionTexture';
+      InQuidditch_KeyButtons[I].DisabledTexture = HoverImage;	//texture'FEOverOptionTexture';
+      InQuidditch_KeyButtons[I].OverTexture = HoverImage3;		//texture'FEOverOption3Texture';
       InQuidditch_KeyButtons[I].SetFont(0);
       InQuidditch_KeyButtons[I].bAcceptsFocus = false;
       InQuidditch_KeyButtons[I].bIgnoreLDoubleClick = true;
@@ -305,10 +316,10 @@ function Created ()
       InWizardDuel_KeyNames[I].SetFont(1);
       InWizardDuel_KeyNames[I].TextColor = LabelTextColor;
       InWizardDuel_KeyButtons[I] = HPMenuRaisedButton(CreateControl(class'HPMenuRaisedButton', ctlX, ctlY, buttonWidth, ctlH));
-      InWizardDuel_KeyButtons[I].UpTexture = texture'FEOverOption5Texture';
-      InWizardDuel_KeyButtons[I].DownTexture = texture'FEOverOptionTexture';
-      InWizardDuel_KeyButtons[I].DisabledTexture = texture'FEOverOptionTexture';
-      InWizardDuel_KeyButtons[I].OverTexture = texture'FEOverOption3Texture';
+      InWizardDuel_KeyButtons[I].UpTexture = HoverImage5;		//texture'FEOverOption5Texture';
+      InWizardDuel_KeyButtons[I].DownTexture = HoverImage;		//texture'FEOverOptionTexture';
+      InWizardDuel_KeyButtons[I].DisabledTexture = HoverImage;	//texture'FEOverOptionTexture';
+      InWizardDuel_KeyButtons[I].OverTexture = HoverImage3;		//texture'FEOverOption3Texture';
       InWizardDuel_KeyButtons[I].SetFont(0);
       InWizardDuel_KeyButtons[I].bAcceptsFocus = false;
       InWizardDuel_KeyButtons[I].bIgnoreLDoubleClick = true;
@@ -339,10 +350,10 @@ function Created ()
       InGame_KeyNames[I].SetFont(1);
       InGame_KeyNames[I].TextColor = LabelTextColor;
       InGame_KeyButtons[I] = HPMenuRaisedButton(CreateControl(class'HPMenuRaisedButton', ctlX, ctlY, buttonWidth, ctlH));
-      InGame_KeyButtons[I].UpTexture = texture'FEOverOption5Texture';
-      InGame_KeyButtons[I].DownTexture = texture'FEOverOptionTexture';
-      InGame_KeyButtons[I].DisabledTexture = texture'FEOverOptionTexture';
-      InGame_KeyButtons[I].OverTexture = texture'FEOverOption3Texture';
+      InGame_KeyButtons[I].UpTexture = HoverImage5; 		//texture'FEOverOption5Texture';
+      InGame_KeyButtons[I].DownTexture = HoverImage;		//texture'FEOverOptionTexture';
+      InGame_KeyButtons[I].DisabledTexture = HoverImage;	//texture'FEOverOptionTexture';
+      InGame_KeyButtons[I].OverTexture = HoverImage3;		//texture'FEOverOption3Texture';
       InGame_KeyButtons[I].SetFont(0);
       InGame_KeyButtons[I].bAcceptsFocus = false;
       InGame_KeyButtons[I].bIgnoreLDoubleClick = true;
@@ -1967,5 +1978,12 @@ defaultproperties
     GoupLabelTextColor=(R=255,G=255,B=255,A=0)
 
     ButtonTextColor=(R=255,G=255,B=255,A=0)
-
+	
+	//get the imported textures -AdamJD
+	//
+	HoverImage5=FEOverOption5Texture
+	
+	HoverImage=FEOverOptionTexture
+	
+	HoverImage3=FEOverOption3Texture
 }

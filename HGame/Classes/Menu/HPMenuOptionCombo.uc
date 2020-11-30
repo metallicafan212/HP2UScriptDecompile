@@ -4,14 +4,23 @@
 
 class HPMenuOptionCombo extends UWindowComboControl;
 
+//texture imports -AdamJD
+#exec Texture Import File=Textures\Icons\FEComboIdleTexture.PNG	GROUP=Icons	Name=FEComboIdleTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEComboOverTexture.PNG	GROUP=Icons	Name=FEComboOverTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+
 var Texture IdleTexture;
 var Texture OverTexture;
+
+//texture vars for importing -AdamJD
+var Texture textureIdle;
+var Texture textureOver;
+
 
 function Created ()
 {
   Super.Created();
-  IdleTexture = Texture'FEComboIdleTexture';
-  OverTexture = Texture'FEComboOverTexture';
+  IdleTexture = textureIdle; 	//Texture'FEComboIdleTexture';
+  OverTexture = textureOver; 	//Texture'FEComboOverTexture';
 }
 
 function CreateEditBox ()
@@ -75,5 +84,9 @@ function CloseUpWithNoSound ()
 defaultproperties
 {
     ListClass=Class'HPMenuOptionComboList'
-
+	
+	//get the imported textures -AdamJD
+	textureIdle=FEComboIdleTexture
+	
+	textureOver=FEComboOverTexture
 }

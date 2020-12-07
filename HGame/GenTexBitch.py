@@ -30,7 +30,19 @@ texExclude = ["HiddenPawn.PNG", "ica.PNG", "icb.PNG", "icc.PNG", "icd.PNG", "ice
              ];
 
 #AdamJD: Added another one for wizard cards because there's over 200 of them...
-texExcludeWizCard = [];
+texExcludeWizCard = ["WizCardAgrippaBigTexture.PNG", "WizardCardAgrippaTex0.PNG", "WizCardAldertonBigTexture.PNG", "WizardCardAldertonTex0.PNG", "WizCardAndrosBigTexture.PNG", "WizardCardAndrosTex0.PNG",
+                     "WizCardBarbaryBigTexture.PNG", "WizardCardBarbaryTex0.PNG", "WizCardBarkwithBigTexture.PNG", "WizardCardBarkwithTex0.PNG", "WizCardBeamishBigTexture.PNG", "WizardCardBeamishTex0.PNG",
+                     "WizCardBelbyBigTexture.PNG", "WizardCardBelbyTex0.PNG", "WizCardBlaneBigTexture.PNG", "WizardCardBlaneTex0.PNG", "WizCardBloxamBigTexture.PNG", "WizardCardBloxamTex0.PNG",
+                     "WizCardBonhamBigTexture.PNG", "WizardCardBonhamTex0.PNG", "WizCardBottBigTexture.PNG", "WizCardBertieBigTextureLayer0.PNG", "WizCardBertieBigTextureLayer1.PNG", "WizCardBertieBigTextureLayer2.PNG", "WizardCardBottTex0.PNG",
+                     "WizCardCatchloveBigTexture.PNG", "WizardCardCatchloveTex0.PNG", "WizCardChittockBigTexture.PNG", "WizardCardChittockTex0.PNG", "WizCardCirceBigTexture.PNG", "WizardCardCirceTex0.PNG",
+                     "WizCardClaggBigTexture.PNG", "WizardCardClaggTex0.PNG", "WizCardCliodneBigTexture.PNG", "WizardCardCliodneTex0.PNG", "WizCardCronkBigTexture.PNG", "WizardCardCronkTex0.PNG",
+                     "WizCardCrumbBigTexture.PNG", "WizardCardCrumbTex0.PNG", "WizCardDodderidgeBigTexture.PNG", "WizardCardDodderidgeTex0.PNG", "WizCardDukeBigTexture.PNG", "WizardCardDukeTex0.PNG",
+                     "WizCardDumbledoreBigTexture.PNG", "WizCardAlbusBigTextureLayer0.PNG", "WizCardAlbusBigTextureLayer1.PNG", "WizCardAlbusBigTextureLayer2.PNG", "WizardCardDumbledoreTex0.PNG",
+                     "WizCardElphickBigTexture.PNG", "WizardCardElphickTex0.PNG", "WizCardEthelredBigTexture.PNG", "WizardCardEthelredTex0.PNG", "WizCardFancourtBigTexture.PNG", "WizardCardFancourtTex0.PNG",
+                     "WizCardFayBigTexture.PNG", "WizardCardFayTex0.PNG", "WizCardFulbertBigTexture.PNG", "WizardCardFulbertTex0.PNG", "WizCardFurmageBigTexture.PNG", "WizardCardFurmageTex0.PNG",
+                     "WizCardGoshawkBigTexture.PNG", "WizardCardGoshawkTex0.PNG", "WizCardGravesBigTexture.PNG", "WizardCardGravesTex0.PNG", "WizCardGregoryBigTexture.PNG", "WizardCardGregoryTex0.PNG",
+                     "WizCardGrunnionBigTexture.PNG", "WizardCardGrunnionTex0.PNG", "WizCardGryffindorBigTexture.PNG", "WizardCardGryffindorTex0.PNG", "WizCardGunhildaBigTexture.PNG", "WizardCardGunhildaTex0.PNG",
+                    ];
 
 def HasAlpha(Img):
     if Img.mode == "P":

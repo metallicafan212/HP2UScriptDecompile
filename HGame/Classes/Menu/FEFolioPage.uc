@@ -647,7 +647,7 @@ function PaintLargeCard (Canvas Canvas, float fScaleFactor)
   local float offX;
   local float offY;
 
-  if ( byte(Canvas.SizeX) > WinWidth )
+  if ( Canvas.SizeX > WinWidth )
   {
     nLargeCardX = Canvas.SizeX / 2 - textureCurrLargeCard.USize / 2;
     nLargeCardY = 4 + (textureCurrLargeCard.VSize * fScaleFactor - textureCurrLargeCard.VSize) / 2;

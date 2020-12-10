@@ -4,6 +4,13 @@
 
 class WCPinkstone extends Goldcards;
 
+//texture imports -AdamJD
+#exec Texture Import File=Textures\Icons\WizCardPinkstoneBigTexture.PNG	GROUP=Icons	Name=WizCardPinkstoneBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardCarlottaBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardCarlottaBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardCarlottaBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardCarlottaBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardCarlottaBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardCarlottaBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Skins\WizardCardPinkstoneTex0.PNG	GROUP=Skins	Name=WizardCardPinkstoneTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+
 function PostBeginPlay ()
 {
   WizardName = "Carlotta Pinkstone";
@@ -17,8 +24,6 @@ defaultproperties
     textureBig=Texture'HGame.Icons.WizCardPinkstoneBigTexture'
 
     strDescriptionId="WizCard_0017"
-
-    bIsLayered=True
 
     textureLayers(0)=Texture'HGame.Icons.WizCardCarlottaBigTextureLayer0'
 

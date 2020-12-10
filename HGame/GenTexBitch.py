@@ -42,6 +42,20 @@ texExcludeWizCard = ["WizCardAgrippaBigTexture.PNG", "WizardCardAgrippaTex0.PNG"
                      "WizCardFayBigTexture.PNG", "WizardCardFayTex0.PNG", "WizCardFulbertBigTexture.PNG", "WizardCardFulbertTex0.PNG", "WizCardFurmageBigTexture.PNG", "WizardCardFurmageTex0.PNG",
                      "WizCardGoshawkBigTexture.PNG", "WizardCardGoshawkTex0.PNG", "WizCardGravesBigTexture.PNG", "WizardCardGravesTex0.PNG", "WizCardGregoryBigTexture.PNG", "WizardCardGregoryTex0.PNG",
                      "WizCardGrunnionBigTexture.PNG", "WizardCardGrunnionTex0.PNG", "WizCardGryffindorBigTexture.PNG", "WizardCardGryffindorTex0.PNG", "WizCardGunhildaBigTexture.PNG", "WizardCardGunhildaTex0.PNG",
+                     "WizCardHerpoBigTexture.PNG", "WizCardHerpoBigTextureLayer0.PNG", "WizCardHerpoBigTextureLayer1.PNG", "WizCardHerpoBigTextureLayer2.PNG", "WizardCardHerpoTex0.PNG",
+                     "WizCardHipworthBigTexture.PNG", "WizardCardHipworthTex0.PNG", "WizCardHufflepuffBigTexture.PNG", "WizCardHelgaBigTextureLayer0.PNG", "WizCardHelgaBigTextureLayer1.PNG", "WizCardHelgaBigTextureLayer2.PNG", "WizardCardHufflepuffTex0.PNG",
+                     "WizCardJonesBigTexture.PNG", "WizardCardJonesTex0.PNG", "WizCardKeggBigTexture.PNG", "WizardCardKeggTex0.PNG", "WizCardKetteridgeBigTexture.PNG", "WizardCardKetteridgeTex0.PNG",
+                     "WizCardKnightleyBigTexture.PNG", "WizCardMontagueBigTextureLayer0.PNG", "WizCardMontagueBigTextureLayer1.PNG", "WizCardMontagueBigTextureLayer2.PNG", "WizardCardKnightleyTex0.PNG",
+                     "WizCardLufkinBigTexture.PNG", "WizardCardLufkinTex0.PNG", "WizCardMaeveBigTexture.PNG", "WizardCardMaeveTex0.PNG", "WizCardMarjoribanksBigTexture.PNG", "WizardCardMarjoribanksTex0.PNG",
+                     "WizCardMerlinBigTexture.PNG", "WizardCardMerlinTex0.PNG", "WizCardMerwynBigTexture.PNG", "WizardCardMerwynTex0.PNG", "WizCardMontmorencyBigTexture.PNG", "WizardCardMontmorencyTex0.PNG",
+                     "WizCardMopsusBigTexture.PNG", "WizardCardMopsusTex0.PNG", "WizCardMuldoonBigTexture.PNG", "WizardCardMuldoonTex0.PNG", "WizCardNutcombeBigTexture.PNG", "WizardCardNutcombeTex0.PNG",
+                     "WizCardOglethorpeBigTexture.PNG", "WizardCardOglethorpeTex0.PNG", "WizCardOldridgeBigTexture.PNG", "WizardCardOldridgeTex0.PNG", "WizCardOliphantBigTexture.PNG", "WizardCardOliphantTex0.PNG",
+                     "WizCardOllertonBigTexture.PNG", "WizardCardOllertonTex0.PNG", "WizCardParacelsusBigTexture.PNG", "WizardCardParacelsusTex0.PNG", "WizCardPeakesBigTexture.PNG", "WizardCardPeakesTex0.PNG",
+                     "WizCardPilliwickleBigTexture.PNG", "WizardCardPilliwickleTex0.PNG", "WizCardPinkstoneBigTexture.PNG", "WizCardCarlottaBigTextureLayer0.PNG", "WizCardCarlottaBigTextureLayer1.PNG", "WizCardCarlottaBigTextureLayer2.PNG", "WizardCardPinkstoneTex0.PNG",
+                     "WizCardPlattBigTexture.PNG", "WizardCardPlattTex0.PNG", "WizCardPlumptonBigTexture.PNG", "WizardCardPlumptonTex0.PNG", "WizCardPlunkettBigTexture.PNG", "WizardCardPlunkettTex0.PNG",
+                     "WizCardPoBigTexture.PNG", "WizardCardPoTex0.PNG", "WizCardPokebyBigTexture.PNG", "WizardCardPokebyTex0.PNG",
+                     "WizCardPotterBigTexture.PNG", "WizCardHarryBigTextureLayer0.PNG", "WizCardHarryBigTextureLayer1.PNG", "WizCardHarryBigTextureLayer2.PNG", "WizardCardPotterTex0.PNG",
+                     "WizCardRastrickBigTexture.PNG", "WizardCardRastrickTex0.PNG", "WizCardRavenclawBigTexture.PNG", "WizCardRowenaBigTextureLayer0.PNG", "WizCardRowenaBigTextureLayer1.PNG", "WizCardRowenaBigTextureLayer2.PNG", "WizardCardRavenclawTex0.PNG",
                     ];
 
 def HasAlpha(Img):

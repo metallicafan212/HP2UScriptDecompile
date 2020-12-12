@@ -56,6 +56,18 @@ texExcludeWizCard = ["WizCardAgrippaBigTexture.PNG", "WizardCardAgrippaTex0.PNG"
                      "WizCardPoBigTexture.PNG", "WizardCardPoTex0.PNG", "WizCardPokebyBigTexture.PNG", "WizardCardPokebyTex0.PNG",
                      "WizCardPotterBigTexture.PNG", "WizCardHarryBigTextureLayer0.PNG", "WizCardHarryBigTextureLayer1.PNG", "WizCardHarryBigTextureLayer2.PNG", "WizardCardPotterTex0.PNG",
                      "WizCardRastrickBigTexture.PNG", "WizardCardRastrickTex0.PNG", "WizCardRavenclawBigTexture.PNG", "WizCardRowenaBigTextureLayer0.PNG", "WizCardRowenaBigTextureLayer1.PNG", "WizCardRowenaBigTextureLayer2.PNG", "WizardCardRavenclawTex0.PNG",
+                     "WizCardSawbridgeBigTexture.PNG", "WizardCardSawbridgeTex0.PNG", "WizCardScamanderBigTexture.PNG", "WizardCardScamanderTex0.PNG", "WizCardShimplingBigTexture.PNG", "WizardCardShimplingTex0.PNG",
+                     "WizCardShingletonBigTexture.PNG", "WizardCardShingletonTex0.PNG", "WizCardSlytherinBigTexture.PNG", "WizardCardSlytherinTex0.PNG", "WizCardSmethwyckBigTexture.PNG", "WizardCardSmethwyckTex0.PNG",
+                     "WizCardStalkBigTexture.PNG", "WizardCardStalkTex0.PNG", "WizCardStarkeyBigTexture.PNG", "WizardCardStarkeyTex0.PNG", "WizCardStroulgerBigTexture.PNG", "WizardCardStroulgerTex0.PNG",
+                     "WizCardStumpBigTexture.PNG", "WizardCardStumpTex0.PNG", "WizCardSummerbeeBigTexture.PNG", "WizardCardSummerbeeTex0.PNG", "WizCardSweetingBigTexture.PNG", "WizardCardSweetingTex0.PNG",
+                     "WizCardSykesBigTexture.PNG", "WizardCardSykesTex0.PNG", "WizCardThrustonBigTexture.PNG", "WizardCardThrustonTex0.PNG", "WizCardThurkellBigTexture.PNG", "WizardCardThurkellTex0.PNG",
+                     "WizCardTokeBigTexture.PNG", "WizardCardTokeTex0.PNG", "WizCardToothillBigTexture.PNG", "WizardCardToothillTex0.PNG", "WizCardTremlettBigTexture.PNG", "WizardCardTremlettTex0.PNG",
+                     "WizCardTugwoodBigTexture.PNG", "WizardCardTugwoodTex0.PNG", "WizCardTwonkBigTexture.PNG", "WizardCardTwonkTex0.PNG", "WizCardUricBigTexture.PNG", "WizardCardUricTex0.PNG",
+                     "WizCardVablatskyBigTexture.PNG", "WizardCardVablatskyTex0.PNG", "WizCardWadcockBigTexture.PNG", "WizardCardWadcockTex0.PNG", "WizCardWafflingBigTexture.PNG", "WizardCardWafflingTex0.PNG",
+                     "WizCardWagtailBigTexture.PNG", "WizardCardWagtailTex0.PNG", "WizCardWarbeckBigTexture.PNG", "WizardCardWarbeckTex0.PNG", "WizCardWellbelovedBigTexture.PNG", "WizardCardWellbelovedTex0.PNG",
+                     "WizCardWendelinBigTexture.PNG", "WizardCardWendelinTex0.PNG", "WizCardWenlockBigTexture.PNG", "WizardCardWenlockTex0.PNG", "WizCardWhitehornBigTexture.PNG", "WizardCardWhitehornTex0.PNG",
+                     "WizCardWildsmithBigTexture.PNG", "WizardCardWildsmithTex0.PNG", "WizCardWintringhamBigTexture.PNG", "WizardCardWintringhamTex0.PNG", "WizCardWithersBigTexture.PNG", "WizardCardWithersTex0.PNG",
+                     "WizCardWoodcroftBigTexture.PNG", "WizardCardWoodcroftTex0.PNG", "WizCardWrightBigTexture.PNG", "WizardCardWrightTex0.PNG", "WizCardYoudleBigTexture.PNG", "WizardCardYoudleTex0.PNG"
                     ];
 
 def HasAlpha(Img):

@@ -4537,7 +4537,8 @@ state PlayerWalking
 		fFallDistanceZ = (fHighestZ-location.z);
 			
 		// if we fell for a long distance then hurt harry
-		if( fFallDistanceZ > FALL_DAMAGE_DISTANCE /*take damage if bNoFallingDamage is false -AdamJD*/ && !bNoFallingDamage )
+		if( fFallDistanceZ > FALL_DAMAGE_DISTANCE 
+			&& !bNoFallingDamage ) //only take damage if bNoFallingDamage is false -AdamJD
 		{
 			// The farther you fall the more damage you get
 			if( fFallDistanceZ < FALL_DAMAGE_DISTANCE + 32 )	// 512 - 544

@@ -966,15 +966,14 @@ state StateQuidditchCam
   
 		rSavedCurrRotation = rCurrRotation;
 		rCurrRotation = rotator(CamTarget.Location - vCurrPosition);
-		// UpdatePosition(fTimeDelta/*,True*/);
-		UpdatePosition(fTimeDelta,True); //turns out uncommenting the second parameter makes quidditch cam smoother... -AdamJD
+		UpdatePosition(fTimeDelta,True);
 		rCurrRotation = rSavedCurrRotation;
 		lookDir = 0.5 * (PlayerHarry.Location - vCurrPosition) + 0.5 * (CamTarget.Location - vCurrPosition);
 		rDestRotation = rotator(lookDir);
 		UpdateRotationUsingVectors(fTimeDelta);
 	}
 	
-	//force camera to focus on Harry before going to the cutscene cam(TEMP) -AdamJD
+	//force camera to focus on Harry before going to the cutscene cam -AdamJD
 	function EndState()
 	{
 		Log("AdamJD:	Ended quidditch cam");

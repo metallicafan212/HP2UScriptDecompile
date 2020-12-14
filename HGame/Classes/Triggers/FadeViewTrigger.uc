@@ -46,7 +46,8 @@ defaultproperties
 
     fadetime=0.25
 
-    A=255.00
+	// Metallicafan212:	This is incorrect, it has to be 0 at first
+    A=0.0
 
     R=255.00
 

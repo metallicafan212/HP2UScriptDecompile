@@ -926,32 +926,32 @@ event PostSaveGame ()
 
 function LoadLevel (string LevelName)
 {
-  local Characters A;
+	local Characters A;
 
-  foreach AllActors(Class'Characters',A)
-  {
-    if ( A.bPersistent )
-    {
-      A.PersistentState = A.GetStateName();
-      A.PersistentLeadingActor = A.LeadingActor.Name;
-      A.PersistentNavPName = A.navP.Name;
-      Log("*!* " $ string(A) $ " P_SAVING: PersistentState: " $ string(A.PersistentState) $ " for " $ string(A));
-      Log("*!* " $ string(A) $ " P_SAVING: LeadingActor: " $ string(A.PersistentLeadingActor) $ " AnimSequence: " $ string(A.AnimSequence) $ " navP:" $ string(A.navP));
-    }
-  }
-  StopAllMusic(1.0);
-  ConsoleCommand("SavePActors");
-  HPConsole(Player.Console).ChangeLevel(LevelName,True);
+	foreach AllActors(Class'Characters',A)
+	{
+		if ( A.bPersistent )
+		{
+			A.PersistentState = A.GetStateName();
+			A.PersistentLeadingActor = A.LeadingActor.Name;
+			A.PersistentNavPName = A.navP.Name;
+			Log("*!* " $ string(A) $ " P_SAVING: PersistentState: " $ string(A.PersistentState) $ " for " $ string(A));
+			Log("*!* " $ string(A) $ " P_SAVING: LeadingActor: " $ string(A.PersistentLeadingActor) $ " AnimSequence: " $ string(A.AnimSequence) $ " navP:" $ string(A.navP));
+		}
+	}
+	StopAllMusic(1.0);
+	ConsoleCommand("SavePActors");
+	HPConsole(Player.Console).ChangeLevel(LevelName,True);
   
-  //commenting out because this causes issues on times such as a black screen -AdamJD
-  /*
-  if ( InStr(Caps(LevelName),"STARTUP") > -1 )
-  {
-    HPConsole(Player.Console).menuBook.bGamePlaying = False;
-    HPConsole(Player.Console).menuBook.OpenBook("Main");
-    HPConsole(Player.Console).LaunchUWindow();
-  }
-  */
+	//commenting out because this causes issues on times such as a black screen -AdamJD
+	/*
+	if ( InStr(Caps(LevelName),"STARTUP") > -1 )
+	{
+		HPConsole(Player.Console).menuBook.bGamePlaying = False;
+		HPConsole(Player.Console).menuBook.OpenBook("Main");
+		HPConsole(Player.Console).LaunchUWindow();
+	}
+	*/
 }
 
 event PreClientTravel ()
@@ -983,75 +983,92 @@ event PreClientTravel ()
   bHarryKilled = False;
 }
 
-event TravelPostAccept ()
+event TravelPostAccept()
 {
   local SmartStart StartPoint;
   local Characters Ch;
   local Weapon weap;
   local bool bFoundSmartStart;
 
-  Super.TravelPostAccept();
-  Log("weapon is" $ string(Weapon));
-  if ( Inventory == None )
-  {
-    weap = Spawn(Class'baseWand',self);
-    weap.BecomeItem();
-    AddInventory(weap);
-    weap.WeaponSet(self);
-    weap.GiveAmmo(self);
-    Log(string(self) $ " spawning weap " $ string(weap));
-  } else {
-    Log("not spawning weap");
-  }
-  CopyAllStatusFromHarryToManager();
-  StatusGroupWizardCards(managerStatus.GetStatusGroup(Class'StatusGroupWizardCards')).RemoveHarryOwnedCardsFromLevel(None);
-  if ( Director != None )
-  {
-    Director.OnPlayerTravelPostAccept();
-  }
-  foreach AllActors(Class'Characters',Ch)
-  {
-    Ch.SetEverythingForTheDuel();
-  }
-  if ( PreviousLevelName != "" )
-  {
-    bFoundSmartStart = False;
-    foreach AllActors(Class'SmartStart',StartPoint)
-    {
-      if ( (StartPoint.PreviousLevelName != "") && (StartPoint.PreviousLevelName ~= PreviousLevelName) )
-      {
-        SetLocation(StartPoint.Location);
-        SetRotation(StartPoint.Rotation);
-        if ( StartPoint.bDoLevelSave )
-        {
-          harry(Level.PlayerHarryActor).SaveGame();
-        }
-        cm("***Found SmartStart from:" $ PreviousLevelName);
-        Log("***Found SmartStart from:" $ PreviousLevelName);
-        bFoundSmartStart = True;
-      } 
-	  // else 
-	  // {
-	// }
-    }
-  }
-  if (  !bFoundSmartStart )
-  {
-    cm("***Failed to find SmartStart from:" $ PreviousLevelName);
-    Log("***Failed to find SmartStart from:" $ PreviousLevelName);
-  }
-  if ( bQueuedToSaveGame )
-  {
-    cm(" *-*-* Keep the loading screen ON because we *ARE* QueuedToSaveGame. At least until we are done saving.");
-    Log(" *-*-* Keep the loading screen ON because we *ARE* QueuedToSaveGame. At least until we are done saving.");
-    bShowLoadingScreen = True;
-  } 
-  else 
-  {
-    cm(" *-*-* Turn OFF the loading screen because we are *NOT* QueuedToSaveGame.");
-    Log(" *-*-* Turn OFF the loading screen because we are *NOT* QueuedToSaveGame.");
-    bShowLoadingScreen = False;
-  }
+	Super.TravelPostAccept();
+	Log("weapon is" $ string(Weapon));
+	if ( Inventory == None )
+	{
+		weap = Spawn(Class'baseWand',self);
+		weap.BecomeItem();
+		AddInventory(weap);
+		weap.WeaponSet(self);
+		weap.GiveAmmo(self);
+		Log(string(self) $ " spawning weap " $ string(weap));
+	} 
+	else 
+	{
+		Log("not spawning weap");
+	}
+	CopyAllStatusFromHarryToManager();
+	StatusGroupWizardCards(managerStatus.GetStatusGroup(Class'StatusGroupWizardCards')).RemoveHarryOwnedCardsFromLevel(None);
+	if ( Director != None )
+	{
+		Director.OnPlayerTravelPostAccept();
+	}
+	foreach AllActors(Class'Characters',Ch)
+	{
+		Ch.SetEverythingForTheDuel();
+	}
+	if ( PreviousLevelName != "" )
+	{
+		bFoundSmartStart = False;
+		foreach AllActors(Class'SmartStart',StartPoint)
+		{
+			if ( (StartPoint.PreviousLevelName != "") && (StartPoint.PreviousLevelName ~= PreviousLevelName) )
+			{
+				SetLocation(StartPoint.Location);
+				SetRotation(StartPoint.Rotation);
+				if ( StartPoint.bDoLevelSave )
+				{
+					harry(Level.PlayerHarryActor).SaveGame();
+				}
+				cm("***Found SmartStart from:" $ PreviousLevelName);
+				Log("***Found SmartStart from:" $ PreviousLevelName);
+				bFoundSmartStart = True;
+			} 
+		}
+		
+		// Metallicafan212:	I do it in cpp now, more reliable
+		/*
+		// Metallicafan212:	Find the portal
+		if(Level.StartPortal != '')
+		{
+			foreach AllActors(Class'SmartStart', StartPoint, Level.StartPortal)
+			{
+				SetLocation(StartPoint.Location);
+				SetRotation(StartPoint.Rotation);
+				if ( StartPoint.bDoLevelSave )
+				{
+					harry(Level.PlayerHarryActor).SaveGame();
+				}
+				bFoundSmartStart = True;
+			}
+		}
+		*/
+	}
+	if (  !bFoundSmartStart )
+	{
+		cm("***Failed to find SmartStart from:" $ PreviousLevelName);
+		Log("***Failed to find SmartStart from:" $ PreviousLevelName);
+	}
+	if ( bQueuedToSaveGame )
+	{
+		cm(" *-*-* Keep the loading screen ON because we *ARE* QueuedToSaveGame. At least until we are done saving.");
+		Log(" *-*-* Keep the loading screen ON because we *ARE* QueuedToSaveGame. At least until we are done saving.");
+		bShowLoadingScreen = True;
+	} 
+	else 
+	{
+		cm(" *-*-* Turn OFF the loading screen because we are *NOT* QueuedToSaveGame.");
+		Log(" *-*-* Turn OFF the loading screen because we are *NOT* QueuedToSaveGame.");
+		bShowLoadingScreen = False;
+	}
 }
 
 function CopyAllStatusFromHarryToManager ()

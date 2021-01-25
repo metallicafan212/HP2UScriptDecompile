@@ -4,91 +4,89 @@
 
 class spellTrigger extends Trigger;
 
-//texture import -AdamJD
-#exec Texture Import File=Textures\spell_trigger.PNG Name=spell_trigger COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-
 var() bool bHitJustFromFront;
 
 function BeginPlay ()
 {
-  Super.BeginPlay();
+	Super.BeginPlay();
 }
 
 function bool IsRelevant (Actor Other)
 {
-  if (  !bInitiallyActive )
-  {
-    if ( baseSpell(Other) == None )
-    {
-      bInitiallyActive = True;
-      Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!making active1 " $ string(Other));
-      return False;
-    }
-    if ( bool(baseSpell(Other).SpellType) == bool(eVulnerableToSpell) )
-    {
-      return False;
-    } else {
-      bInitiallyActive = True;
-      Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!making active 2 " $ string(Other));
-      return False;
-    }
-    return False;
-  }
-  if ( baseSpell(Other) == None )
-  {
-    return False;
-  }
-  if ( baseSpell(Other).SpellType == eVulnerableToSpell )
-  {
-    return True;
-  } else {
-    return False;
-  }
+	if (  !bInitiallyActive )
+	{
+		if ( baseSpell(Other) == None )
+		{
+			bInitiallyActive = True;
+			Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!making active1 " $ string(Other));
+			return False;
+		}
+		if ( bool(baseSpell(Other).SpellType) == bool(eVulnerableToSpell) )
+		{
+			return False;
+		} 
+		else 
+		{
+			bInitiallyActive = True;
+			Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!making active 2 " $ string(Other));
+			return False;
+		}
+		return False;
+	}
+	if ( baseSpell(Other) == None )
+	{
+		return False;
+	}
+	if ( baseSpell(Other).SpellType == eVulnerableToSpell )
+	{
+		return True;
+	} 
+	else 
+	{
+		return False;
+	}
 }
 
 function Touch (Actor Other)
 {
-  local Actor A;
+	local Actor A;
 
-  if ( IsRelevant(Other) )
-  {
-    if ( bTriggerOnceOnly )
-    {
-      SetCollision(False);
-      bProjTarget = False;
-    }
-  }
-  Super.Touch(Other);
+	if ( IsRelevant(Other) )
+	{
+		if ( bTriggerOnceOnly )
+		{
+		SetCollision(False);
+		bProjTarget = False;
+		}
+	}
+	Super.Touch(Other);
 }
 
 state() OtherTriggerToggles //extends OtherTriggerToggles
 {
-  function Trigger (Actor Other, Pawn EventInstigator)
-  {
-    Super.Trigger(Other,EventInstigator);
-    bProjTarget =  !bProjTarget;
-  }
-  
+	function Trigger (Actor Other, Pawn EventInstigator)
+	{
+		Super.Trigger(Other,EventInstigator);
+		bProjTarget =  !bProjTarget;
+	}
 }
 
 state() OtherTriggerTurnsOn //extends OtherTriggerTurnsOn
 {
-  function Trigger (Actor Other, Pawn EventInstigator)
-  {
-    Super.Trigger(Other,EventInstigator);
-    bProjTarget = True;
-  }
-  
+	function Trigger (Actor Other, Pawn EventInstigator)
+	{
+		Super.Trigger(Other,EventInstigator);
+		bProjTarget = True;
+	}
 }
 
 state() OtherTriggerTurnsOff //extends OtherTriggerTurnsOff
 {
-  function Trigger (Actor Other, Pawn EventInstigator)
-  {
-    Super.Trigger(Other,EventInstigator);
-    bProjTarget = False;
-  }
-  
+	function Trigger (Actor Other, Pawn EventInstigator)
+	{
+		Super.Trigger(Other,EventInstigator);
+		bProjTarget = False;
+	}
 }
 
 defaultproperties

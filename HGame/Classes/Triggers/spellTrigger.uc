@@ -4,6 +4,9 @@
 
 class spellTrigger extends Trigger;
 
+//texture import -AdamJD
+#exec Texture Import File=Textures\spell_trigger.PNG Name=spell_trigger COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+
 var() bool bHitJustFromFront;
 
 function BeginPlay ()
@@ -21,7 +24,7 @@ function bool IsRelevant (Actor Other)
 			Log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!making active1 " $ string(Other));
 			return False;
 		}
-		if ( bool(baseSpell(Other).SpellType) == bool(eVulnerableToSpell) )
+		if ( baseSpell(Other).SpellType == eVulnerableToSpell )
 		{
 			return False;
 		} 

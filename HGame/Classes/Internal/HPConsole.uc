@@ -1469,7 +1469,8 @@ event DrawLevelInfo (Canvas C, string URL)
 {
   local float SizeX;
   local float SizeY;
-  local string Index;
+  //local string Index;
+  local string sIndex;
   local string Text;
   local int Dot;
   local int cards;
@@ -1489,8 +1490,8 @@ event DrawLevelInfo (Canvas C, string URL)
   C.DrawColor.R = 0;
   C.DrawColor.G = 0;
   C.DrawColor.B = 0;
-  Index = Localize("text","n_" $ URL,"Dobby");
-  Text = Localize("text","level_name_" $ Index,"HGame");
+  sIndex = Localize("text","n_" $ URL,"Dobby");
+  Text = Localize("text","level_name_" $ sIndex,"HGame");
   if ( Left(Text,1) != "<" )
   {
     C.CurX = FrameX * 0.34999999;
@@ -1498,7 +1499,7 @@ event DrawLevelInfo (Canvas C, string URL)
     C.Font = LocalBigFont;
     C.DrawText(Text);
   }
-  Text = Localize("text","objective_" $ Index,"HGame");
+  Text = Localize("text","objective_" $ sIndex,"HGame");
   if ( Left(Text,1) != "<" )
   {
     C.CurX = FrameX * 0.34999999;
@@ -1516,7 +1517,7 @@ event DrawLevelInfo (Canvas C, string URL)
     if ( cards > 0 )
     {
       C.CurX = FrameX * 0.34999999;
-      Text = Localize("all","find_wizard_text_0" $ string(cards),"Pickup");
+      Text = Localize("all","find_wizard_text_0" $ cards,"Pickup");
       if ( Left(Text,1) != "<" )
       {
         C.DrawText(Text);
@@ -1526,7 +1527,7 @@ event DrawLevelInfo (Canvas C, string URL)
     if ( secrets > 0 )
     {
       C.CurX = FrameX * 0.34999999;
-      Text = Localize("all","find_secret_text_0" $ string(secrets),"Pickup");
+      Text = Localize("all","find_secret_text_0" $ secrets,"Pickup");
       if ( Left(Text,1) != "<" )
       {
         C.DrawText(Text);

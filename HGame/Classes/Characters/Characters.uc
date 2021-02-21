@@ -6,7 +6,6 @@ class Characters extends HChar;
 
 const strCUE_OUT_OF_STOCK_DONE= "_OutOfStockDone";
 const strCUE_LURING_DONE= "_LuringDone";
-const strWeasleyTurnTowardCommand = "TurnTo harry Follow"; //hack to make both Weasley twins turn towards Harry -AdamJD
 enum EVendorDialog {
   VDialog_FredWeasley,
   VDialog_GeorgeWeasley,
@@ -775,10 +774,7 @@ begin:
   if ( WeasleyTwin != None )
   {
     WeasleyTwin.GotoState('stateIdle');
-	
-	//you need both for the twin to turn towards Harry AND not mess up the animations -AdamJD
     WeasleyTwin.TurnToward(Level.PlayerHarryActor);
-	WeasleyTwin.CutCommand(strWeasleyTurnTowardCommand);
   }
   SayPopupLine(VendorDialog.strLureId,strCUE_LURING_DONE,'wave');
 keep_facing_harry:
@@ -790,9 +786,7 @@ keep_facing_harry:
   TurnToward(Level.PlayerHarryActor);
   if ( WeasleyTwin != None )
   {
-	//you need both for the twin to turn towards Harry AND not mess up the animations -AdamJD
     WeasleyTwin.TurnToward(Level.PlayerHarryActor);
-	WeasleyTwin.CutCommand(strWeasleyTurnTowardCommand);
   }
   goto ('keep_facing_harry');
 }
@@ -829,10 +823,7 @@ begin:
   if ( WeasleyTwin != None )
   {
     WeasleyTwin.GotoState('stateIdle');
-	
-    //you need both for the twin to turn towards Harry AND not mess up the animations -AdamJD
     WeasleyTwin.TurnToward(Level.PlayerHarryActor);
-	WeasleyTwin.CutCommand(strWeasleyTurnTowardCommand);
   }
   SayPopupLine(VendorDialog.strOutOfStockId,strCUE_OUT_OF_STOCK_DONE,GetTalkAnimName());
 keep_facing_harry:
@@ -844,9 +835,7 @@ keep_facing_harry:
   TurnToward(Level.PlayerHarryActor);
   if ( WeasleyTwin != None )
   {
-    //you need both for the twin to turn towards Harry AND not mess up the animations -AdamJD
     WeasleyTwin.TurnToward(Level.PlayerHarryActor);
-	WeasleyTwin.CutCommand(strWeasleyTurnTowardCommand);
   }
   goto ('keep_facing_harry');
 }

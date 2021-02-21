@@ -1294,7 +1294,6 @@ state PlayerWalking //extends PlayerWalking
         if ( Deceleration < AirSpeedNormal / 2 )
         {
           Deceleration += ((AirSpeedNormal / 2) / DecelRate) * DeltaTime;
-          // There are 1 jump destination(s) inside the last statement!
         }
       }
 	  else

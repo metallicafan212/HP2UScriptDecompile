@@ -4,7 +4,7 @@
 
 class PackSounds extends Actor;    
 
-//import wav sounds -AdamJD
+//import the wav sounds -AdamJD
 
 //Adv11_COS
 #exec Audio Import File=Sounds\Adv11_COS\Adv11a_cutscene_explosion_rubble.wav	Group=Adv11_COS

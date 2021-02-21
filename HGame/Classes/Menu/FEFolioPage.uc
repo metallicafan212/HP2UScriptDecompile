@@ -961,7 +961,6 @@ function SetInitialSelection ()
       } else {
         nCurrItemOnPage = nCardCount % nNumSmallPerPage - 1;
 		return;
-        // There are 3 jump destination(s) inside the last statement!
       }
     }
   }

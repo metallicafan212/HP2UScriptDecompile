@@ -402,16 +402,17 @@ function AddToCastedSpellList (baseSpell spell)
 function SubtractFromCastedSpellList (baseSpell spell)
 {
   local int I;
-  local int Index;
+  //local int Index;
+  local int iIndex;
   local bool bFound;
 
   // I = 0;
-  for ( I=0; I < NumCastedSpells; I++ )
+  for ( I=0; I < NumCastedSpells; ++I )
   {
     if ( CastedSpellList[I] == spell )
     {
       bFound = True;
-      Index = I;
+      iIndex = I;
       CastedSpellList[I] = None;
       NumCastedSpells--;
 	  break;
@@ -423,7 +424,7 @@ function SubtractFromCastedSpellList (baseSpell spell)
   if ( bFound )
   {
     // I = Index;
-    for ( I=Index; I < 8 - 1; ++I )
+    for ( I=iIndex; I < 8 - 1; ++I )
     {
       CastedSpellList[I] = CastedSpellList[I + 1];
       // ++I;

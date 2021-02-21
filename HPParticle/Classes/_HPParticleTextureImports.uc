@@ -1,5 +1,5 @@
-//class created by me to add the exec commands for finding the HPParticle textures instead of having to put them in each individual class -AdamJD
-class _HPParticleImports extends Actor 
+//this is created by me to add the exec commands for finding the textures in one file instead of having to put them in each individual class -AdamJD
+class _HPParticleTextureImports extends Actor 
 	abstract;
 
 //get the HPParticle textures -AdamJD

@@ -145,7 +145,8 @@ function Vector pushDirection ()
   local Rotator Facing;
   local Vector tempLocation;
   local Vector tempCollision;
-  local int Index;
+  //local int Index;
+  local int iIndex;
 
   Facing = rotator(PlayerHarry.Location - Location);
   // Count = 1;
@@ -175,9 +176,9 @@ function Vector pushDirection ()
   } else //{
     if ( rotationCount <= 9 )
     {
-      Index = rotationCount / 2;
+      iIndex = rotationCount / 2;
       Facing = rotator(PlayerHarry.Location - Location);
-      Facing.Yaw = fRotation[Index];
+      Facing.Yaw = fRotation[iIndex];
 	  tempLocation = Location + (vector(Facing) * CollisionRadius);
       return Normal(Location - tempLocation);
     } else {

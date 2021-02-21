@@ -39,7 +39,6 @@ const strVENDOR_WAIT_ANIM_PARAM= " loopanim=vendor_idle2";
 const strINDEFINITE_TEXT_PARAM= " IndefiniteText";
 const strTALK_COMMAND= "TALK ";
 const strSAY_COMMAND= "SAY ";
-const strFACE_VENDOR_COMMAND= "TURNTO "; //this const is added by me to access the Vendor cutname -AdamJD
 const strFACE_HARRY_COMMAND= "TURNTO harry";
 const strCAPTURE_COMMAND= "CAPTURE";
 const strRELEASE_COMMAND= "RELEASE";
@@ -313,8 +312,7 @@ state EngageVendor
 	begin:
 		Level.PlayerHarryActor.Acceleration = vect(0.00,0.00,0.00);
 		Level.PlayerHarryActor.Velocity *= vect(0.00,0.00,1.00);
-		//harry(Level.PlayerHarryActor).TurnTo(Level.PlayerHarryActor.Location + (Vendor.Location - Level.PlayerHarryActor.Location) * vect(1.00,1.00,0.00));
-		harry(Level.PlayerHarryActor).CutCommand(strFACE_VENDOR_COMMAND $Vendor.CutName); //can only get Harry to face a vendor by using TurnTo as a cutscene command -AdamJD
+		harry(Level.PlayerHarryActor).TurnTo(Level.PlayerHarryActor.Location + (Vendor.Location - Level.PlayerHarryActor.Location) * vect(1.00,1.00,0.00));
 		Vendor.CutCommand(strFACE_HARRY_COMMAND,strCUE_VENDOR_TURN_DONE);
 		//WeasleyTwin = Vendor.GetWeasleyTwin();
 		WeasleyTwin = WeasTwin;

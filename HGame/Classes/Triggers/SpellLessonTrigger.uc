@@ -717,14 +717,15 @@ function SayTryAgain (bool bLastTimeAround)
   local int nTryLastTimeEntries;
   local int nTryAgainEntries;
   //local int I;
+  local int iSayTryAgain;
 
   if ( bLastTimeAround )
   {
     // I = 0;
     // if ( I < 2 )
-	for(I = 0; I < 2; I++) //for loop -AdamJD
+	for(iSayTryAgain = 0; iSayTryAgain < 2; iSayTryAgain++) //for loop -AdamJD
     {
-      if ( strTryOneLastTime[I] != "" )
+      if ( strTryOneLastTime[iSayTryAgain] != "" )
       {
         ++nTryLastTimeEntries;
       } //else {
@@ -738,14 +739,14 @@ function SayTryAgain (bool bLastTimeAround)
   if ( bLastTimeAround && (nTryLastTimeEntries > 0) )
   {
     // I = RandRange(0.0,byte(nTryLastTimeEntries - 1)) = SayLessonDialog(strTryOneLastTime[I],False);
-	I = RandRange(0.0,nTryLastTimeEntries - 1);
-	SayLessonDialog(strTryOneLastTime[I],False);
+	iSayTryAgain = RandRange(0.0,nTryLastTimeEntries - 1);
+	SayLessonDialog(strTryOneLastTime[iSayTryAgain],False);
   } else {
     // I = 0;
     // if ( I < 3 )
-	for(I = 0; I < 3; I++) //for loop -AdamJD
+	for(iSayTryAgain = 0; iSayTryAgain < 3; iSayTryAgain++) //for loop -AdamJD
     {
-      if ( strTryAgain[I] != "" )
+      if ( strTryAgain[iSayTryAgain] != "" )
       {
         ++nTryAgainEntries;
       } //else {
@@ -757,8 +758,8 @@ function SayTryAgain (bool bLastTimeAround)
     if ( nTryAgainEntries > 0 )
     {
       // I = RandRange(0.0,byte(nTryAgainEntries - 1)) = SayLessonDialog(strTryAgain[I],False);
-	  I = RandRange(0.0,nTryAgainEntries - 1);
-	  SayLessonDialog(strTryAgain[I],False);
+	  iSayTryAgain = RandRange(0.0,nTryAgainEntries - 1);
+	  SayLessonDialog(strTryAgain[iSayTryAgain],False);
     }
   }
 }
@@ -769,6 +770,7 @@ function SayEncouragement ()
   local int nEncourageAnyEntries;
   local bool bDoingGood;
   //local int I;
+  local int iSayEncouragement;
 
   if ( nHitPointsPassed > 1 )
   {
@@ -781,9 +783,9 @@ function SayEncouragement ()
   {
     // I = 0;
     // if ( I < 2 )
-	for(I = 0; I < 2; I++) //for loop -AdamJD
+	for(iSayEncouragement = 0; iSayEncouragement < 2; iSayEncouragement++) //for loop -AdamJD
     {
-      if ( strEncourageDoingGood[I] != "" )
+      if ( strEncourageDoingGood[iSayEncouragement] != "" )
       {
         ++nDoingGoodEntries;
       } //else {
@@ -797,14 +799,14 @@ function SayEncouragement ()
   if ( bDoingGood && (nDoingGoodEntries > 0) )
   {
     // I = RandRange(0.0,byte(nDoingGoodEntries - 1)) = SayLessonDialog(strEncourageDoingGood[I],False);
-	I = RandRange(0.0,nDoingGoodEntries - 1);
-	SayLessonDialog(strEncourageDoingGood[I],False);
+	iSayEncouragement = RandRange(0.0,nDoingGoodEntries - 1);
+	SayLessonDialog(strEncourageDoingGood[iSayEncouragement],False);
   } else {
     // I = 0;
     // if ( I < 2 )
-	for(I = 0; I < 2; I++) //for loop -AdamJD
+	for(iSayEncouragement = 0; iSayEncouragement < 2; iSayEncouragement++) //for loop -AdamJD
     {
-      if ( strEncourageAny[I] != "" )
+      if ( strEncourageAny[iSayEncouragement] != "" )
       {
         ++nEncourageAnyEntries;
       } //else {
@@ -816,8 +818,8 @@ function SayEncouragement ()
     if ( nEncourageAnyEntries > 0 )
     {
       // I = RandRange(0.0,byte(nEncourageAnyEntries - 1)) = SayLessonDialog(strEncourageAny[I],False);
-	  I = RandRange(0.0,nEncourageAnyEntries - 1); 
-	  SayLessonDialog(strEncourageAny[I],False);
+	  iSayEncouragement = RandRange(0.0,nEncourageAnyEntries - 1); 
+	  SayLessonDialog(strEncourageAny[iSayEncouragement],False);
     }
   }
 }

@@ -427,7 +427,6 @@ begin:
     {
       DesiredRotation.Yaw = rNewRot.Yaw - limbs[firstLimb].relYaw;
 	  //GotoState('stateIdle');
-      // There are 1 jump destination(s) inside the last statement!
     }
 	GotoState('stateIdle'); //this should be here -AdamJD 
   } else //{

@@ -564,11 +564,11 @@ state stateHit3
     {
       SetRotation(TempRotator);
       MoveSpeed = GroundSpeed + (GroundSpeedEnd - GroundSpeed) * iNumHits / iNumHitsToBeat;
-      if ( bool(PlayerHarry.Difficulty) == bool(1) )
+      if ( PlayerHarry.Difficulty == 1 )
       {
         MoveSpeed *= 1.29999995;
       } else {
-        if ( bool(PlayerHarry.Difficulty) == bool(2) )
+        if ( PlayerHarry.Difficulty == 2 )
         {
           MoveSpeed *= 1.79999995;
         }

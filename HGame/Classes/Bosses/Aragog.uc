@@ -976,7 +976,7 @@ state stateShootSpell
 		TempFloat = VSize(PlayerHarry.Location - Location);
 		TempRotator = rotator(PlayerHarry.Location - Location);
 		TempInt = TempRotator.Yaw;
-		if ( bool(SpellType) == bool(1) )
+		if ( SpellType == SPELL_SPRAY )
 		{
 		  TempInt += (Rand(2) * 2 - 1) * SpellSpraySpreadAmount / 2;
 		}
@@ -1068,7 +1068,7 @@ state stateShootSpell
   }
   Sleep(0.5);
   TempCount++;
-  if ( (TempCount < 2) && (GetHealth() < 0.5) && ((bool(SpellType) == bool(0)) || (bool(SpellType) == bool(1))) )
+  if ( (TempCount < 2) && (GetHealth() < 0.5) && ((SpellType == SPELL_DIRECT) || (SpellType == SPELL_SPRAY)) )
   {
     goto ('Begin');
   }

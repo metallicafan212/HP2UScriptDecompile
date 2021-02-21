@@ -589,5 +589,5 @@ defaultproperties
 
     bBlockActors=False
 
-    RotationRate=(Pitch=50000,Yaw=50000,Roll=50000),=
+    RotationRate=(Pitch=50000,Yaw=50000,Roll=50000)
 }

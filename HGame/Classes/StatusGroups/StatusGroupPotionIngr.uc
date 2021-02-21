@@ -26,7 +26,6 @@ function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, 
 	{
 		nCutBorderHeight 	= HPHud(smParent.PlayerHarry.myHUD).managerCutScene.GetMaxBorderHeightFromCanvasHeight(nCanvasSizeY);
 		nOutY 				= nCanvasSizeY - nIconHeight * fScaleFactor - nCutBorderHeight;
-		// There are 1 jump destination(s) inside the last statement!
 	}
 }
 

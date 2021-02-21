@@ -1531,6 +1531,7 @@ state statePotionMixingStir
     default:
   }
   fStirSoundDuration = GetSoundDuration(soundStirPotion);
+  loop:
   PlaySound(soundStirPotion,SLOT_Interact);
   Sleep(fStirSoundDuration);
   goto ('Loop');
@@ -1850,7 +1851,7 @@ state stateDead
   {
     Sleep(1.5);
   }
- 
+  loop:
   if ( bAllowHarryToDie )
   {
     ConsoleCommand("LoadGame 0");
@@ -5311,7 +5312,8 @@ state waitForDeath
 function name GetCurrIdleAnimName ()
 {
   local string AnimName;
-  local int Index;
+  //local int Index;
+  local int iIndex;
   local name nm;
 
   if ( bInDuelingMode )
@@ -5326,8 +5328,8 @@ function name GetCurrIdleAnimName ()
   {
     return HarryAnims[int(HarryAnimSet)].Idle;
   }
-  Index = 1 + Rand(IdleNums);
-  AnimName = "idle_" $ string(Index);
+  iIndex = 1 + Rand(IdleNums);
+  AnimName = "idle_" $iIndex;
   nm = StringToAnimName(AnimName);
   return nm;
 }
@@ -5335,7 +5337,8 @@ function name GetCurrIdleAnimName ()
 function name GetCurrFidgetAnimName ()
 {
   local string AnimName;
-  local int Index;
+  //local int Index;
+  local int iIndex;
   local name nm;
 
   if ( bInDuelingMode )
@@ -5346,8 +5349,8 @@ function name GetCurrFidgetAnimName ()
   {
     return GetCurrIdleAnimName();
   }
-  Index = 1 + Rand(FidgetNums);
-  AnimName = "fidget_" $ string(Index);
+  iIndex = 1 + Rand(FidgetNums);
+  AnimName = "fidget_" $iIndex;
   nm = StringToAnimName(AnimName);
   return nm;
 }

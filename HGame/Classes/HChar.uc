@@ -621,15 +621,16 @@ function PreBeginPlay ()
 function name GetCurrFidgetAnimName ()
 {
 	local string AnimName;
-	local int Index;
+	//local int Index;
+	local int iIndex;
 	local name nm;
 
 	if ( FidgetNums == 0 )
 	{
 		return IdleAnimName;
 	}
-	Index = 1 + Rand(FidgetNums);
-	AnimName = "fidget_" $Index;
+	iIndex = 1 + Rand(FidgetNums);
+	AnimName = "fidget_" $iIndex;
 	nm = StringToAnimName(AnimName);
 	return nm;
 }
@@ -637,21 +638,22 @@ function name GetCurrFidgetAnimName ()
 function name GetCurrIdleAnimName ()
 {
 	local string AnimName;
-	local int Index;
+	//local int Index;
+	local int iIndex;
 	local name nm;
 
 	if ( IdleNums == 0 )
 	{
 		return IdleAnimName;
 	}
-	Index = Rand(IdleNums + 1);
-	if ( Index == 0 )
+	iIndex = Rand(IdleNums + 1);
+	if ( iIndex == 0 )
 	{
 		AnimName = "idle";
 	} 
 	else 
 	{
-		AnimName = "idle_" $Index;
+		AnimName = "idle_" $iIndex;
 	}
 	nm = StringToAnimName(AnimName);
 	return nm;

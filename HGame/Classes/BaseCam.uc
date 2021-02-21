@@ -976,7 +976,7 @@ state StateQuidditchCam
 	//force camera to focus on Harry before going to the cutscene cam -AdamJD
 	function EndState()
 	{
-		Log("AdamJD:	Ended quidditch cam");
+		//Log("AdamJD:	Ended quidditch cam");
 		InitTarget(PlayerHarry);
 		InitPositionAndRotation(True);
 	}

@@ -122,7 +122,7 @@ begin:
   harry(Owner).HarryAnimType = /*1*/ AT_Combine;
   PlayAnim('duel_cast',,0.31);
   FinishAnim();
-  if ( bool(harry(Owner).bAltFire) == /*0*/ False )
+  if ( harry(Owner).bAltFire == 0 )
   {
     harry(Owner).StopAiming();
   } else {
@@ -146,7 +146,7 @@ begin:
   PlayAnim('cast_Expelliarmus',,0.31);
   FinishAnim();
   harry(Owner).bReboundingSpells = False;
-  if ( bool(harry(Owner).bAltFire) == /*0*/ False )
+  if ( harry(Owner).bAltFire == 0 )
   {
     harry(Owner).StopAiming();
   } else {

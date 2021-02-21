@@ -110,7 +110,8 @@ function Disintegrate (Vector start_locn, Rotator dirn)
 {
   local Rotator randRotVelocity;
   local int I;
-  local int Index;
+  //local int Index;
+  local int iIndex;
   local int nums;
   local Vector vectGap;
   local Debris A;
@@ -155,20 +156,20 @@ function Disintegrate (Vector start_locn, Rotator dirn)
   // if ( I < nums )
   for(I = 0; I < nums; ++I)
   {
-    Index = Rand(NumMeshs);
+    iIndex = Rand(NumMeshs);
     A = Spawn(Class'Debris',,,start_locn,RotRand());
     if ( A != None )
     {
-      A.Mesh = GetRandomMesh(Index);
-      A.DrawScale *= BaseDebris[Index].DrawScale;
-      A.Particles = BaseDebris[Index].bParticles;
-      A.MySound = BaseDebris[Index].cSound;
-      A.newDrawScale = BaseDebris[Index].DrawScale;
-      A.hasParticles = BaseDebris[Index].hasParticles;
-      A.LifeBase = BaseDebris[Index].LifeBase;
-      A.LifeRand = BaseDebris[Index].LifeRand;
-      A.MaxParticles = BaseDebris[Index].MaxParticles;
-      A.VelocityMultiplier = BaseDebris[Index].Velocity;
+      A.Mesh = GetRandomMesh(iIndex);
+      A.DrawScale *= BaseDebris[iIndex].DrawScale;
+      A.Particles = BaseDebris[iIndex].bParticles;
+      A.MySound = BaseDebris[iIndex].cSound;
+      A.newDrawScale = BaseDebris[iIndex].DrawScale;
+      A.hasParticles = BaseDebris[iIndex].hasParticles;
+      A.LifeBase = BaseDebris[iIndex].LifeBase;
+      A.LifeRand = BaseDebris[iIndex].LifeRand;
+      A.MaxParticles = BaseDebris[iIndex].MaxParticles;
+      A.VelocityMultiplier = BaseDebris[iIndex].Velocity;
       A.ScaleDown = ScaleDown;
       A.InitializeDebris();
     }

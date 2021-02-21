@@ -83,10 +83,11 @@ function PreBeginPlay ()
 function Mesh GetRandomMesh ()
 {
   local Mesh lMesh;
-  local int Index;
+  //local int Index;
+  local int iIndex;
 
-  Index = Rand(NumMeshs);
-  lMesh = Meshs[Index];
+  iIndex = Rand(NumMeshs);
+  lMesh = Meshs[iIndex];
   return lMesh;
 }
 

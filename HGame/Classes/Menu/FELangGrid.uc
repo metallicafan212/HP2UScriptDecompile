@@ -25,7 +25,8 @@ function PaintColumn (Canvas C, UWindowGridColumn Column, float MouseX, float Mo
   local int Y;
   local int TopMargin;
   local int BottomMargin;
-  local int Index;
+  //local int Index;
+  local int iIndex;
   local Color colorCutTextBlue;
 
 /*
@@ -53,13 +54,13 @@ function PaintColumn (Canvas C, UWindowGridColumn Column, float MouseX, float Mo
   TopRow = VertSB.Pos;
   Skipped = 0;
   Y = 1;
-  Index = 0;
+  iIndex = 0;
   // if ( (Y < RowHeight + WinHeight - RowHeight - TopMargin + BottomMargin) && (Index < browser.MasterCount) )
-  while((Y < RowHeight + WinHeight - RowHeight - (TopMargin + BottomMargin)) && (Index < browser.MasterCount))
+  while((Y < RowHeight + WinHeight - RowHeight - (TopMargin + BottomMargin)) && (iIndex < browser.MasterCount))
   {
     if ( Skipped >= VertSB.Pos )
     {
-      if ( Index == SelectedRow )
+      if ( iIndex == SelectedRow )
       {
         C.DrawColor.R = 255;
         C.DrawColor.G = 5;
@@ -72,22 +73,21 @@ function PaintColumn (Canvas C, UWindowGridColumn Column, float MouseX, float Mo
       switch (Column.ColumnNum)
       {
         case 0:
-        Column.ClipText(C,2.0,Y + TopMargin,browser.status[Index]);
+        Column.ClipText(C,2.0,Y + TopMargin,browser.status[iIndex]);
         break;
         case 1:
-        Column.ClipText(C,2.0,Y + TopMargin,browser.MasterList[Index]);
+        Column.ClipText(C,2.0,Y + TopMargin,browser.MasterList[iIndex]);
         break;
         case 2:
-        Column.ClipText(C,2.0,Y + TopMargin,browser.MasterText[Index]);
+        Column.ClipText(C,2.0,Y + TopMargin,browser.MasterText[iIndex]);
         break;
         default:
       }
       Y = Y + RowHeight;
-      // There are 1 jump destination(s) inside the last statement!
     }
 	
 	Skipped++;
-    Index++;
+    iIndex++;
     // goto JL00DE;
   }
 }

@@ -152,6 +152,7 @@ auto state Idle
 
 state CauldronsNotAvailableYet
 {
+ignores Bump;
   function CutCue (string cue)
   {
     if ( cue ~= "_MixingCauldronsNotAvailableYet" )
@@ -185,6 +186,7 @@ state CauldronsNotAvailableYet
 
 state Mixing
 {
+ignores Bump;
 begin:
   PlayerHarry.DoPotionMixingBegin();
   sgPotionIngr.SetEffectTypeToPermanent();

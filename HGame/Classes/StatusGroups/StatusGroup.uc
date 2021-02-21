@@ -250,15 +250,12 @@ function HandleMenuModeSwitching (bool bMenuMode)
 			GotoState('Hold');
 		}
 	} 
-	else 
+	else if ( CurrEffectType == ET_Menu )
 	{
-		if ( CurrEffectType == ET_Menu )
+		CurrEffectType = GameEffectType;
+		if (  !IsInState('Idle') && (CurrEffectType != ET_Permanent) )
 		{
-			CurrEffectType = GameEffectType;
-			if (  !IsInState('Idle') && (CurrEffectType != 2) )
-			{
-				GotoState('Idle');
-			}
+			GotoState('Idle');
 		}
 	}
 }
@@ -584,7 +581,7 @@ auto state Idle
 {
 	function OnCountIncremented ()
 	{
-		if ( (CurrEffectType == 2) || (CurrEffectType == 3) )
+		if ( (CurrEffectType == ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
 			GotoState('Hold');
 		} 
@@ -604,7 +601,7 @@ auto state Idle
   
 	function BeginState ()
 	{
-		if ( (CurrEffectType == 2) || (CurrEffectType == 3) )
+		if ( (CurrEffectType == ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
 			GotoState('Hold');
 		}
@@ -636,7 +633,7 @@ state EffectIn
 		local int nFadeValue;
 		local int nFadeStart;
   
-		if ( CurrEffectType == 0 )
+		if ( CurrEffectType == ET_Fade )
 		{
 			return CalcFadeValue(True, fCurrEffectInTime, fTotalEffectInTime);
 		} 
@@ -648,7 +645,7 @@ state EffectIn
   
 	function GetGroupCurrXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nX, out int nY)
 	{
-		if ( CurrEffectType == 1 )
+		if ( CurrEffectType == ET_Fly )
 		{
 			CalcFlyXY(bMenuMode, Canvas, nIconWidth, nIconHeight, True, fCurrEffectInTime, fTotalEffectInTime, nX, nY);
 		} 
@@ -675,7 +672,7 @@ state Hold
   
 	function OnCountIncremented ()
 	{
-		if ( (bool(CurrEffectType) != bool(2)) || (bool(CurrEffectType) == bool(3)) )
+		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
 			SetTimer(0.0,False);
 			SetTimer(fTotalHoldTime,False);
@@ -684,7 +681,7 @@ state Hold
   
 	function BeginState ()
 	{
-		if ( (CurrEffectType != 2) || (CurrEffectType == 3) )
+		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
 			SetTimer(fTotalHoldTime,False);
 		}
@@ -712,7 +709,7 @@ state EffectOut
   
 	function OnCountIncremented ()
 	{
-		if ( (CurrEffectType != 2) || (CurrEffectType == 3) )
+		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
 			GotoState('Hold');
 		}
@@ -724,7 +721,7 @@ state EffectOut
 		local int nFadeValue;
 		local int nFadeStart;
   
-		if ( CurrEffectType == 0 )
+		if ( CurrEffectType == ET_Fade )
 		{
 			return CalcFadeValue(False, fCurrEffectOutTime, fTotalEffectOutTime);
 		} 
@@ -736,7 +733,7 @@ state EffectOut
   
 	function GetGroupCurrXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nX, out int nY)
 	{
-		if ( CurrEffectType == 1 )
+		if ( CurrEffectType == ET_Fly )
 		{
 			CalcFlyXY(bMenuMode, Canvas, nIconWidth, nIconHeight, False, fCurrEffectOutTime, fTotalEffectOutTime, nX, nY);
 		} 

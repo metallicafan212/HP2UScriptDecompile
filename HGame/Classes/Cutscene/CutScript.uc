@@ -335,7 +335,8 @@ function bool ParseCommand (string Command)
   local string untilCue;
   local Actor subjectActor;
   local BossEncounterTrigger aTrigger;
-  local int Index;
+  //local int Index;
+  local int iIndex;
   local int eow;
   local int I;
   local float timerDuration;
@@ -488,18 +489,18 @@ function bool ParseCommand (string Command)
     return False;
   }
   actionPart = ParseDelimitedString(Command," ",2,True);
-  Index = InStr(actionPart,"*");
-  if ( Index < 0 )
+  iIndex = InStr(actionPart,"*");
+  if ( iIndex < 0 )
   {
     untilCue = GenerateUniqueCue();
     AddPendingCue(untilCue);
   } else {
-    untilCue = ParseDelimitedString(Mid(actionPart,Index + 1)," ",1,False);
+    untilCue = ParseDelimitedString(Mid(actionPart,iIndex + 1)," ",1,False);
     if ( Len(untilCue) == 0 )
     {
       untilCue = GenerateUniqueCue();
     }
-    actionPart = Left(actionPart,Index);
+    actionPart = Left(actionPart,iIndex);
   }
   // if ( (Asc(Right(actionPart,1)) == 32) || (Asc(Right(actionPart,1)) == 9) )
   while ( (Asc(Right(actionPart,1)) == 32) || (Asc(Right(actionPart,1)) == 9) )

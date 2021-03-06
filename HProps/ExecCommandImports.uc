@@ -2422,11 +2422,11 @@
 #exec MeshMap SetTexture MeshMap=skArmorWholeSuitMesh Num=0 Texture=skArmorWholeSuitTex0
 
 //texture import (skArmTorchSepiaTex0) -AdamJD 
-#exec Texture Import File=Textures\skArmTorchSepiaTex0.png Name=skArmTorchSepiaTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skArmTorchSepiaTex0.png Name=skArmTorchSepiaTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skArmTorchSepiaMesh Num=0 Texture=skArmTorchSepiaTex0
 
 //texture import (skArmTorchTex0) -AdamJD 
-#exec Texture Import File=Textures\skArmTorchTex0.png Name=skArmTorchTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skArmTorchTex0.png Name=skArmTorchTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skArmTorchMesh Num=0 Texture=skArmTorchTex0
 
 //texture import (skBarrelMinersTex0) -AdamJD 
@@ -2526,7 +2526,7 @@
 #exec MeshMap SetTexture MeshMap=skBirchTree1Mesh Num=0 Texture=skBirchTree1Tex0
 
 //texture import (skBirchTree1Tex1) -AdamJD 
-#exec Texture Import File=Textures\skBirchTree1Tex1.png Name=skBirchTree1Tex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skBirchTree1Tex1.png Name=skBirchTree1Tex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBirchTree1Mesh Num=1 Texture=skBirchTree1Tex1
 
 //texture import (skBirchTree2Tex0) -AdamJD 
@@ -2534,7 +2534,7 @@
 #exec MeshMap SetTexture MeshMap=skBirchTree2Mesh Num=0 Texture=skBirchTree2Tex0
 
 //texture import (skBirchTree2Tex1) -AdamJD 
-#exec Texture Import File=Textures\skBirchTree2Tex1.png Name=skBirchTree2Tex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skBirchTree2Tex1.png Name=skBirchTree2Tex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBirchTree2Mesh Num=1 Texture=skBirchTree2Tex1
 
 //texture import (skBirchTree3Tex0) -AdamJD 
@@ -2542,7 +2542,7 @@
 #exec MeshMap SetTexture MeshMap=skBirchTree3Mesh Num=0 Texture=skBirchTree3Tex0
 
 //texture import (skBirchTree3Tex1) -AdamJD 
-#exec Texture Import File=Textures\skBirchTree3Tex1.png Name=skBirchTree3Tex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skBirchTree3Tex1.png Name=skBirchTree3Tex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBirchTree3Mesh Num=1 Texture=skBirchTree3Tex1
 
 //texture import (skBlackboard1Tex0) -AdamJD 
@@ -2734,11 +2734,11 @@
 #exec MeshMap SetTexture MeshMap=skChairsHagridsLeatherMesh Num=0 Texture=skChairsHagridsLeatherTex0
 
 //texture import (skChairsHagridsWoodTex0) -AdamJD 
-#exec Texture Import File=Textures\skChairsHagridsWoodTex0.png Name=skChairsHagridsWoodTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skChairsHagridsWoodTex0.png Name=skChairsHagridsWoodTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChairsHagridsWoodMesh Num=0 Texture=skChairsHagridsWoodTex0
 
 //texture import (skChairsHagridsWoodTex1) -AdamJD 
-#exec Texture Import File=Textures\skChairsHagridsWoodTex1.png Name=skChairsHagridsWoodTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skChairsHagridsWoodTex1.png Name=skChairsHagridsWoodTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChairsHagridsWoodMesh Num=1 Texture=skChairsHagridsWoodTex1
 
 //texture import (skChairsRedComfyTex0) -AdamJD 
@@ -2758,11 +2758,11 @@
 #exec MeshMap SetTexture MeshMap=skChairsTeacherMesh Num=0 Texture=skChairsTeacherTex0
 
 //texture import (skChairsWood1Tex0) -AdamJD 
-#exec Texture Import File=Textures\skChairsWood1Tex0.png Name=skChairsWood1Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skChairsWood1Tex0.png Name=skChairsWood1Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChairsWood1Mesh Num=0 Texture=skChairsWood1Tex0
 
 //texture import (skChairsWood1Tex1) -AdamJD 
-#exec Texture Import File=Textures\skChairsWood1Tex1.png Name=skChairsWood1Tex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skChairsWood1Tex1.png Name=skChairsWood1Tex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChairsWood1Mesh Num=1 Texture=skChairsWood1Tex1
 
 //texture import (skChallengeStarFinalTex0) -AdamJD 
@@ -2798,7 +2798,7 @@
 #exec MeshMap SetTexture MeshMap=skChristmasOrnamentBallMesh Num=0 Texture=skChristmasOrnamentBallTex0
 
 //texture import (skChristmasOrnamentBirdTex0) -AdamJD 
-#exec Texture Import File=Textures\skChristmasOrnamentBirdTex0.png Name=skChristmasOrnamentBirdTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skChristmasOrnamentBirdTex0.png Name=skChristmasOrnamentBirdTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChristmasOrnamentBirdMesh Num=0 Texture=skChristmasOrnamentBirdTex0
 
 //texture import (skChristmasOrnamentStarTex0) -AdamJD 
@@ -2886,15 +2886,15 @@
 #exec MeshMap SetTexture MeshMap=skDiffindoVinesMesh Num=1 Texture=skDiffindoVinesTex1
 
 //texture import (skDiffindoWeb1Tex0) -AdamJD 
-#exec Texture Import File=Textures\skDiffindoWeb1Tex0.png Name=skDiffindoWeb1Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skDiffindoWeb1Tex0.png Name=skDiffindoWeb1Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skDiffindoWeb1Mesh Num=0 Texture=skDiffindoWeb1Tex0
 
 //texture import (skDiffindoWeb2Tex0) -AdamJD 
-#exec Texture Import File=Textures\skDiffindoWeb2Tex0.png Name=skDiffindoWeb2Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skDiffindoWeb2Tex0.png Name=skDiffindoWeb2Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skDiffindoWeb2Mesh Num=0 Texture=skDiffindoWeb2Tex0
 
 //texture import (skDiffindoWeb3Tex0) -AdamJD 
-#exec Texture Import File=Textures\skDiffindoWeb3Tex0.png Name=skDiffindoWeb3Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skDiffindoWeb3Tex0.png Name=skDiffindoWeb3Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skDiffindoWeb3Mesh Num=0 Texture=skDiffindoWeb3Tex0
 
 //texture import (skDishesGobletTex0) -AdamJD 
@@ -2978,7 +2978,7 @@
 #exec MeshMap SetTexture MeshMap=skFirTreeBigMesh Num=0 Texture=skFirTreeBigTex0
 
 //texture import (skFirTreeBigTex1) -AdamJD 
-#exec Texture Import File=Textures\skFirTreeBigTex1.png Name=skFirTreeBigTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skFirTreeBigTex1.png Name=skFirTreeBigTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skFirTreeBigMesh Num=1 Texture=skFirTreeBigTex1
 
 //texture import (skFirTreeMedTex0) -AdamJD 
@@ -2986,7 +2986,7 @@
 #exec MeshMap SetTexture MeshMap=skFirTreeMedMesh Num=0 Texture=skFirTreeMedTex0
 
 //texture import (skFirTreeMedTex1) -AdamJD 
-#exec Texture Import File=Textures\skFirTreeMedTex1.png Name=skFirTreeMedTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skFirTreeMedTex1.png Name=skFirTreeMedTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skFirTreeMedMesh Num=1 Texture=skFirTreeMedTex1
 
 //texture import (skFirTreeThickTex0) -AdamJD 
@@ -2994,7 +2994,7 @@
 #exec MeshMap SetTexture MeshMap=skFirTreeThickMesh Num=0 Texture=skFirTreeThickTex0
 
 //texture import (skFirTreeThickTex1) -AdamJD 
-#exec Texture Import File=Textures\skFirTreeThickTex1.png Name=skFirTreeThickTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skFirTreeThickTex1.png Name=skFirTreeThickTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skFirTreeThickMesh Num=1 Texture=skFirTreeThickTex1
 
 //texture import (skFirTreeThinTex0) -AdamJD 
@@ -3002,7 +3002,7 @@
 #exec MeshMap SetTexture MeshMap=skFirTreeThinMesh Num=0 Texture=skFirTreeThinTex0
 
 //texture import (skFirTreeThinTex1) -AdamJD 
-#exec Texture Import File=Textures\skFirTreeThinTex1.png Name=skFirTreeThinTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skFirTreeThinTex1.png Name=skFirTreeThinTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skFirTreeThinMesh Num=1 Texture=skFirTreeThinTex1
 
 //texture import (skFlipendoVaseBronzeBrokenTex0) -AdamJD 
@@ -3282,11 +3282,11 @@
 #exec MeshMap SetTexture MeshMap=skMapleTreeFullMesh Num=0 Texture=skMapleTreeFullTex0
 
 //texture import (skMapleTreeFullTex1) -AdamJD 
-#exec Texture Import File=Textures\skMapleTreeFullTex1.png Name=skMapleTreeFullTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skMapleTreeFullTex1.png Name=skMapleTreeFullTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skMapleTreeFullMesh Num=1 Texture=skMapleTreeFullTex1
 
 //texture import (skMapleTreeFullTex2) -AdamJD 
-#exec Texture Import File=Textures\skMapleTreeFullTex2.png Name=skMapleTreeFullTex2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skMapleTreeFullTex2.png Name=skMapleTreeFullTex2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skMapleTreeFullMesh Num=2 Texture=skMapleTreeFullTex2
 
 //texture import (skMrytleSinkTex0) -AdamJD 
@@ -3330,7 +3330,7 @@
 #exec MeshMap SetTexture MeshMap=skPlantsEmptyPotMesh Num=0 Texture=skPlantsEmptyPotTex0
 
 //texture import (skPlantsFlowerRedTex0) -AdamJD 
-#exec Texture Import File=Textures\skPlantsFlowerRedTex0.png Name=skPlantsFlowerRedTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skPlantsFlowerRedTex0.png Name=skPlantsFlowerRedTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skPlantsFlowerRedMesh Num=0 Texture=skPlantsFlowerRedTex0
 
 //texture import (skPlantsFlowerYellowTex0) -AdamJD 
@@ -3342,7 +3342,7 @@
 #exec MeshMap SetTexture MeshMap=skPlantsHangingPlant1Mesh Num=0 Texture=skPlantsHangingPlant1Tex0
 
 //texture import (skPlantsWindowBoxTex0) -AdamJD 
-#exec Texture Import File=Textures\skPlantsWindowBoxTex0.png Name=skPlantsWindowBoxTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skPlantsWindowBoxTex0.png Name=skPlantsWindowBoxTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skPlantsWindowBoxMesh Num=0 Texture=skPlantsWindowBoxTex0
 
 //texture import (skPlantsWindowBoxTex1) -AdamJD 
@@ -3514,31 +3514,31 @@
 #exec MeshMap SetTexture MeshMap=skToolsWateringCanMesh Num=0 Texture=skToolsWateringCanTex0
 
 //texture import (skTreeSprite01Tex0) -AdamJD 
-#exec Texture Import File=Textures\skTreeSprite01Tex0.png Name=skTreeSprite01Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skTreeSprite01Tex0.png Name=skTreeSprite01Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTreeSprite01Mesh Num=0 Texture=skTreeSprite01Tex0
 
 //texture import (skTreeSprite02Tex0) -AdamJD 
-#exec Texture Import File=Textures\skTreeSprite02Tex0.png Name=skTreeSprite02Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skTreeSprite02Tex0.png Name=skTreeSprite02Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTreeSprite02Mesh Num=0 Texture=skTreeSprite02Tex0
 
 //texture import (skTreeSprite03Tex0) -AdamJD 
-#exec Texture Import File=Textures\skTreeSprite03Tex0.png Name=skTreeSprite03Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skTreeSprite03Tex0.png Name=skTreeSprite03Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTreeSprite03Mesh Num=0 Texture=skTreeSprite03Tex0
 
 //texture import (skTreeSprite04Tex0) -AdamJD 
-#exec Texture Import File=Textures\skTreeSprite04Tex0.png Name=skTreeSprite04Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skTreeSprite04Tex0.png Name=skTreeSprite04Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTreeSprite04Mesh Num=0 Texture=skTreeSprite04Tex0
 
 //texture import (skTreeSprite05Tex0) -AdamJD 
-#exec Texture Import File=Textures\skTreeSprite05Tex0.png Name=skTreeSprite05Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skTreeSprite05Tex0.png Name=skTreeSprite05Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTreeSprite05Mesh Num=0 Texture=skTreeSprite05Tex0
 
 //texture import (skTreeSprite06Tex0) -AdamJD 
-#exec Texture Import File=Textures\skTreeSprite06Tex0.png Name=skTreeSprite06Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skTreeSprite06Tex0.png Name=skTreeSprite06Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTreeSprite06Mesh Num=0 Texture=skTreeSprite06Tex0
 
 //texture import (skTreeSprite2Tex0) -AdamJD 
-#exec Texture Import File=Textures\skTreeSprite2Tex0.png Name=skTreeSprite2Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skTreeSprite2Tex0.png Name=skTreeSprite2Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTreeSprite2Mesh Num=0 Texture=skTreeSprite2Tex0
 
 //texture import (skTrunkHogwarts1Tex0) -AdamJD 
@@ -3570,11 +3570,11 @@
 #exec MeshMap SetTexture MeshMap=skWiggentreeBarkMesh Num=0 Texture=skWiggentreeBarkTex0
 
 //texture import (skWizCardTestTex0) -AdamJD 
-#exec Texture Import File=Textures\skWizCardTestTex0.png Name=skWizCardTestTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skWizCardTestTex0.png Name=skWizCardTestTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skWizCardTestMesh Num=0 Texture=skWizCardTestTex0
 
 //texture import (skWizCardTestTex1) -AdamJD 
-#exec Texture Import File=Textures\skWizCardTestTex1.png Name=skWizCardTestTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skWizCardTestTex1.png Name=skWizCardTestTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skWizCardTestMesh Num=1 Texture=skWizCardTestTex1
 
 //texture import (skWizCardTestTex2) -AdamJD 

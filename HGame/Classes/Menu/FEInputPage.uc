@@ -5,9 +5,9 @@
 class FEInputPage extends baseFEPage;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FEOverOption5Texture.PNG	GROUP=Icons	Name=FEOverOption5Texture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\FEOverOptionTexture.PNG	GROUP=Icons	Name=FEOverOptionTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\FEOverOption3Texture.PNG	GROUP=Icons	Name=FEOverOption3Texture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEOverOption5Texture.PNG	GROUP=Icons	Name=FEOverOption5Texture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEOverOptionTexture.PNG	GROUP=Icons	Name=FEOverOptionTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEOverOption3Texture.PNG	GROUP=Icons	Name=FEOverOption3Texture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 
 const InWizardDuel_LastBoundKeyIndex= 13;
 const InWizardDuel_FirstBoundKeyIndex= 12;

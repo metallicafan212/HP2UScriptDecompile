@@ -5,9 +5,9 @@
 class HPMenuOptionComboList extends UWindowComboList;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FEComboListBox.PNG	GROUP=Icons	Name=FEComboListBox COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\FEComboListLarge.PNG	GROUP=Icons	Name=FEComboListLarge COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\FEComboListSmall.PNG	GROUP=Icons	Name=FEComboListSmall COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\FEComboListBox.PNG	GROUP=Icons	Name=FEComboListBox COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboListLarge.PNG	GROUP=Icons	Name=FEComboListLarge COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboListSmall.PNG	GROUP=Icons	Name=FEComboListSmall COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 
 var Texture bgImage;
 

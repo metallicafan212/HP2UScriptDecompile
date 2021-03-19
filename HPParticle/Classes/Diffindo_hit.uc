@@ -4,6 +4,9 @@
 
 class Diffindo_hit extends AllSpellCast_FX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\Particles.utx 	Package=HPParticle.particle_fx
+
 defaultproperties
 {
     ParticlesPerSec=(Base=1000.00,Rand=0.00)

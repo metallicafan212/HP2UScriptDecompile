@@ -4,6 +4,9 @@
 
 class Wing_fly_overlay extends Wing_fly;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\HP_FX.utx 		Package=HPParticle.hp_fx
+
 defaultproperties
 {
     ParticlesPerSec=(Base=40.00,Rand=40.00)

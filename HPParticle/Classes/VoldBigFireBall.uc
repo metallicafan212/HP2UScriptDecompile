@@ -4,6 +4,9 @@
 
 class VoldBigFireBall extends ParticleFX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\Particles.utx 	Package=HPParticle.particle_fx
+
 var() float fFireBallSpeed;
 
 function Tick (float dtime)

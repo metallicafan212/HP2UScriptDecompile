@@ -4,6 +4,9 @@
 
 class Skurge_hit extends AllSpellCast_FX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\HP_FX.utx 		Package=HPParticle.hp_fx
+
 function PreBeginPlay ()
 {
   Super.PreBeginPlay();

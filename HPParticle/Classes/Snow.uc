@@ -4,6 +4,9 @@
 
 class Snow extends ParticleFX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\Particles.utx 	Package=HPParticle.particle_fx
+
 defaultproperties
 {
     ParticlesPerSec=(Base=40.00,Rand=0.00)

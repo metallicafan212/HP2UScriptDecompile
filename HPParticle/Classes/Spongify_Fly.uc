@@ -4,6 +4,9 @@
 
 class Spongify_Fly extends AllSpellCast_FX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\HP_FX.utx 		Package=HPParticle.hp_fx
+
 defaultproperties
 {
     SourceWidth=(Base=5.00,Rand=0.00)

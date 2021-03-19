@@ -4,6 +4,9 @@
 
 class Crabfireball extends ParticleFX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\Particles.utx 	Package=HPParticle.particle_fx
+
 defaultproperties
 {
     ParticlesPerSec=(Base=15.00,Rand=5.00)

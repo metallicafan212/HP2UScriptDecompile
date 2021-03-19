@@ -4,6 +4,9 @@
 
 class Firefly2 extends ParticleFX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\HP_FX.utx 		Package=HPParticle.hp_fx
+
 defaultproperties
 {
     ParticlesPerSec=(Base=0.09,Rand=0.00)

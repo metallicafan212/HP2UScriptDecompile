@@ -4,6 +4,9 @@
 
 class Fire01 extends ParticleFX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\Particles.utx 	Package=HPParticle.particle_fx
+
 defaultproperties
 {
     ParticlesPerSec=(Base=25.00,Rand=10.00)

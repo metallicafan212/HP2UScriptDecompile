@@ -4,6 +4,9 @@
 
 class LessonSparks2 extends ParticleFX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\HP_FX.utx 		Package=HPParticle.hp_fx
+
 defaultproperties
 {
     AngularSpreadWidth=(Base=60.00,Rand=60.00)

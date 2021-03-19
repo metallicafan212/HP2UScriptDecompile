@@ -4,6 +4,9 @@
 
 class Aloh_Fly extends AllSpellCast_FX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\HP_FX.utx 		Package=HPParticle.hp_fx
+
 defaultproperties
 {
     ParticlesPerSec=(Base=25.00,Rand=10.00)

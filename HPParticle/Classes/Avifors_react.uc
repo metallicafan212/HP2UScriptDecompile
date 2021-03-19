@@ -4,6 +4,9 @@
 
 class Avifors_react extends AllSpellCast_FX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\HP_FX.utx 		Package=HPParticle.hp_fx
+
 defaultproperties
 {
     ParticlesPerSec=(Base=1.00,Rand=2.00)

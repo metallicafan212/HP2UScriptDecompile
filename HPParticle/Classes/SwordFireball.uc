@@ -4,6 +4,9 @@
 
 class SwordFireball extends ParticleFX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\Particles.utx 	Package=HPParticle.particle_fx
+
 defaultproperties
 {
     SourceWidth=(Base=5.00,Rand=3.00)

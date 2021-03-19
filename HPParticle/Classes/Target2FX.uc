@@ -4,6 +4,9 @@
 
 class Target2FX extends ParticleFX;
 
+//texture package import -AdamJD
+#exec OBJ LOAD FILE=..\Textures\Particles.utx 	Package=HPParticle.particle_fx
+
 defaultproperties
 {
     ParticlesPerSec=(Base=20.00,Rand=0.00)

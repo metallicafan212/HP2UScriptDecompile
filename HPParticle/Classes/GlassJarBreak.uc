@@ -51,7 +51,7 @@ defaultproperties
 
     ParticlesMax=20
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Glass'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Glass'
 
     LastUpdateLocation=(X=0.00,Y=0.00,Z=32.00)
 

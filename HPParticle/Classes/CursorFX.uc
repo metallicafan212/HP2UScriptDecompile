@@ -37,7 +37,7 @@ defaultproperties
 
     SizeDelay=1.00
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_03'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_03'
 
     Physics=PHYS_Rotating
 

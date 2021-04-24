@@ -47,7 +47,7 @@ defaultproperties
 
     ParticlesMax=50
 
-    Textures=Texture'HPParticle.hp_fx.Particles.White_Feather'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.White_Feather'
 
     EmitDelay=0.79
 

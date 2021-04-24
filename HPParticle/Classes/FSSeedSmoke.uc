@@ -43,7 +43,7 @@ defaultproperties
 
     GravityModifier=-0.01
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Dark_Smoke5'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Dark_Smoke5'
 
     Style=STY_Modulated
 }

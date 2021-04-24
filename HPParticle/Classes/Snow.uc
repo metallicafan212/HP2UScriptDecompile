@@ -43,5 +43,5 @@ defaultproperties
 
     Gravity=(X=0.00,Y=0.00,Z=-1.00)
 
-    Textures=Texture'HPParticle.particle_fx.soft_pfx'
+    Textures(0)=Texture'HPParticle.particle_fx.soft_pfx'
 }

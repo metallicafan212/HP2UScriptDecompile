@@ -45,5 +45,5 @@ defaultproperties
 
     GravityModifier=0.10
 
-    Textures=Texture'HPParticle.hp_fx.Particles.blob32'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.blob32'
 }

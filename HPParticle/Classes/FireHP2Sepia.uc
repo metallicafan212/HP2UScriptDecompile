@@ -13,5 +13,5 @@ defaultproperties
 
     ColorEnd=(Base=(R=127,G=105,B=79,A=0),Rand=(R=0,G=0,B=0,A=0))
 
-    Textures=Texture'HPParticle.hp_fx.Particles.SepiaFlamefx'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.SepiaFlamefx'
 }

@@ -47,7 +47,7 @@ defaultproperties
 
     GravityModifier=-0.10
 
-    Textures=Texture'HPParticle.hp_fx.Spells.LesFire_01'
+    Textures(0)=Texture'HPParticle.hp_fx.Spells.LesFire_01'
 
     LastUpdateLocation=(X=-0.28,Y=224.00,Z=-16.60)
 

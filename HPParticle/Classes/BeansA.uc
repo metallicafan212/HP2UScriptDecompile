@@ -35,7 +35,7 @@ defaultproperties
 
     ParticlesMax=3
 
-    Textures=Texture'HPParticle.hp_fx.Particles.BeanFX'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.BeanFX'
 
     Rotation=(Pitch=16528,Yaw=0,Roll=0)
 

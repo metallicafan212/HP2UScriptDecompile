@@ -41,7 +41,7 @@ defaultproperties
 
     ParticlesMax=400
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_BW'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_BW'
 
     Rotation=(Pitch=16640,Yaw=0,Roll=0)
 

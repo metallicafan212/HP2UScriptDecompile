@@ -47,7 +47,7 @@ defaultproperties
 
     Gravity=(X=0.00,Y=0.00,Z=35.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Z'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Z'
 
     Tag=SleepFX
 }

@@ -49,7 +49,7 @@ defaultproperties
 
     Attraction=(X=1.00,Y=1.00,Z=1.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_5_BW'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_5_BW'
 
     Rotation=(Pitch=16640,Yaw=0,Roll=0)
 }

@@ -47,7 +47,7 @@ defaultproperties
 
     ParticlesMax=100
 
-    Textures=Texture'HPParticle.hp_fx.Spells.Les_BlueSmoke'
+    Textures(0)=Texture'HPParticle.hp_fx.Spells.Les_BlueSmoke'
 
     LastUpdateLocation=(X=-383.86,Y=-178.58,Z=65.73)
 

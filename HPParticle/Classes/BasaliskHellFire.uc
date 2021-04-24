@@ -43,7 +43,7 @@ defaultproperties
 
     ParticlesMax=500
 
-    Textures=FireTexture'HPParticle.hp_fx.Spells.GoldSparkle01'
+    Textures(0)=FireTexture'HPParticle.hp_fx.Spells.GoldSparkle01'
 
     bDynamicLight=True
 

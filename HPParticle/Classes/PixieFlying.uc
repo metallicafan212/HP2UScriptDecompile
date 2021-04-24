@@ -37,7 +37,7 @@ defaultproperties
 
     GravityModifier=0.05
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
 
     Rotation=(Pitch=16323,Yaw=0,Roll=0)
 }

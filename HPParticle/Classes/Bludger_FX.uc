@@ -39,7 +39,7 @@ defaultproperties
 
     SpinRate=(Base=-6.00,Rand=6.00)
 
-    Textures=Texture'HPParticle.hp_fx.Spells.Les_BlueSmoke'
+    Textures(0)=Texture'HPParticle.hp_fx.Spells.Les_BlueSmoke'
 
     CollisionRadius=10000.00
 }

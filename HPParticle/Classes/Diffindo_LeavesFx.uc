@@ -45,7 +45,7 @@ defaultproperties
 
     ParticlesMax=32
 
-    Textures=Texture'HPParticle.hp_fx.Particles.leaf'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.leaf'
 
     Rotation=(Pitch=49472,Yaw=0,Roll=0)
 

@@ -41,7 +41,7 @@ defaultproperties
 
     ParticlesMax=8
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Feather'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Feather'
 
     Style=STY_Masked
 }

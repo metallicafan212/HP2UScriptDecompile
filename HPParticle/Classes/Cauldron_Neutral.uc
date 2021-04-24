@@ -45,7 +45,7 @@ defaultproperties
 
     GravityModifier=0.01
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Smoke3'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Smoke3'
 
     AmbientSound=Sound'HPSounds.Exec_demo_level_SFX.cauldron_bubbling'
 

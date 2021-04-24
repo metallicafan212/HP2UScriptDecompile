@@ -41,7 +41,7 @@ defaultproperties
 
     Attraction=(X=5.00,Y=5.00,Z=5.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_02'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_02'
 
     Rotation=(Pitch=16640,Yaw=0,Roll=0)
 }

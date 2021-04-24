@@ -47,7 +47,7 @@ defaultproperties
 
     ParticlesMax=150
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Key3'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Key3'
 
     Age=643.23
 

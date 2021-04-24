@@ -43,5 +43,5 @@ defaultproperties
 
     ParticlesMax=64
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Smoke1'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Smoke1'
 }

@@ -43,5 +43,5 @@ defaultproperties
 
     ParticlesMax=20
 
-    Textures=Texture'HPParticle.hp_fx.General.SPIKYBUSH_leaf'
+    Textures(0)=Texture'HPParticle.hp_fx.General.SPIKYBUSH_leaf'
 }

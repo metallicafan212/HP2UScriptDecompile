@@ -49,7 +49,7 @@ defaultproperties
 
     Gravity=(X=0.00,Y=0.00,Z=5.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.flare4'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.flare4'
 
     Rotation=(Pitch=-16352,Yaw=0,Roll=0)
 

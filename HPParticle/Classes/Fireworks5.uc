@@ -31,7 +31,7 @@ defaultproperties
 
     ParticlesMax=80
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_01'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_01'
 
     Rotation=(Pitch=16528,Yaw=0,Roll=0)
 }

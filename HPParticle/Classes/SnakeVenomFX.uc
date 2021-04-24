@@ -29,5 +29,5 @@ defaultproperties
 
     SizeLength=(Base=16.00,Rand=8.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Dot_1'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Dot_1'
 }

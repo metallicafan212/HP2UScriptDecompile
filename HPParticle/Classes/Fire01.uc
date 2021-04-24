@@ -35,7 +35,7 @@ defaultproperties
 
     Gravity=(X=0.00,Y=0.00,Z=50.00)
 
-    Textures=Texture'HPParticle.particle_fx.PotFire08'
+    Textures(0)=Texture'HPParticle.particle_fx.PotFire08'
 
     AmbientSound=Sound'HPSounds.General.torch01'
 

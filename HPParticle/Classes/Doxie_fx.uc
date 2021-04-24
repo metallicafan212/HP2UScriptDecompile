@@ -43,7 +43,7 @@ defaultproperties
 
     ChaosDelay=0.50
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_5'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_5'
 
     Rotation=(Pitch=-16352,Yaw=0,Roll=0)
 

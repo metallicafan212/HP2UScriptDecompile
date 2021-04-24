@@ -41,7 +41,7 @@ defaultproperties
 
     Attraction=(X=-0.01,Y=-0.01,Z=-0.01)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_02'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_02'
 
     bDynamicLight=True
 }

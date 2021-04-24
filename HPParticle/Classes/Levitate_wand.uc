@@ -37,7 +37,7 @@ defaultproperties
 
     GravityModifier=0.00
 
-    Textures=FireTexture'HPParticle.hp_fx.Particles.F_spark'
+    Textures(0)=FireTexture'HPParticle.hp_fx.Particles.F_spark'
 
     Rotation=(Pitch=16640,Yaw=0,Roll=0)
 

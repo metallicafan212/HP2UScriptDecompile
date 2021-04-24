@@ -29,7 +29,7 @@ defaultproperties
 
     SizeLength=(Base=2.00,Rand=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Dot_Neutral'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Dot_Neutral'
 
     RenderPrimitive=PPRIM_Liquid
 

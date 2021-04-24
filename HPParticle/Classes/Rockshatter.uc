@@ -39,7 +39,7 @@ defaultproperties
 
     ParticlesMax=20
 
-    Textures=Texture'HPParticle.hp_fx.Particles.rockpiece'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.rockpiece'
 
     Style=STY_Masked
 

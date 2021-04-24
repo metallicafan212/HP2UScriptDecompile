@@ -37,7 +37,7 @@ defaultproperties
 
     Attraction=(X=5.00,Y=5.00,Z=5.00)
 
-    Textures=Texture'HPParticle.hp_fx.Spells.Les_BlueSmoke'
+    Textures(0)=Texture'HPParticle.hp_fx.Spells.Les_BlueSmoke'
 
     LastUpdateLocation=(X=0.00,Y=20.00,Z=32.00)
 

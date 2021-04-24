@@ -89,7 +89,7 @@ defaultproperties
 
     bSystemRelative=True
 
-    Textures=Texture'HPParticle.hp_fx.Particles.flare4'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.flare4'
 
     bEmit=False
 }

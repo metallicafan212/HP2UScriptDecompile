@@ -43,7 +43,7 @@ defaultproperties
 
     Damping=2.00
 
-    Textures=Texture'HPParticle.hp_fx.Spells.Les_fire_01'
+    Textures(0)=Texture'HPParticle.hp_fx.Spells.Les_fire_01'
 
     CollisionRadius=10000.00
 }

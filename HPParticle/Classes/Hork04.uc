@@ -49,7 +49,7 @@ defaultproperties
 
     ParticlesMax=20
 
-    Textures=Texture'HPParticle.hp_fx.Particles.HorkaChunk'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.HorkaChunk'
 
     Rotation=(Pitch=16323,Yaw=0,Roll=0)
 

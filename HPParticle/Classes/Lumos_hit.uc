@@ -41,7 +41,7 @@ defaultproperties
 
     ParticlesMax=80
 
-    Textures=Texture'HPParticle.hp_fx.General.CandleF'
+    Textures(0)=Texture'HPParticle.hp_fx.General.CandleF'
 
     LastUpdateLocation=(X=-383.86,Y=-178.58,Z=65.73)
 

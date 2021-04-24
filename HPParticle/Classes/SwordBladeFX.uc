@@ -33,5 +33,5 @@ defaultproperties
 
     Attraction=(X=20.00,Y=20.00,Z=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.flare4'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.flare4'
 }

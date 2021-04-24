@@ -31,7 +31,7 @@ defaultproperties
 
     SizeEndScale=(Base=2.00,Rand=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.FF_Wind'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.FF_Wind'
 
     LastUpdateLocation=(X=-128.08,Y=-40.05,Z=186.00)
 

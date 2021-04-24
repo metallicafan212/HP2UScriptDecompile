@@ -29,7 +29,7 @@ defaultproperties
 
     ChaosDelay=0.25
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Key3'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Key3'
 
     Physics=PHYS_Rotating
 

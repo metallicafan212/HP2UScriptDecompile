@@ -35,7 +35,7 @@ defaultproperties
 
     Chaos=0.50
 
-    Textures=Texture'HPParticle.hp_fx.Spells.LesBlueFire_01'
+    Textures(0)=Texture'HPParticle.hp_fx.Spells.LesBlueFire_01'
 
     AmbientSound=Sound'HPSounds.Ch2Skurge.blue_death_torch'
 

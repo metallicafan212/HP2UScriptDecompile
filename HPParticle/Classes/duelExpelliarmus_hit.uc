@@ -35,7 +35,7 @@ defaultproperties
 
     ParticlesMax=100
 
-    Textures=Texture'HPParticle.hp_fx.Particles.flare4'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.flare4'
 
     Rotation=(Pitch=16320,Yaw=0,Roll=0)
 }

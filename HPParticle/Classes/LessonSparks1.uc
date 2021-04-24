@@ -39,7 +39,7 @@ defaultproperties
 
     Damping=1.00
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
 
     Rotation=(Pitch=48995,Yaw=0,Roll=0)
 }

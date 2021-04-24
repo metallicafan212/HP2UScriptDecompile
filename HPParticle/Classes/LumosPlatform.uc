@@ -39,7 +39,7 @@ defaultproperties
 
     Chaos=1.00
 
-    Textures=Texture'HPParticle.hp_fx.General.CandleF'
+    Textures(0)=Texture'HPParticle.hp_fx.General.CandleF'
 
     CollisionHeight=20.00
 }

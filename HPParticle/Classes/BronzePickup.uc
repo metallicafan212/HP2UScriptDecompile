@@ -49,7 +49,7 @@ defaultproperties
 
     ParticlesMax=150
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Reward_Bronze'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Reward_Bronze'
 
     Age=643.23
 

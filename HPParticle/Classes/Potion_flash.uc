@@ -43,7 +43,7 @@ defaultproperties
 
     GravityModifier=-0.10
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_5_BW'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_5_BW'
 
     LastUpdateLocation=(X=0.00,Y=0.00,Z=-50.73)
 

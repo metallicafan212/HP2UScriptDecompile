@@ -47,7 +47,7 @@ defaultproperties
 
     ParticlesMax=180
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_3'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_3'
 
     EmitDelay=0.79
 

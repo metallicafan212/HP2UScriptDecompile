@@ -31,7 +31,7 @@ defaultproperties
 
     Attraction=(X=5.00,Y=5.00,Z=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Dot_2'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Dot_2'
 
     Rotation=(Pitch=-16352,Yaw=0,Roll=0)
 

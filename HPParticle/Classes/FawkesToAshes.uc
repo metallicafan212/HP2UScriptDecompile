@@ -53,7 +53,7 @@ defaultproperties
 
     ParticlesMax=200
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Smoke5'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Smoke5'
 
     bDynamicLight=True
 

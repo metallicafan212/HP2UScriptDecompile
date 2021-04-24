@@ -21,7 +21,7 @@ defaultproperties
 
     SpinRate=(Base=3.00,Rand=2.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.swirl001'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.swirl001'
 
     LastUpdateLocation=(X=-104.67,Y=5.33,Z=-74.00)
 

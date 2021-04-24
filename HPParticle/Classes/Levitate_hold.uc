@@ -43,7 +43,7 @@ defaultproperties
 
     ParticlesAlive=80
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Feather'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Feather'
 
     LastUpdateLocation=(X=5.12,Y=4.56,Z=36.10)
 

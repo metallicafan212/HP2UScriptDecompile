@@ -40,7 +40,7 @@ defaultproperties
 
     Chaos=4.00
 
-    Textures=Texture'HPParticle.particle_fx.PotFire08'
+    Textures(0)=Texture'HPParticle.particle_fx.PotFire08'
 
     LifeSpan=2.00
 }

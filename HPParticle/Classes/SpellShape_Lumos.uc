@@ -47,7 +47,7 @@ defaultproperties
 
     ParticlesMax=180
 
-    Textures=Texture'HPParticle.hp_fx.General.CandleF'
+    Textures(0)=Texture'HPParticle.hp_fx.General.CandleF'
 
     EmitDelay=0.79
 

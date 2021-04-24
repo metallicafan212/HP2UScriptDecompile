@@ -43,5 +43,5 @@ defaultproperties
 
     GravityModifier=0.03
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Smoke5'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Smoke5'
 }

@@ -33,7 +33,7 @@ defaultproperties
 
     SizeEndScale=(Base=10.00,Rand=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.FF_SmallPuff'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.FF_SmallPuff'
 
     EmitDelay=0.03
 

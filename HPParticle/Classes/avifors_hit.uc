@@ -35,5 +35,5 @@ defaultproperties
 
     ParticlesMax=5
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_1'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_1'
 }

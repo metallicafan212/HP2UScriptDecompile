@@ -47,7 +47,7 @@ defaultproperties
 
     ParticlesMax=50
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Key1'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Key1'
 
     EmitDelay=0.79
 

@@ -43,7 +43,7 @@ defaultproperties
 
     GravityModifier=-0.10
 
-    Textures=Texture'HPParticle.hp_fx.Spells.Les_VoldSpell'
+    Textures(0)=Texture'HPParticle.hp_fx.Spells.Les_VoldSpell'
 
     LastUpdateLocation=(X=-383.86,Y=-178.58,Z=65.73)
 

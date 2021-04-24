@@ -41,7 +41,7 @@ defaultproperties
 
     Attraction=(X=10.00,Y=10.00,Z=10.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Goldstar01'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Goldstar01'
 
     Rotation=(Pitch=16640,Yaw=0,Roll=0)
 }

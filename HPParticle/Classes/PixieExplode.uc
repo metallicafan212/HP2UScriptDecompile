@@ -47,7 +47,7 @@ defaultproperties
 
     ParticlesMax=200
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
 
     Location=(X=0.00,Y=0.00,Z=100.00)
 

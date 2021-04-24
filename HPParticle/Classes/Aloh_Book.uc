@@ -49,7 +49,7 @@ defaultproperties
 
     GravityModifier=0.00
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Key1'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Key1'
 
     Rotation=(Pitch=16640,Yaw=0,Roll=0)
 

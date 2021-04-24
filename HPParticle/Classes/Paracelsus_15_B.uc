@@ -51,7 +51,7 @@ defaultproperties
 
     GravityModifier=-0.20
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Smoke5'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Smoke5'
 
     Rotation=(Pitch=16640,Yaw=0,Roll=0)
 }

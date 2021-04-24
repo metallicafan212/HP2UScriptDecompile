@@ -37,5 +37,5 @@ defaultproperties
 
     GravityModifier=-0.02
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_3'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_3'
 }

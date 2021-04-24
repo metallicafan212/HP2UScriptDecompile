@@ -41,7 +41,7 @@ defaultproperties
 
     ParticlesMax=8
 
-    Textures=Texture'HPParticle.hp_fx.Particles.twig2'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.twig2'
 
     Style=STY_Masked
 }

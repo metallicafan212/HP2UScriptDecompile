@@ -45,7 +45,7 @@ defaultproperties
 
     ParticlesMax=100
 
-    Textures=FireTexture'HPParticle.hp_fx.Particles.SpinG'
+    Textures(0)=FireTexture'HPParticle.hp_fx.Particles.SpinG'
 
     Rotation=(Pitch=16323,Yaw=0,Roll=0)
 }

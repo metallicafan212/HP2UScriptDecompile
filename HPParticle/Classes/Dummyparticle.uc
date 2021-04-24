@@ -37,5 +37,5 @@ defaultproperties
 
     ChaosDelay=0.50
 
-    Textures=FireTexture'HPParticle.hp_fx.Particles.spin'
+    Textures(0)=FireTexture'HPParticle.hp_fx.Particles.spin'
 }

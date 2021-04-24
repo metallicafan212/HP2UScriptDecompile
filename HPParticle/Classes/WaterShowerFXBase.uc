@@ -43,7 +43,7 @@ defaultproperties
 
     GravityModifier=0.25
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Dot_1'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Dot_1'
 
     RenderPrimitive=PPRIM_Liquid
 

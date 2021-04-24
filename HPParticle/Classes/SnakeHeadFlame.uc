@@ -35,7 +35,7 @@ defaultproperties
 
     ParticlesMax=200
 
-    Textures=Texture'HPParticle.particle_fx.PotFire08'
+    Textures(0)=Texture'HPParticle.particle_fx.PotFire08'
 
     Rotation=(Pitch=-2336,Yaw=-16272,Roll=-240)
 }

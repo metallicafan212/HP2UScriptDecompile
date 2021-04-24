@@ -43,5 +43,5 @@ defaultproperties
 
     Damping=1.00
 
-    Textures=Texture'HPParticle.hp_fx.General.AngryKeys_A00'
+    Textures(0)=Texture'HPParticle.hp_fx.General.AngryKeys_A00'
 }

@@ -37,7 +37,7 @@ defaultproperties
 
     ParticlesMax=80
 
-    Textures=FireTexture'HPParticle.hp_fx.Particles.RiddleInk'
+    Textures(0)=FireTexture'HPParticle.hp_fx.Particles.RiddleInk'
 
     Style=STY_Masked
 }

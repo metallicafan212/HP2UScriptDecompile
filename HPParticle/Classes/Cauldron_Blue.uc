@@ -43,7 +43,7 @@ defaultproperties
 
     Gravity=(X=-2.00,Y=-2.00,Z=0.00)
 
-    Textures=FireTexture'HPParticle.hp_fx.Particles.spin'
+    Textures(0)=FireTexture'HPParticle.hp_fx.Particles.spin'
 
     AmbientSound=Sound'HPSounds.Exec_demo_level_SFX.cauldron_bubbling'
 

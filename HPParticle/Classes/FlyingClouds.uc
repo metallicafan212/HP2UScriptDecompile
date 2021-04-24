@@ -43,7 +43,7 @@ defaultproperties
 
     ParticlesAlive=10
 
-    Textures=Texture'HPParticle.hp_fx.Particles.FF_Cloud'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.FF_Cloud'
 
     Texture=Texture'HPParticle.hp_fx.Particles.SepiaFlamefx'
 }

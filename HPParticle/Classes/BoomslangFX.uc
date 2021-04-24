@@ -39,7 +39,7 @@ defaultproperties
 
     Damping=0.50
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
 
     CollisionRadius=30.00
 

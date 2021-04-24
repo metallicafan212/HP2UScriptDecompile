@@ -36,7 +36,7 @@ defaultproperties
 
     Damping=1.50
 
-    Textures=None
+    Textures(0)=None
 
     EmitDelay=0.07
 

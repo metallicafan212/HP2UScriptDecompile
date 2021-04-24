@@ -43,7 +43,7 @@ defaultproperties
 
     ParticlesMax=100
 
-    Textures=Texture'HPParticle.particle_fx.noisy2_pfx'
+    Textures(0)=Texture'HPParticle.particle_fx.noisy2_pfx'
 
     Rotation=(Pitch=48995,Yaw=0,Roll=0)
 }

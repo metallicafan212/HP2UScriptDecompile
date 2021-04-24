@@ -41,5 +41,5 @@ defaultproperties
 
     Chaos=1.00
 
-    Textures=Texture'HPParticle.particle_fx.ember00'
+    Textures(0)=Texture'HPParticle.particle_fx.ember00'
 }

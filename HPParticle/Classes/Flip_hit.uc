@@ -43,5 +43,5 @@ defaultproperties
 
     ParticlesMax=50
 
-    Textures=Texture'HPParticle.hp_fx.Particles.flare4'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.flare4'
 }

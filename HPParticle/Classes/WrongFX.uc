@@ -41,7 +41,7 @@ defaultproperties
 
     ParticlesMax=50
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Smoke4'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Smoke4'
 
     Rotation=(Pitch=-16840,Yaw=7776,Roll=0)
 

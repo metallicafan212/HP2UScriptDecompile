@@ -47,7 +47,7 @@ defaultproperties
 
     ParticlesMax=60
 
-    Textures=Texture'HPParticle.hp_fx.Particles.White_Feather'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.White_Feather'
 
     Rotation=(Pitch=0,Yaw=0,Roll=0)
 }

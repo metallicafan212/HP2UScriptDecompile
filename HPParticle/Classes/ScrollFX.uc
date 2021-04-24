@@ -45,5 +45,5 @@ defaultproperties
 
     Attraction=(X=10.00,Y=10.00,Z=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_4'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_4'
 }

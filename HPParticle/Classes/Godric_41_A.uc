@@ -33,7 +33,7 @@ defaultproperties
 
     Attraction=(X=20.00,Y=20.00,Z=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Dot_2'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Dot_2'
 
     LastUpdateLocation=(X=-0.28,Y=224.00,Z=-16.60)
 

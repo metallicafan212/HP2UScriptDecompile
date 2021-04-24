@@ -39,7 +39,7 @@ defaultproperties
 
     Damping=2.00
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_8'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_8'
 
     CutName="serpentsoriaPE"
 }

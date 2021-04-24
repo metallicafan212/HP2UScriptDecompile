@@ -43,7 +43,7 @@ defaultproperties
 
     GravityModifier=0.50
 
-    Textures=Texture'HPParticle.hp_fx.Particles.blob32'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.blob32'
 
     Rotation=(Pitch=16640,Yaw=0,Roll=0)
 }

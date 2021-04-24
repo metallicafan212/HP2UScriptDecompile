@@ -41,7 +41,7 @@ defaultproperties
 
     GravityModifier=-0.05
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Z'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Z'
 
     LastUpdateLocation=(X=5.12,Y=4.56,Z=36.10)
 

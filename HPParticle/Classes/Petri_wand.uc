@@ -39,7 +39,7 @@ defaultproperties
 
     Attraction=(X=35.00,Y=35.00,Z=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_5'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_5'
 
     LastUpdateLocation=(X=-388.53,Y=-383.68,Z=60.94)
 

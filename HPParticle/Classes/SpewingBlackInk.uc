@@ -35,7 +35,7 @@ defaultproperties
 
     GravityModifier=0.05
 
-    Textures=Texture'HPParticle.hp_fx.Particles.BlackDot'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.BlackDot'
 
     Style=STY_None
 

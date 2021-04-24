@@ -45,5 +45,5 @@ defaultproperties
 
     ParticlesMax=100
 
-    Textures=Texture'HPParticle.hp_fx.Spells.Les_fire_01'
+    Textures(0)=Texture'HPParticle.hp_fx.Spells.Les_fire_01'
 }

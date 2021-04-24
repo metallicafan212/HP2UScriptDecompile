@@ -33,5 +33,5 @@ defaultproperties
 
     SpinRate=(Base=4.00,Rand=-8.00)
 
-    Textures=Texture'HPParticle.particle_fx.soft_pfx'
+    Textures(0)=Texture'HPParticle.particle_fx.soft_pfx'
 }

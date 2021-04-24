@@ -33,7 +33,7 @@ defaultproperties
 
     Gravity=(X=0.00,Y=0.50,Z=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Dot_Neutral'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Dot_Neutral'
 
     Rotation=(Pitch=16208,Yaw=0,Roll=0)
 }

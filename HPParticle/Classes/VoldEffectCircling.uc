@@ -65,7 +65,7 @@ defaultproperties
 
     Distribution=DIST_Uniform
 
-    Textures=Texture'HPParticle.hp_fx.Particles.flare5'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.flare5'
 
     LifeSpan=10.00
 }

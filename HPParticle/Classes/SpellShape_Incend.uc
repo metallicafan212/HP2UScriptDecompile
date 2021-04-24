@@ -47,7 +47,7 @@ defaultproperties
 
     ParticlesMax=180
 
-    Textures=Texture'HPParticle.hp_fx.Spells.Les_BlueSmoke'
+    Textures(0)=Texture'HPParticle.hp_fx.Spells.Les_BlueSmoke'
 
     EmitDelay=0.79
 

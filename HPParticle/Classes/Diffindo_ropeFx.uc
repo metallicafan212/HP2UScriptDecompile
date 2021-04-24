@@ -39,7 +39,7 @@ defaultproperties
 
     DripTime=(Base=0.50,Rand=0.00)
 
-    Textures=Texture'HPParticle.hp_fx.Particles.flare4'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.flare4'
 
     Rotation=(Pitch=48995,Yaw=0,Roll=0)
 }

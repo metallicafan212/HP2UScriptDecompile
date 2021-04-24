@@ -33,7 +33,7 @@ defaultproperties
 
     ParticlesMax=50
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Dot_2'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Dot_2'
 
     Rotation=(Pitch=48995,Yaw=0,Roll=0)
 }

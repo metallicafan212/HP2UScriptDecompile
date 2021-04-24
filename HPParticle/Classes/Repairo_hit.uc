@@ -39,7 +39,7 @@ defaultproperties
 
     ParticlesMax=80
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_3'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_3'
 
     LastUpdateLocation=(X=-388.11,Y=-1.97,Z=16.40)
 

@@ -43,7 +43,7 @@ defaultproperties
 
     Damping=4.00
 
-    Textures=FireTexture'HPParticle.hp_fx.Particles.F_Spark2'
+    Textures(0)=FireTexture'HPParticle.hp_fx.Particles.F_Spark2'
 
     LastUpdateLocation=(X=-383.54,Y=385.14,Z=15.72)
 

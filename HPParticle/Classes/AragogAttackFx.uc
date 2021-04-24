@@ -43,7 +43,7 @@ defaultproperties
 
     Attraction=(X=20.00,Y=20.00,Z=20.00)
 
-    Textures=Texture'HPParticle.particle_fx.noisy5_pfx'
+    Textures(0)=Texture'HPParticle.particle_fx.noisy5_pfx'
 
     Rotation=(Pitch=16384,Yaw=0,Roll=0)
 }

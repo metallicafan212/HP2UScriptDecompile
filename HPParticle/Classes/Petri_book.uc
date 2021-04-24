@@ -43,7 +43,7 @@ defaultproperties
 
     Damping=3.50
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Sparkle_5'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Sparkle_5'
 
     LastUpdateLocation=(X=-383.46,Y=384.39,Z=15.72)
 

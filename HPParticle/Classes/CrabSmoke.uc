@@ -46,7 +46,7 @@ defaultproperties
 
     ParticlesMax=25
 
-    Textures=None
+    Textures(0)=None
 
     Rotation=(Pitch=16384,Yaw=0,Roll=0)
 

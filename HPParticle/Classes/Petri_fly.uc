@@ -39,7 +39,7 @@ defaultproperties
 
     Damping=1.00
 
-    Textures=FireTexture'HPParticle.hp_fx.Spells.WIN_P'
+    Textures(0)=FireTexture'HPParticle.hp_fx.Spells.WIN_P'
 
     LastUpdateLocation=(X=-383.86,Y=-190.73,Z=65.73)
 

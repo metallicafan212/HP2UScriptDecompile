@@ -51,7 +51,7 @@ defaultproperties
 
     ParticlesMax=250
 
-    Textures=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
+    Textures(0)=Texture'HPParticle.hp_fx.Particles.Les_Sparkle_04'
 
     Age=643.23
 

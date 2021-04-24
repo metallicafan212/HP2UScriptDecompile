@@ -39,7 +39,7 @@ defaultproperties
 
     Attraction=(X=10.00,Y=10.00,Z=10.00)
 
-    Textures=Texture'HPParticle.particle_fx.PotFire07'
+    Textures(0)=Texture'HPParticle.particle_fx.PotFire07'
 
     Rotation=(Pitch=16384,Yaw=0,Roll=0)
 }

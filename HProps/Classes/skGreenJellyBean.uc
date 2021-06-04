@@ -6,7 +6,7 @@ class skGreenJellyBean extends HPMeshActor;
 
 //model import (skGreenJellyBeanMesh) -AdamJD 
 #exec Mesh ModelImport Mesh=skGreenJellyBeanMesh ModelFile=Models\skGreenJellyBeanMesh.psk LODStyle=10 
-#exec Mesh Origin Mesh=skGreenJellyBeanMesh X=0 Y=0 Z=0 Yaw=0 Pitch=0 Roll=0 
+#exec Mesh Origin Mesh=skGreenJellyBeanMesh X=0 Y=0 Z=16 Yaw=0 Pitch=0 Roll=0 
 
 //anim import (skGreenJellyBeanAnims) -AdamJD 
 #exec Anim Import Anim=skGreenJellyBeanAnims AnimFile=Models\skGreenJellyBeanAnims.psa Compress=1 MaxKeys=999999 ImportSeqs=1 

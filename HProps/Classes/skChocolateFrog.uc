@@ -7,7 +7,7 @@ class skChocolateFrog extends HPMesh
   
 //model import (skChocolateFrogMesh) -AdamJD 
 #exec Mesh ModelImport Mesh=skChocolateFrogMesh ModelFile=Models\skChocolateFrogMesh.psk LODStyle=10 
-#exec Mesh Origin Mesh=skChocolateFrogMesh X=0 Y=0 Z=0 Yaw=0 Pitch=0 Roll=0 
+#exec Mesh Origin Mesh=skChocolateFrogMesh X=0 Y=0 Z=40 Yaw=0 Pitch=0 Roll=0 
 
 //anim import (skChocolateFrogAnims) -AdamJD 
 #exec Anim Import Anim=skChocolateFrogAnims AnimFile=Models\skChocolateFrogAnims.psa Compress=1 MaxKeys=999999 ImportSeqs=1 

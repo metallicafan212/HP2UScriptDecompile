@@ -98,7 +98,7 @@ state GameSnitchLesson extends GamePlay
 {
   function BeginState ()
   {
-    Wood.PlaySound(Sound'Q_whistle_short',/*3*/SLOT_Interact,1.0,,20000.0);
+    Wood.PlaySound(Sound'Q_whistle_short',SLOT_Interact,1.0,,20000.0);
     bBlewEndWhistle = False;
     ScorePhase = 0;
     Super.BeginState();
@@ -135,23 +135,23 @@ state GameSnitchLesson extends GamePlay
       }
       if ( fProgressPercent > 98 )
       {
-        bSaid = CommentMgr.SayComment(/*6*/WC_CatchSnitch);
+        bSaid = CommentMgr.SayComment(WC_CatchSnitch);
       }
       if (  !bSaid && (fProgressPercent > 97) &&  !bCanReachForSnitch )
       {
-        bSaid = CommentMgr.SayComment(/*5*/WC_TooOffCenter);
+        bSaid = CommentMgr.SayComment(WC_TooOffCenter);
       }
       if (  !bSaid && (fProgressPercent > 80) )
       {
-        bSaid = CommentMgr.SayComment(/*4*/WC_ClosingOnSnitch);
+        bSaid = CommentMgr.SayComment(WC_ClosingOnSnitch);
       }
-      if (  !bSaid &&  !CommentMgr.CommentHasBeenSaidBefore(/*1*/WC_FlightAdvice) )
+      if (  !bSaid &&  !CommentMgr.CommentHasBeenSaidBefore(WC_FlightAdvice) )
       {
-        bSaid = CommentMgr.SayComment(/*1*/WC_FlightAdvice);
+        bSaid = CommentMgr.SayComment(WC_FlightAdvice);
       }
       if (  !bSaid )
       {
-        bSaid = CommentMgr.SayComment(/*2*/WC_QuidAdvice);
+        bSaid = CommentMgr.SayComment(WC_QuidAdvice);
       }
       if ( bSaid )
       {
@@ -208,7 +208,7 @@ state GameSnitchLesson extends GamePlay
     } else {
       if (  !bBlewEndWhistle )
       {
-        Wood.PlaySound(EndWhistle,/*3*/SLOT_Interact,1.0,,20000.0);
+        Wood.PlaySound(EndWhistle,SLOT_Interact,1.0,,20000.0);
         bBlewEndWhistle = True;
         SetTimer(GetSoundDuration(EndWhistle),False);
       } else {
@@ -242,7 +242,7 @@ state GameMockGame extends GamePlay
   {
     local QuidditchPlayer OtherPlayer;
   
-    Wood.PlaySound(Sound'Q_whistle_short',/*3*/SLOT_Interact,1.0,,20000.0);
+    Wood.PlaySound(Sound'Q_whistle_short',SLOT_Interact,1.0,,20000.0);
     bBlewEndWhistle = False;
     foreach AllActors(Class'QuidditchPlayer',OtherPlayer)
     {
@@ -281,23 +281,23 @@ state GameMockGame extends GamePlay
       bSaid = False;
       if ( fProgressPercent > 98 )
       {
-        bSaid = CommentMgr.SayComment(/*6*/WC_CatchSnitch);
+        bSaid = CommentMgr.SayComment(WC_CatchSnitch);
       }
       if (  !bSaid && (fProgressPercent > 97) &&  !bCanReachForSnitch && SeekerIsOutOfWay() )
       {
-        bSaid = CommentMgr.SayComment(/*5*/WC_TooOffCenter);
+        bSaid = CommentMgr.SayComment(WC_TooOffCenter);
       }
       if (  !bSaid &&  !SeekerIsOutOfWay() )
       {
-        bSaid = CommentMgr.SayComment(/*3*/WC_SeekerAdvice);
+        bSaid = CommentMgr.SayComment(WC_SeekerAdvice);
       }
       if (  !bSaid && (fProgressPercent > 80) )
       {
-        bSaid = CommentMgr.SayComment(/*4*/WC_ClosingOnSnitch);
+        bSaid = CommentMgr.SayComment(WC_ClosingOnSnitch);
       }
       if (  !bSaid )
       {
-        bSaid = CommentMgr.SayComment(/*2*/WC_QuidAdvice);
+        bSaid = CommentMgr.SayComment(WC_QuidAdvice);
       }
       if ( bSaid )
       {
@@ -385,7 +385,7 @@ state GameMockGame extends GamePlay
     } else {
       if (  !bBlewEndWhistle )
       {
-        Wood.PlaySound(EndWhistle,/*3*/SLOT_Interact,1.0,,20000.0);
+        Wood.PlaySound(EndWhistle,SLOT_Interact,1.0,,20000.0);
         bBlewEndWhistle = True;
         SetTimer(GetSoundDuration(EndWhistle),False);
       } else {
@@ -419,7 +419,7 @@ state GameMockGame extends GamePlay
   
 }
 
-state PendingEvent //extends PendingEvent
+state PendingEvent
 {
   function BeginState ()
   {
@@ -433,7 +433,7 @@ state PendingEvent //extends PendingEvent
   
   function Timer ()
   {
-    Wood.PlaySound(EndWhistle,/*3*/SLOT_Interact,1.0,,20000.0);
+    Wood.PlaySound(EndWhistle,SLOT_Interact,1.0,,20000.0);
     bBlewEndWhistle = True;
   }
   

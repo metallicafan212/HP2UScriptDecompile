@@ -64,7 +64,7 @@ state StateFlying
   {
     Velocity = vector(Rotation) * Speed;
     currentVelocity = Velocity;
-    if ( False )
+    if ( BOOL_DEBUG_AI )
     {
       PlayerHarry.ClientMessage("Begin Velocity =  " $ string(Velocity));
     }

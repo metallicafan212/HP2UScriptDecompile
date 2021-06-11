@@ -61,7 +61,7 @@ state stillOpen
 {
  begin:
   bProjTarget = False;
-  eVulnerableToSpell = /*0*/ SPELL_None; 
+  eVulnerableToSpell =  SPELL_None; 
   LoopAnim('End');
 }
 
@@ -125,7 +125,7 @@ state turnover
         newSpawn.Velocity = Vel * 2;
       } else {
         newSpawn.Velocity = Vel;
-        newSpawn.SetPhysics(/*2*/PHYS_Falling);
+        newSpawn.SetPhysics(PHYS_Falling);
       }
       newSpawn.bPersistent = bMakeSpawnPersistent;
       // iBean++;
@@ -151,7 +151,7 @@ state turnover
   
  begin:
   bProjTarget = False;
-  eVulnerableToSpell = /*0*/ SPELL_None;
+  eVulnerableToSpell =  SPELL_None;
   PlaySound(Sound'cauldron_flip');
   PlayAnim('tipover'/*, [RootBone] 'move'*/); //commenting out the rootbone stops floating cauldrons (thanks to MaxG for finding this) -AdamJD
   FinishAnim();

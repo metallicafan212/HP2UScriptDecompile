@@ -44,7 +44,7 @@ function Landed (Vector HitNormal)
 
 function ThrownLanded (Vector HitNormal)
 {
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("Thrown and Landed");
   }
@@ -53,14 +53,14 @@ function ThrownLanded (Vector HitNormal)
 
 function ShootPoison ()
 {
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("Shoot Poison");
   }
   HeadLocation = Location;
   HeadRotation = Rotation;
   Destroy();
-  PlaySound(Sound'horklump_mushroom_head_explode',/*1*/SLOT_Misc,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(Sound'horklump_mushroom_head_explode',SLOT_Misc,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
   Spawn(Class'ThrownPoisonCloud',self,,HeadLocation,HeadRotation);
 }
 
@@ -68,7 +68,7 @@ auto state fallOver
 {
   function Tick (float DeltaTime)
   {
-    Super(HPawn).Tick(DeltaTime);
+    Super.Tick(DeltaTime);
     if ( bFalling == True )
     {
       SetLocation(Location + Vec(tempX,tempY,0.0));
@@ -77,7 +77,7 @@ auto state fallOver
   
   function HitWall (Vector HitNormal, Actor Wall)
   {
-    if ( False )
+    if ( BOOL_DEBUG_AI )
     {
       PlayerHarry.ClientMessage("Hit the wall");
     }

@@ -15,7 +15,7 @@ class skNorrisTorch extends HPMeshActor;
 #exec Anim Digest Anim=skNorrisTorchAnims VERBOSE 
 
 //texture import (skNorrisTorchTex0) -AdamJD 
-#exec Texture Import File=Textures\skNorrisTorchTex0.png Name=skNorrisTorchTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skNorrisTorchTex0.png Name=skNorrisTorchTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skNorrisTorchMesh Num=0 Texture=skNorrisTorchTex0
 
 defaultproperties

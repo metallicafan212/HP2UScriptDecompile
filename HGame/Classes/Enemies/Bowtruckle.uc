@@ -417,7 +417,7 @@ function Tick (float deltaT)
   GotoState('stateGotoHarry');
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
   Acceleration = vect(0.00,0.00,0.00);

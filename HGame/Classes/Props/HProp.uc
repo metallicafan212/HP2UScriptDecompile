@@ -183,7 +183,7 @@ function TickPickupOrDropOff (float Delta)
 }
 
 state DropOffProp
-{
+{	
   event Tick (float Delta)
   {
     TickPickupOrDropOff(Delta);
@@ -221,7 +221,7 @@ state DropOffProp
 }
 
 state PickupProp
-{
+{  
   event Tick (float Delta)
   {
     TickPickupOrDropOff(Delta);

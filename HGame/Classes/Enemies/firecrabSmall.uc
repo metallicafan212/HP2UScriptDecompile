@@ -111,7 +111,7 @@ function PlayRoarSound ()
     break;
     default:
   }
-  PlaySound(RoarSound,/*0*/SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(RoarSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
 state stateHitBySpell
@@ -122,7 +122,7 @@ state stateHitBySpell
   }
   
  begin:
-  if ( True )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage(string(Name) $ " : State stateHitBySpell ");
   }
@@ -161,7 +161,7 @@ state DoFlip
   
   function Tick (float DeltaTime)
   {
-    Super(HChar).Tick(DeltaTime);
+    Super.Tick(DeltaTime);
     if ( VSize(Velocity) <= 5 )
     {
       if ( OnALedge(Location) )
@@ -177,7 +177,7 @@ state DoFlip
   }
   
  begin:
-  if ( True )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage(string(Name) $ " : State Do Flip ");
   }
@@ -189,7 +189,7 @@ state DoFlip
   // if ( bool(Physics) != bool(2) )
   if(Physics != PHYS_Falling)
   {
-    PlaySound(Sound'SPI_large_LandOnBack',/*0*/SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
   }
   Sleep(1.0);
   LoopAnim('onback');
@@ -203,7 +203,7 @@ state DoFlip
   // if ( bool(Physics) != bool(2) )
   if(Physics != PHYS_Falling)
   {
-    PlaySound(Sound'SPI_large_LandOnBack',/*0*/SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
   }
   Sleep(0.5);
   LoopAnim('Look');
@@ -222,7 +222,7 @@ state AttackHarry
   }
   
  begin:
-  if ( True )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": attackHarry");
   }
@@ -274,7 +274,7 @@ state throwing
   }
   
  begin:
-  PlaySound(Sound'firecrab_preattack',/*0*/SLOT_None);
+  PlaySound(Sound'firecrab_preattack',SLOT_None);
   PlayAnim('preattack');
   FinishAnim();
   // if ( LineOfSightTo(PlayerHarry) && (iNumShots > 0) )
@@ -291,7 +291,7 @@ state throwing
     smallSpell.iAccuracyMin = iAccuracyMin;
     smallSpell.iAccuracyMax = iAccuracyMax;
     SetRotation(Rotation + rot(0,32768,0));
-    PlaySound(AttackSound,/*0*/SLOT_None);
+    PlaySound(AttackSound,SLOT_None);
     PlayAnim('Attack');
     FinishAnim();
     if (  !LineOfSightTo(PlayerHarry) && (bMoveAround == True) )
@@ -299,7 +299,7 @@ state throwing
       TurnTo(Location + (Location - PlayerHarry.Location));
       vTemp = Normal(PlayerHarry.Location - Location);
       vTemp2 = Location Cross PlayerHarry.Location;
-      if ( True )
+      if ( BOOL_DEBUG_AI )
       {
         PlayerHarry.ClientMessage("cross = " $ string(vTemp2));
       }
@@ -307,7 +307,7 @@ state throwing
       {
         LoopAnim('StrafeLeft');
         vTemp2 =  -vTemp Cross Vec(0.0,0.0,1.0);
-        if ( True )
+        if ( BOOL_DEBUG_AI )
         {
           PlayerHarry.ClientMessage("strafing left");
         }
@@ -316,14 +316,14 @@ state throwing
         {
           LoopAnim('StrafeRight');
           vTemp2 = vTemp Cross Vec(0.0,0.0,1.0);
-          if ( True )
+          if ( BOOL_DEBUG_AI )
           {
             PlayerHarry.ClientMessage("strafing right");
           }
         } else {
           LoopAnim('Walk');
           vTemp2 = Normal(Location - PlayerHarry.Location);
-          if ( True )
+          if ( BOOL_DEBUG_AI )
           {
             PlayerHarry.ClientMessage("backing up");
           }
@@ -369,13 +369,13 @@ state strafeAround
     TurnTo(Location + Location - PlayerHarry.Location);
     vTemp = Normal(PlayerHarry.Location - Location);
     vTemp2 = Location Cross PlayerHarry.Location;
-    if ( True )
+    if ( BOOL_DEBUG_AI )
     {
       PlayerHarry.ClientMessage("cross = " $ string(vTemp2));
     }
     if ( StrafeLeft == True )
     {
-      if ( True )
+      if ( BOOL_DEBUG_AI )
       {
         PlayerHarry.ClientMessage("strafing left");
       }
@@ -388,7 +388,7 @@ state strafeAround
     } else //{
       if ( StrafeLeft == False )
       {
-        if ( True )
+        if ( BOOL_DEBUG_AI )
         {
           PlayerHarry.ClientMessage("strafing right");
         }

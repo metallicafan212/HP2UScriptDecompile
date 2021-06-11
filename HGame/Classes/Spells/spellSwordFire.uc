@@ -31,7 +31,7 @@ function bool OnSpellHitWall (Actor aWall, Vector HitNormal)
 {
   if ( harry(Level.PlayerHarryActor).bMSword )
   {
-    harry(Level.PlayerHarryActor).PlaySound(Sound'Big_whomp2',/*0*/SLOT_None,RandRange(1.0,1.5),False,500.0,RandRange(0.5,1.0));
+    harry(Level.PlayerHarryActor).PlaySound(Sound'Big_whomp2',SLOT_None,RandRange(1.0,1.5),False,500.0,RandRange(0.5,1.0));
     Spawn(Class'DustCloud05_lrg',self,,Location);
     harry(Level.PlayerHarryActor).ShakeView(1.0,150.0,150.0);
     harry(Level.PlayerHarryActor).AutoHitAreaEffect(300.0);
@@ -48,9 +48,9 @@ function bool OnSpellHitHPawn (Actor aHit, Vector vHitLocation)
     aHit.Spawn(Class'DobbyBurst');
     aHit.Spawn(Class'DustCloud04_med');
     aHit.Spawn(Class'Verd_hit');
-    aHit.PlaySound(Sound'Dueling_EXP_smack',/*0*/SLOT_None,,,,RandRange(0.69999999,1.25));
-    aHit.PlaySound(Sound'health_boost1',/*0*/SLOT_None,,,,RandRange(0.69999999,1.25));
-    aHit.PlaySound(Sound'pickup_wig_bark',/*0*/SLOT_None,,,,RandRange(0.69999999,1.25));
+    aHit.PlaySound(Sound'Dueling_EXP_smack',SLOT_None,,,,RandRange(0.69999999,1.25));
+    aHit.PlaySound(Sound'health_boost1',SLOT_None,,,,RandRange(0.69999999,1.25));
+    aHit.PlaySound(Sound'pickup_wig_bark',SLOT_None,,,,RandRange(0.69999999,1.25));
     aHit.Destroy();
     CreateHitEffects(aHit,vHitLocation);
     return False;
@@ -84,13 +84,13 @@ function DamagePercent (float Scale)
   fxFlyParticleEffect.SourceDepth.Base = fxFlyParticleEffect.Default.SourceDepth.Base * scale2;
   if ( Scale < 0.333 )
   {
-    PlaySound(Sound'sword_shoot',/*3*/SLOT_Interact);
+    PlaySound(Sound'sword_shoot',SLOT_Interact);
   } else //{
     if ( Scale < 0.667 )
     {
-      PlaySound(Sound'sword_shoot_big',/*3*/SLOT_Interact);
+      PlaySound(Sound'sword_shoot_big',SLOT_Interact);
     } else {
-      PlaySound(Sound'sword_shoot_biggest',/*3*/SLOT_Interact);
+      PlaySound(Sound'sword_shoot_biggest',SLOT_Interact);
     }
   //}
 }

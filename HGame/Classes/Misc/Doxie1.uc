@@ -71,7 +71,7 @@ state idlehover
 {
   event Tick (float DeltaTime)
   {
-    Super(HChar).Tick(DeltaTime);
+    Super.Tick(DeltaTime);
     ParticleFXActor.SetLocation(Location);
     if ( bAttackOnSight )
     {
@@ -88,7 +88,7 @@ state idlehover
   goto ('loophere');
 }
 
-state patrol //extends patrol
+state patrol
 {
   event Tick (float DeltaTime)
   {
@@ -155,7 +155,7 @@ state MoveToScowl
   
   event Tick (float DeltaTime)
   {
-    Super(HChar).Tick(DeltaTime);
+    Super.Tick(DeltaTime);
     ParticleFXActor.SetLocation(Location);
     if ( VSize(Location - PlayerHarry.Location) < 128 )
     {

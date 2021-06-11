@@ -157,7 +157,7 @@ function PeevesTaunting ()
 
 function StopPeevesDialog ()
 {
-	if ( False )
+	if ( BOOL_DEBUG_AI )
 	{
 		PlayerHarry.ClientMessage("Stopping Dialog");
 	}
@@ -281,7 +281,7 @@ function Vector GetHarryMovementCenter ()
 	return peevesTrigger.Location;
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
 	if ( Type == Annoyance )
@@ -307,7 +307,7 @@ state MoveToPoint
 {
 	function Tick (float DeltaTime)
 	{
-		Super(HChar).Tick(DeltaTime);
+		Super.Tick(DeltaTime);
 		MoveSmooth(vDir * AirSpeed * DeltaTime);
 		if ( VSize2D(Location - CurrentPoint.Location) < 10 )
 		{
@@ -412,7 +412,7 @@ begin:
 state stateHitBySpell
 {
 begin:
-	if ( False )
+	if ( BOOL_DEBUG_AI )
 	{
 		PlayerHarry.ClientMessage("In state HIT BY SPELL");
 	}

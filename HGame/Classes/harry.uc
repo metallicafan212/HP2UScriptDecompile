@@ -943,15 +943,12 @@ function LoadLevel (string LevelName)
 	ConsoleCommand("SavePActors");
 	HPConsole(Player.Console).ChangeLevel(LevelName,True);
   
-	//commenting out because this causes issues on times such as a black screen -AdamJD
-	/*
 	if ( InStr(Caps(LevelName),"STARTUP") > -1 )
 	{
 		HPConsole(Player.Console).menuBook.bGamePlaying = False;
 		HPConsole(Player.Console).menuBook.OpenBook("Main");
 		HPConsole(Player.Console).LaunchUWindow();
 	}
-	*/
 }
 
 event PreClientTravel ()
@@ -4585,7 +4582,7 @@ state PlayerWalking
 
 	// Reset our highestZ position
 	fHighestZ = default.fHighestZ;
-		
+	
 	//turn bNoFallingDamage back off if it was turned on -AdamJD
 	if(bNoFallingDamage)
 	{

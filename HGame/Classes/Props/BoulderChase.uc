@@ -41,7 +41,7 @@ function PawnAtPatrolPoint (PatrolPoint pP)
 	}
 }
 
-state patrol //extends patrol
+state patrol
 {
 	function Tick (float dtime)
 	{

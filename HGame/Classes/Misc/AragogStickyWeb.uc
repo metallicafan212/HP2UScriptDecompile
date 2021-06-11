@@ -47,11 +47,11 @@ function Timer ()
 
 function BeginToGrow ()
 {
-  PlaySound(ShrinkSound,/*0*/SLOT_None,0.25);
+  PlaySound(ShrinkSound,SLOT_None,0.25);
   GotoState('stateShowing');
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
   DrawScale = 0.0;
@@ -223,7 +223,7 @@ state() stateHiding
     }
     aSlimedHPawn = None;
     fShrinkTime *= RandRange(0.81,1.25);
-    PlaySound(ShrinkSound,/*0*/SLOT_None,0.25);
+    PlaySound(ShrinkSound,SLOT_None,0.25);
   }
   
   function Tick (float fTimeDelta)

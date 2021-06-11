@@ -94,7 +94,7 @@ begin:
   {
     if ( Snds.Opening != None )
     {
-      PlaySound(Snds.Opening,/*0*/SLOT_None);
+      PlaySound(Snds.Opening,SLOT_None);
     }
     PlayAnim(Anims.Opening);
     Sleep(BaseDelay);
@@ -112,7 +112,6 @@ begin:
     RandomNums = RandRange(Limits.Min,Limits.Max);
 	}
 	if (  !bSpawnExactNumbers )
-    // There are 1 jump destination(s) inside the last statement!
     {
       // CurrentNum = 0;
       // if ( CurrentNum < RandomNums )
@@ -145,7 +144,7 @@ begin:
   // }
   if ( Snds.Spawning != None )
   {
-    PlaySound(Snds.Spawning,/*1*/SLOT_Misc);
+    PlaySound(Snds.Spawning,SLOT_Misc);
   }
   if ( Lives > 0 )
   {
@@ -153,7 +152,7 @@ begin:
     {
       if ( Snds.Closing != None )
       {
-        PlaySound(Snds.Closing,/*0*/SLOT_None);
+        PlaySound(Snds.Closing,SLOT_None);
       }
       PlayAnim(Anims.Closing);
       FinishAnim();
@@ -301,7 +300,7 @@ function SpawnObject (int Index)
   } else {
     newSpawn.Velocity = StartVel;
   }
-  newSpawn.SetPhysics(/*2*/PHYS_Falling);
+  newSpawn.SetPhysics(PHYS_Falling);
   switch (Rand(3))
   {
     case 0:

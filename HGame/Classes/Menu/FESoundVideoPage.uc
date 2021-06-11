@@ -290,7 +290,7 @@ function PlayClick ()
 {
   if ( buttonClickSound != None )
   {
-    GetPlayerOwner().PlaySound(buttonClickSound,/*3*/SLOT_Interact);
+    GetPlayerOwner().PlaySound(buttonClickSound,SLOT_Interact);
   }
 }
 

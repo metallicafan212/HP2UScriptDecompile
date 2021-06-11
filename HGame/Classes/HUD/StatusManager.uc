@@ -435,9 +435,9 @@ function GiveCard (int nCardId, bool bHarry)
     PlayerHarry.ClientMessage(strDebug);
     if ( bHarry )
     {
-      siWC.SetCardOwner(nCardId,siWC./*1*/ECardOwner.CardOwner_Harry);
+      siWC.SetCardOwner(nCardId,siWC.ECardOwner.CardOwner_Harry);
     } else {
-      siWC.SetCardOwner(nCardId,siWC./*2*/ECardOwner.CardOwner_Vendor);
+      siWC.SetCardOwner(nCardId,siWC.ECardOwner.CardOwner_Vendor);
     }
   }
 }
@@ -462,15 +462,15 @@ function GiveAllCardsToHarry ()
     {
       if ( ClassIsChildOf(classWC,Class'BronzeCards') )
       {
-        siBronzeCards.SetCardOwner(I,siBronzeCards./*1*/ECardOwner.CardOwner_Harry);
+        siBronzeCards.SetCardOwner(I,siBronzeCards.ECardOwner.CardOwner_Harry);
       } else //{
         if ( ClassIsChildOf(classWC,Class'SilverCards') )
         {
-          siSilverCards.SetCardOwner(I,siSilverCards./*1*/ECardOwner.CardOwner_Harry);
+          siSilverCards.SetCardOwner(I,siSilverCards.ECardOwner.CardOwner_Harry);
         } else //{
           if ( ClassIsChildOf(classWC,Class'Goldcards') )
           {
-            siGoldCards.SetCardOwner(I,siGoldCards./*1*/ECardOwner.CardOwner_Harry);
+            siGoldCards.SetCardOwner(I,siGoldCards.ECardOwner.CardOwner_Harry);
           }
         // }
       // }
@@ -478,7 +478,7 @@ function GiveAllCardsToHarry ()
     // I++;
     // goto JL0058;
   }
-  siGoldCards.SetCardOwner(Class'WCPotter'.Default.Id,siGoldCards./*1*/ECardOwner.CardOwner_Harry);
+  siGoldCards.SetCardOwner(Class'WCPotter'.Default.Id,siGoldCards.ECardOwner.CardOwner_Harry);
   GetStatusItem(Class'StatusGroupLocks',Class'StatusItemLock1').SetCount(1);
   GetStatusItem(Class'StatusGroupLocks',Class'StatusItemLock2').SetCount(1);
   GetStatusItem(Class'StatusGroupLocks',Class'StatusItemLock3').SetCount(1);

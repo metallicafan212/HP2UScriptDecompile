@@ -923,7 +923,7 @@ function PlayerTrack (float DeltaTime)
   {
     Woosh = SlowWooshSounds[Rand(5)];
     fPitch = RandRange(1.0,1.5);
-    PlaySound(Woosh,/*1*/SLOT_Misc,1.0,,1000.0,fPitch);
+    PlaySound(Woosh,SLOT_Misc,1.0,,1000.0,fPitch);
     fNextTimeSafeToWoosh = (Level.TimeSeconds + (GetSoundDuration(Woosh) / fPitch)) + 0.1;
   }
   UpdateBroomSound();
@@ -1064,7 +1064,7 @@ function float GetReversalsPerSecond ()
   return fReversalRate;
 }
 
-state PlayerWalking //extends PlayerWalking
+state PlayerWalking
 {
   ignores  Mount, AltFire;
   
@@ -1507,13 +1507,13 @@ state PlayerWalking //extends PlayerWalking
       bHitWall = True;
       fSpeed = VSize(Velocity);
       fVolume = fSpeed / AirSpeedNormal;
-      PlaySound(HitSounds[Rand(3)],/*3*/SLOT_Interact,fVolume,,,RandRange(0.81,1.25));
+      PlaySound(HitSounds[Rand(3)],SLOT_Interact,fVolume,,,RandRange(0.81,1.25));
       if ( WallDamage > 0 )
       {
         EffectiveDamage = (WallDamage * fSpeed) / AirSpeedNormal;
 		if ( !bInvincible && (EffectiveDamage > 0) )
         {
-          PlaySound(HurtSound[Rand(15)],/*5*/SLOT_Talk,,True);
+          PlaySound(HurtSound[Rand(15)],SLOT_Talk,,True);
           AddHealth(-EffectiveDamage);
           if ( GetHealthCount() <= 0.0 )
           {
@@ -1550,9 +1550,9 @@ state PlayerWalking //extends PlayerWalking
       PlayAnim('React');
       if ( pTarget.IsA('QuidGoal') )
       {
-        PlaySound(Sound'Q_BRM_HitPole_01',/*3*/SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+        PlaySound(Sound'Q_BRM_HitPole_01',SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
       } else {
-        PlaySound(HitSounds[Rand(3)],/*3*/SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+        PlaySound(HitSounds[Rand(3)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
       }
       Velocity = vect(0.00,0.00,1.00);
       bHit = True;
@@ -1612,7 +1612,7 @@ function Vector GetDodgeVelFromHitwall (Actor aSelf, Vector vHitNormal, Actor LF
   return vVel;
 }
 
-state stateCutIdle //extends stateCutIdle
+state stateCutIdle
 {
   ignores  Mount, AltFire;
   
@@ -1870,7 +1870,7 @@ state Catching
   
 begin:
   PlayAnim('Catch',,0.1);
-  PlaySound(Sound'Q_snitch_catch',/*3*/SLOT_Interact);
+  PlaySound(Sound'Q_snitch_catch',SLOT_Interact);
   Sleep(25.0 / 30.0);
   DoCatch();
   if ( PathAfterCatch != 'None' )

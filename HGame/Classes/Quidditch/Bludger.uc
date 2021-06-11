@@ -44,7 +44,7 @@ function Touch (Actor Other)
           FinishMine();
         }
       } else {
-        PlaySound(HitSounds[Rand(2)],/*3*/SLOT_Interact,,,2000.0);
+        PlaySound(HitSounds[Rand(2)],SLOT_Interact,,,2000.0);
         Subject.TakeDamage(Damage,self,Location,100 * Normal(Velocity),'Bludgered');
         fTimeOfLastDamage = Level.TimeSeconds;
         Super.Touch(Other);

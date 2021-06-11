@@ -209,19 +209,19 @@ function bool SayDialogLine (optional bool bNoGap)
   {
     // case 0:
 	case HA_Gryffindor:
-    eCrowdHouse = /*0*/ HA_Gryffindor;
+    eCrowdHouse =  HA_Gryffindor;
     break;
     // case 1:
 	case HA_Ravenclaw:
-    eCrowdHouse = /*1*/ HA_Ravenclaw;
+    eCrowdHouse =  HA_Ravenclaw;
     break;
     // case 2:
 	case HA_Hufflepuff:
-    eCrowdHouse = /*2*/ HA_Hufflepuff;
+    eCrowdHouse =  HA_Hufflepuff;
     break;
     // case 3:
 	case HA_Slytherin:
-    eCrowdHouse = /*3*/ HA_Slytherin;
+    eCrowdHouse =  HA_Slytherin;
     break;
     default:
   }
@@ -268,7 +268,7 @@ function bool SayDialogLine (optional bool bNoGap)
 		case HA_Gryffindor:
 		// case 5:
 		case HA_Opponent:
-		eHouse = /*4*/ HA_Neutral;
+		eHouse =  HA_Neutral;
 		break;
 		default:
 		if ( eHouse == eOpponent )
@@ -310,7 +310,7 @@ function bool SayDialogLine (optional bool bNoGap)
   dlgSound = Dialog.House[eHouse].Variant[Variant].dlgSound;
   if ( dlgSound != None )
   {
-    CurrentSpeakingCrowd.PlaySound(dlgSound,/*5*/SLOT_Talk,0.28,,5000.0);
+    CurrentSpeakingCrowd.PlaySound(dlgSound,SLOT_Talk,0.28,,5000.0);
     bSaid = True;
   } else {
     Log("QuidditchCrowdDialogMgr: Failed to say dialog for dialog line; DlgName = " $ Dialog.House[eHouse].Variant[Variant].DlgName $ ".");

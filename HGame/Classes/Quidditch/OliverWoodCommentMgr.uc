@@ -194,7 +194,7 @@ function bool SayComment (WoodComment eComment, optional bool bNoGap)
   dlgSound = Comments[eComment].Variant[Variant].dlgSound;
   if ( dlgSound != None )
   {
-    Speaker.PlaySound(dlgSound,/*5*/SLOT_Talk,fVolume,,8200.0);
+    Speaker.PlaySound(dlgSound,SLOT_Talk,fVolume,,8200.0);
     bSaid = True;
   } else {
     Log("OliverWoodCommentMgr: Failed to say dialog for comment type " $ string(eComment) $ "; DlgName = " $ Comments[eComment].Variant[Variant].DlgName $ ".");

@@ -8,7 +8,7 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
 {
 }
 
-state Fly //extends Fly
+state Fly
 {
   function BeginState ()
   {
@@ -33,7 +33,7 @@ loop:
   goto ('Loop');
 }
 
-auto state Pursue //extends Pursue
+auto state Pursue
 {
 begin:
   SetCollision(False,False,False);

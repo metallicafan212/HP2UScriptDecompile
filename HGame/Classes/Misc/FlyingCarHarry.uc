@@ -128,15 +128,15 @@ function UpdateBroomSound ()
       PlaySlowWhooshSound();
     }
   }
-  if (  !ModifySound(/*0*/SOUND_Volume,fTurnFactor,MainBroomSound,/*3*/SLOT_Interact) )
+  if (  !ModifySound(SOUND_Volume,fTurnFactor,MainBroomSound,SLOT_Interact) )
   {
-    PlaySound(MainBroomSound,/*3*/SLOT_Interact,fTurnFactor,True,,1.0);
+    PlaySound(MainBroomSound,SLOT_Interact,fTurnFactor,True,,1.0);
   }
-  if (  !ModifySound(/*0*/SOUND_Volume,fVolume,BroomSound,/*1*/SLOT_Misc) )
+  if (  !ModifySound(SOUND_Volume,fVolume,BroomSound,SLOT_Misc) )
   {
-    PlaySound(BroomSound,/*1*/SLOT_Misc,fVolume,True,,fPitch);
+    PlaySound(BroomSound,SLOT_Misc,fVolume,True,,fPitch);
   } else {
-    ModifySound(/*2*/SOUND_Pitch,fPitch,BroomSound,/*1*/SLOT_Misc);
+    ModifySound(SOUND_Pitch,fPitch,BroomSound,SLOT_Misc);
   }
 }
 
@@ -155,7 +155,7 @@ function Vector SideDirection (float fYawControl)
   return vLeft;
 }
 
-state PlayerWalking //extends PlayerWalking
+state PlayerWalking
 {
   ignores  Mount, AltFire;
   

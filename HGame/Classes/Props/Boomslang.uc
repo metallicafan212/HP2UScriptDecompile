@@ -4,7 +4,7 @@
 
 class Boomslang extends PotionIngredients;
 
-state PickupProp //extends PickupProp
+state PickupProp
 {
   function EndState ()
   {

@@ -116,7 +116,7 @@ function OnDiffindoExplode ()
   }
   if ( DiffindoCutSound != None )
   {
-    PlaySound(DiffindoCutSound,/*0*/SLOT_None);
+    PlaySound(DiffindoCutSound,SLOT_None);
   }
 }
 
@@ -125,7 +125,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
   GotoState('stateHitByDiffindo');
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
   function bool HandleSpellDiffindo (optional baseSpell spell, optional Vector vHitLocation)
   {
@@ -155,7 +155,7 @@ state stateHitByDiffindo
     fxCut.SetLocation(vStartPoint);
     if ( DiffindoImpactSound != None )
     {
-      PlaySound(DiffindoImpactSound,/*3*/SLOT_Interact,1.0,False,2000.0,1.0);
+      PlaySound(DiffindoImpactSound,SLOT_Interact,1.0,False,2000.0,1.0);
     }
   }
   

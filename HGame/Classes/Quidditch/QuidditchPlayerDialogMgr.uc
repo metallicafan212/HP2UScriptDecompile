@@ -217,42 +217,42 @@ function bool SayDialogLine (optional bool bNoGap)
   switch (CurrentSpeakingPlayer.eSex)
   {
     case SX_Male:
-    eSex = /*0*/ SX_Male;
+    eSex =  SX_Male;
     break;
     case SX_Female:
-    eSex = /*1*/ SX_Female;
+    eSex =  SX_Female;
     break;
     case SX_Neutral:
-    eSex = /*2*/ SX_Neutral;
+    eSex =  SX_Neutral;
     break;
     default:
   }
   switch (CurrentSpeakingPlayer.Team)
   {
     case TA_Gryffindor:
-    eTeam = /*0*/ TA_Gryffindor;
+    eTeam =  TA_Gryffindor;
     break;
     case TA_Opponent:
-    eTeam = /*1*/ TA_Opponent;
+    eTeam =  TA_Opponent;
     break;
     case TA_Neutral:
-    eTeam = /*2*/ TA_Neutral;
+    eTeam =  TA_Neutral;
     break;
     default:
   }
   switch (CurrentSpeakingPlayer.eHouse)
   {
     case HA_Gryffindor:
-    ePlayerHouse = /*0*/ HA_Gryffindor;
+    ePlayerHouse =  HA_Gryffindor;
     break;
     case HA_Ravenclaw:
-    ePlayerHouse = /*1*/ HA_Ravenclaw;
+    ePlayerHouse =  HA_Ravenclaw;
     break;
     case HA_Hufflepuff:
-    ePlayerHouse = /*2*/ HA_Hufflepuff;
+    ePlayerHouse =  HA_Hufflepuff;
     break;
     case HA_Slytherin:
-    ePlayerHouse = /*3*/ HA_Slytherin;
+    ePlayerHouse =  HA_Slytherin;
     break;
     default:
   }
@@ -299,10 +299,10 @@ function bool SayDialogLine (optional bool bNoGap)
 		case HA_Gryffindor:
 		// case 5:
 		case HA_Opponent:
-		eHouse = /*4*/ HA_Neutral;
+		eHouse =  HA_Neutral;
 		break;
 		default:
-		eHouse = /*5*/ HA_Opponent;
+		eHouse =  HA_Opponent;
 		break;
 	  }
   }
@@ -335,7 +335,7 @@ function bool SayDialogLine (optional bool bNoGap)
   dlgSound = Dialog[eSex].House[eHouse].Variant[Variant].dlgSound;
   if ( dlgSound != None )
   {
-    CurrentSpeakingPlayer.PlaySound(dlgSound,/*5*/SLOT_Talk,0.333,,5000.0);
+    CurrentSpeakingPlayer.PlaySound(dlgSound,SLOT_Talk,0.333,,5000.0);
     bSaid = True;
   } else {
     Log("QuidditchPlayerDialogMgr: Failed to say dialog for dialog line; DlgName = " $ Dialog[eSex].House[eHouse].Variant[Variant].DlgName $ ".");

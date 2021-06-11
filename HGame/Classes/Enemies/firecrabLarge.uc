@@ -89,13 +89,13 @@ function PlayRoarSound ()
     break;
     default:
   }
-  PlaySound(RoarSound,/*0*/SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(RoarSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
 state stateHitBySpell
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage(string(Name) $ " : State stateHitBySpell ");
   }
@@ -108,7 +108,7 @@ begin:
 state DoFlip
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage(string(Name) $ " : State Do Flip ");
   }
@@ -121,7 +121,7 @@ begin:
   // if ( bool(Physics) != bool(2) )
   if(Physics != PHYS_Falling)
   {
-    PlaySound(Sound'SPI_large_LandOnBack',/*0*/SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
   }
   Sleep(1.0);
   GotoState('stayFlipped');
@@ -130,7 +130,7 @@ begin:
 state AttackHarry
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": attackHarry");
   }
@@ -161,7 +161,7 @@ state throwing
   TurnTo(Location + (Location - PlayerHarry.Location));
   if ( VSize(PlayerHarry.Location - Location) < GrenadeOnlyDistance )
   {
-    PlaySound(Sound'firecrab_preattack',/*0*/SLOT_None);
+    PlaySound(Sound'firecrab_preattack',SLOT_None);
     PlayAnim('preattack');
     FinishAnim();
   }
@@ -183,7 +183,7 @@ state throwing
       smallSpell.fHitTimeIncrement = fSmallHitTimeIncrement;
       smallSpell.iAccuracyMin = iAccuracyMin;
       smallSpell.iAccuracyMax = iAccuracyMax;
-      PlaySound(AttackSound,/*0*/SLOT_None);
+      PlaySound(AttackSound,SLOT_None);
       PlayAnim('Attack');
       FinishAnim();
     }
@@ -191,7 +191,7 @@ state throwing
     // Counter++;
     // goto JL0082;
   }
-  PlaySound(Sound'firecrab_preattack',/*0*/SLOT_None);
+  PlaySound(Sound'firecrab_preattack',SLOT_None);
   PlayAnim('preattack');
   FinishAnim();
   largeSpell = Spawn(Class'spellFireLarge',self,,Location + Vec(0.0,0.0,12.0),Rotation + rot(0,32768,0));

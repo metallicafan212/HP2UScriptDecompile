@@ -175,7 +175,7 @@ function bool HandleSpellFlipendo (optional baseSpell spell, optional Vector vHi
   return True;
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
   Sleep(2.0);

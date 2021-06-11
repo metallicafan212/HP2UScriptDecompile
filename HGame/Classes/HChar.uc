@@ -608,11 +608,11 @@ function PreBeginPlay ()
 		}
 	}
 	HowManyAlarmSounds = I;
-	if ( PlayerHarry.Difficulty == 1 )
+	if ( PlayerHarry.Difficulty == DifficultyMedium )
 	{
 		GroundRunSpeed = 240.0;
 	} 
-	else if ( PlayerHarry.Difficulty == 2 )
+	else if ( PlayerHarry.Difficulty == DifficultyHard )
     {
       GroundRunSpeed = 270.0;
     }
@@ -824,7 +824,7 @@ state DoingBumpLine
   
 	event Bump (Actor Other)
 	{
-		Super(Actor).Bump(Other);
+		Super.Bump(Other);
 	}
   
 	function CutCue (string cue)
@@ -992,11 +992,11 @@ function bool CutCommand_HandleSet (string Command, optional string cue, optiona
 	return True;
 }
 
-auto state patrol //extends patrol
+auto state patrol
 {
 }
 
-state stateIdle //extends stateIdle
+state stateIdle
 {	
 	begin:
 		//Log("In state " $GetStateName());
@@ -1020,10 +1020,6 @@ state stateIdle //extends stateIdle
 					PlayAnim(CurrFidgetAnimName,RandRange(0.81,1.25),0.2);
 					FinishAnim();
 				}
-				
-				//we need to make actors with fidget anims automatically play an idle/fidget anim if they are not setup (eg. adding an actor from the editor for custom maps) -AdamJD 
-				//
-				//Update: turns out the engine already takes care of this... lol -AdamJD
 			} 
 			else 
 			{

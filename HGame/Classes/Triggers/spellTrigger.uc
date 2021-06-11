@@ -65,7 +65,7 @@ function Touch (Actor Other)
 	Super.Touch(Other);
 }
 
-state() OtherTriggerToggles //extends OtherTriggerToggles
+state() OtherTriggerToggles
 {
 	function Trigger (Actor Other, Pawn EventInstigator)
 	{
@@ -74,7 +74,7 @@ state() OtherTriggerToggles //extends OtherTriggerToggles
 	}
 }
 
-state() OtherTriggerTurnsOn //extends OtherTriggerTurnsOn
+state() OtherTriggerTurnsOn
 {
 	function Trigger (Actor Other, Pawn EventInstigator)
 	{
@@ -83,7 +83,7 @@ state() OtherTriggerTurnsOn //extends OtherTriggerTurnsOn
 	}
 }
 
-state() OtherTriggerTurnsOff //extends OtherTriggerTurnsOff
+state() OtherTriggerTurnsOff
 {
 	function Trigger (Actor Other, Pawn EventInstigator)
 	{

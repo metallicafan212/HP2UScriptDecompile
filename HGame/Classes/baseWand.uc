@@ -486,11 +486,11 @@ function CastSpell (optional Actor aTarget, optional Vector aTargetOffset, optio
   } else {
     if ( aTarget.IsA('harry') )
     {
-      if ( PlayerHarry.Difficulty == 1 )
+      if ( PlayerHarry.Difficulty == DifficultyMedium )
       {
         LastCastedSpell.Speed *= 1.79999995;
       } else //{
-        if ( PlayerHarry.Difficulty == 2 )
+        if ( PlayerHarry.Difficulty == DifficultyHard )
         {
           LastCastedSpell.Speed *= 2.5;
         }

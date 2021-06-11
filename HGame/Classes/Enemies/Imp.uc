@@ -157,7 +157,7 @@ function playHitSound ()
     HitSound = Sound'imp_ouch_01';
     break;
   }
-  PlaySound(HitSound,/*0*/SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
 }
 
 function playDieSound ()
@@ -181,7 +181,7 @@ function playDieSound ()
     HitSound = Sound'imp_die_01';
     break;
   }
-  PlaySound(HitSound,/*0*/SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
 }
 
 function playAttackSound ()
@@ -211,13 +211,13 @@ function playAttackSound ()
     HitSound = Sound'imp_attack_01';
     break;
   }
-  PlaySound(HitSound,/*0*/SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
 }
 
 function playThrownSound ()
 {
   impThrownSound = Sound'imp_scream';
-  PlaySound(impThrownSound,/*0*/SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(impThrownSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
 }
 
 function playBiteSound ()
@@ -238,7 +238,7 @@ function playBiteSound ()
     biteSound = Sound'imp_bite_01';
     break;
   }
-  PlaySound(biteSound,/*0*/SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(biteSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
 function bool HandleSpellFlipendo (optional baseSpell spell, optional Vector vHitLocation)
@@ -250,12 +250,12 @@ function bool HandleSpellFlipendo (optional baseSpell spell, optional Vector vHi
 
 function Landed (Vector HitNormal)
 {
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": In function Landed");
   }
   Super.Landed(HitNormal);
-  StopSound(impStruggleSound,/*1*/SLOT_Misc);
+  StopSound(impStruggleSound,SLOT_Misc);
   if ( IsInState('stateGetAwayFromHarry') || IsInState('stateBeingCarried') )
   {
     GotoState('stateGotAwayFromHarry');
@@ -275,8 +275,8 @@ function ThrownLanded (Vector HitNormal)
     NewH = 13.0;
   }
   SetCollisionSize(newR,NewH);
-  StopSound(impStruggleSound,/*1*/SLOT_Misc);
-  StopSound(impThrownSound,/*0*/SLOT_None);
+  StopSound(impStruggleSound,SLOT_Misc);
+  StopSound(impThrownSound,SLOT_None);
   if (  !bDespawned )
   {
     GotoState('HitGroundWhenThrown');
@@ -329,7 +329,7 @@ function Tick (float DeltaTime)
       {
         bPlayedWarning = True;
         impStruggleSound = Sound'imp_attack_01';
-        PlaySound(impStruggleSound,/*1*/SLOT_Misc,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,True);
+        PlaySound(impStruggleSound,SLOT_Misc,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,True);
         LoopAnim('struggle');
       }
       if ( timeStunned <= 0 )
@@ -376,10 +376,10 @@ function Tick (float DeltaTime)
   }
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": auto stateIdle");
   }
@@ -413,7 +413,7 @@ state stateMoveTowardHarry
   }
   
  begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": state MoveTowardHarry");
   }
@@ -482,7 +482,7 @@ begin:
 state stateRunAway
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateRunAway");
   }
@@ -519,7 +519,7 @@ begin:
   GotoState('stateRunAway');
 }
 
-state stateBeingThrown //extends stateBeingThrown
+state stateBeingThrown
 {
   function BeginState ()
   {
@@ -527,7 +527,7 @@ state stateBeingThrown //extends stateBeingThrown
   }
   
  begin:
-  StopSound(impStruggleSound,/*1*/SLOT_Misc);
+  StopSound(impStruggleSound,SLOT_Misc);
   playThrownSound();
   PlayAnim('thrown');
   FinishAnim();
@@ -538,7 +538,7 @@ state stateBeingThrown //extends stateBeingThrown
 state stateHitByFlipendo
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateHitByFlipendo");
   }
@@ -667,8 +667,8 @@ state stateWaitForTrigger
 state stateDied
 {
 begin:
-  StopSound(impThrownSound,/*0*/SLOT_None);
-  PlaySound(Sound'horklump_mushroom_head_explode',/*0*/SLOT_None,RandRange(0.62,1.0),,70000.0,RandRange(0.81,1.25),,False);
+  StopSound(impThrownSound,SLOT_None);
+  PlaySound(Sound'horklump_mushroom_head_explode',SLOT_None,RandRange(0.62,1.0),,70000.0,RandRange(0.81,1.25),,False);
   if ( Rand(2) == 0 )
   {
     Spawn(Class'DustCloud01_tiny',self,,Location,Rotation);

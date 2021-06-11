@@ -79,7 +79,7 @@ function PostBeginPlay ()
 {
   Super.PostBeginPlay();
   InitialState = 'GameIntro';
-  CarLocation = /*1*/LOC_SAFE;
+  CarLocation = LOC_SAFE;
   Hedwig.SetOwner(guide);
   Hedwig.AttachToOwner();
   Hedwig.bTrailerPrePivot = True;
@@ -272,13 +272,13 @@ function bool SetCarLocation ()
   currentLocation = CarLocation;
   if ( SafeRefCount > 0 )
   {
-    CarLocation = /*1*/ LOC_SAFE;
+    CarLocation =  LOC_SAFE;
   } else //{
     if ( TownRefCount > 0 )
     {
-      CarLocation = /*2*/ LOC_TOWN;
+      CarLocation =  LOC_TOWN;
     } else {
-      CarLocation = /*0*/ LOC_NONE;
+      CarLocation =  LOC_NONE;
     }
   //}
   if ( currentLocation == CarLocation )

@@ -30,7 +30,7 @@ function ColObjTouch (Actor Other, GenericColObj ColObj)
   harry(Other).TakeDamage(Damage,self,ColObj.Location,vect(0.00,0.00,0.00),'None');
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
   function Timer ()
   {
@@ -104,14 +104,14 @@ state stateAngry
     }
     if ( snd != None )
     {
-      PlaySound(snd,/*0*/SLOT_None,RandRange(0.69999999,1.0),False,WillowSoundRadius,RandRange(0.81,1.25));
+      PlaySound(snd,SLOT_None,RandRange(0.69999999,1.0),False,WillowSoundRadius,RandRange(0.81,1.25));
     }
     if ( (Frame >= 28) && (LastAnimFrame < 28) || (Frame >= 73) && (LastAnimFrame < 73) || (Frame >= 127) && (LastAnimFrame < 127) || (Frame >= 169) && (LastAnimFrame < 169) )
     {
       snd = Sound'Big_whomp2';
       fScale = -2.0 / fGetAngryDistance * VSize2D(PlayerHarry.Location - Location) + 2.5;
       fScale = Clamp(fScale, 0,1);
-      PlaySound(snd,/*0*/SLOT_None,RandRange(0.41,1.0),False,WillowSoundRadius,RandRange(0.2,0.89999998));
+      PlaySound(snd,SLOT_None,RandRange(0.41,1.0),False,WillowSoundRadius,RandRange(0.2,0.89999998));
       PlayerHarry.ShakeView(0.5,50.0 * fScale,50.0 * fScale);
     }
     LastAnimFrame = Frame;

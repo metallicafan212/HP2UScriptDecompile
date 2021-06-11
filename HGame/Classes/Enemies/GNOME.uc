@@ -214,7 +214,7 @@ function Actor FindClosestGoody ()
     aTargetGoody = M;
     return aTargetGoody;
   }
-  jb = FindClosestObject(/*0*/OBJECT_BEAN);
+  jb = FindClosestObject(OBJECT_BEAN);
   ww = None;
   if ( (jb == None) && (ww == None) )
   {
@@ -528,7 +528,7 @@ function GnomeDropBeans ()
   {
     return;
   }
-  DropGoodies(/*0*/OBJECT_BEAN,iBeans,Location,CollisionHeight,False);
+  DropGoodies(OBJECT_BEAN,iBeans,Location,CollisionHeight,False);
   iBeans = 0;
 }
 
@@ -538,7 +538,7 @@ function HarryDropBeans (int beans)
   {
     return;
   }
-  DropGoodies(/*0*/OBJECT_BEAN,beans,PlayerHarry.Location,PlayerHarry.CollisionHeight,False);
+  DropGoodies(OBJECT_BEAN,beans,PlayerHarry.Location,PlayerHarry.CollisionHeight,False);
 }
 
 function GnomePickupObject (Actor A)
@@ -916,10 +916,10 @@ begin:
   goto ('Begin');
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": auto stateIdle");
   }
@@ -945,7 +945,7 @@ begin:
 state stateWasHoldingByHarry
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateWasHoldingByHarry");
   }
@@ -958,7 +958,7 @@ begin:
 state stateGotoPatrolPointForce
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateGotoPatrolPointForce");
   }
@@ -979,7 +979,7 @@ begin:
 state stateGotoPatrolPointBack
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateGotoPatrolPointBack");
   }
@@ -1000,7 +1000,7 @@ begin:
 state stateGoHome
 {
 begin:
-  if ( False )
+  if (  BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateGoHome");
   }
@@ -1010,7 +1010,7 @@ begin:
   GotoState('stateIdle');
 }
 
-state stateBeingThrown //extends stateBeingThrown
+state stateBeingThrown
 {
   // ignores  Landed; //UTPT added this for some reason -AdamJD
   
@@ -1064,7 +1064,7 @@ state stateHitByFlip
   }
   
  begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateHitByFlip");
   }
@@ -1073,7 +1073,7 @@ state stateHitByFlip
 state stateGettingUp
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateGettingUp");
   }
@@ -1107,7 +1107,7 @@ begin:
 state statePatrol
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": statePatrol");
   }
@@ -1185,7 +1185,7 @@ state stateThrowMushroomLump
   {
     local int Frame;
   
-    Super(HChar).Tick(dtime);
+    Super.Tick(dtime);
     Frame = AnimFrame * 46;
 	if ( bPlayThrowAnim && (Frame >= 30) && (LastAnimFrame < 30) )
     {
@@ -1229,7 +1229,7 @@ begin:
 state stateGotoTargetObject
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateGotoTargetObject");
   }
@@ -1252,12 +1252,12 @@ state stateEatMushroom
 {
   function Tick (float dtime)
   {
-    Super(HChar).Tick(dtime);
+    Super.Tick(dtime);
     ShrinkActor(aTargetGoody,hunger);
   }
   
  begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateEatMushroom");
   }
@@ -1274,7 +1274,7 @@ state stateEatMushroom
     FinishAnim();
     aTargetGoody.Destroy();
     aTargetGoody = None;
-    DropGoodies(/*0*/OBJECT_BEAN,Rand(2) + 1,Location,CollisionHeight,False);
+    DropGoodies(OBJECT_BEAN,Rand(2) + 1,Location,CollisionHeight,False);
   } else {
     GotoState('statePatrol');
   }
@@ -1284,7 +1284,7 @@ state stateEatMushroom
 state statePickupTargetObject
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": statePickupTargetObject");
   }
@@ -1330,7 +1330,7 @@ begin:
 state stateDied
 {
 begin:
-  if ( False )
+  if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateDied");
   }
@@ -1341,7 +1341,7 @@ begin:
   } else {
     Spawn(Class'DustCloud02_small',self,,Location,Rotation);
   }
-  DropGoodies(/*0*/OBJECT_BEAN,Rand(3) + 1,Location,0.0,True);
+  DropGoodies(OBJECT_BEAN,Rand(3) + 1,Location,0.0,True);
   Destroy();
 }
 

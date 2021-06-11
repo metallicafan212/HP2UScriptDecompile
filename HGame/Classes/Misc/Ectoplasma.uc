@@ -36,7 +36,7 @@ function PreBeginPlay ()
 
 function Bump (Actor Other)
 {
-  PlaySound(BumpSound,/*1*/SLOT_Misc);
+  PlaySound(BumpSound,SLOT_Misc);
 }
 
 function float GetDefaultDrawScale ()
@@ -115,7 +115,7 @@ function UpdateFX ()
   fxReact.ParticlesPerSec.Base = fxParticlesPerSecond * DrawScale;
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
   if ( bHidden )
@@ -199,7 +199,7 @@ state() stateHiding
       harry(aSlimedHPawn).EctoRefSub();
     }
     aSlimedHPawn = None;
-    PlaySound(ShrinkSound,/*1*/SLOT_Misc,0.69999999);
+    PlaySound(ShrinkSound,SLOT_Misc,0.69999999);
   }
   
   function EndState ()

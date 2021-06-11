@@ -117,13 +117,13 @@ function SetTargetZone (int Z)
   switch (Z)
   {
     case 0:
-    eTargetZone = /*0*/ ZONE_ONE;
+    eTargetZone =  ZONE_ONE;
     break;
     case 1:
-    eTargetZone = /*1*/ ZONE_TWO;
+    eTargetZone =  ZONE_TWO;
     break;
     default:
-    eTargetZone = /*0*/ ZONE_ONE;
+    eTargetZone =  ZONE_ONE;
     break;
   }
 }

@@ -4,7 +4,7 @@
 
 class BEATER extends QuidditchPlayer;
 
-state() Fly //extends Fly
+state() Fly
 {
 begin:
 loop:

@@ -874,7 +874,7 @@ auto state StateStartup
 		SetCameraMode( CM_Standard );
 }
 
-state stateIdle //extends stateIdle
+state stateIdle
 {
 }
 

@@ -88,7 +88,7 @@ state StateLumosOn
       TriggerEvent(Event,self,None);
       bFirstEventSent = True;
     }
-    PlaySound(Sound'Lumos_hit01',/*0*/ SLOT_None,125.0,False);
+    PlaySound(Sound'Lumos_hit01', SLOT_None,125.0,False);
   }
   
   event Tick (float fTimeDelta)

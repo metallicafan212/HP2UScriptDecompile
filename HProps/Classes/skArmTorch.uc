@@ -15,7 +15,7 @@ class skArmTorch extends HPMeshActor;
 #exec Anim Digest Anim=skArmTorchAnims VERBOSE 
 
 //texture import (skArmTorchTex0) -AdamJD 
-#exec Texture Import File=Textures\skArmTorchTex0.png Name=skArmTorchTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins
+#exec Texture Import File=Textures\skArmTorchTex0.png Name=skArmTorchTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins
 #exec MeshMap SetTexture MeshMap=skArmTorchMesh Num=0 Texture=skArmTorchTex0
 
 defaultproperties

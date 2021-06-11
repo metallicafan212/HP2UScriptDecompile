@@ -14,7 +14,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
   GotoState('stateTriggered');
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 }
 

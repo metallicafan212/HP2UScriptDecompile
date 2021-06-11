@@ -875,7 +875,7 @@ function DrawE3DemoLockout (Canvas Canvas)
   Canvas.Font = saveFont;
 }
 
-state UWindow //extends UWindow
+state UWindow
 {
 	event bool KeyType (EInputKey Key)
 	{

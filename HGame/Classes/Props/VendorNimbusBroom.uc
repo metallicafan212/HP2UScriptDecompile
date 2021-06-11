@@ -4,7 +4,7 @@
 
 class VendorNimbusBroom extends HProp;
 
-auto state BounceIntoPlace //extends BounceIntoPlace
+auto state BounceIntoPlace
 {
 }
 

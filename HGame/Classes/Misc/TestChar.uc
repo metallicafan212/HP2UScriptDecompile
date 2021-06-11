@@ -28,7 +28,7 @@ function FollowNextSplinePath ()
   {
     CurrentPiece = 0;
   }
-  FollowSplinePath('InterpolationPointSet3',60.0,30.0,Start[CurrentPiece],End[CurrentPiece],,/*4*/MOVE_TYPE_EASE_FROM_AND_TO);
+  FollowSplinePath('InterpolationPointSet3',60.0,30.0,Start[CurrentPiece],End[CurrentPiece],,MOVE_TYPE_EASE_FROM_AND_TO);
 }
 
 auto state() DoNothing
@@ -37,7 +37,7 @@ begin:
   FollowSplinePath('InterpolationPointSet3',60.0);
 }
 
-state patrolFollowSpline //extends patrolFollowSpline
+state patrolFollowSpline
 {
   function Tick (float dtime)
   {

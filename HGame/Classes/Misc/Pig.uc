@@ -54,34 +54,34 @@ function PlaySoundSnort ()
   switch (Rand(10))
   {
     case 0:
-    PlaySound(Sound'Pig_snort01',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort01',SLOT_None);
     break;
     case 1:
-    PlaySound(Sound'Pig_snort02',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort02',SLOT_None);
     break;
     case 2:
-    PlaySound(Sound'Pig_snort03',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort03',SLOT_None);
     break;
     case 3:
-    PlaySound(Sound'Pig_snort04',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort04',SLOT_None);
     break;
     case 4:
-    PlaySound(Sound'Pig_snort05',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort05',SLOT_None);
     break;
     case 5:
-    PlaySound(Sound'Pig_snort06',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort06',SLOT_None);
     break;
     case 6:
-    PlaySound(Sound'Pig_snort07',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort07',SLOT_None);
     break;
     case 7:
-    PlaySound(Sound'Pig_snort08',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort08',SLOT_None);
     break;
     case 8:
-    PlaySound(Sound'Pig_snort09',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort09',SLOT_None);
     break;
     case 9:
-    PlaySound(Sound'Pig_snort10',/*0*/SLOT_None);
+    PlaySound(Sound'Pig_snort10',SLOT_None);
     break;
     default:
   }
@@ -89,7 +89,7 @@ function PlaySoundSnort ()
 
 function PlaySoundSqueal ()
 {
-  PlaySound(Sound'pig_squeal1',/*0*/SLOT_None,,,,RandRange(0.81,1.12));
+  PlaySound(Sound'pig_squeal1',SLOT_None,,,,RandRange(0.81,1.12));
 }
 
 function bool HandleSpellRictusempra (optional baseSpell spell, optional Vector vHitLocation)

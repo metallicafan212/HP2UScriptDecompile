@@ -202,13 +202,13 @@ function SetHouse (HouseAffiliation eOpponent)
     switch (Team)
     {
       case TA_Gryffindor:
-      eHouse = /*0*/ HA_Gryffindor;
+      eHouse =  HA_Gryffindor;
       break;
       case TA_Opponent:
       eHouse = eOpponent;
       break;
       case TA_Neutral:
-      eHouse = /*0*/ HA_Gryffindor;
+      eHouse =  HA_Gryffindor;
       break;
       default:
     }
@@ -464,7 +464,7 @@ function DoKick (Pawn KickTarget)
       PlayAnim('PushRight',1.0,0.2);
     }
   }
-  PlaySound(Emotes[eSex].KickEmotes[Rand(8)],/*5*/SLOT_Talk,,True);
+  PlaySound(Emotes[eSex].KickEmotes[Rand(8)],SLOT_Talk,,True);
   if ( TargetDist < CollisionRadius * 3.0 )
   {
     KickTarget.TakeDamage(KickDamage,self,Location,100 * Normal(TargetDir),'Kicked');
@@ -516,7 +516,7 @@ function UpdateWoosh (float DeltaTime)
   if ( bCanWoosh && (Level.TimeSeconds > fNextTimeSafeToWoosh) && (fLastDistanceFromCamera >= 180) && (fDistanceFromCamera < 180) && (VSize(Velocity) > 200) )
   {
     Woosh = WooshSounds[Rand(4)];
-    PlaySound(Woosh,/*1*/SLOT_Misc,0.69999999,,500.0,RandRange(0.81,1.25));
+    PlaySound(Woosh,SLOT_Misc,0.69999999,,500.0,RandRange(0.81,1.25));
     fNextTimeSafeToWoosh = Level.TimeSeconds + GetSoundDuration(Woosh);
   }
   fLastDistanceFromCamera = fDistanceFromCamera;
@@ -576,7 +576,7 @@ function Bump (Actor Other)
     } else {
       PlayAnim('Bump');
     }
-    PlaySound(HitSounds[Rand(3)],/*3*/SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+    PlaySound(HitSounds[Rand(3)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
     pTarget.TakeDamage(Damage,self,Location,100 * Normal(Velocity),'Collided');
     Velocity = vect(0.00,0.00,1.00);
     bHit = True;
@@ -604,7 +604,7 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
           fHealth -= fBumpedPenalty;
         }
       //}
-      PlaySound(Emotes[eSex].OuchEmotes[Rand(8)],/*5*/SLOT_Talk,,True);
+      PlaySound(Emotes[eSex].OuchEmotes[Rand(8)],SLOT_Talk,,True);
     } else {
       Damage = 0;
     }
@@ -616,7 +616,7 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
     }
     if ( DamageType != 'Collided' )
     {
-      PlaySound(HitSounds[Rand(3)],/*3*/SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+      PlaySound(HitSounds[Rand(3)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
     }
     Super.TakeDamage(Damage,InstigatedBy,HitLocation,Momentum,DamageType);
   }
@@ -920,7 +920,7 @@ Begin:
   fTargetTrackVertOffset = 0.0;
   fTimeForNextOffset = Level.TimeSeconds + 20.0;
   PlayAnim('Catch',,0.1);
-  PlaySound(Sound'Q_snitch_catch',/*3*/SLOT_Interact);
+  PlaySound(Sound'Q_snitch_catch',SLOT_Interact);
   Sleep(25.0 / 30.0);
   CatchTarget();
   if ( Path_Catch != 'None' )

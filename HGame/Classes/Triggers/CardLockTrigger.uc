@@ -18,7 +18,7 @@ var() float fLock2WaitTime;
 var() float fLock3WaitTime;
 var() float fLock4WaitTime;
 
-state NormalTrigger //extends NormalTrigger
+state NormalTrigger
 {
   event Activate (Actor Other, Pawn EventInstigator)
   {

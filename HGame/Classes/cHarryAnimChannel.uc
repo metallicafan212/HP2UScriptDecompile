@@ -84,14 +84,14 @@ state stateThrow
   Sleep(0.33751 / 1.5);
   harry(Owner).ThrowCarryingActor();
   FinishAnim();
-  harry(Owner).HarryAnimType = /*0*/ AT_Replace;
+  harry(Owner).HarryAnimType =  AT_Replace;
   GotoState('stateIdle');
 }
 
 state stateCasting
 {
 begin:
-  harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+  harry(Owner).HarryAnimType =  AT_Combine;
   if ( harry(Owner).bHarryUsingSword )
   {
     LoopAnim('swordaim',1.0,0.2);
@@ -119,7 +119,7 @@ state stateDuelingCast
 {
 begin:
   harry(Owner).Cast();
-  harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+  harry(Owner).HarryAnimType =  AT_Combine;
   PlayAnim('duel_cast',,0.31);
   FinishAnim();
   if ( harry(Owner).bAltFire == 0 )
@@ -142,7 +142,7 @@ begin:
     harry(Owner).bReboundingSpells = True;
   }
   harry(Owner).Cast();
-  harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+  harry(Owner).HarryAnimType =  AT_Combine;
   PlayAnim('cast_Expelliarmus',,0.31);
   FinishAnim();
   harry(Owner).bReboundingSpells = False;
@@ -190,7 +190,7 @@ state stateKnockBack
   
   function BeginState ()
   {
-    harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+    harry(Owner).HarryAnimType =  AT_Combine;
   }
   
  begin:
@@ -201,7 +201,7 @@ state stateKnockBack
   }
   PlayAnim('KnockBack',,0.31);
   FinishAnim();
-  harry(Owner).HarryAnimType = /*0*/ AT_Replace;
+  harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
   {
     GotoState('stateCasting');
@@ -232,13 +232,13 @@ state stateEctoJump
   
   function BeginState ()
   {
-    harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+    harry(Owner).HarryAnimType =  AT_Combine;
   }
   
  begin:
   PlayAnim(harry(Owner).HarryAnims[harry(Owner).HarryAnimSet].Jump,,0.1);
   FinishAnim();
-  harry(Owner).HarryAnimType = /*0*/ AT_Replace;
+  harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
   {
     GotoState('stateCasting');
@@ -259,7 +259,7 @@ state stateDrinkWiggenwell
 {
   function BeginState ()
   {
-    harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+    harry(Owner).HarryAnimType =  AT_Combine;
     harry(Owner).fTimeLastDrank = Level.TimeSeconds;
     bAnimNotReplaceable = True;
   }
@@ -272,7 +272,7 @@ state stateDrinkWiggenwell
     bAnimNotReplaceable = False;
     harry(Owner).managerStatus.GetStatusGroup(Class'StatusGroupPotions').IncrementCount(Class'StatusItemWiggenwell',-1);
     harry(Owner).AddHealth(100);
-    harry(Owner).PlaySound(Sound'health_boost1',/*0*/ SLOT_None);
+    harry(Owner).PlaySound(Sound'health_boost1', SLOT_None);
   }
   
  begin:
@@ -284,21 +284,21 @@ state stateDrinkWiggenwell
   switch (Rand(3))
   {
     case 0:
-    harry(Owner).PlaySound(Sound'gulping2',/*0*/ SLOT_None);
+    harry(Owner).PlaySound(Sound'gulping2', SLOT_None);
     break;
     case 1:
-    harry(Owner).PlaySound(Sound'gulping3',/*0*/ SLOT_None);
+    harry(Owner).PlaySound(Sound'gulping3', SLOT_None);
     break;
     case 2:
-    harry(Owner).PlaySound(Sound'gulping4',/*0*/ SLOT_None);
+    harry(Owner).PlaySound(Sound'gulping4', SLOT_None);
     break;
     default:
     harry(Owner).ClientMessage("Warning: random gulp not working right");
-    harry(Owner).PlaySound(Sound'gulping2',/*0*/ SLOT_None);
+    harry(Owner).PlaySound(Sound'gulping2', SLOT_None);
     break;
   }
   FinishAnim();
-  harry(Owner).HarryAnimType = /*0*/ AT_Replace;
+  harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
   {
     GotoState('stateCasting');
@@ -329,13 +329,13 @@ state stateSleepyJump
   
   function BeginState ()
   {
-    harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+    harry(Owner).HarryAnimType =  AT_Combine;
   }
   
  begin:
   PlayAnim(harry(Owner).HarryAnims[harry(Owner).HarryAnimSet].Jump,,0.1);
   FinishAnim();
-  harry(Owner).HarryAnimType = /*0*/ AT_Replace;
+  harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
   {
     GotoState('stateCasting');
@@ -366,13 +366,13 @@ state stateWebJump
   
   function BeginState ()
   {
-    harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+    harry(Owner).HarryAnimType =  AT_Combine;
   }
   
  begin:
   PlayAnim(harry(Owner).HarryAnims[harry(Owner).HarryAnimSet].Jump,,0.1);
   FinishAnim();
-  harry(Owner).HarryAnimType = /*0*/ AT_Replace;
+  harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
   {
     GotoState('stateCasting');
@@ -393,13 +393,13 @@ state stateReactRictusempra
 {
   function BeginState ()
   {
-    harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+    harry(Owner).HarryAnimType =  AT_Combine;
   }
   
  begin:
   PlayAnim('react_rictusempra',,0.31);
   FinishAnim();
-  harry(Owner).HarryAnimType = /*0*/ AT_Replace;
+  harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
   {
     harry(Owner).StopAiming();
@@ -419,13 +419,13 @@ state stateReactMimbleWimble
 {
   function BeginState ()
   {
-    harry(Owner).HarryAnimType = /*1*/ AT_Combine;
+    harry(Owner).HarryAnimType =  AT_Combine;
   }
   
  begin:
   PlayAnim('mimblewimble',,0.31);
   FinishAnim();
-  harry(Owner).HarryAnimType = /*0*/ AT_Replace;
+  harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
   {
     harry(Owner).StopAiming();

@@ -80,7 +80,7 @@ function OnPlayerMissed (int nLevel)
   // SetArrowTexture(2,nLevel);
   SetArrowTexture(nIDX_MISS, nLevel);
   FancySpawn(Class'SpellLessonMiss');
-  PlaySound(soundMissed,/*0*/SLOT_None);
+  PlaySound(soundMissed,SLOT_None);
 }
 
 function Reset (int nLevel)

@@ -101,7 +101,7 @@ function Tick (float dtime)
   }
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
   LoopAnim('Idle');

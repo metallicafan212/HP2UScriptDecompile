@@ -590,7 +590,7 @@ function StartGame ()
   SetTuningParameters(harry.curQuidMatchNum);
   if ( Commentator != None )
   {
-    Commentator.PlaySound(Sound'Q_whistle_short',/*3*/SLOT_Interact,1.0,,20000.0);
+    Commentator.PlaySound(Sound'Q_whistle_short',SLOT_Interact,1.0,,20000.0);
   }
   foreach AllActors(Class'QuidditchPlayer',OtherPlayer)
   {
@@ -738,7 +738,7 @@ state GameIntro
         CutCue(cue);
         return True;
       } else {
-        return Super(Director).CutCommand(Command,cue,bFastFlag);
+        return Super.CutCommand(Command,cue,bFastFlag);
       }
     //}
   }
@@ -1641,7 +1641,7 @@ begin:
   {
     if ( Commentator != None )
     {
-      Commentator.PlaySound(Sound'Q_whistle_long',/*3*/SLOT_Interact,1.0,,20000.0);
+      Commentator.PlaySound(Sound'Q_whistle_long',SLOT_Interact,1.0,,20000.0);
     }
     if ( bHasCrowds )
     {
@@ -1826,7 +1826,7 @@ begin:
   {
     if ( (Commentator != None) &&  !bInTrench )
     {
-      Commentator.PlaySound(Sound'Q_whistle_long',/*3*/SLOT_Interact,1.0,,20000.0);
+      Commentator.PlaySound(Sound'Q_whistle_long',SLOT_Interact,1.0,,20000.0);
     }
     if ( bHasCrowds )
     {

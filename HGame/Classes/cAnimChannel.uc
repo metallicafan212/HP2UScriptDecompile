@@ -37,7 +37,7 @@ state stateCast
   function BeginState ()
   {
     bCasting = True;
-    Duellist(Owner).DuellistAnimType = /*1*/ AT_Combine;
+    Duellist(Owner).DuellistAnimType =  AT_Combine;
   }
   
   function Tick (float dtime)
@@ -56,7 +56,7 @@ state stateCast
  begin:
   PlayAnim('Cast',,0.31);
   FinishAnim();
-  Duellist(Owner).DuellistAnimType = /*0*/ AT_Replace;
+  Duellist(Owner).DuellistAnimType =  AT_Replace;
   bCasting = False;
   GotoState('stateIdle');
 }
@@ -72,7 +72,7 @@ function DoCharging ()
 state stateCharging
 {
 begin:
-  Duellist(Owner).DuellistAnimType = /*1*/ AT_Combine;
+  Duellist(Owner).DuellistAnimType =  AT_Combine;
   LoopAnim('duel_charge',,0.31);
   GotoState('stateIdle');
 }
@@ -91,14 +91,14 @@ state stateDefence
   {
     bCasting = True;
     Duellist(Owner).bReboundingSpells = True;
-    Duellist(Owner).DuellistAnimType = /*1*/ AT_Combine;
+    Duellist(Owner).DuellistAnimType =  AT_Combine;
   }
   
  begin:
   Duellist(Owner).Defence();
   PlayAnim('cast_Expelliarmus',,0.31);
   FinishAnim();
-  Duellist(Owner).DuellistAnimType = /*0*/ AT_Replace;
+  Duellist(Owner).DuellistAnimType =  AT_Replace;
   Duellist(Owner).bReboundingSpells = False;
   bCasting = False;
   GotoState('stateIdle');
@@ -115,10 +115,10 @@ function DoKnockBack ()
 state stateKnockBack
 {
 begin:
-  Duellist(Owner).DuellistAnimType = /*1*/ AT_Combine;
+  Duellist(Owner).DuellistAnimType =  AT_Combine;
   PlayAnim('react_backfire',,0.31);
   FinishAnim();
-  Duellist(Owner).DuellistAnimType = /*0*/ AT_Replace;
+  Duellist(Owner).DuellistAnimType =  AT_Replace;
   GotoState('stateIdle');
 }
 
@@ -153,7 +153,7 @@ state stateReactRictusempra
   
   function BeginState ()
   {
-    Duellist(Owner).DuellistAnimType = /*1*/ AT_Combine;
+    Duellist(Owner).DuellistAnimType =  AT_Combine;
     fTimeInRictusempra = 0.0;
   }
   
@@ -162,7 +162,7 @@ state stateReactRictusempra
   PlayAnim('react_rictusempra',,0.31);
   Sleep(0.1);
   FinishAnim();
-  Duellist(Owner).DuellistAnimType = /*0*/ AT_Replace;
+  Duellist(Owner).DuellistAnimType =  AT_Replace;
   QuitThisState(True);
 }
 
@@ -187,7 +187,7 @@ state stateReactMimbleWimble
   
   function BeginState ()
   {
-    Duellist(Owner).DuellistAnimType = /*1*/ AT_Combine;
+    Duellist(Owner).DuellistAnimType =  AT_Combine;
     fTimeInMimbleWimble = 0.0;
   }
   
@@ -196,7 +196,7 @@ state stateReactMimbleWimble
   PlayAnim('mimblewimble',,0.31);
   Sleep(0.1);
   FinishAnim();
-  Duellist(Owner).DuellistAnimType = /*0*/ AT_Replace;
+  Duellist(Owner).DuellistAnimType =  AT_Replace;
   QuitThisState(False);
 }
 

@@ -4,7 +4,7 @@
 
 class Seeker extends QuidditchPlayer;
 
-state Fly //extends Fly
+state Fly
 {
   function BeginState ()
   {

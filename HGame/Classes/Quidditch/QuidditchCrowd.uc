@@ -89,20 +89,14 @@ function Cheer (CheerType eCheerType)
   {
     // case 0:
 	case CT_Cheer:
-		fRadius = CheerRadius * 5.0; //UTPT didn't add anything so this is an educated guess -AdamJD
-		break;
     // case 2:
 	case CT_Boo:
-		fRadius = CheerRadius * 5.0; //UTPT didn't add anything so this is an educated guess -AdamJD
-		break;
     // case 4:
 	case CT_Coax:
 		fRadius = CheerRadius * 3.0;
 		break;
     // case 1:
 	case CT_CheerLong:
-		fRadius = CheerRadius * 10.0; //UTPT didn't add anything so this is an educated guess -AdamJD
-		break;
     // case 3:
 	case CT_BooLong:
 		fRadius = CheerRadius * 10.0;
@@ -114,7 +108,7 @@ function Cheer (CheerType eCheerType)
 	default:
 		break;
   }
-  PlaySound(CheerSound,/*1*/SLOT_Misc,CheerVolume / 255.0,,fRadius,fPitch);
+  PlaySound(CheerSound,SLOT_Misc,CheerVolume / 255.0,,fRadius,fPitch);
   if ( NextCrowd != None )
   {
     NextCrowd.Cheer(eCheerType);

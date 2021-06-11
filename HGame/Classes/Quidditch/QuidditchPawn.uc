@@ -158,11 +158,11 @@ function Hide ()
   bHidden = True;
   if ( FlyingSound != None )
   {
-    StopSound(FlyingSound,/*1*/SLOT_Misc);
+    StopSound(FlyingSound,SLOT_Misc);
   }
   if ( PursuitSound != None )
   {
-    StopSound(PursuitSound,/*1*/SLOT_Misc);
+    StopSound(PursuitSound,SLOT_Misc);
   }
   if ( Trail != None )
   {
@@ -179,7 +179,7 @@ function Show ()
   bHidden = False;
   if ( FlyingSound != None )
   {
-    PlaySound(FlyingSound,/*1*/SLOT_Misc,1.0,,10000.0);
+    PlaySound(FlyingSound,SLOT_Misc,1.0,,10000.0);
   }
   if ( Trail != None )
   {
@@ -354,7 +354,7 @@ function UpdateWoosh (float DeltaTime)
   if ( bCanWoosh && (Level.TimeSeconds > fNextTimeSafeToWoosh) && (fLastDistanceFromCamera >= 180) && (fDistanceFromCamera < 180) && (VSize(Velocity) > 75) )
   {
     Woosh = WooshSounds[Rand(4)];
-    PlaySound(Woosh,/*6*/SLOT_Interface,0.81,,500.0,RandRange(0.81,1.25));
+    PlaySound(Woosh,SLOT_Interface,0.81,,500.0,RandRange(0.81,1.25));
     fNextTimeSafeToWoosh = Level.TimeSeconds + GetSoundDuration(Woosh);
   }
   fLastDistanceFromCamera = fDistanceFromCamera;
@@ -530,7 +530,7 @@ function ExplodeMine ()
 {
   if ( ExplosionSound != None )
   {
-    PlaySound(ExplosionSound,/*3*/SLOT_Interact,1.0,,10000.0);
+    PlaySound(ExplosionSound,SLOT_Interact,1.0,,10000.0);
   }
   if ( ExplosionFX != None )
   {
@@ -638,7 +638,7 @@ state() LyingInWait
   {
     local Vector BobOffset;
   
-    Super(HPawn).Tick(DeltaTime);
+    Super.Tick(DeltaTime);
     BobOffset.X = 2.5 * Sin(4.5 * Level.TimeSeconds);
     BobOffset.Y = 2.5 * Sin(3.5 * Level.TimeSeconds);
     BobOffset.Z = 11.0 * Sin(8.0 * Level.TimeSeconds);
@@ -672,10 +672,10 @@ state Pursue
     {
       if ( FlyingSound != None )
       {
-        PlaySound(FlyingSound,/*1*/SLOT_Misc,2.0,,10000.0,1.5);
+        PlaySound(FlyingSound,SLOT_Misc,2.0,,10000.0,1.5);
       }
     } else {
-      PlaySound(PursuitSound,/*1*/SLOT_Misc,1.0,,10000.0);
+      PlaySound(PursuitSound,SLOT_Misc,1.0,,10000.0);
     }
     if ( Commentator != None )
     {
@@ -696,11 +696,11 @@ state Pursue
     }
     if ( FlyingSound != None )
     {
-      PlaySound(FlyingSound,/*1*/SLOT_Misc,1.0,,10000.0);
+      PlaySound(FlyingSound,SLOT_Misc,1.0,,10000.0);
     } else //{
       if ( PursuitSound != None )
       {
-        StopSound(PursuitSound,/*1*/SLOT_Misc);
+        StopSound(PursuitSound,SLOT_Misc);
       }
     //}
   }

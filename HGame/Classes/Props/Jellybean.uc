@@ -86,7 +86,7 @@ function Touch (Actor Other)
   }
 }
 
-auto state BounceIntoPlace //extends BounceIntoPlace
+auto state BounceIntoPlace
 {
   function BeginState ()
   {

@@ -139,7 +139,7 @@ function TurnOnEdgeEffects ()
     fxEdgeSparkles[11].SetLocation(Location + Vec( -fBoxWidth / 2, -fBoxDepth / 2,0.0));
     fxEdgeSparkles[11].SourceHeight.Base = fBoxHeight;
   }
-  PlaySound(Sound'Lumos_glow_loop',/*3*/SLOT_Interact,0.5,True,,,,True);
+  PlaySound(Sound'Lumos_glow_loop',SLOT_Interact,0.5,True,,,,True);
 }
 
 function TurnOffEdgeEffects ()
@@ -161,7 +161,7 @@ function TurnOffEdgeEffects ()
       // goto JL0014;
     }
   }
-  StopSound(Sound'Lumos_glow_loop',/*3*/SLOT_Interact);
+  StopSound(Sound'Lumos_glow_loop',SLOT_Interact);
 }
 
 function UpdateSparkles ()

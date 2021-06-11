@@ -81,7 +81,7 @@ auto state isFalling
   
     Velocity.Z *= 0.2 + FRand() * 0.31;
     Velocity = MirrorVectorByNormal(Velocity,HitNormal);
-    PlaySound(MySound,/*0*/SLOT_None,0.75,,100000.0,RandRange(0.89999998,1.12));
+    PlaySound(MySound,SLOT_None,0.75,,100000.0,RandRange(0.89999998,1.12));
     if ( hasParticles )
     {
       p = Spawn(Particles,,,Location,rot(0,0,0));

@@ -378,7 +378,7 @@ function Tick (float dtime)
   HarryDamageTimer += dtime;
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
   PlaySoundAngry();

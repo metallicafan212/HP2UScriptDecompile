@@ -48,7 +48,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
   }
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 }
 

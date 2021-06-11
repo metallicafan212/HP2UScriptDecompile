@@ -1213,11 +1213,11 @@ function HandleSpellIncantationSound (ESpellType SpellType)
   }
   if ( SpellIncantation != "" )
   {
-    PlaySound(Sound(DynamicLoadObject("AllDialog." $ SpellIncantation,Class'Sound')),/*5*/SLOT_Talk,,True);
+    PlaySound(Sound(DynamicLoadObject("AllDialog." $ SpellIncantation,Class'Sound')),SLOT_Talk,,True);
   }
   if ( SpellSound != None )
   {
-    PlaySound(SpellSound,/*0*/SLOT_None,,True);
+    PlaySound(SpellSound,SLOT_None,,True);
   }
 }
 

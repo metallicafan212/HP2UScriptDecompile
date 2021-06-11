@@ -138,7 +138,7 @@ begin:
 	case ATTACK_JUMP:
 		PlayAnim('walk2jump');
 		FinishAnim();
-		PlaySound(Sound'SPI_large_preattack',/*0*/SLOT_None,RandRange(0.62,1.0),,200000.0,RandRange(3.5,4.41),,False);
+		PlaySound(Sound'SPI_large_preattack',SLOT_None,RandRange(0.62,1.0),,200000.0,RandRange(3.5,4.41),,False);
 		LoopAnim('Jump');
 		Sleep(0.31);
 		PlayAnim('jump2walk');
@@ -148,9 +148,9 @@ begin:
 	case ATTACK_REAR:
 		if ( Rand(2) == 0 )
 		{
-		  PlaySound(Sound'SPI_large_Hiss1',/*0*/SLOT_None,RandRange(0.62,1.0),,200000.0,RandRange(0.81,1.25),,False);
+		  PlaySound(Sound'SPI_large_Hiss1',SLOT_None,RandRange(0.62,1.0),,200000.0,RandRange(0.81,1.25),,False);
 		} else {
-		  PlaySound(Sound'SPI_large_Hiss2',/*0*/SLOT_None,RandRange(0.62,1.0),,200000.0,RandRange(0.81,1.25),,False);
+		  PlaySound(Sound'SPI_large_Hiss2',SLOT_None,RandRange(0.62,1.0),,200000.0,RandRange(0.81,1.25),,False);
 		}
 		PlayAnim('webattack');
 		FinishAnim();
@@ -213,14 +213,14 @@ state stateBiteHarry
  begin:
   Velocity = vect(0.00,0.00,0.00);
   Acceleration = vect(0.00,0.00,0.00);
-  PlaySound(Sound'SPI_large_jump',/*0*/SLOT_None,RandRange(0.89999998,1.0),,20000.0,RandRange(0.81,1.25),,False);
+  PlaySound(Sound'SPI_large_jump',SLOT_None,RandRange(0.89999998,1.0),,20000.0,RandRange(0.81,1.25),,False);
   PlayAnim('Attack',2.0);
   Sleep(0.31);
   if ( Rand(2) == 0 )
   {
-    PlaySound(Sound'SPI_large_bite1',/*0*/SLOT_None,RandRange(0.89999998,1.0),,250.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_bite1',SLOT_None,RandRange(0.89999998,1.0),,250.0,RandRange(0.81,1.25),,False);
   } else {
-    PlaySound(Sound'SPI_large_bite2',/*0*/SLOT_None,RandRange(0.89999998,1.0),,250.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_bite2',SLOT_None,RandRange(0.89999998,1.0),,250.0,RandRange(0.81,1.25),,False);
   }
   Sleep(0.04);
   if ( VSize(PlayerHarry.Location - Location) < savedCollision + PlayerHarry.CollisionRadius )
@@ -274,12 +274,12 @@ state HitBySpell
   }
   
  begin:
-  PlaySound(Sound'SPI_hit',/*0*/SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.81,1.25),,False);
+  PlaySound(Sound'SPI_hit',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.81,1.25),,False);
   if ( Rand(2) == 0 )
   {
-    PlaySound(Sound'SPI_large_ouch1',/*0*/SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_ouch1',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.81,1.25),,False);
   } else {
-    PlaySound(Sound'SPI_large_ouch2',/*0*/SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_ouch2',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.81,1.25),,False);
   }
   if ( numSpells > 0 )
   {
@@ -319,7 +319,7 @@ state OutForTheCount
   Acceleration = vect(0.00,0.00,0.00);
   PlayAnim('flippedOver',1.39999998);
   Sleep(0.723);
-  PlaySound(Sound'SPI_large_LandOnBack',/*0*/SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
+  PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
   Sleep(0.5);
   LoopAnim('idleOnBack');
   foreach AllActors(Class'Aragog',Spider)

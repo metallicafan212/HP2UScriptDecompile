@@ -16,7 +16,7 @@ auto state Wilted
   Log("spiky bush wilting...");
   PlayAnim('wither');
   Sleep(1.0);
-  PlaySound(Sound'spiky_bush_wilt',/*0*/SLOT_None);
+  PlaySound(Sound'spiky_bush_wilt',SLOT_None);
 }
 
 defaultproperties

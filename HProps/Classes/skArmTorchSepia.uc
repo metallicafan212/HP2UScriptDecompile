@@ -15,7 +15,7 @@ class skArmTorchSepia extends HPMeshActor;
 #exec Anim Digest Anim=skArmTorchSepiaAnims VERBOSE 
 
 //texture import (skArmTorchSepiaTex0) -AdamJD 
-#exec Texture Import File=Textures\skArmTorchSepiaTex0.png Name=skArmTorchSepiaTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skArmTorchSepiaTex0.png Name=skArmTorchSepiaTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skArmTorchSepiaMesh Num=0 Texture=skArmTorchSepiaTex0
 
 defaultproperties

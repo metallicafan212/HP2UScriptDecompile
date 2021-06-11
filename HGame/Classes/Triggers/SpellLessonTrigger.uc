@@ -994,7 +994,7 @@ state PlayGame
 {
   event PlayerInput (float fDeltaTime)
   {
-    if ( (PlayerHarry.bSpellLessonUp != 0) || IsJoyPressed(/*0*/LessonKey_Up,PlayerHarry.aSpellLessonX,PlayerHarry.aSpellLessonY) )
+    if ( (PlayerHarry.bSpellLessonUp != 0) || IsJoyPressed(LessonKey_Up,PlayerHarry.aSpellLessonX,PlayerHarry.aSpellLessonY) )
     {
       if ( nKeyNeedsReset[0] == 0 )
       {
@@ -1005,7 +1005,7 @@ state PlayGame
     } else {
       nKeyNeedsReset[0] = 0;
     }
-    if ( (PlayerHarry.bSpellLessonDown) != 0 || IsJoyPressed(/*1*/LessonKey_Down,PlayerHarry.aSpellLessonX,PlayerHarry.aSpellLessonY) )
+    if ( (PlayerHarry.bSpellLessonDown) != 0 || IsJoyPressed(LessonKey_Down,PlayerHarry.aSpellLessonX,PlayerHarry.aSpellLessonY) )
     {
       if ( nKeyNeedsReset[1] == 0 )
       {
@@ -1016,7 +1016,7 @@ state PlayGame
     } else {
       nKeyNeedsReset[1] = 0;
     }
-    if ( (PlayerHarry.bSpellLessonLeft) != 0 || IsJoyPressed(/*2*/LessonKey_Left,PlayerHarry.aSpellLessonX,PlayerHarry.aSpellLessonY) )
+    if ( (PlayerHarry.bSpellLessonLeft) != 0 || IsJoyPressed(LessonKey_Left,PlayerHarry.aSpellLessonX,PlayerHarry.aSpellLessonY) )
     {
       if ( nKeyNeedsReset[2] == 0 )
       {
@@ -1027,7 +1027,7 @@ state PlayGame
     } else {
       nKeyNeedsReset[2] = 0;
     }
-    if ( (PlayerHarry.bSpellLessonRight != 0) || IsJoyPressed(/*3*/LessonKey_Right,PlayerHarry.aSpellLessonX,PlayerHarry.aSpellLessonY) )
+    if ( (PlayerHarry.bSpellLessonRight != 0) || IsJoyPressed(LessonKey_Right,PlayerHarry.aSpellLessonX,PlayerHarry.aSpellLessonY) )
     {
       if ( nKeyNeedsReset[3] == 0 )
       {
@@ -1045,7 +1045,7 @@ state PlayGame
   event EndState ()
   {
     PlayerHarry.StopAllMusic(0.5);
-    GameWand.StopSound(soundWand,/*3*/SLOT_Interact);
+    GameWand.StopSound(soundWand,SLOT_Interact);
   }
   
  begin:
@@ -1067,7 +1067,7 @@ state PlayGame
 	default:
 		break;
   }
-  GameWand.PlaySound(soundWand,/*3*/SLOT_Interact,1.0,True,TransientSoundRadius,1.0,False,True);
+  GameWand.PlaySound(soundWand,SLOT_Interact,1.0,True,TransientSoundRadius,1.0,False,True);
   GameWand.StartWand(fWandSpeed + (10 * PlayerHarry.Difficulty));
 }
 

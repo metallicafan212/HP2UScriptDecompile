@@ -4,7 +4,7 @@
 
 class ChallengeStar extends HProp;
 
-state PickupProp //extends PickupProp
+state PickupProp
 {
   function EndState ()
   {

@@ -242,7 +242,7 @@ function FindNewMoveToLoc ()
   vMoveDir = Normal(vMoveTo - Location);
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
   function bool RespondToDamage ()
   {
@@ -564,11 +564,11 @@ state stateHit3
     {
       SetRotation(TempRotator);
       MoveSpeed = GroundSpeed + (GroundSpeedEnd - GroundSpeed) * iNumHits / iNumHitsToBeat;
-      if ( PlayerHarry.Difficulty == 1 )
+      if ( PlayerHarry.Difficulty == DifficultyMedium )
       {
         MoveSpeed *= 1.29999995;
       } else {
-        if ( PlayerHarry.Difficulty == 2 )
+        if ( PlayerHarry.Difficulty == DifficultyHard )
         {
           MoveSpeed *= 1.79999995;
         }

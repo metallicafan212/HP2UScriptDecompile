@@ -79,7 +79,7 @@ event Falling ()
 event Landed (Vector HitNormal)
 {
   Super.Landed(HitNormal);
-  PlaySound(Sound'snail_land',/*0*/SLOT_None);
+  PlaySound(Sound'snail_land',SLOT_None);
   if ( IsInState('patrol') || IsInState('RamHarry') )
   {
     StartTrail();
@@ -139,7 +139,7 @@ function DoSnailDamage (name nameDamage, Vector vDamageLoc, bool bCuttingHarryOf
         default:
       }
     } else {
-      PlaySound(Sound'snail_ouch2',/*0*/SLOT_None,RandRange(0.81,1.0),,,RandRange(0.81,1.12));
+      PlaySound(Sound'snail_ouch2',SLOT_None,RandRange(0.81,1.0),,,RandRange(0.81,1.12));
     }
     bAllowSnailDamage = False;
   }
@@ -229,16 +229,16 @@ function PlaySnailHitSound ()
   switch (Rand(3))
   {
     case 0:
-    PlaySound(Sound'snail_ouch1_A',/*0*/SLOT_None);
+    PlaySound(Sound'snail_ouch1_A',SLOT_None);
     break;
     case 1:
-    PlaySound(Sound'snail_ouch1_B',/*0*/SLOT_None);
+    PlaySound(Sound'snail_ouch1_B',SLOT_None);
     break;
     case 2:
-    PlaySound(Sound'snail_ouch1_C',/*0*/SLOT_None);
+    PlaySound(Sound'snail_ouch1_C',SLOT_None);
     break;
     case 3:
-    PlaySound(Sound'snail_ouch2_A',/*0*/SLOT_None);
+    PlaySound(Sound'snail_ouch2_A',SLOT_None);
     break;
     default:
   }
@@ -290,7 +290,7 @@ event UnTouch (Actor Other)
   }
 }
 
-auto state patrol //extends patrol
+auto state patrol
 {
   // ignores  Tick; //UTPT added this for some reason -AdamJD
   
@@ -312,9 +312,9 @@ auto state patrol //extends patrol
     SetTimer(RandRange(3.0,8.0),False);
     if ( Rand(2) == 0 )
     {
-      PlaySound(Sound'snail_slither1',/*0*/SLOT_None,,,1000.0,RandRange(0.81,1.12));
+      PlaySound(Sound'snail_slither1',SLOT_None,,,1000.0,RandRange(0.81,1.12));
     } else {
-      PlaySound(Sound'snail_slither2',/*0*/SLOT_None,,,1000.0,RandRange(0.81,1.12));
+      PlaySound(Sound'snail_slither2',SLOT_None,,,1000.0,RandRange(0.81,1.12));
     }
   }
   
@@ -339,8 +339,8 @@ state Pushed
 	
   function Landed (Vector HitNormal)
   {
-    Super(HChar).Landed(HitNormal);
-    PlaySound(Sound'snail_land',/*0*/SLOT_None);
+    Super.Landed(HitNormal);
+    PlaySound(Sound'snail_land',SLOT_None);
     GotoState('RecoverFromPush');
   }
   
@@ -409,8 +409,8 @@ state RamHarry
   
   event EndState ()
   {
-    StopSound(soundAttackCry,/*0*/SLOT_None);
-    StopSound(soundWarningCry,/*0*/SLOT_None);
+    StopSound(soundAttackCry,SLOT_None);
+    StopSound(soundWarningCry,SLOT_None);
   }
   
  begin:
@@ -418,9 +418,9 @@ state RamHarry
   SetGroundSpeed();
   if ( Rand(2) == 0 )
   {
-    PlaySound(soundAttackCry,/*0*/SLOT_None,RandRange(0.81,1.0),,,RandRange(0.81,1.12));
+    PlaySound(soundAttackCry,SLOT_None,RandRange(0.81,1.0),,,RandRange(0.81,1.12));
   } else {
-    PlaySound(soundWarningCry,/*0*/SLOT_None,RandRange(0.81,1.0),,,RandRange(0.81,1.12));
+    PlaySound(soundWarningCry,SLOT_None,RandRange(0.81,1.0),,,RandRange(0.81,1.12));
   }
   MoveTo(PlayerHarry.Location);
   PlayAnim('Idle');

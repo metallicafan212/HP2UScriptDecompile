@@ -24,7 +24,7 @@ function PostBeginPlay ()
 {
   local WhompWRController Root;
 
-  Root = WhompWRController(CreateAnimChannel(Class'WhompWRController',/*0*/AT_Replace,'Root1'));
+  Root = WhompWRController(CreateAnimChannel(Class'WhompWRController',AT_Replace,'Root1'));
   Root.SetOwner(self);
   Root.WhichRoot = 1;
   Root.RootAnimNameUp = 'Root1UP';
@@ -35,7 +35,7 @@ function PostBeginPlay ()
   Root.ColObj[2] = FindColObj('BlockPlayerRoot1_3');
   Root.Damage = Damage1;
   Root.Tag = 'Root1Tag';
-  Root = WhompWRController(CreateAnimChannel(Class'WhompWRController',/*0*/AT_Replace,'Root2'));
+  Root = WhompWRController(CreateAnimChannel(Class'WhompWRController',AT_Replace,'Root2'));
   Root.SetOwner(self);
   Root.WhichRoot = 2;
   Root.RootAnimNameUp = 'Root2UP';
@@ -46,7 +46,7 @@ function PostBeginPlay ()
   Root.ColObj[2] = FindColObj('BlockPlayerRoot2_3');
   Root.Damage = Damage2;
   Root.Tag = 'Root2Tag';
-  Root = WhompWRController(CreateAnimChannel(Class'WhompWRController',/*0*/AT_Replace,'Root3'));
+  Root = WhompWRController(CreateAnimChannel(Class'WhompWRController',AT_Replace,'Root3'));
   Root.SetOwner(self);
   Root.WhichRoot = 3;
   Root.RootAnimNameUp = 'Root3UP';

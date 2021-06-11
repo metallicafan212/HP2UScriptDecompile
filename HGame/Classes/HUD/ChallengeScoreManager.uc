@@ -533,7 +533,7 @@ state Tally
   
   function EndState ()
   {
-    StopSound(soundTally,/*3*/SLOT_Interact);
+    StopSound(soundTally,SLOT_Interact);
     bFirstTime = False;
     if (  !bMastered && (nHighScore >= nMaxScore) )
     {
@@ -556,7 +556,7 @@ state Tally
   }
   fTallySoundDuration = GetSoundDuration(soundTally);
  loop:
-  PlayerHarry.PlaySound(soundTally,/*3*/SLOT_Interact);
+  PlayerHarry.PlaySound(soundTally,SLOT_Interact);
   Sleep(fTallySoundDuration);
   goto ('Loop');
 }

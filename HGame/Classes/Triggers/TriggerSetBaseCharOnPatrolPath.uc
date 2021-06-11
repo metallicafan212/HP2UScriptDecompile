@@ -42,7 +42,7 @@ function ProcessTrigger ()
   foreach AllActors(Class'HPawn',A,Event)
   {
     A.firstPatrolPointObjectName = DestPatrolPoint_ObjectName;
-    A.ePatrolType = /*0*/ PATROLTYPE_PATROL_POINTS;
+    A.ePatrolType =  PATROLTYPE_PATROL_POINTS;
     A.bGoBackToLastNavPoint = False;
     A.navP = None;
     A.tempNavP = None;

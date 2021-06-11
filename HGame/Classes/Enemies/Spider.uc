@@ -123,7 +123,7 @@ function playSquishSound ()
     squishSound = Sound'spider_small_squish';
     break;
   }
-  PlaySound(squishSound,/*0*/SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(squishSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
 function playAttackSound ()
@@ -145,7 +145,7 @@ function playAttackSound ()
     break;
     default:
   }
-  PlaySound(AttackSound,/*0*/SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(AttackSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
 function bool AttackHarryCheck ()
@@ -471,7 +471,7 @@ state walkAway
   
   function Tick (float DeltaTime)
   {
-    Super(HChar).Tick(DeltaTime);
+    Super.Tick(DeltaTime);
     EdgeCounter -= DeltaTime;
     if ( EdgeCounter <= 0 )
     {

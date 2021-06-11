@@ -145,25 +145,25 @@ function PlayCountdownSound ()
     Cam = harry(Level.PlayerHarryActor).Cam;
     if ( fCountdownTime > 30.0 )
     {
-      Cam.PlaySound(Sound'timer_1',/*0*/SLOT_None,0.5,,,,True);
+      Cam.PlaySound(Sound'timer_1',SLOT_None,0.5,,,,True);
     } else //{
       if ( fCountdownTime > 20.0 )
       {
-        Cam.PlaySound(Sound'timer_2',/*0*/SLOT_None,0.5,,,,True);
+        Cam.PlaySound(Sound'timer_2',SLOT_None,0.5,,,,True);
       } else //{
         if ( fCountdownTime > 15.0 )
         {
-          Cam.PlaySound(Sound'timer_3',/*0*/SLOT_None,0.5,,,,True);
+          Cam.PlaySound(Sound'timer_3',SLOT_None,0.5,,,,True);
         } else //{
           if ( fCountdownTime > 10.0 )
           {
-            Cam.PlaySound(Sound'timer_4',/*0*/SLOT_None,0.5,,,,True);
+            Cam.PlaySound(Sound'timer_4',SLOT_None,0.5,,,,True);
           } else //{
             if ( fCountdownTime > 5.0 )
             {
-              Cam.PlaySound(Sound'timer_5',/*0*/SLOT_None,0.5,,,,True);
+              Cam.PlaySound(Sound'timer_5',SLOT_None,0.5,,,,True);
             } else {
-              Cam.PlaySound(Sound'timer_6',/*0*/SLOT_None,0.5,,,,True);
+              Cam.PlaySound(Sound'timer_6',SLOT_None,0.5,,,,True);
             }
           // }
         // }

@@ -141,7 +141,7 @@ state AttachToHarry
       iteratorCheck = 10;
       if ( harryIsStill() == False )
       {
-        StopSound(squishSound,/*0*/SLOT_None);
+        StopSound(squishSound,SLOT_None);
         Detach(PlayerHarry);
         SetOwner(None);
         // SetPhysics(2);
@@ -149,7 +149,7 @@ state AttachToHarry
         PrePivot = vect(0.00,0.00,0.00);
         GotoState('moveToMarker');
       } else {
-        PlaySound(spiderBiteSound,/*0*/SLOT_None,RandRange(0.62,1.0),,200.0,RandRange(0.81,1.25),,False);
+        PlaySound(spiderBiteSound,SLOT_None,RandRange(0.62,1.0),,200.0,RandRange(0.81,1.25),,False);
       }
     }
   }

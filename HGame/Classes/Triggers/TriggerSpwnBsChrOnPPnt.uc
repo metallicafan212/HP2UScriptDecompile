@@ -74,7 +74,7 @@ function ProcessTrigger ()
     Log("TriggerSpwnBsChrOnPPnt: couldn't spawn the baseChar:" $ string(BaseCharToSpawn[I]));
     return;
   }
-  A.ePatrolType = /*0*/ PATROLTYPE_PATROL_POINTS;
+  A.ePatrolType =  PATROLTYPE_PATROL_POINTS;
   A.firstPatrolPointObjectName = sp.Name;
   if ( BaseCharGroundSpeed[I] != 0 )
   {

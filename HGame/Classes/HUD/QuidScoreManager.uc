@@ -335,7 +335,7 @@ state Tally
   
   function EndState ()
   {
-    StopSound(soundTally,/*3*/SLOT_Interact);
+    StopSound(soundTally,SLOT_Interact);
   }
   
 begin:
@@ -367,7 +367,7 @@ begin:
   PlayerHarry.ClientMessage("start tally " $ string(nAwardGryffPoints) $ " " $ string(nTallyPointsPerTick) $ " " $ string(fTickDelta) $ " " $ string(fTicksPerSec));
   fTallySoundDuration = GetSoundDuration(soundTally);
 loop:
-  PlayerHarry.PlaySound(soundTally,/*3*/SLOT_Interact);
+  PlayerHarry.PlaySound(soundTally,SLOT_Interact);
   Sleep(fTallySoundDuration);
   goto ('Loop');
 }

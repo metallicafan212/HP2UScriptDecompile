@@ -364,7 +364,7 @@ auto state StateStartup
   goto ('Begin');
 }
 
-state stateIdle //extends stateIdle
+state stateIdle
 {
 begin:
   Sleep(2.0);
@@ -856,7 +856,7 @@ begin:
 function DoAttack2 ()
 {
   bListenToHarry = False;
-  if ( (PlayerHarry.Difficulty > 0) && (VSize2D(PlayerHarry.Location - Location) < HeadAttackFarthest_2 + 20) )
+  if ( (PlayerHarry.Difficulty > DifficultyEasy) && (VSize2D(PlayerHarry.Location - Location) < HeadAttackFarthest_2 + 20) )
   {
     GotoState('stateAttack_2_');
   } else {
@@ -1078,11 +1078,11 @@ function CastSpitSpell (bool bAimAtHarry, optional bool bUseHeadYaw)
 	V = _BasiliskHeadColObj.Location + vector(R) * Dist2D;
     V.Z = FloorZ;
     fTimeToHit = 1.29999995;
-    if ( PlayerHarry.Difficulty == 1 )
+    if ( PlayerHarry.Difficulty == DifficultyMedium )
     {
       fTimeToHit = 0.5;
     } else {
-      if ( PlayerHarry.Difficulty == 2 )
+      if ( PlayerHarry.Difficulty == DifficultyHard )
       {
         fTimeToHit = 0.181;
       }
@@ -2161,11 +2161,11 @@ function BasilHitBySpell (baseSpell spell, Vector HitLocation)
   {
     DamageAmount *= 0.5;
   }
-  if ( PlayerHarry.Difficulty == 1 )
+  if ( PlayerHarry.Difficulty == DifficultyMedium )
   {
     DamageAmount *= 0.75;
   } else {
-    if ( PlayerHarry.Difficulty == 2 )
+    if ( PlayerHarry.Difficulty == DifficultyHard )
     {
       DamageAmount *= 0.5;
     }

@@ -161,7 +161,7 @@ function OnBounce (Actor Other)
 		}
 		fxSheet.DrawScale = fxSheet.Default.DrawScale * 2;
 		bBouncing = True;
-		PlaySound(Sound'SPN_bounce_on',/*0*/SLOT_None,,True);
+		PlaySound(Sound'SPN_bounce_on',SLOT_None,,True);
 	}
 }
 
@@ -215,7 +215,7 @@ state stateGoingToEnabled
     rNewRot = rotator(PadDir);
     DesiredRotation.Yaw = rNewRot.Yaw;
     rLast = DesiredRotation;
-    PlaySound(Sound'SPN_activate',/*0*/SLOT_None,,True);
+    PlaySound(Sound'SPN_activate',SLOT_None,,True);
     SetLocation(vStartPosition + Vec(0.0,0.0,fRaiseAmount));
     fxSheet.SetLocation(Location);
   }

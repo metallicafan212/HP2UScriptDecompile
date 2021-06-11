@@ -39,7 +39,7 @@ state PlayGame
   {
     killAttachedParticleFX(0.0);
     CreateAttachedParticleFX();
-    FollowSplinePath(LessonTrigger.nameSplinePath,fWandSpeed,0.0,LessonTrigger.nameIPStart,LessonTrigger.nameIPEnd,False,/*0*/MOVE_TYPE_LINEAR,True);
+    FollowSplinePath(LessonTrigger.nameSplinePath,fWandSpeed,0.0,LessonTrigger.nameIPStart,LessonTrigger.nameIPEnd,False,MOVE_TYPE_LINEAR,True);
   }
   
   function EndState ()

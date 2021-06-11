@@ -42,7 +42,7 @@ function Trigger (Actor Other, Pawn Instigator)
       Vel.Z = 40.0 + fAdditionalZVelocity;
       Vel = Vel >> Rotation;
       SpawnedObject.Velocity = Vel * fVelocityModifier;
-      SpawnedObject.SetPhysics(/*2*/PHYS_Falling);
+      SpawnedObject.SetPhysics(PHYS_Falling);
     }
   }
 }

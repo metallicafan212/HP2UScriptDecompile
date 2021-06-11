@@ -61,7 +61,7 @@ state stillOpen
 {
 begin:
   bProjTarget = False;
-  eVulnerableToSpell = /*0*/ SPELL_None;
+  eVulnerableToSpell =  SPELL_None;
   LoopAnim('End');
 }
 
@@ -156,7 +156,7 @@ state turnover
       } else {
         newSpawn.Velocity = Vel;
         bPlayBeanSound = True;
-        newSpawn.SetPhysics(/*2*/PHYS_Falling);
+        newSpawn.SetPhysics(PHYS_Falling);
       }
     //}
     newSpawn.bPersistent = bMakeSpawnPersistent;
@@ -184,7 +184,7 @@ state turnover
   }
  begin:
   bProjTarget = False;
-  eVulnerableToSpell = /*0*/ SPELL_None;
+  eVulnerableToSpell =  SPELL_None;
   PlaySound(Sound'wood_chest_open');
   PlayAnim('Open');
   FinishAnim();

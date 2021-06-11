@@ -182,7 +182,7 @@ function bool SayATaunt ()
   fTimeSinceDrank = Level.TimeSeconds - harry.fTimeLastDrank;
   if ( (fTimeSinceDrank > 0.75) && (fTimeSinceDrank < 3.0) )
   {
-    bSaid = SayTaunt(/*3*/QT_Potion,/*1*/TA_Opponent,True);
+    bSaid = SayTaunt(QT_Potion,TA_Opponent,True);
     if ( bSaid )
     {
 	  //Log("AdamJD:	Said potion taunt(opponent)");
@@ -197,14 +197,14 @@ function bool SayATaunt ()
     {
       if ( fHarryTimeSinceKicked <= fSeekerTimeSinceKicked )
       {
-        bSaid = SayTaunt(/*2*/QT_Kicked,/*1*/TA_Opponent,True);
+        bSaid = SayTaunt(QT_Kicked,TA_Opponent,True);
         if ( bSaid )
         {
 		  //Log("AdamJD:	Said kick taunt(opponent)");
           harry.fTimeLastKicked = -1.0;
         }
       } else {
-        bSaid = SayTaunt(/*2*/QT_Kicked,/*0*/TA_Gryffindor,True);
+        bSaid = SayTaunt(QT_Kicked,TA_Gryffindor,True);
         if ( bSaid )
         {
 		  //Log("AdamJD:    Said kick taunt(harry)");
@@ -217,10 +217,10 @@ function bool SayATaunt ()
   {
     if ( Rand(2) == 0 )
     {
-      bSaid = SayTaunt(/*1*/QT_Idle,/*1*/TA_Opponent,True);
+      bSaid = SayTaunt(QT_Idle,TA_Opponent,True);
 	  //Log("AdamJD:     Said idle taunt(opponent)");
     } else {
-      bSaid = SayTaunt(/*1*/QT_Idle,/*0*/TA_Gryffindor,True);
+      bSaid = SayTaunt(QT_Idle,TA_Gryffindor,True);
 	  //Log("AdamJD:     Said idle taunt(harry)");
     }
   }
@@ -275,7 +275,7 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
   {
     // case 0:
 	case TA_Gryffindor:
-    eHouse = /*0*/ HA_Gryffindor;
+    eHouse =  HA_Gryffindor;
     Speaker = harry;
     break;
     // case 1:
@@ -285,7 +285,7 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
     break;
     // case 2:
 	case TA_Neutral:
-    eHouse = /*4*/ HA_Neutral;
+    eHouse =  HA_Neutral;
     Speaker = None;
     break;
     default:
@@ -341,7 +341,7 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
   dlgSound = Taunts[eTaunt].House[eHouse].Variant[Variant].dlgSound;
   if ( dlgSound != None )
   {
-    Speaker.PlaySound(dlgSound,/*5*/SLOT_Talk,1.0);
+    Speaker.PlaySound(dlgSound,SLOT_Talk,1.0);
     bSaid = True;
   } else {
     Log("QuidditchTauntMgr: Failed to say dialog for dialog line; DlgName = " $ Taunts[eTaunt].House[eHouse].Variant[Variant].DlgName $ ".");

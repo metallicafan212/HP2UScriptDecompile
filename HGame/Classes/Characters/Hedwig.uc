@@ -112,13 +112,13 @@ function PlayerCutRelease ()
   GotoState('stateIdle');
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
   cm("This is where Hedwig begins");
   if (  !bDoNothingAtStartup )
   {
-    if ( False )
+    if ( BOOL_DEBUG_AI )
     {
       PlayerHarry.ClientMessage("" $ string(Name) $ ": auto stateIdle");
     }
@@ -142,7 +142,7 @@ begin:
   Velocity = vect(0.00,0.00,0.00);
 }
 
-state patrolFollowSpline //extends patrolFollowSpline
+state patrolFollowSpline
 {
   //UTPT added this for some reason -AdamJD
   // ignores  Tick; 

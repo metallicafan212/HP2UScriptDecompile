@@ -94,7 +94,7 @@ auto state fallOver
   
   function HitWall (Vector HitNormal, Actor Wall)
   {
-    if ( False )
+    if ( BOOL_DEBUG_AI )
     {
       PlayerHarry.ClientMessage("Hit the wall");
     }

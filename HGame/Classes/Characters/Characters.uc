@@ -890,7 +890,7 @@ begin:
   until(False);
 }
 
-auto state patrol //extends patrol
+auto state patrol
 {
   function startup ()
   {

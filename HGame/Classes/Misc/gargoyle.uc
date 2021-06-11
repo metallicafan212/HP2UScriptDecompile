@@ -69,11 +69,11 @@ state Green
  begin:
   PlayAnim('change2green',1.0,0.5);
   Sleep(1.0);
-  PlaySound(Sound'Fawkes_wing_flap',/*0*/SLOT_None,,,,1.75);
+  PlaySound(Sound'Fawkes_wing_flap',SLOT_None,,,,1.75);
   Sleep(0.25);
-  PlaySound(Sound'owl_wing_flap',/*0*/SLOT_None,,,,1.75);
+  PlaySound(Sound'owl_wing_flap',SLOT_None,,,,1.75);
   Sleep(73.0 / 30.0 - 1.25 - 0.25);
-  PlaySound(Sound'dragon_statue_roar',/*0*/SLOT_None);
+  PlaySound(Sound'dragon_statue_roar',SLOT_None);
   FinishAnim();
   LoopAnim('Green',1.0,0.5);
   Sleep(1.0);

@@ -222,18 +222,18 @@ state ThrashingAndSmashing
   } else {
     BackGroundRootSound = Sound'willow_base_woodmovement';
   }
-  ColObj[1].PlaySound(BackGroundRootSound,/*1*/SLOT_Misc,RandRange(0.81,1.0) * 0.5,,,RandRange(0.62,0.81));
-  ColObj[1].PlaySound(Sound'pig_squeal1',/*2*/SLOT_Pain,RandRange(0.41,0.41),,,RandRange(0.23,0.25999999));
+  ColObj[1].PlaySound(BackGroundRootSound,SLOT_Misc,RandRange(0.81,1.0) * 0.5,,,RandRange(0.62,0.81));
+  ColObj[1].PlaySound(Sound'pig_squeal1',SLOT_Pain,RandRange(0.41,0.41),,,RandRange(0.23,0.25999999));
   switch (Rand(3))
   {
     case 0:
-    ColObj[1].PlaySound(Sound'Root_up_creak1',/*0*/SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
+    ColObj[1].PlaySound(Sound'Root_up_creak1',SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
     break;
     case 1:
-    ColObj[1].PlaySound(Sound'Root_up_creak2',/*0*/SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
+    ColObj[1].PlaySound(Sound'Root_up_creak2',SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
     break;
     case 2:
-    ColObj[1].PlaySound(Sound'Root_up_creak3',/*0*/SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
+    ColObj[1].PlaySound(Sound'Root_up_creak3',SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
     break;
     default:
   }
@@ -244,7 +244,7 @@ state ThrashingAndSmashing
     PlayAnim(RootAnimNameLoop,1.0,0.1);
     Sleep(tree.GetUpTime(WhichRoot,TimingStage));
     PlayAnim(RootAnimNameDown,tree.GetDownAnimRate(WhichRoot,TimingStage),0.1);
-    ColObj[1].PlaySound(Sound'whomp06',/*0*/SLOT_None,RandRange(0.81,1.0),,,RandRange(0.69999999,0.81));
+    ColObj[1].PlaySound(Sound'whomp06',SLOT_None,RandRange(0.81,1.0),,,RandRange(0.69999999,0.81));
 	do
 	{
       Sleep(0.01);
@@ -254,8 +254,8 @@ state ThrashingAndSmashing
     DoHitGroundEffects();
     AnimRate = 1.0;
     FinishAnim();
-    ColObj[1].StopSound(BackGroundRootSound,/*1*/SLOT_Misc);
-    ColObj[1].StopSound(Sound'pig_squeal1',/*2*/SLOT_Pain,1.0);
+    ColObj[1].StopSound(BackGroundRootSound,SLOT_Misc);
+    ColObj[1].StopSound(Sound'pig_squeal1',SLOT_Pain,1.0);
     Sleep(tree.GetOnGroundTime(WhichRoot,TimingStage));
     TimingStage++;
     if ( (TimingStage >= 10) || (tree.GetUpAnimRate(WhichRoot,TimingStage) == 0) )
@@ -318,17 +318,17 @@ function DoHitGroundEffects ()
   switch (Rand(3))
   {
     case 0:
-    ColObj[1].PlaySound(Sound'Big_whomp2',/*5*/SLOT_Talk,1.0,,,RandRange(0.62,0.81));
+    ColObj[1].PlaySound(Sound'Big_whomp2',SLOT_Talk,1.0,,,RandRange(0.62,0.81));
     break;
     case 1:
-    ColObj[1].PlaySound(Sound'Big_whomp3',/*5*/SLOT_Talk,1.0,,,RandRange(0.62,0.81));
+    ColObj[1].PlaySound(Sound'Big_whomp3',SLOT_Talk,1.0,,,RandRange(0.62,0.81));
     break;
     case 2:
-    ColObj[1].PlaySound(Sound'Big_whomp4',/*5*/SLOT_Talk,1.0,,,RandRange(0.62,0.81));
+    ColObj[1].PlaySound(Sound'Big_whomp4',SLOT_Talk,1.0,,,RandRange(0.62,0.81));
     break;
     default:
   }
-  ColObj[1].PlaySound(Sound'big_block_fall',/*0*/SLOT_None,0.62,,1000000.0,RandRange(0.5,0.69999999));
+  ColObj[1].PlaySound(Sound'big_block_fall',SLOT_None,0.62,,1000000.0,RandRange(0.5,0.69999999));
   PlayerHarry.ShakeView(0.5,200.0,200.0);
 }
 

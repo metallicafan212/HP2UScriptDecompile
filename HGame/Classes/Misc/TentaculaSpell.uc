@@ -4,7 +4,7 @@
 
 class TentaculaSpell extends GenericColObj;
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
   function bool HandleSpellDiffindo (optional baseSpell spell, optional Vector vHitLocation)
   {

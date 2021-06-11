@@ -38,7 +38,7 @@ function Timer ()
 
 function Bump (Actor Other)
 {
-  PlaySound(BumpSound,/*0*/SLOT_None);
+  PlaySound(BumpSound,SLOT_None);
 }
 
 event Destroyed ()
@@ -75,7 +75,7 @@ function UpdateFX ()
   fxReact.ParticlesPerSec.Base = fxParticlesPerSecond * DrawScale;
 }
 
-auto state stateIdle //extends stateIdle
+auto state stateIdle
 {
 begin:
   SetTimer(fWebLifetime,False);
@@ -148,7 +148,7 @@ state() stateHiding
       harry(aSlimedHPawn).WebAnimRefCountSub();
     }
     aSlimedHPawn = None;
-    PlaySound(ShrinkSound,/*0*/SLOT_None);
+    PlaySound(ShrinkSound,SLOT_None);
   }
   
   function Tick (float fTimeDelta)
@@ -168,7 +168,7 @@ state() stateHiding
   
 }
 
-state stateDestroy //extends stateDestroy
+state stateDestroy
 {
 begin:
   PlayerHarry.ClientMessage(string(self.Name) $ " :  We are in state Destroy");

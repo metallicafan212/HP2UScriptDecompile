@@ -17,7 +17,7 @@ defaultproperties
 
     bUnlit=True
 
-    MultiSkins=FireTexture'HPParticle.hp_fx.Particles.LessonTrail'
+    MultiSkins(0)=FireTexture'HPParticle.hp_fx.Particles.LessonTrail'
 
     CollisionRadius=10.00
 

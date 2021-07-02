@@ -13,5 +13,5 @@ defaultproperties
 
     AmbientGlow=200
 
-    MultiSkins=WetTexture'HPParticle.hp_fx.General.SnakeEyesWet'
+    MultiSkins(0)=WetTexture'HPParticle.hp_fx.General.SnakeEyesWet'
 }

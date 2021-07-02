@@ -60,13 +60,13 @@ loop:
 
 defaultproperties
 {
-    HouseDisplayInfo(0)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skGeorgeWQuidMesh',MultiSkins=Texture'HPModels.Skins.skGeorgeWQuidTex0')
+    HouseDisplayInfo(0)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skGeorgeWQuidMesh',MultiSkins[0]=None)
 
-    HouseDisplayInfo(1)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skBeaterMesh',MultiSkins=Texture'HPModels.Skins.skBeater_RTex0')
+    HouseDisplayInfo(1)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skBeaterMesh',MultiSkins[0]=Texture'HPModels.Skins.skBeater_RTex0')
 
-    HouseDisplayInfo(2)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skBeaterMesh',MultiSkins=Texture'HPModels.Skins.skBeater_HTex0')
+    HouseDisplayInfo(2)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skBeaterMesh',MultiSkins[0]=Texture'HPModels.Skins.skBeater_HTex0')
 
-    HouseDisplayInfo(3)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skBeaterMesh',MultiSkins=Texture'HPModels.Skins.skBeater_STex0')
+    HouseDisplayInfo(3)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skBeaterMesh',MultiSkins[0]=Texture'HPModels.Skins.skBeater_STex0')
 
     IPSpeed=600.00
 }

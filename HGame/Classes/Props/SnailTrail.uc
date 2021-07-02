@@ -84,7 +84,7 @@ defaultproperties
 
     bUnlit=True
 
-    MultiSkins=FireTexture'HPParticle.hp_fx.Particles.Silverslime'
+    MultiSkins(0)=FireTexture'HPParticle.hp_fx.Particles.Silverslime'
 
     CollisionRadius=10.00
 

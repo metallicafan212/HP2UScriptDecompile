@@ -20,7 +20,7 @@ defaultproperties
 
     AmbientGlow=254
 
-    MultiSkins=WetTexture'HPParticle.hp_fx.General.SpongifyRugWet'
+    MultiSkins(0)=WetTexture'HPParticle.hp_fx.General.SpongifyRugWet'
 
     bCollideActors=False
 
@@ -29,5 +29,4 @@ defaultproperties
     bBlockActors=False
 
     bBlockPlayers=False
-
 }

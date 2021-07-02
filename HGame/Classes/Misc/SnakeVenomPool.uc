@@ -149,7 +149,7 @@ defaultproperties
 
     AmbientGlow=128
 
-    MultiSkins=WetTexture'HPParticle.hp_fx.General.Venomwet'
+    MultiSkins(0)=WetTexture'HPParticle.hp_fx.General.Venomwet'
 
     CollisionRadius=44.00
 

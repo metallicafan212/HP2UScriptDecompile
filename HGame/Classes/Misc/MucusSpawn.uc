@@ -22,7 +22,7 @@ defaultproperties
 
     AmbientGlow=75
 
-    MultiSkins=WetTexture'HPParticle.hp_fx.Particles.FlobberM'
+    MultiSkins(0)=WetTexture'HPParticle.hp_fx.Particles.FlobberM'
 
     CollisionRadius=10.00
 

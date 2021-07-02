@@ -73,13 +73,13 @@ state Fly
 
 defaultproperties
 {
-    HouseDisplayInfo(0)=(Sex=SX_Female,Mesh=SkeletalMesh'HPModels.skQuidPlayerFMesh',MultiSkins=Texture'HPModels.Skins.skQuidPlayerF_GTex0')
+    HouseDisplayInfo(0)=(Sex=SX_Female,Mesh=SkeletalMesh'HPModels.skQuidPlayerFMesh',MultiSkins[0]=None)
 
-    HouseDisplayInfo(1)=(Sex=SX_Female,Mesh=SkeletalMesh'HPModels.skQuidPlayerFMesh',MultiSkins=Texture'HPModels.Skins.skQuidPlayerF_RTex0')
+    HouseDisplayInfo(1)=(Sex=SX_Female,Mesh=SkeletalMesh'HPModels.skQuidPlayerFMesh',MultiSkins[0]=Texture'HPModels.Skins.skQuidPlayerF_RTex0')
 
-    HouseDisplayInfo(2)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skQuidPlayerMMesh',MultiSkins=Texture'HPModels.Skins.skQuidPlayerM_HTex0')
+    HouseDisplayInfo(2)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skQuidPlayerMMesh',MultiSkins[0]=Texture'HPModels.Skins.skQuidPlayerM_HTex0')
 
-    HouseDisplayInfo(3)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skDracoQuidMesh',MultiSkins=Texture'HPModels.Skins.skDracoQuidTex0')
+    HouseDisplayInfo(3)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skDracoQuidMesh',MultiSkins[0]=None)
 
     // EnemyHealthBar=4
 	EnemyHealthBar=EnemyBar_Seeker

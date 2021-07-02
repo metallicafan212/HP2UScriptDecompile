@@ -176,11 +176,11 @@ defaultproperties
     bSmallSpiders=True
 	
 	// Metallicafan212:	This doesn't seem to have decomped correctly, so I'm writing it by hand.....
-	theSpiders(0)=(attackSpeed=100,CanWander=True,drawingScale=1,forwardDistance=0,GroupName="",iRotation=0,jumpingDistanceFromHarry=250,leaveSmallDeadSpider=0.2,NextSpiderDelay=0.5,NormalSpeed=75,numSpellsLargeSpider=1,waitForTrigger=False)
-	theSpiders(1)=(attackSpeed=100,CanWander=True,drawingScale=1,forwardDistance=0,GroupName="",iRotation=0,jumpingDistanceFromHarry=250,leaveSmallDeadSpider=0.2,NextSpiderDelay=0.5,NormalSpeed=75,numSpellsLargeSpider=1,waitForTrigger=False)
-	theSpiders(2)=(attackSpeed=100,CanWander=True,drawingScale=1,forwardDistance=0,GroupName="",iRotation=0,jumpingDistanceFromHarry=250,leaveSmallDeadSpider=0.2,NextSpiderDelay=0.5,NormalSpeed=75,numSpellsLargeSpider=1,waitForTrigger=False)
-	theSpiders(3)=(attackSpeed=100,CanWander=True,drawingScale=1,forwardDistance=0,GroupName="",iRotation=0,jumpingDistanceFromHarry=250,leaveSmallDeadSpider=0.2,NextSpiderDelay=0.5,NormalSpeed=75,numSpellsLargeSpider=1,waitForTrigger=False)
-	theSpiders(4)=(attackSpeed=100,CanWander=True,drawingScale=1,forwardDistance=0,GroupName="",iRotation=0,jumpingDistanceFromHarry=250,leaveSmallDeadSpider=0.2,NextSpiderDelay=0.5,NormalSpeed=75,numSpellsLargeSpider=1,waitForTrigger=False)
+	theSpiders(0)=(NormalSpeed=75,attackSpeed=100,canWander=True,waitForTrigger=False,forwardDistance=0,GroupName="",iRotation=0,nextSpiderDelay=0.5,drawingScale=1,jumpingDistanceFromHarry=250,numSpellsLargeSpider=1,leaveSmallDeadSpider=0.2)
+	theSpiders(1)=(NormalSpeed=75,attackSpeed=100,canWander=True,waitForTrigger=False,forwardDistance=0,GroupName="",iRotation=0,nextSpiderDelay=0.5,drawingScale=1,jumpingDistanceFromHarry=250,numSpellsLargeSpider=1,leaveSmallDeadSpider=0.2)
+	theSpiders(2)=(NormalSpeed=75,attackSpeed=100,canWander=True,waitForTrigger=False,forwardDistance=0,GroupName="",iRotation=0,nextSpiderDelay=0.5,drawingScale=1,jumpingDistanceFromHarry=250,numSpellsLargeSpider=1,leaveSmallDeadSpider=0.2)
+	theSpiders(3)=(NormalSpeed=75,attackSpeed=100,canWander=True,waitForTrigger=False,forwardDistance=0,GroupName="",iRotation=0,nextSpiderDelay=0.5,drawingScale=1,jumpingDistanceFromHarry=250,numSpellsLargeSpider=1,leaveSmallDeadSpider=0.2)
+	theSpiders(4)=(NormalSpeed=75,attackSpeed=100,canWander=True,waitForTrigger=False,forwardDistance=0,GroupName="",iRotation=0,nextSpiderDelay=0.5,drawingScale=1,jumpingDistanceFromHarry=250,numSpellsLargeSpider=1,leaveSmallDeadSpider=0.2)
 
     //theSpiders(0)=(attackSpeed=75.00,iRotation=1120403456,drawingScale=0.00,DamageAmount=0.00,offsetFromSpawner=(X=0.00,Y=0.00,Z=0.00),,jumpingDistanceFromHarry=0.00,numSpells=-855638016),,numberOfSpiders=4082892,nextSpiderDelay=0.00),
 

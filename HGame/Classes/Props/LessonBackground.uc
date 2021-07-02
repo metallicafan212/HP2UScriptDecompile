@@ -17,7 +17,7 @@ defaultproperties
 
     Opacity=0.50
 
-    MultiSkins=WetTexture'HPParticle.hp_fx.General.LessonBackWet'
+    MultiSkins(0)=WetTexture'HPParticle.hp_fx.General.LessonBackWet'
 
     bCollideWorld=False
 

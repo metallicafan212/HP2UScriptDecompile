@@ -8,6 +8,6 @@ defaultproperties
 {
     Mesh=SkeletalMesh'HPModels.skhp2_genfemale2Mesh'
 
-    MultiSkins=Texture'HPModels.Skins.skhp2_genfemale1_1Tex0'
+    MultiSkins(0)=Texture'HPModels.Skins.skhp2_genfemale1_1Tex0'
 
 }

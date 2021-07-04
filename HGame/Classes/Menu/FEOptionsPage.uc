@@ -12,10 +12,10 @@ const fOBJECTIVE_W= 640;
 const fOBJECTIVE_X= 0;
 var HPMessageBox ConfirmQuit;
 var bool bSetupAfterPageSwitch;
-var UWindowButton HudButtonList[30];
-var UWindowButton QuitButton;
-var UWindowButton InputButton;
-var UWindowButton SoundVideoButton;
+var HGameButton HudButtonList[30];
+var HGameButton QuitButton;
+var HGameButton InputButton;
+var HGameButton SoundVideoButton;
 var UWindowLabelControl QuitLabel;
 var UWindowLabelControl InputLabel;
 var UWindowLabelControl SoundVideoLabel;
@@ -67,7 +67,7 @@ function Created ()
   textureLionClick = Texture(DynamicLoadObject("HP_Menu.Hud.MenuLionButtonClick",Class'Texture'));
   textureLionIdle = Texture(DynamicLoadObject("HP_Menu.Hud.MenuLionButtonIdle",Class'Texture'));
   textureLionRO = Texture(DynamicLoadObject("HP_Menu.Hud.MenuLionButtonRO",Class'Texture'));
-  InputButton = UWindowButton(CreateControl(Class'UWindowButton',182.0,310.0,60.0,60.0));
+  InputButton = HGameButton(CreateControl(Class'HGameButton',182.0,310.0,60.0,60.0));
   InputButton.UpTexture = textureLionIdle;
   InputButton.DownTexture = textureLionClick;
   InputButton.OverTexture = textureLionRO;
@@ -80,7 +80,7 @@ function Created ()
   InputLabel.Align = TA_Center; //from UWindowBase.uc in the proto -AdamJD 
   InputLabel.bShadowText = True;
   InputLabel.SetText(GetLocalFEString("Options_0040"));
-  SoundVideoButton = UWindowButton(CreateControl(Class'UWindowButton',252.0,120.0,136.0,106.0));
+  SoundVideoButton = HGameButton(CreateControl(Class'HGameButton',252.0,120.0,136.0,106.0));
   SoundVideoButton.UpTexture = textureLionIdle;
   SoundVideoButton.DownTexture = textureLionClick;
   SoundVideoButton.OverTexture = textureLionRO;
@@ -93,7 +93,7 @@ function Created ()
   SoundVideoLabel.Align = TA_Center; //from UWindowBase.uc in the proto -AdamJD 
   SoundVideoLabel.bShadowText = True;
   SoundVideoLabel.SetText(GetLocalFEString("Options_0041"));
-  QuitButton = UWindowButton(CreateControl(Class'UWindowButton',394.0,310.0,60.0,60.0));
+  QuitButton = HGameButton(CreateControl(Class'HGameButton',394.0,310.0,60.0,60.0));
   QuitButton.UpTexture = textureLionIdle;
   QuitButton.DownTexture = textureLionClick;
   QuitButton.OverTexture = textureLionRO;

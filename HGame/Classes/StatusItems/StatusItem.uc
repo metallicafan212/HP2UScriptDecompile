@@ -198,13 +198,19 @@ function Font GetCountFont (Canvas Canvas)
 	return fontRet;
 }
 
+function float GetHScale(Canvas Canvas)
+{
+	return (4.0 / 3.0) / (Canvas.SizeX / float(Canvas.SizeY));
+}
+
 function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 {
+	// Metallicafan212:	Scale it
 	Canvas.SetPos(nCurrX, nCurrY);
-	Canvas.DrawIcon(textureHudIcon,fScaleFactor);
+	Canvas.DrawIcon(textureHudIcon, fScaleFactor * GetHScale(Canvas));
 	if ( bDisplayCount )
 	{
-		DrawCount(Canvas,nCurrX,nCurrY,fScaleFactor);
+		DrawCount(Canvas, nCurrX, nCurrY, fScaleFactor * GetHScale(Canvas));
 	}
 }
 
@@ -244,7 +250,7 @@ function DrawSpecifiedCount (Canvas Canvas, int nCurrX, int nCurrY, float fScale
 
 function DrawCount (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 {
-	DrawSpecifiedCount(Canvas,nCurrX,nCurrY,fScaleFactor,nCount);
+	DrawSpecifiedCount(Canvas, nCurrX, nCurrY, fScaleFactor, nCount);
 }
 
 function int GetHudIconUSize ()

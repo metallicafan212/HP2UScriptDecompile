@@ -7,7 +7,7 @@ class HPConsole extends baseConsole;
 const BUTTONS_Y=193;
 const BUTTONS_X=185;
 var UWindowDialogClientWindow levSelect;
-var UWindowButton OKButton;
+var HGameButton OKButton;
 var bool bLevelSelect;
 var bool firstRun;
 var int CanvasSizeX;

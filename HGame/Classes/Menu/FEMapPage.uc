@@ -64,7 +64,7 @@ struct sHarryLocInfo
 
 struct sButtonInfo
 {
-  var UWindowButton MapButton;
+  var HGameButton MapButton;
   var int MapLink;
   var string ButtonText;
 };
@@ -75,7 +75,7 @@ var int TotalNumMapButtons;
 var int MapButtonIdx[4];
 var int NumMapButtons[4];
 var sHarryLocInfo HarryLocInfo[43];
-var UWindowButton HarryLocationButton;
+var HGameButton HarryLocationButton;
 var UWindowWrappedTextArea StatusBarTextWindow;
 var int nCurrPage;
 var int HarryLocX;
@@ -170,7 +170,7 @@ function Created ()
   AddMapButton(385,360,42,72,Texture'DiamondTexture',"14");
   AddMapButton(288,73,42,83,Texture'UpArrowTexture',"10","1");
   NumMapButtons[3] = TotalNumMapButtons - MapButtonIdx[3];
-  HarryLocationButton = UWindowButton(CreateWindow(Class'UWindowButton',0.0,0.0,64.0,64.0));
+  HarryLocationButton = HGameButton(CreateWindow(Class'HGameButton',0.0,0.0,64.0,64.0));
   HarryLocationButton.Register(self);
   HarryLocationButton.UpTexture = Texture'HarryLocationTexture';
   HarryLocationButton.DownTexture = Texture'HarryLocationTexture';
@@ -229,7 +229,7 @@ function Created ()
   AddMapButton(385,360,42,72,MapDiamondImage,"14");
   AddMapButton(288,73,42,83,MapUpArrowImage,"10","1");
   NumMapButtons[3] = TotalNumMapButtons - MapButtonIdx[3];
-  HarryLocationButton = UWindowButton(CreateWindow(Class'UWindowButton',0.0,0.0,64.0,64.0));
+  HarryLocationButton = HGameButton(CreateWindow(Class'HGameButton',0.0,0.0,64.0,64.0));
   HarryLocationButton.Register(self);
   HarryLocationButton.UpTexture = MapHarryLocationImage;
   HarryLocationButton.DownTexture = MapHarryLocationImage;
@@ -251,7 +251,7 @@ function AddMapButton (int X, int Y, int W, int H, Texture t, string ButtonText,
   {
     TotalNumMapButtons = 40 - 1;
   }
-  Buttons[TotalNumMapButtons].MapButton = UWindowButton(CreateWindow(Class'UWindowButton',X,Y,W,H));
+  Buttons[TotalNumMapButtons].MapButton = HGameButton(CreateWindow(Class'HGameButton',X,Y,W,H));
   Buttons[TotalNumMapButtons].MapButton.DownTexture = t;
   Buttons[TotalNumMapButtons].MapButton.OverTexture = t;
   Buttons[TotalNumMapButtons].MapButton.Register(self);

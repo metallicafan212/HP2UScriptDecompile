@@ -9,16 +9,16 @@ class FEQuidPage extends baseFEPage;
 
 var HPMessageBox ConfirmReplay;
 var harry PlayerHarry;
-var UWindowButton startGameButtons[6];
-var UWindowButton opponentCrests[6];
-var UWindowButton myCrests[6];
+var HGameButton startGameButtons[6];
+var HGameButton opponentCrests[6];
+var HGameButton myCrests[6];
 var UWindowLabelControl opponentScores[6];
 var UWindowLabelControl myScores[6];
 var UWindowLabelControl myPoints[6];
 var Texture lockedTexture;
 var UWindowLabelControl matchLabel[6];
-var UWindowButton NimbusButton;
-var UWindowButton QArmorButton;
+var HGameButton NimbusButton;
+var HGameButton QArmorButton;
 
 /*
 function PreSwitchPage ()
@@ -404,12 +404,12 @@ function Created ()
     matchLabel[I].TextColor.B = 215;
     matchLabel[I].Align = 2; 
     matchLabel[I].bShadowText = True;
-    myCrests[I] = UWindowButton(CreateControl(Class'UWindowButton',StartX + Col * gameSpaceX,StartY + Row * gameSpaceY + 5,64.0,64.0));
+    myCrests[I] = HGameButton(CreateControl(Class'HGameButton',StartX + Col * gameSpaceX,StartY + Row * gameSpaceY + 5,64.0,64.0));
     myCrests[I].Align = 2;
     myCrests[I].UpTexture = crestIcons[0];
     myCrests[I].DownTexture = crestIcons[0];
     myCrests[I].OverTexture = crestIcons[0];
-    opponentCrests[I] = UWindowButton(CreateControl(Class'UWindowButton',StartX + Col * gameSpaceX + 64,StartY + Row * gameSpaceY + 5,64.0,64.0));
+    opponentCrests[I] = HGameButton(CreateControl(Class'HGameButton',StartX + Col * gameSpaceX + 64,StartY + Row * gameSpaceY + 5,64.0,64.0));
     opponentCrests[I].Align = 2;
     opponentCrests[I].UpTexture = crestIcons[1 + (I % 3)];
 	opponentCrests[I].DownTexture = crestIcons[1 + (I % 3)];
@@ -454,13 +454,13 @@ function Created ()
   matchLabel[3].SetText(GetLocalFEString("Quidditch_0012"));
   matchLabel[4].SetText(GetLocalFEString("Quidditch_0013"));
   matchLabel[5].SetText(GetLocalFEString("Quidditch_0014"));
-  QArmorButton = UWindowButton(CreateControl(Class'UWindowButton',5.0,5.0,64.0,64.0));
+  QArmorButton = HGameButton(CreateControl(Class'HGameButton',5.0,5.0,64.0,64.0));
   QArmorButton.ToolTipString = GetLocalFEString("Main_Menu_0012");
   QArmorButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2QuidditchArmor",Class'Texture'));
   QArmorButton.OverTexture = QArmorButton.UpTexture;
   QArmorButton.DownTexture = QArmorButton.OverTexture;
   QArmorButton.DownSound = None;
-  NimbusButton = UWindowButton(CreateControl(Class'UWindowButton',570.0,5.0,64.0,64.0));
+  NimbusButton = HGameButton(CreateControl(Class'HGameButton',570.0,5.0,64.0,64.0));
   NimbusButton.ToolTipString = GetLocalFEString("Main_Menu_0013");
   NimbusButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2Nimbus2001",Class'Texture'));
   NimbusButton.OverTexture = NimbusButton.UpTexture;
@@ -519,19 +519,19 @@ function Created()
 		matchLabel[i].Align= TA_Center;
 		matchLabel[i].bShadowText= true;
 
-		myCrests[i] = UWindowButton(CreateControl(class'UWindowButton',startX + (col * gameSpaceX),startY + (row * gameSpaceY) + 5,64,64));
+		myCrests[i] = HGameButton(CreateControl(class'HGameButton',startX + (col * gameSpaceX),startY + (row * gameSpaceY) + 5,64,64));
 		myCrests[i].Align= TA_Center;
 		myCrests[i].UpTexture= crestIcons[0]; 
 		myCrests[i].DownTexture= crestIcons[0]; 
 		myCrests[i].OverTexture= crestIcons[0]; 
 
-		opponentCrests[i]= UWindowButton(CreateControl(class'UWindowButton',startX + (col * gameSpaceX) + 64,startY + (row * gameSpaceY) + 5,64,64));
+		opponentCrests[i]= HGameButton(CreateControl(class'HGameButton',startX + (col * gameSpaceX) + 64,startY + (row * gameSpaceY) + 5,64,64));
 		opponentCrests[i].Align=TA_Center;
 		opponentCrests[i].UpTexture= crestIcons[1+(i%3)]; 
 		opponentCrests[i].DownTexture= crestIcons[1+(i%3)]; 
 		opponentCrests[i].OverTexture= crestIcons[1+(i%3)]; 
 
-		startGameButtons[i]= UWindowButton(CreateControl(class'UWindowButton',startX + (col * gameSpaceX),startY + (row * gameSpaceY),gameBoxWidth,gameBoxHeight));
+		startGameButtons[i]= HGameButton(CreateControl(class'HGameButton',startX + (col * gameSpaceX),startY + (row * gameSpaceY),gameBoxWidth,gameBoxHeight));
 		startGameButtons[i].setFont(4);
 		startGameButtons[i].Align= TA_Center;
 		startGameButtons[i].bShadowText= true;
@@ -574,13 +574,13 @@ function Created()
     matchLabel[3].SetText(GetLocalFEString("Quidditch_0012"));
     matchLabel[4].SetText(GetLocalFEString("Quidditch_0013"));
     matchLabel[5].SetText(GetLocalFEString("Quidditch_0014"));
-    QArmorButton= UWindowButton(CreateControl(Class'UWindowButton',5.0,5.0,64.0,64.0));
+    QArmorButton= HGameButton(CreateControl(Class'HGameButton',5.0,5.0,64.0,64.0));
     QArmorButton.ToolTipString= GetLocalFEString("Main_Menu_0012");
     QArmorButton.UpTexture= Texture(DynamicLoadObject("HP2_Menu.Icons.HP2QuidditchArmor",Class'Texture'));
     QArmorButton.OverTexture= QArmorButton.UpTexture;
     QArmorButton.DownTexture= QArmorButton.OverTexture;
     QArmorButton.DownSound= None;
-    NimbusButton= UWindowButton(CreateControl(Class'UWindowButton',570.0,5.0,64.0,64.0));
+    NimbusButton= HGameButton(CreateControl(Class'HGameButton',570.0,5.0,64.0,64.0));
     NimbusButton.ToolTipString= GetLocalFEString("Main_Menu_0013");
     NimbusButton.UpTexture= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2Nimbus2001",Class'Texture'));
     NimbusButton.OverTexture= NimbusButton.UpTexture;

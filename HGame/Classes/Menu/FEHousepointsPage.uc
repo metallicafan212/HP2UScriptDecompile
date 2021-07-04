@@ -4,34 +4,34 @@
 
 class FEHousepointsPage extends baseFEPage;
 
-var UWindowButton GryffButton;
-var UWindowButton HuffButton;
-var UWindowButton RaveButton;
-var UWindowButton SlythButton;
+var HGameButton GryffButton;
+var HGameButton HuffButton;
+var HGameButton RaveButton;
+var HGameButton SlythButton;
 
 function Created ()
 {
   CreateBackPageButton();
   CreateTitleButton(GetLocalFEString("Report_Card_0004"));
-  GryffButton = UWindowButton(CreateControl(Class'UWindowButton',152.0,110.0,70.0,98.0));
+  GryffButton = HGameButton(CreateControl(Class'HGameButton',152.0,110.0,70.0,98.0));
   GryffButton.ToolTipString = GetLocalFEString("InGameMenu_0009");
   GryffButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrest",Class'Texture'));
   GryffButton.OverTexture = GryffButton.UpTexture;
   GryffButton.DownTexture = GryffButton.OverTexture;
   GryffButton.DownSound = None;
-  HuffButton = UWindowButton(CreateControl(Class'UWindowButton',152.0,252.0,70.0,98.0));
+  HuffButton = HGameButton(CreateControl(Class'HGameButton',152.0,252.0,70.0,98.0));
   HuffButton.ToolTipString = GetLocalFEString("InGameMenu_0010");
   HuffButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2HufflepuffCrest",Class'Texture'));
   HuffButton.OverTexture = HuffButton.UpTexture;
   HuffButton.DownTexture = HuffButton.OverTexture;
   HuffButton.DownSound = None;
-  RaveButton = UWindowButton(CreateControl(Class'UWindowButton',428.0,110.0,70.0,98.0));
+  RaveButton = HGameButton(CreateControl(Class'HGameButton',428.0,110.0,70.0,98.0));
   RaveButton.ToolTipString = GetLocalFEString("InGameMenu_0011");
   RaveButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2RavenclawCrest",Class'Texture'));
   RaveButton.OverTexture = RaveButton.UpTexture;
   RaveButton.DownTexture = RaveButton.OverTexture;
   RaveButton.DownSound = None;
-  SlythButton = UWindowButton(CreateControl(Class'UWindowButton',428.0,252.0,70.0,98.0));
+  SlythButton = HGameButton(CreateControl(Class'HGameButton',428.0,252.0,70.0,98.0));
   SlythButton.ToolTipString = GetLocalFEString("InGameMenu_0012");
   SlythButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SlytherinCrest",Class'Texture'));
   SlythButton.OverTexture = SlythButton.UpTexture;

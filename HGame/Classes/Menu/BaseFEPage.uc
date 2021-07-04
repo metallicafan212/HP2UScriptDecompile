@@ -6,14 +6,14 @@ class baseFEPage extends UWindowDialogClientWindow;
 
 struct CurrRolloverInfo
 {
-  var UWindowButton Button;
+  var HGameButton Button;
   var Texture textureRO;
   var bool bROIsWet;
   var Sound soundRO;
 };
 
 var baseFEBook book;
-var UWindowButton BackPageButton;
+var HGameButton BackPageButton;
 var UWindowLabelControl TitleButton;
 var Texture textureReturnNorm;
 var Texture textureReturnRO;
@@ -26,6 +26,53 @@ function string GetLocalFEString (string strId)
 
 function Paint (Canvas Canvas, float X, float Y)
 {
+}
+
+function float GetHeightScale()
+{
+	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
+}
+
+
+// Metallicafan212:	Override version of the UWindow function, so we can auto scale on Y
+function UWindowDialogControl CreateControl(class<UWindowDialogControl> ControlClass, float X, float Y, float W, float H, optional UWindowWindow OwnerWindow)
+{
+	local UWindowDialogControl C;
+	
+	// Metallicafan212:	These are in 4/3 units
+	//					We need to scale it to our corrected units
+	
+	// Metallicafan212:	Scale
+	//Y *= GetHeightScale();
+	//W *= GetHeightScale();
+	//H *= GetHeightScale();
+	//X *= GetHeightScale();
+	//X *= GetWidthScale();
+	//Y *= GetHeightScale();
+	//W *= GetHeightScale();
+	//H *= GetHeightScale();
+
+	C = UWindowDialogControl(CreateWindow(ControlClass, X, Y, W, H, OwnerWindow));
+	C.Register(Self);
+	C.Notify(C.DE_Created);
+
+	if(TabLast == None)
+	{
+		TabLast = C;
+		C.TabNext = C;
+		C.TabPrev = C;
+	}
+	else
+	{
+		C.TabNext = TabLast.TabNext;
+		C.TabPrev = TabLast;
+		TabLast.TabNext.TabPrev = C;
+		TabLast.TabNext = C;
+
+		TabLast = C;
+	}
+
+	return C;
 }
 
 function PreSwitchPage ()
@@ -61,7 +108,7 @@ function CreateBackPageButton (optional int nX, optional int nY)
 		textureReturnNorm = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuBackToGame",Class'Texture'));
 		textureReturnRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuBackToGameWet",Class'WetTexture'));
 	}
-	BackPageButton = UWindowButton(CreateControl(Class'UWindowButton', nX, nY,48.0,48.0));
+	BackPageButton = HGameButton(CreateControl(Class'HGameButton', nX, nY,48.0,48.0));
 	BackPageButton.UpTexture = textureReturnNorm;
 	BackPageButton.DownTexture = textureReturnNorm;
 	BackPageButton.OverTexture = textureReturnNorm;
@@ -147,6 +194,11 @@ function AfterPaint (Canvas Canvas, float X, float Y)
 	local float fOffsetX;
 	local float fOffsetY;
 	local int nSaveStyle;
+	
+	local float HScale;
+	
+	// Metallicafan212:	Scale rollover
+	HScale = GetHeightScale();
 
 	if ( BackPageButton != None )
 	{
@@ -156,14 +208,14 @@ function AfterPaint (Canvas Canvas, float X, float Y)
 			nSaveStyle 		= Canvas.Style;
 			Canvas.Style 	= 3;
 			Canvas.SetPos(CurrRollover.Button.WinLeft * fScaleFactor,CurrRollover.Button.WinTop * fScaleFactor);
-			Canvas.DrawIcon(CurrRollover.textureRO,fScaleFactor);
+			Canvas.DrawIcon(CurrRollover.textureRO, fScaleFactor * HScale);
 			Canvas.Style = nSaveStyle;
 		}
 	}
 	Super.AfterPaint(Canvas,X,Y);
 }
 
-function SetRollover (UWindowButton Button, Texture textureRO, Sound soundRO, bool bROIsWet)
+function SetRollover (HGameButton Button, Texture textureRO, Sound soundRO, bool bROIsWet)
 {
 	CurrRollover.Button = Button;
 	CurrRollover.textureRO = textureRO;

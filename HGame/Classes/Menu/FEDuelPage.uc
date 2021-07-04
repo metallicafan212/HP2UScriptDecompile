@@ -9,8 +9,8 @@ class FEDuelPage extends baseFEPage;
 
 var HPMessageBox ConfirmReplay;
 var harry PlayerHarry;
-var UWindowButton rankingButtons[10];
-var UWindowButton lockedButtons[10];
+var HGameButton rankingButtons[10];
+var HGameButton lockedButtons[10];
 var Texture lockedTexture;
 var string duelistNames[11];
 var string duelistNamesInEnglish[11];
@@ -36,7 +36,7 @@ function Created ()
   // if ( I < 10 )
   for(I = 0; I < 10; I++)
   {
-    rankingButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',WinWidth / 2 - 180 / 2,StartY + I * 28,180.0,26.0));
+    rankingButtons[I] = HGameButton(CreateControl(Class'HGameButton',WinWidth / 2 - 180 / 2,StartY + I * 28,180.0,26.0));
     rankingButtons[I].SetFont(4);
     rankingButtons[I].TextColor.R = 255;
     rankingButtons[I].TextColor.G = 255;

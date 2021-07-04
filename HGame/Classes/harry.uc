@@ -498,6 +498,9 @@ function PostBeginPlay()
 		break;
 	if( cam == none )
 		cam = spawn( class'BaseCam' );
+		
+	// Metallicafan212:	Correct the fov
+	Cam.SetFOV(90.0);
 
 	viewClass(class'BaseCam', true);
 

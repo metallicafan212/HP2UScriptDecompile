@@ -23,7 +23,7 @@ enum EKeyType {
 
 var bool bInitialized;
 var string OldSettings;
-var UWindowButton OptionsLabel;
+var HGameButton OptionsLabel;
 var localized string optionsText;
 var UWindowLabelControl InGame_Label;
 var localized string InGame_Text;
@@ -62,7 +62,7 @@ var localized string KeyboardText;
 var string RealKeyName[255];
 var localized string LocalizedKeyName[255];
 var localized string OrString;
-var UWindowButton SelectedButton;
+var HGameButton SelectedButton;
 var bool bPolling;
 var int Selection;
 var string AliasNames1[14];
@@ -1248,7 +1248,7 @@ function Notify (UWindowDialogControl C, byte E)
         return;
       }
     }
-    if ( UWindowButton(C) != None )
+    if ( HGameButton(C) != None )
     {
       PlayClick();
       // I = 0;
@@ -1260,7 +1260,7 @@ function Notify (UWindowDialogControl C, byte E)
           RemoveExistingBoundKeyMinIndex = 0;
           RemoveExistingBoundKeyMaxIndex = 11;
           SetKeyType = KT_Game;
-          SelectedButton = UWindowButton(C);
+          SelectedButton = HGameButton(C);
           Selection = I;
           Log("InputPage InGame_KeyButtons Selection" $ string(Selection) $ " is:" $ AliasNames1[Selection] $ "' clicked ...");
           bPolling = True;
@@ -1280,7 +1280,7 @@ function Notify (UWindowDialogControl C, byte E)
           RemoveExistingBoundKeyMinIndex = 11;
           RemoveExistingBoundKeyMaxIndex = 12;
           SetKeyType = KT_Quidditch;
-          SelectedButton = UWindowButton(C);
+          SelectedButton = HGameButton(C);
           Selection = 11 + I;
           Log("InputPage InQuidditch_KeyButtons Selection" $ string(Selection) $ " is:" $ AliasNames1[Selection] $ "' clicked ...");
           bPolling = True;
@@ -1300,7 +1300,7 @@ function Notify (UWindowDialogControl C, byte E)
           RemoveExistingBoundKeyMinIndex = 12;
           RemoveExistingBoundKeyMaxIndex = 13;
           SetKeyType = KT_WizardDuel;
-          SelectedButton = UWindowButton(C);
+          SelectedButton = HGameButton(C);
           Selection = 12 + I;
           Log("InputPage InWizardDuel_KeyButtons Selection" $ string(Selection) $ " is:" $ AliasNames1[Selection] $ "' clicked ...");
           bPolling = True;

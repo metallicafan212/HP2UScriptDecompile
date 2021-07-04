@@ -8,21 +8,21 @@ struct LevelListItem
 {
   var string LevelName;
   var string LevelUrl;
-  var UWindowButton Button;
+  var HGameButton Button;
 };
 
-var UWindowButton NewGameButton;
+var HGameButton NewGameButton;
 var UWindowSmallButton LoadGameButton;
-var UWindowButton OptionsButton;
-var UWindowButton CreditsButton;
-var UWindowButton ExitButton;
-var UWindowButton LangButton;
-var UWindowButton LogoWindow;
+var HGameButton OptionsButton;
+var HGameButton CreditsButton;
+var HGameButton ExitButton;
+var HGameButton LangButton;
+var HGameButton LogoWindow;
 var string LegalText;
 var HPMessageBox ConfirmExit;
 var UWindowSmallButton VersionButton;
 var bool bE3DemoMode;
-var UWindowButton E3DemoStartButton;
+var HGameButton E3DemoStartButton;
 var LevelListItem LevelList[30];
 var int FirstPreviewIndex;
 
@@ -88,7 +88,7 @@ function Created ()
     {
       if ( LevelList[I].LevelName != "" )
       {
-        LevelList[I].Button = UWindowButton(CreateControl(Class'UWindowButton',X,Y,W,H));
+        LevelList[I].Button = HGameButton(CreateControl(Class'HGameButton',X,Y,W,H));
         LevelList[I].Button.SetFont(4);
         LevelList[I].Button.TextColor.R = 250;
         LevelList[I].Button.TextColor.G = 250;
@@ -107,7 +107,7 @@ function Created ()
       // goto JL0121;
     }
     Y += H;
-    ExitButton = UWindowButton(CreateControl(Class'UWindowButton',X,Y,W,H));
+    ExitButton = HGameButton(CreateControl(Class'HGameButton',X,Y,W,H));
     ExitButton.SetFont(4);
     ExitButton.TextColor.R = 250;
     ExitButton.TextColor.G = 250;
@@ -128,7 +128,7 @@ function Created ()
     {
       if ( LevelList[I].LevelName != "" )
       {
-        LevelList[I].Button = UWindowButton(CreateControl(Class'UWindowButton',X,Y,W,H));
+        LevelList[I].Button = HGameButton(CreateControl(Class'HGameButton',X,Y,W,H));
         LevelList[I].Button.SetFont(4);
         LevelList[I].Button.TextColor.R = 96;
         LevelList[I].Button.TextColor.G = 96;
@@ -148,9 +148,9 @@ function Created ()
       // goto JL0443;
     }
   } else {
-    E3DemoStartButton = UWindowButton(CreateControl(Class'UWindowButton',WinWidth / 2 - 80,WinHeight - 100,160.0,60.0));
+    E3DemoStartButton = HGameButton(CreateControl(Class'HGameButton',WinWidth / 2 - 80,WinHeight - 100,160.0,60.0));
     E3DemoStartButton.ToolTipString = "Start Demo";
-    ExitButton = UWindowButton(CreateControl(Class'UWindowButton',WinWidth - 50,WinHeight - 60,50.0,30.0));
+    ExitButton = HGameButton(CreateControl(Class'HGameButton',WinWidth - 50,WinHeight - 60,50.0,30.0));
     ExitButton.SetFont(4);
     ExitButton.TextColor.R = 250;
     ExitButton.TextColor.G = 250;

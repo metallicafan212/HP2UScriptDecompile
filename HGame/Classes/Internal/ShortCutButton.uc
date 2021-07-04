@@ -2,7 +2,7 @@
 // ShortCutButton.
 //================================================================================
 
-class ShortCutButton extends UWindowButton;
+class ShortCutButton extends HGameButton;
 
 //texture imports -AdamJD
 #exec Texture Import File=Textures\Icons\ButtonUpTexture.PNG	GROUP=Icons	Name=ButtonUpTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914

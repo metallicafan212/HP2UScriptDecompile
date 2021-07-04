@@ -2,7 +2,7 @@
 // HPMenuRaisedButton.
 //================================================================================
 
-class HPMenuRaisedButton extends UWindowButton;
+class HPMenuRaisedButton extends HGameButton;
 
 var int textOffsetX;
 

@@ -91,7 +91,11 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 	local float fFillRatio;
 	local float fCurrBarBeforeEffect;
 	local float fCurrBarAfterEffect;
+	
+	// Metallicafan212:	Scale by the height as well
+	fScaleFactor *= GetHScale(Canvas);
 
+	
 	nX = 5 * fScaleFactor;
 	nY = 5 * fScaleFactor;
 	fSegmentHeight = 0.0;
@@ -109,9 +113,6 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 	// Metallicafan212:	This is a for loop
 	for(i = 0; i < nNumHealthIcons; i++)
 	{
-	//I = 0;
-	//if ( I < nNumHealthIcons )
-	//{
 		nY = 4 * fScaleFactor;
 		if ( nRemainingCount >= nUnitsPerIcon )
 		{
@@ -152,7 +153,6 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 			Canvas.DrawTile(textureHealthOrangeInside, textureHudIcon.USize * fScaleFactor, fSegmentHeight * fScaleFactor, 0.0, fSegmentStartAt, textureHudIcon.USize, fSegmentHeight);
 		}
 		nX += nActualIconW * fScaleFactor;
-		//goto JL00AB;
 	}
 	Canvas.DrawColor = colorSave;
 }

@@ -5,8 +5,8 @@
 class HPMessageBox extends UWindowDialogClientWindow;
 
 var string Result;
-var UWindowButton button1;
-var UWindowButton button2;
+var HGameButton button1;
+var HGameButton button2;
 var UWindowWrappedTextArea Message;
 var bool bClosing;
 var bool bClosedFromTick;
@@ -35,7 +35,7 @@ function Setup (string set_message, string set_button1, optional string set_butt
   FEROButtonTexture = Texture(DynamicLoadObject("HP2_Menu.icon.Hp2ConfirmYes_Highlight",Class'Texture'));
   if ( set_button2 != "" )
   {
-    button1 = UWindowButton(CreateControl(Class'UWindowButton',18.0,78.0,92.0,25.0));
+    button1 = HGameButton(CreateControl(Class'HGameButton',18.0,78.0,92.0,25.0));
     button1.UpTexture = FENormalButtonTexture;
     button1.DownTexture = FEROButtonTexture;
     button1.OverTexture = FEROButtonTexture;
@@ -47,7 +47,7 @@ function Setup (string set_message, string set_button1, optional string set_butt
     // button1.Align = 2;
 	button1.Align = TA_Center;
   }
-  button2 = UWindowButton(CreateControl(Class'UWindowButton',138.0,78.0,92.0,25.0));
+  button2 = HGameButton(CreateControl(Class'HGameButton',138.0,78.0,92.0,25.0));
   button2.UpTexture = FENormalButtonTexture;
   button2.DownTexture = FEROButtonTexture;
   button2.OverTexture = FEROButtonTexture;

@@ -206,7 +206,7 @@ function SetFOV (float fFOV, optional float fTime, optional bool bEaseTo)
 	local FOVController FOVControl;
 
 	FOVControl = Spawn(Class'FOVController');
-	FOVControl.Init(fFOV,fTime,bEaseTo);
+	FOVControl.Init(fFOV, fTime, bEaseTo);
 }
 
 function SetPosition (Vector Pos)

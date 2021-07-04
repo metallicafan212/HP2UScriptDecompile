@@ -8,8 +8,8 @@ const nSPONGIFY_CHALLENGE= 3;
 const nDIFFINDO_CHALLENGE= 2;
 const nSKURGE_CHALLENGE= 1;
 const nRICTUSEMPRA_CHALLENGE= 0;
-var UWindowButton NameButtons[4];
-var UWindowButton ScoreButtons[4];
+var HGameButton NameButtons[4];
+var HGameButton ScoreButtons[4];
 var UWindowLabelControl NoneWonLabel;
 
 
@@ -34,7 +34,7 @@ function Created ()
   // if ( I < 4 )
   for(I = 0; I < 4; I++)
   {
-    NameButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',100.0,nStartY + I * 26,200.0,20.0));
+    NameButtons[I] = HGameButton(CreateControl(Class'HGameButton',100.0,nStartY + I * 26,200.0,20.0));
     NameButtons[I].SetFont(4);
     NameButtons[I].TextColor.R = 255;
     NameButtons[I].TextColor.G = 255;
@@ -42,7 +42,7 @@ function Created ()
     // NameButtons[I].Align = 0;
 	NameButtons[I].Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
     NameButtons[I].bShadowText = True;
-    ScoreButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',440.0,nStartY + I * 26,200.0,20.0));
+    ScoreButtons[I] = HGameButton(CreateControl(Class'HGameButton',440.0,nStartY + I * 26,200.0,20.0));
     ScoreButtons[I].SetFont(4);
     ScoreButtons[I].TextColor.R = 255;
     ScoreButtons[I].TextColor.G = 255;

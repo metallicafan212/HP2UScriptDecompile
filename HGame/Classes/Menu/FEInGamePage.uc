@@ -6,21 +6,21 @@ class FEInGamePage extends baseFEPage;
 
 var HPMessageBox ConfirmQuit;
 var bool bSetupAfterPageSwitch;
-var UWindowButton BeansButton;
-var UWindowButton HousepointsButton;
-var UWindowButton SecretsButton;
-var UWindowButton PotionsButton;
-var UWindowButton FMucusButton;
-var UWindowButton WBarkButton;
-var UWindowButton ChallengesButton;
-var UWindowButton DuelButton;
-var UWindowButton FolioButton;
-var UWindowButton MapButton;
-var UWindowButton QuidditchButton;
-var UWindowButton QuitButton;
-var UWindowButton InputButton;
-var UWindowButton CreditsButton;
-var UWindowButton SoundVideoButton;
+var HGameButton BeansButton;
+var HGameButton HousepointsButton;
+var HGameButton SecretsButton;
+var HGameButton PotionsButton;
+var HGameButton FMucusButton;
+var HGameButton WBarkButton;
+var HGameButton ChallengesButton;
+var HGameButton DuelButton;
+var HGameButton FolioButton;
+var HGameButton MapButton;
+var HGameButton QuidditchButton;
+var HGameButton QuitButton;
+var HGameButton InputButton;
+var HGameButton CreditsButton;
+var HGameButton SoundVideoButton;
 var UWindowSmallButton VersionButton;
 var Texture textureChallengesRO;
 var Texture textureMapRO;
@@ -122,6 +122,7 @@ function PaintObjectiveText (Canvas Canvas, float fScaleFactor)
 	local Font fontText;
 	local Color colorText;
 	local harry PlayerHarry;
+	
 
 	PlayerHarry = harry(Root.Console.Viewport.Actor);
 	strObjectiveId = PlayerHarry.strObjectiveId;
@@ -141,172 +142,206 @@ function PaintObjectiveText (Canvas Canvas, float fScaleFactor)
 		colorText.G = 255;
 		colorText.B = 255;
 	
-		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,GetLocalFEString("InGameMenu_0027"), 14 * fScaleFactor, 400 * fScaleFactor, 16 * fScaleFactor, colorText,fontText);
-		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strObjective, 14 * fScaleFactor, 416 * fScaleFactor, 58 * fScaleFactor, colorText, fontText, 626.0 * fScaleFactor);
+		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,GetLocalFEString("InGameMenu_0027"), 14 * fScaleFactor, 400 * fScaleFactor * GetHeightScale(), 16 * fScaleFactor, colorText, fontText);
+		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strObjective, 14 * fScaleFactor, 416 * fScaleFactor * GetHeightScale(), 58 * fScaleFactor, colorText, fontText, 626.0 * fScaleFactor);
 	}
 }
 
 function PaintCountText (Canvas Canvas, float fScaleFactor)
 {
-  local StatusManager managerStatus;
-  local StatusItem si;
+	local StatusManager managerStatus;
+	local StatusItem si;
+	
+	local float hScale;
+	
+	// Metallicafan212:	Calc once
+	hScale = GetHeightScale();
 
-  managerStatus = harry(Root.Console.Viewport.Actor).managerStatus;
-  si = managerStatus.GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts');
-  si.DrawCount(Canvas,HousepointsButton.WinLeft * fScaleFactor, HousepointsButton.WinTop * fScaleFactor, fScaleFactor);
-  si = managerStatus.GetStatusItem(Class'StatusGroupJellybeans',Class'StatusItemJellybeans');
-  si.DrawCount(Canvas,BeansButton.WinLeft * fScaleFactor, BeansButton.WinTop * fScaleFactor, fScaleFactor);
-  si = managerStatus.GetStatusItem(Class'StatusGroupPotions',Class'StatusItemWiggenwell');
-  si.DrawCount(Canvas,PotionsButton.WinLeft * fScaleFactor, PotionsButton.WinTop * fScaleFactor, fScaleFactor);
-  si = managerStatus.GetStatusItem(Class'StatusGroupPotionIngr',Class'StatusItemFlobberMucus');
-  si.DrawCount(Canvas,FMucusButton.WinLeft * fScaleFactor, FMucusButton.WinTop * fScaleFactor, fScaleFactor);
-  si = managerStatus.GetStatusItem(Class'StatusGroupPotionIngr',Class'StatusItemWiggenBark');
-  si.DrawCount(Canvas,WBarkButton.WinLeft * fScaleFactor, WBarkButton.WinTop * fScaleFactor, fScaleFactor);
-  DrawCount(Canvas,fScaleFactor,SecretsButton.WinLeft, SecretsButton.WinTop, strSecretsCount);
+	managerStatus = harry(Root.Console.Viewport.Actor).managerStatus;
+	si = managerStatus.GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts');
+	si.DrawCount(Canvas,HousepointsButton.WinLeft * fScaleFactor, HousepointsButton.WinTop * fScaleFactor * hScale, fScaleFactor * hScale);
+	si = managerStatus.GetStatusItem(Class'StatusGroupJellybeans',Class'StatusItemJellybeans');
+	si.DrawCount(Canvas,BeansButton.WinLeft * fScaleFactor, BeansButton.WinTop * fScaleFactor * hScale, fScaleFactor * hScale);
+	si = managerStatus.GetStatusItem(Class'StatusGroupPotions',Class'StatusItemWiggenwell');
+	si.DrawCount(Canvas,PotionsButton.WinLeft * fScaleFactor, PotionsButton.WinTop * fScaleFactor * hScale, fScaleFactor * hScale);
+	si = managerStatus.GetStatusItem(Class'StatusGroupPotionIngr',Class'StatusItemFlobberMucus');
+	si.DrawCount(Canvas,FMucusButton.WinLeft * fScaleFactor, FMucusButton.WinTop * fScaleFactor * hScale, fScaleFactor * hScale);
+	si = managerStatus.GetStatusItem(Class'StatusGroupPotionIngr',Class'StatusItemWiggenBark');
+	si.DrawCount(Canvas,WBarkButton.WinLeft * fScaleFactor, WBarkButton.WinTop * fScaleFactor * hScale, fScaleFactor * hScale);
+	DrawCount(Canvas, fScaleFactor, SecretsButton.WinLeft, SecretsButton.WinTop, strSecretsCount);
 }
 
 function DrawCount (Canvas Canvas, float fScaleFactor, int nButtonLeft, int nButtonTop, string strCount)
 {
-  local Font fontSave;
-  local StatusManager managerStatus;
-  local StatusItem si;
-  local float fXTextLen;
-  local float fYTextLen;
+	local Font fontSave;
+	local StatusManager managerStatus;
+	local StatusItem si;
+	local float fXTextLen;
+	local float fYTextLen;
+	
+	local float hScale;
+	
+	// Metallicafan212:	Calc once
+	hScale = GetHeightScale();
 
-  fontSave = Canvas.Font;
-  managerStatus = harry(Root.Console.Viewport.Actor).managerStatus;
-  si = managerStatus.GetStatusItem(Class'StatusGroupJellybeans',Class'StatusItemJellybeans');
-  Canvas.DrawColor = si.GetCountColor();
-  Canvas.Font = si.GetCountFont(Canvas);
-  Canvas.TextSize(strCount,fXTextLen,fYTextLen);
-  Canvas.SetPos((nButtonLeft + 50) * fScaleFactor - fXTextLen / 2, (nButtonTop + 58) * fScaleFactor - fYTextLen / 2);
-  Canvas.DrawShadowText(strCount,si.GetCountColor(),si.GetCountColor(True));
-  Canvas.Font = fontSave;
+	fontSave = Canvas.Font;
+	managerStatus = harry(Root.Console.Viewport.Actor).managerStatus;
+	si = managerStatus.GetStatusItem(Class'StatusGroupJellybeans',Class'StatusItemJellybeans');
+	Canvas.DrawColor = si.GetCountColor();
+	Canvas.Font = si.GetCountFont(Canvas);
+	Canvas.TextSize(strCount,fXTextLen,fYTextLen);
+	Canvas.SetPos((nButtonLeft + 50) * fScaleFactor - fXTextLen / 2, (nButtonTop + 58) * (fScaleFactor * hScale) - fYTextLen / 2);
+	Canvas.DrawShadowText(strCount, si.GetCountColor(), si.GetCountColor(True));
+	Canvas.Font = fontSave;
 }
 
 function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
 {
-  local float fScaleFactor;
+	local float fScaleFactor;
 
-  fScaleFactor = nCanvasSizeX / WinWidth;
-  //return nCanvasSizeY - 88 * fScaleFactor = return;
-  return (nCanvasSizeY - 88 * fScaleFactor);
+	fScaleFactor = nCanvasSizeX / WinWidth;
+	//return nCanvasSizeY - 88 * fScaleFactor = return;
+	return (nCanvasSizeY - 88 * fScaleFactor);
 }
 
 function Created ()
 {
-  PotionsButton = UWindowButton(CreateControl(Class'UWindowButton',30.0,16.0,64.0,64.0));
-  PotionsButton.ToolTipString = GetLocalFEString("InGameMenu_0020");
-  PotionsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWPotion",Class'Texture'));
-  PotionsButton.OverTexture = PotionsButton.UpTexture;
-  PotionsButton.DownTexture = PotionsButton.OverTexture;
-  PotionsButton.DownSound = None;
-  FMucusButton = UWindowButton(CreateControl(Class'UWindowButton',110.0,16.0,64.0,64.0));
-  FMucusButton.ToolTipString = GetLocalFEString("InGameMenu_0008");
-  FMucusButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuFMucus",Class'Texture'));
-  FMucusButton.OverTexture = FMucusButton.UpTexture;
-  FMucusButton.DownTexture = FMucusButton.OverTexture;
-  FMucusButton.DownSound = None;
-  WBarkButton = UWindowButton(CreateControl(Class'UWindowButton',192.0,16.0,64.0,64.0));
-  WBarkButton.ToolTipString = GetLocalFEString("InGameMenu_0019");
-  WBarkButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWBark",Class'Texture'));
-  WBarkButton.OverTexture = WBarkButton.UpTexture;
-  WBarkButton.DownTexture = WBarkButton.OverTexture;
-  WBarkButton.DownSound = None;
-  BeansButton = UWindowButton(CreateControl(Class'UWindowButton',416.0,16.0,64.0,64.0));
-  BeansButton.ToolTipString = GetLocalFEString("InGameMenu_0013");
-  BeansButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuJellyBeans",Class'Texture'));
-  BeansButton.OverTexture = BeansButton.UpTexture;
-  BeansButton.DownTexture = BeansButton.OverTexture;
-  BeansButton.DownSound = None;
-  SecretsButton = UWindowButton(CreateControl(Class'UWindowButton',532.0,16.0,64.0,64.0));
-  SecretsButton.ToolTipString = GetLocalFEString("Report_Card_0006");
-  SecretsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuSecrets",Class'Texture'));
-  SecretsButton.OverTexture = SecretsButton.UpTexture;
-  SecretsButton.DownTexture = SecretsButton.OverTexture;
-  SecretsButton.DownSound = None;
-  HousepointsButton = UWindowButton(CreateControl(Class'UWindowButton',278.0,5.0,70.0,98.0));
-  HousepointsButton.ToolTipString = GetLocalFEString("InGameMenu_0046");
-  HousepointsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrest",Class'Texture'));
-  HousepointsButton.OverTexture = HousepointsButton.UpTexture;
-  HousepointsButton.DownTexture = HousepointsButton.OverTexture;
-  HousepointsButton.DownSound = soundTopClick;
-  ChallengesButton = UWindowButton(CreateControl(Class'UWindowButton',146.0,114.0,64.0,64.0));
-  ChallengesButton.ToolTipString = GetLocalFEString("InGameMenu_0044");
-  ChallengesButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuChallenges",Class'Texture'));
-  ChallengesButton.OverTexture = ChallengesButton.UpTexture;
-  ChallengesButton.DownTexture = ChallengesButton.OverTexture;
-  ChallengesButton.DownSound = soundMiddleClick;
-  DuelButton = UWindowButton(CreateControl(Class'UWindowButton',146.0,248.0,64.0,64.0));
-  DuelButton.ToolTipString = GetLocalFEString("InGameMenu_0043");
-  DuelButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWizardDuel",Class'Texture'));
-  DuelButton.OverTexture = DuelButton.UpTexture;
-  DuelButton.DownTexture = DuelButton.OverTexture;
-  DuelButton.DownSound = soundMiddleClick;
-  FolioButton = UWindowButton(CreateControl(Class'UWindowButton',252.0,134.0,136.0,168.0));
-  FolioButton.ToolTipString = GetLocalFEString("InGameMenu_0004");
-  FolioButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuFolioButtonIdle",Class'Texture'));
-  FolioButton.OverTexture = FolioButton.UpTexture;
-  FolioButton.DownTexture = FolioButton.OverTexture;
-  FolioButton.DownSound = soundFolioClick;
-  MapButton = UWindowButton(CreateControl(Class'UWindowButton',438.0,114.0,64.0,64.0));
-  MapButton.ToolTipString = GetLocalFEString("InGameMenu_0045");
-  MapButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2Maps",Class'Texture'));
-  MapButton.OverTexture = MapButton.UpTexture;
-  MapButton.DownTexture = MapButton.OverTexture;
-  MapButton.DownSound = soundMiddleClick;
-  QuidditchButton = UWindowButton(CreateControl(Class'UWindowButton',438.0,248.0,64.0,64.0));
-  QuidditchButton.ToolTipString = GetLocalFEString("InGameMenu_0042");
-  QuidditchButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuidditch",Class'Texture'));
-  QuidditchButton.OverTexture = QuidditchButton.UpTexture;
-  QuidditchButton.DownTexture = QuidditchButton.OverTexture;
-  QuidditchButton.DownSound = soundMiddleClick;
-  QuitButton = UWindowButton(CreateControl(Class'UWindowButton',12.0,338.0,48.0,48.0));
-  QuitButton.ToolTipString = GetLocalFEString("InGameMenu_0002");
-  QuitButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuit",Class'Texture'));
-  QuitButton.OverTexture = QuitButton.UpTexture;
-  QuitButton.DownTexture = QuitButton.OverTexture;
-  QuitButton.DownSound = soundBottomClick;
-  InputButton = UWindowButton(CreateControl(Class'UWindowButton',72.0,338.0,48.0,48.0));
-  InputButton.ToolTipString = GetLocalFEString("InGameMenu_0047");
-  InputButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2Options",Class'Texture'));
-  InputButton.OverTexture = InputButton.UpTexture;
-  InputButton.DownTexture = InputButton.OverTexture;
-  InputButton.DownSound = soundBottomClick;
-  SoundVideoButton = UWindowButton(CreateControl(Class'UWindowButton',520.0,338.0,48.0,48.0));
-  SoundVideoButton.ToolTipString = GetLocalFEString("InGameMenu_0048");
-  SoundVideoButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuSoundOptions",Class'Texture'));
-  SoundVideoButton.OverTexture = SoundVideoButton.UpTexture;
-  SoundVideoButton.DownTexture = SoundVideoButton.OverTexture;
-  SoundVideoButton.DownSound = soundBottomClick;
-  textureChallengesRO = Texture(DynamicLoadObject("HP2_Menu.HP2ChallengesBarWet",Class'WetTexture'));
-  textureMapRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MapsWet",Class'WetTexture'));
-  textureDuelRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWizardDuelWet",Class'WetTexture'));
-  textureQuidRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuidditchWet",Class'WetTexture'));
-  textureQuitRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuitWet",Class'WetTexture'));
-  textureInputRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2OptionsWet",Class'WetTexture'));
-  textureSoundRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuSoundOptionsWet",Class'WetTexture'));
-  textureFolioRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuFolioButtonIdle",Class'Texture'));
-  textureGryffRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrestWet",Class'WetTexture'));
-  CreateBackPageButton(578,338);
-  if ( HPConsole(Root.Console).bDebugMode )
-  {
-    CreditsButton = UWindowButton(CreateControl(Class'UWindowButton',135.0,338.0,48.0,48.0));
-    CreditsButton.ToolTipString = "Credits";
-    CreditsButton.UpTexture = InputButton.UpTexture;
-    CreditsButton.OverTexture = CreditsButton.UpTexture;
-    CreditsButton.DownTexture = CreditsButton.DownTexture;
-    textureCreditsRO = textureInputRO;
-    SoundVideoButton.DownSound = soundBottomClick;
-  }
-  VersionButton = UWindowSmallButton(CreateControl(Class'UWindowSmallButton',550.0,462.0,84.0,25.0));
-  VersionButton.SetFont(0);
-  VersionButton.TextColor.R = 250;
-  VersionButton.TextColor.G = 250;
-  VersionButton.TextColor.B = 250;
-  VersionButton.Align = TA_Right;
-  VersionButton.SetText(Class'Version'.Default.Version);
-  Super.Created();
+	// Metallicafan212:	Move the buttons
+	//local float HScale;
+	
+	//HScale = GetHeightScale();
+	
+	// Metallicafan212:	Weld button
+	PotionsButton = HGameButton(CreateControl(Class'HGameButton', 30.0, 16.0, 64.0, 64.0));
+	PotionsButton.ToolTipString = GetLocalFEString("InGameMenu_0020");
+	PotionsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWPotion",Class'Texture'));
+	PotionsButton.OverTexture = PotionsButton.UpTexture;
+	PotionsButton.DownTexture = PotionsButton.OverTexture;
+	PotionsButton.DownSound = None;
+  
+	FMucusButton = HGameButton(CreateControl(Class'HGameButton',110.0,16.0,64.0,64.0));
+	FMucusButton.ToolTipString = GetLocalFEString("InGameMenu_0008");
+	FMucusButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuFMucus",Class'Texture'));
+	FMucusButton.OverTexture = FMucusButton.UpTexture;
+	FMucusButton.DownTexture = FMucusButton.OverTexture;
+	FMucusButton.DownSound = None;
+	
+	WBarkButton = HGameButton(CreateControl(Class'HGameButton',192.0,16.0,64.0,64.0));
+	WBarkButton.ToolTipString = GetLocalFEString("InGameMenu_0019");
+	WBarkButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWBark",Class'Texture'));
+	WBarkButton.OverTexture = WBarkButton.UpTexture;
+	WBarkButton.DownTexture = WBarkButton.OverTexture;
+	WBarkButton.DownSound = None;
+  
+	BeansButton = HGameButton(CreateControl(Class'HGameButton',416.0,16.0,64.0,64.0));
+	BeansButton.ToolTipString = GetLocalFEString("InGameMenu_0013");
+	BeansButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuJellyBeans",Class'Texture'));
+	BeansButton.OverTexture = BeansButton.UpTexture;
+	BeansButton.DownTexture = BeansButton.OverTexture;
+	BeansButton.DownSound = None;
+	
+	SecretsButton = HGameButton(CreateControl(Class'HGameButton',532.0,16.0,64.0,64.0));
+	SecretsButton.ToolTipString = GetLocalFEString("Report_Card_0006");
+	SecretsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuSecrets",Class'Texture'));
+	SecretsButton.OverTexture = SecretsButton.UpTexture;
+	SecretsButton.DownTexture = SecretsButton.OverTexture;
+	SecretsButton.DownSound = None;
+  
+	HousepointsButton = HGameButton(CreateControl(Class'HGameButton',278.0,5.0,70.0,98.0));
+	HousepointsButton.ToolTipString = GetLocalFEString("InGameMenu_0046");
+	HousepointsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrest",Class'Texture'));
+	HousepointsButton.OverTexture = HousepointsButton.UpTexture;
+	HousepointsButton.DownTexture = HousepointsButton.OverTexture;
+	HousepointsButton.DownSound = soundTopClick;
+	
+	ChallengesButton = HGameButton(CreateControl(Class'HGameButton',146.0,114.0,64.0,64.0));
+	ChallengesButton.ToolTipString = GetLocalFEString("InGameMenu_0044");
+	ChallengesButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuChallenges",Class'Texture'));
+	ChallengesButton.OverTexture = ChallengesButton.UpTexture;
+	ChallengesButton.DownTexture = ChallengesButton.OverTexture;
+	ChallengesButton.DownSound = soundMiddleClick;
+	
+	DuelButton = HGameButton(CreateControl(Class'HGameButton',146.0,248.0,64.0,64.0));
+	DuelButton.ToolTipString = GetLocalFEString("InGameMenu_0043");
+	DuelButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWizardDuel",Class'Texture'));
+	DuelButton.OverTexture = DuelButton.UpTexture;
+	DuelButton.DownTexture = DuelButton.OverTexture;
+	DuelButton.DownSound = soundMiddleClick;
+  
+	FolioButton = HGameButton(CreateControl(Class'HGameButton',252.0,134.0,136.0,168.0));
+	FolioButton.ToolTipString = GetLocalFEString("InGameMenu_0004");
+	FolioButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuFolioButtonIdle",Class'Texture'));
+	FolioButton.OverTexture = FolioButton.UpTexture;
+	FolioButton.DownTexture = FolioButton.OverTexture;
+	FolioButton.DownSound = soundFolioClick;
+  
+	MapButton = HGameButton(CreateControl(Class'HGameButton',438.0,114.0,64.0,64.0));
+	MapButton.ToolTipString = GetLocalFEString("InGameMenu_0045");
+	MapButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2Maps",Class'Texture'));
+	MapButton.OverTexture = MapButton.UpTexture;
+	MapButton.DownTexture = MapButton.OverTexture;
+	MapButton.DownSound = soundMiddleClick;
+  
+	QuidditchButton = HGameButton(CreateControl(Class'HGameButton',438.0,248.0,64.0,64.0));
+	QuidditchButton.ToolTipString = GetLocalFEString("InGameMenu_0042");
+	QuidditchButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuidditch",Class'Texture'));
+	QuidditchButton.OverTexture = QuidditchButton.UpTexture;
+	QuidditchButton.DownTexture = QuidditchButton.OverTexture;
+	QuidditchButton.DownSound = soundMiddleClick;
+  
+	QuitButton = HGameButton(CreateControl(Class'HGameButton',12.0,338.0,48.0,48.0));
+	QuitButton.ToolTipString = GetLocalFEString("InGameMenu_0002");
+	QuitButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuit",Class'Texture'));
+	QuitButton.OverTexture = QuitButton.UpTexture;
+	QuitButton.DownTexture = QuitButton.OverTexture;
+	QuitButton.DownSound = soundBottomClick;
+  
+	InputButton = HGameButton(CreateControl(Class'HGameButton',72.0,338.0,48.0,48.0));
+	InputButton.ToolTipString = GetLocalFEString("InGameMenu_0047");
+	InputButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2Options",Class'Texture'));
+	InputButton.OverTexture = InputButton.UpTexture;
+	InputButton.DownTexture = InputButton.OverTexture;
+	InputButton.DownSound = soundBottomClick;
+  
+	SoundVideoButton = HGameButton(CreateControl(Class'HGameButton',520.0,338.0,48.0,48.0));
+	SoundVideoButton.ToolTipString = GetLocalFEString("InGameMenu_0048");
+	SoundVideoButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuSoundOptions",Class'Texture'));
+	SoundVideoButton.OverTexture = SoundVideoButton.UpTexture;
+	SoundVideoButton.DownTexture = SoundVideoButton.OverTexture;
+	SoundVideoButton.DownSound = soundBottomClick;
+  
+	textureChallengesRO = Texture(DynamicLoadObject("HP2_Menu.HP2ChallengesBarWet",Class'WetTexture'));
+	textureMapRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MapsWet",Class'WetTexture'));
+	textureDuelRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWizardDuelWet",Class'WetTexture'));
+	textureQuidRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuidditchWet",Class'WetTexture'));
+	textureQuitRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuitWet",Class'WetTexture'));
+	textureInputRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2OptionsWet",Class'WetTexture'));
+	textureSoundRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuSoundOptionsWet",Class'WetTexture'));
+	textureFolioRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuFolioButtonIdle",Class'Texture'));
+	textureGryffRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrestWet",Class'WetTexture'));
+  
+	CreateBackPageButton(578,338);
+	
+	if ( HPConsole(Root.Console).bDebugMode )
+	{
+		CreditsButton = HGameButton(CreateControl(Class'HGameButton',135.0,338.0,48.0,48.0));
+		CreditsButton.ToolTipString = "Credits";
+		CreditsButton.UpTexture = InputButton.UpTexture;
+		CreditsButton.OverTexture = CreditsButton.UpTexture;
+		CreditsButton.DownTexture = CreditsButton.DownTexture;
+		textureCreditsRO = textureInputRO;
+		SoundVideoButton.DownSound = soundBottomClick;
+	}
+  
+	VersionButton = UWindowSmallButton(CreateControl(Class'UWindowSmallButton',550.0,462.0,84.0,25.0));
+	VersionButton.SetFont(0);
+	VersionButton.TextColor.R = 250;
+	VersionButton.TextColor.G = 250;
+	VersionButton.TextColor.B = 250;
+	VersionButton.Align = TA_Right;
+	VersionButton.SetText(Class'Version'.Default.Version);
+	
+	Super.Created();
 }
 
 function WindowDone (UWindowWindow W)

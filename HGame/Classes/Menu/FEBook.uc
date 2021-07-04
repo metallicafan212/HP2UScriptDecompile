@@ -86,101 +86,114 @@ function LoadSelectedSlot ()
 
 function ToolTip (string strTip)
 {
-  StatusBarTextWindow.Clear();
-  StatusBarTextWindow.AddText(strTip);
+	StatusBarTextWindow.Clear();
+	StatusBarTextWindow.AddText(strTip);
 }
 
 function ResolutionChanged (float W, float H)
 {
-  Super.ResolutionChanged(W,H);
-  bResolutionChanged = True;
+	Super.ResolutionChanged(W,H);
+	bResolutionChanged = True;
 }
 
 function ChangePage (baseFEPage Page)
 {
-  Log("ChangePage" @ string(Page));
-  if ( curPage != Page )
-  {
-    prevPage = curPage;
-    if ( curPage != None )
-    {
-      curPage.HideWindow();
-    }
-    curPage = Page;
-    if ( curPage != None )
-    {
-      curPage.PreSwitchPage();
-      if ( curPage != MainPage )
-      {
-        curPage.ShowWindow();
-      }
-    }
-  }
-  bShowBackground = False;
-  switch (curPage)
-  {
-    case MainPage:
-    bGamePlaying = False;
-    break;
-    case InputPage:
-    bShowBackground = True;
-    curBackground = Back1Background;
-    break;
-    case SoundVideoPage:
-    bShowBackground = True;
-    curBackground = Back1Background;
-    break;
-    case LangPage:
-    break;
-    case InGamePage:
-    bShowBackground = True;
-    curBackground = InGameBackground;
-    break;
-    case QuidPage:
-    bShowBackground = True;
-    curBackground = Back1Background;
-    break;
-    case DuelPage:
-    bShowBackground = True;
-    curBackground = Back1Background;
-    break;
-    case HousepointsPage:
-    bShowBackground = True;
-    curBackground = Back1Background;
-    break;
-    case ChallengesPage:
-    bShowBackground = True;
-    curBackground = Back1Background;
-    break;
-    case FolioPage:
-    bShowBackground = True;
-    curBackground = Back1Background;
-    break;
-    case CreditsPage:
-    prevPage = InGamePage;
-    break;
-    case MapPage:
-    break;
-    case None:
-    prevPage = None;
-    break;
-    default:
-    Log("UnknownPage in FEBook: " $ string(Page));
-    break;
-  }
-  if ( curPage != None )
-  {
-    StatusBarTextWindow.WinTop = curPage.GetStatusY();
-  }
+	Log("ChangePage" @ string(Page));
+	if ( curPage != Page )
+	{
+		prevPage = curPage;
+		if ( curPage != None )
+		{
+			curPage.HideWindow();
+		}
+		curPage = Page;
+		if ( curPage != None )
+		{
+		curPage.PreSwitchPage();
+		if ( curPage != MainPage )
+		{
+			curPage.ShowWindow();
+		}
+		}
+	}
+	bShowBackground = False;
+	switch (curPage)
+	{
+		case MainPage:
+			bGamePlaying = False;
+			break;
+			
+		case InputPage:
+			bShowBackground = True;
+			curBackground = Back1Background;
+			break;
+    
+		case SoundVideoPage:
+			bShowBackground = True;
+			curBackground = Back1Background;
+			break;
+    
+		case LangPage:
+			break;
+		
+		case InGamePage:
+			bShowBackground = True;
+			curBackground = InGameBackground;
+			break;
+    
+		case QuidPage:
+			bShowBackground = True;
+			curBackground = Back1Background;
+			break;
+    
+		case DuelPage:
+			bShowBackground = True;
+			curBackground = Back1Background;
+			break;
+    
+		case HousepointsPage:
+			bShowBackground = True;
+			curBackground = Back1Background;
+			break;
+    
+		case ChallengesPage:
+			bShowBackground = True;
+			curBackground = Back1Background;
+			break;
+		
+		case FolioPage:
+			bShowBackground = True;
+			curBackground = Back1Background;
+			break;
+    
+		case CreditsPage:
+			prevPage = InGamePage;
+			break;
+    
+		case MapPage:
+			break;
+		
+		case None:
+			prevPage = None;
+			break;
+		
+		default:
+			Log("UnknownPage in FEBook: " $ string(Page));
+			break;
+	}
+	if ( curPage != None )
+	{
+		StatusBarTextWindow.WinTop = curPage.GetStatusY();
+	}
 }
 
 function ChangePagePrevious ()
 {
-  if ( (prevPage != None) && (prevPage != curPage) )
-  {
-    ChangePage(prevPage);
-    prevPage = None;
-  }
+	if ( (prevPage != None) && (prevPage != curPage) )
+	{
+		ChangePage(prevPage);
+		prevPage = None;
+	}
 }
 
 function ChangePageNamed (string Name)
@@ -266,181 +279,207 @@ event Tick (float Delta)
 
 function Created ()
 {
-  local int I;
-  local Texture tempTexture;
-  local LevelInfo lev;
+	local int I;
+	local Texture tempTexture;
+	local LevelInfo lev;
 
-  Super.Created();
-  bNewGame = False;
-  DismissButton = UWindowSmallButton(CreateControl(Class'UWindowSmallButton',WinWidth - 10,0.0,10.0,10.0));
-  DismissButton.SetFont(4);
-  StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea',0.0,WinHeight - 26,500.0,26.0));
-  StatusBarTextWindow.Clear();
-  StatusBarTextWindow.AddText("");
-  StatusBarTextWindow.Font = 4;
-  bShowBackground = True;
-  InGamePage = FEInGamePage(CreateWindow(Class'FEInGamePage',0.0,0.0,640.0,480.0));
-  InGamePage.book = self;
-  InGamePage.HideWindow();
-  FolioPage = baseFEPage(CreateWindow(Class'FEFolioPage',0.0,0.0,640.0,480.0));
-  FolioPage.book = self;
-  FolioPage.HideWindow();
-  InputPage = baseFEPage(CreateWindow(Class'FEInputPage',0.0,0.0,640.0,480.0));
-  InputPage.book = self;
-  InputPage.HideWindow();
-  SoundVideoPage = baseFEPage(CreateWindow(Class'FESoundVideoPage',0.0,0.0,640.0,480.0));
-  SoundVideoPage.book = self;
-  SoundVideoPage.HideWindow();
-  QuidPage = baseFEPage(CreateWindow(Class'FEQuidPage',0.0,0.0,640.0,480.0));
-  QuidPage.book = self;
-  QuidPage.HideWindow();
-  DuelPage = baseFEPage(CreateWindow(Class'FEDuelPage',0.0,0.0,640.0,480.0));
-  DuelPage.book = self;
-  DuelPage.HideWindow();
-  HousepointsPage = baseFEPage(CreateWindow(Class'FEHousepointsPage',0.0,0.0,640.0,480.0));
-  HousepointsPage.book = self;
-  HousepointsPage.HideWindow();
-  ChallengesPage = baseFEPage(CreateWindow(Class'FEChallengesPage',0.0,0.0,640.0,480.0));
-  ChallengesPage.book = self;
-  ChallengesPage.HideWindow();
-  MainPage = baseFEPage(CreateWindow(Class'FEMainPage',0.0,0.0,640.0,480.0));
-  MainPage.book = self;
-  OpenBook("MAIN");
-  MapPage = baseFEPage(CreateWindow(Class'FEMapPage',0.0,0.0,640.0,480.0));
-  MapPage.book = self;
-  MapPage.HideWindow();
-  CreditsPage = baseFEPage(CreateWindow(Class'FECreditsPage',0.0,0.0,640.0,480.0));
-  CreditsPage.book = self;
-  CreditsPage.HideWindow();
-  LangPage = baseFEPage(CreateWindow(Class'FESoundBrowser',0.0,0.0,640.0,480.0));
-  LangPage.book = self;
-  LangPage.HideWindow();
-  lev = GetLevel();
-  if ( InStr(Caps(lev.GetLocalURL()),"AUTOPLAY") >= 0 )
-  {
-    Log("autoplay");
-    bGamePlaying = True;
-    bShowSplash = False;
-    CloseBook();
-  }
+	Super.Created();
+	bNewGame 	= False;
+	DismissButton = UWindowSmallButton(CreateControl(Class'UWindowSmallButton', WinWidth - 10, 0.0, 10.0, 10.0));
+	DismissButton.SetFont(4);
+	StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea', 0.0, WinHeight - 26, 500.0, 26.0));
+	StatusBarTextWindow.Clear();
+	StatusBarTextWindow.AddText("");
+	StatusBarTextWindow.Font = 4;
+	bShowBackground = True;
+	InGamePage = FEInGamePage(CreateWindow(Class'FEInGamePage', 0.0, 0.0, WinWidth, WinHeight));
+	InGamePage.book = self;
+	InGamePage.HideWindow();
+	FolioPage = baseFEPage(CreateWindow(Class'FEFolioPage', 0.0, 0.0, WinWidth, WinHeight));
+	FolioPage.book = self;
+	FolioPage.HideWindow();
+	InputPage = baseFEPage(CreateWindow(Class'FEInputPage', 0.0, 0.0, WinWidth, WinHeight));
+	InputPage.book = self;
+	InputPage.HideWindow();
+	SoundVideoPage = baseFEPage(CreateWindow(Class'FESoundVideoPage', 0.0, 0.0, WinWidth, WinHeight));
+	SoundVideoPage.book = self;
+	SoundVideoPage.HideWindow();
+	QuidPage = baseFEPage(CreateWindow(Class'FEQuidPage', 0.0, 0.0, WinWidth, WinHeight));
+	QuidPage.book = self;
+	QuidPage.HideWindow();
+	DuelPage = baseFEPage(CreateWindow(Class'FEDuelPage', 0.0, 0.0, WinWidth, WinHeight));
+	DuelPage.book = self;
+	DuelPage.HideWindow();
+	HousepointsPage = baseFEPage(CreateWindow(Class'FEHousepointsPage', 0.0, 0.0, WinWidth, WinHeight));
+	HousepointsPage.book = self;
+	HousepointsPage.HideWindow();
+	ChallengesPage = baseFEPage(CreateWindow(Class'FEChallengesPage', 0.0, 0.0, WinWidth, WinHeight));
+	ChallengesPage.book = self;
+	ChallengesPage.HideWindow();
+	MainPage = baseFEPage(CreateWindow(Class'FEMainPage',0.0, 0.0, WinWidth, WinHeight));
+	MainPage.book = self;
+	OpenBook("MAIN");
+	MapPage = baseFEPage(CreateWindow(Class'FEMapPage',0.0, 0.0, WinWidth, WinHeight));
+	MapPage.book = self;
+	MapPage.HideWindow();
+	CreditsPage = baseFEPage(CreateWindow(Class'FECreditsPage', 0.0, 0.0, WinWidth, WinHeight));
+	CreditsPage.book = self;
+	CreditsPage.HideWindow();
+	LangPage = baseFEPage(CreateWindow(Class'FESoundBrowser',0.0, 0.0, WinWidth, WinHeight));
+	LangPage.book = self;
+	LangPage.HideWindow();
+	lev = GetLevel();
+	if ( InStr(Caps(lev.GetLocalURL()),"AUTOPLAY") >= 0 )
+	{
+		Log("autoplay");
+		bGamePlaying = True;
+		bShowSplash = False;
+		CloseBook();
+	}
 }
 
 function ScaleAndDraw (Canvas Canvas, float X, float Y, Texture Tex)
 {
-  local float FX;
-  local float fy;
+	local float FX;
+	local float fy;
+	
+	//Log("Width " $ WinWidth $ " Height " $ WinHeight);
+	
+	/*
+	local float XScale, YScale;
+	
+	Log("Width " $ WinWidth $ " Height " $ WinHeight);
+	
+	XScale = (4.0 / 3.0) / (WinWidth / WinHeight);
+	YScale = XScale;//(WinHeight / WinWidth) / (3.0 / 4.0);
+	*/
 
-  if ( Tex == None )
-  {
-    return;
-  }
-  FX = Canvas.SizeX / 640.0; 
-  fy = Canvas.SizeY / 480.0;
-  FX = Canvas.SizeX / 640.0;
-  fy = Canvas.SizeY / 480.0;
-  FX = 1.0;
-  fy = 1.0;
-  DrawStretchedTexture(Canvas,X * FX,Y * fy,Tex.USize * FX,Tex.VSize * fy,Tex);
+	if ( Tex == None )
+	{
+		return;
+	}
+	//FX = Canvas.SizeX / 640.0; 
+	//fy = Canvas.SizeY / 480.0;
+	//FX = Canvas.SizeX / 640.0;
+	//fy = Canvas.SizeY / 480.0;
+	//FX = 1.0;
+	//fy = 1.0;
+  
+	// Metallicafan212: We need to reduce based on our real size
+	//					4/3 uses 1.0, so use that as our scale
+	
+	//FX = (3.0 / 4.0) * (Canvas.SizeX / float(Canvas.SizeY));
+	//FY = (4.0 / 3.0) * (Canvas.SizeY / float(Canvas.SizeX));
+	
+	//FX = XScale;
+	//FY = YScale;
+	FX = 1.0;
+	FY = (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
+
+	DrawStretchedTexture(Canvas, X * FX, Y * FY, Tex.USize * FX, Tex.VSize * FY, Tex);
 }
 
 function Paint (Canvas Canvas, float X, float Y)
 {
-  local int Width;
-  local int I;
-  local int Ox;
-  local int Oy;
-  local Color saveColor;
+	local int Width;
+	local int I;
+	local int Ox;
+	local int Oy;
+	local Color saveColor;
 
-  if ( bNeedToStartMusic )
-  {
-    if ( nMusicHandle == 0 )
-    {
-      nMusicHandle = GetPlayerOwner().PlayMusic("sm_dia_Ambient02_01.ogg",0.5);
-    }
-    bNeedToStartMusic = False;
-  }
-  if ( bResolutionChanged )
-  {
-    Root.SetScale(Root.RealWidth / 640);
-    bResolutionChanged = False;
-  }
-  if ( bShowBackground )
-  {
-    ScaleAndDraw(Canvas,0.0,0.0,curBackground.p1);
-    ScaleAndDraw(Canvas,256.0,0.0,curBackground.p2);
-    ScaleAndDraw(Canvas,512.0,0.0,curBackground.p3);
-    ScaleAndDraw(Canvas,0.0,256.0,curBackground.p4);
-    ScaleAndDraw(Canvas,256.0,256.0,curBackground.p5);
-    ScaleAndDraw(Canvas,512.0,256.0,curBackground.p6);
-  }
+	if ( bNeedToStartMusic )
+	{
+		if ( nMusicHandle == 0 )
+		{
+			nMusicHandle = GetPlayerOwner().PlayMusic("sm_dia_Ambient02_01.ogg",0.5);
+		}
+		bNeedToStartMusic = False;
+	}
+	
+	if ( bResolutionChanged )
+	{
+		Root.SetScale(Root.RealWidth / 640);
+		bResolutionChanged = False;
+		
+		// Metallicafan212:	We need to work through all our controls
+	}
+	if ( bShowBackground )
+	{
+		ScaleAndDraw(Canvas,0.0,0.0,curBackground.p1);
+		ScaleAndDraw(Canvas,256.0,0.0,curBackground.p2);
+		ScaleAndDraw(Canvas,512.0,0.0,curBackground.p3);
+		ScaleAndDraw(Canvas,0.0,256.0,curBackground.p4);
+		ScaleAndDraw(Canvas,256.0,256.0,curBackground.p5);
+		ScaleAndDraw(Canvas,512.0,256.0,curBackground.p6);
+	}
 }
 
 function OpenBook (optional string pageName)
 {
-  if ( HPConsole(Root.Console).bLocked )
-  {
-    return;
-  }
-  HPConsole(Root.Console).bQuickKeyEnable = False;
-  harry(HPConsole(Root.Console).Viewport.Actor).StopAiming();
-  HPConsole(Root.Console).LaunchUWindow();
-  bIsOpen = True;
-  if ( pageName != "" )
-  {
-    ChangePageNamed(pageName);
-  }
-  Log("OpenBook" @ pageName $ "," @ string(curPage));
-  if ( curPage != None )
-  {
-    curPage.PreOpenBook();
-  }
-  if (!(pageName ~= "MAIN" ))
-  {
-    bNeedToStartMusic = True;
-  }
+	if ( HPConsole(Root.Console).bLocked )
+	{
+		return;
+	}
+	HPConsole(Root.Console).bQuickKeyEnable = False;
+	harry(HPConsole(Root.Console).Viewport.Actor).StopAiming();
+	HPConsole(Root.Console).LaunchUWindow();
+	bIsOpen = True;
+	if ( pageName != "" )
+	{
+		ChangePageNamed(pageName);
+	}
+	Log("OpenBook" @ pageName $ "," @ string(curPage));
+	if ( curPage != None )
+	{
+		curPage.PreOpenBook();
+	}
+	if (!(pageName ~= "MAIN" ))
+	{
+		bNeedToStartMusic = True;
+	}
 }
 
 function CloseBook ()
 {
-  if ( nMusicHandle != 0 )
-  {
-    bNeedToStartMusic = False;
-    GetPlayerOwner().StopMusic(nMusicHandle,0.0);
-    nMusicHandle = 0;
-  }
-  Log(" */**/** CloseBook Called!!! ");
-  curPage.ClearRollover();
-  if ( bInEndGame == False )
-  {
-    Root.Console.CloseUWindow();
-    bIsOpen = False;
-    ChangePage(None);
-    bShowBackground = False;
-  } 
-  else 
-  {
-    ShowCredits();
-  }
+	if ( nMusicHandle != 0 )
+	{
+		bNeedToStartMusic = False;
+		GetPlayerOwner().StopMusic(nMusicHandle,0.0);
+		nMusicHandle = 0;
+	}
+	Log(" */**/** CloseBook Called!!! ");
+	curPage.ClearRollover();
+	if ( bInEndGame == False )
+	{
+		Root.Console.CloseUWindow();
+		bIsOpen = False;
+		ChangePage(None);
+		bShowBackground = False;
+	} 
+	else 
+	{
+		ShowCredits();
+	}
 }
 
 function bool IsInGameMenuShowing ()
 {
-  return bIsOpen && ((curPage == InGamePage) || (curPage == FolioPage));
+	return bIsOpen && ((curPage == InGamePage) || (curPage == FolioPage));
 }
 
 function bool IsInGameSubMenuShowing ()
 {
-  return bIsOpen && (curPage != InGamePage);
+	return bIsOpen && (curPage != InGamePage);
 }
 
 function HPMessageBox doHPMessageBox (string Msg, string textButton1, optional string textButton2, optional float TimeOut)
 {
-  local HPMessageBox W;
+	local HPMessageBox W;
 
-  W = HPMessageBox(Root.CreateWindow(Class'HPMessageBox',(640.0 - 246) / 2,(480.0 - 102) / 2,246.0,150.0,self));
-  W.Setup(Msg,textButton1,textButton2,TimeOut);
-  Root.ShowModal(W);
-  return W;
+	W = HPMessageBox(Root.CreateWindow(Class'HPMessageBox',(640.0 - 246) / 2,(480.0 - 102) / 2,246.0,150.0,self));
+	W.Setup(Msg,textButton1,textButton2,TimeOut);
+	Root.ShowModal(W);
+	return W;
 }
 
 function ExitFromGame ()

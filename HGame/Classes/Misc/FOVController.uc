@@ -73,8 +73,8 @@ function CutBypass ()
 
 function Finish ()
 {
-	PlayerHarry.DesiredFOV 		= GetScaledFOV(FOVEnd);
-	PlayerHarry.FovAngle 		= GetScaledFOV(FOVEnd);
+	PlayerHarry.DesiredFOV 		= FOVEnd;
+	PlayerHarry.FovAngle 		= FOVEnd;
 	PlayerHarry.ClientMessage("FOVController -> Finish Called, Start: " $ string(FOVStart) $ " FOVEnd: " $ string(FOVEnd) $ " FOVTime: " $ string(FOVTime));
 	Destroy();
 }

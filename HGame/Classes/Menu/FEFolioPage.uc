@@ -56,8 +56,8 @@ var HGameButton HilitedCard;
 var float fHilitedCardScale;
 var HGameButton ForwardButton;
 var HGameButton BackButton;
-var UWindowLabelControl PreviousPageLabel;
-var UWindowLabelControl NextPageLabel;
+var HGameLabelControl PreviousPageLabel;
+var HGameLabelControl NextPageLabel;
 var HGameButton BronzeButton;
 var HGameButton SilverButton;
 var HGameButton GoldButton;
@@ -178,7 +178,7 @@ function Created ()
   BackButton.DownTexture = textureLeftUp;
   BackButton.OverTexture = textureLeftUp;
   BackButton.ToolTipString = GetLocalFEString("Folio_Menu_0002");
-  NextPageLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',605.0 - 100 - 5,316.0 + 5,100.0,28.0));
+  NextPageLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',605.0 - 100 - 5,316.0 + 5,100.0,28.0));
   NextPageLabel.SetFont(4);
   NextPageLabel.TextColor.R = 255;
   NextPageLabel.TextColor.G = 255;
@@ -186,7 +186,7 @@ function Created ()
   // NextPageLabel.Align = 1;
   NextPageLabel.Align = TA_Right; //from UWindowBase.uc in the proto -AdamJD 
   NextPageLabel.bShadowText = True;
-  PreviousPageLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',5.0 + 32 + 5,316.0 + 5,100.0,28.0));
+  PreviousPageLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',5.0 + 32 + 5,316.0 + 5,100.0,28.0));
   PreviousPageLabel.SetFont(4);
   PreviousPageLabel.TextColor.R = 255;
   PreviousPageLabel.TextColor.G = 255;
@@ -200,7 +200,7 @@ function Created ()
 
 function SetCardCountData ()
 {
-  local UWindowLabelControl LabelControl;
+  local HGameLabelControl LabelControl;
 
   strCardCountBronze = string(nHarrysBronzeCount) $ "/" $ string(50);
   nBronzeHealthBars = nHarrysBronzeCount / 10;

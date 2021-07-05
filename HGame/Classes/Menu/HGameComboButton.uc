@@ -1,6 +1,7 @@
-// Metallicafan212:	Button that scales the position and size to fit the current screen
-class HGameButton based on UWindowButton;
+// Metallicafan212:	Custom combo button that auto scales
+class HGameComboButton based on UWindowComboButton;
 
+// Metallicafan212:	Same code as the button
 var float WX, WY, WW, WH;
 
 var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
@@ -47,8 +48,6 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 function Resized()
 {
 	local float HScale;
-	
-	Super.Resized();
 	
 	HScale = GetHeightScale();
 	

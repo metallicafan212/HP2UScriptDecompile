@@ -1,9 +1,9 @@
-// Metallicafan212:	Button that scales the position and size to fit the current screen
-class HGameButton based on UWindowButton;
+// Metallicafan212:	Scalable combo control
+class HGameComboControl based on UWindowComboControl;
 
-var float WX, WY, WW, WH;
+var float WX, WY, WW, WH, WEditBoxWidth;
 
-var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
+//var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
 
 // Metallicafan212:	Get the H Scale
 function float GetHeightScale()
@@ -57,24 +57,9 @@ function Resized()
 	WinWidth	= WW * HScale;
 	WinHeight	= WH * HScale;
 	
+	EditBoxWidth	= WEditBoxWidth * HScale;
+	
 	//RegionScale = GetHeightScale();
-
-	// Metallicafan212:	Scale the region
-	UpRegion.W			= WUpRegion.W * HScale;
-	UpRegion.H			= WUpRegion.H * HScale;
-	UpRegion.Y 			= WUpRegion.Y * HScale;
-	
-	DownRegion.W		= WDownRegion.W * HScale;
-	DownRegion.H		= WDownRegion.H * HScale;
-	DownRegion.Y 		= WDownRegion.Y * HScale;
-	
-	DisabledRegion.W	= WDisabledRegion.W * HScale;
-	DisabledRegion.H	= WDisabledRegion.H * HScale;
-	DisabledRegion.Y 	= WDisabledRegion.Y * HScale;
-	
-	OverRegion.W		= WOverRegion.W * HScale;
-	OverRegion.H		= WOverRegion.H * HScale;
-	OverRegion.Y 		= WOverRegion.Y * HScale;
 }
 
 function Created()
@@ -87,10 +72,14 @@ function Created()
 	WW = WinWidth;
 	WH = WinHeight;
 	
+	WEditBoxWidth = EditBoxWidth;
+	
+	/*
 	WUpRegion 			= UpRegion;
 	WDownRegion			= DownRegion;
 	WDisabledRegion		= DisabledRegion;
 	WOverRegion			= OverRegion;
+	*/
 	
 	// Metallicafan212:	Now scale them
 	Resized();

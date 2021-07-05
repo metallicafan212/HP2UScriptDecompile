@@ -68,39 +68,39 @@ function Setup (string set_message, string set_button1, optional string set_butt
 
 function ScaleAndDraw (Canvas Canvas, float X, float Y, Texture Tex)
 {
-  local float FX;
-  local float fy;
+	local float FX;
+	local float fy;
 
-  FX = Canvas.SizeX / 640.0;
-  fy = Canvas.SizeY / 480.0;
-  FX = 1.0;
-  fy = 1.0;
-  DrawStretchedTexture(Canvas,X * FX,Y * fy,Tex.USize * FX,Tex.VSize * fy,Tex);
+	//FX = Canvas.SizeX / 640.0;
+	//fy = Canvas.SizeY / 480.0;
+	FX = 1.0;//(4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);//1.0;
+	fy = (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);//1.0;
+	DrawStretchedTexture(Canvas,X * FX,Y * fy,Tex.USize * FX,Tex.VSize * fy,Tex);
 }
 
 function Paint (Canvas Canvas, float X, float Y)
 {
-  ScaleAndDraw(Canvas,0.0,0.0,FEMessageBoxBg);
+	ScaleAndDraw(Canvas,0.0,0.0,FEMessageBoxBg);
 }
 
 function AfterPaint (Canvas C, float X, float Y)
 {
-  Super.AfterPaint(C,X,Y);
-  if ( TimeOut != 0 )
-  {
-    FrameCount++;
-    if ( FrameCount >= 5 )
-    {
-      TimeOutTime = GetEntryLevel().TimeSeconds + TimeOut;
-      TimeOut = 0.0;
-    }
-  }
-  if ( (TimeOutTime != 0) && (GetEntryLevel().TimeSeconds > TimeOutTime) )
-  {
-    TimeOutTime = 0.0;
-    bClosedFromTick = True;
-    Close();
-  }
+	Super.AfterPaint(C,X,Y);
+	if ( TimeOut != 0 )
+	{
+		FrameCount++;
+		if ( FrameCount >= 5 )
+		{
+			TimeOutTime = GetEntryLevel().TimeSeconds + TimeOut;
+			TimeOut = 0.0;
+		}
+	}
+	if ( (TimeOutTime != 0) && (GetEntryLevel().TimeSeconds > TimeOutTime) )
+	{
+		TimeOutTime = 0.0;
+		bClosedFromTick = True;
+		Close();
+	}
 }
 
 function Notify (UWindowDialogControl C, byte E)
@@ -108,36 +108,38 @@ function Notify (UWindowDialogControl C, byte E)
   local int I;
 
   Super.Notify(C,E);
+  
   if ( C == None )
   {
     return;
   }
+  
   switch (E)
   {
     case 2:
-    switch (C)
-    {
-      case button1:
-      case button2:
-      Result = C.Text;
-      Log("HPMessageBox button clicked" @ Result);
-      Close();
-      break;
-      default:
-    }
-    default:
-  }
-  Super.Notify(C,E);
+		switch (C)
+		{
+			case button1:
+			case button2:
+				Result = C.Text;
+				Log("HPMessageBox button clicked" @ Result);
+				Close();
+				break;
+			default:
+		}
+		default:
+	}
+	Super.Notify(C,E);
 }
 
 function Close (optional bool bByParent)
 {
-  if (  !bClosing )
-  {
-    Log("HPMessageBox Close" @ Message.Text $ ", Result=" @ Result);
-    bClosing = True;
-    Super.Close(bByParent);
-    OwnerWindow.WindowDone(self);
-  }
+	if (  !bClosing )
+	{
+		Log("HPMessageBox Close" @ Message.Text $ ", Result=" @ Result);
+		bClosing = True;
+		Super.Close(bByParent);
+		OwnerWindow.WindowDone(self);
+	}
 }
 

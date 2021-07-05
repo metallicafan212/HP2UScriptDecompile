@@ -1,9 +1,9 @@
-// Metallicafan212:	Button that scales the position and size to fit the current screen
-class HGameButton based on UWindowButton;
+// Metallicafan212:	Scalable H Slider
+class HGameHSlider based on UWindowHSliderControl;
 
 var float WX, WY, WW, WH;
 
-var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
+//var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
 
 // Metallicafan212:	Get the H Scale
 function float GetHeightScale()
@@ -35,13 +35,45 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	ClipY = C.ClipY;
 
 	C.SetOrigin(OrgX + ClippingRegion.X * Root.GUIScale, OrgY + ClippingRegion.Y * Root.GUIScale);
-	C.SetClip(Root.RealWidth, Root.RealHeight);//ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.GUIScale);
+	C.SetClip(ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.GUIScale);
 
 	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
 	C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
+}
+
+function BeforePaint(Canvas C, float X, float Y)
+{
+	local float W, H;
+	
+	// Metallicafan212:	Skip
+	Super(UWindowDialogControl).BeforePaint(C, X, Y);
+	
+	TextSize(C, Text, W, H);
+	WinHeight = H+1;
+	
+	switch(Align)
+	{
+		case TA_Left:
+			SliderDrawX = (WinWidth - SliderWidth);
+			TextX = 0;
+			break;
+		case TA_Right:
+			SliderDrawX = 0;	
+			TextX = WinWidth - W;
+			break;
+		case TA_Center:
+			SliderDrawX = (WinWidth - SliderWidth) / 2;
+			TextX = (WinWidth - W) / 2;
+			break;
+	}
+
+	SliderDrawY = ((WinHeight - 2) * GetHeightScale()) / 2;
+	TextY 		= ((WinHeight - H) * GetHeightScale()) / 2;
+
+	TrackStart = SliderDrawX + (SliderWidth - TrackWidth) * ((Value - MinValue)/(MaxValue - MinValue));
 }
 
 function Resized()
@@ -59,6 +91,7 @@ function Resized()
 	
 	//RegionScale = GetHeightScale();
 
+	/*
 	// Metallicafan212:	Scale the region
 	UpRegion.W			= WUpRegion.W * HScale;
 	UpRegion.H			= WUpRegion.H * HScale;
@@ -75,6 +108,7 @@ function Resized()
 	OverRegion.W		= WOverRegion.W * HScale;
 	OverRegion.H		= WOverRegion.H * HScale;
 	OverRegion.Y 		= WOverRegion.Y * HScale;
+	*/
 }
 
 function Created()
@@ -87,10 +121,12 @@ function Created()
 	WW = WinWidth;
 	WH = WinHeight;
 	
+	/*
 	WUpRegion 			= UpRegion;
 	WDownRegion			= DownRegion;
 	WDisabledRegion		= DisabledRegion;
 	WOverRegion			= OverRegion;
+	*/
 	
 	// Metallicafan212:	Now scale them
 	Resized();

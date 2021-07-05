@@ -1,9 +1,9 @@
-// Metallicafan212:	Button that scales the position and size to fit the current screen
-class HGameButton based on UWindowButton;
+// Metallicafan212:	Scalable edit box
+class HGameEditBox extends UWindowEditBox;
 
 var float WX, WY, WW, WH;
 
-var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
+//var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
 
 // Metallicafan212:	Get the H Scale
 function float GetHeightScale()
@@ -59,6 +59,7 @@ function Resized()
 	
 	//RegionScale = GetHeightScale();
 
+	/*
 	// Metallicafan212:	Scale the region
 	UpRegion.W			= WUpRegion.W * HScale;
 	UpRegion.H			= WUpRegion.H * HScale;
@@ -75,6 +76,7 @@ function Resized()
 	OverRegion.W		= WOverRegion.W * HScale;
 	OverRegion.H		= WOverRegion.H * HScale;
 	OverRegion.Y 		= WOverRegion.Y * HScale;
+	*/
 }
 
 function Created()
@@ -87,10 +89,12 @@ function Created()
 	WW = WinWidth;
 	WH = WinHeight;
 	
+	/*
 	WUpRegion 			= UpRegion;
 	WDownRegion			= DownRegion;
 	WDisabledRegion		= DisabledRegion;
 	WOverRegion			= OverRegion;
+	*/
 	
 	// Metallicafan212:	Now scale them
 	Resized();

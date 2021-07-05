@@ -2,7 +2,7 @@
 // HPMenuOptionCheckBox.
 //================================================================================
 
-class HPMenuOptionCheckBox extends UWindowCheckbox;
+class HPMenuOptionCheckBox extends HGameCheckbox;
 
 //texture imports -AdamJD
 #exec Texture Import File=Textures\Icons\FEOptionTickCheckedTex.PNG	GROUP=Icons	Name=FEOptionTickCheckedTex COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
@@ -17,39 +17,42 @@ var Texture TBoxUnchecked;
 var Texture TBoxUncheckedOver;
 
 
-function Checkbox_SetupSizes (UWindowCheckbox W, Canvas C)
+function Checkbox_SetupSizes (HGameCheckbox W, Canvas C)
 {
-  local float TW;
-  local float TH;
+	local float TW;
+	local float TH;
 
-  W.TextSize(C,W.Text,TW,TH);
-  W.WinHeight = Max(TH + 1,16);
-  W.ImageX = 0.0;
-  W.TextX = 13.0 + 4;
-  W.ImageY = (W.WinHeight - 12) / 2;
-  W.TextY = (W.WinHeight - TH) / 2;
-  if ( W.bChecked )
-  {
-    W.UpTexture = TBoxChecked; 			//Texture'FEOptionTickCheckedTex';
-    W.DownTexture = TBoxCheckedOver; 	//Texture'FEOptionTickCheckedOverTex';
-    W.OverTexture = TBoxCheckedOver;	//Texture'FEOptionTickCheckedOverTex';
-    W.DisabledTexture = None;
-  } else {
-    W.UpTexture = TBoxUnchecked; 		//Texture'FEOptionTickUncheckedTex';
-    W.DownTexture = TBoxUncheckedOver; 	//Texture'FEOptionTickUncheckedOverTex';
-    W.OverTexture = TBoxUncheckedOver; 	//Texture'FEOptionTickUncheckedOverTex';
-    W.DisabledTexture = None;
-  }
+	W.TextSize(C, W.Text, TW, TH);
+	W.WinHeight = Max(TH + 1, 16);
+	W.ImageX 	= 0.0;
+	W.TextX 	= 13.0 + 4;
+	W.ImageY 	= ((W.WinHeight - 12) * GetHeightScale()) / 2;
+	W.TextY 	= ((W.WinHeight - TH) * GetHeightScale()) / 2;
+	
+	if ( W.bChecked )
+	{
+		W.UpTexture = TBoxChecked; 			//Texture'FEOptionTickCheckedTex';
+		W.DownTexture = TBoxCheckedOver; 	//Texture'FEOptionTickCheckedOverTex';
+		W.OverTexture = TBoxCheckedOver;	//Texture'FEOptionTickCheckedOverTex';
+		W.DisabledTexture = None;
+	} 
+	else 
+	{
+		W.UpTexture = TBoxUnchecked; 		//Texture'FEOptionTickUncheckedTex';
+		W.DownTexture = TBoxUncheckedOver; 	//Texture'FEOptionTickUncheckedOverTex';
+		W.OverTexture = TBoxUncheckedOver; 	//Texture'FEOptionTickUncheckedOverTex';
+		W.DisabledTexture = None;
+	}
 }
 
 function BeforePaint (Canvas C, float X, float Y)
 {
-  Checkbox_SetupSizes(self,C);
+	Checkbox_SetupSizes(self,C);
 }
 
 function Paint (Canvas C, float X, float Y)
 {
-  Super.Paint(C,X,Y);
+	Super.Paint(C,X,Y);
 }
 
 //get the imported textures -AdamJD

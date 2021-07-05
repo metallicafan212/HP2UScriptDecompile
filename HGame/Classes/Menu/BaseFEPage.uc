@@ -14,7 +14,7 @@ struct CurrRolloverInfo
 
 var baseFEBook book;
 var HGameButton BackPageButton;
-var UWindowLabelControl TitleButton;
+var HGameLabelControl TitleButton;
 var Texture textureReturnNorm;
 var Texture textureReturnRO;
 var CurrRolloverInfo CurrRollover;
@@ -121,21 +121,31 @@ function CreateBackPageButton (optional int nX, optional int nY)
 // This is used lol -AdamJD
 function CreateTitleButton (string strTitle, optional int nXPos, optional int nYPos)
 {
+	local bool bCenter;
+	
 	if ( nXPos == 0 )
 	{
 		/*
-		nXPos = WinWidth / byte(2) = 200 - );
-		// There are 1 jump destination(s) inside the last statement!
-		{
-		nYPos = 40;
-		}
+		//align title to the centre of the page -AdamJD
+		
+		// Metallicafan212:	Correctly align to the center
+		nXPos = (WinWidth / 2) - (200 * GetHeightScale());
 		*/
 		
-		//align title to the centre of the page -AdamJD
-		nXPos = (WinWidth / 2) - 200;
+		nXPos = 0;
+		
 		nYPos = 40;
+		
+		bCenter = true;
 	}
-	TitleButton = UWindowLabelControl(CreateControl(Class'UWindowLabelControl', nXPos, nYPos,400.0,30.0));
+	
+	if(!bCenter)
+		TitleButton = HGameLabelControl(CreateControl(Class'HGameLabelControl', nXPos, nYPos, 400.0, 30.0));
+	else
+	{
+		TitleButton = HGameLabelControl(CreateControl(Class'HGameLabelControl', nXPos, nYPos, 640.0, 30.0));
+	}
+		
 	TitleButton.SetFont(4);
 	TitleButton.TextColor.R = 215;
 	TitleButton.TextColor.G = 0;

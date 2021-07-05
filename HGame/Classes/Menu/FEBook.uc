@@ -29,7 +29,7 @@ struct Background
   var float durration;
 };
 
-var UWindowSmallButton DismissButton;
+var HGameSmallButton DismissButton;
 var HPMessageBox ConfirmQuitGame;
 var baseFEPage MainPage;
 var baseFEPage ReportPage;
@@ -93,6 +93,29 @@ function ToolTip (string strTip)
 function ResolutionChanged (float W, float H)
 {
 	Super.ResolutionChanged(W,H);
+	
+	// Metallicafan212:	Do it to all pages...
+	MainPage.ResolutionChanged(W, H);
+	ReportPage.ResolutionChanged(W, H);
+	FolioPage.ResolutionChanged(W, H);
+	ChapterPage.ResolutionChanged(W, H);
+	SavePage.ResolutionChanged(W, H);
+	InGamePage.ResolutionChanged(W, H);
+	SlotPage.ResolutionChanged(W, H);
+	CreditsPage.ResolutionChanged(W, H);
+	LoadPage.ResolutionChanged(W, H);
+	InputPage.ResolutionChanged(W, H);
+	SoundVideoPage.ResolutionChanged(W, H);
+	SplashPage.ResolutionChanged(W, H);
+	LangPage.ResolutionChanged(W, H);
+	MapPage.ResolutionChanged(W, H);
+	QuidPage.ResolutionChanged(W, H);
+	DuelPage.ResolutionChanged(W, H);
+	HousepointsPage.ResolutionChanged(W, H);
+	ChallengesPage.ResolutionChanged(W, H);
+	curPage.ResolutionChanged(W, H);
+	prevPage.ResolutionChanged(W, H);
+	
 	bResolutionChanged = True;
 }
 
@@ -109,11 +132,11 @@ function ChangePage (baseFEPage Page)
 		curPage = Page;
 		if ( curPage != None )
 		{
-		curPage.PreSwitchPage();
-		if ( curPage != MainPage )
-		{
-			curPage.ShowWindow();
-		}
+			curPage.PreSwitchPage();
+			if ( curPage != MainPage )
+			{
+				curPage.ShowWindow();
+			}
 		}
 	}
 	bShowBackground = False;
@@ -285,7 +308,7 @@ function Created ()
 
 	Super.Created();
 	bNewGame 	= False;
-	DismissButton = UWindowSmallButton(CreateControl(Class'UWindowSmallButton', WinWidth - 10, 0.0, 10.0, 10.0));
+	DismissButton = HGameSmallButton(CreateControl(Class'HGameSmallButton', WinWidth - 10, 0.0, 10.0, 10.0));
 	DismissButton.SetFont(4);
 	StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea', 0.0, WinHeight - 26, 500.0, 26.0));
 	StatusBarTextWindow.Clear();
@@ -336,6 +359,28 @@ function Created ()
 		bShowSplash = False;
 		CloseBook();
 	}
+	
+	// Metallicafan212:	Fix the menus not being scaled right
+	MainPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	ReportPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	FolioPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	ChapterPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	SavePage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	InGamePage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	SlotPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	CreditsPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	LoadPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	InputPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	SoundVideoPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	SplashPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	LangPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	MapPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	QuidPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	DuelPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	HousepointsPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	ChallengesPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	curPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	prevPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
 }
 
 function ScaleAndDraw (Canvas Canvas, float X, float Y, Texture Tex)
@@ -374,6 +419,7 @@ function ScaleAndDraw (Canvas Canvas, float X, float Y, Texture Tex)
 	//FX = XScale;
 	//FY = YScale;
 	FX = 1.0;
+	//FY = 1.0;
 	FY = (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
 
 	DrawStretchedTexture(Canvas, X * FX, Y * FY, Tex.USize * FX, Tex.VSize * FY, Tex);
@@ -412,6 +458,26 @@ function Paint (Canvas Canvas, float X, float Y)
 		ScaleAndDraw(Canvas,256.0,256.0,curBackground.p5);
 		ScaleAndDraw(Canvas,512.0,256.0,curBackground.p6);
 	}
+}
+
+function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float H, 
+									  float tX, float tY, float tW, float tH, texture Tex ) 
+{
+	local float OrgX, OrgY, ClipX, ClipY;
+
+	OrgX = C.OrgX;
+	OrgY = C.OrgY;
+	ClipX = C.ClipX;
+	ClipY = C.ClipY;
+
+	C.SetOrigin(OrgX + ClippingRegion.X * Root.GUIScale, OrgY + ClippingRegion.Y * Root.HGUIScale);//Root.GUIScale);
+	C.SetClip(Root.RealWidth, Root.RealHeight);//ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.HGUIScale);//Root.GUIScale);
+
+	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.HGUIScale);//Root.GUIScale);
+	C.DrawTileClipped( Tex, W * Root.GUIScale, H * Root.HGUIScale, tX, tY, tW, tH);//Root.GUIScale, tX, tY, tW, tH);
+	
+	C.SetClip(ClipX, ClipY);
+	C.SetOrigin(OrgX, OrgY);
 }
 
 function OpenBook (optional string pageName)

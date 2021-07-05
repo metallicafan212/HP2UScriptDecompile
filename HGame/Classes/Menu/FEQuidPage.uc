@@ -12,11 +12,11 @@ var harry PlayerHarry;
 var HGameButton startGameButtons[6];
 var HGameButton opponentCrests[6];
 var HGameButton myCrests[6];
-var UWindowLabelControl opponentScores[6];
-var UWindowLabelControl myScores[6];
-var UWindowLabelControl myPoints[6];
+var HGameLabelControl opponentScores[6];
+var HGameLabelControl myScores[6];
+var HGameLabelControl myPoints[6];
 var Texture lockedTexture;
-var UWindowLabelControl matchLabel[6];
+var HGameLabelControl matchLabel[6];
 var HGameButton NimbusButton;
 var HGameButton QArmorButton;
 
@@ -357,119 +357,6 @@ function Paint (Canvas Canvas, float X, float Y)
   Super.Paint(Canvas,X,Y);
 }
 
-/*
-function Created ()
-{
-  local int StartX;
-  local int StartY;
-  local int gameBoxWidth;
-  local int gameBoxHeight;
-  local int gameSpaceX;
-  local int gameSpaceY;
-  local int I;
-  local int Row;
-  local int Col;
-  local Texture crestIcons[4];
-
-  gameBoxWidth = 128;
-  gameBoxHeight = 128;
-  gameSpaceX = 64 + gameBoxWidth;
-  gameSpaceY = 32 + gameBoxHeight;
-  StartX = (WinWidth / 2) - ((3 * gameBoxWidth + (2 * 64)) / 2);
-  StartY = 100; 
-  PlayerHarry = harry(HPConsole(Root.Console).Viewport.Actor);
-  crestIcons[0] = Texture'GryfCrestTexture';
-  crestIcons[1] = Texture'HuffCrestTexture';
-  crestIcons[2] = Texture'RaveCrestTexture';
-  crestIcons[3] = Texture'SlytCrestTexture';
-  lockedTexture = Texture'QuidMatchLockTexture';
-  CreateBackPageButton();
-  CreateTitleButton(GetLocalFEString("Quidditch_0007"));
-  // I = 0;
-  // if ( I < 6 )
-  for(I = 0; I < 6; I++)
-  {
-    if ( I > 2 )
-    {
-      Row = 1;
-      Col = I - 3;
-    } else {
-      Row = 0;
-      Col = I;
-    }
-    matchLabel[I] = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',StartX + (Col * gameSpaceX),StartY + (Row * gameSpaceY) - 20,gameBoxWidth,30.0));
-    matchLabel[I].SetFont(4);
-    matchLabel[I].TextColor.R = 215;
-    matchLabel[I].TextColor.G = 100;
-    matchLabel[I].TextColor.B = 215;
-    matchLabel[I].Align = 2; 
-    matchLabel[I].bShadowText = True;
-    myCrests[I] = HGameButton(CreateControl(Class'HGameButton',StartX + Col * gameSpaceX,StartY + Row * gameSpaceY + 5,64.0,64.0));
-    myCrests[I].Align = 2;
-    myCrests[I].UpTexture = crestIcons[0];
-    myCrests[I].DownTexture = crestIcons[0];
-    myCrests[I].OverTexture = crestIcons[0];
-    opponentCrests[I] = HGameButton(CreateControl(Class'HGameButton',StartX + Col * gameSpaceX + 64,StartY + Row * gameSpaceY + 5,64.0,64.0));
-    opponentCrests[I].Align = 2;
-    opponentCrests[I].UpTexture = crestIcons[1 + (I % 3)];
-	opponentCrests[I].DownTexture = crestIcons[1 + (I % 3)];
-	opponentCrests[I].OverTexture = crestIcons[1 + (I % 3)];
-    startGameButtons[I].SetFont(4);
-    startGameButtons[I].Align = 2;
-    startGameButtons[I].bShadowText = True;
-    startGameButtons[I].ToolTipString = GetLocalFEString("Quidditch_0020") $ " " $ string(I);
-    startGameButtons[I].UpTexture = Texture'QuidMatchBoxTexture';
-    startGameButtons[I].DownTexture = Texture'QuidMatchBoxTexture';
-    startGameButtons[I].OverTexture = Texture'QuidMatchBoxTexture';
-	myScores[I] = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',StartX + (Col * gameSpaceX),StartY + (Row * gameSpaceY) + 5 + 64,64.0,20.0));
-    myScores[I].SetFont(4);
-    myScores[I].TextColor.R = 255;
-    myScores[I].TextColor.G = 255;
-    myScores[I].TextColor.B = 255;
-    myScores[I].Align = 2;
-    myScores[I].bShadowText = True;
-    myScores[I].SetText("");
-    opponentScores[I] = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',StartX + (Col * gameSpaceX) + 64,StartY + (Row * gameSpaceY) + 5 + 64,64.0,20.0));
-    opponentScores[I].SetFont(4);
-    opponentScores[I].TextColor.R = 255;
-    opponentScores[I].TextColor.G = 255;
-    opponentScores[I].TextColor.B = 255;
-    opponentScores[I].Align = 2;
-    opponentScores[I].bShadowText = True;
-    opponentScores[I].SetText("");
-    myPoints[I] = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',StartX + (Col * gameSpaceX) + 0,StartY + (Row * gameSpaceY) + 100,128.0,20.0));
-    myPoints[I].SetFont(4);
-    myPoints[I].TextColor.R = 255;
-    myPoints[I].TextColor.G = 255;
-    myPoints[I].TextColor.B = 255;
-    myPoints[I].Align = 2;
-    myPoints[I].bShadowText = True;
-    myPoints[I].SetText("");
-    // I++;
-    // goto JL00F8;
-  }
-  matchLabel[0].SetText(GetLocalFEString("Quidditch_0009"));
-  matchLabel[1].SetText(GetLocalFEString("Quidditch_0010"));
-  matchLabel[2].SetText(GetLocalFEString("Quidditch_0011"));
-  matchLabel[3].SetText(GetLocalFEString("Quidditch_0012"));
-  matchLabel[4].SetText(GetLocalFEString("Quidditch_0013"));
-  matchLabel[5].SetText(GetLocalFEString("Quidditch_0014"));
-  QArmorButton = HGameButton(CreateControl(Class'HGameButton',5.0,5.0,64.0,64.0));
-  QArmorButton.ToolTipString = GetLocalFEString("Main_Menu_0012");
-  QArmorButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2QuidditchArmor",Class'Texture'));
-  QArmorButton.OverTexture = QArmorButton.UpTexture;
-  QArmorButton.DownTexture = QArmorButton.OverTexture;
-  QArmorButton.DownSound = None;
-  NimbusButton = HGameButton(CreateControl(Class'HGameButton',570.0,5.0,64.0,64.0));
-  NimbusButton.ToolTipString = GetLocalFEString("Main_Menu_0013");
-  NimbusButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2Nimbus2001",Class'Texture'));
-  NimbusButton.OverTexture = NimbusButton.UpTexture;
-  NimbusButton.DownTexture = NimbusButton.OverTexture;
-  NimbusButton.DownSound = None;
-  Super.Created();
-}
-*/
-
 //rewritten this function because the original is broken -AdamJD
 function Created()
 {
@@ -487,8 +374,8 @@ function Created()
 	gameBoxWidth = 128;
 	gameBoxHeight = 128;
 
-	gameSpaceX= 64 + gameBoxWidth;
-	gameSpaceY= 32 + gameBoxHeight;
+	gameSpaceX = 64 + gameBoxWidth;
+	gameSpaceY = 32 + gameBoxHeight;
 
 	startX = (WinWidth / 2) - ((3 * gameBoxWidth + (2 * 64)) / 2);
 	startY = 100;
@@ -511,7 +398,7 @@ function Created()
 			col = i;
 		}
 
-		matchLabel[i]= UWindowLabelControl(CreateControl(class'UWindowLabelControl',startX + (col * gameSpaceX),startY + (row * gameSpaceY) - 20,gameBoxWidth,30));
+		matchLabel[i]= HGameLabelControl(CreateControl(class'HGameLabelControl',startX + (col * gameSpaceX),startY + (row * gameSpaceY) - 20,gameBoxWidth,30));
 		matchLabel[i].setFont(4);
 		matchLabel[i].TextColor.r= 215;
 		matchLabel[i].TextColor.g= 100;
@@ -540,7 +427,7 @@ function Created()
 		startGameButtons[i].DownTexture= Texture 'QuidMatchBoxTexture'; 
 		startGameButtons[i].OverTexture= Texture 'QuidMatchBoxTexture'; 
 
-		myScores[i]=UWindowLabelControl(CreateControl(class'UWindowLabelControl',startX + (col * gameSpaceX),startY + (row * gameSpaceY) + 5 + 64,64,20));
+		myScores[i]=HGameLabelControl(CreateControl(class'HGameLabelControl',startX + (col * gameSpaceX),startY + (row * gameSpaceY) + 5 + 64,64,20));
 		myScores[i].setFont(4);
 		myScores[i].TextColor.r= 255;
 		myScores[i].TextColor.g= 255;
@@ -549,7 +436,7 @@ function Created()
 		myScores[i].bShadowText= true;
 		myScores[i].setText("");
 
-		opponentScores[i]= UWindowLabelControl(CreateControl(class'UWindowLabelControl',startX + (col * gameSpaceX) + 64, startY + (row * gameSpaceY) + 5 + 64,64,20));
+		opponentScores[i]= HGameLabelControl(CreateControl(class'HGameLabelControl',startX + (col * gameSpaceX) + 64, startY + (row * gameSpaceY) + 5 + 64,64,20));
 		opponentScores[i].setFont(4);
 		opponentScores[i].TextColor.r= 255;
 		opponentScores[i].TextColor.g= 255;
@@ -558,7 +445,7 @@ function Created()
 		opponentScores[i].bShadowText= true;
 		opponentScores[i].setText("");
 
-		myPoints[i]= UWindowLabelControl(CreateControl(class'UWindowLabelControl',startX + (col * gameSpaceX) + 32,startY + (row * gameSpaceY) + 100,64,20));
+		myPoints[i]= HGameLabelControl(CreateControl(class'HGameLabelControl',startX + (col * gameSpaceX) + 32,startY + (row * gameSpaceY) + 100,64,20));
 		myPoints[i].setFont(4);
 		myPoints[i].TextColor.r= 255;
 		myPoints[i].TextColor.g= 255;

@@ -10,7 +10,7 @@ const nSKURGE_CHALLENGE= 1;
 const nRICTUSEMPRA_CHALLENGE= 0;
 var HGameButton NameButtons[4];
 var HGameButton ScoreButtons[4];
-var UWindowLabelControl NoneWonLabel;
+var HGameLabelControl NoneWonLabel;
 
 
 function Created ()
@@ -20,7 +20,7 @@ function Created ()
 
   CreateBackPageButton();
   CreateTitleButton(GetLocalFEString("Report_Card_0008"));
-  NoneWonLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',WinWidth / 2 - 200,100.0,400.0,30.0));
+  NoneWonLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',WinWidth / 2 - 200,100.0,400.0,30.0));
   NoneWonLabel.SetFont(4);
   NoneWonLabel.TextColor.R = 255;
   NoneWonLabel.TextColor.G = 255;

@@ -1,6 +1,7 @@
-// Metallicafan212:	Button that scales the position and size to fit the current screen
-class HGameButton based on UWindowButton;
+// Metallicafan212:	Custom checkbox
+class HGameCheckbox extends UWindowCheckbox;
 
+// Metallicafan212:	Same as the button
 var float WX, WY, WW, WH;
 
 var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;

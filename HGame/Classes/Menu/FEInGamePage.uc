@@ -21,7 +21,7 @@ var HGameButton QuitButton;
 var HGameButton InputButton;
 var HGameButton CreditsButton;
 var HGameButton SoundVideoButton;
-var UWindowSmallButton VersionButton;
+var HGameSmallButton VersionButton;
 var Texture textureChallengesRO;
 var Texture textureMapRO;
 var Texture textureDuelRO;
@@ -61,58 +61,66 @@ const nBAR_X=   0;
 
 function Paint (Canvas Canvas, float X, float Y)
 {
-  local float fScaleFactor;
-  local bool bHaveObjectiveText;
+	local float fScaleFactor;
+	local bool bHaveObjectiveText;
 
-  fScaleFactor = Canvas.SizeX / WinWidth;
-  if ( strCurrToolTip != "" )
-  {
-    PaintToolTipText(Canvas,fScaleFactor);
-  } 
-  else 
-  {
-    PaintObjectiveText(Canvas,fScaleFactor);
-  }
-  Super.Paint(Canvas,X,Y);
+	fScaleFactor = Canvas.SizeX / WinWidth;
+	if ( strCurrToolTip != "" )
+	{
+		PaintToolTipText(Canvas,fScaleFactor);
+	} 
+	else 
+	{
+		PaintObjectiveText(Canvas,fScaleFactor);
+	}
+	
+	Super.Paint(Canvas,X,Y);
 }
 
 function AfterPaint (Canvas Canvas, float X, float Y)
 {
-  local float fScaleFactor;
-  local bool bHaveObjectiveText;
-  local int nSaveStyle;
+	local float fScaleFactor;
+	local bool bHaveObjectiveText;
+	local int nSaveStyle;
 
-  fScaleFactor = Canvas.SizeX / WinWidth;
-  PaintCountText(Canvas,fScaleFactor);
-  Super.AfterPaint(Canvas,X,Y);
+	fScaleFactor = Canvas.SizeX / WinWidth;
+	PaintCountText(Canvas,fScaleFactor);
+	
+	Super.AfterPaint(Canvas,X,Y);
 }
 
 function PaintToolTipText (Canvas Canvas, float fScaleFactor)
 {
-  local Font fontText;
-  local Color colorText;
-  local harry PlayerHarry;
+	local Font fontText;
+	local Color colorText;
+	local harry PlayerHarry;
+	
+	// Metallicafan212:	Move it up
+	local float HScale;
+	
+	HScale = GetHeightScale();
 
-  PlayerHarry = harry(Root.Console.Viewport.Actor);
-  if ( Canvas.SizeX <= 512 )
-  {
-    fontText = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
-  } 
-  else 
-  {
-    if ( Canvas.SizeX <= 800 )
-    {
-      fontText = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
-    } 
+	PlayerHarry = harry(Root.Console.Viewport.Actor);
+	if ( Canvas.SizeX <= 512 )
+	{
+		fontText = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
+	} 
 	else 
 	{
-      fontText = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
-    }
-  }
-  colorText.R = 255;
-  colorText.G = 255;
-  colorText.B = 255;
-  HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strCurrToolTip, 6 * fScaleFactor, 424 * fScaleFactor, 46 * fScaleFactor, colorText,fontText);
+		if ( Canvas.SizeX <= 800 )
+		{
+			fontText = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
+		} 
+		else 
+		{
+			fontText = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
+		}
+	}
+	
+	colorText.R = 255;
+	colorText.G = 255;
+	colorText.B = 255;
+	HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas, strCurrToolTip, 6 * fScaleFactor, 424 * fScaleFactor * HScale, 46 * fScaleFactor, colorText, fontText);
 }
 
 function PaintObjectiveText (Canvas Canvas, float fScaleFactor)
@@ -201,7 +209,7 @@ function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
 
 	fScaleFactor = nCanvasSizeX / WinWidth;
 	//return nCanvasSizeY - 88 * fScaleFactor = return;
-	return (nCanvasSizeY - 88 * fScaleFactor);
+	return (nCanvasSizeY - 88 * fScaleFactor * GetHeightScale());
 }
 
 function Created ()
@@ -333,7 +341,7 @@ function Created ()
 		SoundVideoButton.DownSound = soundBottomClick;
 	}
   
-	VersionButton = UWindowSmallButton(CreateControl(Class'UWindowSmallButton',550.0,462.0,84.0,25.0));
+	VersionButton = HGameSmallButton(CreateControl(Class'HGameSmallButton',550.0,462.0,84.0,25.0));
 	VersionButton.SetFont(0);
 	VersionButton.TextColor.R = 250;
 	VersionButton.TextColor.G = 250;
@@ -346,168 +354,188 @@ function Created ()
 
 function WindowDone (UWindowWindow W)
 {
-  if ( W == ConfirmQuit )
-  {
-    if ( ConfirmQuit.Result == ConfirmQuit.button1.Text )
-    {
-      Root.DoQuitGame();
-    }
-    ConfirmQuit = None;
-  }
+	if ( W == ConfirmQuit )
+	{
+		if ( ConfirmQuit.Result == ConfirmQuit.button1.Text )
+		{
+			Root.DoQuitGame();
+		}
+		ConfirmQuit = None;
+	}
 }
 
 function bool KeyEvent (byte Key, byte Action, float Delta)
 {
-  return False;
+	return False;
 }
 
 function Notify (UWindowDialogControl C, byte E)
 {
-  local int I;
+	local int I;
 
-  if ( E == 2 )
-  {
-    switch (C)
-    {
-      case InputButton:
-      FEBook(book).ChangePageNamed("INPUT");
-      break;
-      case SoundVideoButton:
-      FEBook(book).ChangePageNamed("SOUNDVIDEO");
-      break;
-      case QuitButton:
-      ConfirmQuit = doHPMessageBox(GetLocalFEString("InGameMenu_0026"),GetLocalFEString("Shared_Menu_0003"),GetLocalFEString("Shared_Menu_0004"));
-      break;
-      case BackPageButton:
-      FEBook(book).CloseBook();
-      break;
-      case FolioButton:
-      FEBook(book).ChangePageNamed("FOLIO");
-      break;
-      case QuidditchButton:
-      FEBook(book).ChangePageNamed("QUIDDITCH");
-      break;
-      case DuelButton:
-      FEBook(book).ChangePageNamed("DUEL");
-      break;
-      case ChallengesButton:
-      FEBook(book).ChangePageNamed("CHALLENGES");
-      break;
-      case MapButton:
-      FEBook(book).ChangePageNamed("MAP");
-      break;
-      case CreditsButton:
-      FEBook(book).ChangePageNamed("CREDITSPAGE");
-      break;
-      case HousepointsButton:
-      FEBook(book).ChangePageNamed("HPOINTS");
-      break;
-      break;
-      default:
-      break;
-    }
-  } 
-  else 
-  {
-    if ( E == 12 )
-    {
-      switch (C)
-      {
-        case DuelButton:
-        SetRollover(DuelButton,textureDuelRO,soundMiddleRO,True);
-        break;
-        case ChallengesButton:
-        SetRollover(ChallengesButton,textureChallengesRO,soundMiddleRO,True);
-        break;
-        case MapButton:
-        SetRollover(MapButton,textureMapRO,soundMiddleRO,True);
-        break;
-        case QuidditchButton:
-        SetRollover(QuidditchButton,textureQuidRO,soundMiddleRO,True);
-        break;
-        case QuitButton:
-        SetRollover(QuitButton,textureQuitRO,soundBottomRO,True);
-        break;
-        case InputButton:
-        SetRollover(InputButton,textureInputRO,soundBottomRO,True);
-        break;
-        case SoundVideoButton:
-        SetRollover(SoundVideoButton,textureSoundRO,soundBottomRO,True);
-        break;
-        case FolioButton:
-        SetRollover(FolioButton,textureFolioRO,soundFolioRO,False);
-        break;
-        case CreditsButton:
-        SetRollover(CreditsButton,textureCreditsRO,soundBottomRO,True);
-        break;
-        case HousepointsButton:
-        SetRollover(HousepointsButton,textureGryffRO,soundTopRO,True);
-        break;
-        default:
-      }
-    } 
+	if ( E == 2 )
+	{
+		switch (C)
+		{
+			case InputButton:
+				FEBook(book).ChangePageNamed("INPUT");
+				break;
+      
+			case SoundVideoButton:
+				FEBook(book).ChangePageNamed("SOUNDVIDEO");
+				break;
+      
+			case QuitButton:
+				ConfirmQuit = doHPMessageBox(GetLocalFEString("InGameMenu_0026"),GetLocalFEString("Shared_Menu_0003"),GetLocalFEString("Shared_Menu_0004"));
+				break;
+      
+			case BackPageButton:
+				FEBook(book).CloseBook();
+				break;
+      
+			case FolioButton:
+				FEBook(book).ChangePageNamed("FOLIO");
+				break;
+      
+			case QuidditchButton:
+				FEBook(book).ChangePageNamed("QUIDDITCH");
+				break;
+      
+			case DuelButton:
+				FEBook(book).ChangePageNamed("DUEL");
+				break;
+      
+			case ChallengesButton:
+				FEBook(book).ChangePageNamed("CHALLENGES");
+				break;
+      
+			case MapButton:
+				FEBook(book).ChangePageNamed("MAP");
+				break;
+      
+			case CreditsButton:
+				FEBook(book).ChangePageNamed("CREDITSPAGE");
+				break;
+     
+			case HousepointsButton:
+				FEBook(book).ChangePageNamed("HPOINTS");
+				break;
+			
+			default:
+				break;
+		}
+	} 
 	else 
 	{
-      if ( E == 9 )
-      {
-        switch (C)
-        {
-          case DuelButton:
-          case ChallengesButton:
-          case MapButton:
-          case QuidditchButton:
-          case QuitButton:
-          case InputButton:
-          case SoundVideoButton:
-          case FolioButton:
-          case CreditsButton:
-          case HousepointsButton:
-          ClearRollover();
-          break;
-          default:
-        }
-      }
-    }
-  }
-  Super.Notify(C,E);
+		if ( E == 12 )
+		{
+			switch (C)
+			{
+				case DuelButton:
+					SetRollover(DuelButton,textureDuelRO,soundMiddleRO,True);
+					break;
+				
+				case ChallengesButton:
+					SetRollover(ChallengesButton,textureChallengesRO,soundMiddleRO,True);
+					break;
+				
+				case MapButton:
+					SetRollover(MapButton,textureMapRO,soundMiddleRO,True);
+					break;
+				
+				case QuidditchButton:
+					SetRollover(QuidditchButton,textureQuidRO,soundMiddleRO,True);
+					break;
+				
+				case QuitButton:
+					SetRollover(QuitButton,textureQuitRO,soundBottomRO,True);
+					break;
+				
+				case InputButton:
+					SetRollover(InputButton,textureInputRO,soundBottomRO,True);
+					break;
+				
+				case SoundVideoButton:
+					SetRollover(SoundVideoButton,textureSoundRO,soundBottomRO,True);
+					break;
+				
+				case FolioButton:
+					SetRollover(FolioButton,textureFolioRO,soundFolioRO,False);
+					break;
+				
+				case CreditsButton:
+					SetRollover(CreditsButton,textureCreditsRO,soundBottomRO,True);
+					break;
+				
+				case HousepointsButton:
+					SetRollover(HousepointsButton,textureGryffRO,soundTopRO,True);
+					break;
+			}
+		} 
+		else 
+		{
+			if ( E == 9 )
+			{
+				switch (C)
+				{
+					case DuelButton:
+					case ChallengesButton:
+					case MapButton:
+					case QuidditchButton:
+					case QuitButton:
+					case InputButton:
+					case SoundVideoButton:
+					case FolioButton:
+					case CreditsButton:
+					case HousepointsButton:
+						ClearRollover();
+						break;
+				}
+			}
+		}
+	}
+	
+	Super.Notify(C,E);
 }
 
 function PreSwitchPage ()
 {
-  Super.PreSwitchPage();
-  strSecretsCount = GetSecretsCount();
-  if ( HPConsole(Root.Console).bDebugMode )
-  {
-    VersionButton.ShowWindow();
-  } 
-  else 
-  {
-    VersionButton.HideWindow();
-  }
+	Super.PreSwitchPage();
+	strSecretsCount = GetSecretsCount();
+	if ( HPConsole(Root.Console).bDebugMode )
+	{
+		VersionButton.ShowWindow();
+	} 
+	else 
+	{
+		VersionButton.HideWindow();
+	}
 }
 
 function ToolTip (string strSetTip)
 {
-  strCurrToolTip = strSetTip;
+	strCurrToolTip = strSetTip;
 }
 
 function string GetSecretsCount ()
 {
-  local string strSecrets;
-  local int nNumSecrets;
-  local int nNumSecretsFound;
-  local SecretAreaMarker Marker;
+	local string strSecrets;
+	local int nNumSecrets;
+	local int nNumSecretsFound;
+	local SecretAreaMarker Marker;
 
-  foreach Root.Console.Viewport.Actor.AllActors(Class'SecretAreaMarker',Marker)
-  {
-    nNumSecrets++;
-    if ( Marker.bFound )
-    {
-      nNumSecretsFound++;
-    }
-  }
-  strSecrets = string(nNumSecretsFound) $ "/" $ string(nNumSecrets);
-  return strSecrets;
+	foreach Root.Console.Viewport.Actor.AllActors(Class'SecretAreaMarker',Marker)
+	{
+		nNumSecrets++;
+		if ( Marker.bFound )
+		{
+			nNumSecretsFound++;
+		}
+	}
+	
+	strSecrets = string(nNumSecretsFound) $ "/" $ string(nNumSecrets);
+  
+	return strSecrets;
 }
 
 defaultproperties

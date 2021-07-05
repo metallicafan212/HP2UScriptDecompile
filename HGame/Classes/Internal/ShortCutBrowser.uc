@@ -10,8 +10,8 @@ struct List
   var ShortCutList List;
 };
 
-var UWindowComboControl ComboBoxListTypes;
-var UWindowComboControl ComboBoxGameStates;
+var HGameComboControl ComboBoxListTypes;
+var HGameComboControl ComboBoxGameStates;
 var ShortCutButton buttonLaunch;
 var int iNumLists;
 var int iCurList;
@@ -27,12 +27,12 @@ function Created ()
 {
   Super.Created();
   bTransient = False;
-  ComboBoxListTypes = UWindowComboControl(CreateControl(Class'UWindowComboControl',0.0,0.0,128.0,16.0));
+  ComboBoxListTypes = HGameComboControl(CreateControl(Class'HGameComboControl',0.0,0.0,128.0,16.0));
   ComboBoxListTypes.SetFont(0);
   ComboBoxListTypes.SetEditable(False);
   ComboBoxListTypes.SetButtons(False);
   ComboBoxListTypes.SetHelpText("ComboBoxListTypes help text");
-  ComboBoxGameStates = UWindowComboControl(CreateControl(Class'UWindowComboControl',128.0,0.0,94.0,16.0));
+  ComboBoxGameStates = HGameComboControl(CreateControl(Class'HGameComboControl',128.0,0.0,94.0,16.0));
   ComboBoxGameStates.SetFont(0);
   ComboBoxGameStates.SetEditable(False);
   ComboBoxGameStates.SetButtons(False);

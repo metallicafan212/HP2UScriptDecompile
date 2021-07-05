@@ -25,39 +25,39 @@ var bool bInitialized;
 var string OldSettings;
 var HGameButton OptionsLabel;
 var localized string optionsText;
-var UWindowLabelControl InGame_Label;
+var HGameLabelControl InGame_Label;
 var localized string InGame_Text;
-var UWindowLabelControl MiscLabel;
+var HGameLabelControl MiscLabel;
 var localized string MiscText;
-var UWindowLabelControl InQuidditch_Label;
+var HGameLabelControl InQuidditch_Label;
 var localized string InQuidditch_Text;
-var UWindowLabelControl InWizardDuel_Label;
+var HGameLabelControl InWizardDuel_Label;
 var localized string InWizardDuel_Text;
-var UWindowCheckbox AutoCenterCamCheck;
+var HGameCheckbox AutoCenterCamCheck;
 var localized string AutoCenterCamText;
-var UWindowCheckbox AutoDrinkPotionCheck;
+var HGameCheckbox AutoDrinkPotionCheck;
 var localized string AutoDrinkPotionText;
-var UWindowCheckbox MoveWhileCastingCheck;
+var HGameCheckbox MoveWhileCastingCheck;
 var localized string MoveWhileCastingText;
-var UWindowHSliderControl SensitivitySlider;
-var UWindowCheckbox MouseInvertCheck;
+var HGameHSlider SensitivitySlider;
+var HGameCheckbox MouseInvertCheck;
 var localized string MouseInvertText;
-var UWindowLabelControl MouseSensitivityLabel;
+var HGameLabelControl MouseSensitivityLabel;
 var localized string MouseSensitivityText;
-var UWindowLabelControl MouseHiLabel;
-var UWindowLabelControl MouseLoLabel;
+var HGameLabelControl MouseHiLabel;
+var HGameLabelControl MouseLoLabel;
 var localized string MouseHiText;
 var localized string MouseLoText;
 var UWindowEditControl SensitivityEdit;
 var localized string SensitivityText;
-var UWindowCheckbox MouseSmoothCheck;
+var HGameCheckbox MouseSmoothCheck;
 var localized string MouseSmoothText;
 var HPMessageBox ConfirmSettings;
 var localized string ConfirmSettingsTitle;
 var localized string ConfirmSettingsText;
 var localized string ConfirmSettingsCancelTitle;
 var localized string ConfirmSettingsCancelText;
-var UWindowLabelControl KeyboardLabel;
+var HGameLabelControl KeyboardLabel;
 var localized string KeyboardText;
 var string RealKeyName[255];
 var localized string LocalizedKeyName[255];
@@ -74,22 +74,22 @@ var int RemoveExistingBoundKeyMinIndex;
 var int RemoveExistingBoundKeyMaxIndex;
 var EKeyType SetKeyType;
 var localized string InGame_LabelList[11];
-var UWindowLabelControl InGame_KeyNames[11];
+var HGameLabelControl InGame_KeyNames[11];
 var HPMenuRaisedButton InGame_KeyButtons[11];
 var int InGame_VertSpacing[11];
 var localized string InQuidditch_LabelList[2];
-var UWindowLabelControl InQuidditch_KeyNames[2];
+var HGameLabelControl InQuidditch_KeyNames[2];
 var HPMenuRaisedButton InQuidditch_KeyButtons[2];
 var int InQuidditch_VertSpacing[2];
 var localized string InWizardDuel_LabelList[2];
-var UWindowLabelControl InWizardDuel_KeyNames[2];
+var HGameLabelControl InWizardDuel_KeyNames[2];
 var HPMenuRaisedButton InWizardDuel_KeyButtons[2];
 var int InWizardDuel_VertSpacing[2];
-var UWindowCheckbox AutoJumpCheck;
+var HGameCheckbox AutoJumpCheck;
 var localized string AutoJumpText;
-var UWindowCheckbox InvertBroomCheck;
+var HGameCheckbox InvertBroomCheck;
 var localized string InvertBroomText;
-var UWindowLabelControl DifficultyLabel;
+var HGameLabelControl DifficultyLabel;
 var HPMenuOptionCombo DifficultyCombo;
 var localized string DifficultyText;
 var localized string DifficultyLevel[3];
@@ -195,13 +195,13 @@ function Created ()
   buttonHeight = 24;
   textHeight = 10;
   textOffsetY = (buttonHeight - textHeight) / 2;
-  MiscLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',labelX,ctlY,ctlW,1.0));
+  MiscLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',labelX,ctlY,ctlW,1.0));
   MiscLabel.SetText(MiscText);
   MiscLabel.SetFont(1);
   MiscLabel.TextColor = GoupLabelTextColor;
   ctlY += 25;
   I = 0;
-  MouseSensitivityLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',labelX,ctlY + textOffsetY,ctlW,1.0));
+  MouseSensitivityLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',labelX,ctlY + textOffsetY,ctlW,1.0));
   MouseSensitivityLabel.SetText(MouseSensitivityText);
   MouseSensitivityLabel.SetFont(1);
   MouseSensitivityLabel.TextColor = LabelTextColor;
@@ -212,11 +212,11 @@ function Created ()
   ctlY += 28;
   
   //UTPT didn't decompile this(added from UEExplorer) -AdamJD
-  MouseHiLabel = UWindowLabelControl(CreateControl(class'UWindowLabelControl', (ctlX + SliderWidth) - 21, ctlY, ctlW, 1.0));
+  MouseHiLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', (ctlX + SliderWidth) - 21, ctlY, ctlW, 1.0));
   MouseHiLabel.SetText(MouseHiText);
   MouseHiLabel.SetFont(0);
   MouseHiLabel.TextColor = ButtonTextColor;
-  MouseLoLabel = UWindowLabelControl(CreateControl(class'UWindowLabelControl', ctlX, ctlY, ctlW, 1.0));
+  MouseLoLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', ctlX, ctlY, ctlW, 1.0));
   MouseLoLabel.SetText(MouseLoText);
   MouseLoLabel.SetFont(0);
   MouseLoLabel.TextColor = ButtonTextColor;
@@ -249,7 +249,7 @@ function Created ()
   AutoDrinkPotionCheck.TextColor = LabelTextColor;
   ctlY += 25;
   Log("get ini:HGame.Harry bAutoQuaff -> " $ string(AutoDrinkPotionCheck.bChecked));
-  DifficultyLabel = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY + textOffsetY, ctlW, 1.0));
+  DifficultyLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, ctlW, 1.0));
   DifficultyLabel.SetText(DifficultyText);
   DifficultyLabel.SetFont(1);
   DifficultyLabel.TextColor = LabelTextColor;
@@ -262,7 +262,7 @@ function Created ()
   DifficultyCombo.AddItem(DifficultyLevel[1], "DifficultyMedium");
   DifficultyCombo.AddItem(DifficultyLevel[2], "DifficultyHard");
   ctlY += 35;
-  InQuidditch_Label = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY, ctlW, 1.0));
+  InQuidditch_Label = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY, ctlW, 1.0));
   InQuidditch_Label.SetText(InQuidditch_Text);
   InQuidditch_Label.SetFont(1);
   InQuidditch_Label.TextColor = GoupLabelTextColor;
@@ -279,7 +279,7 @@ function Created ()
   // if(I < 1)
   for(I = 0; I < 1; I++)
   {
-      InQuidditch_KeyNames[I] = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY + textOffsetY, labelWidth + 200, 1.0));
+      InQuidditch_KeyNames[I] = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, labelWidth + 200, 1.0));
       InQuidditch_KeyNames[I].SetText(InQuidditch_LabelList[I]);
       InQuidditch_KeyNames[I].SetFont(1);
       InQuidditch_KeyNames[I].TextColor = LabelTextColor;
@@ -300,7 +300,7 @@ function Created ()
       // goto J0x85D;
   }
   ctlY += 13;
-  InWizardDuel_Label = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY, ctlW, 1.0));
+  InWizardDuel_Label = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY, ctlW, 1.0));
   InWizardDuel_Label.SetText(InWizardDuel_Text);
   InWizardDuel_Label.SetFont(1);
   InWizardDuel_Label.TextColor = GoupLabelTextColor;
@@ -311,7 +311,7 @@ function Created ()
   // if(I < 1)
   for(I = 0; I < 1; I++)
   {
-      InWizardDuel_KeyNames[I] = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
+      InWizardDuel_KeyNames[I] = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
       InWizardDuel_KeyNames[I].SetText(InWizardDuel_LabelList[I]);
       InWizardDuel_KeyNames[I].SetFont(1);
       InWizardDuel_KeyNames[I].TextColor = LabelTextColor;
@@ -334,7 +334,7 @@ function Created ()
   ctlY = 40 - offsetY;
   ctlX = 430 - offsetX;
   labelX = 330 - offsetX;
-  InGame_Label = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY, ctlW, 1.0));
+  InGame_Label = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY, ctlW, 1.0));
   InGame_Label.SetText(InGame_Text);
   InGame_Label.SetFont(1);
   InGame_Label.TextColor = GoupLabelTextColor;
@@ -345,7 +345,7 @@ function Created ()
   // if(I < 11)
   for(I = 0; I < 11; I++)
   {
-      InGame_KeyNames[I] = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
+      InGame_KeyNames[I] = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
       InGame_KeyNames[I].SetText(InGame_LabelList[I]);
       InGame_KeyNames[I].SetFont(1);
       InGame_KeyNames[I].TextColor = LabelTextColor;

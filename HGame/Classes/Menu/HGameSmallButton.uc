@@ -1,5 +1,5 @@
-// Metallicafan212:	Button that scales the position and size to fit the current screen
-class HGameButton based on UWindowButton;
+// Metallicafan212:	Scaleable small button
+class HGameSmallButton based on UWindowSmallButton;
 
 var float WX, WY, WW, WH;
 

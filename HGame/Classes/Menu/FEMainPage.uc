@@ -12,7 +12,7 @@ struct LevelListItem
 };
 
 var HGameButton NewGameButton;
-var UWindowSmallButton LoadGameButton;
+var HGameSmallButton LoadGameButton;
 var HGameButton OptionsButton;
 var HGameButton CreditsButton;
 var HGameButton ExitButton;
@@ -20,7 +20,7 @@ var HGameButton LangButton;
 var HGameButton LogoWindow;
 var string LegalText;
 var HPMessageBox ConfirmExit;
-var UWindowSmallButton VersionButton;
+var HGameSmallButton VersionButton;
 var bool bE3DemoMode;
 var HGameButton E3DemoStartButton;
 var LevelListItem LevelList[30];
@@ -68,7 +68,7 @@ function Created ()
 
   Super.Created();
   LegalText = Localize("all","legal_title_01","Pickup");
-  VersionButton = UWindowSmallButton(CreateControl(Class'UWindowSmallButton',WinWidth - 84,WinHeight - 30,84.0,25.0));
+  VersionButton = HGameSmallButton(CreateControl(Class'HGameSmallButton',WinWidth - 84,WinHeight - 30,84.0,25.0));
   VersionButton.SetFont(0);
   VersionButton.TextColor.R = 250;
   VersionButton.TextColor.G = 250;

@@ -1399,7 +1399,7 @@ function RenderUWindow (Canvas Canvas)
   if ( Viewport.bWindowsMouseAvailable && (Root != None) )
   {
     MouseX = Viewport.WindowsMouseX / Root.GUIScale;
-    MouseY = Viewport.WindowsMouseY / Root.GUIScale;
+    MouseY = Viewport.WindowsMouseY / Root.HGUIScale;//Root.GUIScale;
   }
   if (  !bCreatedRoot )
   {
@@ -1425,7 +1425,7 @@ function RenderUWindow (Canvas Canvas)
     Root.WinTop = 0.0;
     Root.WinLeft = 0.0;
     Root.WinWidth = Canvas.ClipX / Root.GUIScale;
-    Root.WinHeight = Canvas.ClipY / Root.GUIScale;
+    Root.WinHeight = Canvas.ClipY / Root.HGUIScale;//Root.GUIScale;
     Root.RealWidth = Canvas.ClipX;
     Root.RealHeight = Canvas.ClipY;
     Root.ClippingRegion.X = 0;

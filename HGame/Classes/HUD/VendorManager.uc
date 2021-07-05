@@ -660,7 +660,7 @@ function bool IsMouseOverVendorButton (int nLeft, int nTop, int nWidth, int nHei
 	hpCon = HPConsole(Level.PlayerHarryActor.Player.Console);
 	fScaleFactor = VendorCanvas.GetHudScaleFactor();
 	nVendorMouseX = hpCon.MouseX * hpCon.Root.GUIScale;
-	nVendorMouseY = hpCon.MouseY * hpCon.Root.GUIScale;
+	nVendorMouseY = hpCon.MouseY * hpCon.Root.HGUIScale;//hpCon.Root.GUIScale;
 	nLeft *= fScaleFactor;
 	nTop *= fScaleFactor;
 	nWidth *= fScaleFactor;

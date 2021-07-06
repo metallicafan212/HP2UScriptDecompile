@@ -28,7 +28,7 @@ function BeforePaint (Canvas C, float X, float Y)
 	local float H;
 	local float MaxWidth;
 	local int Count;
-	local HGameComboListItem I;
+	local UWindowComboListItem I;
 	local float ListX;
 	local float ListY;
 	local float ExtraWidth;
@@ -51,7 +51,7 @@ function BeforePaint (Canvas C, float X, float Y)
 	}
 	
 	ItemHeight = ((WinHeight - 7)) / Count;
-	I = HGameComboListItem(Items.Next);
+	I = UWindowComboListItem(Items.Next);
 	
 	while (I != None)
 	{
@@ -60,7 +60,7 @@ function BeforePaint (Canvas C, float X, float Y)
 		{
 			MaxWidth = W + ExtraWidth;
 		}
-		I = HGameComboListItem(I.Next);
+		I = UWindowComboListItem(I.Next);
 	}
 	
 	WinWidth = MaxWidth;

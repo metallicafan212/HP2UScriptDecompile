@@ -7,7 +7,7 @@ class ShortCutList extends UWindowGrid;
 var int SelectedRow;
 var int NumRows;
 
-function Reset ()
+function Reset()
 {
 }
 
@@ -15,12 +15,12 @@ function LaunchShortcut (int Row)
 {
 }
 
-function OnLaunchButton ()
+function OnLaunchButton()
 {
   LaunchShortcut(SelectedRow);
 }
 
-function Created ()
+function Created()
 {
   Super.Created();
   RowHeight = 12.0;

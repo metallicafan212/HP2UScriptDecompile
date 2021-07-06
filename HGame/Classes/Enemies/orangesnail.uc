@@ -37,7 +37,7 @@ var(Snail) int nNormalBodyDamage;
 var(Snail) int nRamBodyDamage;
 var(Snail) float fStunDuration;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   if ( nMaxTrailSegments > 50 )
   {
@@ -70,7 +70,7 @@ event Tick (float fDeltaTime)
   }
 }
 
-event Falling ()
+event Falling()
 {
   Super.Falling();
   EndTrail();
@@ -86,7 +86,7 @@ event Landed (Vector HitNormal)
   }
 }
 
-function SetGroundSpeed ()
+function SetGroundSpeed()
 {
   if ( nEctoplasmTouchCount >= 1 )
   {
@@ -183,12 +183,12 @@ function DoTrailUpdates (float fDeltaTime)
   }
 }
 
-function StartTrail ()
+function StartTrail()
 {
   bLeaveTrail = True;
 }
 
-function EndTrail ()
+function EndTrail()
 {
   local int I;
 
@@ -224,7 +224,7 @@ function bool HandleSpellRictusempra (optional baseSpell spell, optional Vector 
   return True;
 }
 
-function PlaySnailHitSound ()
+function PlaySnailHitSound()
 {
   switch (Rand(3))
   {
@@ -244,7 +244,7 @@ function PlaySnailHitSound ()
   }
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   fCountdownAfterCut = 0.0;
   bCutInProgress = True;
@@ -254,7 +254,7 @@ function PlayerCutCapture ()
   }
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   fCountdownAfterCut = 3.0;
 }
@@ -307,7 +307,7 @@ auto state patrol
 	  }
   }
   
-  function Timer ()
+  function Timer()
   {
     SetTimer(RandRange(3.0,8.0),False);
     if ( Rand(2) == 0 )
@@ -318,7 +318,7 @@ auto state patrol
     }
   }
   
-  event BeginState ()
+  event BeginState()
   {
     Super.BeginState();
     SetGroundSpeed();
@@ -327,7 +327,7 @@ auto state patrol
     SetTimer(RandRange(3.0,8.0),False);
   }
   
-  event EndState ()
+  event EndState()
   {
     SetTimer(0.0,False);
   }
@@ -386,7 +386,7 @@ begin:
 
 state RamHarry
 {
-  function SetGroundSpeed ()
+  function SetGroundSpeed()
   {
     if ( nEctoplasmTouchCount >= 1 )
     {
@@ -396,7 +396,7 @@ state RamHarry
     }
   }
   
-  event BeginState ()
+  event BeginState()
   {
     Super.BeginState();
     StartTrail();
@@ -407,7 +407,7 @@ state RamHarry
     GotoState('patrol');
   }
   
-  event EndState ()
+  event EndState()
   {
     StopSound(soundAttackCry,SLOT_None);
     StopSound(soundWarningCry,SLOT_None);
@@ -432,7 +432,7 @@ state BumpedHarryPart1
 {
   ignores Bump; //UTPT didn't add this for some reason -AdamJD
   
-  function Vector GetAboutFaceVector ()
+  function Vector GetAboutFaceVector()
   {
     local Vector vDest;
   
@@ -453,7 +453,7 @@ state BumpedHarryPart1
 
 state BumpedHarryPart2
 {
-  function Vector GetDestVector ()
+  function Vector GetDestVector()
   {
     local Vector vDest;
     local int nRetreatScalar;

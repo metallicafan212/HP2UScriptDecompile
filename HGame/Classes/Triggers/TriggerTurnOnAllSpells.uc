@@ -22,7 +22,7 @@ auto state Waiting
   
 }
 
-function ProcessTrigger ()
+function ProcessTrigger()
 {
   harry(Level.PlayerHarryActor).ClientMessage("<*> Turning on ALL spells for this level!! <*>");
   harry(Level.PlayerHarryActor).bNoSpellBookCheck = True;

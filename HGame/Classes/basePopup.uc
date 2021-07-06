@@ -10,7 +10,7 @@ function Draw (Canvas Canvas)
 {
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   foreach AllActors(Class'harry',PlayerHarry)

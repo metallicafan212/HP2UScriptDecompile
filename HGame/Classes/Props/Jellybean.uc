@@ -11,7 +11,7 @@ var(JellyBeand) bool bFallsToGround;
 var int iSkinTexture;
 var bool bInitialized;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   if (  !bInitialized )
@@ -88,7 +88,7 @@ function Touch (Actor Other)
 
 auto state BounceIntoPlace
 {
-  function BeginState ()
+  function BeginState()
   {
     if ( bFallsToGround )
     {

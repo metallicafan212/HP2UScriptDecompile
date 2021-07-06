@@ -20,13 +20,13 @@ var float fTimeToComment;
 var Sound EndWhistle;
 var bool bBlewEndWhistle;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   CommentMgr = Spawn(Class'OliverWoodCommentMgr');
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   foreach AllActors(Class'OliverWood',Wood)
@@ -46,7 +46,7 @@ function PostBeginPlay ()
   InitialState = 'GameCutScene';
 }
 
-function OnPlayerTravelPostAccept ()
+function OnPlayerTravelPostAccept()
 {
   Super(Director).OnPlayerTravelPostAccept();
   // Opponent = 0;
@@ -56,13 +56,13 @@ function OnPlayerTravelPostAccept ()
 
 state GameCutScene
 {
-  function BeginState ()
+  function BeginState()
   {
     PlayerHarry.ClientMessage(string(Name) $ " Entered " $ string(GetStateName()) $ " State");
     Log(string(Name) $ " Entered " $ string(GetStateName()) $ " State");
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.ClientMessage(string(Name) $ " Exited " $ string(GetStateName()) $ " State");
     Log(string(Name) $ " Exited " $ string(GetStateName()) $ " State");
@@ -96,7 +96,7 @@ state GameCutScene
 
 state GameSnitchLesson extends GamePlay
 {
-  function BeginState ()
+  function BeginState()
   {
     Wood.PlaySound(Sound'Q_whistle_short',SLOT_Interact,1.0,,20000.0);
     bBlewEndWhistle = False;
@@ -108,7 +108,7 @@ state GameSnitchLesson extends GamePlay
     SetTimer(SnitchLessonTime,False);
   }
   
-  function EndState ()
+  function EndState()
   {
     SetTimer(0.0,False);
     Wood.StopHeadLook();
@@ -162,7 +162,7 @@ state GameSnitchLesson extends GamePlay
     }
   }
   
-  function OnActionKeyPressed ()
+  function OnActionKeyPressed()
   {
     local float fProximity;
     local Bludger Bludger;
@@ -195,7 +195,7 @@ state GameSnitchLesson extends GamePlay
     }
   }
   
-  function Timer ()
+  function Timer()
   {
     local Bludger Bludger;
     local float fTimeLeft;
@@ -238,7 +238,7 @@ state GameSnitchLesson extends GamePlay
 
 state GameMockGame extends GamePlay
 {
-  function BeginState ()
+  function BeginState()
   {
     local QuidditchPlayer OtherPlayer;
   
@@ -265,7 +265,7 @@ state GameMockGame extends GamePlay
     SetTimer(MockGameTime,False);
   }
   
-  function EndState ()
+  function EndState()
   {
     SetTimer(0.0,False);
     Super.EndState();
@@ -333,7 +333,7 @@ state GameMockGame extends GamePlay
     }
   }
   
-  function OnActionKeyPressed ()
+  function OnActionKeyPressed()
   {
     local float fProximity;
     local Bludger Bludger;
@@ -372,7 +372,7 @@ state GameMockGame extends GamePlay
     }
   }
   
-  function Timer ()
+  function Timer()
   {
     local Bludger Bludger;
     local float fTimeLeft;
@@ -421,23 +421,23 @@ state GameMockGame extends GamePlay
 
 state PendingEvent
 {
-  function BeginState ()
+  function BeginState()
   {
     SetTimer(FMax(1.0,CommentMgr.TimeLeftUntilSafeToSayAComment(True)),False);
   }
   
-  function EndState ()
+  function EndState()
   {
     SetTimer(0.0,False);
   }
   
-  function Timer ()
+  function Timer()
   {
     Wood.PlaySound(EndWhistle,SLOT_Interact,1.0,,20000.0);
     bBlewEndWhistle = True;
   }
   
-  function TriggerPendingEvent ()
+  function TriggerPendingEvent()
   {
     MakeSeekerLetGoOfSnitch();
     bSnitchVisible = False;

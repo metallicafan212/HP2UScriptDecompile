@@ -12,7 +12,7 @@ var float TimeCur;
 var string SavedCue;
 var harry PlayerHarry;
 
-event BeginPlay ()
+event BeginPlay()
 {
   Super.BeginPlay();
   PlayerHarry = harry(Level.PlayerHarryActor);
@@ -29,13 +29,13 @@ function Init (Actor A, float fEndOpacity, float fTime, optional string cue)
   PlayerHarry.ClientMessage("===---> Going to set actor " $ string(FadingActor) $ " from " $ string(FadeStart) $ " to " $ string(FadeEnd));
 }
 
-function CutBypass ()
+function CutBypass()
 {
   Finish();
   Super.CutBypass();
 }
 
-function Finish ()
+function Finish()
 {
   FadingActor.Opacity = FadeEnd;
   CutCue(SavedCue);

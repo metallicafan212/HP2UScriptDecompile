@@ -79,7 +79,7 @@ var float fGapTime;
 var bool bSeekersInRange;
 var float fTimeInRange;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int Variant;
   local QuidditchPlayer Player;
@@ -116,7 +116,7 @@ function SetOpponent (HouseAffiliation eNewOpponent)
   Log("QuidditchTauntMgr: Opponent = " $ string(eOpponent) $ ".");
 }
 
-function StartTaunts ()
+function StartTaunts()
 {
   bSeekersInRange = False;
   fTimeInRange = -1.0;
@@ -124,7 +124,7 @@ function StartTaunts ()
   SetTimer(FMax(0.2,TimeLeftUntilSafeToSayALine(True)),False);
 }
 
-function StopTaunts ()
+function StopTaunts()
 {
   SetTimer(0.0,False);
   if ( (Commentator != None) && (Commentator.fVolume > 0.62) )
@@ -133,13 +133,13 @@ function StopTaunts ()
   }
 }
 
-event Timer ()
+event Timer()
 {
   SayATaunt();
   SetTimer(FMax(0.2,TimeLeftUntilSafeToSayALine(True)),False);
 }
 
-function bool SayATaunt ()
+function bool SayATaunt()
 {
   local bool bSaid;
   local float fTimeSinceDrank;
@@ -360,7 +360,7 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
   return bSaid;
 }
 
-function InitTauntArray ()
+function InitTauntArray()
 {
   local int C;
   local int H;

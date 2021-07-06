@@ -39,7 +39,7 @@ function Color Col (float R, float G, float B)
   return C;
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   local float Time;
   local Vector Vel;
@@ -72,18 +72,18 @@ function Vector ProjectFuturePosition (float AtTime)
   return Location + (PadDir * PadSpeed * AtTime) + Region.Zone.ZoneGravity * AtTime;
 }
 
-event Destroyed ()
+event Destroyed()
 {
   TurnOffSpecialFX();
   Super.Destroyed();
 }
 
-function bool IsEnabled ()
+function bool IsEnabled()
 {
   return  !IsInState('stateDisabled');
 }
 
-function TurnOnSpecialFX ()
+function TurnOnSpecialFX()
 {
   local Vector hwd;
   local Vector hwdRotated;
@@ -112,7 +112,7 @@ function TurnOnSpecialFX ()
   }
 }
 
-function TurnOffSpecialFX ()
+function TurnOffSpecialFX()
 {
   if ( fxSparkles != None )
   {
@@ -172,7 +172,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
 
 auto state stateWaitForEvent
 {
-  function BeginState ()
+  function BeginState()
   {
     if (  !bEnableOnEvent )
     {
@@ -184,7 +184,7 @@ auto state stateWaitForEvent
 
 state stateDisabled
 {
-  function BeginState ()
+  function BeginState()
   {
     // eVulnerableToSpell = 21;
 	eVulnerableToSpell = SPELL_Spongify;
@@ -204,7 +204,7 @@ state stateDisabled
 
 state stateGoingToEnabled
 {
-  function BeginState ()
+  function BeginState()
   {
     local Vector vNewPos;
     local Rotator rNewRot;
@@ -236,7 +236,7 @@ state stateGoingToEnabled
 
 state stateEnabled
 {
-  function BeginState ()
+  function BeginState()
   {
     fTimeEnabled = 0.0;
   }
@@ -255,7 +255,7 @@ state stateEnabled
 
 state stateGoingToDisabled
 {
-  function BeginState ()
+  function BeginState()
   {
     DesiredRotation = rot(0,0,0);
     SetLocation(vStartPosition);

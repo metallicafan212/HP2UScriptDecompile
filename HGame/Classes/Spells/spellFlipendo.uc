@@ -4,11 +4,11 @@
 
 class spellFlipendo extends baseSpell;
 
-event BeginEvent ()
+event BeginEvent()
 {
 }
 
-event EndEvent ()
+event EndEvent()
 {
 }
 
@@ -16,7 +16,7 @@ event KilledBy (Pawn EventInstigator)
 {
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -33,7 +33,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
   }
@@ -50,7 +50,7 @@ state StateFlying
   begin:
 }
 
-function bool IsRelevantToMover ()
+function bool IsRelevantToMover()
 {
   return True;
 }

@@ -18,7 +18,7 @@ var bool bGoDisabled;
 var int Damage;
 var Sound BackGroundRootSound;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   tree = WhompingWillow(Owner);
   PlayerHarry = tree.PlayerHarry;
@@ -268,7 +268,7 @@ state ThrashingAndSmashing
   GotoState('stateIdle');
 }
 
-function DoHitGroundEffects ()
+function DoHitGroundEffects()
 {
   local Vector vX;
   local Vector vY;
@@ -332,7 +332,7 @@ function DoHitGroundEffects ()
   PlayerHarry.ShakeView(0.5,200.0,200.0);
 }
 
-function Class<Dustclouds> PickRandomDustParticle ()
+function Class<Dustclouds> PickRandomDustParticle()
 {
   local int I;
 

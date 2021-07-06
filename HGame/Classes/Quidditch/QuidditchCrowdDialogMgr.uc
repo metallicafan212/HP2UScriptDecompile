@@ -80,7 +80,7 @@ var QuidditchCrowd SpeakingCrowds;
 var int NumSpeakingCrowds;
 var QuidditchCrowd CurrentSpeakingCrowd;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int Variant;
   local QuidditchCrowd Crowd;
@@ -112,24 +112,24 @@ function SetOpponent (HouseAffiliation eNewOpponent)
   fillDialogArray();
 }
 
-function StartDialog ()
+function StartDialog()
 {
   fNextTimeALineCanBeSaid = (Level.TimeSeconds + (FRand() * 1.0)) + 1.0;
   SetTimer((fNextTimeALineCanBeSaid + fGapTime) - Level.TimeSeconds,False);
 }
 
-function StopDialog ()
+function StopDialog()
 {
   SetTimer(0.0,False);
 }
 
-event Timer ()
+event Timer()
 {
   SayADialogLine();
   SetTimer(FMax(fNoGapTimeBetweenLines,(fNextTimeALineCanBeSaid + fGapTime) - Level.TimeSeconds),False);
 }
 
-function PickNextSpeakingCrowd ()
+function PickNextSpeakingCrowd()
 {
   local int nSkip;
 
@@ -151,7 +151,7 @@ function PickNextSpeakingCrowd ()
   }
 }
 
-function SayADialogLine ()
+function SayADialogLine()
 {
   PickNextSpeakingCrowd();
   if (  !SayDialogLine(True) )
@@ -174,7 +174,7 @@ function float TimeLeftUntilSafeToSayALine (optional bool bNoGap)
   return fTimeLeft;
 }
 
-function bool DialogLineHasBeenSaidBefore ()
+function bool DialogLineHasBeenSaidBefore()
 {
   return Dialog.bHasBeenSaid;
 }
@@ -349,7 +349,7 @@ function string GetDialogLineId (int Sex, int House, int Variant, bool bMatchSpe
   }
 }
 
-function fillDialogArray ()
+function fillDialogArray()
 {
   local int S;
   local int H;

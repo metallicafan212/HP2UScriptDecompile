@@ -20,7 +20,7 @@ Var Texture textureOverSlider;
 var Texture textureSliderKnob;
 
 
-function Created ()
+function Created()
 {
   Super.Created();
   SliderWidth = 145.0;

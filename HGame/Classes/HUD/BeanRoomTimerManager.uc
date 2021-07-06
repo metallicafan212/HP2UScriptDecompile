@@ -4,7 +4,7 @@
 
 class BeanRoomTimerManager extends CountdownTimerManager;
 
-function float GetTimerDuration ()
+function float GetTimerDuration()
 {
   local harry PlayerHarry;
   local StatusGroup sgHousePts;

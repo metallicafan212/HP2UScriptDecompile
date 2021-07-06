@@ -8,7 +8,7 @@ class WCWarbeck extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardWarbeckBigTexture.PNG	GROUP=Icons	Name=WizCardWarbeckBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardWarbeckTex0.PNG	GROUP=Skins	Name=WizardCardWarbeckTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Celestina Warbeck";
   Super.PostBeginPlay();

@@ -6,7 +6,7 @@ class StatusGroupHousePoints extends StatusGroup;
 
 const strCUT_NAME= "Housepoints";
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
 	CutName = "Housepoints";
 }
@@ -191,7 +191,7 @@ function bool CutQuestion (string question)
 	}
 }
 
-function ResolveTies ()
+function ResolveTies()
 {
 	local StatusItem siGryffindorPts;
 	local StatusItem siSlytherinPts;
@@ -303,7 +303,7 @@ function bool IsHouseAhead (Class<StatusItem> classItem)
 	return classItem == siWinning.Class;
 }
 
-function PutGryffInLead ()
+function PutGryffInLead()
 {
 	local int nGryffPts;
 	local int nSlythPts;

@@ -7,7 +7,7 @@ class FlyToController extends HiddenHPawn;
 var bool bEnabled;
 var HPawn H;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	if ( Owner != None )
@@ -16,14 +16,14 @@ function PostBeginPlay ()
 	}
 }
 
-function EnableController ()
+function EnableController()
 {
 	bEnabled = True;
 	H = HPawn(Owner);
 	GotoState('DoingTheFlyTo');
 }
 
-function DisableController ()
+function DisableController()
 {
 	bEnabled = False;
 	GotoState('stateIdle');
@@ -78,7 +78,7 @@ auto state DoingTheFlyTo
   
 }
 
-function Vector GetVDest ()
+function Vector GetVDest()
 {
 	local Vector vDest;
 

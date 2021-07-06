@@ -29,7 +29,7 @@ var() PeevesType Type;
 var Sound throwSound;
 var PatrolPoint CurrentPoint;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
 	Super.PreBeginPlay();
 	bFlipPushable = True;
@@ -38,7 +38,7 @@ function PreBeginPlay ()
 	SetCollision(True,False,False);
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	if ( Type == Annoyance )
@@ -78,7 +78,7 @@ function bool HandleSpellSkurge (optional baseSpell spell, optional Vector vHitL
 	return True;
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
 	return float(Health) / 100;
 }
@@ -89,7 +89,7 @@ function Tick (float DeltaTime)
 	ParticleFXActor.SetLocation(Location + vect(0.00,0.00,-15.00));
 }
 
-function PeevesOuch ()
+function PeevesOuch()
 {
 	switch (Rand(3))
 	{
@@ -109,7 +109,7 @@ function PeevesOuch ()
 	PlaySound(peevesVoice, SLOT_Talk);
 }
 
-function PeevesYell ()
+function PeevesYell()
 {
 	sSoundID = "peeves_ow_long";
 	Localize("all",sSoundID,"HPdialog");
@@ -118,7 +118,7 @@ function PeevesYell ()
 	PlaySound(peevesVoice, SLOT_Talk);
 }
 
-function PeevesLaughing ()
+function PeevesLaughing()
 {
 	switch (Rand(3))
 	{
@@ -138,7 +138,7 @@ function PeevesLaughing ()
 	PlaySound(peevesVoice, SLOT_Talk);
 }
 
-function PeevesTaunting ()
+function PeevesTaunting()
 {
 	switch (Rand(2))
 	{
@@ -155,7 +155,7 @@ function PeevesTaunting ()
 	PlaySound(peevesVoice, SLOT_Talk);
 }
 
-function StopPeevesDialog ()
+function StopPeevesDialog()
 {
 	if ( BOOL_DEBUG_AI )
 	{
@@ -176,7 +176,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
 	GotoState('MoveToPoint');
 }
 
-function GotoFirstPoint ()
+function GotoFirstPoint()
 {
 	local PatrolPoint tempPatrolPoint;
 	local float fDist;
@@ -197,12 +197,12 @@ function GotoFirstPoint ()
 	CurrentPoint = ClosestPoint;
 }
 
-function GotoNextPoint ()
+function GotoNextPoint()
 {
 	CurrentPoint = CurrentPoint.NextPatrolPoint;
 }
 
-function FindClosestDeathPoint ()
+function FindClosestDeathPoint()
 {
 	local PatrolPoint tempPatrolPoint;
 	local float fDist;
@@ -227,7 +227,7 @@ function FindClosestDeathPoint ()
 	}
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
 	if ( Type == Annoyance )
 	{
@@ -239,7 +239,7 @@ function PlayerCutCapture ()
 	}
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
 	if ( Type != Annoyance )
 	{
@@ -254,7 +254,7 @@ function PlayerCutRelease ()
 	}
 }
 
-function Vector GetCamTargetLoc ()
+function Vector GetCamTargetLoc()
 {
 	local Vector V;
 	local Vector v1;
@@ -266,17 +266,17 @@ function Vector GetCamTargetLoc ()
 	return vLoc;
 }
 
-function Vector GetTargetLocation ()
+function Vector GetTargetLocation()
 {
 	return Location;
 }
 
-function Vector GetHarryFaceLocation ()
+function Vector GetHarryFaceLocation()
 {
 	return peevesTrigger.Location;
 }
 
-function Vector GetHarryMovementCenter ()
+function Vector GetHarryMovementCenter()
 {
 	return peevesTrigger.Location;
 }
@@ -444,7 +444,7 @@ begin:
 
 state stateAnnoyHarry
 {
-  function BeginState ()
+  function BeginState()
   {
 		LoopAnim('Flying');
   }

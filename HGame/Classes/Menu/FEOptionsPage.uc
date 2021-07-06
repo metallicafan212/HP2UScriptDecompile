@@ -62,7 +62,7 @@ function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
   }
 }
 
-function Created ()
+function Created()
 {
   textureLionClick = Texture(DynamicLoadObject("HP_Menu.Hud.MenuLionButtonClick",Class'Texture'));
   textureLionIdle = Texture(DynamicLoadObject("HP_Menu.Hud.MenuLionButtonIdle",Class'Texture'));
@@ -149,7 +149,7 @@ function Notify (UWindowDialogControl C, byte E)
   //}
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
   Super.PreSwitchPage();
 }

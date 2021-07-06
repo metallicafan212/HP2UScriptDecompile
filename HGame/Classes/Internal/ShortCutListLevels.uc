@@ -7,7 +7,7 @@ class ShortCutListLevels extends ShortCutList;
 var array<int> lableNumbers;
 var array<string> lableMapNames;
 
-function Reset ()
+function Reset()
 {
   local string FirstMap;
   local string NextMap;
@@ -36,7 +36,7 @@ function LaunchShortcut (int Row)
   baseConsole(Root.Console).ChangeLevel(lableMapNames[Row],True);
 }
 
-function Created ()
+function Created()
 {
   Super.Created();
   AddColumn(" Level",28.0);

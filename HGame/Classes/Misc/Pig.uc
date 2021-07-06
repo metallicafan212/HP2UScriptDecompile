@@ -8,7 +8,7 @@ var float fCurrTime;
 var() bool bLessFrequentSquealing;
 var SleepingGoyle SlGoyle;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local SleepingGoyle sg;
 
@@ -49,7 +49,7 @@ function Tick (float DeltaTime)
   }
 }
 
-function PlaySoundSnort ()
+function PlaySoundSnort()
 {
   switch (Rand(10))
   {
@@ -87,7 +87,7 @@ function PlaySoundSnort ()
   }
 }
 
-function PlaySoundSqueal ()
+function PlaySoundSqueal()
 {
   PlaySound(Sound'pig_squeal1',SLOT_None,,,,RandRange(0.81,1.12));
 }

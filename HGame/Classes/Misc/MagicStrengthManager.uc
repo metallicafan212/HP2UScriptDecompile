@@ -42,7 +42,7 @@ event Tick (float fDelta)
   }
 }
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   Super.PostBeginPlay();
   textureSlider = Texture(DynamicLoadObject("HP_Menu.Hud.MagicStrengthSlider",Class'Texture'));
@@ -50,13 +50,13 @@ event PostBeginPlay ()
   textureBarFull = Texture(DynamicLoadObject("HP_Menu.Hud.MagicStrengthFull",Class'Texture'));
 }
 
-function StartMagicStrength ()
+function StartMagicStrength()
 {
   HPHud(PlayerHarry.myHUD).RegisterMagicStrength(self);
   GotoState('DisplayStrength');
 }
 
-function EndMagicStrength ()
+function EndMagicStrength()
 {
   HPHud(PlayerHarry.myHUD).RegisterMagicStrength(None);
   GotoState('Idle');
@@ -126,7 +126,7 @@ state DisplayStrength
     Canvas.DrawIcon(textureSlider,fScaleFactor);
   }
   
-  event BeginState ()
+  event BeginState()
   {
     fRemainingStrength = 120.0;
   }

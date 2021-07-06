@@ -8,7 +8,7 @@ class WCGraves extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardGravesBigTexture.PNG	GROUP=Icons	Name=WizCardGravesBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardGravesTex0.PNG	GROUP=Skins	Name=WizardCardGravesTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Merton Graves";
   Super.PostBeginPlay();

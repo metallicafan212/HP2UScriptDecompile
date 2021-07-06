@@ -4,7 +4,7 @@
 
 class CutLogWindow extends UWindowFramedWindow;
 
-function Created ()
+function Created()
 {
   Super.Created();
   bSizable = False;

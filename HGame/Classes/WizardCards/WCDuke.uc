@@ -8,7 +8,7 @@ class WCDuke extends SilverCards;
 #exec Texture Import File=Textures\Icons\WizCardDukeBigTexture.PNG	GROUP=Icons	Name=WizCardDukeBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardDukeTex0.PNG	GROUP=Skins	Name=WizardCardDukeTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Kirley Duke";
   Super.PostBeginPlay();

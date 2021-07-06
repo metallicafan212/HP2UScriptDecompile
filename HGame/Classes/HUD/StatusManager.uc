@@ -11,7 +11,7 @@ var int nCanvasSizeY;
 var harry PlayerHarry;
 
 
-event PreBeginPlay ()
+event PreBeginPlay()
 {
   Super.PreBeginPlay();
   sgList = None;
@@ -172,7 +172,7 @@ function StatusGroup GetStatusGroup (Class<StatusGroup> classGroup)
   return None;
 }
 
-function CreateStartupItems ()
+function CreateStartupItems()
 {
   GetStatusItem(Class'StatusGroupHealth',Class'StatusItemHealth');
   GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts');
@@ -190,7 +190,7 @@ function AddHPointsG (int nPoints)
   AddHousePoints(Class'StatusItemGryffindorPts',nPoints);
 }
 
-function int GetHPointsG ()
+function int GetHPointsG()
 {
   return GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts').nCount;
 }
@@ -200,7 +200,7 @@ function AddHPointsH (int nPoints)
   AddHousePoints(Class'StatusItemHufflePuffPts',nPoints);
 }
 
-function int GetHPointsH ()
+function int GetHPointsH()
 {
   return GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemHufflePuffPts').nCount;
 }
@@ -210,7 +210,7 @@ function AddHPointsS (int nPoints)
   AddHousePoints(Class'StatusItemSlytherinPts',nPoints);
 }
 
-function int GetHPointsS ()
+function int GetHPointsS()
 {
   return GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemSlytherinPts').nCount;
 }
@@ -220,7 +220,7 @@ function AddHPointsR (int nPoints)
   AddHousePoints(Class'StatusItemRavenclawPts',nPoints);
 }
 
-function int GetHPointsR ()
+function int GetHPointsR()
 {
   return GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemRavenclawPts').nCount;
 }
@@ -248,7 +248,7 @@ function AddFMucus (int nCount)
   IncrementCount(Class'StatusGroupPotionIngr',Class'StatusItemFlobberMucus',nCount);
 }
 
-function int GetFMucusCount ()
+function int GetFMucusCount()
 {
   return GetStatusItem(Class'StatusGroupPotionIngr',Class'StatusItemFlobberMucus').nCount;
 }
@@ -258,7 +258,7 @@ function AddWBark (int nCount)
   IncrementCount(Class'StatusGroupPotionIngr',Class'StatusItemWiggenBark',nCount);
 }
 
-function int GetWBarkCount ()
+function int GetWBarkCount()
 {
   return GetStatusItem(Class'StatusGroupPotionIngr',Class'StatusItemWiggenBark').nCount;
 }
@@ -268,7 +268,7 @@ function AddBicorn (int nCount)
   IncrementCount(Class'StatusGroupPolyIngr',Class'StatusItemBicorn',nCount);
 }
 
-function int GetBicornCount ()
+function int GetBicornCount()
 {
   return GetStatusItem(Class'StatusGroupPolyIngr',Class'StatusItemBicorn').nCount;
 }
@@ -278,7 +278,7 @@ function AddBoomslang (int nCount)
   IncrementCount(Class'StatusGroupPolyIngr',Class'StatusItemBoomslang',nCount);
 }
 
-function int GetBoomslangCount ()
+function int GetBoomslangCount()
 {
   return GetStatusItem(Class'StatusGroupPolyIngr',Class'StatusItemBoomslang').nCount;
 }
@@ -288,7 +288,7 @@ function int AddNimbus (int nCount)
   IncrementCount(Class'StatusGroupQGear',Class'StatusItemNimbus',nCount);
 }
 
-function int GetNimbusCount ()
+function int GetNimbusCount()
 {
   return GetStatusItem(Class'StatusGroupQGear',Class'StatusItemNimbus').nCount;
 }
@@ -298,7 +298,7 @@ function int AddQArmor (int nCount)
   IncrementCount(Class'StatusGroupQGear',Class'StatusItemQArmor',nCount);
 }
 
-function int GetQArmorCount ()
+function int GetQArmorCount()
 {
   return GetStatusItem(Class'StatusGroupQGear',Class'StatusItemQArmor').nCount;
 }
@@ -308,7 +308,7 @@ function AddBeans (int nCount)
   IncrementCount(Class'StatusGroupJellybeans',Class'StatusItemJellybeans',nCount);
 }
 
-function int GetBeanCount ()
+function int GetBeanCount()
 {
   return GetStatusItem(Class'StatusGroupJellybeans',Class'StatusItemJellybeans').nCount;
 }
@@ -318,7 +318,7 @@ function AddPotions (int nCount)
   IncrementCount(Class'StatusGroupPotions',Class'StatusItemWiggenwell',nCount);
 }
 
-function int GetPotionCount ()
+function int GetPotionCount()
 {
   return GetStatusItem(Class'StatusGroupPotions',Class'StatusItemWiggenwell').nCount;
 }
@@ -328,7 +328,7 @@ function AddHealth (int nCount)
   IncrementCount(Class'StatusGroupHealth',Class'StatusItemHealth',nCount);
 }
 
-function int GetHealthCount ()
+function int GetHealthCount()
 {
   return GetStatusItem(Class'StatusGroupHealth',Class'StatusItemHealth').nCount;
 }
@@ -343,7 +343,7 @@ function AddHealthPotential (int nCount)
   IncrementCountPotential(Class'StatusGroupHealth',Class'StatusItemHealth',nCount);
 }
 
-function int GetHealthPotentialCount ()
+function int GetHealthPotentialCount()
 {
   return GetStatusItem(Class'StatusGroupHealth',Class'StatusItemHealth').nCurrCountPotential;
 }
@@ -353,7 +353,7 @@ function AddLock1 (int nCount)
   IncrementCountPotential(Class'StatusGroupLocks',Class'StatusItemLock1',nCount);
 }
 
-function int GetLock1Count ()
+function int GetLock1Count()
 {
   return GetStatusItem(Class'StatusGroupLocks',Class'StatusItemLock1').nCount;
 }
@@ -363,7 +363,7 @@ function AddLock2 (int nCount)
   IncrementCountPotential(Class'StatusGroupLocks',Class'StatusItemLock2',nCount);
 }
 
-function int GetLock2Count ()
+function int GetLock2Count()
 {
   return GetStatusItem(Class'StatusGroupLocks',Class'StatusItemLock2').nCount;
 }
@@ -373,7 +373,7 @@ function AddLock3 (int nCount)
   IncrementCountPotential(Class'StatusGroupLocks',Class'StatusItemLock3',nCount);
 }
 
-function int GetLock3Count ()
+function int GetLock3Count()
 {
   return GetStatusItem(Class'StatusGroupLocks',Class'StatusItemLock3').nCount;
 }
@@ -383,7 +383,7 @@ function AddLock4 (int nCount)
   IncrementCountPotential(Class'StatusGroupLocks',Class'StatusItemLock4',nCount);
 }
 
-function int GetLock4Count ()
+function int GetLock4Count()
 {
   return GetStatusItem(Class'StatusGroupLocks',Class'StatusItemLock4').nCount;
 }
@@ -442,7 +442,7 @@ function GiveCard (int nCardId, bool bHarry)
   }
 }
 
-function GiveAllCardsToHarry ()
+function GiveAllCardsToHarry()
 {
   local StatusItemWizardCards siBronzeCards;
   local StatusItemWizardCards siSilverCards;
@@ -485,7 +485,7 @@ function GiveAllCardsToHarry ()
   GetStatusItem(Class'StatusGroupLocks',Class'StatusItemLock4').SetCount(1);
 }
 
-function ShowCardData ()
+function ShowCardData()
 {
   local StatusGroupWizardCards sgWC;
 

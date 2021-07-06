@@ -9,7 +9,7 @@ class spellTrigger extends Trigger;
 
 var() bool bHitJustFromFront;
 
-function BeginPlay ()
+function BeginPlay()
 {
 	Super.BeginPlay();
 }

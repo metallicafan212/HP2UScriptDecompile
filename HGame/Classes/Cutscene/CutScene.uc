@@ -32,7 +32,7 @@ function CutSceneLog (string Str)
   Log("CutSceneLog:<" $ FileName $ ">" $ Str);
 }
 
-function OpenCutConsole ()
+function OpenCutConsole()
 {
   HPConsole(Level.PlayerHarryActor.Player.Console).ShowCutConsole(True);
 }
@@ -54,7 +54,7 @@ function CutCue (string cue)
   }
 }
 
-event OnResolveGameState ()
+event OnResolveGameState()
 {
   if (  !bInCurrentGameState )
   {
@@ -75,7 +75,7 @@ event OnResolveGameState ()
   }
 }
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   if ( bLevelLoadStarts )
   {
@@ -83,7 +83,7 @@ event PostBeginPlay ()
   }
 }
 
-function CreateThreads ()
+function CreateThreads()
 {
   local int I;
   local int t;
@@ -126,7 +126,7 @@ function CreateThreads ()
   }
 }
 
-function DeleteThreads ()
+function DeleteThreads()
 {
   local int I;
 
@@ -145,7 +145,7 @@ function DeleteThreads ()
 
 auto state disabled
 {
-  event BeginState ()
+  event BeginState()
   {
     harry(Level.PlayerHarryActor).ClientMessage(string(self) $ " Entering DISABLED state");
     if ( bPlaying || bFastForwarding )
@@ -170,7 +170,7 @@ auto state disabled
   {
   }
   
-  function Play ()
+  function Play()
   {
   }
   
@@ -178,7 +178,7 @@ auto state disabled
 
 state Idle
 {
-  event BeginState ()
+  event BeginState()
   {
     harry(Level.PlayerHarryActor).ClientMessage(string(self) $ " Entering ENABLED state");
     if (  !bInCurrentGameState )
@@ -231,7 +231,7 @@ state Idle
   }
 }
 
-function ForceFinish ()
+function ForceFinish()
 {
   local int I;
 
@@ -249,7 +249,7 @@ function ForceFinish ()
   }
 }
 
-function bool CheckFinished ()
+function bool CheckFinished()
 {
   local int I;
   local bool bStillRunning;
@@ -269,7 +269,7 @@ function bool CheckFinished ()
   return  !bStillRunning;
 }
 
-function bool CheckAdvancing ()
+function bool CheckAdvancing()
 {
   local int I;
   local bool bStillAdvancing;
@@ -289,7 +289,7 @@ function bool CheckAdvancing ()
   return bStillAdvancing;
 }
 
-function FastForward ()
+function FastForward()
 {
   if ( bPlaying || bFastForwarding )
   {
@@ -306,7 +306,7 @@ state Running
   {
   }
   
-  function FastForward ()
+  function FastForward()
   {
     if ( bSkipAllowed )
     {
@@ -329,7 +329,7 @@ state Running
   goto ('Loop');
 }
 
-function DumpCurState ()
+function DumpCurState()
 {
   local int I;
 
@@ -357,14 +357,14 @@ function DumpCurState ()
 
 state FastForwarding
 {
-  event BeginState ()
+  event BeginState()
   {
     safetyLoopCount = 0;
     bFastForwarding = True;
     harry(Level.PlayerHarryActor).ClientMessage(string(self) $ " FastForwarding");
   }
   
-  function StartThreadsFF ()
+  function StartThreadsFF()
   {
     local int I;
   
@@ -381,7 +381,7 @@ state FastForwarding
     }
   }
   
-  function FastForward ()
+  function FastForward()
   {
     CutSceneLog("***Fastforward called while already fastforwarding");
   }
@@ -422,7 +422,7 @@ Loop:
   }
 }
 
-function Play ()
+function Play()
 {
   if ( bPlaying )
   {

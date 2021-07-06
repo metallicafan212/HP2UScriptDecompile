@@ -16,24 +16,24 @@ var Texture textureIdle;
 var Texture textureOver;
 
 
-function Created ()
+function Created()
 {
   Super.Created();
   IdleTexture = textureIdle; 	//Texture'FEComboIdleTexture';
   OverTexture = textureOver; 	//Texture'FEComboOverTexture';
 }
 
-function CreateEditBox ()
+function CreateEditBox()
 {
   EditBox = HPMenuOptionEditBox(CreateWindow(Class'HPMenuOptionEditBox',0.0,0.0,WinWidth,WinHeight));
 }
 
-function CreateComboButton ()
+function CreateComboButton()
 {
   Button = HPMenuOptionComboButton(CreateWindow(Class'HPMenuOptionComboButton',0.0,0.0,WinWidth,WinHeight));
 }
 
-function CreateComboList ()
+function CreateComboList()
 {
   List = HPMenuOptionComboList(Root.CreateWindow(ListClass,0.0,0.0,WinWidth,WinHeight));
 }
@@ -73,7 +73,7 @@ function Paint (Canvas C, float X, float Y)
   //}
 }
 
-function CloseUpWithNoSound ()
+function CloseUpWithNoSound()
 {
   bListVisible = False;
   EditBox.SetEditable(bCanEdit);

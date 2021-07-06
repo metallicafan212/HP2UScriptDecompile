@@ -8,7 +8,7 @@ class WCGunhilda extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardGunhildaBigTexture.PNG	GROUP=Icons	Name=WizCardGunhildaBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardGunhildaTex0.PNG	GROUP=Skins	Name=WizardCardGunhildaTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Gunhilda of Gorsemoor";
   Super.PostBeginPlay();

@@ -11,7 +11,7 @@ class WCRavenclaw extends Goldcards;
 #exec Texture Import File=Textures\Icons\WizCardRowenaBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardRowenaBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardRavenclawTex0.PNG	GROUP=Skins	Name=WizardCardRavenclawTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Rowena Ravenclaw";
   Super.PostBeginPlay();

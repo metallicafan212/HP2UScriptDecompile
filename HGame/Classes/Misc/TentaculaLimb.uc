@@ -37,7 +37,7 @@ function ColObjTouch (Actor Other, GenericColObj ColObj)
   }
 }
 
-function PlaySoundOuch ()
+function PlaySoundOuch()
 {
   switch (Rand(3))
   {
@@ -55,7 +55,7 @@ function PlaySoundOuch ()
   }
 }
 
-function PlaySoundWilt ()
+function PlaySoundWilt()
 {
   switch (Rand(8))
   {
@@ -67,7 +67,7 @@ function PlaySoundWilt ()
   }
 }
 
-function PlaySoundAttack ()
+function PlaySoundAttack()
 {
   switch (Rand(3))
   {

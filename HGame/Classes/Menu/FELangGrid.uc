@@ -8,7 +8,7 @@ var UWindowGridColumn ngSecretColumn;
 var FESoundBrowser browser;
 var int SelectedRow;
 
-function Created ()
+function Created()
 {
   Super.Created();
   RowHeight = 12.0;

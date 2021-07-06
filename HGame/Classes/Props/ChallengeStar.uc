@@ -6,7 +6,7 @@ class ChallengeStar extends HProp;
 
 state PickupProp
 {
-  function EndState ()
+  function EndState()
   {
     local ChallengeScoreManager managerChallenge;
   
@@ -36,7 +36,7 @@ defaultproperties
 
     classStatusItem=Class'StatusItemStars'
 
-    attachedParticleClass=Class'HPParticle.Goldstar01'
+    attachedParticleClass(0)=Class'HPParticle.Goldstar01'
 
     // Physics=5
 	Physics=PHYS_Rotating

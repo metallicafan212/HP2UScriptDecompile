@@ -12,7 +12,7 @@ var() float fLightningViolence;
 var() int iLightningLoops;
 var() float fTimeBetweenchanges;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	foreach AllActors(Class'FlyingFordDirector',Director)
 	{

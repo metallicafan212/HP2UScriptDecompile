@@ -4,7 +4,7 @@
 
 class FlobberwormMucus extends PotionIngredients;
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   Super.PostBeginPlay();
   LoopAnim('Idle');

@@ -79,7 +79,7 @@ var QuidditchPlayer SpeakingPlayers;
 var int NumSpeakingPlayers;
 var QuidditchPlayer CurrentSpeakingPlayer;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int Variant;
   local QuidditchPlayer Player;
@@ -114,24 +114,24 @@ function SetOpponent (HouseAffiliation eNewOpponent)
   Log("QuidditchPlayerDialogMgr: Opponent = " $ string(eOpponent) $ ".");
 }
 
-function StartDialog ()
+function StartDialog()
 {
   fNextTimeALineCanBeSaid = (Level.TimeSeconds + (FRand() * 1.0)) + 1.0;
   SetTimer((fNextTimeALineCanBeSaid + fGapTime) - Level.TimeSeconds,False);
 }
 
-function StopDialog ()
+function StopDialog()
 {
   SetTimer(0.0,False);
 }
 
-event Timer ()
+event Timer()
 {
   SayADialogLine();
   SetTimer(FMax(fNoGapTimeBetweenLines,(fNextTimeALineCanBeSaid + fGapTime) - Level.TimeSeconds),False);
 }
 
-function PickNextSpeakingPlayer ()
+function PickNextSpeakingPlayer()
 {
   local int nSkip;
 
@@ -153,7 +153,7 @@ function PickNextSpeakingPlayer ()
   }
 }
 
-function SayADialogLine ()
+function SayADialogLine()
 {
   PickNextSpeakingPlayer();
   if (  !SayDialogLine(True) )
@@ -369,7 +369,7 @@ function string GetDialogLineId (int Sex, int House, int Variant)
   }
 }
 
-function fillDialogArray ()
+function fillDialogArray()
 {
   local int S;
   local int H;

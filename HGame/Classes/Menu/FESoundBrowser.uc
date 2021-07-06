@@ -11,7 +11,7 @@ var string status[3000];
 var string MasterText[3000];
 var int MasterCount;
 
-function Created ()
+function Created()
 {
   local int I;
   local Texture tempTexture;
@@ -35,7 +35,7 @@ function Paint (Canvas Canvas, float X, float Y)
   HPHud(Root.Console.Viewport.Actor.myHUD).managerCutScene.RenderHudItemManager(Canvas,False,True,False);
 }
 
-function LoadDialogKeys ()
+function LoadDialogKeys()
 {
   local string Id;
   local string Key;
@@ -65,7 +65,7 @@ function LoadDialogKeys ()
   }
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
   local string Text;
   local Sound Sound;

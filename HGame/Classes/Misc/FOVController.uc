@@ -35,7 +35,7 @@ function float EaseTo (float t)
   //}
 }
 
-event BeginPlay ()
+event BeginPlay()
 {
   Super.BeginPlay();
   PlayerHarry = harry(Level.PlayerHarryActor);
@@ -52,7 +52,7 @@ function Init (float SetFOVEnd, float SetTime, optional bool bInEaseTo)
   PlayerHarry.ClientMessage("FOVController -> FOVStart: " $ string(FOVStart) $ " FOVEnd: " $ string(FOVEnd) $ " FOVTime: " $ string(FOVTime));
 }
 
-function DestroyAllFOVControllers ()
+function DestroyAllFOVControllers()
 {
   local FOVController A;
 
@@ -65,13 +65,13 @@ function DestroyAllFOVControllers ()
   }
 }
 
-function CutBypass ()
+function CutBypass()
 {
   Finish();
   Super.CutBypass();
 }
 
-function Finish ()
+function Finish()
 {
   PlayerHarry.DesiredFOV = FOVEnd;
   PlayerHarry.FovAngle = FOVEnd;

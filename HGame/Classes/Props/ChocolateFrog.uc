@@ -15,7 +15,7 @@ var int JumpOutOfWayCount;
 var() float fJumpTime;
 var Vector vTemp;
 
-function Sound GetRibbitOrHopsound ()
+function Sound GetRibbitOrHopsound()
 {
   if ( FRand() <= 0.69999999 )
   {
@@ -45,7 +45,7 @@ function JumpToNewLoc (Vector V, optional bool bJumpOutOfWay)
 
 auto state holdstill
 {
-  function Timer ()
+  function Timer()
   {
     local Vector vH;
     local Vector vToMe;
@@ -70,7 +70,7 @@ auto state holdstill
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     SetTimer(0.0,False);
   }

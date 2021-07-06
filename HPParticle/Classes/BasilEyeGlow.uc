@@ -37,7 +37,7 @@ auto state stateIdle
 
 state stateGlow
 {
-  function BeginState ()
+  function BeginState()
   {
     EnableEmission(True);
   }

@@ -102,7 +102,7 @@ var Texture textureBigEmptyCard;
 var Texture textureSmallEmptyCard;
 
 
-function Created ()
+function Created()
 {
   local int I;
 
@@ -198,7 +198,7 @@ function Created ()
   Super.Created();
 }
 
-function SetCardCountData ()
+function SetCardCountData()
 {
   local UWindowLabelControl LabelControl;
 
@@ -209,13 +209,13 @@ function SetCardCountData ()
   strCardCountGold = string(nHarrysGoldCount) $ "/" $ string(11);
 }
 
-function ShowWindow ()
+function ShowWindow()
 {
   UpdateDisplayDetails();
   Super.ShowWindow();
 }
 
-function PreOpenBook ()
+function PreOpenBook()
 {
   ShowWindow();
 }
@@ -235,14 +235,14 @@ function SetLargeCardProps (Class<WizardCardIcon> classWC)
   }
 }
 
-function UpdateDisplayDetails ()
+function UpdateDisplayDetails()
 {
   UpdatePreviousNextButtons();
   UpdatePageCards();
   UpdateGroupButtonTextures();
 }
 
-function UpdatePreviousNextButtons ()
+function UpdatePreviousNextButtons()
 {
   BackButton.bDisabled = nCurrPage == 0;
   if ( CurrCardGroup == CardGroup_Gold )
@@ -312,7 +312,7 @@ function UpdatePreviousNextButtons ()
   }
 }
 
-function UpdatePageCards ()
+function UpdatePageCards()
 {
   local int I;
   local StatusGroupWizardCards sgCards;
@@ -402,7 +402,7 @@ function UpdatePageCards ()
   HiliteCurrCard();
 }
 
-function UpdateGroupButtonTextures ()
+function UpdateGroupButtonTextures()
 {
   switch (CurrCardGroup)
   {
@@ -561,7 +561,7 @@ function Notify (UWindowDialogControl C, byte E)
   Super.Notify(C,E);
 }
 
-function HiliteCurrCard ()
+function HiliteCurrCard()
 {
   if ( nCurrItemOnPage < 10 )
   {
@@ -772,13 +772,13 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
   Canvas.Font = fontSave;
 }
 
-function int GetStatusY ()
+function int GetStatusY()
 {
   // return 374;
   return nSTATUS_BAR_Y;
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
   PlayerHarry = harry(Root.Console.Viewport.Actor);
   InitHarryOwnedCards();
@@ -787,7 +787,7 @@ function PreSwitchPage ()
   Super.PreSwitchPage();
 }
 
-function InitHarryOwnedCards ()
+function InitHarryOwnedCards()
 {
   local int I;
   local int J;
@@ -879,7 +879,7 @@ function InitHarryOwnedCards ()
   }
 }
 
-function SetInitialSelection ()
+function SetInitialSelection()
 {
   local StatusGroupWizardCards sgCards;
   local StatusItemWizardCards siCards;

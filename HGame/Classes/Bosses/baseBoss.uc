@@ -15,7 +15,7 @@ var(Movement) float GroundSpeedEnd;
 var() name CamStateName;
 var bool bShowBossHealth;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   if ( bCollideActors && bBlockActors && bBlockPlayers )
@@ -24,12 +24,12 @@ function PostBeginPlay ()
   }
 }
 
-function StartBossEncounter ()
+function StartBossEncounter()
 {
   Health = 100;
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
   return 1.0 - iNumHits / iNumHitsToBeat;
 }
@@ -38,7 +38,7 @@ event TakeDamage (int Damage, Pawn EventInstigator, Vector HitLocation, Vector M
 {
 }
 
-function SendDefeatedTrigger ()
+function SendDefeatedTrigger()
 {
   if ( TrigEventWhenDefeated != 'None' )
   {
@@ -47,7 +47,7 @@ function SendDefeatedTrigger ()
   }
 }
 
-function SendVictoriousTrigger ()
+function SendVictoriousTrigger()
 {
   if ( TrigEventWhenVictor != 'None' )
   {
@@ -57,7 +57,7 @@ function SendVictoriousTrigger ()
   }
 }
 
-function SendDefeatedTrigger2 ()
+function SendDefeatedTrigger2()
 {
   if ( TrigEventWhenDefeated2 != 'None' )
   {
@@ -66,7 +66,7 @@ function SendDefeatedTrigger2 ()
   }
 }
 
-function SendVictoriousTrigger2 ()
+function SendVictoriousTrigger2()
 {
   if ( TrigEventWhenVictor2 != 'None' )
   {
@@ -76,22 +76,22 @@ function SendVictoriousTrigger2 ()
   }
 }
 
-function Vector GetCamTargetLoc ()
+function Vector GetCamTargetLoc()
 {
   return Location;
 }
 
-function Vector GetTargetLocation ()
+function Vector GetTargetLocation()
 {
   return Location;
 }
 
-function Vector GetHarryFaceLocation ()
+function Vector GetHarryFaceLocation()
 {
   return Location;
 }
 
-function Vector GetHarryMovementCenter ()
+function Vector GetHarryMovementCenter()
 {
   return Location;
 }
@@ -120,19 +120,19 @@ function Rotator AdjustToss (float ProjSpeed, Vector projStart, int AimError, bo
   }
 }
 
-function Vector GetCameraOffset ()
+function Vector GetCameraOffset()
 {
   return vect(0.00,0.00,0.00);
 }
 
-function name GetCamState ()
+function name GetCamState()
 {
   return CamStateName;
 }
 
 state dieing
 {
-  function movearound ()
+  function movearound()
   {
     local Rotator Direction;
   
@@ -211,11 +211,11 @@ function TweakSetting (string S)
   PlayerHarry.ClientMessage("Boss unknown TweakSetting:" $ S);
 }
 
-function BeatBoss ()
+function BeatBoss()
 {
 }
 
-function bool SetCamMode ()
+function bool SetCamMode()
 {
   return False;
 }

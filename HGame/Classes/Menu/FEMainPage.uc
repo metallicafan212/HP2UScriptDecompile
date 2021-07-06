@@ -56,7 +56,7 @@ function Paint (Canvas Canvas, float X, float Y)
   Canvas.Font = saveFont;
 }
 
-function Created ()
+function Created()
 {
   local int I;
   local Texture tempTexture;
@@ -245,7 +245,7 @@ function Notify (UWindowDialogControl C, byte E)
   }
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
 }
 

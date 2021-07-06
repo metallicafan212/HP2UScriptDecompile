@@ -56,7 +56,7 @@ var HChar Speaker;
 var bool bMute;
 var float fVolume;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int Variant;
 
@@ -211,7 +211,7 @@ function bool SayComment (WoodComment eComment, optional bool bNoGap)
   return bSaid;
 }
 
-function InitCommentArray ()
+function InitCommentArray()
 {
   local int C;
   local int V;

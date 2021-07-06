@@ -4,11 +4,11 @@
 
 class SpiderDead extends SpiderSmall;
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
 }
 

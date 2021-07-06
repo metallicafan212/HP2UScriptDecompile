@@ -35,7 +35,7 @@ var float fBounceIntoPlaceTimeout;
 var bool bBounceIntoPlace;
 var Sound soundBounce;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   if ( bBounceIntoPlace )
@@ -60,7 +60,7 @@ event Touch (Actor Other)
   }
 }
 
-function FaceCamera ()
+function FaceCamera()
 {
   local Rotator R;
 
@@ -72,7 +72,7 @@ function FaceCamera ()
   SetRotation(R);
 }
 
-function ZoomToCamera ()
+function ZoomToCamera()
 {
   local Vector V;
 
@@ -113,7 +113,7 @@ function RenderHud (Canvas Canvas)
   Canvas.DrawActor(self,False,True);
 }
 
-function DoPickupProp ()
+function DoPickupProp()
 {
   GotoState('PickupProp');
 }
@@ -137,7 +137,7 @@ event HitWall (Vector HitNormal, Actor Wall)
   }
 }
 
-function SetFlyProps ()
+function SetFlyProps()
 {
   // SetPhysics(4);
   SetPhysics(PHYS_Flying);
@@ -189,7 +189,7 @@ state DropOffProp
     TickPickupOrDropOff(Delta);
   }
   
-  event BeginState ()
+  event BeginState()
   {
     // PickupFlyTo = 3;
 	PickupFlyTo = FT_DropOffInWorld;
@@ -227,7 +227,7 @@ state PickupProp
     TickPickupOrDropOff(Delta);
   }
   
-  event BeginState ()
+  event BeginState()
   {
     bReadyForFlyEffect = False;
   }
@@ -292,7 +292,7 @@ state PickupProp
 
 state BounceIntoPlace
 {
-  function BeginState ()
+  function BeginState()
   {
     bBounceIntoPlaceTiming = False;
     fBounceIntoPlaceTimeout = 5.0;

@@ -6,7 +6,7 @@ class ArmTorch_Sepia extends ArmTorch;
 
 defaultproperties
 {
-    attachedParticleClass=Class'HPParticle.FireHP2Sepia'
+    attachedParticleClass(0)=Class'HPParticle.FireHP2Sepia'
 
     attachedParticleOffset=(X=-18.00,Y=-4.00,Z=14.00)
 

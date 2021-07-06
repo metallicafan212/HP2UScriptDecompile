@@ -11,7 +11,7 @@ var Vector vShootLocation;
 var() float SpeedScalar;
 var() bool bPlayFlameSound;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local TorchFire03 A;
   local float fClosest;
@@ -71,7 +71,7 @@ begin:
   // if (! False ) goto JL0016;
 }
 
-function SpawnFireBall ()
+function SpawnFireBall()
 {
   local spellSnakeHeadFire A;
 

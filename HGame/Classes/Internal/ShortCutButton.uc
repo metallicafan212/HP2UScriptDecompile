@@ -15,7 +15,7 @@ var Texture UpButtonTexture;
 var Texture DownButtonTexture;
 
 
-function Created ()
+function Created()
 {
   Super.Created();
   //UpTexture = Texture'ButtonUpTexture';

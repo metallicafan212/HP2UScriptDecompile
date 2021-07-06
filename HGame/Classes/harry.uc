@@ -303,7 +303,7 @@ var travel bool bHarryKilled;
 var int iMinHealthAfterDeath;
 
 /*
-event PreBeginPlay ()
+event PreBeginPlay()
 {
   Super.PreBeginPlay();
   foreach AllActors(Class'Director',Director)
@@ -384,7 +384,7 @@ event PreBeginPlay()
 }
 
 /*
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local Pawn p;
   local Actor A;
@@ -536,7 +536,7 @@ function PostBeginPlay()
     CopyAllStatusFromHarryToManager();
 }
 
-event Possess ()
+event Possess()
 {
   Super.Possess();
   if ( Director != None )
@@ -545,7 +545,7 @@ event Possess ()
   }
 }
 
-function DisablePlayerInput ()
+function DisablePlayerInput()
 {
   SendPlayerCaptureMessages(True);
   bIsCaptured = True;
@@ -553,7 +553,7 @@ function DisablePlayerInput ()
   bKeepStationary = True;
 }
 
-function EnablePlayerInput ()
+function EnablePlayerInput()
 {
   bIsCaptured = False;
   myHUD.EndCutScene();
@@ -561,7 +561,7 @@ function EnablePlayerInput ()
   SendPlayerCaptureMessages(False);
 }
 
-function bool InputIsDisabled ()
+function bool InputIsDisabled()
 {
   return bKeepStationary;
 }
@@ -575,7 +575,7 @@ function OnEvent (name EventName)
   Super.OnEvent(EventName);
 }
 
-function PlayPeevesHack ()
+function PlayPeevesHack()
 {
 }
 
@@ -611,7 +611,7 @@ function bool IsInSpellBook (ESpellType ESpellType)
   return SpellBook[ESpellType] != None;
 }
 
-function AddAllSpellsToSpellBook ()
+function AddAllSpellsToSpellBook()
 {
   AddToSpellBook(Class'spellFlipendo');
   AddToSpellBook(Class'spellLumos');
@@ -664,7 +664,7 @@ function AddToSpellBookByString (string SpellName)
 }
 
 /*
-function ClearSpellBook ()
+function ClearSpellBook()
 {
   local int I;
 
@@ -716,7 +716,7 @@ function TurnOnDuelingMode (HPawn PawnOpponent)
   Duellist(DuelOpponent).SetHealthBar();
 }
 
-function TurnOffDuelingMode ()
+function TurnOffDuelingMode()
 {
   bInDuelingMode = False;
   Duellist(DuelOpponent).TurnOffSpellCursor();
@@ -732,7 +732,7 @@ function TurnOffDuelingMode ()
   HudSpellSelector = None;
 }
 
-function HandleDuelPlayerInput ()
+function HandleDuelPlayerInput()
 {
   if ( bDuelCycleSpell == 1 )
   {
@@ -793,7 +793,7 @@ function HandleDuelPlayerInput ()
   }
 }
 
-function EctoRefAdd ()
+function EctoRefAdd()
 {
   if ( iEctoRefCount == 0 )
   {
@@ -804,7 +804,7 @@ function EctoRefAdd ()
   iEctoRefCount++;
 }
 
-function EctoRefSub ()
+function EctoRefSub()
 {
   if ( iEctoRefCount > 0 )
   {
@@ -834,7 +834,7 @@ function SleepyAnimTimerAdd (int t)
   }
 }
 
-function SleepyAnimTimerSub ()
+function SleepyAnimTimerSub()
 {
   if ( iSleepyAnimTimer > 0 )
   {
@@ -853,7 +853,7 @@ function SetMaxSleepyAnim (float t)
   return;
 }
 
-function WebAnimRefCountAdd ()
+function WebAnimRefCountAdd()
 {
   if ( iWebAnimRefCount == 0 )
   {
@@ -862,7 +862,7 @@ function WebAnimRefCountAdd ()
   iWebAnimRefCount++;
 }
 
-function WebAnimRefCountSub ()
+function WebAnimRefCountSub()
 {
   if ( iWebAnimRefCount > 0 )
   {
@@ -880,7 +880,7 @@ function WebAnimRefCountSub ()
   //}
 }
 
-function LeaveEcto ()
+function LeaveEcto()
 {
   bPlayedEctoKnockBack = False;
 }
@@ -901,7 +901,7 @@ function DestroyClass (string sInput)
   }
 }
 
-function ListGroups ()
+function ListGroups()
 {
   local name cname;
   local Actor Act;
@@ -912,14 +912,14 @@ function ListGroups ()
   }
 }
 
-event PreSaveGame ()
+event PreSaveGame()
 {    
   PreviousLevelName = "";
   SloMo(1.0);
   CopyAllStatusFromManagerToHarry();
 }
 
-event PostSaveGame ()
+event PostSaveGame()
 {
   bShowLoadingScreen = False;
 }
@@ -951,7 +951,7 @@ function LoadLevel (string LevelName)
 	}
 }
 
-event PreClientTravel ()
+event PreClientTravel()
 {
   local string TS;
   local int TI;
@@ -1068,14 +1068,14 @@ event TravelPostAccept()
 	}
 }
 
-function CopyAllStatusFromHarryToManager ()
+function CopyAllStatusFromHarryToManager()
 {
   CopyGenericStatusFromHarryToManager();
   CopyCardCardStatusFromHarryToManager();
 }
 
 /*
-function CopyGenericStatusFromHarryToManager ()
+function CopyGenericStatusFromHarryToManager()
 {
   local StatusItem siCurr;
   local int nStatusIdx;
@@ -1119,7 +1119,7 @@ function CopyGenericStatusFromHarryToManager()
 }
 
 /*
-function CopyCardCardStatusFromHarryToManager ()
+function CopyCardCardStatusFromHarryToManager()
 {
   local StatusGroupWizardCards sgCards;
   local StatusItemWizardCards siCards;
@@ -1184,37 +1184,37 @@ function CopyCardCardStatusFromHarryToManager()
 
 
 
-function int getnumHousePointsHarry ()
+function int getnumHousePointsHarry()
 {
   return numHousePointsHarry;
 }
 
-function int getLastHousePointsHarry ()
+function int getLastHousePointsHarry()
 {
   return numLastHousePointsHarry;
 }
 
-function int getNumHousePointsGryffindor ()
+function int getNumHousePointsGryffindor()
 {
   return numHousePointsGryffindor;
 }
 
-function int getNumHousePointsSlytherin ()
+function int getNumHousePointsSlytherin()
 {
   return numHousePointsSlytherin;
 }
 
-function int getNumHousePointsHufflePuff ()
+function int getNumHousePointsHufflePuff()
 {
   return numHousePointsHufflepuff;
 }
 
-function int getNumHousePointsRavenclaw ()
+function int getNumHousePointsRavenclaw()
 {
   return numHousePointsRavenclaw;
 }
 
-function SaveStateName ()
+function SaveStateName()
 {
   ClientMessage("Harry state " $ string(GetStateName()) $ " " $ string(LastState));
   if ( GetStateName() != 'PickingUpWizardCard' )
@@ -1223,7 +1223,7 @@ function SaveStateName ()
   }
 }
 
-function RestoreStateName ()
+function RestoreStateName()
 {
   GotoState(LastState);
 }
@@ -1285,7 +1285,7 @@ function bool InFrontOfHarry (Actor A)
   return False;
 }
 
-function Actor FindClosestTargetPoint ()
+function Actor FindClosestTargetPoint()
 {
   local TargetPoint ClosestTP;
   local TargetPoint CurrTP;
@@ -1334,7 +1334,7 @@ function HarryAccurateThrowObject (Actor A, Actor Target, bool bCollideActors, b
   A.GotoState('stateBeingThrown');
 }
 
-function ThrowCarryingActor ()
+function ThrowCarryingActor()
 {
   local Vector V;
   local Vector v2;
@@ -1415,7 +1415,7 @@ function DropCarryingActor (optional bool bLatentDrop)
 
 state statePickupItem
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity *= vect(0.00,0.00,1.00);
     Acceleration *= vect(0.00,0.00,1.00);
@@ -1436,23 +1436,23 @@ state statePickupItem
   GotoState('PlayerWalking');
 }
 
-function DoPotionMixingBegin ()
+function DoPotionMixingBegin()
 {
   bKeepStationary = True;
   GotoState('statePotionMixingBegin');
 }
 
-function DoPotionMixingStir ()
+function DoPotionMixingStir()
 {
   GotoState('statePotionMixingStir');
 }
 
-function DoPotionMixingIdle ()
+function DoPotionMixingIdle()
 {
   GotoState('statePotionMixingIdle');
 }
 
-function DoPotionMixingEnd ()
+function DoPotionMixingEnd()
 {
   CutCue("MixingCauldronDone");
   bKeepStationary = False;
@@ -1462,12 +1462,12 @@ function DoPotionMixingEnd ()
   }
 }
 
-function bool IsMixingPotion ()
+function bool IsMixingPotion()
 {
   return IsInState('statePotionMixingBegin') || IsInState('statePotionMixingStir') || IsInState('statePotionMixingIdle');
 }
 
-function CauldronMixing GetNearestMixingCauldron ()
+function CauldronMixing GetNearestMixingCauldron()
 {
   local CauldronMixing cauldronTest;
   local CauldronMixing cauldronClosest;
@@ -1490,7 +1490,7 @@ function CauldronMixing GetNearestMixingCauldron ()
 
 state statePotionMixingBegin
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity *= vect(0.00,0.00,1.00);
     Acceleration *= vect(0.00,0.00,1.00);
@@ -1503,7 +1503,7 @@ state statePotionMixingBegin
 
 state statePotionMixingStir
 {
-  function EndState ()
+  function EndState()
   {
     StopSound(soundStirPotion,SLOT_Interact);
   }
@@ -1576,7 +1576,7 @@ function GotoShortcut (int Num)
   }
 }
 
-function int FindNearestSavePointID ()
+function int FindNearestSavePointID()
 {
   local Actor SavePointInstance;
   local int ReturnID;
@@ -1646,7 +1646,7 @@ state stateDead
 {
   ignores  TakeDamage, AltFire, Tick, Fire;
   
-  function BeginState ()
+  function BeginState()
   {
     local float fAnimRate;
   
@@ -1766,7 +1766,7 @@ state stateDead
 	}
   
   /*
-  function Vector FindFaintLocation ()
+  function Vector FindFaintLocation()
   {
     local float D;
     local Vector N;
@@ -1862,7 +1862,7 @@ state stateInactive
   ignores  DoJump, AltFire, Fire, TakeDamage;
 }
 
-function StatusItem GetHealthStatusItem ()
+function StatusItem GetHealthStatusItem()
 {
   return (managerStatus.GetStatusItem(Class'StatusGroupHealth',Class'StatusItemHealth'));
 }
@@ -1893,7 +1893,7 @@ function AddHealth (int iHealth)
   }
 }
 
-function int GetHealthCount ()
+function int GetHealthCount()
 {
   local StatusItem siHealth;
 
@@ -1907,7 +1907,7 @@ function int GetHealthCount ()
   }
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
   return (GetHealthStatusItem().GetCountToCurrPotentialRatio());
 }
@@ -1917,7 +1917,7 @@ function AddGryffindorPoints (int iPoints)
   managerStatus.IncrementCount(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts',iPoints);
 }
 
-function int JellyBeansCount ()
+function int JellyBeansCount()
 {
   local StatusGroup sg;
   local int Count;
@@ -1927,7 +1927,7 @@ function int JellyBeansCount ()
   return Count;
 }
 
-function int PotionsCount ()
+function int PotionsCount()
 {
   local StatusGroup sg;
   local int Count;
@@ -1988,7 +1988,7 @@ function forceHarrywing (Actor Other)
   GotoState('wingspell');
 }
 
-function freeHarry ()
+function freeHarry()
 {
   GotoState('PlayerWalking');
 }
@@ -2042,7 +2042,7 @@ state wingspell
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     HProp(focusActor).bStopLevitating = True;
   }
@@ -2242,7 +2242,7 @@ function StartBossEncounter (baseBoss Boss, bool in_bHarryShouldLockOntoBoss, bo
   }
 }
 
-function StopBossEncounter ()
+function StopBossEncounter()
 {
   BossTarget = None;
   bLockedOnTarget = False;
@@ -2264,7 +2264,7 @@ function StopBossEncounter ()
   Cam.SetCameraMode(Cam.ECamMode.CM_Standard);
 }
 
-function name HarryAtMapMarker ()
+function name HarryAtMapMarker()
 {
   local MenuMapLocationMarker A;
   local name closestAtag;
@@ -2343,16 +2343,16 @@ simulated function ClientPlaySound (Sound ASound, optional bool bInterrupt, opti
   SoundPlayer.PlaySound(ASound,SLOT_Talk,16.0,bInterrupt);
 }
 
-function DebugState ()
+function DebugState()
 {
 }
 
-function TurnDebugModeOn ()
+function TurnDebugModeOn()
 {
   HPConsole(Player.Console).bDebugMode = True;
 }
 
-function PreSetMovement ()
+function PreSetMovement()
 {
   bCanJump = True;
   bCanWalk = True;
@@ -2362,7 +2362,7 @@ function PreSetMovement ()
   bCanDoSpecial = True;
 }
 
-function HarryKnockBack ()
+function HarryKnockBack()
 {
   PlayHurtEmoteSound();
   if ( CarryingActor != None )
@@ -2557,7 +2557,7 @@ event Landed (Vector HitNormal)
   GroundSpeed = GroundRunSpeed;
 }
 
-function Falling ()
+function Falling()
 {
   local float S;
 
@@ -2569,7 +2569,7 @@ function Falling ()
   GroundSpeed = GroundJumpSpeed;
 }
 
-simulated function PlayFootStep ()
+simulated function PlayFootStep()
 {
   local Sound Step;
   local float decision;
@@ -2750,7 +2750,7 @@ function DoJump (optional float f)
 	}
 }
 
-function PlayHurtEmoteSound ()
+function PlayHurtEmoteSound()
 {
   if ( bIsGoyle )
   {
@@ -2847,7 +2847,7 @@ function PlayHurtEmoteSound ()
   }
 }
 
-function PlayDeathEmoteSound ()
+function PlayDeathEmoteSound()
 {
   if ( bIsGoyle )
   {
@@ -2881,7 +2881,7 @@ function PlayDeathEmoteSound ()
   }
 }
 
-function PlayLandedEmoteSound ()
+function PlayLandedEmoteSound()
 {
   if ( bIsGoyle )
   {
@@ -2927,7 +2927,7 @@ function PlayLandedEmoteSound ()
   }
 }
 
-function PlayFallingPullupEmoteSound ()
+function PlayFallingPullupEmoteSound()
 {
   if ( bIsGoyle )
   {
@@ -2949,7 +2949,7 @@ function PlayFallingPullupEmoteSound ()
   }
 }
 
-function PlayEasyPullupEmoteSound ()
+function PlayEasyPullupEmoteSound()
 {
   if ( bIsGoyle )
   {
@@ -2971,7 +2971,7 @@ function PlayEasyPullupEmoteSound ()
   }
 }
 
-function PlayHardPullupEmoteSound ()
+function PlayHardPullupEmoteSound()
 {
   if ( bIsGoyle )
   {
@@ -2993,7 +2993,7 @@ function PlayHardPullupEmoteSound ()
   }
 }
 
-function PlayFallDeepEmoteSound ()
+function PlayFallDeepEmoteSound()
 {
   if ( bIsGoyle )
   {
@@ -3018,7 +3018,7 @@ function PlayFallDeepEmoteSound ()
   }
 }
 
-function PlayJumpEmoteSound ()
+function PlayJumpEmoteSound()
 {
   if ( bIsGoyle )
   {
@@ -3338,7 +3338,7 @@ function PlaySpellCastSound (ESpellType SpellType)
 }
 
 /*
-function PlayLandedSound ()
+function PlayLandedSound()
 {
   local Sound Step;
   local float decision;
@@ -3461,7 +3461,7 @@ function PlayLandedSound()
 	}
 }
 
-function PlayTurning ()
+function PlayTurning()
 {
   PlayAnim(HarryAnims[HarryAnimSet].StrafeLeft,,,[Type]HarryAnimType);
 }
@@ -3500,30 +3500,30 @@ function TweenToRunning (float TweenTime)
   }
 }
 
-function PlayRunning ()
+function PlayRunning()
 {
   TweenToRunning(0.0);
 }
 
-function PlayInAir ()
+function PlayInAir()
 {
   LoopAnim(AnimFalling,,[TweenTime]0.41,,[Type]HarryAnimType);
   ClientMessage(" animFalling = " $ string(AnimFalling));
 }
 
-function PlayDuck ()
+function PlayDuck()
 {
   BaseEyeHeight = 0.0;
   TweenAnim('SneakF',0.25);
 }
 
-function PlayCrawling ()
+function PlayCrawling()
 {
   BaseEyeHeight = 0.0;
   LoopAnim('SneakF');
 }
 
-function PlayIdle ()
+function PlayIdle()
 {
   if ( Mesh == None )
   {
@@ -3533,7 +3533,7 @@ function PlayIdle ()
   LoopAnim(CurrIdleAnimName,0.81,0.25,,HarryAnimType);
 }
 
-function PlayWaiting ()
+function PlayWaiting()
 {
   if ( Mesh == None )
   {
@@ -3580,7 +3580,7 @@ function TweenToWaiting (float TweenTime)
   LoopAnim(CurrIdleAnimName,,[TweenTime]TweenTime,,[Type]HarryAnimType);
 }
 
-function Cast ()
+function Cast()
 {
   local Actor BestTarget;
   //local Actor HitActor;
@@ -3761,7 +3761,7 @@ state Mounting
 {
   ignores  ProcessMove, AltFire, Mount;
   
-  function BeginState ()
+  function BeginState()
   {
     DebugState();
 	// bFallingMount = Physics == PHYS_Walking;
@@ -3826,14 +3826,14 @@ state MountFinish
     ViewRotation = Rotation;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     DebugState();
     SetCollisionSize(CollisionRadius * 0.5,CollisionHeight * 0.5,CollisionHeight * 0.5);
     PrePivot.Z -= CollisionHeight;
   }
   
-  function EndState ()
+  function EndState()
   {
     PrePivot.Z += CollisionHeight;
     SetCollisionSize(CollisionRadius * 2,CollisionHeight * 2,0.0);
@@ -3881,12 +3881,12 @@ function DoCelebrateCardSet (bool bCelebrateBronzeIn)
 
 state CelebrateCardSet
 {
-  event BeginState ()
+  event BeginState()
   {
     nCelebrateProgress = 0;
   }
   
-  event EndState ()
+  event EndState()
   {
     if ( nCelebrateProgress < 1 )
     {
@@ -3948,7 +3948,7 @@ function Touch(Actor Other)
   }
 }
 
-function StartAimSoundFX ()
+function StartAimSoundFX()
 {
   if ( bInDuelingMode && (CurrentDuelSpell == 2) )
   {
@@ -3963,7 +3963,7 @@ function StartAimSoundFX ()
   }
 }
 
-function StopAimSoundFX ()
+function StopAimSoundFX()
 {
   StopSound(Sound'spell_dud',SLOT_Misc);
   if ( bInDuelingMode && (CurrentDuelSpell == 1) )
@@ -3979,7 +3979,7 @@ function StartAiming (bool in_bHarryUsingSword)
 }
 
 /*
-function StopAiming ()
+function StopAiming()
 {
   if ( CarryingActor == None )
   {
@@ -4013,13 +4013,13 @@ function StopAiming()
 	}
 }
 
-function TurnOffCastingVars ()
+function TurnOffCastingVars()
 {
   bIsAiming = False;
   bIsAimingWithCharge = False;
 }
 
-function TurnOffSpellCursor ()
+function TurnOffSpellCursor()
 {
   bIsAimingWithCharge = False;
   baseWand(Weapon).StopChargingSpell();
@@ -4044,12 +4044,12 @@ function TurnOnCastingVars (bool in_bHarryUsingSword)
   }
 }
 
-function bool PlayerIsAiming ()
+function bool PlayerIsAiming()
 {
   return bIsAiming;
 }
 
-function bool PlayerIsAimingWithCharge ()
+function bool PlayerIsAimingWithCharge()
 {
   return bIsAimingWithCharge;
 }
@@ -4101,7 +4101,7 @@ function PlayerTick (float dtime)
   }
 }
 
-function DisplayFirstErrorMessages ()
+function DisplayFirstErrorMessages()
 {
   local Actor A;
   local Actor a2;
@@ -4124,7 +4124,7 @@ function DisplayFirstErrorMessages ()
   }
 }
 
-function bool CurrentAnimHasFootStepSounds ()
+function bool CurrentAnimHasFootStepSounds()
 {
   switch (AnimSequence)
   {
@@ -4248,7 +4248,7 @@ function name MyGetAnimGroup (name animseqname)
   return 'None';
 }
 
-function SetNewMesh ()
+function SetNewMesh()
 {
   if ( bIsGoyle && (Mesh == SkeletalMesh'skharryMesh') )
   {
@@ -4301,7 +4301,7 @@ function AutoHitAreaEffect (float fRadius)
 }
 
 /*
-function CreateSpongifyEffects ()
+function CreateSpongifyEffects()
 {
   local int I;
 
@@ -4342,7 +4342,7 @@ return;
 }
 
 /*
-function StopSpongifyEffects ()
+function StopSpongifyEffects()
 {
   local int I;
 
@@ -4425,7 +4425,7 @@ state PlayerWalking
     }
   }
 
-  function AnimEnd ()
+  function AnimEnd()
   {
     local name MyAnimGroup;
   
@@ -4811,7 +4811,7 @@ state PlayerWalking
 	eLastPhysState = Physics;
   }
   
-  function JumpOffPawn ()
+  function JumpOffPawn()
   {
     fTimeInAir = 0.0;
     Super.JumpOffPawn();
@@ -5041,7 +5041,7 @@ state PlayerWalking
 		}
 	}
   
-  function BeginState ()
+  function BeginState()
   {
     DebugState();
     if ( Mesh == None )
@@ -5069,7 +5069,7 @@ state PlayerWalking
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     WalkBob = vect(0.00,0.00,0.00);
     bIsCrouching = False;
@@ -5081,7 +5081,7 @@ state PlayerWalking
   }
 }
 
-function UpdateRotationToTarget ()
+function UpdateRotationToTarget()
 {
   local Rotator R;
   local Vector V;
@@ -5111,7 +5111,7 @@ function UpdateRotationToTarget ()
   //}
 }
 
-function Vector ProcessAccel ()
+function Vector ProcessAccel()
 {
   local float D;
   local Vector V;
@@ -5250,7 +5250,7 @@ function Rotator AdjustAim (float ProjSpeed, Vector projStart, int AimError, boo
   return defaultAngle;
 }
 
-function float TurnWhileStrafingMult ()
+function float TurnWhileStrafingMult()
 {
   if ( Basilisk(BossTarget) != None )
   {
@@ -5260,12 +5260,12 @@ function float TurnWhileStrafingMult ()
   return 0.0;
 }
 
-function Vector GetSwordFireTargetLoc ()
+function Vector GetSwordFireTargetLoc()
 {
   return baseBoss(BossTarget).GetTargetLocation();
 }
 
-function Timer ()
+function Timer()
 {
   SleepyAnimTimerSub();
 }
@@ -5282,7 +5282,7 @@ function nailed (Actor caller, out int status)
   }
 }
 
-function displaydemoMessage ()
+function displaydemoMessage()
 {
 }
 
@@ -5306,7 +5306,7 @@ state waitForDeath
 		goto ('Loop');
 }
 
-function name GetCurrIdleAnimName ()
+function name GetCurrIdleAnimName()
 {
   local string AnimName;
   //local int Index;
@@ -5331,7 +5331,7 @@ function name GetCurrIdleAnimName ()
   return nm;
 }
 
-function name GetCurrFidgetAnimName ()
+function name GetCurrFidgetAnimName()
 {
   local string AnimName;
   //local int Index;
@@ -5357,12 +5357,12 @@ function ReceiveIconMessage (Texture Icon, string Message, float duration)
   baseHUD(myHUD).ReceiveIconMessage(Icon,Message,duration);
 }
 
-function bool HarryIsDead ()
+function bool HarryIsDead()
 {
   return GetHealthCount() <= 0;
 }
 
-function startmenu ()
+function startmenu()
 {
   HPConsole(Player.Console).bQuickKeyEnable = False;
   HPConsole(Player.Console).LaunchUWindow();
@@ -5380,11 +5380,11 @@ state harryfrozen
   // ignores  AltFire, Fire;
   ignores Fire, AltFire, ZoneChange, AnimEnd, Landed, PlayerTick, SeePlayer, HearNoise, Bump; //UTPT forgot to add these... -AdamJD
   
-  function BeginState ()
+  function BeginState()
   {
   }
   
-  function EndState ()
+  function EndState()
   {
   }
   
@@ -5402,7 +5402,7 @@ event PlayerCalcView (out Actor ViewActor, out Vector CameraLocation, out Rotato
   }
 }
 
-function makeTarget ()
+function makeTarget()
 {
   local Vector tloc;
   //local Vector TargetOffset;
@@ -5430,7 +5430,7 @@ function StartSpellLearning (SpellLessonTrigger SpellLesson)
   GotoState('SpellLearning');
 }
 
-function EndSpellLearning ()
+function EndSpellLearning()
 {
   CurrSpellLesson = None;
   GotoState('PlayerWalking');
@@ -5454,18 +5454,18 @@ function StartVendorEngagement (VendorManager VManager)
   bKeepStationary = True;
 }
 
-function EndVendorEngagement ()
+function EndVendorEngagement()
 {
   CurrVendorManager = None;
   bKeepStationary = False;
 }
 
-function bool IsEngagedWithVendor ()
+function bool IsEngagedWithVendor()
 {
   return (CurrVendorManager != None);
 }
 
-function Add60HousePointsToGryffindor ()
+function Add60HousePointsToGryffindor()
 {
   numHousePointsHarry += 60;
   numHousePointsGryffindor += 60;
@@ -5519,7 +5519,7 @@ function AddHousePoints (int Num)
 
 state stateCutIdle
 {
-  function BeginState ()
+  function BeginState()
   {
     Acceleration = vect(0.00,0.00,0.00);
     Velocity = vect(0.00,0.00,0.00);
@@ -5849,7 +5849,7 @@ function bool CutCommand_ResetLevel (string Command, optional string cue)
   return True;
 }
 
-function ToggleUseSword ()
+function ToggleUseSword()
 {
   bHarryUsingSword =  !bHarryUsingSword;
   if ( bHarryUsingSword )
@@ -5860,7 +5860,7 @@ function ToggleUseSword ()
   baseWand(Weapon).ToggleUseSword();
 }
 
-function bool MoveWhileCasting ()
+function bool MoveWhileCasting()
 {
   if ( bAltFire == 0 )
   {
@@ -5958,7 +5958,7 @@ event PlayerInput (float DeltaTime)
   }
 }
 
-function DoDrinkWiggenwell ()
+function DoDrinkWiggenwell()
 {
   local StatusItem siWiggenPotion;
   local StatusGroup sgPotions;
@@ -5984,14 +5984,14 @@ function DoDrinkWiggenwell ()
   }
 }
 
-function CopyAllStatusFromManagerToHarry ()
+function CopyAllStatusFromManagerToHarry()
 {
   CopyGenericStatusFromManagerToHarry();
   CopyCardStatusFromManagerToHarry();
 }
 
 /*
-function CopyGenericStatusFromManagerToHarry ()
+function CopyGenericStatusFromManagerToHarry()
 {
   local StatusGroup sgLoop;
   local StatusItem siLoop;
@@ -6085,7 +6085,7 @@ function CopyGenericStatusFromManagerToHarry()
 }
 
 /*
-function CopyCardStatusFromManagerToHarry ()
+function CopyCardStatusFromManagerToHarry()
 {
   local StatusGroupWizardCards sgCards;
   local StatusItemWizardCards siCards;
@@ -6178,7 +6178,7 @@ function CopyCardStatusFromManagerToHarry()
 
 
 /*
-function ClearNonTravelStatus ()
+function ClearNonTravelStatus()
 {
   local StatusGroup sgLoop;
   local StatusItem siLoop;
@@ -6243,7 +6243,7 @@ function HandleSpellIncantationSound (ESpellType SpellType)
   PlaySpellCastSound(SpellType);
 }
 
-function CheckIfHarryLostDuel ()
+function CheckIfHarryLostDuel()
 {
   if ( (managerStatus.GetHealthCount() <= 0) &&  !bDuelIsOver )
   {
@@ -6366,12 +6366,12 @@ function SetObjectiveTextId (string strId)
   strObjectiveId = strId;
 }
 
-function bool HaveObjectiveText ()
+function bool HaveObjectiveText()
 {
   return strObjectiveId != "";
 }
 
-function int ConvertGameStateToNumber ()
+function int ConvertGameStateToNumber()
 {
   local string Num;
 

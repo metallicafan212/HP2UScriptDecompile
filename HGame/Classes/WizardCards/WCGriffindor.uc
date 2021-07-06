@@ -8,7 +8,7 @@ class WCGriffindor extends Goldcards;
 #exec Texture Import File=Textures\Icons\WizCardGryffindorBigTexture.PNG	GROUP=Icons	Name=WizCardGryffindorBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardGryffindorTex0.PNG	GROUP=Skins	Name=WizardCardGryffindorTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Godric Gryffindor";
   Super.PostBeginPlay();

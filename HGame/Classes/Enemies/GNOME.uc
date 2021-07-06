@@ -38,7 +38,7 @@ var() int HarryPotions;
 var() int MaxGoodies;
 var float hunger;
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   Velocity = vect(0.00,0.00,0.00);
   Acceleration = vect(0.00,0.00,0.00);
@@ -46,12 +46,12 @@ function PlayerCutCapture ()
   GotoState('stateJustStandThere');
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   GotoState('stateIdle');
 }
 
-function bool VeryCloseToPatrolPoint ()
+function bool VeryCloseToPatrolPoint()
 {
   if ( VSize2D(Location - pPLoc) < 10.0 )
   {
@@ -90,7 +90,7 @@ function bool MyLineOfSightTo (Actor End)
   return False;
 }
 
-function bool FindClosestPP ()
+function bool FindClosestPP()
 {
   local PatrolPoint ClosestPP;
   local PatrolPoint CurPP;
@@ -141,7 +141,7 @@ function Class<Actor> FindClassType (EObject otype)
   return classtype;
 }
 
-function Class<Actor> FindPotionClassType ()
+function Class<Actor> FindPotionClassType()
 {
   local Class<Actor> pclasstype;
 
@@ -182,7 +182,7 @@ function Actor FindClosestObject (EObject otype)
   return None;
 }
 
-function bool HasTooManyGoodies ()
+function bool HasTooManyGoodies()
 {
   if ( iBeans >= MaxGoodies )
   {
@@ -191,7 +191,7 @@ function bool HasTooManyGoodies ()
   return False;
 }
 
-function Actor FindClosestMushroom ()
+function Actor FindClosestMushroom()
 {
   local Actor M;
 
@@ -200,7 +200,7 @@ function Actor FindClosestMushroom ()
   return M;
 }
 
-function Actor FindClosestGoody ()
+function Actor FindClosestGoody()
 {
   local float fDistJB;
   local float fDistWW;
@@ -250,7 +250,7 @@ function PlaySoundAndSetDuration (Sound snd)
   bCurrentSoundOver = False;
 }
 
-function PlaySoundGetOff ()
+function PlaySoundGetOff()
 {
   switch (Rand(3))
   {
@@ -267,7 +267,7 @@ function PlaySoundGetOff ()
   }
 }
 
-function PlaySoundOuch ()
+function PlaySoundOuch()
 {
   switch (Rand(8))
   {
@@ -299,7 +299,7 @@ function PlaySoundOuch ()
   }
 }
 
-function PlaySoundTalk ()
+function PlaySoundTalk()
 {
   switch (Rand(16))
   {
@@ -355,7 +355,7 @@ function PlaySoundTalk ()
   }
 }
 
-function PlaySoundDie ()
+function PlaySoundDie()
 {
   switch (Rand(6))
   {
@@ -381,7 +381,7 @@ function PlaySoundDie ()
   }
 }
 
-function PlaySoundGetsThrown ()
+function PlaySoundGetsThrown()
 {
   switch (Rand(10))
   {
@@ -419,7 +419,7 @@ function PlaySoundGetsThrown ()
   }
 }
 
-function PlaySoundEat ()
+function PlaySoundEat()
 {
   switch (Rand(4))
   {
@@ -439,7 +439,7 @@ function PlaySoundEat ()
   }
 }
 
-function PlaySoundCrash ()
+function PlaySoundCrash()
 {
   switch (Rand(5))
   {
@@ -522,7 +522,7 @@ function DropGoodies (EObject otype, int nums, Vector Loc, float Height, bool ba
   }
 }
 
-function GnomeDropBeans ()
+function GnomeDropBeans()
 {
   if ( iBeans == 0 )
   {
@@ -566,7 +566,7 @@ function GnomePickupObject (Actor A)
   ObjectPickup(A,'GNOME R Hand');
 }
 
-function bool HarryHasSomeStuff ()
+function bool HarryHasSomeStuff()
 {
   local int stuff;
 
@@ -578,8 +578,8 @@ function bool HarryHasSomeStuff ()
   return False;
 }
 
-// function PreBeginPlay ();
-function PreBeginPlay ()
+// function PreBeginPlay();
+function PreBeginPlay()
 { 
 	//all this is added from the proto because UTPT didn't add any of it -AdamJD
 	//
@@ -739,7 +739,7 @@ function HitWall (Vector HitNormal, Actor HitWall)
   GotoState('stateHitWall');
 }
 
-function FindTargetLocation ()
+function FindTargetLocation()
 {
   vTargetLocation = aTargetGoody.Location;
 }
@@ -793,7 +793,7 @@ function GetSomethingFromHarry (int beans, int potions)
   }
 }
 
-function DestroyHolding ()
+function DestroyHolding()
 {
   if ( aHolding == None )
   {
@@ -804,13 +804,13 @@ function DestroyHolding ()
   aHolding = None;
 }
 
-function DestroyHoldingAndTakeAwayAllGoodies ()
+function DestroyHoldingAndTakeAwayAllGoodies()
 {
   iBeans = 0;
   DestroyHolding();
 }
 
-function PlayIdleAnim ()
+function PlayIdleAnim()
 {
   local int Output;
 
@@ -850,7 +850,7 @@ function PlayIdleAnim ()
   }
 }
 
-function LoopRunAnimNormal ()
+function LoopRunAnimNormal()
 {
   PlaySoundTalk();
   if ( aHolding != None )
@@ -861,7 +861,7 @@ function LoopRunAnimNormal ()
   }
 }
 
-function LoopRunAnimAttack ()
+function LoopRunAnimAttack()
 {
   PlaySoundTalk();
   if ( aHolding != None )
@@ -872,7 +872,7 @@ function LoopRunAnimAttack ()
   }
 }
 
-function LoopRunAnimAttackBite ()
+function LoopRunAnimAttackBite()
 {
   PlaySoundTalk();
   if ( aHolding != None )
@@ -1048,7 +1048,7 @@ begin:
 
 state stateHitByFlip
 {
-  function BeginState ()
+  function BeginState()
   {
     if ( Lives > 0 )
     {

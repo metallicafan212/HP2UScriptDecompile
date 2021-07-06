@@ -23,7 +23,7 @@ var int iCurState;
 var array<string> StateArray;
 
 
-function Created ()
+function Created()
 {
   Super.Created();
   bTransient = False;
@@ -45,12 +45,12 @@ function Created ()
   iCurList = 0;
 }
 
-function Activated ()
+function Activated()
 {
   UpdateCurrentGameStateSelection();
 }
 
-function Resized ()
+function Resized()
 {
   ListArray[iCurList].List.WinWidth = WinWidth;
   ListArray[iCurList].List.WinHeight = WinHeight - 4;
@@ -76,7 +76,7 @@ function AddList (string strName, ShortCutList newList)
   iNumLists++;
 }
 
-function UpdateCurrentGameStateSelection ()
+function UpdateCurrentGameStateSelection()
 {
   ComboBoxGameStates.SetSelectedIndex(ComboBoxGameStates.List.FindItemIndex(GetPlayerOwner().CurrentGameState,True));
 }
@@ -122,12 +122,12 @@ function Notify (UWindowDialogControl C, byte E)
   }
 }
 
-function GameStateComboBoxChanged ()
+function GameStateComboBoxChanged()
 {
   harry(GetPlayerOwner()).SetGameState(ComboBoxGameStates.GetValue());
 }
 
-function ListTypeComboBoxChanged ()
+function ListTypeComboBoxChanged()
 {
   local string strNewName;
   local int I;

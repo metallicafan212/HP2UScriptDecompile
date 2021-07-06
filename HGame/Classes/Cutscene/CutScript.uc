@@ -322,7 +322,7 @@ function AddPendingCue (string cue)
   }
 }
 
-function string GenerateUniqueCue ()
+function string GenerateUniqueCue()
 {
   Default.lastCueNum++;
   return "_" $ Default.lastCueNum $ "UniqueCue";
@@ -568,17 +568,17 @@ function bool CutCommand_CameraShake (string Command)
   return True;
 }
 
-function Play ()
+function Play()
 {
   GotoState('Running');
 }
 
-function Pause ()
+function Pause()
 {
   GotoState('Idle');
 }
 
-function FastForward ()
+function FastForward()
 {
   local TimedCue TC;
   local Actor Act;
@@ -608,7 +608,7 @@ function FastForward ()
   bFastForward = True;
 }
 
-function Reset ()
+function Reset()
 {
 }
 
@@ -620,7 +620,7 @@ begin:
 
 state Running
 {
-  function BeginState ()
+  function BeginState()
   {
     bPlaying = True;
     bFastForward = False;
@@ -666,7 +666,7 @@ state Running
   
 }
 
-function DumpCurState ()
+function DumpCurState()
 {
   CutLog("*****************************************************************************");
   CutLog("*CutDump" $ string(self));

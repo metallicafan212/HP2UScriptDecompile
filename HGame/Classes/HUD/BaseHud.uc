@@ -125,7 +125,7 @@ function ShowPopup (Class<basePopup> popup)
 	curPopup = Spawn(popup);
 }
 
-function DestroyPopup ()
+function DestroyPopup()
 {
 	if ( curPopup != None )
 	{
@@ -166,7 +166,7 @@ simulated function HUDSetup (Canvas Canvas)
 	Canvas.Font		 	= baseConsole(PlayerPawn(Owner).Player.Console).LocalMedFont;
 }
 
-exec function ToggleDialog ()
+exec function ToggleDialog()
 {
 	bDrawDialogText =  !bDrawDialogText;
 }

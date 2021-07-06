@@ -7,7 +7,7 @@ class cHarryAnimChannel extends AnimChannel;
 var HProp propTemp;
 var int LastAnimFrame;
 
-function GotoStateThrow ()
+function GotoStateThrow()
 {
   GotoState('stateThrow');
 }
@@ -17,7 +17,7 @@ function bool GotoStateCasting (bool in_bHarryUsingSword)
   GotoState('stateCasting');
 }
 
-function bool IsCarryingActor ()
+function bool IsCarryingActor()
 {
   if ( IsInState('statePickupItem') || IsInState('stateThrow') )
   {
@@ -27,24 +27,24 @@ function bool IsCarryingActor ()
   }
 }
 
-function bool CanPickSomethingUp ()
+function bool CanPickSomethingUp()
 {
   return True;
 }
 
-function bool PlayHarryMovementAnims ()
+function bool PlayHarryMovementAnims()
 {
   return True;
 }
 
-function Cast ()
+function Cast()
 {
   harry(Owner).Cast();
 }
 
 auto state stateIdle
 {
-  function BeginState ()
+  function BeginState()
   {
     harry(Owner).PlayIdle();
   }
@@ -54,12 +54,12 @@ auto state stateIdle
 
 state statePickupItem
 {
-  function bool CanPickSomethingUp ()
+  function bool CanPickSomethingUp()
   {
     return False;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     PlayAnim('Pickup',1.0,0.151);
   }
@@ -74,7 +74,7 @@ state statePickupItem
 
 state stateThrow
 {
-  function bool CanPickSomethingUp ()
+  function bool CanPickSomethingUp()
   {
     return False;
   }
@@ -158,7 +158,7 @@ begin:
 
 state stateCast
 {
-  function BeginState ()
+  function BeginState()
   {
     if ( harry(Owner).bHarryUsingSword )
     {
@@ -173,7 +173,7 @@ state stateCast
   harry(Owner).StopAiming();
 }
 
-function DoKnockBack ()
+function DoKnockBack()
 {
   if (  !IsInState('stateKnockBack') &&  !IsInState('stateEctoJump') )
   {
@@ -183,12 +183,12 @@ function DoKnockBack ()
 
 state stateKnockBack
 {
-  function bool CanPickSomethingUp ()
+  function bool CanPickSomethingUp()
   {
     return False;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     harry(Owner).HarryAnimType =  AT_Combine;
   }
@@ -210,7 +210,7 @@ state stateKnockBack
   }
 }
 
-function DoEctoJump ()
+function DoEctoJump()
 {
   if (  !IsInState('stateEctoJump') )
   {
@@ -220,17 +220,17 @@ function DoEctoJump ()
 
 state stateEctoJump
 {
-  function bool CanPickSomethingUp ()
+  function bool CanPickSomethingUp()
   {
     return False;
   }
   
-  function bool PlayHarryMovementAnims ()
+  function bool PlayHarryMovementAnims()
   {
     return False;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     harry(Owner).HarryAnimType =  AT_Combine;
   }
@@ -247,7 +247,7 @@ state stateEctoJump
   }
 }
 
-function DoDrinkWiggenwell ()
+function DoDrinkWiggenwell()
 {
   if (  !IsInState('stateDrinkWiggenwell') )
   {
@@ -257,14 +257,14 @@ function DoDrinkWiggenwell ()
 
 state stateDrinkWiggenwell
 {
-  function BeginState ()
+  function BeginState()
   {
     harry(Owner).HarryAnimType =  AT_Combine;
     harry(Owner).fTimeLastDrank = Level.TimeSeconds;
     bAnimNotReplaceable = True;
   }
   
-  function EndState ()
+  function EndState()
   {
     propTemp.bHidden = True;
     harry(Owner).DropCarryingActor();
@@ -307,7 +307,7 @@ state stateDrinkWiggenwell
   }
 }
 
-function DoSleepyJump ()
+function DoSleepyJump()
 {
   if (  !IsInState('stateSleepyJump') )
   {
@@ -317,17 +317,17 @@ function DoSleepyJump ()
 
 state stateSleepyJump
 {
-  function bool CanPickSomethingUp ()
+  function bool CanPickSomethingUp()
   {
     return False;
   }
   
-  function bool PlayHarryMovementAnims ()
+  function bool PlayHarryMovementAnims()
   {
     return False;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     harry(Owner).HarryAnimType =  AT_Combine;
   }
@@ -344,7 +344,7 @@ state stateSleepyJump
   }
 }
 
-function DoWebJump ()
+function DoWebJump()
 {
   if (  !IsInState('stateWebJump') )
   {
@@ -354,17 +354,17 @@ function DoWebJump ()
 
 state stateWebJump
 {
-  function bool CanPickSomethingUp ()
+  function bool CanPickSomethingUp()
   {
     return False;
   }
   
-  function bool PlayHarryMovementAnims ()
+  function bool PlayHarryMovementAnims()
   {
     return False;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     harry(Owner).HarryAnimType =  AT_Combine;
   }
@@ -381,7 +381,7 @@ state stateWebJump
   }
 }
 
-function DoReactRictusempra ()
+function DoReactRictusempra()
 {
   if (  !IsInState('stateReactRictusempra') )
   {
@@ -391,7 +391,7 @@ function DoReactRictusempra ()
 
 state stateReactRictusempra
 {
-  function BeginState ()
+  function BeginState()
   {
     harry(Owner).HarryAnimType =  AT_Combine;
   }
@@ -407,7 +407,7 @@ state stateReactRictusempra
   GotoState('stateIdle');
 }
 
-function DoReactMimbleWimble ()
+function DoReactMimbleWimble()
 {
   if (  !IsInState('stateReactMimbleWimble') )
   {
@@ -417,7 +417,7 @@ function DoReactMimbleWimble ()
 
 state stateReactMimbleWimble
 {
-  function BeginState ()
+  function BeginState()
   {
     harry(Owner).HarryAnimType =  AT_Combine;
   }

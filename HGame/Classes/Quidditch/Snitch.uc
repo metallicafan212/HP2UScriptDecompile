@@ -35,7 +35,7 @@ var int iNextHistorySlot;
 var float HistoryTimer;
 var HPawn CatchProxy;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   if ( Mesh == None )
   {
@@ -89,7 +89,7 @@ function PostBeginPlay ()
   CatchProxy = None;
 }
 
-function Hide ()
+function Hide()
 {
   Super.Hide();
   if ( HoopTrail != None )
@@ -98,7 +98,7 @@ function Hide ()
   }
 }
 
-function Show ()
+function Show()
 {
   Super.Show();
   if ( HoopTrail != None )
@@ -174,7 +174,7 @@ function SetAltTrail (bool bOn)
   }
 }
 
-function ClearAllEffects ()
+function ClearAllEffects()
 {
   SetJerking(False);
   SetApparentScale(1.0);
@@ -190,7 +190,7 @@ function ClearAllEffects ()
   }
 }
 
-function ResetAllEffects ()
+function ResetAllEffects()
 {
   if ( Halo != None )
   {
@@ -202,7 +202,7 @@ function ResetAllEffects ()
   }
 }
 
-function HPawn CreateCatchProxy ()
+function HPawn CreateCatchProxy()
 {
   if ( CatchProxy != None )
   {
@@ -229,7 +229,7 @@ function HPawn CreateCatchProxy ()
   return CatchProxy;
 }
 
-function DisposeCatchProxy ()
+function DisposeCatchProxy()
 {
   Trail.SetOwner(self);
   ResetAllEffects();
@@ -249,7 +249,7 @@ function FlyOnPath (name Path, optional int StartPoint)
   Super.FlyOnPath(Path,StartPoint);
 }
 
-function StopFlyingOnPath ()
+function StopFlyingOnPath()
 {
   SetJerking(False);
   Super.StopFlyingOnPath();

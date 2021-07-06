@@ -28,7 +28,7 @@ function Paint (Canvas Canvas, float X, float Y)
 {
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
 	local bool bBackPage;
 
@@ -42,7 +42,7 @@ function PreSwitchPage ()
 	ClearRollover();
 }
 
-function PreOpenBook ()
+function PreOpenBook()
 {
 }
 
@@ -113,7 +113,7 @@ function SetBackPageToolTip (bool bBackPage)
 	}
 }
 
-function int GetStatusY ()
+function int GetStatusY()
 {
   return WinHeight - 26;
 }
@@ -175,7 +175,7 @@ function SetRollover (UWindowButton Button, Texture textureRO, Sound soundRO, bo
 	}
 }
 
-function ClearRollover ()
+function ClearRollover()
 {
 	CurrRollover.Button = None;
 	CurrRollover.textureRO = None;

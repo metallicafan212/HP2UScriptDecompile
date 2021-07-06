@@ -9,7 +9,7 @@ class HiddenHPawn extends HPawn;
 
 var bool bShowHiddenPawns;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
 	Super.PreBeginPlay();
 	SetCollision(,);

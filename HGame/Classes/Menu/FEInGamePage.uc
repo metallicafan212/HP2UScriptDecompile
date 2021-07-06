@@ -193,7 +193,7 @@ function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
   return (nCanvasSizeY - 88 * fScaleFactor);
 }
 
-function Created ()
+function Created()
 {
   PotionsButton = UWindowButton(CreateControl(Class'UWindowButton',30.0,16.0,64.0,64.0));
   PotionsButton.ToolTipString = GetLocalFEString("InGameMenu_0020");
@@ -437,7 +437,7 @@ function Notify (UWindowDialogControl C, byte E)
   Super.Notify(C,E);
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
   Super.PreSwitchPage();
   strSecretsCount = GetSecretsCount();
@@ -456,7 +456,7 @@ function ToolTip (string strSetTip)
   strCurrToolTip = strSetTip;
 }
 
-function string GetSecretsCount ()
+function string GetSecretsCount()
 {
   local string strSecrets;
   local int nNumSecrets;

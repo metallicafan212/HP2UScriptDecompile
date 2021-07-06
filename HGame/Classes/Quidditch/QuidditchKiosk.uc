@@ -4,7 +4,7 @@
 
 class QuidditchKiosk extends BlackboardQuidditch;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 }
 

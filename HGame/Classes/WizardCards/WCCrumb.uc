@@ -8,7 +8,7 @@ class WCCrumb extends SilverCards;
 #exec Texture Import File=Textures\Icons\WizCardCrumbBigTexture.PNG	GROUP=Icons	Name=WizCardCrumbBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardCrumbTex0.PNG	GROUP=Skins	Name=WizardCardCrumbTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Gideon Crumb";
   Super.PostBeginPlay();

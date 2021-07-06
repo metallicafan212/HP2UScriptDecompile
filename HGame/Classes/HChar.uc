@@ -67,12 +67,12 @@ var bool bCapturedFromStateIdle;
 var float fDistanceToHarry; //added by me to find the distance between Slytherin students and Harry -AdamJD
 
 
-function bool ShouldStartLookingForHarry ()
+function bool ShouldStartLookingForHarry()
 {
 	return True;
 }
 
-function bool IsHuntingHarry ()
+function bool IsHuntingHarry()
 {
 	return False;
 }
@@ -115,7 +115,7 @@ function bool CanSeeHarry (optional bool bLookingForHarry, optional bool bDontCa
 	return True;
 }
 
-function float PlayRandomSoundAndAnimFirstTime ()
+function float PlayRandomSoundAndAnimFirstTime()
 {
 	local int randNumber;
 	local float duration;
@@ -141,7 +141,7 @@ function float PlayRandomSoundAndAnimFirstTime ()
 	return duration;
 }
 
-function float PlayRandomSoundAndAnimSecondTime ()
+function float PlayRandomSoundAndAnimSecondTime()
 {
 	local int randNumber;
 	local float duration;
@@ -168,12 +168,12 @@ state StartFollowingHarry
 	//UTPT added this for some reason -AdamJD
 	//ignores  Tick;
   
-	function bool ShouldStartLookingForHarry ()
+	function bool ShouldStartLookingForHarry()
 	{
 		return False;
 	}
   
-	function bool IsHuntingHarry ()
+	function bool IsHuntingHarry()
 	{
 		return True;
 	}
@@ -199,17 +199,17 @@ state StartFollowingHarry
 
 state followHarry
 {
-	function bool ShouldStartLookingForHarry ()
+	function bool ShouldStartLookingForHarry()
 	{
 		return False;
 	}
   
-	function bool IsHuntingHarry ()
+	function bool IsHuntingHarry()
 	{
 		return True;
 	}
   
-	function BeginState ()
+	function BeginState()
 	{
 		vLastPosition = vect(0.00,0.00,0.00);
 		iStuckCounter = 0;
@@ -275,17 +275,17 @@ state RandomLookForHarry
 	//UTPT added this for some reason -AdamJD
 	//ignores  Tick;
 	
-	function bool ShouldStartLookingForHarry ()
+	function bool ShouldStartLookingForHarry()
 	{
 		return False;
 	}
   
-	function bool IsHuntingHarry ()
+	function bool IsHuntingHarry()
 	{
 		return True;
 	}
   
-	function BeginState ()
+	function BeginState()
 	{
 		vLastPosition = vect(0.00,0.00,0.00);
 		iStuckCounter = 0;
@@ -327,7 +327,7 @@ state RandomLookForHarry
 	  }
 	}
   
-	function EndState ()
+	function EndState()
 	{
 		bTempDontLookForHarry = False;
 	}
@@ -392,12 +392,12 @@ state RandomLookForHarry
 
 state LookForHarryIdle
 {
-	function bool IsHuntingHarry ()
+	function bool IsHuntingHarry()
 	{
 		return True;
 	}
   
-	function bool ShouldStartLookingForHarry ()
+	function bool ShouldStartLookingForHarry()
 	{
 		return False;
 	}
@@ -410,17 +410,17 @@ state LookForHarryIdle
 
 state CaughtHarry
 {
-	function bool ShouldStartLookingForHarry ()
+	function bool ShouldStartLookingForHarry()
 	{
 		return False;
 	}
   
-	function bool IsHuntingHarry ()
+	function bool IsHuntingHarry()
 	{
 		return True;
 	}
   
-	function BeginState ()
+	function BeginState()
 	{
 		local Characters A;
   
@@ -454,17 +454,17 @@ state SaySomethingFirstTime
 	//UTPT added this for some reason -AdamJD
 	//ignores  Tick;
   
-	function bool ShouldStartLookingForHarry ()
+	function bool ShouldStartLookingForHarry()
 	{
 		return False;
 	}
   
-	function bool IsHuntingHarry ()
+	function bool IsHuntingHarry()
 	{
 		return True;
 	}
   
-	function BeginState ()
+	function BeginState()
 	{
 		Acceleration = vect(0.00,0.00,0.00);
 		Velocity = vect(0.00,0.00,0.00);
@@ -490,7 +490,7 @@ state SaySomethingFirstTime
 		GotoState('followHarry');
 }
 
-function NotifyOthersOfHarry ()
+function NotifyOthersOfHarry()
 {
 	local HChar A;
 
@@ -534,7 +534,7 @@ function Tick (float DeltaTime)
 	}
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
 	local string AnimName;
 	local int I;
@@ -618,7 +618,7 @@ function PreBeginPlay ()
     }
 }
 
-function name GetCurrFidgetAnimName ()
+function name GetCurrFidgetAnimName()
 {
 	local string AnimName;
 	//local int Index;
@@ -635,7 +635,7 @@ function name GetCurrFidgetAnimName ()
 	return nm;
 }
 
-function name GetCurrIdleAnimName ()
+function name GetCurrIdleAnimName()
 {
 	local string AnimName;
 	//local int Index;
@@ -815,7 +815,7 @@ function DoBumpLine (optional bool bJustTalk, optional string AlternateBumpLineS
 
 state DoingBumpLine
 {
-	function BeginState ()
+	function BeginState()
 	{
 		Acceleration = vect(0.00,0.00,0.00);
 		Velocity = vect(0.00,0.00,0.00);
@@ -911,19 +911,19 @@ function DoAction (name Action)
 {
 }
 
-function DoPossess ()
+function DoPossess()
 {
 }
 
-function DoUnPossess ()
+function DoUnPossess()
 {
 }
 
-function CanAttack ()
+function CanAttack()
 {
 }
 
-function OnTouch ()
+function OnTouch()
 {
 }
 
@@ -1043,17 +1043,17 @@ state stateCutCapture
 {
 }
 
-function SaveState ()
+function SaveState()
 {
 	SavedState = GetStateName();
 }
 
-function RestoreState ()
+function RestoreState()
 {
 	GotoState(SavedState);
 }
 
-simulated function PlayFootStep ()
+simulated function PlayFootStep()
 {
 	local Sound Step;
 	local float decision;
@@ -1132,17 +1132,17 @@ simulated function PlayFootStep ()
 	PlaySound(Step,SLOT_Interact,GetFootStepVol() * RandRange(0.69999999,1.0),False,1000.0,RandRange(0.69999999,1.29999995));
 }
 
-function float GetFootStepVol ()
+function float GetFootStepVol()
 {
 	return 0.5;
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
 	return Health;
 }
 
-function Sound GetRandomFallSound ()
+function Sound GetRandomFallSound()
 {
 	local int nActualSounds;
 
@@ -1163,7 +1163,7 @@ function Sound GetRandomFallSound ()
 	}
 }
 
-function HandleFallSounds ()
+function HandleFallSounds()
 {
 	local Vector vUnderLocation;
 

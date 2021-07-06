@@ -43,7 +43,7 @@ var float fTickDelta;
 var float fTicksPerSec;
 
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   Super.PostBeginPlay();
   textureHuff = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2HufflepuffCrestSm",Class'Texture'));
@@ -54,7 +54,7 @@ event PostBeginPlay ()
   textureOpponent = textureHuff;
 }
 
-function Timer ()
+function Timer()
 {
   foreach AllActors(Class'harry',PlayerHarry)
   {
@@ -68,7 +68,7 @@ function Timer ()
   }
 }
 
-function StartQuidScore ()
+function StartQuidScore()
 {
   SetTimer(0.2,True);
   nGryffindorScore = 0;
@@ -76,17 +76,17 @@ function StartQuidScore ()
   GotoState('QuidScoreDisplay');
 }
 
-function PauseQuidScore ()
+function PauseQuidScore()
 {
   GotoState('Idle');
 }
 
-function ResumeQuidScore ()
+function ResumeQuidScore()
 {
   GotoState('QuidScoreDisplay');
 }
 
-function TallyQuidScore ()
+function TallyQuidScore()
 {
   GotoState('Tally');
 }
@@ -317,7 +317,7 @@ state Tally
     }
   }
   
-  function BeginState ()
+  function BeginState()
   {
     local StatusGroup sgHousePoints;
     local float fTallyPointsPerSec;
@@ -333,7 +333,7 @@ state Tally
     siGryffHousePoints = PlayerHarry.managerStatus.GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts');
   }
   
-  function EndState ()
+  function EndState()
   {
     StopSound(soundTally,SLOT_Interact);
   }
@@ -374,7 +374,7 @@ loop:
 
 state PostTallyHold
 {
-  function Timer ()
+  function Timer()
   {
     GotoState('Idle');
   }
@@ -388,12 +388,12 @@ state PostTallyHold
     }
   }
   
-  function BeginState ()
+  function BeginState()
   {
     SetTimer(4.0,False);
   }
   
-  function EndState ()
+  function EndState()
   {
     CutNotifyActor.CutCue(strTallyCue);
     HPHud(PlayerHarry.myHUD).RegisterQuidScoreManager(None);

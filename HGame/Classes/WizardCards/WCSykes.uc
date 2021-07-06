@@ -8,7 +8,7 @@ class WCSykes extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardSykesBigTexture.PNG	GROUP=Icons	Name=WizCardSykesBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardSykesTex0.PNG	GROUP=Skins	Name=WizardCardSykesTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Jocunda Sykes";
   Super.PostBeginPlay();

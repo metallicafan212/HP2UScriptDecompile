@@ -6,7 +6,7 @@ class FinalStar extends HProp;
 
 state PickupProp
 {
-  function EndState ()
+  function EndState()
   {
     local ChallengeScoreManager managerChallenge;
   
@@ -28,7 +28,7 @@ defaultproperties
 
     bPickupOnTouch=True
 
-    attachedParticleClass=Class'HPParticle.GoldstarFinal'
+    attachedParticleClass(0)=Class'HPParticle.GoldstarFinal'
 
     // Physics=5
 	Physics=PHYS_Rotating

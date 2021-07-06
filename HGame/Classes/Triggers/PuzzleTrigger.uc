@@ -12,7 +12,7 @@ var float fCurrTime;
 var bool bIsOpen;
 var int Pieces;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local ElevatorMover EM;
   local int Count;
@@ -34,7 +34,7 @@ function PostBeginPlay ()
   Pieces = Count;
 }
 
-function MyOpenDoor ()
+function MyOpenDoor()
 {
   if (  !bIsOpen )
   {
@@ -43,7 +43,7 @@ function MyOpenDoor ()
   }
 }
 
-function MyCloseDoor ()
+function MyCloseDoor()
 {
   if ( bIsOpen )
   {
@@ -52,7 +52,7 @@ function MyCloseDoor ()
   }
 }
 
-function MyToggleDoor ()
+function MyToggleDoor()
 {
   local Trigger t;
   local Mover M;

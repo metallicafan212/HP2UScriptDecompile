@@ -6,7 +6,7 @@ class CutLogClientWindow extends UWindowDialogClientWindow;
 
 var UWindowConsoleTextAreaControl TextArea;
 
-function Created ()
+function Created()
 {
   TextArea = UWindowConsoleTextAreaControl(CreateWindow(Class'UWindowConsoleTextAreaControl',0.0,0.0,WinWidth,WinHeight));
 }

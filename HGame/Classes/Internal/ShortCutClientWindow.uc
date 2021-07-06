@@ -6,7 +6,7 @@ class ShortCutClientWindow extends UWindowDialogClientWindow;
 
 var ShortCutBrowser browser;
 
-function Created ()
+function Created()
 {
   local string curToken;
   local int I;
@@ -28,7 +28,7 @@ function Created ()
   browser.UpdateCurrentGameStateSelection();
 }
 
-function Activated ()
+function Activated()
 {
   if ( browser != None )
   {
@@ -36,7 +36,7 @@ function Activated ()
   }
 }
 
-function Resized ()
+function Resized()
 {
   Super.Resized();
   browser.WinWidth = WinWidth;

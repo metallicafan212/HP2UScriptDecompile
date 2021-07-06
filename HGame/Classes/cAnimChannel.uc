@@ -9,14 +9,14 @@ var bool bCasting;
 var float fTimeInRictusempra;
 var float fTimeInMimbleWimble;
 
-function Cast ()
+function Cast()
 {
   Duellist(Owner).Cast();
 }
 
 auto state stateIdle
 {
-  function BeginState ()
+  function BeginState()
   {
     Duellist(Owner).PlayIdle();
   }
@@ -24,7 +24,7 @@ auto state stateIdle
   begin:
 }
 
-function DoCast ()
+function DoCast()
 {
   if (  !IsInState('stateCast') )
   {
@@ -34,7 +34,7 @@ function DoCast ()
 
 state stateCast
 {
-  function BeginState ()
+  function BeginState()
   {
     bCasting = True;
     Duellist(Owner).DuellistAnimType =  AT_Combine;
@@ -61,7 +61,7 @@ state stateCast
   GotoState('stateIdle');
 }
 
-function DoCharging ()
+function DoCharging()
 {
   if (  !IsInState('stateCharging') )
   {
@@ -77,7 +77,7 @@ begin:
   GotoState('stateIdle');
 }
 
-function DoDefence ()
+function DoDefence()
 {
   if (  !IsInState('stateDefence') )
   {
@@ -87,7 +87,7 @@ function DoDefence ()
 
 state stateDefence
 {
-  function BeginState ()
+  function BeginState()
   {
     bCasting = True;
     Duellist(Owner).bReboundingSpells = True;
@@ -104,7 +104,7 @@ state stateDefence
   GotoState('stateIdle');
 }
 
-function DoKnockBack ()
+function DoKnockBack()
 {
   if (  !IsInState('stateKnockBack') )
   {
@@ -122,7 +122,7 @@ begin:
   GotoState('stateIdle');
 }
 
-function DoReactRictusempra ()
+function DoReactRictusempra()
 {
   if (  !IsInState('stateReactRictusempra') )
   {
@@ -151,7 +151,7 @@ state stateReactRictusempra
     }
   }
   
-  function BeginState ()
+  function BeginState()
   {
     Duellist(Owner).DuellistAnimType =  AT_Combine;
     fTimeInRictusempra = 0.0;
@@ -166,7 +166,7 @@ state stateReactRictusempra
   QuitThisState(True);
 }
 
-function DoReactMimbleWimble ()
+function DoReactMimbleWimble()
 {
   if (  !IsInState('stateReactMimbleWimble') )
   {
@@ -185,7 +185,7 @@ state stateReactMimbleWimble
     }
   }
   
-  function BeginState ()
+  function BeginState()
   {
     Duellist(Owner).DuellistAnimType =  AT_Combine;
     fTimeInMimbleWimble = 0.0;

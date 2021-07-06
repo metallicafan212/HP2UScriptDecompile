@@ -10,14 +10,14 @@ class PixieMarker extends Actor;
 const BOOL_DEBUG_AI= false;
 var() name GroupName;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   SetCollision(,,);
   bCollideWorld = False;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   SetCollision(True,False,False);
 }

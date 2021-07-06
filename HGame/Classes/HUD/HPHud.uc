@@ -19,7 +19,7 @@ var VendorManager CurrVendorManager;
 var HProp propArray[20];
 var bool bHideStatus;
 
-function StartCutScene ()
+function StartCutScene()
 {
   if ( harry(Owner).bIsCaptured )
   {
@@ -30,7 +30,7 @@ function StartCutScene ()
   managerCutScene.StartCutScene();
 }
 
-function EndCutScene ()
+function EndCutScene()
 {
   managerCutScene.EndCutScene();
   bCutSceneMode = False;
@@ -42,7 +42,7 @@ function SetSubtitleText (string Text, float duration)
   managerCutScene.SetText(Text,duration);
 }
 
-function ClearSubtitleText ()
+function ClearSubtitleText()
 {
   managerCutScene.ClearText();
 }
@@ -154,7 +154,7 @@ function UnregisterPickupProp (HProp Prop)
   }
 }
 
-function bool IsCutSceneOrPopupInProgress ()
+function bool IsCutSceneOrPopupInProgress()
 {
   return bCutSceneMode || bCutPopupMode || managerCutScene.bPopupBorderActive || managerCutScene.bBothBordersActive;
 }
@@ -201,7 +201,7 @@ function DrawHoops (Canvas Canvas, int iNumber, int iMaxNumber)
   Canvas.DrawText(string(iNumber) $ "/" $ string(iMaxNumber),False);
 }
 
-simulated function PreBeginPlay ()
+simulated function PreBeginPlay()
 {
   local int I;
 
@@ -221,7 +221,7 @@ simulated function PreBeginPlay ()
   }
 }
 
-simulated function PostBeginPlay ()
+simulated function PostBeginPlay()
 {
   Super.PostBeginPlay();
 }
@@ -457,7 +457,7 @@ function DrawCutStyleText (Canvas Canvas, string strText, int nXPos, int nYPos, 
 
 auto state Loading
 {
-  event BeginState ()
+  event BeginState()
   {
     local CutScene aCut;
   
@@ -483,7 +483,7 @@ begin:
 
 state Idle
 {
-  event BeginState ()
+  event BeginState()
   {
     bHideStatus = False;
   }

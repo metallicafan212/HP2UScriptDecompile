@@ -8,7 +8,7 @@ class WCStarkey extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardStarkeyBigTexture.PNG	GROUP=Icons	Name=WizCardStarkeyBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardStarkeyTex0.PNG	GROUP=Skins	Name=WizardCardStarkeyTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Hesper Starkey";
   Super.PostBeginPlay();

@@ -40,7 +40,7 @@ var Sound CoaxSounds[2];
 var Sound AwSounds[2];
 
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
 }

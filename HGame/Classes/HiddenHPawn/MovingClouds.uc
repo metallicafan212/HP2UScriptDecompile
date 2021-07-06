@@ -14,7 +14,7 @@ var Vector vCloudLocation;
 var Vector vDir;
 var Director Director;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	foreach AllActors(Class'Director',Director)
 	{
@@ -43,7 +43,7 @@ function Bump (Actor Other)
 	Touch(Other);
 }
 
-function bool PassedClouds ()
+function bool PassedClouds()
 {
 	local Vector vCarLocation;
 	local Vector vStraightDir;
@@ -59,7 +59,7 @@ function bool PassedClouds ()
 	return False;
 }
 
-function Vector FindLocation ()
+function Vector FindLocation()
 {
 	local Rotator Direction;
 	local Vector vOffset;
@@ -72,7 +72,7 @@ function Vector FindLocation ()
 	return vLocation;
 }
 
-function Vector FindLocationFromPath ()
+function Vector FindLocationFromPath()
 {
 	local Rotator Direction;
 	local Vector vOffset;
@@ -153,7 +153,7 @@ defaultproperties
 
     bFollowCar=True
 
-    attachedParticleClass=Class'HPParticle.FlyingClouds'
+    attachedParticleClass(0)=Class'HPParticle.FlyingClouds'
 
     bHidden=False
 

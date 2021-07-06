@@ -11,11 +11,11 @@ var() float fFullScale;
 var float fCurrentScale;
 var() float fHalfLife;
 
-event BeginEvent ()
+event BeginEvent()
 {
 }
 
-event EndEvent ()
+event EndEvent()
 {
 }
 
@@ -23,7 +23,7 @@ event KilledBy (Pawn EventInstigator)
 {
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -97,7 +97,7 @@ function DamagePercent (float Scale)
 
 auto state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
   }

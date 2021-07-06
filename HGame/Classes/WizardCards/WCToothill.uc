@@ -8,7 +8,7 @@ class WCToothill extends SilverCards;
 #exec Texture Import File=Textures\Icons\WizCardToothillBigTexture.PNG	GROUP=Icons	Name=WizCardToothillBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardToothillTex0.PNG	GROUP=Skins	Name=WizardCardToothillTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Alberta Toothill";
   Super.PostBeginPlay();

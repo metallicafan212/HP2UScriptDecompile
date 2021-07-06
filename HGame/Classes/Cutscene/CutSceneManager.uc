@@ -20,7 +20,7 @@ var bool bShowFF;
 var Texture textureFFIcons[3];
 var int curFFIcon;
 
-function StartCutScene ()
+function StartCutScene()
 {
   if (  !IsInState('SlideIn') &&  !IsInState('Hold') )
   {
@@ -28,7 +28,7 @@ function StartCutScene ()
   }
 }
 
-function EndCutScene ()
+function EndCutScene()
 {
   strCutCommentText = "";
   if (  !IsInState('SlideOut') &&  !IsInState('Idle') )
@@ -48,7 +48,7 @@ function SetText (string strSetText, float fSetTextDuration)
   StartCutScene();
 }
 
-function ClearText ()
+function ClearText()
 {
   strText = "";
   strCutCommentText = "";
@@ -63,7 +63,7 @@ function SetCutCommentText (string strText)
   strCutCommentText = strText;
 }
 
-event Timer ()
+event Timer()
 {
   strText = "";
   if (  !Level.PlayerHarryActor.bIsCaptured )
@@ -151,7 +151,7 @@ state SlideIn
     }
   }
   
-  function BeginState ()
+  function BeginState()
   {
     if ( Level.PlayerHarryActor.bIsCaptured )
     {
@@ -205,7 +205,7 @@ state SlideOut
     }
   }
   
-  function BeginState ()
+  function BeginState()
   {
     bResetBorderHeightToMax = True;
   }

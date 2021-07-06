@@ -10,13 +10,13 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
 
 state Fly
 {
-  function BeginState ()
+  function BeginState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' Begin Seeking'));
     Log(string(Name) $ string(' Begin Seeking'));
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' End Seeking'));
     Log(string(Name) $ string(' End Seeking'));

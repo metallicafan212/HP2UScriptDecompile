@@ -8,7 +8,7 @@ class WCWithers extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardWithersBigTexture.PNG	GROUP=Icons	Name=WizCardWithersBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardWithersTex0.PNG	GROUP=Skins	Name=WizardCardWithersTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Lord Stoddard Withers";
   Super.PostBeginPlay();

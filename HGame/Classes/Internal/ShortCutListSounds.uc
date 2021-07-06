@@ -10,7 +10,7 @@ var string MasterText[1500];
 var int MasterCount;
 const MAX_ROWS= 1500;
 
-function Created ()
+function Created()
 {
   Super.Created();
   RowHeight = 12.0;
@@ -23,7 +23,7 @@ function Created ()
   Reset();
 }
 
-function Reset ()
+function Reset()
 {
   local string Text;
   local Sound Sound;

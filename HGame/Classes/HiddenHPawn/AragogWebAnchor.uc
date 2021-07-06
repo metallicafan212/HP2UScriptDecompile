@@ -14,7 +14,7 @@ var(VisualFX) ParticleFX fxHitMeParticleEffect;
 var(VisualFX) Class<ParticleFX> fxHitMeParticleEffectClass;
 var Sound HitSound;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	foreach AllActors(Class'Aragog',Spider)
@@ -51,7 +51,7 @@ defaultproperties
 
     fxReactParticleEffectClass=Class'HPParticle.WebDustBase'
 
-    attachedParticleClass=Class'HPParticle.Diffindo_WebFx'
+    attachedParticleClass(0)=Class'HPParticle.Diffindo_WebFx'
 
     bHidden=False
 

@@ -21,7 +21,7 @@ function Touch (Actor Other)
   ProcessTrigger();
 }
 
-function ProcessTrigger ()
+function ProcessTrigger()
 {
   local PatrolPoint sp;
   local HPawn A;

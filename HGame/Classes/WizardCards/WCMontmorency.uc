@@ -8,7 +8,7 @@ class WCMontmorency extends SilverCards;
 #exec Texture Import File=Textures\Icons\WizCardMontmorencyBigTexture.PNG	GROUP=Icons	Name=WizCardMontmorencyBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardMontmorencyTex0.PNG	GROUP=Skins	Name=WizardCardMontmorencyTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Laverne de Montmorency";
   Super.PostBeginPlay();

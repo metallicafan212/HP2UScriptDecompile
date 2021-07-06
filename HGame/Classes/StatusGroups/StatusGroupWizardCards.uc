@@ -48,7 +48,7 @@ function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int
 	nOutY 			= -nIconHeight * fScaleFactor;
 }
 
-function AssignAllSilverToVendors ()
+function AssignAllSilverToVendors()
 {
 	local StatusItemWizardCards siWC;
 	local int nCardId;
@@ -91,7 +91,7 @@ function AssignAllSilverToVendors ()
 	*/
 }
 
-function AssignVendorCards ()
+function AssignVendorCards()
 {
 	local chestbronze Chest;
 	local bronzecauldron Cauldron;
@@ -332,7 +332,7 @@ function bool HasCardGameStatePassed (string strCardGameState)
 	
 }
 
-function ShowCardData ()
+function ShowCardData()
 {
 	StatusItemWizardCards(GetStatusItem(Class'StatusItemBronzeCards')).ShowCardData();
 	StatusItemWizardCards(GetStatusItem(Class'StatusItemSilverCards')).ShowCardData();
@@ -355,7 +355,7 @@ function SetLastObtainedCardItem (StatusItemWizardCards siWC)
 	}
 }
 
-function ECardType GetLastObtainedCardType ()
+function ECardType GetLastObtainedCardType()
 {
 	return LastObtainedCardType;
 }
@@ -379,7 +379,7 @@ function SetLastObtainedCardTypeAsInt (int nLastCardType)
 	}
 }
 
-function int GetLastObtainedCardTypeAsInt ()
+function int GetLastObtainedCardTypeAsInt()
 {
 	switch (LastObtainedCardType)
 	{

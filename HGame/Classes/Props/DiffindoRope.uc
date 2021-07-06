@@ -7,7 +7,7 @@ class DiffindoRope extends HDiffindo;
 var ParticleFX fxShimmer;
 var Class<ParticleFX> fxShimmerClass;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   SetCollision(True,True,True);
@@ -22,7 +22,7 @@ function PreBeginPlay ()
   }
 }
 
-event Destroyed ()
+event Destroyed()
 {
   if ( fxShimmer != None )
   {

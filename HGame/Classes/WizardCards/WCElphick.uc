@@ -8,7 +8,7 @@ class WCElphick extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardElphickBigTexture.PNG	GROUP=Icons	Name=WizCardElphickBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardElphickTex0.PNG	GROUP=Skins	Name=WizardCardElphickTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Wilfred Elphick";
   Super.PostBeginPlay();

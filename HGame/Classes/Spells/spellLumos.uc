@@ -17,7 +17,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
     Acceleration = Velocity;

@@ -6,7 +6,7 @@ class Boomslang extends PotionIngredients;
 
 state PickupProp
 {
-  function EndState ()
+  function EndState()
   {
     TriggerEvent(Event,None,None);
     Super.EndState();
@@ -29,7 +29,7 @@ defaultproperties
 
     classStatusItem=Class'StatusItemBoomslang'
 
-    attachedParticleClass=Class'HPParticle.BoomslangFX'
+    attachedParticleClass(0)=Class'HPParticle.BoomslangFX'
 
     attachedParticleOffset=(X=0.00,Y=0.00,Z=20.00)
 

@@ -13,7 +13,7 @@ var UWindowButton ScoreButtons[4];
 var UWindowLabelControl NoneWonLabel;
 
 
-function Created ()
+function Created()
 {
   local int I;
   local int nStartY;
@@ -74,7 +74,7 @@ function Notify (UWindowDialogControl C, byte E)
   Super.Notify(C,E);
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
   local harry PlayerHarry;
   local int nHighScore;

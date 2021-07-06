@@ -104,7 +104,7 @@ var Texture HoverImage;
 var Texture HoverImage3;
 
 
-function LocalizeStrings ()
+function LocalizeStrings()
 {
   local int I;
   local string tmpStr;
@@ -160,7 +160,7 @@ function LocalizeStrings ()
   DifficultyLevel[2] = GetLocalFEString("Options_0055");
 }
 
-function Created ()
+function Created()
 {
   local int ctlX;
   local int ctlY;
@@ -371,7 +371,7 @@ function Created ()
   return;
 }
 
-function ShowWindow ()
+function ShowWindow()
 {
   Super.ShowWindow();
   if ( HPConsole(Root.Console).bDebugMode )
@@ -384,14 +384,14 @@ function ShowWindow ()
   }
 }
 
-function HideWindow ()
+function HideWindow()
 {
   Super.HideWindow();
   DifficultyCombo.CloseUpWithNoSound();
   GetPlayerOwner().SaveConfig();
 }
 
-function PlayClick ()
+function PlayClick()
 {
   if ( buttonClickSound != None )
   {
@@ -462,7 +462,7 @@ function BeforePaint (Canvas C, float X, float Y)
   }
 }
 
-function LoadAvailableSettings ()
+function LoadAvailableSettings()
 {
   local string ParseString;
   local int p;
@@ -475,7 +475,7 @@ function LoadAvailableSettings ()
   bInitialized = True;
 }
 
-function SwitchFlyingControlAliases ()
+function SwitchFlyingControlAliases()
 {
   local string tmp;
 
@@ -485,12 +485,12 @@ function SwitchFlyingControlAliases ()
   Log("Flying control aliases switched");
 }
 
-function bool IsFlyingControlInverted ()
+function bool IsFlyingControlInverted()
 {
   return harry(GetPlayerOwner()).bInvertBroomPitch;
 }
 
-function LoadExistingKeys ()
+function LoadExistingKeys()
 {
   local int I;
   local int J;
@@ -576,58 +576,58 @@ function WindowDone (UWindowWindow W)
   }
 }
 
-function SensitivityChanged ()
+function SensitivityChanged()
 {
   GetPlayerOwner().MouseSensitivity = SensitivitySlider.Value;
   Log("Sensitivity changed to " $ string(GetPlayerOwner().MouseSensitivity));
 }
 
-function MouseSmoothChanged ()
+function MouseSmoothChanged()
 {
   GetPlayerOwner().bMaxMouseSmoothing = MouseSmoothCheck.bChecked;
   Log("bMaxMouseSmoothing changed to " $ string(MouseSmoothCheck.bChecked));
 }
 
-function MouseInvertChanged ()
+function MouseInvertChanged()
 {
   GetPlayerOwner().InvertMouse(MouseInvertCheck.bChecked);
   GetPlayerOwner().ConsoleCommand("set ini:Engine.PlayerPawn bInvertMouse " $ AutoCenterCamCheck.bChecked);
   Log("MouseInvert changed to " $ string(MouseInvertCheck.bChecked));
 }
 
-function AutoCenterCamChanged ()
+function AutoCenterCamChanged()
 {
   harry(GetPlayerOwner()).bAutoCenterCamera = AutoCenterCamCheck.bChecked;
   GetPlayerOwner().ConsoleCommand("set ini:HGame.Harry bAutoCenterCamera " $ AutoCenterCamCheck.bChecked);
   Log("AutoCenterCam changed to " $ string(AutoCenterCamCheck.bChecked));
 }
 
-function AutoDrinkPotionChanged ()
+function AutoDrinkPotionChanged()
 {
   harry(GetPlayerOwner()).bAutoQuaff = AutoDrinkPotionCheck.bChecked;
   GetPlayerOwner().ConsoleCommand("set ini:HGame.Harry bAutoQuaff " $ AutoDrinkPotionCheck.bChecked);
   Log("bAutoQuaff changed to " $ string(AutoDrinkPotionCheck.bChecked));
 }
 
-function MoveWhileCastingChanged ()
+function MoveWhileCastingChanged()
 {
   harry(GetPlayerOwner()).bMoveWhileCasting = MoveWhileCastingCheck.bChecked;
   GetPlayerOwner().ConsoleCommand("set ini:HGame.Harry bMoveWhileCasting " $ MoveWhileCastingCheck.bChecked);
   Log("MoveWhileCasting changed to " $ string(MoveWhileCastingCheck.bChecked));
 }
 
-function AutoJumpChanged ()
+function AutoJumpChanged()
 {
   GetPlayerOwner().AutoJump(AutoJumpCheck.bChecked);
   Log("AutoJumpChanged changed to " $ string(AutoJumpCheck.bChecked));
 }
 
-function InvertBroomChanged ()
+function InvertBroomChanged()
 {
   harry(GetPlayerOwner()).InvertBroomPitch(InvertBroomCheck.bChecked);
 }
 
-function DifficultyChanged ()
+function DifficultyChanged()
 {
   local string Str;
 

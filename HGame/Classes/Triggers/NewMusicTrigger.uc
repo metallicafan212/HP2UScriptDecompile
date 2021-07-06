@@ -12,7 +12,7 @@ var transient bool Triggered;
 var transient int SongHandle;
 var harry PlayerHarry;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 // JL0014:
   foreach AllActors(Class'harry',PlayerHarry)
@@ -27,7 +27,7 @@ function Activate (Actor Other, Pawn Instigator)
   ProcessTrigger();
 }
 
-function ProcessTrigger ()
+function ProcessTrigger()
 {
   local NewMusicTrigger nmt;
 

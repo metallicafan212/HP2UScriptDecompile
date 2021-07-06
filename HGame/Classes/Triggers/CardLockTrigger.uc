@@ -34,7 +34,7 @@ state NormalTrigger
 
 state SendLockMessages
 {
-  function BeginState ()
+  function BeginState()
   {
     sgLocks = StatusGroupLocks(harry(Level.PlayerHarryActor).managerStatus.GetStatusGroup(Class'StatusGroupLocks'));
     siLock1 = StatusItemLock1(sgLocks.GetStatusItem(Class'StatusItemLock1'));

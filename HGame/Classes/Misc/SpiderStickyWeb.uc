@@ -19,18 +19,18 @@ var Class<ParticleFX> fxHitClass;
 var Class<ParticleFX> fxReactClass;
 var float fWebLifetime;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   SetCollision(True,False,False);
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
 }
 
-function Timer ()
+function Timer()
 {
   PlayerHarry.ClientMessage("The timer has fired");
   GotoState('stateHiding');
@@ -41,7 +41,7 @@ function Bump (Actor Other)
   PlaySound(BumpSound,SLOT_None);
 }
 
-event Destroyed ()
+event Destroyed()
 {
   if ( fxHit != None )
   {
@@ -60,7 +60,7 @@ function bool HandleSpellRictusempra (optional baseSpell spell, optional Vector 
   return True;
 }
 
-function UpdateFX ()
+function UpdateFX()
 {
   local Vector colRotated;
 
@@ -85,7 +85,7 @@ begin:
 
 state() stateShowing
 {
-  function BeginState ()
+  function BeginState()
   {
     bCollideWorld = True;
     // eVulnerableToSpell = 22;
@@ -137,7 +137,7 @@ begin:
 
 state() stateHiding
 {
-  function BeginState ()
+  function BeginState()
   {
     bCollideWorld = False;
     // eVulnerableToSpell = 0;

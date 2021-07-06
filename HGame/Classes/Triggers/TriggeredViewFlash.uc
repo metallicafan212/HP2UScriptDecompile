@@ -9,7 +9,7 @@ class TriggeredViewFlash extends Triggers;
 
 var PlayerPawn Player;
 
-function FIndPlayer ()
+function FIndPlayer()
 {
 // JL0014:
   foreach AllActors(Class'PlayerPawn',Player)

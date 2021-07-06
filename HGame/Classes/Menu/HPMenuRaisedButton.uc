@@ -6,7 +6,7 @@ class HPMenuRaisedButton extends UWindowButton;
 
 var int textOffsetX;
 
-function Created ()
+function Created()
 {
   Super.Created();
 }

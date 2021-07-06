@@ -94,7 +94,7 @@ function AttachLimb (int I)
   }
 }
 
-function AttachAllLimbs ()
+function AttachAllLimbs()
 {
   local int I;
 
@@ -131,7 +131,7 @@ function DeAttachLimb (int I)
   }
 }
 
-function DeAttachAllLimbs ()
+function DeAttachAllLimbs()
 {
   local int I;
 
@@ -147,7 +147,7 @@ function DeAttachAllLimbs ()
   bHasGoodLimbs = False;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int I;
   local BaseCam Cam;
@@ -222,7 +222,7 @@ function PostBeginPlay ()
   }
 }
 
-function bool HasLimbs ()
+function bool HasLimbs()
 {
   local int I;
 
@@ -240,7 +240,7 @@ function bool HasLimbs ()
   return False;
 }
 
-function int ClosestLimb ()
+function int ClosestLimb()
 {
   local int I;
   local int maxi;
@@ -326,7 +326,7 @@ function bool HandleSpellDiffindo (optional baseSpell spell, optional Vector vHi
   return True;
 }
 
-function PlaySoundAngry ()
+function PlaySoundAngry()
 {
   switch (Rand(5))
   {
@@ -338,7 +338,7 @@ function PlaySoundAngry ()
   }
 }
 
-function PlaySoundOuch ()
+function PlaySoundOuch()
 {
   switch (Rand(3))
   {

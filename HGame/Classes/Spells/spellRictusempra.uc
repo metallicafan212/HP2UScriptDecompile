@@ -4,7 +4,7 @@
 
 class spellRictusempra extends baseSpell;
 
-function OnSpellInit ()
+function OnSpellInit()
 {
   local float fDistMod;
 
@@ -22,7 +22,7 @@ function OnSpellInit ()
   SetRotation(rotator(CurrentDir));
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -39,7 +39,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
     Acceleration = vector(Rotation) * 10;

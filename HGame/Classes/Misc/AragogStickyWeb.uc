@@ -20,14 +20,14 @@ var int iDamage;
 var float DamageTime;
 var bool bTouch;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   SetCollision(True,False,False);
   DamageTime = 0.0;
 }
 
-event Destroyed ()
+event Destroyed()
 {
   if ( fxHit != None )
   {
@@ -40,12 +40,12 @@ event Destroyed ()
   Super.Destroyed();
 }
 
-function Timer ()
+function Timer()
 {
   GotoState('stateHiding');
 }
 
-function BeginToGrow ()
+function BeginToGrow()
 {
   PlaySound(ShrinkSound,SLOT_None,0.25);
   GotoState('stateShowing');
@@ -60,7 +60,7 @@ begin:
 
 state stateShowing
 {
-  function BeginState ()
+  function BeginState()
   {
     bCollideWorld = True;
     // eVulnerableToSpell = 0;
@@ -143,7 +143,7 @@ begin:
 
 state DoneGrowing
 {
-  function BeginState ()
+  function BeginState()
   {
     // eVulnerableToSpell = 19;
 	eVulnerableToSpell = SPELL_Diffindo;
@@ -211,7 +211,7 @@ begin:
 
 state() stateHiding
 {
-  function BeginState ()
+  function BeginState()
   {
     bCollideWorld = False;
     // eVulnerableToSpell = 0;

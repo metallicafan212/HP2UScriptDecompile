@@ -8,7 +8,7 @@ class WCFay extends SilverCards;
 #exec Texture Import File=Textures\Icons\WizCardFayBigTexture.PNG	GROUP=Icons	Name=WizCardFayBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardFayTex0.PNG	GROUP=Skins	Name=WizardCardFayTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Morgan le Fay";
   Super.PostBeginPlay();

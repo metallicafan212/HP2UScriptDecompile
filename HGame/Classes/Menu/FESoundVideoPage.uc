@@ -65,7 +65,7 @@ var float fLeftMarginIndent;
 var float fRightMargin;
 var float fRightMarginIndent;
 
-function LocalizeStrings ()
+function LocalizeStrings()
 {
   local int I;
   local string tmpStr;
@@ -94,7 +94,7 @@ function LocalizeStrings ()
   ConfirmSettingsCancelText = GetLocalFEString("Options_0050");
 }
 
-function Created ()
+function Created()
 {
   local int ctlX;
   local int ctlY;
@@ -286,7 +286,7 @@ function Created ()
   CreateBackPageButton();
 }
 
-function PlayClick ()
+function PlayClick()
 {
   if ( buttonClickSound != None )
   {
@@ -319,7 +319,7 @@ function bool IsSupportedResolution (string TempStr)
   return False;
 }
 
-function LoadAvailableSettings ()
+function LoadAvailableSettings()
 {
   local float Brightness;
   local string ParseString;
@@ -422,7 +422,7 @@ function LoadAvailableSettings ()
   bInitialized = True;
 }
 
-function SettingsChanged ()
+function SettingsChanged()
 {
   local string NewSettings;
 
@@ -461,7 +461,7 @@ function WindowDone (UWindowWindow W)
   }
 }
 
-function HideWindow ()
+function HideWindow()
 {
   Super.HideWindow();
   ResolutionCombo.CloseUpWithNoSound();
@@ -470,7 +470,7 @@ function HideWindow ()
   GetPlayerOwner().SaveConfig();
 }
 
-function BrightnessChanged ()
+function BrightnessChanged()
 {
   if ( bInitialized )
   {
@@ -479,7 +479,7 @@ function BrightnessChanged ()
   }
 }
 
-function TextureDetailChanged ()
+function TextureDetailChanged()
 {
   if ( bInitialized )
   {
@@ -488,7 +488,7 @@ function TextureDetailChanged ()
   }
 }
 
-function ObjectDetailChanged ()
+function ObjectDetailChanged()
 {
   switch (ObjectDetailSlider.GetValue())
   {
@@ -531,7 +531,7 @@ function ObjectDetailChanged ()
   GetPlayerOwner().ConsoleCommand("set ini:HGame.Harry ObjectDetail " $ string(GetPlayerOwner().ObjectDetail));
 }
 
-function MusicVolumeChanged ()
+function MusicVolumeChanged()
 {
 	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
 	MusicVolumeLabel.SetText( MusicVolumeText $" - " $int(MusicVolumeSlider.Value) );
@@ -540,7 +540,7 @@ function MusicVolumeChanged ()
 	return;
 }
 
-function SoundVolumeChanged ()
+function SoundVolumeChanged()
 {
 	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
 	SoundVolumeLabel.SetText( SoundVolumeText $" - " $int(SoundVolumeSlider.Value) );

@@ -13,7 +13,7 @@ var string lineText[2100];
 var string LanguageName;
 var globalconfig string LanguageExtension;
 
-event Spawned ()
+event Spawned()
 {
   if ( PlayerHarry == None )
   {

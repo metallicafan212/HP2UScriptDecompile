@@ -7,7 +7,7 @@ class spellEcto extends baseSpell;
 var(VisualFX) ParticleFX fxHitHarryParticleEffect;
 var(VisualFX) Class<ParticleFX> fxHitHarryParticleEffectClass;
 
-function OnSpellInit ()
+function OnSpellInit()
 {
   if ( TargetActor.IsA('harry') )
   {
@@ -15,7 +15,7 @@ function OnSpellInit ()
   }
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -32,7 +32,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
   }

@@ -49,7 +49,7 @@ var() DamageParams Damage;
 var() AccuracyParams Accuracy;
 var() BarkDistParams BarkDist;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   local int I;
 
@@ -80,7 +80,7 @@ function PreBeginPlay ()
   }
 }
 
-function Mesh GetRandomMesh ()
+function Mesh GetRandomMesh()
 {
   local Mesh lMesh;
   //local int Index;
@@ -91,7 +91,7 @@ function Mesh GetRandomMesh ()
   return lMesh;
 }
 
-function GetObjectToThrow ()
+function GetObjectToThrow()
 {
   objectToThrow = Spawn(Class'BowTruckleTwig',,,);
   if ( objectToThrow == None )
@@ -194,7 +194,7 @@ function DropBark (Vector Loc, float Height)
   }
 }
 
-function bool CloseToHome ()
+function bool CloseToHome()
 {
   if ( VSize(Location - vHome) < travelFromHome )
   {
@@ -203,7 +203,7 @@ function bool CloseToHome ()
   return False;
 }
 
-function bool FarFromHarry ()
+function bool FarFromHarry()
 {
   if ( bInCutScene )
   {
@@ -216,7 +216,7 @@ function bool FarFromHarry ()
   return False;
 }
 
-function float PlaySoundOuch ()
+function float PlaySoundOuch()
 {
   local float duration;
   local Sound snd;
@@ -253,7 +253,7 @@ function float PlaySoundOuch ()
   return duration;
 }
 
-function PlaySoundTaunt ()
+function PlaySoundTaunt()
 {
   switch (Rand(9))
   {
@@ -288,7 +288,7 @@ function PlaySoundTaunt ()
   }
 }
 
-function PlaySoundAttack ()
+function PlaySoundAttack()
 {
   switch (Rand(4))
   {
@@ -308,7 +308,7 @@ function PlaySoundAttack ()
   }
 }
 
-function PlaySoundSurprise ()
+function PlaySoundSurprise()
 {
   switch (Rand(5))
   {
@@ -362,12 +362,12 @@ function HitWall (Vector HitNormal, Actor HitWall)
   GotoState('stateGoHome');
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   bInCutScene = True;
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   bInCutScene = False;
 }

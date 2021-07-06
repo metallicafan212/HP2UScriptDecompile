@@ -8,7 +8,7 @@ class WCMarjoribanks extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardMarjoribanksBigTexture.PNG	GROUP=Icons	Name=WizCardMarjoribanksBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardMarjoribanksTex0.PNG	GROUP=Skins	Name=WizardCardMarjoribanksTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Beaumont Marjoribanks";
   Super.PostBeginPlay();

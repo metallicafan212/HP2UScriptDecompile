@@ -8,7 +8,7 @@ var() string WarningMessage;
 var() float durration;
 var harry PlayerHarry;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   foreach AllActors(Class'harry',PlayerHarry)

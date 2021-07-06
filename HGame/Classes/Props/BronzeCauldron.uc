@@ -28,13 +28,13 @@ function PreBeginPlay()
 }
 */
 
-function int GetMaxEjectedObjects ()
+function int GetMaxEjectedObjects()
 {
   // return 3;
   return (nMAX_EJECTED_OBJECTS);
 }
 
-function SetupRandomBeans ()
+function SetupRandomBeans()
 {
   local int iBean;
 
@@ -67,7 +67,7 @@ state stillOpen
 
 auto state waitforspell
 {
-  function BeginState ()
+  function BeginState()
   {
     if ( bOpened )
     {
@@ -86,7 +86,7 @@ auto state waitforspell
 
 state turnover
 {
-  function generateobject ()
+  function generateobject()
   {
     local Vector Dir;
     local Vector Vel;

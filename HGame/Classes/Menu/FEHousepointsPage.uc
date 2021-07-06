@@ -9,7 +9,7 @@ var UWindowButton HuffButton;
 var UWindowButton RaveButton;
 var UWindowButton SlythButton;
 
-function Created ()
+function Created()
 {
   CreateBackPageButton();
   CreateTitleButton(GetLocalFEString("Report_Card_0004"));

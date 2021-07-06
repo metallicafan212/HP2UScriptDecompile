@@ -8,7 +8,7 @@ class WCWaffling extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardWafflingBigTexture.PNG	GROUP=Icons	Name=WizCardWafflingBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardWafflingTex0.PNG	GROUP=Skins	Name=WizardCardWafflingTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Adalbert Waffling";
   Super.PostBeginPlay();

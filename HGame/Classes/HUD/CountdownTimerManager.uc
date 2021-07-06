@@ -20,7 +20,7 @@ var float fLastTickTime;
 var bool bShowNumericTime;
 
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   if ( bStartOnLevelLoad == True )
   {
@@ -29,7 +29,7 @@ event PostBeginPlay ()
   LoadTimerBarGraphics();
 }
 
-function LoadTimerBarGraphics ()
+function LoadTimerBarGraphics()
 {
   fFULL_OFFSET_X = 51.0;
   fFULL_OFFSET_Y = 26.0;
@@ -57,7 +57,7 @@ function DrawCountdown (Canvas Canvas)
   DrawTuningModeData(Canvas);
 }
 
-event Timer ()
+event Timer()
 {
   if ( bStartOnLevelLoad )
   {
@@ -107,18 +107,18 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
   // }
 }
 
-function float GetTimerDuration ()
+function float GetTimerDuration()
 {
   return fDuration;
 }
 
-function StartCountDown ()
+function StartCountDown()
 {
   HPHud(Level.PlayerHarryActor.myHUD).RegisterCountdownTimerManager(self);
   GotoState('CountingDown');
 }
 
-function StopCountDown ()
+function StopCountDown()
 {
   HPHud(Level.PlayerHarryActor.myHUD).RegisterCountdownTimerManager(None);
   GotoState('Idle');
@@ -136,7 +136,7 @@ function DrawTuningModeData (Canvas Canvas)
   }
 }
 
-function PlayCountdownSound ()
+function PlayCountdownSound()
 {
   local BaseCam Cam;
 
@@ -214,7 +214,7 @@ state CountingDown
     PlayCountdownSound();
   }
   
-  event BeginState ()
+  event BeginState()
   {
     fCountdownTime = GetTimerDuration();
     fLastTickTime = 0.0;

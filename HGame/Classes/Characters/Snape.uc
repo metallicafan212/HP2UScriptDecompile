@@ -27,7 +27,7 @@ function AdjustHousePoints (int Points)
   sgHousePoints.IncrementCount(Class'StatusItemGryffindorPts',Points);
 }
 
-function int HousePointsCount ()
+function int HousePointsCount()
 {
   local StatusGroup sgHousePoints;
   local int Count;
@@ -37,7 +37,7 @@ function int HousePointsCount ()
   return Count;
 }
 
-function float PlaySnapeSoundText ()
+function float PlaySnapeSoundText()
 {
   local float duration;
 
@@ -75,7 +75,7 @@ function float PlaySnapeSoundText ()
   return duration;
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
 }

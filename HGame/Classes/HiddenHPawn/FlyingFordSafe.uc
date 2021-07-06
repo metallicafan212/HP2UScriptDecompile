@@ -8,7 +8,7 @@ const BOOL_DEBUG_AI= false;
 var bool bTouch;
 var Director Director;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	foreach AllActors(Class'Director',Director)
 	{

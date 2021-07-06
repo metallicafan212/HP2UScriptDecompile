@@ -8,7 +8,7 @@ class WCHipworth extends BronzeCards;
 #exec Texture Import File=Textures\Icons\WizCardHipworthBigTexture.PNG	GROUP=Icons	Name=WizCardHipworthBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardHipworthTex0.PNG	GROUP=Skins	Name=WizardCardHipworthTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Glover Hipworth";
   Super.PostBeginPlay();

@@ -4,7 +4,7 @@
 
 class HPMenuOptionComboButton extends UWindowComboButton;
 
-function Created ()
+function Created()
 {
   Super.Created();
 }

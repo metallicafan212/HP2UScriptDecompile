@@ -170,7 +170,7 @@ begin:
   }
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int I;
 
@@ -217,7 +217,7 @@ function PostBeginPlay ()
   }
 }
 
-function FindBaseParticlePos ()
+function FindBaseParticlePos()
 {
   local Vector Dir;
   local int bNum;

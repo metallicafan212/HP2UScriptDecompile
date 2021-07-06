@@ -15,7 +15,7 @@ var int iCounter;
 var float TimerToPoint;
 var() bool bStarted;
 
-event Destroyed ()
+event Destroyed()
 {
   Sparkle.Destroy();
   Super.Destroyed();

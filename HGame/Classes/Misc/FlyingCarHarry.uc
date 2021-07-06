@@ -26,7 +26,7 @@ var Vector vTurbulence;
 var float fLightningYaw;
 var float fLightningPitch;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   foreach AllActors(Class'Director',Director)
@@ -36,7 +36,7 @@ function PreBeginPlay ()
   }
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   PrimaryAnim = 'Flying';
@@ -51,7 +51,7 @@ function PostBeginPlay ()
   vCurrentTetherDistance = Vec(0.0,0.0,0.0);
 }
 
-event Possess ()
+event Possess()
 {
   Super.Possess();
   Log("BroomHarry in State " $ string(GetStateName()) $ ".");
@@ -60,7 +60,7 @@ event Possess ()
   SetRotation(guide.Rotation);
 }
 
-function DeterminePrimaryAnim ()
+function DeterminePrimaryAnim()
 {
   local float Speed;
 
@@ -69,7 +69,7 @@ function DeterminePrimaryAnim ()
   Trail.ParentBlend = Min(Speed / 200, 1);
 }
 
-function UpdateBroomSound ()
+function UpdateBroomSound()
 {
   local float fSpeed;
   local float fSpeedFactor;
@@ -159,7 +159,7 @@ state PlayerWalking
 {
   ignores  Mount, AltFire;
   
-  function BeginState ()
+  function BeginState()
   {
     Super.BeginState();
     // SetPhysics(4);
@@ -405,7 +405,7 @@ state PlayerWalking
     bHittingWall = True;
   }
   
-  event Timer ()
+  event Timer()
   {
   }
   

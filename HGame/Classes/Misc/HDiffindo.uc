@@ -22,7 +22,7 @@ var() bool bUseDiffindoSpellHitFX;
 var() Sound DiffindoImpactSound;
 var() Sound DiffindoCutSound;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   PlayerHarry = harry(Level.PlayerHarryActor);
   SetCollision(True,True,True);
@@ -30,7 +30,7 @@ function PreBeginPlay ()
   ComputeNewStartAndEndPoints();
 }
 
-event Destroyed ()
+event Destroyed()
 {
   if ( fxCut != None )
   {
@@ -39,7 +39,7 @@ event Destroyed ()
   Super.Destroyed();
 }
 
-function ComputeNewStartAndEndPoints ()
+function ComputeNewStartAndEndPoints()
 {
   local float fWidth;
   local float fHeight;
@@ -96,7 +96,7 @@ function UpdateDiffindoFX (float fTimeDelta)
   fxCut.SetLocation(vStartPoint + vCutLength * fTravel);
 }
 
-function OnDiffindoExplode ()
+function OnDiffindoExplode()
 {
   if ( fxExplodeClass0 != None )
   {
@@ -146,7 +146,7 @@ function Died (Pawn Killer, name DamageType, Vector HitLocation)
 
 state stateHitByDiffindo
 {
-  function BeginState ()
+  function BeginState()
   {
     fxCut = Spawn(fxCutClass);
     fxCut.SetLocation(Location);

@@ -191,7 +191,7 @@ function MoveCardToEnd (int nStartIdx)
   
 }
 
-function UpdateCount ()
+function UpdateCount()
 {
   local int I;
 
@@ -683,7 +683,7 @@ function SetCardData (int nIdx, int nId, int nOwner)
 	  }
 }
 
-function ShowCardData ()
+function ShowCardData()
 {
 	local int I;
 

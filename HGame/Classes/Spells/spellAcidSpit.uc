@@ -9,17 +9,17 @@ var() int iDamage;
 var bool bSpawnPool;
 var float fPoolShrinkTimeMult;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   InitSpell(None,None);
 }
 
-event BeginEvent ()
+event BeginEvent()
 {
 }
 
-event EndEvent ()
+event EndEvent()
 {
 }
 
@@ -27,7 +27,7 @@ event KilledBy (Pawn EventInstigator)
 {
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -61,7 +61,7 @@ function HitWall (Vector HitNormal, Actor Wall)
 
 auto state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
   }

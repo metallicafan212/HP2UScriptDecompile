@@ -378,7 +378,7 @@ function TransitionToCameraMode (ECamMode eMode)
 }
 
 /*
-function ShowSettings ()
+function ShowSettings()
 {
   PlayerHarry.ClientMessage("The current camera settings are:");
   PlayerHarry.ClientMessage("-------------------------------------------");
@@ -506,7 +506,7 @@ function SaveUserSettings( int i )
 	if(USE_DEBUG_MODE)playerHarry.ClientMessage("Saved user settings into slot " $i);
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
 	SetCollision(False,False,False);
 	bCollideWorld = False;
@@ -515,7 +515,7 @@ function PreBeginPlay ()
 	fDistanceScalarMin = DISTANCE_SCALAR_MIN;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	PlayerHarry = harry(Level.PlayerHarryActor);
@@ -818,7 +818,7 @@ function UpdatePosition (float fTimeDelta, optional bool bSkipWorldCheck)
 	SetLocation(vCurrPosition);
 }
 
-function bool CheckCollisionWithWorld ()
+function bool CheckCollisionWithWorld()
 {
 	local Vector HitLocation;
 	local Vector HitNormal;
@@ -861,7 +861,7 @@ function bool CheckCollisionWithWorld ()
  
 auto state StateStartup
 {
-	function BeginState ()
+	function BeginState()
 	{
 	}
   
@@ -880,7 +880,7 @@ state stateIdle
 
 state StateTransition
 {
-	function BeginState ()
+	function BeginState()
 	{
 		CamTarget.SetAttachedTo(None);
 		// CamTarget.DoFlyTo(PlayerHarry.Location + CamSetStandard.vLookAtOffset,3,1.0);
@@ -892,7 +892,7 @@ state StateTransition
 		PlayerHarry.ClientMessage(" 1 DestRot = " $ string(rDestRotation) $ " CurRot = " $ string(rCurrRotation));
 	}
   
-	function CutBypass ()
+	function CutBypass()
 	{
 		PlayerHarry.ClientMessage(" Transition DestRot = " $ string(rDestRotation) $ " CurRot = " $ string(rCurrRotation) $ "TargetLoc = " $ string(CamTarget.Location));
 		CamTarget.SetAttachedTo(PlayerHarry);
@@ -919,7 +919,7 @@ state StateStandardCam
 	//ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
 	ignores TakeDamage, SeePlayer, EnemyNotVisible, HearNoise, KilledBy, Trigger, Bump, HitWall, HeadZoneChange, FootZoneChange, ZoneChange, Falling, WarnTarget, Died, LongFall, PainTimer; //UTPT left all these out... -AdamJD
   
-	function BeginState ()
+	function BeginState()
 	{
 		if ( /*True*/USE_DEBUG_MODE )
 		{
@@ -930,7 +930,7 @@ state StateStandardCam
 		InitPositionAndRotation(True);
 	}
   
-	function EndState ()
+	function EndState()
 	{
 		rSavedRotation = rCurrRotation;
 	}
@@ -947,7 +947,7 @@ state StateStandardCam
 
 state StateQuidditchCam
 {
-	function BeginState ()
+	function BeginState()
 	{
 		if ( /*True*/USE_DEBUG_MODE )
 		{
@@ -984,7 +984,7 @@ state StateQuidditchCam
 
 state StateFlyingCarCam
 {
-	function BeginState ()
+	function BeginState()
 	{
 		if ( /*True*/USE_DEBUG_MODE )
 		{
@@ -1012,7 +1012,7 @@ state StateDuelingCam
 	//ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
 	ignores TakeDamage, SeePlayer, EnemyNotVisible, HearNoise, KilledBy, Trigger, Bump, HitWall, HeadZoneChange, FootZoneChange, ZoneChange, Falling, WarnTarget, Died, LongFall, PainTimer; //UTPT left all these out... -AdamJD
   
-	function BeginState ()
+	function BeginState()
 	{
 		local Rotator Rot;
   
@@ -1035,7 +1035,7 @@ state StateDuelingCam
 
 state StateCutSceneCam
 {
-	function BeginState ()
+	function BeginState()
 	{
 		if ( /*True*/USE_DEBUG_MODE )
 		{
@@ -1066,7 +1066,7 @@ state StateCutSceneCam
 
 state StateBossCam
 {
-	function BeginState ()
+	function BeginState()
 	{
 		if ( /*True*/USE_DEBUG_MODE )
 		{
@@ -1103,7 +1103,7 @@ state StateFreeCam
 	//ignores  LongFall, Died, WarnTarget, KilledBy, TakeDamage;
 	ignores TakeDamage, SeePlayer, EnemyNotVisible, HearNoise, KilledBy, Trigger, Bump, HitWall, HeadZoneChange, FootZoneChange, ZoneChange, Falling, WarnTarget, Died, LongFall, PainTimer; //UTPT left all these out... -AdamJD
   
-	function BeginState ()
+	function BeginState()
 	{
 		if ( USE_DEBUG_MODE )
 		{
@@ -1684,14 +1684,14 @@ function bool CutCommand_ProcessTarget (string Command, optional string cue, opt
 	return True;
 }
 
-function CutBypass ()
+function CutBypass()
 {
 	cm("******** baseCam CutBypass.");
 	Super.CutBypass();
 	CamTarget.CutBypass();
 }
 
-function GlobalCutBypass ()
+function GlobalCutBypass()
 {
 	cm("******** baseCam GlobalCutBypass.");
 	Super.GlobalCutBypass();

@@ -26,7 +26,7 @@ function StartUsing (Vector vLoc)
   bHidden = False;
 }
 
-function StopUsing ()
+function StopUsing()
 {
   bHidden = True;
   SetCollision(False);

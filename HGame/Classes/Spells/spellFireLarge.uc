@@ -33,7 +33,7 @@ var int iDamage;
 var FireballLarge Fireball;
 var float smallDamage;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   fxHeadParticleEffect = Spawn(fxHeadParticleEffectClass);
@@ -44,17 +44,17 @@ function PostBeginPlay ()
   fxFlyParticleEffect.SetRotation(fxFlyParticleEffectClass.Default.Rotation);
 }
 
-function Timer ()
+function Timer()
 {
   bBounce = False;
 }
 
-function bool IsRelevantToMover ()
+function bool IsRelevantToMover()
 {
   return False;
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
   if ( fxHeadParticleEffect != None )
   {
@@ -71,7 +71,7 @@ function bool OnSpellHitHPawn (Actor aHit, Vector vHitLocation)
   return False;
 }
 
-function ShootFireballs ()
+function ShootFireballs()
 {
   local int I;
   //local Crabfire Fireball;
@@ -128,7 +128,7 @@ function SetTargetZone (int Z)
   }
 }
 
-function float SetAngle ()
+function float SetAngle()
 {
   //local float Speed;
   local float fSpeed;
@@ -159,7 +159,7 @@ function float SetAngle ()
   return angle;
 }
 
-function float getTime ()
+function float getTime()
 {
   local float t;
   local float Distance;
@@ -169,7 +169,7 @@ function float getTime ()
   return t;
 }
 
-function Vector GetTarget ()
+function Vector GetTarget()
 {
   local Vector directionFromHarry;
   local Rotator rotationFromHarry;
@@ -193,7 +193,7 @@ function Vector GetTarget ()
   return NewTarget;
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   GotoState('CutIdle');
 }
@@ -214,7 +214,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     fGravityEffect = GrenadeGravity;
     hitTarget = GetTarget();

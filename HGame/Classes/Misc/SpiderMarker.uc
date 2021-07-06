@@ -19,7 +19,7 @@ var SpiderSpawner smallSpawner;
 var PlayerPawn PlayerHarry;
 var Aragog Spider;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   SetCollision(,);
@@ -36,7 +36,7 @@ function PreBeginPlay ()
   }
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   SetCollision(True,False,False);
   if ( (numSmallSpiders != 0) || (numLargeSpiders != 0) )
@@ -46,7 +46,7 @@ function PostBeginPlay ()
   }
 }
 
-function FindClosestSpawner ()
+function FindClosestSpawner()
 {
   local int Counter;
   local float Dist;
@@ -85,7 +85,7 @@ function FindClosestSpawner ()
   }
 }
 
-function incrementNumSmallSpiders ()
+function incrementNumSmallSpiders()
 {
   if ( numSmallSpiders != 0 )
   {
@@ -93,7 +93,7 @@ function incrementNumSmallSpiders ()
   }
 }
 
-function incrementNumLargeSpiders ()
+function incrementNumLargeSpiders()
 {
   if ( numLargeSpiders != 0 )
   {
@@ -101,7 +101,7 @@ function incrementNumLargeSpiders ()
   }
 }
 
-function disableMarker ()
+function disableMarker()
 {
   numLargeSpiders = 0;
   numSmallSpiders = 0;

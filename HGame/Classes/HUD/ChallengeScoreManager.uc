@@ -53,7 +53,7 @@ var(ChallengeManager) name EventRunningOutOfTime;
 var(ChallengeManager) int nWarnTimeAlmostUp;
 
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   Super.PostBeginPlay();
   textureScoreIcon = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2ChallengeScore",Class'Texture'));
@@ -61,7 +61,7 @@ event PostBeginPlay ()
   bSentWarnTimeEvent = False;
 }
 
-function BeginChallenge ()
+function BeginChallenge()
 {
   foreach AllActors(Class'harry',PlayerHarry)
   {
@@ -75,7 +75,7 @@ function BeginChallenge ()
   GotoState('ChallengeInProgress');
 }
 
-function EndChallenge ()
+function EndChallenge()
 {
   local HPawn foreachActor;
 
@@ -86,17 +86,17 @@ function EndChallenge ()
   GotoState('Idle');
 }
 
-function TallyChallenge ()
+function TallyChallenge()
 {
   GotoState('Tally');
 }
 
-function PickedUpStar ()
+function PickedUpStar()
 {
   Log("Error: Picked up star, but challenge has not been started");
 }
 
-function PickedUpFinalStar ()
+function PickedUpFinalStar()
 {
   EndChallenge();
 }
@@ -208,27 +208,27 @@ function bool CutQuestion (string question)
   // }
 }
 
-function bool WorseThanBefore ()
+function bool WorseThanBefore()
 {
   return nCurrScore <= nHighScore;
 }
 
-function bool JustWonFirstTime ()
+function bool JustWonFirstTime()
 {
   return (nHighScore == 0) && (nCurrScore > 0);
 }
 
-function bool NewBestScore ()
+function bool NewBestScore()
 {
   return (nCurrScore > nHighScore) && (nHighScore > 0);
 }
 
-function bool JustMastered ()
+function bool JustMastered()
 {
   return (nHighScore < nMaxScore) && (nCurrScore >= nMaxScore);
 }
 
-function bool PreviouslyMastered ()
+function bool PreviouslyMastered()
 {
   return bMastered;
 }
@@ -268,7 +268,7 @@ function GetHighScoreTextXY (out int nMidX, out int nMidY)
   Log("ERROR: states need to override GetCurrScoreTextXY()");
 }
 
-function Texture GetScoreTexture ()
+function Texture GetScoreTexture()
 {
   Log("ERROR: states need to override GetScoreTexture()");
 }
@@ -371,7 +371,7 @@ auto state Idle
 
 state ChallengeInProgress
 {
-  function Timer ()
+  function Timer()
   {
     if ( (nCurrScore > 0) && (baseHUD(PlayerHarry.myHUD).bCutSceneMode == False) &&  !PlayerHarry.IsInState('CelebrateCardSet') )
     {
@@ -401,7 +401,7 @@ state ChallengeInProgress
     //}
   }
   
-  function PickedUpStar ()
+  function PickedUpStar()
   {
     nCurrScore += STAR_VALUE;
   }
@@ -411,7 +411,7 @@ state ChallengeInProgress
     GetInProgressScorePosition(Canvas,nIconX,nIconY);
   }
   
-  function Texture GetScoreTexture ()
+  function Texture GetScoreTexture()
   {
     return textureScoreIcon;
   }
@@ -436,7 +436,7 @@ state ChallengeInProgress
     }
   }
   
-  function BeginState ()
+  function BeginState()
   {
     nCurrScore = nStartScore;
     SetTimer(1.0,True);
@@ -446,7 +446,7 @@ state ChallengeInProgress
 
 state Tally
 {
-  function CutBypass ()
+  function CutBypass()
   {
     Super.CutBypass();
     bFastForwardTally = True;
@@ -486,7 +486,7 @@ state Tally
     GetTallyScorePosition(Canvas,nIconX,nIconY);
   }
   
-  function Texture GetScoreTexture ()
+  function Texture GetScoreTexture()
   {
     return textureTallyScoreIcon;
   }
@@ -503,7 +503,7 @@ state Tally
     nMidY = 115;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     local StatusGroup sgHousePoints;
     local float fTallyPointsPerSec;
@@ -531,7 +531,7 @@ state Tally
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     StopSound(soundTally,SLOT_Interact);
     bFirstTime = False;
@@ -563,7 +563,7 @@ state Tally
 
 state PostTallyHold
 {
-  function CutBypass ()
+  function CutBypass()
   {
     Super.CutBypass();
     SetTimer(0.0,False);
@@ -571,12 +571,12 @@ state PostTallyHold
     GotoState('PostTallyHoldPoints');
   }
   
-  function Timer ()
+  function Timer()
   {
     GotoState('PostTallyHoldPoints');
   }
   
-  function BeginState ()
+  function BeginState()
   {
     SetTimer(4.0,False);
   }
@@ -586,7 +586,7 @@ state PostTallyHold
     GetTallyScorePosition(Canvas,nIconX,nIconY);
   }
   
-  function Texture GetScoreTexture ()
+  function Texture GetScoreTexture()
   {
     return textureTallyScoreIcon;
   }
@@ -612,19 +612,19 @@ state PostTallyHold
 
 state PostTallyHoldPoints
 {
-  function CutBypass ()
+  function CutBypass()
   {
     Super.CutBypass();
     SetTimer(0.0,False);
     GotoState('Idle');
   }
   
-  function Timer ()
+  function Timer()
   {
     GotoState('Idle');
   }
   
-  function BeginState ()
+  function BeginState()
   {
     if ( bFastForwardTally == True )
     {
@@ -674,7 +674,7 @@ state PostTallyHoldPoints
     siStars.DrawItem(Canvas,nStarIconX,nStarIconY,fScaleFactor);
   }
   
-  function EndState ()
+  function EndState()
   {
     siGryffHousePoints = PlayerHarry.managerStatus.GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts');
     siGryffHousePoints.IncrementCount(nAwardGryffPoints);

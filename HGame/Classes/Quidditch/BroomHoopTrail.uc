@@ -25,7 +25,7 @@ var bool bSpeedBoostSuggested;
 var int HoopsToGo;
 var Sound HoopSounds[16];
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int I;
   local Vector Position;
@@ -151,7 +151,7 @@ function SetTrailEnd (int NewTrailEnd)
   }
 }
 
-function UpdateStage ()
+function UpdateStage()
 {
   local int NewStage;
 
@@ -168,7 +168,7 @@ function OnHoopTouch (BroomHoop Hoop)
 
 state TrailOff
 {
-  function BeginState ()
+  function BeginState()
   {
     local int I;
   
@@ -186,7 +186,7 @@ state TrailOff
 
 state TrailOn
 {
-  function BeginState ()
+  function BeginState()
   {
     NextHoopToUse = 0;
     ValidHoops = 0;
@@ -201,7 +201,7 @@ state TrailOn
     SetTimer(fHoopSpacing,True);
   }
   
-  function Timer ()
+  function Timer()
   {
     local BroomHoop Hoop;
     local int HoopToShow;
@@ -330,7 +330,7 @@ state TrailOn
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     SetTimer(0.0,False);
     bSpeedBoostSuggested = False;

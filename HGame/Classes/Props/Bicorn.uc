@@ -6,7 +6,7 @@ class Bicorn extends PotionIngredients;
 
 state PickupProp
 {
-  function EndState ()
+  function EndState()
   {
     TriggerEvent(Event,None,None);
     Super.EndState();

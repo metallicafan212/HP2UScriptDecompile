@@ -4,7 +4,7 @@
 
 class HPMenuOptionEditBox extends UWindowEditBox;
 
-function Created ()
+function Created()
 {
 }
 

@@ -124,7 +124,7 @@ var Texture Map3BackgroundImage5;
 var Texture Map3BackgroundImage6;
 
 
-function Created ()
+function Created()
 {
   local int I;
   
@@ -285,18 +285,18 @@ function ToolTip (string strTip)
   StatusBarTextWindow.AddText(strTip);
 }
 
-function ShowWindow ()
+function ShowWindow()
 {
   UpdateDisplayDetails();
   Super.ShowWindow();
 }
 
-function PreOpenBook ()
+function PreOpenBook()
 {
   ShowWindow();
 }
 
-function UpdateDisplayDetails ()
+function UpdateDisplayDetails()
 {
   local int I;
   local string S;
@@ -350,7 +350,7 @@ function UpdateDisplayDetails ()
   }
 }
 
-function string GetCurrentUnrFileName ()
+function string GetCurrentUnrFileName()
 {
   local string S;
   local string S2;
@@ -503,14 +503,14 @@ function DrawBackground (Canvas Canvas)
   }
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
   PlayerHarry = harry(Root.Console.Viewport.Actor);
   SetInitialSelection();
   Super.PreSwitchPage();
 }
 
-function SetInitialSelection ()
+function SetInitialSelection()
 {
   local string S;
   local int I;

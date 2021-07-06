@@ -17,7 +17,7 @@ var int iAccuracyMin;
 var int iAccuracyMax;
 var float GrenadeExplosionGravity;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   fxFlyParticleEffect = Spawn(fxFlyParticleEffectClass);
@@ -27,16 +27,16 @@ function PostBeginPlay ()
   SetRotation(rotator(CurrentDir));
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
-function bool IsRelevantToMover ()
+function bool IsRelevantToMover()
 {
   return False;
 }
 
-function float getTime ()
+function float getTime()
 {
   local float t;
   local float Distance;
@@ -64,7 +64,7 @@ function bool OnSpellHitWall (Actor aWall, Vector HitNormal)
   return True;
 }
 
-function float SetAngle ()
+function float SetAngle()
 {
   //local float Speed;
   local float fSpeed;
@@ -96,7 +96,7 @@ function float SetAngle ()
   return angle;
 }
 
-function Vector GetTarget ()
+function Vector GetTarget()
 {
   local Vector directionFromHarry;
   local Rotator rotationFromHarry;
@@ -115,7 +115,7 @@ function Vector GetTarget ()
   return NewTarget;
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   GotoState('CutIdle');
 }
@@ -140,7 +140,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     // SetPhysics(2);
 	SetPhysics(PHYS_Falling);
@@ -160,7 +160,7 @@ state StateFlying
 
 state StateExplosion
 {
-  function BeginState ()
+  function BeginState()
   {
     CurrentDir = vector(Rotation);
     fGravityEffect = GrenadeExplosionGravity;

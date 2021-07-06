@@ -4,17 +4,17 @@
 
 class spellSnakeHeadFire extends baseSpell;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   InitSpell(None,None);
 }
 
-event BeginEvent ()
+event BeginEvent()
 {
 }
 
-event EndEvent ()
+event EndEvent()
 {
 }
 
@@ -22,7 +22,7 @@ event KilledBy (Pawn EventInstigator)
 {
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -33,7 +33,7 @@ function bool OnSpellHitHPawn (Actor aHit, Vector vHitLocation)
 
 auto state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
   }

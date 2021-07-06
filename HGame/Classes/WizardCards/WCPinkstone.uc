@@ -11,7 +11,7 @@ class WCPinkstone extends Goldcards;
 #exec Texture Import File=Textures\Icons\WizCardCarlottaBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardCarlottaBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardPinkstoneTex0.PNG	GROUP=Skins	Name=WizardCardPinkstoneTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Carlotta Pinkstone";
   Super.PostBeginPlay();

@@ -25,7 +25,7 @@ auto state Waiting
   
 }
 
-function ProcessTrigger ()
+function ProcessTrigger()
 {
   local harry PlayerHarry;
 

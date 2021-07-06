@@ -4,7 +4,7 @@
 
 class StatusItemSilverCards extends StatusItemWizardCards;
 
-function UpdateCount ()
+function UpdateCount()
 {
   local int nOldCount;
 

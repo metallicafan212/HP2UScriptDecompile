@@ -7,7 +7,7 @@ class DuelTrigger extends Trigger;
 var harry PlayerHarry;
 var Duellist DuelOpponent;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 // JL0014:
   foreach AllActors(Class'harry',PlayerHarry)

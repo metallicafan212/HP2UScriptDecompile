@@ -35,7 +35,7 @@ var() EStartMixOn StartMixOn;
 var() bool bMixingEnabled;
 
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   Super.PostBeginPlay();
   sgPotionIngr = PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupPotionIngr');
@@ -129,19 +129,19 @@ function SetCauldronFX (ECauldronFX FX)
   CreateAttachedParticleFX();
 }
 
-function int GetNumPotionsToMake ()
+function int GetNumPotionsToMake()
 {
   return Min(siWiggenBark.nCount,siFlobberMucus.nCount);
 }
 
-function bool HaveWiggenPotionIngredients ()
+function bool HaveWiggenPotionIngredients()
 {
   return (siWiggenBark.nCount >= 1) && (siFlobberMucus.nCount >= 1);
 }
 
 auto state Idle
 {
-  event BeginState ()
+  event BeginState()
   {
     Super.BeginState();
     // SetCauldronFX(0);
@@ -161,7 +161,7 @@ ignores Bump;
     }
   }
   
-  event BeginState ()
+  event BeginState()
   {
     local string strDialog;
     local string strDialogID;

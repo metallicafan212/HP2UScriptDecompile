@@ -6,7 +6,7 @@ class AragogCenterWeb extends Actor;
 
 var Aragog Spider;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   foreach AllActors(Class'Aragog',Spider)

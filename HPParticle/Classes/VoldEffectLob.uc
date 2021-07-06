@@ -10,7 +10,7 @@ class VoldEffectLob extends ParticleFX;
 var() float fFlySpeed;
 var() float fGravityEffect;
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   local Vector V;
   local Rotator R;

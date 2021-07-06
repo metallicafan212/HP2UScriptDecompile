@@ -12,7 +12,7 @@ var() int longestTimeBetweenSpells;
 var name HedwigCurrentPath;
 var() bool bDoNothingAtStartup;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   vHome = Location;
@@ -43,17 +43,17 @@ function SetMyTimer (optional float Time)
   }
 }
 
-function StopOnSpline ()
+function StopOnSpline()
 {
   IPSpeed = 0.01;
 }
 
-function ContinueOnSpline ()
+function ContinueOnSpline()
 {
   IPSpeed = 0.0;
 }
 
-function GotoNewPath ()
+function GotoNewPath()
 {
   local int Select;
   local int Count;
@@ -97,7 +97,7 @@ function GotoNewPath ()
   FollowSplinePath(HedwigCurrentPath,SplineSpeed,0.0,);
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   if ( CutName != "CreditsHedwig" )
   {
@@ -106,7 +106,7 @@ function PlayerCutCapture ()
   }
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   cm("Hedwig has been released");
   GotoState('stateIdle');
@@ -147,7 +147,7 @@ state patrolFollowSpline
   //UTPT added this for some reason -AdamJD
   // ignores  Tick; 
   
-  function EndState ()
+  function EndState()
   {
     Super.EndState();
     // SetPhysics(4);
@@ -161,7 +161,7 @@ state patrolFollowSpline
     Global.Tick(DeltaTime);
   }
   
-  function Timer ()
+  function Timer()
   {
     SetMyTimer(3.0);
   }

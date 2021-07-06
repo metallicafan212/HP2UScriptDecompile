@@ -28,7 +28,7 @@ var float ScaleDown;
 var int NumMeshs;
 
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int I;
 
@@ -80,7 +80,7 @@ function Mesh GetRandomMesh (int Index)
   return lMesh;
 }
 
-function GenerateDebris ()
+function GenerateDebris()
 {
   local Vector V;
   local Rotator R;

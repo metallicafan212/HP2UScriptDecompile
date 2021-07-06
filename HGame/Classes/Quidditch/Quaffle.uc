@@ -4,7 +4,7 @@
 
 class Quaffle extends QuidditchPawn;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   if ( Mesh == None )
   {

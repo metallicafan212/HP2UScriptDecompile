@@ -11,7 +11,7 @@ var() bool bUseCollision;
 var bool bFound;
 var Sound FoundSound;
 
-function OnFound ()
+function OnFound()
 {
 	if (  !bFound )
 	{
@@ -24,7 +24,7 @@ function OnFound ()
 	bFound = True;
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
 	if (  !bUseCollision )
 	{

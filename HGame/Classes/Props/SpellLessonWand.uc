@@ -18,7 +18,7 @@ function StartWand (float fSetSpeed)
   GotoState('PlayGame');
 }
 
-function StopWand ()
+function StopWand()
 {
   DestroyControllers();
   GotoState('Idle');
@@ -35,14 +35,14 @@ state PlayGame
     return LessonTrigger.WandAtInterpolationPoint(IPoint,IManager);
   }
   
-  function BeginState ()
+  function BeginState()
   {
     killAttachedParticleFX(0.0);
     CreateAttachedParticleFX();
     FollowSplinePath(LessonTrigger.nameSplinePath,fWandSpeed,0.0,LessonTrigger.nameIPStart,LessonTrigger.nameIPEnd,False,MOVE_TYPE_LINEAR,True);
   }
   
-  function EndState ()
+  function EndState()
   {
     killAttachedParticleFX(0.0);
   }
@@ -51,7 +51,7 @@ state PlayGame
 
 defaultproperties
 {
-    attachedParticleClass=Class'HPParticle.LessonSparks1'
+    attachedParticleClass(0)=Class'HPParticle.LessonSparks1'
 
     // ePatrolType=2
 	ePatrolType=PATROLTYPE_SPLINE_FOLLOW

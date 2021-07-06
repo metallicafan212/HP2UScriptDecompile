@@ -11,7 +11,7 @@ class WCHufflepuff extends Goldcards;
 #exec Texture Import File=Textures\Icons\WizCardHelgaBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardHelgaBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
 #exec Texture Import File=Textures\Skins\WizardCardHufflepuffTex0.PNG	GROUP=Skins	Name=WizardCardHufflepuffTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Helga Hufflepuff";
   Super.PostBeginPlay();

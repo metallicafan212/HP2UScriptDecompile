@@ -6,6 +6,6 @@ class PoisonCloudCut extends PoisonCloud;
 
 defaultproperties
 {
-    attachedParticleClass=Class'HPParticle.Hork02'
+    attachedParticleClass(0)=Class'HPParticle.Hork02'
 
 }

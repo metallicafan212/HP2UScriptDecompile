@@ -20,7 +20,7 @@ var ParticleFX fxReact;
 var Class<ParticleFX> fxHitClass;
 var Class<ParticleFX> fxReactClass;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   SetCollision(True,False,False);
@@ -39,12 +39,12 @@ function Bump (Actor Other)
   PlaySound(BumpSound,SLOT_Misc);
 }
 
-function float GetDefaultDrawScale ()
+function float GetDefaultDrawScale()
 {
   return Default.DrawScale;
 }
 
-event Destroyed ()
+event Destroyed()
 {
   if ( fxHit != None )
   {
@@ -100,7 +100,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
   }
 }
 
-function UpdateFX ()
+function UpdateFX()
 {
   local Vector colRotated;
 
@@ -128,7 +128,7 @@ begin:
 
 state() stateShowing
 {
-  function BeginState ()
+  function BeginState()
   {
     bCollideWorld = True;
     // eVulnerableToSpell = 20;
@@ -154,7 +154,7 @@ state() stateShowing
     }
   }
   
-  simulated function Timer ()
+  simulated function Timer()
   {
     if ( (aSlimedHPawn != None) && aSlimedHPawn.IsA('harry') )
     {
@@ -188,7 +188,7 @@ state() stateShowing
 
 state() stateHiding
 {
-  function BeginState ()
+  function BeginState()
   {
     bCollideWorld = False;
     // eVulnerableToSpell = 0;
@@ -202,7 +202,7 @@ state() stateHiding
     PlaySound(ShrinkSound,SLOT_Misc,0.69999999);
   }
   
-  function EndState ()
+  function EndState()
   {
     bHidden = False;
   }

@@ -34,7 +34,7 @@ var bool bGenerateCreature;
 var bool bOff;
 
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local BaseCam Cam;
   local PatrolPoint pP;
@@ -90,7 +90,7 @@ function Tick (float DeltaTime)
   GenerateCreature();
 }
 
-event OnResolveGameState ()
+event OnResolveGameState()
 {
   if (  !bInCurrentGameState )
   {
@@ -165,7 +165,7 @@ function DestroyCreature (int Index)
   NumCreatures--;
 }
 
-function DestroyCreatures ()
+function DestroyCreatures()
 {
   local int I;
 
@@ -179,7 +179,7 @@ function DestroyCreatures ()
   }
 }
 
-function GenerateCreature ()
+function GenerateCreature()
 {
   local HPawn A;
   local HChar H;

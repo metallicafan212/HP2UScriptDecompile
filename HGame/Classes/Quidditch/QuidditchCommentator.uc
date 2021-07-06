@@ -119,7 +119,7 @@ var float fGapTime;
 var bool bMute;
 var float fVolume;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int Variant;
 
@@ -339,7 +339,7 @@ function string GetCommentId (int eventNum, int House, int Variant)
   }
 }
 
-function fillCommentArray ()
+function fillCommentArray()
 {
   local int C;
   local int H;

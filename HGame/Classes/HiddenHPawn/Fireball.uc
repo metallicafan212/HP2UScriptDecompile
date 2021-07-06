@@ -8,12 +8,12 @@ var bool bTouch;
 var float fLifetime;
 var Vector CurrentDir;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	SetTimer(fLifetime,False);
 }
 
-function Timer ()
+function Timer()
 {
 	Destroy();
 }

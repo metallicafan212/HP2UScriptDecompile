@@ -43,12 +43,12 @@ function SetDebugMode (bool bOn)
   bDebugMode = bOn;
 }
 
-function bool IsLockedOn ()
+function bool IsLockedOn()
 {
   return aCurrentTarget != None;
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   PlayerHarry = harry(Level.PlayerHarryActor);
   if (  !bSpellCursorAlwaysOn || bInvisibleCursor )
@@ -62,7 +62,7 @@ function PreBeginPlay ()
   }
 }
 
-function Destroyed ()
+function Destroyed()
 {
   if ( SpellGesture != None )
   {
@@ -267,7 +267,7 @@ function UpdateCursor (optional bool bJustStopAtClosestPawnOrWall)
   }
 }
 
-function bool LookForTarget ()
+function bool LookForTarget()
 {
   if ( aPossibleTarget == None )
   {
@@ -281,7 +281,7 @@ function bool LookForTarget ()
   return True;
 }
 
-function UnLock ()
+function UnLock()
 {
   if ( aCurrentTarget == None )
   {
@@ -339,22 +339,22 @@ function LockOn (Actor TargetActor)
   StartLockedOnSoundLoop();
 }
 
-function StartLockedOnSoundLoop ()
+function StartLockedOnSoundLoop()
 {
   PlaySound(Sound'spell_target_nl3',SLOT_Misc);
   PlaySound(Sound'spell_targetloop',SLOT_Interact);
 }
 
-function StopLockedOnSoundLoop ()
+function StopLockedOnSoundLoop()
 {
   StopSound(Sound'spell_targetloop',SLOT_Interact);
 }
 
-function TurnSparklesOff ()
+function TurnSparklesOff()
 {
 }
 
-function SetSparklesIdle ()
+function SetSparklesIdle()
 {
   ParticlesPerSec.Base = 20.0;
   SourceWidth.Base = 3.0;
@@ -376,7 +376,7 @@ function SetSparklesIdle ()
   ColorEnd.Base.B = 255;
 }
 
-function SetSparklesSeeking ()
+function SetSparklesSeeking()
 {
   ParticlesPerSec.Base = 20.0;
   SourceWidth.Base = 10.0;
@@ -434,11 +434,11 @@ function SetSparklesLockedOn (float fTargetWidth, float fTargetHeight, float fTa
   ColorEnd.Base.B = 255;
 }
 
-function TurnTargetingOn ()
+function TurnTargetingOn()
 {
 }
 
-function TurnTargetingOff ()
+function TurnTargetingOff()
 {
   UnLock();
   GotoState('stateIdle');
@@ -446,7 +446,7 @@ function TurnTargetingOff ()
 
 auto state stateIdle
 {
-  function BeginState ()
+  function BeginState()
   {
     SetSparklesIdle();
     if (  !bSpellCursorAlwaysOn || bInvisibleCursor )
@@ -470,7 +470,7 @@ auto state stateIdle
     }
   }
   
-  function TurnTargetingOn ()
+  function TurnTargetingOn()
   {
     GotoState('stateSeeking');
   }
@@ -484,7 +484,7 @@ auto state stateIdle
 
 state stateSeeking
 {
-  function BeginState ()
+  function BeginState()
   {
     if (  !bInvisibleCursor )
     {
@@ -493,7 +493,7 @@ state stateSeeking
     SetSparklesSeeking();
   }
   
-  function EndState ()
+  function EndState()
   {
   }
   

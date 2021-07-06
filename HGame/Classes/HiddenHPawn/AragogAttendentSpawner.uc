@@ -42,7 +42,7 @@ var Vector vOffsetUp;
 var() SpiderSpawnerParams theAnchors[8];
 var AragogCenterWeb _AragogCenterWeb;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	bCollideWorld = True;
 	foreach AllActors(Class'AragogCenterWeb',_AragogCenterWeb)

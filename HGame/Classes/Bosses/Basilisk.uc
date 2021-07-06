@@ -128,7 +128,7 @@ var float MinDamageToBotherBasil;
 var int NumSpellsDodged;
 var Actor aLastHole;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local Actor A;
   local int I;
@@ -181,7 +181,7 @@ function PostBeginPlay ()
   AcidSpitPeriod = 1.0 / AcidSpitFreq;
 }
 
-function MakeBasilHeadObj ()
+function MakeBasilHeadObj()
 {
   if ( _BasiliskHeadColObj == None )
   {
@@ -202,7 +202,7 @@ function MakeBasilHeadObj ()
   }
 }
 
-function MakeBasilBreastObj ()
+function MakeBasilBreastObj()
 {
   if ( _BasiliskBreastColObj == None )
   {
@@ -240,7 +240,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
   }
 }
 
-function Vector GetCamTargetLoc ()
+function Vector GetCamTargetLoc()
 {
   local Vector V;
   local Vector v1;
@@ -259,7 +259,7 @@ function Vector GetCamTargetLoc ()
   return vLoc;
 }
 
-function Vector GetTargetLocation ()
+function Vector GetTargetLocation()
 {
   local Vector V;
   local float f;
@@ -279,7 +279,7 @@ function Vector GetTargetLocation ()
   return V;
 }
 
-function Vector GetHarryFaceLocation ()
+function Vector GetHarryFaceLocation()
 {
   if (  !bDidFirstBattle )
   {
@@ -289,12 +289,12 @@ function Vector GetHarryFaceLocation ()
   }
 }
 
-function Vector GetHarryMovementCenter ()
+function Vector GetHarryMovementCenter()
 {
   return Location * vect(1.00,1.00,0.00) + Vec(0.0,0.0,FloorZ + 50);
 }
 
-function bool SetCamMode ()
+function bool SetCamMode()
 {
   PlayerHarry.Cam.rDestRotation = rotator(Normal((Location - PlayerHarry.Location) * vect(1.00,1.00,0.00)));
   return True;
@@ -320,7 +320,7 @@ function SnakeLoopAnim (name Sequence, optional float Rate, optional float Tween
   _AnimChannel.LoopAnim(Sequence,Rate,TweenTime,MinRate,Type,RootBone);
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
 	// return byte (Health) / 100; 
   return float (Health) / 100; //this is a return float -AdamJD
@@ -331,21 +331,21 @@ function bool BasilAcksHit (baseSpell spell)
   return True;
 }
 
-function float GetBasilDamageScalar ()
+function float GetBasilDamageScalar()
 {
   return 1.0;
 }
 
-function bool ShouldDodgeSpell ()
+function bool ShouldDodgeSpell()
 {
   return VSize2D(PlayerHarry.Location - Location) > 200;
 }
 
-function BasilMunchesHarry ()
+function BasilMunchesHarry()
 {
 }
 
-function SaveCurrentStateName ()
+function SaveCurrentStateName()
 {
   StateNameSave = GetStateName();
 }
@@ -372,7 +372,7 @@ begin:
 
 state stateHidden
 {
-  function BeginState ()
+  function BeginState()
   {
     HideBasil();
   }
@@ -381,7 +381,7 @@ state stateHidden
   Sleep(2.0);
 }
 
-function PawnHearHarryNoise ()
+function PawnHearHarryNoise()
 {
   if ( bListenToHarry )
   {
@@ -391,7 +391,7 @@ function PawnHearHarryNoise ()
   }
 }
 
-function HideBasil ()
+function HideBasil()
 {
   PlayAnim('birth',0.0);
   SetLocation(Location + vect(0.00,0.00,-1000.00));
@@ -532,13 +532,13 @@ function Tick (float dtime)
   LastAnimFrame = AnimFrame;
 }
 
-function RealAnimEnd ()
+function RealAnimEnd()
 {
 }
 
 state stateInitBasil1
 {
-  function BeginState ()
+  function BeginState()
   {
     local BlockPlayer A;
   
@@ -568,7 +568,7 @@ state stateWait1
   //UTPT added this for some reason -AdamJD
   // ignores  BasilHitBySpell;
   
-  function EndState ()
+  function EndState()
   {
     SetTimer(0.0,False);
   }
@@ -649,7 +649,7 @@ state stateAcidSpit1
   //UTPT added this for some reason -AdamJD
   // ignores  Tick;
   
-  function BeginState ()
+  function BeginState()
   {
     AcidSpitTimeSinceLastSpit = AcidSpitPeriod;
   }
@@ -682,7 +682,7 @@ state stateAcidSpit1
     return True;
   }
   
-  function bool ShouldDodgeSpell ()
+  function bool ShouldDodgeSpell()
   {
     return False;
   }
@@ -713,7 +713,7 @@ begin:
   GotoState(WaitingState);
 }
 
-function MakeSmokeEyeEffects ()
+function MakeSmokeEyeEffects()
 {
   _BasilSmoke = Spawn(Class'BasilEyeSmoke');
   _BasilSmoke.bEmit = False;
@@ -754,12 +754,12 @@ state stateComeOutAndSniff1
     return Global.ShouldDodgeSpell()  &&  AnimFrame >= 5.0/ 85.0; 
   }
   
-  function float GetBasilDamageScalar ()
+  function float GetBasilDamageScalar()
   {
     return 1.0;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     bHidden = False;
     bHaveHeardHarry = False;
@@ -796,7 +796,7 @@ state stateComeOutAndSniff2
   //UTPT added this for some reason -AdamJD
   // ignores  PawnHearHarryNoise;
   
-  function Timer ()
+  function Timer()
   {
     if ( VSize2D(PlayerHarry.Location - _BasiliskHeadColObj.Location) < BasilSniffDistance )
     {
@@ -805,7 +805,7 @@ state stateComeOutAndSniff2
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     SetTimer(0.0,False);
   }
@@ -818,7 +818,7 @@ state stateComeOutAndSniff2
 	GotoState('stateAttackFromHole');
   }
   
-  function float GetBasilDamageScalar ()
+  function float GetBasilDamageScalar()
   {
     return 1.0;
   }
@@ -853,7 +853,7 @@ begin:
   GotoState(WaitingState);
 }
 
-function DoAttack2 ()
+function DoAttack2()
 {
   bListenToHarry = False;
   if ( (PlayerHarry.Difficulty > DifficultyEasy) && (VSize2D(PlayerHarry.Location - Location) < HeadAttackFarthest_2 + 20) )
@@ -869,7 +869,7 @@ state stateAttackFromHole
   //UTPT added this for some reason -AdamJD
   // ignores  BasilHitBySpell;
   
-  function BeginState ()
+  function BeginState()
   {
     bGotHitDuringWarmUp = False;
   }
@@ -879,7 +879,7 @@ state stateAttackFromHole
     return False;
   }
   
-  function bool ShouldDodgeSpell ()
+  function bool ShouldDodgeSpell()
   {
     return False;
   }
@@ -927,7 +927,7 @@ state stateAttack_2_
     return False;
   }
   
-  function bool ShouldDodgeSpell ()
+  function bool ShouldDodgeSpell()
   {
     return False;
   }
@@ -942,7 +942,7 @@ state stateAttack_2_
 	}
  }
   
-  function BasilMunchesHarry ()
+  function BasilMunchesHarry()
   {
     if ( bGotHitDuringWarmUp )
     {
@@ -993,7 +993,7 @@ state stateAttack_2_
   GotoState(WaitingState);
 }
 
-function PlayLungeAnim_2_ ()
+function PlayLungeAnim_2_()
 {
   local int I;
   local int W;
@@ -1009,7 +1009,7 @@ state stateAcidSpit
   //UTPT added this for some reason -AdamJD
   // ignores  Tick;
   
-  function BeginState ()
+  function BeginState()
   {
     AcidSpitTimeSinceLastSpit = AcidSpitPeriod;
   }
@@ -1042,7 +1042,7 @@ state stateAcidSpit
     return True;
   }
   
-  function bool ShouldDodgeSpell ()
+  function bool ShouldDodgeSpell()
   {
     return False;
   }
@@ -1108,16 +1108,16 @@ function CastSpitSpell (bool bAimAtHarry, optional bool bUseHeadYaw)
 
 state stateDodgeSpell_L
 {
-  function bool ShouldDodgeSpell ()
+  function bool ShouldDodgeSpell()
   {
     return False;
   }
   
-  function SaveCurrentStateName ()
+  function SaveCurrentStateName()
   {
   }
   
-  function BeginState ()
+  function BeginState()
   {
     PlayAnim('LeanLeft',1.0,0.5);
     GotoState('stateDodgeSpell');
@@ -1127,16 +1127,16 @@ state stateDodgeSpell_L
 
 state stateDodgeSpell_R
 {
-  function bool ShouldDodgeSpell ()
+  function bool ShouldDodgeSpell()
   {
     return False;
   }
   
-  function SaveCurrentStateName ()
+  function SaveCurrentStateName()
   {
   }
   
-  function BeginState ()
+  function BeginState()
   {
     PlayAnim('LeanRight',1.0,0.5);
     GotoState('stateDodgeSpell');
@@ -1146,12 +1146,12 @@ state stateDodgeSpell_R
 
 state stateDodgeSpell
 {
-  function bool ShouldDodgeSpell ()
+  function bool ShouldDodgeSpell()
   {
     return False;
   }
   
-  function SaveCurrentStateName ()
+  function SaveCurrentStateName()
   {
   }
   
@@ -1170,7 +1170,7 @@ state stateDodgeSpell
   }
 }
 
-function bool BustOffTheGrate ()
+function bool BustOffTheGrate()
 {
   local Actor A;
 
@@ -1184,7 +1184,7 @@ function bool BustOffTheGrate ()
   return False;
 }
 
-function CHGrate FindClosestGrate ()
+function CHGrate FindClosestGrate()
 {
   local CHGrate A;
 
@@ -1235,7 +1235,7 @@ function float PlayMovingThroughWallSound (optional float Volume, optional bool 
   return GetSoundDuration(snd) / Pitch - 0.5;
 }
 
-function float PlayAboutToAttackSound ()
+function float PlayAboutToAttackSound()
 {
   local float Pitch;
   local Sound snd;
@@ -1246,7 +1246,7 @@ function float PlayAboutToAttackSound ()
   return GetSoundDuration(snd) / Pitch;
 }
 
-function MoveToNewHole ()
+function MoveToNewHole()
 {
   local int NumVisibleHoles;
   local Vector vDir;
@@ -1357,7 +1357,7 @@ begin:
   GotoState(WaitingState);
 }
 
-function PlayHissSound ()
+function PlayHissSound()
 {
   local Sound snd;
 
@@ -1399,7 +1399,7 @@ state stateEyeSpell
 	}
   }
   
-  function BeginState ()
+  function BeginState()
   {
     AttackAttemptCount++;
   }
@@ -1494,7 +1494,7 @@ state stateHitThenEyeSpell
 	EyeBeam2.SetRotation( _BasiliskHeadColObj.rotation );
   }
   
-  function EndState ()
+  function EndState()
   {
     StopEyeGlow();
   }
@@ -1623,7 +1623,7 @@ state stateEyeSpellFire
 	}
   }
   
-  function EndState ()
+  function EndState()
   {
     _BasiliskHeadColObj.StopSound(Sound'BAS_eye_beam_loop',SLOT_Interact,1.0);
   }
@@ -1714,7 +1714,7 @@ JL00D9:
   GotoState(WaitingState);
 }
 
-function StopEyeGlow ()
+function StopEyeGlow()
 {
   if ( EyeBeam1 != None )
   {
@@ -1750,7 +1750,7 @@ state stateAttack
 	}
   }
 
-  function BeginState ()
+  function BeginState()
   {
     AttackAttemptCount++;
   }
@@ -1851,7 +1851,7 @@ function float DegRotAwayFromHarry (optional bool bMissHarry)
   return Z;
 }
 
-function bool AnimSequenceIsLunge ()
+function bool AnimSequenceIsLunge()
 {
   local int I;
   local bool bWasLunge;
@@ -1860,13 +1860,13 @@ function bool AnimSequenceIsLunge ()
   return False;
 }
 
-function PlayRoarSound ()
+function PlayRoarSound()
 {
   local Sound snd;
 
 }
 
-function PlayLungeSound ()
+function PlayLungeSound()
 {
   //local Sound tempSound;
 
@@ -1895,7 +1895,7 @@ function PlayLungeSound ()
   _BasiliskHeadColObj.PlaySound(tempSound,Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.81,1.25));
 }
 
-function PlayLungeAnim ()
+function PlayLungeAnim()
 {
   local int I;
   local int W;
@@ -1928,7 +1928,7 @@ function PlayLungeFromHoleAnim (int part)
 
 state statePodiumAttack
 {
-  function BeginState ()
+  function BeginState()
   {
     local float deg;
   
@@ -1948,7 +1948,7 @@ state statePodiumAttack
 
 state stateHit
 {
-  function BeginState ()
+  function BeginState()
   {
     if ( bDidFirstBattle )
     {
@@ -2036,7 +2036,7 @@ state stateHit_2_
     return False;
   }
   
-  function bool ShouldDodgeSpell ()
+  function bool ShouldDodgeSpell()
   {
     return False;
   }
@@ -2056,7 +2056,7 @@ state stateHit_2_
   GotoState(BasilNextState);
 }
 
-function SetAttackTimer ()
+function SetAttackTimer()
 {
   local float t;
 
@@ -2099,7 +2099,7 @@ function CastEyeSpell (bool bMissHarry)
 
 state stateRetreat
 {
-  function bool ShouldDodgeSpell ()
+  function bool ShouldDodgeSpell()
   {
     return False;
   }
@@ -2116,7 +2116,7 @@ state stateRetreat
   GotoState(WaitingState);
 }
 
-function int GetRealHeadYaw ()
+function int GetRealHeadYaw()
 {
   local int I;
 
@@ -2211,7 +2211,7 @@ function BasilHitBySpell (baseSpell spell, Vector HitLocation)
   return;
 }
 
-function StartBossEncounter ()
+function StartBossEncounter()
 {
   Super.StartBossEncounter();
   PlayerHarry.makeTarget();
@@ -2234,7 +2234,7 @@ function StartBossEncounter ()
   }
 }
 
-function BeatBoss ()
+function BeatBoss()
 {
   local SnakeVenomPool pool;
   local spellAcidSpit spit;
@@ -2330,7 +2330,7 @@ function ColObjTouch (Actor Other, GenericColObj ColObj)
   //}
 }
 
-function MoveToRandomVisibleHole ()
+function MoveToRandomVisibleHole()
 {
   local int NumVisibleHoles;
   //local int NumHoles;

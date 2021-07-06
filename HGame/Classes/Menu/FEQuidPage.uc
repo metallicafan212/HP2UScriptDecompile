@@ -21,7 +21,7 @@ var UWindowButton NimbusButton;
 var UWindowButton QArmorButton;
 
 /*
-function PreSwitchPage ()
+function PreSwitchPage()
 {
   local int I;
   local int nGameState;
@@ -358,7 +358,7 @@ function Paint (Canvas Canvas, float X, float Y)
 }
 
 /*
-function Created ()
+function Created()
 {
   local int StartX;
   local int StartY;
@@ -590,7 +590,7 @@ function Created()
     Super.Created(); 
 }	
 
-function LaunchQuidditch ()
+function LaunchQuidditch()
 {
   FEBook(book).CloseBook();
   harry(Root.Console.Viewport.Actor).LoadLevel("Quidditch.unr");

@@ -163,7 +163,7 @@ var name DelayedEventNextState;
 var string DelayedEventCue;
 
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   if ( bNeedsCommentator )
@@ -191,7 +191,7 @@ function PreBeginPlay ()
   bHousesSet = False;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   foreach AllActors(Class'BroomHarry',harry)
@@ -232,7 +232,7 @@ function PostBeginPlay ()
   InitialState = 'GameIntro';
 }
 
-function OnPlayerTravelPostAccept ()
+function OnPlayerTravelPostAccept()
 {
   local string MatchOpponent;
   local int I;
@@ -406,7 +406,7 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
   //}
 }
 
-function SetHouses ()
+function SetHouses()
 {
   local QuidditchCrowd Crowd;
   local TeamAffiliation eTeam;
@@ -532,7 +532,7 @@ function SetHouses ()
   bHousesSet = True;
 }
 
-function SetPlayerHouses ()
+function SetPlayerHouses()
 {
   local QuidditchPlayer OtherPlayer;
 
@@ -583,7 +583,7 @@ function SetTuningParameters (int Match)
   fHarryProgressKickedPenalty = Tuning_HarryProgress.Penalties.Kicked[Match];
 }
 
-function StartGame ()
+function StartGame()
 {
   local QuidditchPlayer OtherPlayer;
 
@@ -627,7 +627,7 @@ function StartGame ()
   GotoState('GamePlay');
 }
 
-function SetSeekersToFollowSnitch ()
+function SetSeekersToFollowSnitch()
 {
   local Vector TargetX;
   local Vector TargetY;
@@ -646,14 +646,14 @@ function SetSeekersToFollowSnitch ()
   Seeker.SetRotation(Seeker.DesiredRotation);
 }
 
-function SetCameraTargetToFollowSnitch ()
+function SetCameraTargetToFollowSnitch()
 {
   CameraTarget.SetLocation(harry.Location);
   CameraTarget.SetRotation(harry.Rotation);
   CameraTarget.SetLookForTarget(Snitch);
 }
 
-function SetCameraToFollowSnitch ()
+function SetCameraToFollowSnitch()
 {
   // harry.Cam.SetCameraMode(4);
   harry.Cam.SetCameraMode(CM_Quidditch);
@@ -666,14 +666,14 @@ function SetCameraToFollowSnitch ()
   harry.Cam.SetMoveSpeed(1200.0);
 }
 
-function MakeSeekerLetGoOfSnitch ()
+function MakeSeekerLetGoOfSnitch()
 {
   Snitch.DisposeCatchProxy();
   Seeker.DoCapture();
   harry.DoCapture();
 }
 
-function bool SeekerIsOutOfWay ()
+function bool SeekerIsOutOfWay()
 {
   local float fSeekerProximity;
 
@@ -681,7 +681,7 @@ function bool SeekerIsOutOfWay ()
   return fSeekerProximity > harry.TrackingOffsetRange_Horz * 2.79999995;
 }
 
-function ComputeScore ()
+function ComputeScore()
 {
   if ( bGryffWon )
   {
@@ -708,7 +708,7 @@ function TriggerEventDelayed (float fDelayTime, name EventName, optional name Ne
 
 state GameIntro
 {
-  function BeginState ()
+  function BeginState()
   {
     PlayerHarry.ClientMessage(string(Name) $ " Entered " $ string(GetStateName()) $ " State");
     Log(string(Name) $ " Entered " $ string(GetStateName()) $ " State");
@@ -754,7 +754,7 @@ state GamePlay
   //UTPT added this for some reason -AdamJD
   // ignores  CutCommand;
   
-  function BeginState ()
+  function BeginState()
   {
     local Bludger Bludger;
     local int PercentDone;
@@ -1406,7 +1406,7 @@ state GamePlay
 	}
   }
   
-  function OnActionKeyPressed ()
+  function OnActionKeyPressed()
   {
     local float fProximity;
     local Bludger Bludger;
@@ -1453,7 +1453,7 @@ state GamePlay
     }
   }
   
-  event Timer ()
+  event Timer()
   {
     local float fTimeLeft;
     local float fTauntTimeLeft;
@@ -1491,19 +1491,19 @@ state GamePlay
     //}
   }
   
-  function OnPlayerDying ()
+  function OnPlayerDying()
   {
     PlayerHarry.ClientMessage("Player dying...");
     GotoState('GameLosing');
   }
   
-  function OnPlayersDeath ()
+  function OnPlayersDeath()
   {
     PlayerHarry.ClientMessage("Player died.");
     GotoState('GameLost');
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.ClientMessage(string(Name) $ " Exited " $ string(GetStateName()) $ " State");
     Log(string(Name) $ " Exited " $ string(GetStateName()) $ " State");
@@ -1528,7 +1528,7 @@ state GamePlay
 
 state GameCatch
 {
-  function BeginState ()
+  function BeginState()
   {
     local Bludger Bludger;
   
@@ -1568,7 +1568,7 @@ state GameCatch
     }
   }
   
-  function OnActionKeyPressed ()
+  function OnActionKeyPressed()
   {
     Super.OnActionKeyPressed();
     if ( True )
@@ -1596,14 +1596,14 @@ state GameCatch
     }
   }
   
-  function Timer ()
+  function Timer()
   {
     SetCameraToFollowSnitch();
     harry.SetReaching(False);
     GotoState('GamePlay');
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.ClientMessage("Exited GameCatch State");
     Log("Exited GameCatch State");
@@ -1615,7 +1615,7 @@ state GameCatch
 
 state GameWon
 {
-  event Timer ()
+  event Timer()
   {
     Log("Harry's Health: " $ string(harry.GetHealthCount()));
     HarryHealth.SetCount(OriginalHealth);
@@ -1729,7 +1729,7 @@ begin:
 
 state GameLosing
 {
-  function BeginState ()
+  function BeginState()
   {
     local Bludger Bludger;
     local Actor CamTarget;
@@ -1745,7 +1745,7 @@ state GameLosing
     harry.Cam.SetTargetActor(CamTarget.Name);
   }
   
-  function OnPlayersDeath ()
+  function OnPlayersDeath()
   {
     PlayerHarry.ClientMessage("Player died");
     bHarryDied = True;
@@ -1780,7 +1780,7 @@ state GameLosing
 
 state GameLost
 {
-  event Timer ()
+  event Timer()
   {
     Log("Harry's Health: " $ string(harry.GetHealthCount()));
     HarryHealth.SetCount(OriginalHealth);
@@ -1910,7 +1910,7 @@ begin:
 
 state PendingEvent
 {
-  function TriggerPendingEvent ()
+  function TriggerPendingEvent()
   {
     Log("Triggering Pending Event; Cue=" $ DelayedEventCue $ ", Event=" $ string(DelayedEventName) $ ", State=" $ string(DelayedEventNextState) $ ".");
     if ( DelayedEventCue != "" )

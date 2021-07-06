@@ -4,12 +4,12 @@
 
 class ShortCutWindow extends UWindowFramedWindow;
 
-function Created ()
+function Created()
 {
   Super.Created();
 }
 
-function BeginPlay ()
+function BeginPlay()
 {
   Super.BeginPlay();
   WindowTitle = "Shortcut Window";
@@ -23,7 +23,7 @@ function BeginPlay ()
   bSizable = True;
 }
 
-function Activated ()
+function Activated()
 {
   local UWindowWindow Prev;
   local UWindowWindow Child;

@@ -94,6 +94,28 @@ function ResolutionChanged (float W, float H)
 {
 	Super.ResolutionChanged(W,H);
 	
+	// Metallicafan212:	Tell them to reposition their controls, if they're relatively positioned
+	MainPage.RepositionChildControls();
+	ReportPage.RepositionChildControls();
+	FolioPage.RepositionChildControls();
+	ChapterPage.RepositionChildControls();
+	SavePage.RepositionChildControls();
+	InGamePage.RepositionChildControls();
+	SlotPage.RepositionChildControls();
+	CreditsPage.RepositionChildControls();
+	LoadPage.RepositionChildControls();
+	InputPage.RepositionChildControls();
+	SoundVideoPage.RepositionChildControls();
+	SplashPage.RepositionChildControls();
+	LangPage.RepositionChildControls();
+	MapPage.RepositionChildControls();
+	QuidPage.RepositionChildControls();
+	DuelPage.RepositionChildControls();
+	HousepointsPage.RepositionChildControls();
+	ChallengesPage.RepositionChildControls();
+	curPage.RepositionChildControls();
+	prevPage.RepositionChildControls();
+	
 	// Metallicafan212:	Do it to all pages...
 	MainPage.ResolutionChanged(W, H);
 	ReportPage.ResolutionChanged(W, H);
@@ -381,6 +403,27 @@ function Created ()
 	ChallengesPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
 	curPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
 	prevPage.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+	
+	MainPage.RepositionChildControls();
+	ReportPage.RepositionChildControls();
+	FolioPage.RepositionChildControls();
+	ChapterPage.RepositionChildControls();
+	SavePage.RepositionChildControls();
+	InGamePage.RepositionChildControls();
+	SlotPage.RepositionChildControls();
+	CreditsPage.RepositionChildControls();
+	LoadPage.RepositionChildControls();
+	InputPage.RepositionChildControls();
+	SoundVideoPage.RepositionChildControls();
+	SplashPage.RepositionChildControls();
+	LangPage.RepositionChildControls();
+	MapPage.RepositionChildControls();
+	QuidPage.RepositionChildControls();
+	DuelPage.RepositionChildControls();
+	HousepointsPage.RepositionChildControls();
+	ChallengesPage.RepositionChildControls();
+	curPage.RepositionChildControls();
+	prevPage.RepositionChildControls();
 }
 
 function ScaleAndDraw (Canvas Canvas, float X, float Y, Texture Tex)

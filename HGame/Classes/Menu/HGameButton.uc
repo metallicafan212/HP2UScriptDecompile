@@ -3,12 +3,20 @@ class HGameButton based on UWindowButton;
 
 var float WX, WY, WW, WH;
 
+// Metallicafan212:	If to stretch to fit
+var bool bStretchTex;
+
 var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
 
 // Metallicafan212:	Get the H Scale
 function float GetHeightScale()
 {
 	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
+}
+
+function float GetDHeightScale()
+{
+	return GetHeightScale() * GetHeightScale();
 }
 
 function float GetWidthScale()
@@ -38,10 +46,34 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	C.SetClip(Root.RealWidth, Root.RealHeight);//ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.GUIScale);
 
 	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
+	
+	//if(bStretchTex)
+	//	tW /= GetHeightScale();
+	
+	/*
+	if(bStretchTex)
+		W /= GetHeightScale(); //W /= GetHeightScale();
+	
 	C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+	*/
+	
+	if(bStretchTex)
+	{
+		C.DrawTileClipped(Tex, WinWidth * Root.GUIScale, WinHeight * Root.GUIScale, tX, tY, tW, tH);
+	}
+	else
+	{
+		C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+	}
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
+}
+
+function ResizeControl(float X, float Y, float W, float H)
+{
+	// Metallicafan212: Resize EVERYTHING
+	
 }
 
 function Resized()

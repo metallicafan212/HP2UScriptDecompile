@@ -46,7 +46,7 @@ event BeginPlay ()
 function Init (float SetFOVEnd, float SetTime, optional bool bInEaseTo)
 {
 	FOVTime 	= SetTime;
-	FOVEnd 		= GetScaledFOV(SetFOVEnd);
+	FOVEnd 		= SetFOVEnd;
 	FOVStart 	= PlayerHarry.FovAngle;
 	bEaseTo 	= bInEaseTo;
 	PlayerHarry.ClientMessage("FOVController -> FOVStart: " $ string(FOVStart) $ " FOVEnd: " $ string(FOVEnd) $ " FOVTime: " $ string(FOVTime));

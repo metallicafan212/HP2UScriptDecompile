@@ -183,6 +183,7 @@ function Created ()
   NextPageLabel.TextColor.R = 255;
   NextPageLabel.TextColor.G = 255;
   NextPageLabel.TextColor.B = 255;
+  
   // NextPageLabel.Align = 1;
   NextPageLabel.Align = TA_Right; //from UWindowBase.uc in the proto -AdamJD 
   NextPageLabel.bShadowText = True;
@@ -191,6 +192,7 @@ function Created ()
   PreviousPageLabel.TextColor.R = 255;
   PreviousPageLabel.TextColor.G = 255;
   PreviousPageLabel.TextColor.B = 255;
+  
   // PreviousPageLabel.Align = 0;
   PreviousPageLabel.Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
   PreviousPageLabel.bShadowText = True;
@@ -561,122 +563,153 @@ function Notify (UWindowDialogControl C, byte E)
   Super.Notify(C,E);
 }
 
-function HiliteCurrCard ()
+function float GetDHeightScale()
 {
-  if ( nCurrItemOnPage < 10 )
-  {
-    nCardGlowLeft = SmallCardBmp[nCurrItemOnPage].WinLeft + -34;
-	nCardGlowTop = SmallCardBmp[nCurrItemOnPage].WinTop + -34;
-	switch (CurrCardGroup)
-    {
-      case CardGroup_Bronze:
-      textureCurrGlow = textureBronzeGlow;	//Texture'CardGlowBronze';
-      break;
-      case CardGroup_Silver:
-      textureCurrGlow = textureSilverGlow;	//Texture'CardGlowSilver';
-      break;
-      case CardGroup_Gold:
-      textureCurrGlow = textureGoldGlow;	//Texture'CardGlowGold';
-      break;
-      default:
-    }
-    HilitedCard = SmallCardBmp[nCurrItemOnPage];
-    if ( SmallCardBmp[nCurrItemOnPage].UpTexture == textureSmallEmptyCard ) 	//Texture'WizCardMissingSmallTexture' )
-    {
-      fHilitedCardScale = -0.53125;
-    } else {
-      fHilitedCardScale = -0.765625;
-    }
-  } else {
-    nCardGlowLeft = HarryCardBmp.WinLeft + -64;
-	nCardGlowTop = HarryCardBmp.WinTop + -64;
-	textureCurrGlow = textureGoldBigGlow;	//Texture'CardGlowGoldBig';
-    HilitedCard = HarryCardBmp;
-    fHilitedCardScale = -0.5;
-  }
+	return GetHeightScale() * GetHeightScale();
+}
+
+function RepositionChildControls()
+{
+	Super.RepositionChildControls();
+	
+	// Metallicafan212:	Readjust the pos of the current highlight
+	HiliteCurrCard();
+}
+
+function HiliteCurrCard()
+{
+	if ( nCurrItemOnPage < 10 )
+	{
+		nCardGlowLeft = SmallCardBmp[nCurrItemOnPage].WinLeft + (-33 * GetDHeightScale());
+		nCardGlowTop = SmallCardBmp[nCurrItemOnPage].WinTop + (-33 * GetDHeightScale());;
+
+		switch (CurrCardGroup)
+		{
+			case CardGroup_Bronze:
+				textureCurrGlow = textureBronzeGlow;	//Texture'CardGlowBronze';
+				break;
+			
+			case CardGroup_Silver:
+				textureCurrGlow = textureSilverGlow;	//Texture'CardGlowSilver';
+				break;
+      
+			case CardGroup_Gold:
+				textureCurrGlow = textureGoldGlow;	//Texture'CardGlowGold';
+				break;
+		}
+    
+		HilitedCard = SmallCardBmp[nCurrItemOnPage];
+		if ( SmallCardBmp[nCurrItemOnPage].UpTexture == textureSmallEmptyCard ) 	//Texture'WizCardMissingSmallTexture' )
+		{
+			fHilitedCardScale = -0.53125;
+		} 
+		else 
+		{
+			fHilitedCardScale = -0.765625;
+		}
+	} 
+	else 
+	{
+		nCardGlowLeft 		= HarryCardBmp.WinLeft + (-64 * GetDHeightScale());
+		nCardGlowTop 		= HarryCardBmp.WinTop + (-64 * GetDHeightScale());
+		textureCurrGlow 	= textureGoldBigGlow;	//Texture'CardGlowGoldBig';
+		HilitedCard 		= HarryCardBmp;
+		fHilitedCardScale 	= -0.5;
+	}
 }
 
 function AfterPaint (Canvas Canvas, float X, float Y)
 {
-  local float fScaleFactor;
+	local float fScaleFactor;
 
-  Super.AfterPaint(Canvas,X,Y);
-  fScaleFactor = Canvas.SizeX / WinWidth;
-  PaintLargeCard(Canvas,fScaleFactor);
-  PaintWizardText(Canvas,fScaleFactor);
-  PaintCardStatData(Canvas,fScaleFactor);
-  HiliteSelectedCard(Canvas);
+	Super.AfterPaint(Canvas,X,Y);
+	fScaleFactor = (Canvas.SizeX / WinWidth) * GetHeightScale();
+	PaintLargeCard(Canvas,fScaleFactor);
+	PaintWizardText(Canvas,fScaleFactor);
+	PaintCardStatData(Canvas,fScaleFactor);
+	HiliteSelectedCard(Canvas);
 }
 
 function BeforePaint (Canvas Canvas, float X, float Y)
 {
-  local float fScaleFactor;
-  local int nStyleSave;
+	local float fScaleFactor;
+	local int nStyleSave;
 
-  Super.BeforePaint(Canvas,X,Y);
-  fScaleFactor = Canvas.SizeX / WinWidth;
-  nStyleSave = Canvas.Style;
-  Canvas.Style = 3;
-  Canvas.SetPos(nCardGlowLeft * fScaleFactor,nCardGlowTop * fScaleFactor);
-  Canvas.DrawIcon(textureCurrGlow,fScaleFactor);
-  Canvas.Style = nStyleSave;
+	Super.BeforePaint(Canvas,X,Y);
+	fScaleFactor 	= Canvas.SizeX / WinWidth;
+	nStyleSave 		= Canvas.Style;
+	Canvas.Style 	= 3;
+	
+	// Metallicafan212:	Move it down
+	Canvas.SetPos(nCardGlowLeft * fScaleFactor, (nCardGlowTop * fScaleFactor));
+	Canvas.DrawIcon(textureCurrGlow, fScaleFactor * GetDHeightScale());
+	Canvas.Style 	= nStyleSave;
 }
 
 function HiliteSelectedCard (Canvas Canvas)
 {
-  local float fScaleFactor;
-  local int nSaveStyle;
+	local float fScaleFactor;
+	local int nSaveStyle;
 
-  if ( HilitedCard != None )
-  {
-    fScaleFactor = Canvas.SizeX / WinWidth;
-    nSaveStyle = Canvas.Style;
-    Canvas.Style = 3;
-    Canvas.SetPos(HilitedCard.WinLeft * fScaleFactor,HilitedCard.WinTop * fScaleFactor);
-    Canvas.DrawIcon(HilitedCard.OverTexture,fScaleFactor + fHilitedCardScale * fScaleFactor);
-    Canvas.Style = nSaveStyle;
-  }
+	if ( HilitedCard != None )
+	{
+		fScaleFactor 	= (Canvas.SizeX / WinWidth);
+		nSaveStyle 		= Canvas.Style;
+		
+		Canvas.Style 	= 3;
+		Canvas.SetPos(HilitedCard.WinLeft * fScaleFactor, HilitedCard.WinTop * fScaleFactor);
+		
+		Canvas.DrawIcon(HilitedCard.OverTexture, (fScaleFactor + fHilitedCardScale * fScaleFactor) * GetDHeightScale() );
+		Canvas.Style 	= nSaveStyle;
+	}
 }
 
 function PaintLargeCard (Canvas Canvas, float fScaleFactor)
 {
-  local int nLargeCardX;
-  local int nLargeCardY;
-  local float MouseX;
-  local float MouseY;
-  local float offX;
-  local float offY;
+	local int nLargeCardX;
+	local int nLargeCardY;
+	local float MouseX;
+	local float MouseY;
+	local float offX;
+	local float offY;
 
-  if ( Canvas.SizeX > WinWidth )
-  {
-    nLargeCardX = Canvas.SizeX / 2 - textureCurrLargeCard.USize / 2;
-    nLargeCardY = 4 + (textureCurrLargeCard.VSize * fScaleFactor - textureCurrLargeCard.VSize) / 2;
-	if ( (classCurWC != None) && classCurWC.Default.bIsLayered )
-    {
-      GetMouseXY(MouseX,MouseY);
-      offX = (MouseX - Canvas.SizeX / 2) / Canvas.SizeX / 2;
-      offY = (MouseY - Canvas.SizeY / 2) / Canvas.SizeY / 2;
-      offX *= 6;
-      offY *= 6;
-      if ( classCurWC.Default.bLastLayerIsFire )
-      {
-        Canvas.SetPos(nLargeCardX,nLargeCardY);
-      } else {
-        Canvas.SetPos(nLargeCardX + offX * 2,nLargeCardY + offY * 2);
-      }
-      Canvas.DrawIcon(classCurWC.Default.textureLayers[2],1.0);
-      Canvas.SetPos(nLargeCardX + offX * 1,nLargeCardY + offY * 1);
-      Canvas.DrawIcon(classCurWC.Default.textureLayers[1],1.0);
-      Canvas.SetPos(nLargeCardX,nLargeCardY);
-      Canvas.DrawIcon(classCurWC.Default.textureLayers[0],1.0);
-    } else {
-      Canvas.SetPos(nLargeCardX,nLargeCardY);
-      Canvas.DrawIcon(textureCurrLargeCard,1.0);
-    }
-  } else {
-    Canvas.SetPos(192.0 * fScaleFactor,4.0 * fScaleFactor);
-    Canvas.DrawIcon(textureCurrLargeCard,fScaleFactor);
-  }
+	if ( Canvas.SizeX > WinWidth )
+	{
+		nLargeCardX = Canvas.SizeX / 2 - textureCurrLargeCard.USize / 2;
+		nLargeCardY = 4 + (textureCurrLargeCard.VSize * fScaleFactor - textureCurrLargeCard.VSize) / 2;
+		if ( (classCurWC != None) && classCurWC.Default.bIsLayered )
+		{
+			GetMouseXY(MouseX,MouseY);
+			offX = (MouseX - Canvas.SizeX / 2) / Canvas.SizeX / 2;
+			offY = (MouseY - Canvas.SizeY / 2) / Canvas.SizeY / 2;
+			offX *= 6;
+			offY *= 6;
+			if ( classCurWC.Default.bLastLayerIsFire )
+			{
+				Canvas.SetPos(nLargeCardX,nLargeCardY);
+			} 
+			else 
+			{
+				Canvas.SetPos(nLargeCardX + offX * 2,nLargeCardY + offY * 2);
+			}
+			
+			Canvas.DrawIcon(classCurWC.Default.textureLayers[2],1.0);
+			Canvas.SetPos(nLargeCardX + offX * 1,nLargeCardY + offY * 1);
+			Canvas.DrawIcon(classCurWC.Default.textureLayers[1],1.0);
+			Canvas.SetPos(nLargeCardX,nLargeCardY);
+			Canvas.DrawIcon(classCurWC.Default.textureLayers[0],1.0);
+		} 
+		else 
+		{
+			Canvas.SetPos(nLargeCardX,nLargeCardY);
+			Canvas.DrawIcon(textureCurrLargeCard,1.0);
+		}
+	} 
+	else 
+	{
+		Canvas.SetPos(192.0 * fScaleFactor,4.0 * fScaleFactor);
+		Canvas.DrawIcon(textureCurrLargeCard,fScaleFactor);
+	}
 }
 
 function PaintWizardText (Canvas Canvas, float fScaleFactor)

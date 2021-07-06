@@ -15,6 +15,19 @@ var Texture lockedTexture;
 var string duelistNames[11];
 var string duelistNamesInEnglish[11];
 
+function RepositionChildControls()
+{
+	local int i;
+	
+	Super.RepositionChildControls();
+	
+	// Metallicafan212:	Recenter the buttons
+	for(i = 0; i < 10; i++)
+	{
+		rankingButtons[i].WinLeft =  WinWidth / 2 - (180 * GetHeightScale())/ 2;
+	}
+}
+
 function Created ()
 {
   local int StartX;
@@ -36,7 +49,7 @@ function Created ()
   // if ( I < 10 )
   for(I = 0; I < 10; I++)
   {
-    rankingButtons[I] = HGameButton(CreateControl(Class'HGameButton',WinWidth / 2 - 180 / 2,StartY + I * 28,180.0,26.0));
+    rankingButtons[I] = HGameButton(CreateControl(Class'HGameButton', WinWidth / 2 - 180 / 2,StartY + I * 28,180.0,26.0));
     rankingButtons[I].SetFont(4);
     rankingButtons[I].TextColor.R = 255;
     rankingButtons[I].TextColor.G = 255;

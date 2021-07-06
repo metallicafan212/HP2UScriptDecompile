@@ -33,6 +33,10 @@ function float GetHeightScale()
 	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
 }
 
+// Metallicafan212:	Blank function to call on all children when the height changes
+function RepositionChildControls()
+{
+}
 
 // Metallicafan212:	Override version of the UWindow function, so we can auto scale on Y
 function UWindowDialogControl CreateControl(class<UWindowDialogControl> ControlClass, float X, float Y, float W, float H, optional UWindowWindow OwnerWindow)

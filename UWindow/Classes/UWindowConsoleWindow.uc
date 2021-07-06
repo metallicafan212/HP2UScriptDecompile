@@ -2,6 +2,12 @@ class UWindowConsoleWindow extends UWindowFramedWindow;
 
 var float OldParentWidth, OldParentHeight;
 
+// Metallicafan212:	Quick math function
+function float GetHeightScale()
+{
+	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
+}
+
 function Created() 
 {
 	Super.Created();
@@ -39,8 +45,10 @@ function SetDimensions()
 	if (ParentWindow.WinWidth < 500)
 	{
 		SetSize(200, 150);
-	} else {
-		SetSize(410, 310);
+	} 
+	else 
+	{
+		SetSize(410 * GetHeightScale(), 310 * GetHeightScale());
 	}
 	WinLeft = ParentWindow.WinWidth/2 - WinWidth/2;
 	WinTop 	= ParentWindow.WinHeight/2 - WinHeight/2;

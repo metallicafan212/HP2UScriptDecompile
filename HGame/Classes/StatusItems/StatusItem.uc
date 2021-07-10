@@ -206,11 +206,11 @@ function float GetHScale(Canvas Canvas)
 function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 {
 	// Metallicafan212:	Scale it
-	Canvas.SetPos(nCurrX, nCurrY);
+	Canvas.SetPos(nCurrX, nCurrY * GetHScale(Canvas));
 	Canvas.DrawIcon(textureHudIcon, fScaleFactor * GetHScale(Canvas));
 	if ( bDisplayCount )
 	{
-		DrawCount(Canvas, nCurrX, nCurrY, fScaleFactor * GetHScale(Canvas));
+		DrawCount(Canvas, nCurrX, nCurrY * GetHScale(Canvas), fScaleFactor * GetHScale(Canvas));
 	}
 }
 

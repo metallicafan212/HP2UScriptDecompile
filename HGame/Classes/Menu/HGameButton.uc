@@ -1,7 +1,10 @@
 // Metallicafan212:	Button that scales the position and size to fit the current screen
 class HGameButton based on UWindowButton;
 
-var float WX, WY, WW, WH;
+var float WX, WY, WW, WH, XOffset, YOffset;
+
+// Metallicafan212:	These are used to rescale them, as needed
+var float OrigX;
 
 // Metallicafan212:	If to stretch to fit
 var bool bStretchTex;
@@ -47,16 +50,6 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 
 	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
 	
-	//if(bStretchTex)
-	//	tW /= GetHeightScale();
-	
-	/*
-	if(bStretchTex)
-		W /= GetHeightScale(); //W /= GetHeightScale();
-	
-	C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
-	*/
-	
 	if(bStretchTex)
 	{
 		C.DrawTileClipped(Tex, WinWidth * Root.GUIScale, WinHeight * Root.GUIScale, tX, tY, tW, tH);
@@ -85,9 +78,10 @@ function Resized()
 	HScale = GetHeightScale();
 	
 	// Metallicafan212:	Scale our wanted values
-	WinTop		= WY * HScale;
+	WinTop		= (WY * HScale) + YOffset;
 	WinWidth	= WW * HScale;
 	WinHeight	= WH * HScale;
+	WinLeft		= WX + XOffset;
 	
 	//RegionScale = GetHeightScale();
 

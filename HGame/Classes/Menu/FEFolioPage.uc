@@ -104,100 +104,107 @@ var Texture textureSmallEmptyCard;
 
 function Created ()
 {
-  local int I;
+	local int I;
 
-  textureDescBkgrd = Texture(DynamicLoadObject("HGame.Icons.leftPanel",Class'Texture'));
-  textureBronzeNormal = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeNormal",Class'Texture'));
-  textureBronzeHilite = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeHilite",Class'Texture'));
-  textureBronzeWet = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeWet",Class'WetTexture'));
-  textureSilverNormal = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioSilverNormal",Class'Texture'));
-  textureSilverHilite = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioSilverHilite",Class'Texture'));
-  textureSilverWet = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioSilverWet",Class'WetTexture'));
-  textureGoldNormal = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioGoldNormal",Class'Texture'));
-  textureGoldHilite = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioGoldHilite",Class'Texture'));
-  textureGoldWet = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioGoldWet",Class'WetTexture'));
-  textureRightUp = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioRightOver",Class'Texture'));
-  textureRightOver = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioRightOver",Class'Texture'));
-  textureLeftUp = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioLeftOver",Class'Texture'));
-  textureLeftOver = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioLeftOver",Class'Texture'));
-  textureSilverKey = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2SilverCardKey",Class'Texture'));
-  textureBronzeHealth = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeHealth",Class'Texture'));
-  HarryCardBmp = HGameButton(CreateWindow(Class'HGameButton',480.0,50.0,128.0,128.0));
-  HarryCardBmp.Register(self);
-  HarryCardBmp.bDisabled = True;
-  HarryCardBmp.bStretched = True;
-  SmallCardBmp[0] = HGameButton(CreateWindow(Class'HGameButton',5.0,254,60.0,60.0));
-  SmallCardBmp[1] = HGameButton(CreateWindow(Class'HGameButton',68.0,254.0,60.0,60.0));
-  SmallCardBmp[2] = HGameButton(CreateWindow(Class'HGameButton',131.0,254.0,60.0,60.0));
-  SmallCardBmp[3] = HGameButton(CreateWindow(Class'HGameButton',194.0,254.0,60.0,60.0));
-  SmallCardBmp[4] = HGameButton(CreateWindow(Class'HGameButton',257.0,254.0,60.0,60.0));
-  SmallCardBmp[5] = HGameButton(CreateWindow(Class'HGameButton',320.0,254.0,60.0,60.0));
-  SmallCardBmp[6] = HGameButton(CreateWindow(Class'HGameButton',383.0,254.0,60.0,60.0));
-  SmallCardBmp[7] = HGameButton(CreateWindow(Class'HGameButton',446.0,254.0,60.0,60.0));
-  SmallCardBmp[8] = HGameButton(CreateWindow(Class'HGameButton',509.0,254.0,60.0,60.0));
-  SmallCardBmp[9] = HGameButton(CreateWindow(Class'HGameButton',572.0,254.0,60.0,60.0));
-  // I = 0;
-  // if ( I != 10 )
-  for(I = 0; I !=10; ++I)
-  {
-    SmallCardBmp[I].Register(self);
-    SmallCardBmp[I].bStretched = True;
-    // ++I;
-    // goto JL0586;
-  }
-  GoldButton = HGameButton(CreateWindow(Class'HGameButton',12.0,70.0,50.0,48.0));
-  GoldButton.Register(self);
-  GoldButton.UpTexture = textureGoldNormal;
-  GoldButton.DownTexture = textureGoldNormal;
-  GoldButton.OverTexture = textureGoldNormal;
-  GoldButton.ToolTipString = GetLocalFEString("Folio_Menu_0003");
-  GoldButton.DownSound = Sound'GUI_Esc_Click3';
-  SilverButton = HGameButton(CreateWindow(Class'HGameButton',12.0,125.0,50.0,48.0));
-  SilverButton.Register(self);
-  SilverButton.UpTexture = textureSilverNormal;
-  SilverButton.DownTexture = textureSilverNormal;
-  SilverButton.OverTexture = textureSilverNormal;
-  SilverButton.ToolTipString = GetLocalFEString("Folio_Menu_0004");
-  SilverButton.DownSound = Sound'GUI_Esc_Click3';
-  BronzeButton = HGameButton(CreateWindow(Class'HGameButton',12.0,180.0,50.0,48.0));
-  BronzeButton.Register(self);
-  BronzeButton.UpTexture = textureBronzeNormal;
-  BronzeButton.DownTexture = textureBronzeNormal;
-  BronzeButton.OverTexture = textureBronzeNormal;
-  BronzeButton.ToolTipString = GetLocalFEString("Folio_Menu_0005");
-  BronzeButton.DownSound = Sound'GUI_Esc_Click3';
-  ForwardButton = HGameButton(CreateWindow(Class'HGameButton',605.0,316.0,32.0,32.0));
-  ForwardButton.Register(self);
-  ForwardButton.UpTexture = textureRightUp;
-  ForwardButton.DownTexture = textureRightUp;
-  ForwardButton.OverTexture = textureRightUp;
-  ForwardButton.ToolTipString = GetLocalFEString("Folio_Menu_0001");
-  BackButton = HGameButton(CreateWindow(Class'HGameButton',5.0,316.0,32.0,32.0));
-  BackButton.Register(self);
-  BackButton.UpTexture = textureLeftUp;
-  BackButton.DownTexture = textureLeftUp;
-  BackButton.OverTexture = textureLeftUp;
-  BackButton.ToolTipString = GetLocalFEString("Folio_Menu_0002");
-  NextPageLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',605.0 - 100 - 5,316.0 + 5,100.0,28.0));
-  NextPageLabel.SetFont(4);
-  NextPageLabel.TextColor.R = 255;
-  NextPageLabel.TextColor.G = 255;
-  NextPageLabel.TextColor.B = 255;
+	textureDescBkgrd 		= Texture(DynamicLoadObject("HGame.Icons.leftPanel",Class'Texture'));
+	textureBronzeNormal 	= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeNormal",Class'Texture'));
+	textureBronzeHilite 	= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeHilite",Class'Texture'));
+	textureBronzeWet 		= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeWet",Class'WetTexture'));
+	textureSilverNormal 	= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioSilverNormal",Class'Texture'));
+	textureSilverHilite 	= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioSilverHilite",Class'Texture'));
+	textureSilverWet 		= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioSilverWet",Class'WetTexture'));
+	textureGoldNormal 		= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioGoldNormal",Class'Texture'));
+	textureGoldHilite 		= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioGoldHilite",Class'Texture'));
+	textureGoldWet 			= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioGoldWet",Class'WetTexture'));
+	textureRightUp 			= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioRightOver",Class'Texture'));
+	textureRightOver 		= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioRightOver",Class'Texture'));
+	textureLeftUp 			= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioLeftOver",Class'Texture'));
+	textureLeftOver 		= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioLeftOver",Class'Texture'));
+	textureSilverKey 		= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2SilverCardKey",Class'Texture'));
+	textureBronzeHealth 	= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeHealth",Class'Texture'));
   
-  // NextPageLabel.Align = 1;
-  NextPageLabel.Align = TA_Right; //from UWindowBase.uc in the proto -AdamJD 
-  NextPageLabel.bShadowText = True;
-  PreviousPageLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',5.0 + 32 + 5,316.0 + 5,100.0,28.0));
-  PreviousPageLabel.SetFont(4);
-  PreviousPageLabel.TextColor.R = 255;
-  PreviousPageLabel.TextColor.G = 255;
-  PreviousPageLabel.TextColor.B = 255;
+	HarryCardBmp = HGameButton(CreateWindow(Class'HGameButton',480.0,50.0,128.0,128.0));
+	HarryCardBmp.Register(self);
+	HarryCardBmp.bDisabled = True;
+	HarryCardBmp.bStretched = True;
   
-  // PreviousPageLabel.Align = 0;
-  PreviousPageLabel.Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
-  PreviousPageLabel.bShadowText = True;
-  CreateBackPageButton(594,350);
-  Super.Created();
+  
+	SmallCardBmp[0] = HGameButton(CreateWindow(Class'HGameButton',5.0,254,60.0,60.0));
+	SmallCardBmp[1] = HGameButton(CreateWindow(Class'HGameButton',68.0,254.0,60.0,60.0));
+	SmallCardBmp[2] = HGameButton(CreateWindow(Class'HGameButton',131.0,254.0,60.0,60.0));
+	SmallCardBmp[3] = HGameButton(CreateWindow(Class'HGameButton',194.0,254.0,60.0,60.0));
+	SmallCardBmp[4] = HGameButton(CreateWindow(Class'HGameButton',257.0,254.0,60.0,60.0));
+	SmallCardBmp[5] = HGameButton(CreateWindow(Class'HGameButton',320.0,254.0,60.0,60.0));
+	SmallCardBmp[6] = HGameButton(CreateWindow(Class'HGameButton',383.0,254.0,60.0,60.0));
+	SmallCardBmp[7] = HGameButton(CreateWindow(Class'HGameButton',446.0,254.0,60.0,60.0));
+	SmallCardBmp[8] = HGameButton(CreateWindow(Class'HGameButton',509.0,254.0,60.0,60.0));
+	SmallCardBmp[9] = HGameButton(CreateWindow(Class'HGameButton',572.0,254.0,60.0,60.0));
+	for(I = 0; I !=10; ++I)
+	{
+		SmallCardBmp[I].Register(self);
+		SmallCardBmp[I].bStretched = True;
+	
+		// Metallicafan212:	Correct the card images
+		SmallCardBmp[i].WW = 60.0 / GetHeightScale();
+		SmallCardBmp[i].WH = 60.0 / GetHeightScale();
+	}
+	GoldButton = HGameButton(CreateWindow(Class'HGameButton',12.0,70.0,50.0,48.0));
+	GoldButton.Register(self);
+	GoldButton.UpTexture = textureGoldNormal;
+	GoldButton.DownTexture = textureGoldNormal;
+	GoldButton.OverTexture = textureGoldNormal;
+	GoldButton.ToolTipString = GetLocalFEString("Folio_Menu_0003");
+	GoldButton.DownSound = Sound'GUI_Esc_Click3';
+	
+	SilverButton = HGameButton(CreateWindow(Class'HGameButton',12.0,125.0,50.0,48.0));
+	SilverButton.Register(self);
+	SilverButton.UpTexture = textureSilverNormal;
+	SilverButton.DownTexture = textureSilverNormal;
+	SilverButton.OverTexture = textureSilverNormal;
+	SilverButton.ToolTipString = GetLocalFEString("Folio_Menu_0004");
+	SilverButton.DownSound = Sound'GUI_Esc_Click3';
+  
+	BronzeButton = HGameButton(CreateWindow(Class'HGameButton',12.0,180.0,50.0,48.0));
+	BronzeButton.Register(self);
+	BronzeButton.UpTexture = textureBronzeNormal;
+	BronzeButton.DownTexture = textureBronzeNormal;
+	BronzeButton.OverTexture = textureBronzeNormal;
+	BronzeButton.ToolTipString = GetLocalFEString("Folio_Menu_0005");
+	BronzeButton.DownSound = Sound'GUI_Esc_Click3';
+  
+	ForwardButton = HGameButton(CreateWindow(Class'HGameButton',605.0,316.0,32.0,32.0));
+	ForwardButton.Register(self);
+	ForwardButton.UpTexture = textureRightUp;
+	ForwardButton.DownTexture = textureRightUp;
+	ForwardButton.OverTexture = textureRightUp;
+	ForwardButton.ToolTipString = GetLocalFEString("Folio_Menu_0001");
+  
+	BackButton = HGameButton(CreateWindow(Class'HGameButton',5.0,316.0,32.0,32.0));
+	BackButton.Register(self);
+	BackButton.UpTexture = textureLeftUp;
+	BackButton.DownTexture = textureLeftUp;
+	BackButton.OverTexture = textureLeftUp;
+	BackButton.ToolTipString = GetLocalFEString("Folio_Menu_0002");
+  
+	NextPageLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',605.0 - 100 - 5,316.0 + 5,100.0,28.0));
+	NextPageLabel.SetFont(4);
+	NextPageLabel.TextColor.R = 255;
+	NextPageLabel.TextColor.G = 255;
+	NextPageLabel.TextColor.B = 255;
+  
+	NextPageLabel.Align = TA_Right; //from UWindowBase.uc in the proto -AdamJD 
+	NextPageLabel.bShadowText = True;
+	PreviousPageLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',5.0 + 32 + 5,316.0 + 5,100.0,28.0));
+	PreviousPageLabel.SetFont(4);
+	PreviousPageLabel.TextColor.R = 255;
+	PreviousPageLabel.TextColor.G = 255;
+	PreviousPageLabel.TextColor.B = 255;
+  
+	// PreviousPageLabel.Align = 0;
+	PreviousPageLabel.Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
+	PreviousPageLabel.bShadowText = True;
+	CreateBackPageButton(594,350);
+	Super.Created();
 }
 
 function SetCardCountData ()
@@ -514,10 +521,7 @@ function Notify (UWindowDialogControl C, byte E)
         {
           nCurrItemOnPage = I;
           UpdateDisplayDetails();
-        } //else {
-          //++I;
-          //goto JL0159;
-        //}
+        } 
       }
       break;
     }
@@ -570,36 +574,46 @@ function float GetDHeightScale()
 
 function RepositionChildControls()
 {
+	local int i;
+	
 	Super.RepositionChildControls();
 	
 	// Metallicafan212:	Readjust the pos of the current highlight
 	HiliteCurrCard();
+	
+	// Metallicafan212:	Correct the card images
+	for(I = 0; I < ArrayCount(SmallCardBmp); I++)
+	{
+		SmallCardBmp[i].WW = 60.0 / GetHeightScale();
+		SmallCardBmp[i].WH = 60.0 / GetHeightScale();
+	}
+	
 }
 
 function HiliteCurrCard()
 {
 	if ( nCurrItemOnPage < 10 )
 	{
-		nCardGlowLeft = SmallCardBmp[nCurrItemOnPage].WinLeft + (-33 * GetDHeightScale());
-		nCardGlowTop = SmallCardBmp[nCurrItemOnPage].WinTop + (-33 * GetDHeightScale());;
+		nCardGlowLeft = SmallCardBmp[nCurrItemOnPage].WinLeft + (-33 * GetHeightScale());
+		nCardGlowTop = SmallCardBmp[nCurrItemOnPage].WinTop + (-33 * GetHeightScale());;
 
 		switch (CurrCardGroup)
 		{
 			case CardGroup_Bronze:
-				textureCurrGlow = textureBronzeGlow;	//Texture'CardGlowBronze';
+				textureCurrGlow = textureBronzeGlow;
 				break;
 			
 			case CardGroup_Silver:
-				textureCurrGlow = textureSilverGlow;	//Texture'CardGlowSilver';
+				textureCurrGlow = textureSilverGlow;
 				break;
       
 			case CardGroup_Gold:
-				textureCurrGlow = textureGoldGlow;	//Texture'CardGlowGold';
+				textureCurrGlow = textureGoldGlow;
 				break;
 		}
     
 		HilitedCard = SmallCardBmp[nCurrItemOnPage];
-		if ( SmallCardBmp[nCurrItemOnPage].UpTexture == textureSmallEmptyCard ) 	//Texture'WizCardMissingSmallTexture' )
+		if ( SmallCardBmp[nCurrItemOnPage].UpTexture == textureSmallEmptyCard )
 		{
 			fHilitedCardScale = -0.53125;
 		} 
@@ -610,9 +624,9 @@ function HiliteCurrCard()
 	} 
 	else 
 	{
-		nCardGlowLeft 		= HarryCardBmp.WinLeft + (-64 * GetDHeightScale());
-		nCardGlowTop 		= HarryCardBmp.WinTop + (-64 * GetDHeightScale());
-		textureCurrGlow 	= textureGoldBigGlow;	//Texture'CardGlowGoldBig';
+		nCardGlowLeft 		= HarryCardBmp.WinLeft + (-64 * GetHeightScale());
+		nCardGlowTop 		= HarryCardBmp.WinTop + (-64 * GetHeightScale());
+		textureCurrGlow 	= textureGoldBigGlow;
 		HilitedCard 		= HarryCardBmp;
 		fHilitedCardScale 	= -0.5;
 	}
@@ -642,7 +656,7 @@ function BeforePaint (Canvas Canvas, float X, float Y)
 	
 	// Metallicafan212:	Move it down
 	Canvas.SetPos(nCardGlowLeft * fScaleFactor, (nCardGlowTop * fScaleFactor));
-	Canvas.DrawIcon(textureCurrGlow, fScaleFactor * GetDHeightScale());
+	Canvas.DrawIcon(textureCurrGlow, fScaleFactor * GetHeightScale());
 	Canvas.Style 	= nStyleSave;
 }
 
@@ -659,7 +673,7 @@ function HiliteSelectedCard (Canvas Canvas)
 		Canvas.Style 	= 3;
 		Canvas.SetPos(HilitedCard.WinLeft * fScaleFactor, HilitedCard.WinTop * fScaleFactor);
 		
-		Canvas.DrawIcon(HilitedCard.OverTexture, (fScaleFactor + fHilitedCardScale * fScaleFactor) * GetDHeightScale() );
+		Canvas.DrawIcon(HilitedCard.OverTexture, (fScaleFactor + fHilitedCardScale * fScaleFactor) * GetHeightScale() );
 		Canvas.Style 	= nSaveStyle;
 	}
 }
@@ -914,89 +928,94 @@ function InitHarryOwnedCards ()
 
 function SetInitialSelection ()
 {
-  local StatusGroupWizardCards sgCards;
-  local StatusItemWizardCards siCards;
-  local int nNumSmallPerPage;
-  local int nCardCount;
+	local StatusGroupWizardCards sgCards;
+	local StatusItemWizardCards siCards;
+	local int nNumSmallPerPage;
+	local int nCardCount;
 
-  sgCards = StatusGroupWizardCards(PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupWizardCards'));
-  switch (sgCards.GetLastObtainedCardType())
-  {
-    case sgCards.ECardType.CardType_Gold:
-		CurrCardGroup = CardGroup_Gold;
-		nCardCount = nHarrysGoldCount;
-		nCurrNumPages = 1;
-		break;
-    case sgCards.ECardType.CardType_Silver:
-		CurrCardGroup = CardGroup_Silver;
-		nCardCount = nHarrysSilverCount;
-		nCurrNumPages = 4;
-		break;
-    case sgCards.ECardType.CardType_Bronze:
-		CurrCardGroup = CardGroup_Bronze;
-		nCardCount = nHarrysBronzeCount;
-		nCurrNumPages = 5;
-		break;
-    case sgCards.ECardType.CardType_None:
-		CurrCardGroup = CardGroup_Bronze;
-		nCardCount = nHarrysBronzeCount;
-		nCurrNumPages = 5;
-		break;
-    default:
-  }
-  nNumSmallPerPage = 10;
-  if ( CurrCardGroup == CardGroup_Gold )
-  {
-    nCurrPage = 0;
-  } else //{
-    if ( nCardCount <= 1 * 10 )
-    {
-      nCurrPage = 0;
-    } else //{
-      if ( nCardCount <= 2 * 10 )
-      {
-        nCurrPage = 1;
-      } else //{
-        if ( nCardCount <= 3 * 10 )
-        {
-          nCurrPage = 2;
-        } else //{
-          if ( nCardCount <= 4 * 10 )
-          {
-            nCurrPage = 3;
-          } else //{
-            if ( nCardCount <= 5 * 10 )
-            {
-              nCurrPage = 4;
-            }
-          // }
-        // }
-      // }
-    // }
-  // }
-  if ( nCardCount == 0 )
-  {
-    nCurrItemOnPage = 0;
-  } else {
-    if ( CurrCardGroup == CardGroup_Gold )
-    {
-      siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemGoldCards'));
-      if ( StatusItemGoldCards(siCards).HaveHarryCard() )
-      {
-        nCurrItemOnPage = 10 + 1;
-      } else {
-        nCurrItemOnPage = nCardCount - 1;
-      }
-    } else {
-      if ( nCardCount % nNumSmallPerPage == 0 )
-      {
-        nCurrItemOnPage = nNumSmallPerPage - 1;
-      } else {
-        nCurrItemOnPage = nCardCount % nNumSmallPerPage - 1;
-		return;
-      }
-    }
-  }
+	sgCards = StatusGroupWizardCards(PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupWizardCards'));
+	
+	switch (sgCards.GetLastObtainedCardType())
+	{
+		case sgCards.ECardType.CardType_Gold:
+			CurrCardGroup = CardGroup_Gold;
+			nCardCount = nHarrysGoldCount;
+			nCurrNumPages = 1;
+			break;
+		case sgCards.ECardType.CardType_Silver:
+			CurrCardGroup = CardGroup_Silver;
+			nCardCount = nHarrysSilverCount;
+			nCurrNumPages = 4;
+			break;
+		case sgCards.ECardType.CardType_Bronze:
+			CurrCardGroup = CardGroup_Bronze;
+			nCardCount = nHarrysBronzeCount;
+			nCurrNumPages = 5;
+			break;
+		case sgCards.ECardType.CardType_None:
+			CurrCardGroup = CardGroup_Bronze;
+			nCardCount = nHarrysBronzeCount;
+			nCurrNumPages = 5;
+			break;
+	}
+	
+	nNumSmallPerPage = 10;
+  
+	if ( CurrCardGroup == CardGroup_Gold )
+	{
+		nCurrPage = 0;
+	} 
+	else if ( nCardCount <= 1 * 10 )
+	{
+		nCurrPage = 0;
+	} else if ( nCardCount <= 2 * 10 )
+	{
+		nCurrPage = 1;
+	} 
+	else if ( nCardCount <= 3 * 10 )
+	{
+		nCurrPage = 2;
+	} 
+	else if ( nCardCount <= 4 * 10 )
+	{
+		nCurrPage = 3;
+	} 
+	else if ( nCardCount <= 5 * 10 )
+	{
+		nCurrPage = 4;
+	}
+	
+	if ( nCardCount == 0 )
+	{
+		nCurrItemOnPage = 0;
+	} 
+	else 
+	{
+		if ( CurrCardGroup == CardGroup_Gold )
+		{
+			siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemGoldCards'));
+			if ( StatusItemGoldCards(siCards).HaveHarryCard() )
+			{
+				nCurrItemOnPage = 10 + 1;
+			} 
+			else 
+			{
+				nCurrItemOnPage = nCardCount - 1;
+			}
+		} 
+		else 
+		{
+			if ( nCardCount % nNumSmallPerPage == 0 )
+			{
+				nCurrItemOnPage = nNumSmallPerPage - 1;
+			} 
+			else 
+			{
+				nCurrItemOnPage = nCardCount % nNumSmallPerPage - 1;
+				return;
+			}
+		}
+	}
 }
 
 defaultproperties

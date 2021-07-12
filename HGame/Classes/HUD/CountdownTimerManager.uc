@@ -22,203 +22,207 @@ var bool bShowNumericTime;
 
 event PostBeginPlay ()
 {
-  if ( bStartOnLevelLoad == True )
-  {
-    SetTimer(0.2,False);
-  }
-  LoadTimerBarGraphics();
+	if ( bStartOnLevelLoad == True )
+	{
+		SetTimer(0.2,False);
+	}
+	LoadTimerBarGraphics();
 }
 
 function LoadTimerBarGraphics ()
 {
-  fFULL_OFFSET_X = 51.0;
-  fFULL_OFFSET_Y = 26.0;
-  textureTimerEmpty = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2Timer",Class'Texture'));
-  textureFullBar = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EmptyBar",Class'Texture'));
+	fFULL_OFFSET_X 		= 51.0;
+	fFULL_OFFSET_Y 		= 26.0;
+	textureTimerEmpty 	= Texture(DynamicLoadObject("HP2_Menu.Icon.HP2Timer",Class'Texture'));
+	textureFullBar 		= Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EmptyBar",Class'Texture'));
+}
+
+function float GetHeightScale(Canvas C)
+{
+	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
 }
 
 function DrawCountdown (Canvas Canvas)
 {
-  local int Ox;
-  local int Oy;
-  local float fScaleFactor;
-  local float fFullRatio;
-  local float fSegmentWidth;
+	local int Ox;
+	local int Oy;
+	local float fScaleFactor;
+	local float fFullRatio;
+	local float fSegmentWidth;
 
-  fScaleFactor = Canvas.GetHudScaleFactor();
-  Ox = Canvas.SizeX - 8 * fScaleFactor - 205.0 * fScaleFactor;
-  Oy = Canvas.SizeY - 8 * fScaleFactor - 58.0 * fScaleFactor;
-  Canvas.SetPos(Ox,Oy);
-  Canvas.DrawIcon(textureTimerEmpty,fScaleFactor);
-  fFullRatio = fCountdownTime / GetTimerDuration();
-  fSegmentWidth = fFullRatio * 118.0;
-  Canvas.SetPos(Ox + fFULL_OFFSET_X * fScaleFactor,Oy + fFULL_OFFSET_Y * fScaleFactor);
-  Canvas.DrawTile(textureFullBar,fSegmentWidth * fScaleFactor,textureFullBar.VSize * fScaleFactor,0.0,0.0,fSegmentWidth,textureFullBar.VSize);
-  DrawTuningModeData(Canvas);
+	fScaleFactor = Canvas.GetHudScaleFactor() * GetHeightScale(Canvas);
+	Ox = Canvas.SizeX - 8 * fScaleFactor - 205.0 * fScaleFactor;
+	Oy = Canvas.SizeY - 8 * fScaleFactor - 58.0 * fScaleFactor;
+	Canvas.SetPos(Ox,Oy);
+	Canvas.DrawIcon(textureTimerEmpty,fScaleFactor);
+	fFullRatio = fCountdownTime / GetTimerDuration();
+	fSegmentWidth = fFullRatio * 118.0;
+	Canvas.SetPos(Ox + fFULL_OFFSET_X * fScaleFactor,Oy + fFULL_OFFSET_Y * fScaleFactor);
+	Canvas.DrawTile(textureFullBar,fSegmentWidth * fScaleFactor,textureFullBar.VSize * fScaleFactor,0.0,0.0,fSegmentWidth,textureFullBar.VSize);
+	DrawTuningModeData(Canvas);
 }
 
 event Timer ()
 {
-  if ( bStartOnLevelLoad )
-  {
-    if ( Level.PlayerHarryActor == None )
-    {
-      SetTimer(0.2,False);
-    } else {
-      if ( bStartOnLevelLoad )
-      {
-        StartCountDown();
-      }
-    }
-  }
+	if ( bStartOnLevelLoad )
+	{
+		if ( Level.PlayerHarryActor == None )
+		{
+			SetTimer(0.2,False);
+		} 
+		else 
+		{
+			if ( bStartOnLevelLoad )
+			{
+				StartCountDown();
+			}
+		}
+	}
 }
 
 function bool CutCommand (string Command, optional string cue, optional bool bFastFlag)
 {
-  local string sActualCommand;
-  local string sCutName;
-  local Actor A;
+	local string sActualCommand;
+	local string sCutName;
+	local Actor A;
 
-  sActualCommand = ParseDelimitedString(Command," ",1,False);
-  if ( sActualCommand ~= "Capture" )
-  {
-    return True;
-  } else //{
-    if ( sActualCommand ~= "Release" )
+	sActualCommand = ParseDelimitedString(Command," ",1,False);
+	if ( sActualCommand ~= "Capture" )
+	{
+		return True;
+	} 
+	else if ( sActualCommand ~= "Release" )
     {
-      return True;
-    } else //{
-      if ( sActualCommand ~= "StartCountdown" )
-      {
-        StartCountDown();
-        CutNotifyActor.CutCue(cue);
-        return True;
-      } else //{
-        if ( sActualCommand ~= "StopCountdown" )
-        {
-          StopCountDown();
-          CutNotifyActor.CutCue(cue);
-          return True;
-        } else {
-          return False;
-        }
-      // }
-    // }
-  // }
+		return True;
+    } 
+	else if ( sActualCommand ~= "StartCountdown" )
+	{
+		StartCountDown();
+		CutNotifyActor.CutCue(cue);
+		return True;
+	} 
+	else if ( sActualCommand ~= "StopCountdown" )
+	{
+		StopCountDown();
+		CutNotifyActor.CutCue(cue);
+		return True;
+	} 
+	else 
+	{
+		return False;
+	}
 }
 
 function float GetTimerDuration ()
 {
-  return fDuration;
+	return fDuration;
 }
 
 function StartCountDown ()
 {
-  HPHud(Level.PlayerHarryActor.myHUD).RegisterCountdownTimerManager(self);
-  GotoState('CountingDown');
+	HPHud(Level.PlayerHarryActor.myHUD).RegisterCountdownTimerManager(self);
+	GotoState('CountingDown');
 }
 
 function StopCountDown ()
 {
-  HPHud(Level.PlayerHarryActor.myHUD).RegisterCountdownTimerManager(None);
-  GotoState('Idle');
+	HPHud(Level.PlayerHarryActor.myHUD).RegisterCountdownTimerManager(None);
+	GotoState('Idle');
 }
 
 function DrawTuningModeData (Canvas Canvas)
 {
-  local string strCurrTime;
+	local string strCurrTime;
 
-  if ( bShowNumericTime )
-  {
-    Canvas.SetPos(Canvas.SizeX - 75,Canvas.SizeY - 60);
-    strCurrTime = string(int(GetTimerDuration() - fCountdownTime));
-	Canvas.DrawText(strCurrTime,False);
-  }
+	if ( bShowNumericTime )
+	{
+		Canvas.SetPos(Canvas.SizeX - 75,Canvas.SizeY - 60);
+		strCurrTime = string(int(GetTimerDuration() - fCountdownTime));
+		Canvas.DrawText(strCurrTime,False);
+	}
 }
 
 function PlayCountdownSound ()
 {
-  local BaseCam Cam;
+	local BaseCam Cam;
 
-  if ( Abs(fLastTickTime - fCountdownTime) > 1.0 )
-  {
-    Cam = harry(Level.PlayerHarryActor).Cam;
-    if ( fCountdownTime > 30.0 )
-    {
-      Cam.PlaySound(Sound'timer_1',SLOT_None,0.5,,,,True);
-    } else //{
-      if ( fCountdownTime > 20.0 )
-      {
-        Cam.PlaySound(Sound'timer_2',SLOT_None,0.5,,,,True);
-      } else //{
-        if ( fCountdownTime > 15.0 )
+	if ( Abs(fLastTickTime - fCountdownTime) > 1.0 )
+	{
+		Cam = harry(Level.PlayerHarryActor).Cam;
+		if ( fCountdownTime > 30.0 )
+		{
+			Cam.PlaySound(Sound'timer_1',SLOT_None,0.5,,,,True);
+		} 
+		else if ( fCountdownTime > 20.0 )
+		{
+			Cam.PlaySound(Sound'timer_2',SLOT_None,0.5,,,,True);
+		} 
+		else if ( fCountdownTime > 15.0 )
         {
-          Cam.PlaySound(Sound'timer_3',SLOT_None,0.5,,,,True);
-        } else //{
-          if ( fCountdownTime > 10.0 )
-          {
-            Cam.PlaySound(Sound'timer_4',SLOT_None,0.5,,,,True);
-          } else //{
-            if ( fCountdownTime > 5.0 )
-            {
-              Cam.PlaySound(Sound'timer_5',SLOT_None,0.5,,,,True);
-            } else {
-              Cam.PlaySound(Sound'timer_6',SLOT_None,0.5,,,,True);
-            }
-          // }
-        // }
-      // }
-    // }
-    fLastTickTime = fCountdownTime;
-  }
+			Cam.PlaySound(Sound'timer_3',SLOT_None,0.5,,,,True);
+        } 
+		else if ( fCountdownTime > 10.0 )
+		{
+			Cam.PlaySound(Sound'timer_4',SLOT_None,0.5,,,,True);
+		} 
+		else if ( fCountdownTime > 5.0 )
+		{
+			Cam.PlaySound(Sound'timer_5',SLOT_None,0.5,,,,True);
+		} 
+		else 
+		{
+			Cam.PlaySound(Sound'timer_6',SLOT_None,0.5,,,,True);
+		}
+		fLastTickTime = fCountdownTime;
+	}
 }
 
 auto state Idle
 {
-  event Trigger (Actor Other, Pawn EventInstigator)
-  {
-    Level.PlayerHarryActor.ClientMessage("countdown ON");
-    StartCountDown();
-  }
+	event Trigger (Actor Other, Pawn EventInstigator)
+	{
+		Level.PlayerHarryActor.ClientMessage("countdown ON");
+		StartCountDown();
+	}
   
 }
 
 state CountingDown
 {
-  event Tick (float fDelta)
-  {
-    if (  !HPHud(Level.PlayerHarryActor.myHUD).IsCutSceneOrPopupInProgress() )
-    {
-      fCountdownTime -= fDelta;
-    }
-    if ( fCountdownTime <= 0.0 )
-    {
-      StopCountDown();
-      TriggerEvent(Event,None,None);
-    }
-  }
+	event Tick (float fDelta)
+	{
+		if (  !HPHud(Level.PlayerHarryActor.myHUD).IsCutSceneOrPopupInProgress() )
+		{
+			fCountdownTime -= fDelta;
+		}
+		if ( fCountdownTime <= 0.0 )
+		{
+			StopCountDown();
+			TriggerEvent(Event,None,None);
+		}
+	}
   
-  event Trigger (Actor Other, Pawn EventInstigator)
-  {
-    Level.PlayerHarryActor.ClientMessage("countdown off");
-    StopCountDown();
-  }
+	event Trigger (Actor Other, Pawn EventInstigator)
+	{
+		Level.PlayerHarryActor.ClientMessage("countdown off");
+		StopCountDown();
+	}
   
-  function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
-  {
-    if ( bMenuMode )
-    {
-      return;
-    }
-    DrawCountdown(Canvas);
-    PlayCountdownSound();
-  }
+	function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
+	{
+		if ( bMenuMode )
+		{
+		return;
+		}
+		DrawCountdown(Canvas);
+		PlayCountdownSound();
+	}
   
-  event BeginState ()
-  {
-    fCountdownTime = GetTimerDuration();
-    fLastTickTime = 0.0;
-  }
+	event BeginState ()
+	{
+		fCountdownTime = GetTimerDuration();
+		fLastTickTime = 0.0;
+	}
   
 }
 

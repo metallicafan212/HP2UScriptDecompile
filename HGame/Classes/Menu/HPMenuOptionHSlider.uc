@@ -19,6 +19,8 @@ var Texture textureSlider;
 Var Texture textureOverSlider;
 var Texture textureSliderKnob;
 
+var bool bStretchTex;
+
 
 function Created ()
 {
@@ -55,6 +57,34 @@ function BeforePaint (Canvas C, float X, float Y)
 	TrackStart 		= SliderDrawX + ((SliderWidth - TrackWidth) * HScale) * (Value - MinValue) / (MaxValue - MinValue);
 }
 
+function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float H, 
+									  float tX, float tY, float tW, float tH, texture Tex ) 
+{
+	local float OrgX, OrgY, ClipX, ClipY;
+
+	OrgX = C.OrgX;
+	OrgY = C.OrgY;
+	ClipX = C.ClipX;
+	ClipY = C.ClipY;
+
+	C.SetOrigin(OrgX + ClippingRegion.X * Root.GUIScale, OrgY + ClippingRegion.Y * Root.GUIScale);
+	C.SetClip(Root.RealWidth, Root.RealHeight);//ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.GUIScale);
+
+	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
+	
+	if(bStretchTex)
+	{
+		C.DrawTileClipped(Tex, W * Root.GUIScale, H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+	}
+	else
+	{
+		C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+	}
+	
+	C.SetClip(ClipX, ClipY);
+	C.SetOrigin(OrgX, OrgY);
+}
+
 function Paint (Canvas C, float X, float Y)
 {
 	local Texture t;
@@ -71,11 +101,16 @@ function Paint (Canvas C, float X, float Y)
 	}
 	R = LookAndFeel.HLine;
 	
+	// Metallicafan212:	Force it to scale correctly
+	//bStretchTex = true;
 	DrawClippedTexture(C, SliderDrawX - fSliderOffsetX, 0.0, Image);
+	
 	if ( MouseIsOver() )
 	{
 		DrawClippedTexture(C, SliderDrawX - fSliderOffsetX, 0.0, overImage);
 	}
+	//bStretchTex = false;
+	
 	DrawClippedTexture(C, TrackStart, 0.0, knobImage);
 }
 

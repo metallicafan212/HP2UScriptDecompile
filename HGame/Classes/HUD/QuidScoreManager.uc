@@ -180,92 +180,115 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
   //}
 }
 
+function float GetHeightScale(Canvas C)
+{
+	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
+}
+
 function DrawQuidScore (Canvas Canvas)
 {
-  local float fScaleFactor;
-  local int nGryffIconX;
-  local int nGryffIconY;
-  local int nOpponIconX;
-  local int nOpponIconY;
-  local int nMidX;
-  local int nMidY;
-  local Color colorOffWhite;
-  local Color colorBlack;
-  local Font fontSave;
-  local string strGryffScore;
-  local string strOpponentScore;
-  local float nXTextLen;
-  local float nYTextLen;
+	local float fScaleFactor;
+	local int nGryffIconX;
+	local int nGryffIconY;
+	local int nOpponIconX;
+	local int nOpponIconY;
+	local int nMidX;
+	local int nMidY;
+	local Color colorOffWhite;
+	local Color colorBlack;
+	local Font fontSave;
+	local string strGryffScore;
+	local string strOpponentScore;
+	local float nXTextLen;
+	local float nYTextLen;
+	
+	local float HScale;
+	
+	// Metallicafan212:	Do scaling
+	HScale = GetHeightScale(Canvas);
 
-  fontSave = Canvas.Font;
-  fScaleFactor = GetScaleFactor(Canvas);
-  nGryffIconX = 520 * fScaleFactor;
-  nGryffIconY = 4 * fScaleFactor;
-  Canvas.SetPos(nGryffIconX,nGryffIconY);
-  Canvas.DrawIcon(textureGryff,fScaleFactor);
-  nOpponIconX = 578 * fScaleFactor;
-  nOpponIconY = 4 * fScaleFactor;
-  Canvas.SetPos(nOpponIconX,nOpponIconY);
-  Canvas.DrawIcon(textureOpponent,fScaleFactor);
-  nXTextLen = 0.0;
-  nYTextLen = 0.0;
-  strGryffScore = string(nGryffindorScore);
-  strOpponentScore = string(nOpponentScore);
-  colorBlack.R = 0;
-  colorBlack.G = 0;
-  colorBlack.B = 0;
-  colorOffWhite.R = 206;
-  colorOffWhite.G = 200;
-  colorOffWhite.B = 190;
-  if ( Canvas.SizeX <= 512 )
-  {
-    Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
-  } else {
-    if ( Canvas.SizeX <= 640 )
-    {
-      Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
-    } else {
-      Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
-    }
-  }
-  Canvas.TextSize(strGryffScore,nXTextLen,nYTextLen);
-  Canvas.SetPos(nGryffIconX + (45 * fScaleFactor) - nXTextLen / 2,nGryffIconY + (50 * fScaleFactor) - nYTextLen / 2);
-  Canvas.DrawShadowText(strGryffScore,colorOffWhite,colorBlack);
-  Canvas.TextSize(strOpponentScore,nXTextLen,nYTextLen);
-  Canvas.SetPos(nOpponIconX + (45 * fScaleFactor) - nXTextLen / 2,nOpponIconY + (50 * fScaleFactor) - nYTextLen / 2);
-  Canvas.DrawText(strOpponentScore,False);
-  Canvas.Font = fontSave;
+
+	fontSave = Canvas.Font;
+	fScaleFactor = GetScaleFactor(Canvas);
+	
+	nGryffIconX = 520 * fScaleFactor;
+	nGryffIconY = 4 * fScaleFactor * HScale;
+	
+	nOpponIconX = 578 * fScaleFactor;
+	nOpponIconY = 4 * fScaleFactor * HScale;
+	
+	Canvas.SetPos(nGryffIconX, nGryffIconY);
+	Canvas.DrawIcon(textureGryff, fScaleFactor * HScale);
+	
+	Canvas.SetPos(nOpponIconX, nOpponIconY);
+	Canvas.DrawIcon(textureOpponent, fScaleFactor * HScale);
+	nXTextLen = 0.0;
+	nYTextLen = 0.0;
+	strGryffScore = string(nGryffindorScore);
+	strOpponentScore = string(nOpponentScore);
+	colorBlack.R = 0;
+	colorBlack.G = 0;
+	colorBlack.B = 0;
+	colorOffWhite.R = 206;
+	colorOffWhite.G = 200;
+	colorOffWhite.B = 190;
+	if ( Canvas.SizeX <= 512 )
+	{
+		Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
+	} 
+	else 
+	{
+		if ( Canvas.SizeX <= 640 )
+		{
+			Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
+		} 
+		else 
+		{
+			Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
+		}
+	}
+	Canvas.TextSize(strGryffScore,nXTextLen,nYTextLen);
+	Canvas.SetPos(nGryffIconX + (45 * fScaleFactor) - nXTextLen / 2, (nGryffIconY + (50 * fScaleFactor) - nYTextLen / 2) * HScale);
+	Canvas.DrawShadowText(strGryffScore,colorOffWhite,colorBlack);
+	Canvas.TextSize(strOpponentScore,nXTextLen,nYTextLen);
+	Canvas.SetPos(nOpponIconX + (45 * fScaleFactor) - nXTextLen / 2, (nOpponIconY + (50 * fScaleFactor) - nYTextLen / 2) * HScale);
+	Canvas.DrawText(strOpponentScore,False);
+	Canvas.Font = fontSave;
 }
 
 function DrawTallyHousepoints (Canvas Canvas)
 {
-  local string strPoints;
-  local float fScaleFactor;
-  local int nPointsIconX;
-  local int nPointsIconY;
-  local Color colorSave;
-  local Font fontSave;
-  local float nXTextLen;
-  local float nYTextLen;
+	local string strPoints;
+	local float fScaleFactor;
+	local int nPointsIconX;
+	local int nPointsIconY;
+	local Color colorSave;
+	local Font fontSave;
+	local float nXTextLen;
+	local float nYTextLen;
+	
+	local float HScale;
+	
+	HScale = GetHeightScale(Canvas);
 
-  colorSave = Canvas.DrawColor;
-  fontSave = Canvas.Font;
-  fScaleFactor = GetScaleFactor(Canvas);
-  nPointsIconX = Canvas.SizeX / 2 - (128 / 2) * fScaleFactor;
-  nPointsIconY = 20 * fScaleFactor;
-  Canvas.SetPos(nPointsIconX,nPointsIconY);
-  Canvas.DrawIcon(textureTallyPointsIcon,fScaleFactor);
-  nXTextLen = 0.0;
-  nYTextLen = 0.0;
-  strPoints = string(siGryffHousePoints.nCount);
-  Canvas.DrawColor.R = 0;
-  Canvas.DrawColor.G = 0;
-  Canvas.DrawColor.B = 0;
-  Canvas.TextSize(strPoints,nXTextLen,nYTextLen);
-  Canvas.SetPos(nPointsIconX + 65 * fScaleFactor - (nXTextLen / 2),nPointsIconY + 87 * fScaleFactor - (nYTextLen / 2));
-  Canvas.DrawText(strPoints,False);
-  Canvas.DrawColor = colorSave;
-  Canvas.Font = fontSave;
+	colorSave = Canvas.DrawColor;
+	fontSave = Canvas.Font;
+	fScaleFactor = GetScaleFactor(Canvas);
+	nPointsIconX = Canvas.SizeX / 2 - (128 / 2) * fScaleFactor;
+	nPointsIconY = 20 * fScaleFactor * HScale;
+	Canvas.SetPos(nPointsIconX, nPointsIconY);
+	Canvas.DrawIcon(textureTallyPointsIcon, fScaleFactor * HScale);
+	nXTextLen = 0.0;
+	nYTextLen = 0.0;
+	strPoints = string(siGryffHousePoints.nCount);
+	Canvas.DrawColor.R = 0;
+	Canvas.DrawColor.G = 0;
+	Canvas.DrawColor.B = 0;
+	Canvas.TextSize(strPoints,nXTextLen,nYTextLen);
+	Canvas.SetPos(nPointsIconX + 65 * fScaleFactor - (nXTextLen / 2), (nPointsIconY + 87 * fScaleFactor - (nYTextLen / 2)) * HScale);
+	Canvas.DrawText(strPoints,False);
+	Canvas.DrawColor = colorSave;
+	Canvas.Font = fontSave;
 }
 
 auto state Idle

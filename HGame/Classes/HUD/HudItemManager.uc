@@ -12,7 +12,7 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 
 function float GetScaleFactor (Canvas Canvas)
 {
-  return Canvas.SizeX / 640.0;
+	return Canvas.SizeX / 640.0;
 }
 
 defaultproperties

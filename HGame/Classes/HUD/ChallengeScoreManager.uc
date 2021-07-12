@@ -238,83 +238,105 @@ function GetScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
   Log("ERROR: states need to override GetScorePosition()");
 }
 
+function float GetHeightScale(Canvas C)
+{
+	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
+}
+
 function GetInProgressScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
 {
-  local float fScaleFactor;
+	local float fScaleFactor;
 
-  fScaleFactor = GetScaleFactor(Canvas);
-  nIconX = Canvas.SizeX / 2 - (128 / 2 * fScaleFactor);
-  nIconY = 4 * fScaleFactor;
-  return;
+	fScaleFactor = GetScaleFactor(Canvas);
+	nIconX 		= Canvas.SizeX / 2 - (128 / 2 * fScaleFactor);
+	nIconY 		= 4 * fScaleFactor * GetHeightScale(Canvas);
+	return;
 }
 
 function GetTallyScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
 {
-  local float fScaleFactor;
+	local float fScaleFactor;
 
-  fScaleFactor = GetScaleFactor(Canvas);
-  nIconX = Canvas.SizeX / 2 - (128 / 2 * fScaleFactor);
-  nIconY = 2 * fScaleFactor;
-  return;
+	fScaleFactor 	= GetScaleFactor(Canvas);
+	nIconX 			= Canvas.SizeX / 2 - (128 / 2 * fScaleFactor);
+	nIconY 			= 2 * fScaleFactor * GetHeightScale(Canvas);
 }
 
 function GetCurrScoreTextXY (out int nMidX, out int nMidY)
 {
-  Log("ERROR: states need to override GetCurrScoreTextXY()");
+	Log("ERROR: states need to override GetCurrScoreTextXY()");
 }
 
 function GetHighScoreTextXY (out int nMidX, out int nMidY)
 {
-  Log("ERROR: states need to override GetCurrScoreTextXY()");
+	Log("ERROR: states need to override GetCurrScoreTextXY()");
 }
 
 function Texture GetScoreTexture ()
 {
-  Log("ERROR: states need to override GetScoreTexture()");
+	Log("ERROR: states need to override GetScoreTexture()");
 }
 
 function DrawScore (Canvas Canvas, bool bMenuMode)
 {
-  local float fScaleFactor;
-  local int nIconX;
-  local int nIconY;
-  local int nMidX;
-  local int nMidY;
-  local Color colorSave;
-  local Font fontSave;
-  local string strCurrScore;
-  local string strPrevHighScore;
-  local float nXTextLen;
-  local float nYTextLen;
+	local float fScaleFactor;
+	local int nIconX;
+	local int nIconY;
+	local int nMidX;
+	local int nMidY;
+	local Color colorSave;
+	local Font fontSave;
+	local string strCurrScore;
+	local string strPrevHighScore;
+	local float nXTextLen;
+	local float nYTextLen;
+	
+	local float HScale;
+	
+	local float Offset;
+	
+	HScale = GetHeightScale(Canvas);
+	
+	// Metallicafan212:	This offset is to recenter the icon
+	Offset = 256 - (256 * HScale);
 
-  if ( bMenuMode )
-  {
-    return;
-  }
-  fScaleFactor = GetScaleFactor(Canvas);
-  GetScorePosition(Canvas,nIconX,nIconY);
-  Canvas.SetPos(nIconX,nIconY);
-  Canvas.DrawIcon(GetScoreTexture(),fScaleFactor);
-  nXTextLen = 0.0;
-  nYTextLen = 0.0;
-  colorSave = Canvas.DrawColor;
-  fontSave = Canvas.Font;
-  strCurrScore = string(nCurrScore);
-  strPrevHighScore = string(nHighScore);
-  Canvas.DrawColor.R = 0;
-  Canvas.DrawColor.G = 0;
-  Canvas.DrawColor.B = 0;
-  Canvas.Font = GetScoreFont(Canvas);
-  Canvas.TextSize(strCurrScore,nXTextLen,nYTextLen);
-  GetCurrScoreTextXY(nMidX,nMidY);
-  Canvas.SetPos(nIconX + (nMidX * fScaleFactor) - nXTextLen / 2,nIconY + (nMidY * fScaleFactor) - nYTextLen / 2);
-  Canvas.DrawText(strCurrScore,False);
-  Canvas.TextSize(strPrevHighScore,nXTextLen,nYTextLen);
-  GetHighScoreTextXY(nMidX,nMidY);
-  Canvas.SetPos(nIconX + (nMidX * fScaleFactor) - nXTextLen / 2,nIconY + (nMidY * fScaleFactor) - nYTextLen / 2);
-  Canvas.DrawText(strPrevHighScore,False);
-  Canvas.DrawColor = colorSave;
-  Canvas.Font = fontSave;
+	if ( bMenuMode )
+	{
+		return;
+	}
+  
+	fScaleFactor = GetScaleFactor(Canvas) * HScale;
+	
+	GetScorePosition(Canvas, nIconX, nIconY);
+	
+	// Metallicafan212:	Offset it
+	nIconX += Offset;
+	
+	Canvas.SetPos(nIconX, nIconY);
+	Canvas.DrawIcon(GetScoreTexture(), fScaleFactor);
+	
+	nXTextLen = 0.0;
+	nYTextLen = 0.0;
+	
+	colorSave 			= Canvas.DrawColor;
+	fontSave 			= Canvas.Font;
+	strCurrScore 		= string(nCurrScore);
+	strPrevHighScore 	= string(nHighScore);
+	Canvas.DrawColor.R 	= 0;
+	Canvas.DrawColor.G 	= 0;
+	Canvas.DrawColor.B 	= 0;
+	Canvas.Font 		= GetScoreFont(Canvas);
+	Canvas.TextSize(strCurrScore,nXTextLen,nYTextLen);
+	
+	GetCurrScoreTextXY(nMidX,nMidY);
+	Canvas.SetPos(nIconX + (nMidX * fScaleFactor) - nXTextLen / 2,nIconY + (nMidY * fScaleFactor) - nYTextLen / 2);
+	Canvas.DrawText(strCurrScore,False);
+	Canvas.TextSize(strPrevHighScore,nXTextLen,nYTextLen);
+	GetHighScoreTextXY(nMidX,nMidY);
+	Canvas.SetPos(nIconX + (nMidX * fScaleFactor) - nXTextLen / 2,nIconY + (nMidY * fScaleFactor) - nYTextLen / 2);
+	Canvas.DrawText(strPrevHighScore,False);
+	Canvas.DrawColor = colorSave;
+	Canvas.Font = fontSave;
 }
 
 function Font GetScoreFont (Canvas Canvas)
@@ -401,40 +423,40 @@ state ChallengeInProgress
     //}
   }
   
-  function PickedUpStar ()
-  {
-    nCurrScore += STAR_VALUE;
-  }
+	function PickedUpStar ()
+	{
+		nCurrScore += STAR_VALUE;
+	}
   
-  function GetScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
-  {
-    GetInProgressScorePosition(Canvas,nIconX,nIconY);
-  }
+	function GetScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
+	{
+		GetInProgressScorePosition(Canvas,nIconX,nIconY);
+	}
   
-  function Texture GetScoreTexture ()
-  {
-    return textureScoreIcon;
-  }
+	function Texture GetScoreTexture ()
+	{
+		return textureScoreIcon;
+	}
   
-  function GetCurrScoreTextXY (out int nMidX, out int nMidY)
-  {
-    nMidX = 32;
-    nMidY = 65;
-  }
+	function GetCurrScoreTextXY (out int nMidX, out int nMidY)
+	{
+		nMidX = 32;
+		nMidY = 65;
+	}
   
-  function GetHighScoreTextXY (out int nMidX, out int nMidY)
-  {
-    nMidX = 93;
-    nMidY = 65;
-  }
+	function GetHighScoreTextXY (out int nMidX, out int nMidY)
+	{
+		nMidX = 93;
+		nMidY = 65;
+	}
   
-  function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
-  {
-    if (  !bFullCutMode )
-    {
-      DrawScore(Canvas,bMenuMode);
-    }
-  }
+	function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
+	{
+		if (  !bFullCutMode )
+		{
+			DrawScore(Canvas,bMenuMode);
+		}
+	}
   
   function BeginState ()
   {
@@ -446,40 +468,46 @@ state ChallengeInProgress
 
 state Tally
 {
-  function CutBypass ()
-  {
-    Super.CutBypass();
-    bFastForwardTally = True;
-    if ( nHighScore < nCurrScore )
-    {
-      nHighScore = nCurrScore;
-    }
-    GotoState('PostTallyHoldPoints');
-  }
+	function CutBypass ()
+	{
+		Super.CutBypass();
+		bFastForwardTally = True;
+		
+		if ( nHighScore < nCurrScore )
+		{
+			nHighScore = nCurrScore;
+		}
+		GotoState('PostTallyHoldPoints');
+	}
   
-  function Tick (float fDeltaTime)
-  {
-    if ( fTickDelta > 0.0 )
-    {
-      if ( nHighScore < nCurrScore )
-      {
-        nHighScore += nTallyPointsPerTick;
-        if ( nHighScore > nCurrScore )
-        {
-          nHighScore = nCurrScore;
-        }
-      } else {
-        GotoState('PostTallyHold');
-      }
-    } else {
-      fTickDelta = fDeltaTime;
-    }
-  }
+	function Tick (float fDeltaTime)
+	{
+		if ( fTickDelta > 0.0 )
+		{
+			if ( nHighScore < nCurrScore )
+			{
+				nHighScore += nTallyPointsPerTick;
+				
+				if ( nHighScore > nCurrScore )
+				{
+					nHighScore = nCurrScore;
+				}
+			} 
+			else 
+			{
+				GotoState('PostTallyHold');
+			}
+		} 
+		else 
+		{
+			fTickDelta = fDeltaTime;
+		}
+	}
   
-  function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
-  {
-    DrawScore(Canvas,bMenuMode);
-  }
+	function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
+	{
+		DrawScore(Canvas,bMenuMode);
+	}
   
   function GetScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
   {
@@ -634,45 +662,52 @@ state PostTallyHoldPoints
     }
   }
   
-  function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
-  {
-    local string strPoints;
-    local string strBeans;
-    local string strStars;
-    local int nNumBeans;
-    local int nNumStars;
-    local float fScaleFactor;
-    local int nPointsIconX;
-    local int nPointsIconY;
-    local int nBeansIconX;
-    local int nBeansIconY;
-    local int nStarIconX;
-    local int nStarIconY;
-    local Color colorSave;
-    local Font fontSave;
-    local float nXTextLen;
-    local float nYTextLen;
-    local StatusItem siHudItem;
+	function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
+	{
+		local string strPoints;
+		local string strBeans;
+		local string strStars;
+		local int nNumBeans;
+		local int nNumStars;
+		local float fScaleFactor;
+		local int nPointsIconX;
+		local int nPointsIconY;
+		local int nBeansIconX;
+		local int nBeansIconY;
+		local int nStarIconX;
+		local int nStarIconY;
+		local Color colorSave;
+		local Font fontSave;
+		local float nXTextLen;
+		local float nYTextLen;
+		local StatusItem siHudItem;
+		
+		local float HScale, Offset;
   
-    if ( bMenuMode )
-    {
-      return;
-    }
-    fScaleFactor = GetScaleFactor(Canvas);
-    nPointsIconX = Canvas.SizeX / 2 - (siGryffPts.GetHudIconUSize() / 2) * fScaleFactor;
-	nPointsIconY = 2 * fScaleFactor;
-	Canvas.SetPos(nPointsIconX,nPointsIconY);
-    Canvas.DrawIcon(siGryffPts.textureHudIcon,fScaleFactor);
-    siGryffPts.DrawSpecifiedCount(Canvas,nPointsIconX,nPointsIconY,fScaleFactor,nAwardGryffPoints);
-    nBeansIconX = nPointsIconX - (siJellybeans.GetHudIconUSize() + 30) * fScaleFactor;
-	nBeansIconY = nPointsIconY + (siGryffPts.GetHudIconVSize() / 2) * fScaleFactor - (siJellybeans.GetHudIconVSize() / 2) * fScaleFactor;
-	Canvas.SetPos(nStarIconX,nStarIconY);
-    siJellybeans.DrawItem(Canvas,nBeansIconX,nBeansIconY,fScaleFactor);
-    nStarIconX = nPointsIconX + (siGryffPts.GetHudIconUSize() + 30) * fScaleFactor;
-	nStarIconY = nPointsIconY + (siGryffPts.GetHudIconVSize() / 2) * fScaleFactor - (siStars.GetHudIconVSize() / 2) * fScaleFactor;
-	Canvas.SetPos(nStarIconX,nStarIconY);
-    siStars.DrawItem(Canvas,nStarIconX,nStarIconY,fScaleFactor);
-  }
+		if ( bMenuMode )
+		{
+			return;
+		}
+			
+		// Metallicafan212:	Get the scale
+		HScale = GetHeightScale(Canvas);
+		
+	
+		fScaleFactor = GetScaleFactor(Canvas) * HScale;
+		nPointsIconX = Canvas.SizeX / 2 - (siGryffPts.GetHudIconUSize() / 2) * fScaleFactor;
+		nPointsIconY = 2 * fScaleFactor;
+		Canvas.SetPos(nPointsIconX,nPointsIconY);
+		Canvas.DrawIcon(siGryffPts.textureHudIcon,fScaleFactor);
+		siGryffPts.DrawSpecifiedCount(Canvas,nPointsIconX,nPointsIconY,fScaleFactor,nAwardGryffPoints);
+		nBeansIconX = nPointsIconX - (siJellybeans.GetHudIconUSize() + 30) * fScaleFactor;
+		nBeansIconY = nPointsIconY + (siGryffPts.GetHudIconVSize() / 2) * fScaleFactor - (siJellybeans.GetHudIconVSize() / 2) * fScaleFactor;
+		Canvas.SetPos(nStarIconX,nStarIconY);
+		siJellybeans.DrawItem(Canvas,nBeansIconX,nBeansIconY,fScaleFactor);
+		nStarIconX = nPointsIconX + (siGryffPts.GetHudIconUSize() + 30) * fScaleFactor;
+		nStarIconY = nPointsIconY + (siGryffPts.GetHudIconVSize() / 2) * fScaleFactor - (siStars.GetHudIconVSize() / 2) * fScaleFactor;
+		Canvas.SetPos(nStarIconX,nStarIconY);
+		siStars.DrawItem(Canvas,nStarIconX,nStarIconY,fScaleFactor);
+	}
   
   function EndState ()
   {

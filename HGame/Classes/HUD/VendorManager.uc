@@ -84,6 +84,9 @@ var int nMinusBeansPerTick;
 var string strYes;
 var string strNo;
 
+// Metallicafan212:	So we can quickly update the hover shit...
+var float HScale;
+
 function SetVendor (Characters V)
 {
 	Vendor 		= V;
@@ -560,6 +563,11 @@ function RenderHud (Canvas canvas, bool bMenuMode, bool bFullCutMode, bool bHalf
 {
 }
 
+function float GetHeightScale(Canvas C)
+{
+	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
+}
+
 function DrawVendorBar (Canvas canvas)
 {
 	local Texture textureYesButton;
@@ -575,6 +583,13 @@ function DrawVendorBar (Canvas canvas)
 	local StatusItem siJellybeans;
 	local Color colorText;
 	local Color colorTextShadow;
+	
+	local float Offset;
+	
+	HScale = GetHeightScale(Canvas);
+	
+	// Metallicafan212:	This needs to be offset to be in the center again
+	Offset = (256 - (256 * HScale)) * 2.0;
 
 	VendorCanvas = Canvas;
 	fontSave = Canvas.Font;
@@ -595,44 +610,57 @@ function DrawVendorBar (Canvas canvas)
 		textureNoButton = textureVendorButtonNormal;
     }
 	
-	fBarX = GetVendorBarX(Canvas);
-	fBarY = GetVendorBarY(Canvas);
-	canvas.SetPos(fBarX,fBarY);
-  
-	//if(textureVendorBarRight != none)
-	//{
-	//	log(textureVendorBarRight.name);
-	//}
-  
-	canvas.DrawIcon(textureVendorBarLeft,fScaleFactor);
-	canvas.SetPos(fBarX + (256 * fScaleFactor),fBarY);
-	canvas.DrawIcon(textureVendorBarRight,fScaleFactor); 
-	canvas.SetPos(fBarX + (fVENDORBAR_PURCHASE_ITEM_X * fScaleFactor),fBarY + (fVENDORBAR_PURCHASE_ITEM_Y * fScaleFactor));
-	canvas.DrawIcon(textureItemToSell,fScaleFactor);
-	canvas.SetPos(fBarX + (fVENDORBAR_YESBUTTON_X * fScaleFactor),fBarY + (fVENDORBAR_YESBUTTON_Y * fScaleFactor));
-	canvas.DrawIcon(textureYesButton,fScaleFactor); 
-	canvas.SetPos(fBarX + (fVENDORBAR_NOBUTTON_X * fScaleFactor),fBarY + (fVENDORBAR_NOBUTTON_Y * fScaleFactor));
-	canvas.DrawIcon(textureNoButton,fScaleFactor);
-	siJellybeans = harry(Level.PlayerHarryActor).managerStatus.GetStatusItem(Class'StatusGroupStars',Class'StatusItemStars');
-	Canvas.Font = siJellybeans.GetCountFont(Canvas);
-	colorText = siJellybeans.GetCountColor();
+	fBarX = GetVendorBarX(Canvas) + Offset;
+	fBarY = GetVendorBarY(Canvas) * HScale;
+	
+	// Metallicafan212:	Left side
+	canvas.SetPos(fBarX, fBarY);	
+	canvas.DrawIcon(textureVendorBarLeft, fScaleFactor * HScale);
+	
+	// Metallicafan212: Right side, but we need to shift over
+	canvas.SetPos(fBarX + (256 * fScaleFactor * HScale), fBarY);
+	canvas.DrawIcon(textureVendorBarRight, fScaleFactor * HScale); 
+	
+	// Metallicafan212:	What they're selling
+	canvas.SetPos(fBarX + (fVENDORBAR_PURCHASE_ITEM_X * fScaleFactor) - offset, fBarY + (fVENDORBAR_PURCHASE_ITEM_Y * fScaleFactor * HScale));
+	canvas.DrawIcon(textureItemToSell, fScaleFactor * HScale);
+	
+	// Metallicafan212:	Yes button
+	canvas.SetPos(fBarX + (fVENDORBAR_YESBUTTON_X * fScaleFactor * HScale), fBarY + (fVENDORBAR_YESBUTTON_Y * fScaleFactor * HScale));
+	canvas.DrawIcon(textureYesButton, fScaleFactor * HScale); 
+	
+	// Metallicafan212:	No button
+	canvas.SetPos(fBarX + (fVENDORBAR_NOBUTTON_X * fScaleFactor * HScale), fBarY + (fVENDORBAR_NOBUTTON_Y * fScaleFactor * HScale));
+	canvas.DrawIcon(textureNoButton, fScaleFactor * HScale);
+	
+	// Metallicafan212:	Bean count
+	siJellybeans 	= harry(Level.PlayerHarryActor).managerStatus.GetStatusItem(Class'StatusGroupStars',Class'StatusItemStars');
+	Canvas.Font 	= siJellybeans.GetCountFont(Canvas);
+	colorText 		= siJellybeans.GetCountColor();
 	colorTextShadow = siJellybeans.GetCountColor(True);
-	Canvas.TextSize(strYes,fXTextLen,fYTextLen);
-	Canvas.SetPos(fBarX + (fVENDORBAR_YESBUTTON_X * fScaleFactor) + (fVENDORBAR_BUTTON_TEXT_X * fScaleFactor) - (fXTextLen / 2),fBarY + (fVENDORBAR_YESBUTTON_Y * fScaleFactor) + (fVENDORBAR_BUTTON_TEXT_Y * fScaleFactor) - (fYTextLen / 2));
+	
+	// Metallicafan212:	Yes line
+	Canvas.TextSize(strYes, fXTextLen, fYTextLen);
+	Canvas.SetPos(fBarX + (fVENDORBAR_YESBUTTON_X * fScaleFactor * HScale) + (fVENDORBAR_BUTTON_TEXT_X * fScaleFactor * HScale) - (fXTextLen / 2), fBarY + (fVENDORBAR_YESBUTTON_Y * fScaleFactor * HScale) + (fVENDORBAR_BUTTON_TEXT_Y * fScaleFactor * HScale) - (fYTextLen / 2));
 	Canvas.DrawShadowText(strYes,colorText,colorTextShadow);
+	
+	// Metallicafan212:	No text
 	Canvas.TextSize(strNo,fXTextLen,fYTextLen);
-	Canvas.SetPos(fBarX + (fVENDORBAR_NOBUTTON_X * fScaleFactor) + (fVENDORBAR_BUTTON_TEXT_X * fScaleFactor) - (fXTextLen / 2),fBarY + (fVENDORBAR_NOBUTTON_Y * fScaleFactor) + (fVENDORBAR_BUTTON_TEXT_Y * fScaleFactor) - (fYTextLen / 2));
+	Canvas.SetPos(fBarX + (fVENDORBAR_NOBUTTON_X * fScaleFactor * HScale) + (fVENDORBAR_BUTTON_TEXT_X * fScaleFactor * HScale) - (fXTextLen / 2), fBarY + (fVENDORBAR_NOBUTTON_Y * fScaleFactor * HScale) + (fVENDORBAR_BUTTON_TEXT_Y * fScaleFactor * HScale) - (fYTextLen / 2));
 	Canvas.DrawShadowText(strNo,colorText,colorTextShadow);
+	
+	// Metallicafan212:	Price text
 	strCurrPrice = string(nCurrPrice);
-	Canvas.TextSize(strCurrPrice,fXTextLen,fYTextLen);
-	Canvas.SetPos(fBarX + (fVENDORBAR_PRICE_X * fScaleFactor) - fXTextLen / 2,fBarY + (fVENDORBAR_PRICE_Y * fScaleFactor) - fYTextLen / 2);
-	Canvas.DrawShadowText(strCurrPrice,colorText,colorTextShadow);
+	Canvas.TextSize(strCurrPrice, fXTextLen, fYTextLen);
+	Canvas.SetPos(fBarX + (fVENDORBAR_PRICE_X * fScaleFactor * HScale) - fXTextLen / 2, fBarY + (fVENDORBAR_PRICE_Y * fScaleFactor * HScale) - fYTextLen / 2);
+	Canvas.DrawShadowText(strCurrPrice, colorText, colorTextShadow);
+	
 	Canvas.Font = fontSave;
 }
 
 function float GetVendorBarX (Canvas canvas)
 {
-	return (canvas.SizeX / 2.0) - (canvas.GetHudScaleFactor() * (fVENDORBAR_W / 2.0));
+	return ((canvas.SizeX / 2.0) - (canvas.GetHudScaleFactor() * (fVENDORBAR_W / 2.0)));
 }
 
 function float GetVendorBarY (Canvas canvas)
@@ -642,12 +670,13 @@ function float GetVendorBarY (Canvas canvas)
 
 function bool IsMouseOverVendorYes ()
 {
-	return (IsMouseOverVendorButton(fVENDORBAR_YESBUTTON_X,fVENDORBAR_YESBUTTON_Y,fVENDORBAR_BUTTON_W,fVENDORBAR_BUTTON_H));
+	
+	return (IsMouseOverVendorButton(fVENDORBAR_YESBUTTON_X * HScale, fVENDORBAR_YESBUTTON_Y * HScale, fVENDORBAR_BUTTON_W, fVENDORBAR_BUTTON_H));
 }
 
 function bool IsMouseOverVendorNo ()
-{
-	return (IsMouseOverVendorButton(fVENDORBAR_NOBUTTON_X,fVENDORBAR_NOBUTTON_Y,fVENDORBAR_BUTTON_W,fVENDORBAR_BUTTON_H));
+{	
+	return (IsMouseOverVendorButton(fVENDORBAR_NOBUTTON_X * HScale, fVENDORBAR_NOBUTTON_Y * HScale, fVENDORBAR_BUTTON_W, fVENDORBAR_BUTTON_H));
 }
 
 function bool IsMouseOverVendorButton (int nLeft, int nTop, int nWidth, int nHeight)
@@ -656,17 +685,20 @@ function bool IsMouseOverVendorButton (int nLeft, int nTop, int nWidth, int nHei
 	local int nVendorMouseX;
 	local int nVendorMouseY;
 	local float fScaleFactor;
-
-	hpCon = HPConsole(Level.PlayerHarryActor.Player.Console);
-	fScaleFactor = VendorCanvas.GetHudScaleFactor();
-	nVendorMouseX = hpCon.MouseX * hpCon.Root.GUIScale;
-	nVendorMouseY = hpCon.MouseY * hpCon.Root.HGUIScale;//hpCon.Root.GUIScale;
-	nLeft *= fScaleFactor;
-	nTop *= fScaleFactor;
-	nWidth *= fScaleFactor;
+	local float Offset;
+	
+	Offset = 256 - (256 * HScale);
+	
+	hpCon 			= HPConsole(Level.PlayerHarryActor.Player.Console);
+	fScaleFactor 	= VendorCanvas.GetHudScaleFactor();
+	nVendorMouseX 	= hpCon.MouseX * hpCon.Root.GUIScale;
+	nVendorMouseY 	= hpCon.MouseY * hpCon.Root.HGUIScale;//hpCon.Root.GUIScale;
+	nLeft 	*= fScaleFactor;
+	nTop 	*= fScaleFactor;
+	nWidth 	*= fScaleFactor;
 	nHeight *= fScaleFactor;
-	nLeft += GetVendorBarX(VendorCanvas);
-	nTop += GetVendorBarY(VendorCanvas);
+	nLeft 	+= GetVendorBarX(VendorCanvas) + Offset;
+	nTop 	+= GetVendorBarY(VendorCanvas) * HScale;
 	if( (nVendorMouseX >= nLeft) && (nVendorMouseX <= (nLeft + nWidth)) )
 	{
 		return ((nVendorMouseY >= nTop) && (nVendorMouseY <= (nTop + nHeight)));

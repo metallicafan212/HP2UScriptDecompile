@@ -81,6 +81,9 @@ var int nCurrPage;
 var int HarryLocX;
 var int HarryLocY;
 
+var float WHarryLocX;
+var float WHarryLocY;
+
 //map shape texture vars -AdamJD
 var Texture MapCircleImage;
 var Texture MapDiamondImage;
@@ -126,432 +129,456 @@ var Texture Map3BackgroundImage6;
 
 function Created ()
 {
-  local int I;
+	local int I;
   
-  /*
-  MapButtonIdx[0] = TotalNumMapButtons;
-  AddMapButton(97,81,42,72,Texture'DiamondTexture',"17");
-  AddMapButton(91,299,42,72,Texture'DiamondTexture',"2");
-  AddMapButton(413,350,46,42,Texture'SquareGreenTexture',"19");
-  AddMapButton(273,209,75,34,Texture'RectangleTexture',"18");
-  AddMapButton(402,206,83,42,Texture'RightArrowTexture',"10","1");
-  NumMapButtons[0] = TotalNumMapButtons - MapButtonIdx[0];
-  MapButtonIdx[1] = TotalNumMapButtons;
-  AddMapButton(460,218,64,56,Texture'RictusempraTexture',"6");
-  AddMapButton(476,343,46,42,Texture'SquareGreenTexture',"5");
-  AddMapButton(282,295,75,34,Texture'RectangleTexture',"4");
-  AddMapButton(525,151,75,34,Texture'RectangleTexture',"7");
-  AddMapButton(508,31,66,73,Texture'SkurgeTexture',"8");
-  AddMapButton(74,224,53,52,Texture'HexTexture',"16");
-  AddMapButton(54,53,56,66,Texture'tSpongifyTexture',"1");
-  AddMapButton(267,347,42,83,Texture'DownArrowTexture',"3","3");
-  AddMapButton(298,8,42,83,Texture'UpArrowTexture',"9","2");
-  AddMapButton(122,343,83,42,Texture'LeftArrowTexture',"18","0");
-  NumMapButtons[1] = TotalNumMapButtons - MapButtonIdx[1];
-  MapButtonIdx[2] = TotalNumMapButtons;
-  AddMapButton(334,185,40,36,Texture'CircleTexture',"27");
-  AddMapButton(409,295,40,36,Texture'CircleTexture',"29");
-  AddMapButton(225,187,40,36,Texture'CircleTexture',"28");
-  AddMapButton(131,292,40,36,Texture'CircleTexture',"26");
-  AddMapButton(263,255,75,34,Texture'RectangleTexture',"9");
-  AddMapButton(485,360,75,34,Texture'RectangleTexture',"30");
-  AddMapButton(498,53,75,34,Texture'RectangleTexture',"32");
-  AddMapButton(147,33,46,42,Texture'SquareGreenTexture',"22");
-  AddMapButton(475,197,46,42,Texture'SquareGreenTexture',"31");
-  AddMapButton(70,278,42,72,Texture'DiamondTexture',"24");
-  AddMapButton(286,316,42,83,Texture'DownArrowTexture',"10","1");
-  NumMapButtons[2] = TotalNumMapButtons - MapButtonIdx[2];
-  MapButtonIdx[3] = TotalNumMapButtons;
-  AddMapButton(81,241,46,42,Texture'SquareGreenTexture',"12");
-  AddMapButton(249,171,75,34,Texture'RectangleTexture',"3");
-  AddMapButton(460,221,75,34,Texture'RectangleTexture',"15");
-  AddMapButton(97,113,49,64,Texture'DiffindoTexture',"11");
-  AddMapButton(149,336,42,72,Texture'DiamondTexture',"13");
-  AddMapButton(385,360,42,72,Texture'DiamondTexture',"14");
-  AddMapButton(288,73,42,83,Texture'UpArrowTexture',"10","1");
-  NumMapButtons[3] = TotalNumMapButtons - MapButtonIdx[3];
-  HarryLocationButton = HGameButton(CreateWindow(Class'HGameButton',0.0,0.0,64.0,64.0));
-  HarryLocationButton.Register(self);
-  HarryLocationButton.UpTexture = Texture'HarryLocationTexture';
-  HarryLocationButton.DownTexture = Texture'HarryLocationTexture';
-  HarryLocationButton.OverTexture = Texture'HarryLocationTexture';
-  HarryLocationButton.ToolTipString = GetLocalFEString("Maps_0033");
-  HarryLocationButton.bDisabled = True;
-  HarryLocationButton.HideWindow();
-  CreateBackPageButton();
-  StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea',16.0,WinHeight - 26,500.0,26.0));
-  StatusBarTextWindow.Clear();
-  StatusBarTextWindow.AddText("");
-  StatusBarTextWindow.Font = 4;
-  StatusBarTextWindow.WinTop = GetStatusY();
-  */
-  
-  //add the map shape textures -AdamJD
-  //
-  MapButtonIdx[0] = TotalNumMapButtons;
-  AddMapButton(97,81,42,72,MapDiamondImage,"17");
-  AddMapButton(91,299,42,72,MapDiamondImage,"2");
-  AddMapButton(413,350,46,42,MapSquareImage,"19");
-  AddMapButton(273,209,75,34,MapRectangleImage,"18");
-  AddMapButton(402,206,83,42,MapRightArrowImage,"10","1");
-  NumMapButtons[0] = TotalNumMapButtons - MapButtonIdx[0];
-  MapButtonIdx[1] = TotalNumMapButtons;
-  AddMapButton(460,218,64,56,MapRictusempraImage,"6");
-  AddMapButton(476,343,46,42,MapSquareImage,"5");
-  AddMapButton(282,295,75,34,MapRectangleImage,"4");
-  AddMapButton(525,151,75,34,MapRectangleImage,"7");
-  AddMapButton(508,31,66,73,MapSkurgeImage,"8");
-  AddMapButton(74,224,53,52,MapHexImage,"16");
-  AddMapButton(54,53,56,66,MapSpongifyImage,"1");
-  AddMapButton(267,347,42,83,MapDownArrowImage,"3","3");
-  AddMapButton(298,8,42,83,MapUpArrowImage,"9","2");
-  AddMapButton(122,343,83,42,MapLeftArrowImage,"18","0");
-  NumMapButtons[1] = TotalNumMapButtons - MapButtonIdx[1];
-  MapButtonIdx[2] = TotalNumMapButtons;
-  AddMapButton(334,185,40,36,MapCircleImage,"27");
-  AddMapButton(409,295,40,36,MapCircleImage,"29");
-  AddMapButton(225,187,40,36,MapCircleImage,"28");
-  AddMapButton(131,292,40,36,MapCircleImage,"26");
-  AddMapButton(263,255,75,34,MapRectangleImage,"9");
-  AddMapButton(485,360,75,34,MapRectangleImage,"30");
-  AddMapButton(498,53,75,34,MapRectangleImage,"32");
-  AddMapButton(147,33,46,42,MapSquareImage,"22");
-  AddMapButton(475,197,46,42,MapSquareImage,"31");
-  AddMapButton(70,278,42,72,MapDiamondImage,"24");
-  AddMapButton(286,316,42,83,MapDownArrowImage,"10","1");
-  NumMapButtons[2] = TotalNumMapButtons - MapButtonIdx[2];
-  MapButtonIdx[3] = TotalNumMapButtons;
-  AddMapButton(81,241,46,42,MapSquareImage,"12");
-  AddMapButton(249,171,75,34,MapRectangleImage,"3");
-  AddMapButton(460,221,75,34,MapRectangleImage,"15");
-  AddMapButton(97,113,49,64,MapDiffindoImage,"11");
-  AddMapButton(149,336,42,72,MapDiamondImage,"13");
-  AddMapButton(385,360,42,72,MapDiamondImage,"14");
-  AddMapButton(288,73,42,83,MapUpArrowImage,"10","1");
-  NumMapButtons[3] = TotalNumMapButtons - MapButtonIdx[3];
-  HarryLocationButton = HGameButton(CreateWindow(Class'HGameButton',0.0,0.0,64.0,64.0));
-  HarryLocationButton.Register(self);
-  HarryLocationButton.UpTexture = MapHarryLocationImage;
-  HarryLocationButton.DownTexture = MapHarryLocationImage;
-  HarryLocationButton.OverTexture = MapHarryLocationImage;
-  HarryLocationButton.ToolTipString = GetLocalFEString("Maps_0033");
-  HarryLocationButton.bDisabled = True;
-  HarryLocationButton.HideWindow();
-  CreateBackPageButton();
-  StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea',16.0,WinHeight - 26,500.0,26.0));
-  StatusBarTextWindow.Clear();
-  StatusBarTextWindow.AddText("");
-  StatusBarTextWindow.Font = 4;
-  StatusBarTextWindow.WinTop = GetStatusY();
+	//add the map shape textures -AdamJD
+	//
+	MapButtonIdx[0] = TotalNumMapButtons;
+	AddMapButton(97,81,42,72,MapDiamondImage,"17");
+	AddMapButton(91,299,42,72,MapDiamondImage,"2");
+	AddMapButton(413,350,46,42,MapSquareImage,"19");
+	AddMapButton(273,209,75,34,MapRectangleImage,"18");
+	AddMapButton(402,206,83,42,MapRightArrowImage,"10","1");
+	
+	NumMapButtons[0] = TotalNumMapButtons - MapButtonIdx[0];
+	MapButtonIdx[1] = TotalNumMapButtons;
+	AddMapButton(460,218,64,56,MapRictusempraImage,"6");
+	AddMapButton(476,343,46,42,MapSquareImage,"5");
+	AddMapButton(282,295,75,34,MapRectangleImage,"4");
+	AddMapButton(525,151,75,34,MapRectangleImage,"7");
+	AddMapButton(508,31,66,73,MapSkurgeImage,"8");
+	AddMapButton(74,224,53,52,MapHexImage,"16");
+	AddMapButton(54,53,56,66,MapSpongifyImage,"1");
+	AddMapButton(267,347,42,83,MapDownArrowImage,"3","3");
+	AddMapButton(298,8,42,83,MapUpArrowImage,"9","2");
+	AddMapButton(122,343,83,42,MapLeftArrowImage,"18","0");
+	
+	NumMapButtons[1] = TotalNumMapButtons - MapButtonIdx[1];
+	MapButtonIdx[2] = TotalNumMapButtons;
+	AddMapButton(334,185,40,36,MapCircleImage,"27");
+	AddMapButton(409,295,40,36,MapCircleImage,"29");
+	AddMapButton(225,187,40,36,MapCircleImage,"28");
+	AddMapButton(131,292,40,36,MapCircleImage,"26");
+	AddMapButton(263,255,75,34,MapRectangleImage,"9");
+	AddMapButton(485,360,75,34,MapRectangleImage,"30");
+	AddMapButton(498,53,75,34,MapRectangleImage,"32");
+	AddMapButton(147,33,46,42,MapSquareImage,"22");
+	AddMapButton(475,197,46,42,MapSquareImage,"31");
+	AddMapButton(70,278,42,72,MapDiamondImage,"24");
+	AddMapButton(286,316,42,83,MapDownArrowImage,"10","1");
+	
+	NumMapButtons[2] = TotalNumMapButtons - MapButtonIdx[2];
+	MapButtonIdx[3] = TotalNumMapButtons;
+	AddMapButton(81,241,46,42,MapSquareImage,"12");
+	AddMapButton(249,171,75,34,MapRectangleImage,"3");
+	AddMapButton(460,221,75,34,MapRectangleImage,"15");
+	AddMapButton(97,113,49,64,MapDiffindoImage,"11");
+	AddMapButton(149,336,42,72,MapDiamondImage,"13");
+	AddMapButton(385,360,42,72,MapDiamondImage,"14");
+	AddMapButton(288,73,42,83,MapUpArrowImage,"10","1");
+	NumMapButtons[3] = TotalNumMapButtons - MapButtonIdx[3];
+	
+	HarryLocationButton = HGameButton(CreateWindow(Class'HGameButton',0.0,0.0,64.0,64.0));
+	HarryLocationButton.Register(self);
+	HarryLocationButton.UpTexture = MapHarryLocationImage;
+	HarryLocationButton.DownTexture = MapHarryLocationImage;
+	HarryLocationButton.OverTexture = MapHarryLocationImage;
+	HarryLocationButton.ToolTipString = GetLocalFEString("Maps_0033");
+	HarryLocationButton.bDisabled = True;
+	HarryLocationButton.HideWindow();
+	
+	CreateBackPageButton();
+	
+	StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea',16.0,WinHeight - 26,500.0,26.0));
+	StatusBarTextWindow.Clear();
+	StatusBarTextWindow.AddText("");
+	StatusBarTextWindow.Font = 4;
+	StatusBarTextWindow.WinTop = GetStatusY();
 }
 
 function AddMapButton (int X, int Y, int W, int H, Texture t, string ButtonText, optional string MapLink)
 {
-  if ( TotalNumMapButtons >= 40 )
-  {
-    TotalNumMapButtons = 40 - 1;
-  }
-  Buttons[TotalNumMapButtons].MapButton = HGameButton(CreateWindow(Class'HGameButton',X,Y,W,H));
-  Buttons[TotalNumMapButtons].MapButton.DownTexture = t;
-  Buttons[TotalNumMapButtons].MapButton.OverTexture = t;
-  Buttons[TotalNumMapButtons].MapButton.Register(self);
-  // if ( Len(ButtonText) < 4 )
-  while ( Len(ButtonText) < 4 )
-  {
-    ButtonText = "0" $ ButtonText;
-    // goto JL00A9;
-  }
-  ButtonText = "Maps_" $ ButtonText;
-  Buttons[TotalNumMapButtons].MapButton.ToolTipString = GetLocalFEString(ButtonText);
-  if ( MapLink != "" )
-  {
-    Buttons[TotalNumMapButtons].MapLink = int(MapLink);
-  } else {
-    Buttons[TotalNumMapButtons].MapLink = -1;
-    Buttons[TotalNumMapButtons].MapButton.DownSound = None;
-  }
-  if ( ButtonText != "" )
-  {
-    Buttons[TotalNumMapButtons].ButtonText = ButtonText;
-  } else {
-    Buttons[TotalNumMapButtons].ButtonText = "NO BUTTON TEXT";
-  }
-  TotalNumMapButtons++;
+	local float HScale;
+	local float Offset;
+	local float InX;
+	
+	HScale = GetHeightScale();
+	
+	Offset = 256.0 - (256.0 * HScale);
+	
+	InX = X;
+	
+	// Metallicafan212:	Calculate the X and Y offsets
+	//if(X / 640.0 > 0.5)
+	//{
+	// Metallicafan212:	Move to the left
+	X *= HScale;
+		
+	X += Offset;
+	//}
+	//else
+	//{
+		// Metallicafan212:	Move to the right
+	//}
+	
+	if ( TotalNumMapButtons >= 40 )
+	{
+		TotalNumMapButtons = 40 - 1;
+	}
+	
+	Buttons[TotalNumMapButtons].MapButton 				= HGameButton(CreateWindow(Class'HGameButton',X,Y,W,H));
+	Buttons[TotalNumMapButtons].MapButton.OrigX 		= InX;
+	Buttons[TotalNumMapButtons].MapButton.DownTexture 	= t;
+	Buttons[TotalNumMapButtons].MapButton.OverTexture 	= t;
+	Buttons[TotalNumMapButtons].MapButton.Register(self);
+
+	while ( Len(ButtonText) < 4 )
+	{
+		ButtonText = "0" $ ButtonText;
+	}
+	
+	ButtonText = "Maps_" $ ButtonText;
+	Buttons[TotalNumMapButtons].MapButton.ToolTipString = GetLocalFEString(ButtonText);
+	
+	if ( MapLink != "" )
+	{
+		Buttons[TotalNumMapButtons].MapLink = int(MapLink);
+	} 
+	else 
+	{
+		Buttons[TotalNumMapButtons].MapLink = -1;
+		Buttons[TotalNumMapButtons].MapButton.DownSound = None;
+	}
+	
+	if ( ButtonText != "" )
+	{
+		Buttons[TotalNumMapButtons].ButtonText = ButtonText;
+	} 
+	else 
+	{
+		Buttons[TotalNumMapButtons].ButtonText = "NO BUTTON TEXT";
+	}
+	TotalNumMapButtons++;
 }
 
 function ToolTip (string strTip)
 {
-  StatusBarTextWindow.Clear();
-  StatusBarTextWindow.AddText(strTip);
+	StatusBarTextWindow.Clear();
+	StatusBarTextWindow.AddText(strTip);
 }
 
 function ShowWindow ()
 {
-  UpdateDisplayDetails();
-  Super.ShowWindow();
+	UpdateDisplayDetails();
+	Super.ShowWindow();
 }
 
 function PreOpenBook ()
 {
-  ShowWindow();
+	ShowWindow();
 }
 
 function UpdateDisplayDetails ()
 {
-  local int I;
-  local string S;
-  local bool bHarryShownOnMap;
-  local name N;
+	local int I;
+	local string S;
+	local bool bHarryShownOnMap;
+	local name N;
+	local float HScale;
+	local float Offset;
+	
+	// Metallicafan212:	Scale the pos
+	HScale = GetHeightScale();
+	Offset = 256.0 - (256 * HScale);
 
-  // I = 0;
-  // if ( I < TotalNumMapButtons )
-  for(I = 0; I < TotalNumMapButtons; I++)
-  {
-    if ( (I >= MapButtonIdx[nCurrPage]) && (I < MapButtonIdx[nCurrPage] + NumMapButtons[nCurrPage]) )
-    {
-      Buttons[I].MapButton.bDisabled = False;
-      Buttons[I].MapButton.ShowWindow();
-    } else {
-      Buttons[I].MapButton.bDisabled = True;
-      Buttons[I].MapButton.HideWindow();
-    }
-    // I++;
-    // goto JL0007;
-  }
-  S = GetCurrentUnrFileName();
-  N = PlayerHarry.HarryAtMapMarker();
-  // I = 0;
-  // if ( I < 43 )
-  for(I = 0; I < 43; I++)
-  {
-    if ( (nCurrPage == HarryLocInfo[I].MapIdx) && (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag == N) )
-    {
-      bHarryShownOnMap = True;
-      HarryLocationButton.bDisabled = False;
-      HarryLocationButton.ShowWindow();
-      HarryLocX = HarryLocInfo[I].X * 640 / 800 - 32;
-      HarryLocY = HarryLocInfo[I].Y * 480 / 600 - 32;
-      HarryLocationButton.WinLeft = HarryLocX;
-      HarryLocationButton.WinTop = HarryLocY;
-	  break;
-    } //else {
-      // I++;
-      // goto JL00F0;
-    //}
-  }
-  if (  !bHarryShownOnMap )
-  {
-    HarryLocationButton.bDisabled = True;
-    HarryLocationButton.HideWindow();
-    if ( N != 'None' )
-    {
-      PlayerHarry.ClientMessage("**** Error: MenuMapLocationMarker.tag=" $ string(N) $ ", but no table entry found.");
-    }
-  }
+	for(I = 0; I < TotalNumMapButtons; I++)
+	{
+		if ( (I >= MapButtonIdx[nCurrPage]) && (I < MapButtonIdx[nCurrPage] + NumMapButtons[nCurrPage]) )
+		{
+			Buttons[I].MapButton.bDisabled = False;
+			Buttons[I].MapButton.ShowWindow();
+			Buttons[I].MapButton.Resized();
+		} 
+		else 
+		{
+			Buttons[I].MapButton.bDisabled = True;
+			Buttons[I].MapButton.HideWindow();
+			Buttons[I].MapButton.Resized();
+		}
+	}
+	
+	S = GetCurrentUnrFileName();
+	N = PlayerHarry.HarryAtMapMarker();
+
+	for(I = 0; I < 43; I++)
+	{
+		if ( (nCurrPage == HarryLocInfo[I].MapIdx) && (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag == N) )
+		{
+			bHarryShownOnMap 				= True;
+			HarryLocationButton.bDisabled 	= False;
+			HarryLocationButton.ShowWindow();
+			WHarryLocX 						= (HarryLocInfo[I].X * 640 / 800 - 32);
+			WHarryLocY 						= (HarryLocInfo[I].Y * 480 / 600 - 32);
+			
+			HarryLocX 						= (WHarryLocX * HScale) + Offset;
+			HarryLocY						= (WHarryLocY * HScale);
+			
+			HarryLocationButton.WinLeft		= HarryLocX;
+			HarryLocationButton.WinTop		= HarryLocY;
+			break;
+		}
+	}
+	
+	if (  !bHarryShownOnMap )
+	{
+		HarryLocationButton.bDisabled = True;
+		HarryLocationButton.HideWindow();
+		if ( N != 'None' )
+		{
+			PlayerHarry.ClientMessage("**** Error: MenuMapLocationMarker.tag=" $ string(N) $ ", but no table entry found.");
+		}
+	}
 }
 
 function string GetCurrentUnrFileName ()
 {
-  local string S;
-  local string S2;
-  local int I;
+	local string S;
+	local string S2;
+	local int I;
 
-  S = GetLevel().LevelEnterText;
-  // if ( True )
-  while ( True )
-  {
-    I = InStr(S,"\\");
-    if ( I >= 0 )
-    {
-      S = Mid(S,I + 1);
-    } else {
-     // goto JL0052;
-	 break;
-    }
-    //goto JL0015;
-  }
-  S2 = Caps(S);
-  if ( InStr(S2,".UNR") < 0 )
-  {
-    S = S $ ".UNR";
-  }
-  return S;
+	S = GetLevel().LevelEnterText;
+  
+	while ( True )
+	{
+		I = InStr(S,"\\");
+		if ( I >= 0 )
+		{
+			S = Mid(S,I + 1);
+		} 
+		else 
+		{
+			break;
+		}
+	}
+	
+	S2 = Caps(S);
+	if ( InStr(S2,".UNR") < 0 )
+	{
+		S = S $ ".UNR";
+	}
+	return S;
 }
 
 function Tick (float dtime)
 {
-  if (  !HarryLocationButton.bDisabled )
-  {
-    HarryLocationButton.WinLeft = HarryLocX + 4 * Cos(GetLevel().TimeSeconds * 7);
-    HarryLocationButton.WinTop = HarryLocY + 4 * 0.69999999 * Sin(GetLevel().TimeSeconds * 2 * 7);
-  }
+	if (  !HarryLocationButton.bDisabled )
+	{
+		HarryLocationButton.WinLeft = HarryLocX + 4 * Cos(GetLevel().TimeSeconds * 7);
+		HarryLocationButton.WinTop 	= HarryLocY + 4 * 0.69999999 * Sin(GetLevel().TimeSeconds * 2 * 7);
+	}
 }
 
 function Notify (UWindowDialogControl C, byte E)
 {
-  local int I;
+	local int I;
 
-  if ( E == 2 )
-  {
-    // I = MapButtonIdx[nCurrPage];
-    // if ( I < MapButtonIdx[nCurrPage] + NumMapButtons[nCurrPage] )
-    for(I = MapButtonIdx[nCurrPage]; I < MapButtonIdx[nCurrPage] + NumMapButtons[nCurrPage]; I++)
+	if ( E == 2 )
 	{
-      if ( (C == Buttons[I].MapButton) && (Buttons[I].MapLink != -1) )
-      {
-        nCurrPage = Buttons[I].MapLink;
-        UpdateDisplayDetails();
-      }
-      // I++;
-      // goto JL001E;
-    }
-    if ( C == BackPageButton )
-    {
-      FEBook(book).DoEscapeFromPage();
-    }
-  }
-  Super.Notify(C,E);
+		for(I = MapButtonIdx[nCurrPage]; I < MapButtonIdx[nCurrPage] + NumMapButtons[nCurrPage]; I++)
+		{
+			if ( (C == Buttons[I].MapButton) && (Buttons[I].MapLink != -1) )
+			{
+				nCurrPage = Buttons[I].MapLink;
+				UpdateDisplayDetails();
+			}
+		}
+		
+		if ( C == BackPageButton )
+		{
+			FEBook(book).DoEscapeFromPage();
+		}
+	}
+	
+	Super.Notify(C,E);
 }
 
 function Paint (Canvas Canvas, float X, float Y)
 {
-  local float fScaleFactor;
+	local float fScaleFactor;
 
-  fScaleFactor = Canvas.SizeX / WinWidth;
-  DrawBackground(Canvas);
-  Super.Paint(Canvas,X,Y);
+	fScaleFactor = Canvas.SizeX / WinWidth;
+	DrawBackground(Canvas);
+	Super.Paint(Canvas,X,Y);
+}
+
+function ResolutionChanged(float W, float H)
+{
+	Super.ResolutionChanged(W, H);
+	
+	// Metallicafan212:	Say we were resized
+	Resized();
+}
+
+function Resized()
+{
+	local float HScale;
+	local float Offset;
+	local int i;
+	
+	Super.Resized();
+	
+	HScale = GetHeightScale();
+	Offset = 256.0 - (256.0 * HScale);
+	
+	// Metallicafan212:	Shift all buttons
+	for(i = 0; i < ArrayCount(Buttons); i++)
+	{
+		if(Buttons[i].MapButton != None)
+		{
+			Buttons[i].MapButton.WX = (Buttons[i].MapButton.OrigX * HScale) + Offset;
+		}
+	}
+	
+	// Metallicafan212:	Move the location text up
+	StatusBarTextWindow.WinTop 	= (WinHeight - 26) * HScale;
+	StatusBarTextWindow.WinLeft = Offset;
+	
+	HarryLocX 						= (WHarryLocX * HScale) + Offset;
+	HarryLocY						= (WHarryLocY * HScale);
+}
+
+function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float H, 
+									  float tX, float tY, float tW, float tH, texture Tex ) 
+{
+	local float OrgX, OrgY, ClipX, ClipY;
+
+	OrgX = C.OrgX;
+	OrgY = C.OrgY;
+	ClipX = C.ClipX;
+	ClipY = C.ClipY;
+
+	C.SetOrigin(OrgX + ClippingRegion.X * Root.GUIScale, OrgY + ClippingRegion.Y * Root.GUIScale);
+	C.SetClip(Root.RealWidth, Root.RealHeight);//ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.GUIScale);
+
+	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
+	
+	C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+	
+	C.SetClip(ClipX, ClipY);
+	C.SetOrigin(OrgX, OrgY);
 }
 
 function DrawBackground (Canvas Canvas)
-{
-  /*
-  switch (nCurrPage)
-  {
-    case 0:
-		DrawStretchedTexture(Canvas,0.0,0.0,256.0,256.0,Texture'Map0Texture1');
-		DrawStretchedTexture(Canvas,256.0,0.0,256.0,256.0,Texture'Map0Texture2');
-		DrawStretchedTexture(Canvas,512.0,0.0,256.0,256.0,Texture'Map0Texture3');
-		DrawStretchedTexture(Canvas,0.0,256.0,256.0,256.0,Texture'Map0Texture4');
-		DrawStretchedTexture(Canvas,256.0,256.0,256.0,256.0,Texture'Map0Texture5');
-		DrawStretchedTexture(Canvas,512.0,256.0,256.0,256.0,Texture'Map0Texture6');
-		break;
-    case 1:
-		DrawStretchedTexture(Canvas,0.0,0.0,256.0,256.0,Texture'Map1Texture1');
-		DrawStretchedTexture(Canvas,256.0,0.0,256.0,256.0,Texture'Map1Texture2');
-		DrawStretchedTexture(Canvas,512.0,0.0,256.0,256.0,Texture'Map1Texture3');
-		DrawStretchedTexture(Canvas,0.0,256.0,256.0,256.0,Texture'Map1Texture4');
-		DrawStretchedTexture(Canvas,256.0,256.0,256.0,256.0,Texture'Map1Texture5');
-		DrawStretchedTexture(Canvas,512.0,256.0,256.0,256.0,Texture'Map1Texture6');
-		break;
-    case 2:
-		DrawStretchedTexture(Canvas,0.0,0.0,256.0,256.0,Texture'Map2Texture1');
-		DrawStretchedTexture(Canvas,256.0,0.0,256.0,256.0,Texture'Map2Texture2');
-		DrawStretchedTexture(Canvas,512.0,0.0,256.0,256.0,Texture'Map2Texture3');
-		DrawStretchedTexture(Canvas,0.0,256.0,256.0,256.0,Texture'Map2Texture4');
-		DrawStretchedTexture(Canvas,256.0,256.0,256.0,256.0,Texture'Map2Texture5');
-		DrawStretchedTexture(Canvas,512.0,256.0,256.0,256.0,Texture'Map2Texture6');
-		break;
-    case 3:
-		DrawStretchedTexture(Canvas,0.0,0.0,256.0,256.0,Texture'Map3Texture1');
-		DrawStretchedTexture(Canvas,256.0,0.0,256.0,256.0,Texture'Map3Texture2');
-		DrawStretchedTexture(Canvas,512.0,0.0,256.0,256.0,Texture'Map3Texture3');
-		DrawStretchedTexture(Canvas,0.0,256.0,256.0,256.0,Texture'Map3Texture4');
-		DrawStretchedTexture(Canvas,256.0,256.0,256.0,256.0,Texture'Map3Texture5');
-		DrawStretchedTexture(Canvas,512.0,256.0,256.0,256.0,Texture'Map3Texture6');
-		break;
-    default:
-  }
-  */
+{  
+	// Metallicafan212:	Store the variables for the centering here
+	local float Page1X, Page1Y,
+				Page2X, Page2Y,
+				Page3X, Page3Y,
+				Page4X, Page4Y,
+				Page5X, Page5Y,
+				Page6X, Page6Y;
+				
+	local float HScale;
+	
+	HScale = GetHeightScale();
+	
+	// Metallicafan212:	Make each set of coords
+	Page1X = 256 - (256 * HScale);
+	Page2X = (256.0 * HScale) + Page1X;
+	Page3X = (512.0 * HScale) + Page1X;
+	Page4X = Page1X;
+	Page5X = Page2X;
+	Page6X = Page3X;
+	Page4Y = 256.0 * HScale;
+	Page5Y = 256.0 * HScale;
+	Page6Y = 256.0 * HScale;
+				
+	
   
-  //add the map background textures -AdamJD
-  //
-  switch (nCurrPage)
-  {
-    case 0:
-		DrawStretchedTexture(Canvas,0.0,0.0,256.0,256.0,Map0BackgroundImage1);
-		DrawStretchedTexture(Canvas,256.0,0.0,256.0,256.0,Map0BackgroundImage2);
-		DrawStretchedTexture(Canvas,512.0,0.0,256.0,256.0,Map0BackgroundImage3);
-		DrawStretchedTexture(Canvas,0.0,256.0,256.0,256.0,Map0BackgroundImage4);
-		DrawStretchedTexture(Canvas,256.0,256.0,256.0,256.0,Map0BackgroundImage5);
-		DrawStretchedTexture(Canvas,512.0,256.0,256.0,256.0,Map0BackgroundImage6);
-		break;
-    case 1:
-		DrawStretchedTexture(Canvas,0.0,0.0,256.0,256.0,Map1BackgroundImage1);
-		DrawStretchedTexture(Canvas,256.0,0.0,256.0,256.0,Map1BackgroundImage2);
-		DrawStretchedTexture(Canvas,512.0,0.0,256.0,256.0,Map1BackgroundImage3);
-		DrawStretchedTexture(Canvas,0.0,256.0,256.0,256.0,Map1BackgroundImage4);
-		DrawStretchedTexture(Canvas,256.0,256.0,256.0,256.0,Map1BackgroundImage5);
-		DrawStretchedTexture(Canvas,512.0,256.0,256.0,256.0,Map1BackgroundImage6);
-		break;
-    case 2:
-		DrawStretchedTexture(Canvas,0.0,0.0,256.0,256.0,Map2BackgroundImage1);
-		DrawStretchedTexture(Canvas,256.0,0.0,256.0,256.0,Map2BackgroundImage2);
-		DrawStretchedTexture(Canvas,512.0,0.0,256.0,256.0,Map2BackgroundImage3);
-		DrawStretchedTexture(Canvas,0.0,256.0,256.0,256.0,Map2BackgroundImage4);
-		DrawStretchedTexture(Canvas,256.0,256.0,256.0,256.0,Map2BackgroundImage5);
-		DrawStretchedTexture(Canvas,512.0,256.0,256.0,256.0,Map2BackgroundImage6);
-		break;
-    case 3:
-		DrawStretchedTexture(Canvas,0.0,0.0,256.0,256.0,Map3BackgroundImage1);
-		DrawStretchedTexture(Canvas,256.0,0.0,256.0,256.0,Map3BackgroundImage2);
-		DrawStretchedTexture(Canvas,512.0,0.0,256.0,256.0,Map3BackgroundImage3);
-		DrawStretchedTexture(Canvas,0.0,256.0,256.0,256.0,Map3BackgroundImage4);
-		DrawStretchedTexture(Canvas,256.0,256.0,256.0,256.0,Map3BackgroundImage5);
-		DrawStretchedTexture(Canvas,512.0,256.0,256.0,256.0,Map3BackgroundImage6);
-		break;
-    default:
-  }
+	//add the map background textures -AdamJD
+	//
+	switch (nCurrPage)
+	{
+		case 0:
+			DrawStretchedTexture(Canvas, Page1X, Page1Y, 256.0, 256.0, Map0BackgroundImage1);
+			DrawStretchedTexture(Canvas, Page2X, Page2Y, 256.0, 256.0, Map0BackgroundImage2);
+			DrawStretchedTexture(Canvas, Page3X, Page3Y, 256.0, 256.0, Map0BackgroundImage3);
+			DrawStretchedTexture(Canvas, Page4X, Page4Y, 256.0, 256.0, Map0BackgroundImage4);
+			DrawStretchedTexture(Canvas, Page5X, Page5Y, 256.0, 256.0, Map0BackgroundImage5);
+			DrawStretchedTexture(Canvas, Page6X, Page6Y, 256.0, 256.0, Map0BackgroundImage6);
+			break;
+			
+		case 1:
+			DrawStretchedTexture(Canvas, Page1X, Page1Y, 256.0, 256.0, Map1BackgroundImage1);
+			DrawStretchedTexture(Canvas, Page2X, Page2Y, 256.0, 256.0, Map1BackgroundImage2);
+			DrawStretchedTexture(Canvas, Page3X, Page3Y, 256.0, 256.0, Map1BackgroundImage3);
+			DrawStretchedTexture(Canvas, Page4X, Page4Y, 256.0, 256.0, Map1BackgroundImage4);
+			DrawStretchedTexture(Canvas, Page5X, Page5Y, 256.0, 256.0, Map1BackgroundImage5);
+			DrawStretchedTexture(Canvas, Page6X, Page6Y, 256.0, 256.0, Map1BackgroundImage6);
+			break;
+			
+		case 2:
+			DrawStretchedTexture(Canvas, Page1X, Page1Y, 256.0, 256.0, Map2BackgroundImage1);
+			DrawStretchedTexture(Canvas, Page2X, Page2Y, 256.0, 256.0, Map2BackgroundImage2);
+			DrawStretchedTexture(Canvas, Page3X, Page3Y, 256.0, 256.0, Map2BackgroundImage3);
+			DrawStretchedTexture(Canvas, Page4X, Page4Y, 256.0, 256.0, Map2BackgroundImage4);
+			DrawStretchedTexture(Canvas, Page5X, Page5Y, 256.0, 256.0, Map2BackgroundImage5);
+			DrawStretchedTexture(Canvas, Page6X, Page6Y, 256.0, 256.0, Map2BackgroundImage6);
+			break;
+			
+		case 3:
+			DrawStretchedTexture(Canvas, Page1X, Page1Y, 256.0, 256.0, Map3BackgroundImage1);
+			DrawStretchedTexture(Canvas, Page2X, Page2Y, 256.0, 256.0, Map3BackgroundImage2);
+			DrawStretchedTexture(Canvas, Page3X, Page3Y, 256.0, 256.0, Map3BackgroundImage3);
+			DrawStretchedTexture(Canvas, Page4X, Page4Y, 256.0, 256.0, Map3BackgroundImage4);
+			DrawStretchedTexture(Canvas, Page5X, Page5Y, 256.0, 256.0, Map3BackgroundImage5);
+			DrawStretchedTexture(Canvas, Page6X, Page6Y, 256.0, 256.0, Map3BackgroundImage6);
+			break;
+	}
 }
 
 function PreSwitchPage ()
 {
-  PlayerHarry = harry(Root.Console.Viewport.Actor);
-  SetInitialSelection();
-  Super.PreSwitchPage();
+	PlayerHarry = harry(Root.Console.Viewport.Actor);
+	SetInitialSelection();
+	Super.PreSwitchPage();
 }
 
 function SetInitialSelection ()
 {
-  local string S;
-  local int I;
-  local name HarryAtMapMarkerName;
+	local string S;
+	local int I;
+	local name HarryAtMapMarkerName;
 
-  S = GetCurrentUnrFileName();
-  nCurrPage = -1;
-  HarryAtMapMarkerName = PlayerHarry.HarryAtMapMarker();
-  // I = 0;
-  // if ( I < 43 )
-  for(I = 0; I < 43; I++)
-  {
-    if ( (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag != 'None') && (HarryLocInfo[I].Tag == HarryAtMapMarkerName) )
-    {
-      nCurrPage = HarryLocInfo[I].MapIdx;
-	  break;
-    } //else {
-      //I++;
-      //goto JL0033;
-    //}
-  }
-  if ( nCurrPage == -1 )
-  {
-    // I = 0;
-    // if ( I < 43 )
+	S = GetCurrentUnrFileName();
+	nCurrPage = -1;
+	HarryAtMapMarkerName = PlayerHarry.HarryAtMapMarker();
+
 	for(I = 0; I < 43; I++)
-    {
-      if ( (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag == HarryAtMapMarkerName) )
-      {
-        nCurrPage = HarryLocInfo[I].MapIdx;
-		break;
-      } //else {
-        //I++;
-        //goto JL00CA;
-      //}
-    }
-  }
-  if ( nCurrPage == -1 )
-  {
-    nCurrPage = 1;
-  }
+	{
+		if ( (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag != 'None') && (HarryLocInfo[I].Tag == HarryAtMapMarkerName) )
+		{
+			nCurrPage = HarryLocInfo[I].MapIdx;
+			break;
+		} 
+	}
+	
+	if ( nCurrPage == -1 )
+	{
+		for(I = 0; I < 43; I++)
+		{
+			if ( (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag == HarryAtMapMarkerName) )
+			{
+				nCurrPage = HarryLocInfo[I].MapIdx;
+				break;
+			}
+		}
+	}
+	
+	if ( nCurrPage == -1 )
+	{
+		nCurrPage = 1;
+	}
 }
 
 defaultproperties

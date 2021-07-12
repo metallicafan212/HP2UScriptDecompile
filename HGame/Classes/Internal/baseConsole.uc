@@ -67,27 +67,7 @@ function ChangeLevel (string lev, bool flag)
 }
 
 function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
-{
-//orginal code -AdamJD
-/*
-    local float FX;
-    local float fy;
-
-    if ( Tex == None )
-    {
-      return;
-    }
-    FX = C.SizeX / 640.0;
-    fy = C.SizeY / 480.0;
-    FX = C.SizeX / 640.0;
-    fy = C.SizeY / 480.0;
-    FX = 1.0;
-    fy = 1.0;
-    Root.DrawStretchedTexture(C, X * FX, Y * fy, Tex.USize * FX, Tex.VSize * fy, Tex);
-*/
- 
-    //Metallicafan212s code -AdamJD
-    //
+{ 
     local float FX;
     local float fy;
     local float Ratio;
@@ -95,107 +75,48 @@ function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
     local float XOffset;
     local float YOffset;
     local float ResX;
-    local float ResY;
+    local float ResY;	
+	local float HScale;
+	
+	HScale = GetHScale(C);
+	
 
     if ( Tex == None )
     {
-	  return;
+		return;
     }
-
-  /*
-  FX = C.SizeX / 640.0;
-  fy = C.SizeY / 480.0;
-  FX = C.SizeX / 640.0;
-  fy = C.SizeY / 480.0;
-  FX = 1.0;
-  fy = 1.0;
-  */
 	
+	// Metallicafan212:	This is centered in the previous call, just draw scaled
 	FX = 1.0;
- 	FY = 1.0;
-	
-	/*
-	// Metallicafan212:	Scale it to 4/3
-	//Ratio 	= C.SizeX / C.SizeY;
-	
-	//FX 		= Ratio; /// 1.3333;
-	
-	// Metallicafan212:	Center the loading screen and draw black behind it
-	//					TODO!
-	
-	// Metallicafan212:	Rewrite this whole fucking system
-	//					We want a perfect middle square
-	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
-	//					Figure out a resolution in the middle of the screen
-	if(C.SizeX > C.SizeY)
-	{
-		Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
-		// Metallicafan212:	Use the height as the basis of the square
-		ResY = C.SizeY;
-		ResX = C.SizeX * Ratio;
-	}
-	else
-	{
-		Ratio 		= (C.Size.X / C.SizeY) / 1.3333333;
-		ResX = C.SizeX;
-		ResY = C.SizeY * Ratio;
-	}
-	*/
-	
-	// Metallicafan212:	Now draw it in the correct place
-	//					We're considering the canvas a perfect 512x512 grid
-	//X = 
-	
-	
-	//FX 		= (C.SizeX / C.SizeY) / 1.33333;
-	
-	//log("X " $ C.SizeX $ " Y " $ C.SizeY);
-	
-	// Metallicafan212:	Check for thinner resolutions
-	//					On these we need to stretch outwards
-	
-	/*
-	if(FX < 1.0)
-	{
-		FX = 1.0;
-		FY = (C.SizeX / C.SizeY);
-		log("FY is " $ FY);
-	}
-	else
-	{
-		FY = 1.0;
-		log("FX is " $ FX);
-	}
-	
-		
-	//FY		= FX;
-	*/
-  
-	//C.DrawTileClipped(Tex, 
-  
-	Root.DrawStretchedTexture(C, (X * FX), (Y * FY), Tex.USize * FX, Tex.VSize * FY, Tex);
+ 	FY = HScale;
+	Root.DrawStretchedTexture(C, (X * FX), (Y * FY), Tex.USize * FX * HScale, Tex.VSize * FY, Tex);
 }
 
 function PrintActionMessageInUpperLeft (Canvas C, string BigMessage)
 {
-  local float XL;
-  local float YL;
+	local float XL;
+	local float YL;
 
-  C.bCenter = False;
-  C.StrLen(BigMessage,XL,YL);
-  C.SetPos(FrameX / 4 - XL / 2, FrameY / 4.5 - YL / 2);
-  C.DrawText(BigMessage,False);
+	C.bCenter = False;
+	C.StrLen(BigMessage,XL,YL);
+	C.SetPos(FrameX / 4 - XL / 2, FrameY / 4.5 - YL / 2);
+	C.DrawText(BigMessage,False);
 }
 
 function PrintActionMessageInLowerLeft (Canvas C, string BigMessage)
 {
-  local float XL;
-  local float YL;
+	local float XL;
+	local float YL;
 
-  C.bCenter = False;
-  C.StrLen(BigMessage,XL,YL);
-  C.SetPos(FrameX / 10,FrameY - FrameY / 4 - YL / 2);
-  C.DrawText(BigMessage,False);
+	C.bCenter = False;
+	C.StrLen(BigMessage,XL,YL);
+	C.SetPos(FrameX / 10,FrameY - FrameY / 4 - YL / 2);
+	C.DrawText(BigMessage,False);
+}
+
+function float GetHScale(Canvas Canvas)
+{
+	return (4.0 / 3.0) / (Canvas.SizeX / float(Canvas.SizeY));
 }
 
 function DrawLevelAction (Canvas C)
@@ -203,6 +124,16 @@ function DrawLevelAction (Canvas C)
 	local string BigMessage;
 	local float fTextWidth;
 	local float fTextHeight;
+	local float Offset;
+	local float HScale;
+	local Color OldColor;
+	
+	local float XL;
+	local float YL;
+	
+	HScale = GetHScale(C);
+	
+	OldColor = C.DrawColor;
 
 	if ( (Viewport.Actor.Level.Pauser != "") && Viewport.Actor.Level.LevelAction == LEVACT_None)
 	{
@@ -230,17 +161,35 @@ function DrawLevelAction (Canvas C)
 		{
 			C.Font = LocalBigFont;
 		}
-		ScaleAndDraw(C,0.0,0.0,LoadingBackground.p1);
-		ScaleAndDraw(C,256.0,0.0,LoadingBackground.p2);
-		ScaleAndDraw(C,512.0,0.0,LoadingBackground.p3);
-		ScaleAndDraw(C,0.0,256.0,LoadingBackground.p4);
-		ScaleAndDraw(C,256.0,256.0,LoadingBackground.p5);
-		ScaleAndDraw(C,512.0,256.0,LoadingBackground.p6);
-		PrintActionMessageInUpperLeft(C,BigMessage);
+		
+		C.SetPos(0, 0);
+		
+		// Metallicafan212:	Clear the screen to black by drawing a black tile across the entire screen
+		//					It's not 100% black, so we need to use RGB(8, 8, 8)...
+		C.DrawColor.R = 128;
+		C.DrawColor.G = 128;
+		C.DrawColor.B = 128;
+		
+		C.DrawTile(LoadingBackground.P1, Root.RealWidth, Root.RealHeight, 0.0, 0.0, LoadingBackground.P1.USize, LoadingBackground.P1.VSize);
+		C.DrawColor = OldColor;
+		
+		// Metallicafan212:	Center the tiles
+		Offset = 256 - (256 * HScale);
+		ScaleAndDraw(C, Offset, 					0.0,	LoadingBackground.p1);
+		ScaleAndDraw(C, (256.0 * HScale) + Offset, 	0.0,	LoadingBackground.p2);
+		ScaleAndDraw(C, (512.0 * HScale) + Offset, 	0.0,	LoadingBackground.p3);
+		ScaleAndDraw(C, Offset, 					256.0,	LoadingBackground.p4);
+		ScaleAndDraw(C, (256.0 * HScale) + Offset, 	256.0,	LoadingBackground.p5);
+		ScaleAndDraw(C, (512.0 * HScale) + Offset, 	256.0,	LoadingBackground.p6);
+		
+		// Metallicafan212:	Customly draw the text offset
+		C.bCenter = False;
+		C.StrLen(BigMessage, XL, YL);
+		C.SetPos((FrameX / 4 - XL / 2) + Offset, FrameY / 4.5 - YL / 2);
+		C.DrawText(BigMessage, False);
+		
 		return;
 	} 
-	//else 
-	//{
 	else if ( Viewport.Actor.Level.LevelAction == LEVACT_Saving )
 	{
 		BigMessage = Localize("all","Options_0057","HPMenu");
@@ -253,7 +202,6 @@ function DrawLevelAction (Canvas C)
 	{
 		BigMessage = PrecachingMessage;
 	}
-	//}
 	if ( BigMessage != "" )
 	{
 		C.Style = 1;
@@ -276,6 +224,8 @@ defaultproperties
 	//
     //LoadingBackground=(p1=Texture'Icons.FELoadingBackground1',p2=Texture'Icons.FELoadingBackground2',p3=Texture'Icons.FELoadingBackground3',p4=Texture'Icons.FELoadingBackground4',p5=Texture'Icons.FELoadingBackground5',p6=Texture'Icons.FELoadingBackground6',durration=999999.00)
 	LoadingBackground=(p1=Texture'HGame.Icons.FELoadingBackground1',p2=Texture'HGame.Icons.FELoadingBackground2',p3=Texture'HGame.Icons.FELoadingBackground3',p4=Texture'HGame.Icons.FELoadingBackground4',p5=Texture'HGame.Icons.FELoadingBackground5',p6=Texture'HGame.Icons.FELoadingBackground6',durration=999999.00)
+	
+	// Metallicafan212:	Load the white tex for doing the black background
 
     bUseSystemFonts=True
 }

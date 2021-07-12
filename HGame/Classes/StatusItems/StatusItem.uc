@@ -24,6 +24,13 @@ var bool bDisplayWhenCountZero;
 var bool bIncrementPosWhenCountZero;
 var bool bTravelStatus;
 
+// Metallicafan212:	if we want smooth icons
+var bool bSmoothIcons;
+
+// Metallicafan212:	Icon scale
+var float XScale;
+var float YScale;
+
 enum ECountColor 
 {
 	CountColor_Black,
@@ -205,13 +212,33 @@ function float GetHScale(Canvas Canvas)
 
 function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 {
+	local float LocScale;
+	local float UScale;
+	local float VScale;
+	
+	local bool bSavedNoSmooth;
+	
+	bSavedNoSmooth = Canvas.bNoSmooth;
+	
+	LocScale = fScaleFactor * GetHScale(Canvas);
+	
+	// Metallicafan212:	Allow for scaling icons down to the "draw" coords
+	UScale = XScale / textureHudIcon.USize;
+	VScale = YScale / textureHudIcon.VSize;
+	
+	if(bSmoothIcons)
+		Canvas.bNoSmooth = false;
+	
 	// Metallicafan212:	Scale it
 	Canvas.SetPos(nCurrX, nCurrY * GetHScale(Canvas));
-	Canvas.DrawIcon(textureHudIcon, fScaleFactor * GetHScale(Canvas));
+	Canvas.DrawTile(textureHudIcon, textureHudIcon.USize * LocScale * UScale, textureHudIcon.VSize * LocScale * VScale, 0, 0, textureHudIcon.USize, textureHudIcon.VSize );
+	
 	if ( bDisplayCount )
 	{
 		DrawCount(Canvas, nCurrX, nCurrY * GetHScale(Canvas), fScaleFactor * GetHScale(Canvas));
 	}
+	
+	Canvas.bNoSmooth = bSavedNoSmooth;
 }
 
 function DrawSpecifiedCount (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor, int nLocalCount)
@@ -293,4 +320,7 @@ defaultproperties
     bHidden=True
     // DrawType=0
 	DrawType=DT_None
+	
+	XScale=64
+	YScale=64
 }

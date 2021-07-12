@@ -4,6 +4,10 @@
 
 class StatusItemHealth extends StatusItem;
 
+// Metallicafan212:	Import the textures
+#exec Texture Import File=Textures\Health\HP2HealthBorder.png Name=HP2HealthBorder Group=Health COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Health\HP2HealthOrangeInside.png Name=HP2HealthOrangeInside Group=Health COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+
 var Texture textureHealthBorder;
 var Texture textureHealthOrangeInside;
 var Texture textureHealthBlack;
@@ -31,12 +35,12 @@ event PreBeginPlay ()
 	local string strHealthBlack;
 
 	Super.PreBeginPlay();
-	strHealthBorder = "HP2_Menu.Icons.HP2HealthBorder";
-	strHealthBlack = "HP2_Menu.Icons.HP2HealthBlack";
-	strHealthOrangeInside = "HP2_Menu.Icons.HP2HealthOrangeInside";
-	textureHealthBorder = Texture(DynamicLoadObject(strHealthBorder,Class'Texture'));
-	textureHealthBlack = Texture(DynamicLoadObject(strHealthBlack,Class'Texture'));
-	textureHealthOrangeInside = Texture(DynamicLoadObject(strHealthOrangeInside,Class'Texture'));
+	strHealthBorder 			= "HGame.Health.HP2HealthBorder";
+	strHealthBlack 				= "HP2_Menu.Icons.HP2HealthBlack";
+	strHealthOrangeInside 		= "HGame.Health.HP2HealthOrangeInside";
+	textureHealthBorder 		= Texture(DynamicLoadObject(strHealthBorder,Class'Texture'));
+	textureHealthBlack 			= Texture(DynamicLoadObject(strHealthBlack,Class'Texture'));
+	textureHealthOrangeInside 	= Texture(DynamicLoadObject(strHealthOrangeInside,Class'Texture'));
 }
 
 function IncrementCount (int nNum)
@@ -91,13 +95,21 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 	local float fFillRatio;
 	local float fCurrBarBeforeEffect;
 	local float fCurrBarAfterEffect;
+	local float UScale;
+	local float VScale;
+	local bool bSavedNoSmooth;
+	
+	bSavedNoSmooth = Canvas.bNoSmooth;
+	
+	if(bSmoothIcons)
+		Canvas.bNoSmooth = false;
 	
 	// Metallicafan212:	Scale by the height as well
 	fScaleFactor *= GetHScale(Canvas);
 
-	
 	nX = 5 * fScaleFactor;
 	nY = 5 * fScaleFactor;
+	
 	fSegmentHeight = 0.0;
 	fSegmentStartAt = 0.0;
 	nTotalOffsets = 1 + 11;
@@ -127,15 +139,11 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 		{
 			nRemainingCount = 0;
 		}
-		Canvas.DrawColor.R = 255;
-		Canvas.DrawColor.G = 255;
-		Canvas.DrawColor.B = 255;
-		Canvas.Style = 3;
-		Canvas.SetPos(nX, nY);
-		Canvas.DrawIcon(textureHealthBlack,fScaleFactor);
+		
+		// Metallicafan212: Health first
 		Canvas.Style = byStyleSave;
 		Canvas.SetPos(nX, nY);
-		Canvas.DrawIcon(textureHealthBorder,fScaleFactor);
+		
 		if (  !IsInState('NormalDisplay') )
 		{
 			fCurrBarAfterEffect = (float(nCount) / float(nUnitsPerIcon));
@@ -145,16 +153,39 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 			}
 		}
 		if ( fFillRatio > 0 )
-		{
-			fSegmentHeight = fFillRatio * (textureHudIcon.VSize - nTotalOffsets);
-			fSegmentStartAt = textureHudIcon.VSize - 11 - fSegmentHeight;
-			fSegmentHeight += 11;
-			Canvas.SetPos(nX, nY + fSegmentStartAt * fScaleFactor);
-			Canvas.DrawTile(textureHealthOrangeInside, textureHudIcon.USize * fScaleFactor, fSegmentHeight * fScaleFactor, 0.0, fSegmentStartAt, textureHudIcon.USize, fSegmentHeight);
+		{		
+			// Metallicafan212:	For moving it down
+			UScale = XScale / textureHealthOrangeInside.USize;
+			VScale = YScale / textureHealthOrangeInside.VSize;
+		
+			fSegmentHeight 		= fFillRatio * ((textureHudIcon.VSize * VScale) - nTotalOffsets);
+			fSegmentStartAt 	= (textureHudIcon.VSize * VScale) - 11 - fSegmentHeight;
+			fSegmentHeight 	   += 11;
+			
+			Canvas.SetPos(nX, nY + fSegmentStartAt * fScaleFactor);			
+			
+			Canvas.DrawTile(textureHealthOrangeInside, textureHealthOrangeInside.USize * fScaleFactor * UScale, fSegmentHeight * fScaleFactor, 0.0, fSegmentStartAt / VScale, textureHudIcon.USize, fSegmentHeight / VScale);
 		}
+		
+		// Metallicafan212:	Same here, scale it
+		UScale = XScale / textureHealthBorder.USize;
+		VScale = YScale / textureHealthBorder.VSize;
+		
+		// Metallicafan212:	Move it back over
+		Canvas.SetPos(nX, nY);
+		
+		// Metallicafan212:	Reset the draw color
+		Canvas.DrawColor.R = 255;
+		Canvas.DrawColor.G = 255;
+		Canvas.DrawColor.B = 255;
+		Canvas.DrawTile(textureHealthBorder, textureHealthBorder.USize * fScaleFactor * UScale, textureHealthBorder.VSize * fScaleFactor * VScale, 0, 0, textureHealthBorder.USize, textureHealthBorder.VSize );
+		
+		// Metallicafan212:	Next icon
 		nX += nActualIconW * fScaleFactor;
 	}
 	Canvas.DrawColor = colorSave;
+	
+	Canvas.bNoSmooth = bSavedNoSmooth;
 }
 
 auto state NormalDisplay
@@ -264,7 +295,7 @@ defaultproperties
 
     nMaxIcons=6
 
-    strHudIcon="HP2_Menu.Icons.HP2HealthEmpty"
+    strHudIcon="HGame.Health.HP2HealthBorder"
 
     bDisplayCount=True
 
@@ -281,5 +312,7 @@ defaultproperties
     nActualIconH=64
 
     strToolTipId="InGameMenu_0022"
+	
+	bSmoothIcons=1
 
 }

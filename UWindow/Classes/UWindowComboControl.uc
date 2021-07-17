@@ -3,9 +3,9 @@ class UWindowComboControl extends UWindowDialogControl;
 var	float				EditBoxWidth;
 var float				EditAreaDrawX, EditAreaDrawY;
 
-var UWindowEditBox		EditBox;
-var UWindowComboButton	Button;
-var UWindowComboLeftButton LeftButton;
+var UWindowEditBox			EditBox;
+var UWindowComboButton		Button;
+var UWindowComboLeftButton 	LeftButton;
 var UWindowComboRightButton RightButton;
 
 var class<UWindowComboList>	ListClass;
@@ -14,6 +14,39 @@ var UWindowComboList	List;
 var bool				bListVisible;
 var bool				bCanEdit;
 var bool				bButtons;
+
+/*
+// Metallicafan212:	Fix the resize issue
+function ResolutionChanged(float W, float H)
+{
+	Super.ResolutionChanged(W, H);
+	
+	WinLeft 			= 0;
+	
+	EditBox.WinLeft		= 0;
+	EditBox.WinWidth 	= WinWidth - 12;
+	EditBox.WinHeight	= WinHeight;
+	EditBox.Resized();
+	
+	Button.WinLeft		= 0;
+	Button.WinWidth 	= WinWidth - 12;
+	Button.Resized();
+	
+	if(LeftButton != none)
+	{
+		LeftButton.WinLeft		= 0;
+		LeftButton.WinWidth 	= WinWidth - 12;
+		LeftButton.Resized();
+	}
+	
+	if(RightButton != none)
+	{
+		RightButton.WinLeft		= 0;
+		RightButton.WinWidth 	= WinWidth - 12;
+		RightButton.Resized();
+	}
+}
+*/
 
 function CreateEditBox ()
 {

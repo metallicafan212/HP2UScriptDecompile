@@ -202,9 +202,9 @@ function AddMapButton (int X, int Y, int W, int H, Texture t, string ButtonText,
 	local float Offset;
 	local float InX;
 	
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
-	Offset = 256.0 - (256.0 * HScale);
+	Offset = (128.0 / HScale) - (128.0 * HScale);//256.0 - (256.0 * HScale);
 	
 	InX = X;
 	
@@ -288,8 +288,8 @@ function UpdateDisplayDetails ()
 	local float Offset;
 	
 	// Metallicafan212:	Scale the pos
-	HScale = GetHeightScale();
-	Offset = 256.0 - (256 * HScale);
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	Offset = (128.0 / HScale) - (128.0 * HScale);//256.0 - (256 * HScale);
 
 	for(I = 0; I < TotalNumMapButtons; I++)
 	{
@@ -427,8 +427,8 @@ function Resized()
 	
 	Super.Resized();
 	
-	HScale = GetHeightScale();
-	Offset = 256.0 - (256.0 * HScale);
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	Offset = (128.0 / HScale) - (128.0 * HScale);//256.0 - (256.0 * HScale);
 	
 	// Metallicafan212:	Shift all buttons
 	for(i = 0; i < ArrayCount(Buttons); i++)
@@ -462,7 +462,7 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 
 	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
 	
-	C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+	C.DrawTileClipped( Tex, W * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), H * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), tX, tY, tW, tH);
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
@@ -480,10 +480,11 @@ function DrawBackground (Canvas Canvas)
 				
 	local float HScale;
 	
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	// Metallicafan212:	Make each set of coords
-	Page1X = 256 - (256 * HScale);
+	//Page1X = 256 - (256 * HScale);
+	Page1X = (128.0 / HScale) - (128.0 * HScale);
 	Page2X = (256.0 * HScale) + Page1X;
 	Page3X = (512.0 * HScale) + Page1X;
 	Page4X = Page1X;
@@ -500,39 +501,75 @@ function DrawBackground (Canvas Canvas)
 	switch (nCurrPage)
 	{
 		case 0:
+			/*
 			DrawStretchedTexture(Canvas, Page1X, Page1Y, 256.0, 256.0, Map0BackgroundImage1);
 			DrawStretchedTexture(Canvas, Page2X, Page2Y, 256.0, 256.0, Map0BackgroundImage2);
-			DrawStretchedTexture(Canvas, Page3X, Page3Y, 256.0, 256.0, Map0BackgroundImage3);
+			DrawStretchedTexture(Canvas, Page3X, Page3Y, 128.0, 256.0, Map0BackgroundImage3);
 			DrawStretchedTexture(Canvas, Page4X, Page4Y, 256.0, 256.0, Map0BackgroundImage4);
 			DrawStretchedTexture(Canvas, Page5X, Page5Y, 256.0, 256.0, Map0BackgroundImage5);
-			DrawStretchedTexture(Canvas, Page6X, Page6Y, 256.0, 256.0, Map0BackgroundImage6);
+			DrawStretchedTexture(Canvas, Page6X, Page6Y, 128.0, 256.0, Map0BackgroundImage6);
+			*/
+			DrawStretchedTextureSegment(Canvas, Page1X, Page1Y, 256.0, 256.0, 0.0, 0.0, Map0BackgroundImage1.USize, 		Map0BackgroundImage1.VSize, Map0BackgroundImage1);
+			DrawStretchedTextureSegment(Canvas, Page2X, Page2Y, 256.0, 256.0, 0.0, 0.0, Map0BackgroundImage2.USize, 		Map0BackgroundImage2.VSize, Map0BackgroundImage2);
+			DrawStretchedTextureSegment(Canvas, Page3X, Page3Y, 128.0, 256.0, 0.0, 0.0, Map0BackgroundImage3.USize / 2.0, 	Map0BackgroundImage3.VSize, Map0BackgroundImage3);
+			DrawStretchedTextureSegment(Canvas, Page4X, Page4Y, 256.0, 256.0, 0.0, 0.0, Map0BackgroundImage4.USize, 		Map0BackgroundImage4.VSize, Map0BackgroundImage4);
+			DrawStretchedTextureSegment(Canvas, Page5X, Page5Y, 256.0, 256.0, 0.0, 0.0, Map0BackgroundImage5.USize, 		Map0BackgroundImage5.VSize, Map0BackgroundImage5);
+			DrawStretchedTextureSegment(Canvas, Page6X, Page6Y, 128.0, 256.0, 0.0, 0.0, Map0BackgroundImage6.USize / 2.0, 	Map0BackgroundImage6.VSize, Map0BackgroundImage6);
 			break;
 			
 		case 1:
+			/*
 			DrawStretchedTexture(Canvas, Page1X, Page1Y, 256.0, 256.0, Map1BackgroundImage1);
 			DrawStretchedTexture(Canvas, Page2X, Page2Y, 256.0, 256.0, Map1BackgroundImage2);
 			DrawStretchedTexture(Canvas, Page3X, Page3Y, 256.0, 256.0, Map1BackgroundImage3);
 			DrawStretchedTexture(Canvas, Page4X, Page4Y, 256.0, 256.0, Map1BackgroundImage4);
 			DrawStretchedTexture(Canvas, Page5X, Page5Y, 256.0, 256.0, Map1BackgroundImage5);
 			DrawStretchedTexture(Canvas, Page6X, Page6Y, 256.0, 256.0, Map1BackgroundImage6);
+			*/
+			DrawStretchedTextureSegment(Canvas, Page1X, Page1Y, 256.0, 256.0, 0.0, 0.0, Map1BackgroundImage1.USize, 		Map1BackgroundImage1.VSize, Map1BackgroundImage1);
+			DrawStretchedTextureSegment(Canvas, Page2X, Page2Y, 256.0, 256.0, 0.0, 0.0, Map1BackgroundImage2.USize, 		Map1BackgroundImage2.VSize, Map1BackgroundImage2);
+			DrawStretchedTextureSegment(Canvas, Page3X, Page3Y, 128.0, 256.0, 0.0, 0.0, Map1BackgroundImage3.USize / 2.0, 	Map1BackgroundImage3.VSize, Map1BackgroundImage3);
+			DrawStretchedTextureSegment(Canvas, Page4X, Page4Y, 256.0, 256.0, 0.0, 0.0, Map1BackgroundImage4.USize, 		Map1BackgroundImage4.VSize, Map1BackgroundImage4);
+			DrawStretchedTextureSegment(Canvas, Page5X, Page5Y, 256.0, 256.0, 0.0, 0.0, Map1BackgroundImage5.USize, 		Map1BackgroundImage5.VSize, Map1BackgroundImage5);
+			DrawStretchedTextureSegment(Canvas, Page6X, Page6Y, 128.0, 256.0, 0.0, 0.0, Map1BackgroundImage6.USize / 2.0, 	Map1BackgroundImage6.VSize, Map1BackgroundImage6);
 			break;
 			
 		case 2:
+			/*
 			DrawStretchedTexture(Canvas, Page1X, Page1Y, 256.0, 256.0, Map2BackgroundImage1);
 			DrawStretchedTexture(Canvas, Page2X, Page2Y, 256.0, 256.0, Map2BackgroundImage2);
-			DrawStretchedTexture(Canvas, Page3X, Page3Y, 256.0, 256.0, Map2BackgroundImage3);
+			DrawStretchedTexture(Canvas, Page3X, Page3Y, 128.0, 256.0, Map2BackgroundImage3);
 			DrawStretchedTexture(Canvas, Page4X, Page4Y, 256.0, 256.0, Map2BackgroundImage4);
 			DrawStretchedTexture(Canvas, Page5X, Page5Y, 256.0, 256.0, Map2BackgroundImage5);
 			DrawStretchedTexture(Canvas, Page6X, Page6Y, 256.0, 256.0, Map2BackgroundImage6);
+			*/
+			
+			DrawStretchedTextureSegment(Canvas, Page1X, Page1Y, 256.0, 256.0, 0.0, 0.0, Map2BackgroundImage1.USize, 		Map2BackgroundImage1.VSize, Map2BackgroundImage1);
+			DrawStretchedTextureSegment(Canvas, Page2X, Page2Y, 256.0, 256.0, 0.0, 0.0, Map2BackgroundImage2.USize, 		Map2BackgroundImage2.VSize, Map2BackgroundImage2);
+			DrawStretchedTextureSegment(Canvas, Page3X, Page3Y, 128.0, 256.0, 0.0, 0.0, Map2BackgroundImage3.USize / 2.0, 	Map2BackgroundImage3.VSize, Map2BackgroundImage3);
+			DrawStretchedTextureSegment(Canvas, Page4X, Page4Y, 256.0, 256.0, 0.0, 0.0, Map2BackgroundImage4.USize, 		Map2BackgroundImage4.VSize, Map2BackgroundImage4);
+			DrawStretchedTextureSegment(Canvas, Page5X, Page5Y, 256.0, 256.0, 0.0, 0.0, Map2BackgroundImage5.USize, 		Map2BackgroundImage5.VSize, Map2BackgroundImage5);
+			DrawStretchedTextureSegment(Canvas, Page6X, Page6Y, 128.0, 256.0, 0.0, 0.0, Map2BackgroundImage6.USize / 2.0, 	Map2BackgroundImage6.VSize, Map2BackgroundImage6);
+			
 			break;
 			
 		case 3:
+		
+			/*
 			DrawStretchedTexture(Canvas, Page1X, Page1Y, 256.0, 256.0, Map3BackgroundImage1);
 			DrawStretchedTexture(Canvas, Page2X, Page2Y, 256.0, 256.0, Map3BackgroundImage2);
-			DrawStretchedTexture(Canvas, Page3X, Page3Y, 256.0, 256.0, Map3BackgroundImage3);
+			DrawStretchedTexture(Canvas, Page3X, Page3Y, 128.0, 256.0, Map3BackgroundImage3);
 			DrawStretchedTexture(Canvas, Page4X, Page4Y, 256.0, 256.0, Map3BackgroundImage4);
 			DrawStretchedTexture(Canvas, Page5X, Page5Y, 256.0, 256.0, Map3BackgroundImage5);
 			DrawStretchedTexture(Canvas, Page6X, Page6Y, 256.0, 256.0, Map3BackgroundImage6);
+			*/
+			
+			DrawStretchedTextureSegment(Canvas, Page1X, Page1Y, 256.0, 256.0, 0.0, 0.0, Map3BackgroundImage1.USize, 		Map3BackgroundImage1.VSize, Map3BackgroundImage1);
+			DrawStretchedTextureSegment(Canvas, Page2X, Page2Y, 256.0, 256.0, 0.0, 0.0, Map3BackgroundImage2.USize, 		Map3BackgroundImage2.VSize, Map3BackgroundImage2);
+			DrawStretchedTextureSegment(Canvas, Page3X, Page3Y, 128.0, 256.0, 0.0, 0.0, Map3BackgroundImage3.USize / 2.0, 	Map3BackgroundImage3.VSize, Map3BackgroundImage3);
+			DrawStretchedTextureSegment(Canvas, Page4X, Page4Y, 256.0, 256.0, 0.0, 0.0, Map3BackgroundImage4.USize, 		Map3BackgroundImage4.VSize, Map3BackgroundImage4);
+			DrawStretchedTextureSegment(Canvas, Page5X, Page5Y, 256.0, 256.0, 0.0, 0.0, Map3BackgroundImage5.USize, 		Map3BackgroundImage5.VSize, Map3BackgroundImage5);
+			DrawStretchedTextureSegment(Canvas, Page6X, Page6Y, 128.0, 256.0, 0.0, 0.0, Map3BackgroundImage6.USize / 2.0, 	Map3BackgroundImage6.VSize, Map3BackgroundImage6);
 			break;
 	}
 }

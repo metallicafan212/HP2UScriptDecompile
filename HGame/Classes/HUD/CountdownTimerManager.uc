@@ -37,11 +37,6 @@ function LoadTimerBarGraphics ()
 	textureFullBar 		= Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EmptyBar",Class'Texture'));
 }
 
-function float GetHeightScale(Canvas C)
-{
-	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
-}
-
 function DrawCountdown (Canvas Canvas)
 {
 	local int Ox;
@@ -50,7 +45,7 @@ function DrawCountdown (Canvas Canvas)
 	local float fFullRatio;
 	local float fSegmentWidth;
 
-	fScaleFactor = Canvas.GetHudScaleFactor() * GetHeightScale(Canvas);
+	fScaleFactor = Canvas.GetHudScaleFactor() * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 	Ox = Canvas.SizeX - 8 * fScaleFactor - 205.0 * fScaleFactor;
 	Oy = Canvas.SizeY - 8 * fScaleFactor - 58.0 * fScaleFactor;
 	Canvas.SetPos(Ox,Oy);

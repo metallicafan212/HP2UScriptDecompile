@@ -28,11 +28,6 @@ function Paint (Canvas Canvas, float X, float Y)
 {
 }
 
-function float GetHeightScale()
-{
-	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
-}
-
 // Metallicafan212:	Blank function to call on all children when the height changes
 function RepositionChildControls()
 {
@@ -212,7 +207,7 @@ function AfterPaint (Canvas Canvas, float X, float Y)
 	local float HScale;
 	
 	// Metallicafan212:	Scale rollover
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 
 	if ( BackPageButton != None )
 	{

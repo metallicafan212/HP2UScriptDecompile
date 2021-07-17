@@ -2,7 +2,8 @@
 // VendorManager.
 //================================================================================
 
-class VendorManager extends Actor;
+// Metallicafan212:	No reason to not organize it
+class VendorManager extends HudItemManager;//Actor;
 
 const strVENDORBAR_LEFT= "HP2_Menu.Icons.HP2VendorBarLeft";
 const strVENDORBAR_RIGHT= "HP2_Menu.Icons.HP2VendorBarRight";
@@ -563,11 +564,6 @@ function RenderHud (Canvas canvas, bool bMenuMode, bool bFullCutMode, bool bHalf
 {
 }
 
-function float GetHeightScale(Canvas C)
-{
-	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
-}
-
 function DrawVendorBar (Canvas canvas)
 {
 	local Texture textureYesButton;
@@ -586,10 +582,10 @@ function DrawVendorBar (Canvas canvas)
 	
 	local float Offset;
 	
-	HScale = GetHeightScale(Canvas);
+	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 	
 	// Metallicafan212:	This needs to be offset to be in the center again
-	Offset = (256 - (256 * HScale)) * 2.0;
+	//Offset = (256 - (256 * HScale)) * 2.0;
 
 	VendorCanvas = Canvas;
 	fontSave = Canvas.Font;
@@ -610,7 +606,7 @@ function DrawVendorBar (Canvas canvas)
 		textureNoButton = textureVendorButtonNormal;
     }
 	
-	fBarX = GetVendorBarX(Canvas) + Offset;
+	fBarX = GetVendorBarX(Canvas); //+ Offset;
 	fBarY = GetVendorBarY(Canvas) * HScale;
 	
 	// Metallicafan212:	Left side
@@ -622,7 +618,7 @@ function DrawVendorBar (Canvas canvas)
 	canvas.DrawIcon(textureVendorBarRight, fScaleFactor * HScale); 
 	
 	// Metallicafan212:	What they're selling
-	canvas.SetPos(fBarX + (fVENDORBAR_PURCHASE_ITEM_X * fScaleFactor) - offset, fBarY + (fVENDORBAR_PURCHASE_ITEM_Y * fScaleFactor * HScale));
+	canvas.SetPos(fBarX + (fVENDORBAR_PURCHASE_ITEM_X * fScaleFactor * HScale), fBarY + (fVENDORBAR_PURCHASE_ITEM_Y * fScaleFactor * HScale));
 	canvas.DrawIcon(textureItemToSell, fScaleFactor * HScale);
 	
 	// Metallicafan212:	Yes button
@@ -660,7 +656,15 @@ function DrawVendorBar (Canvas canvas)
 
 function float GetVendorBarX (Canvas canvas)
 {
-	return ((canvas.SizeX / 2.0) - (canvas.GetHudScaleFactor() * (fVENDORBAR_W / 2.0)));
+	// Metallicafan212:	Add the offset
+	local float offset;
+	
+	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
+	
+	// Metallicafan212:	This needs to be offset to be in the center again
+	Offset = (128.0 / HScale) - (128.0 * HScale);//(256 - (256 * HScale)) * 2.0;
+	
+	return ((canvas.SizeX / 2.0) - (canvas.GetHudScaleFactor() * (fVENDORBAR_W / 2.0))) + Offset;
 }
 
 function float GetVendorBarY (Canvas canvas)
@@ -670,7 +674,6 @@ function float GetVendorBarY (Canvas canvas)
 
 function bool IsMouseOverVendorYes ()
 {
-	
 	return (IsMouseOverVendorButton(fVENDORBAR_YESBUTTON_X * HScale, fVENDORBAR_YESBUTTON_Y * HScale, fVENDORBAR_BUTTON_W, fVENDORBAR_BUTTON_H));
 }
 
@@ -685,9 +688,9 @@ function bool IsMouseOverVendorButton (int nLeft, int nTop, int nWidth, int nHei
 	local int nVendorMouseX;
 	local int nVendorMouseY;
 	local float fScaleFactor;
-	local float Offset;
+	//local float Offset;
 	
-	Offset = 256 - (256 * HScale);
+	//Offset = 256 - (256 * HScale);
 	
 	hpCon 			= HPConsole(Level.PlayerHarryActor.Player.Console);
 	fScaleFactor 	= VendorCanvas.GetHudScaleFactor();
@@ -695,9 +698,9 @@ function bool IsMouseOverVendorButton (int nLeft, int nTop, int nWidth, int nHei
 	nVendorMouseY 	= hpCon.MouseY * hpCon.Root.HGUIScale;//hpCon.Root.GUIScale;
 	nLeft 	*= fScaleFactor;
 	nTop 	*= fScaleFactor;
-	nWidth 	*= fScaleFactor;
-	nHeight *= fScaleFactor;
-	nLeft 	+= GetVendorBarX(VendorCanvas) + Offset;
+	nWidth 	*= fScaleFactor * HScale;
+	nHeight *= fScaleFactor * HScale;
+	nLeft 	+= GetVendorBarX(VendorCanvas);
 	nTop 	+= GetVendorBarY(VendorCanvas) * HScale;
 	if( (nVendorMouseX >= nLeft) && (nVendorMouseX <= (nLeft + nWidth)) )
 	{

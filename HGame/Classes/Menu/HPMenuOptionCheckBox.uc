@@ -26,8 +26,8 @@ function Checkbox_SetupSizes (HGameCheckbox W, Canvas C)
 	W.WinHeight = Max(TH + 1, 16);
 	W.ImageX 	= 0.0;
 	W.TextX 	= 13.0 + 4;
-	W.ImageY 	= ((W.WinHeight - 12) * GetHeightScale()) / 2;
-	W.TextY 	= ((W.WinHeight - TH) * GetHeightScale()) / 2;
+	W.ImageY 	= ((W.WinHeight - 12) * Class'M212HScale'.Static.UWindowGetHeightScale(Root)) / 2;
+	W.TextY 	= ((W.WinHeight - TH) * Class'M212HScale'.Static.UWindowGetHeightScale(Root)) / 2;
 	
 	if ( W.bChecked )
 	{

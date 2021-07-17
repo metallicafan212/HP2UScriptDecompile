@@ -11,15 +11,9 @@ var bool bStretchTex;
 
 var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
 
-// Metallicafan212:	Get the H Scale
-function float GetHeightScale()
-{
-	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
-}
-
 function float GetDHeightScale()
 {
-	return GetHeightScale() * GetHeightScale();
+	return Class'M212HScale'.Static.UWindowGetHeightScale(Root) * Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 }
 
 function float GetWidthScale()
@@ -56,7 +50,7 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	}
 	else
 	{
-		C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+		C.DrawTileClipped( Tex, W * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), H * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), tX, tY, tW, tH);
 	}
 	
 	C.SetClip(ClipX, ClipY);
@@ -75,7 +69,7 @@ function Resized()
 	
 	Super.Resized();
 	
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	// Metallicafan212:	Scale our wanted values
 	WinTop		= (WY * HScale) + YOffset;

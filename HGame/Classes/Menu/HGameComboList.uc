@@ -6,11 +6,6 @@ var float WVBorder;
 
 //var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
 
-// Metallicafan212:	Get the H Scale
-function float GetHeightScale()
-{
-	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
-}
 
 function float GetWidthScale()
 {
@@ -54,7 +49,7 @@ function Paint(Canvas C, float X, float Y)
 				DrawItem(C, I, HBorder, (VBorder + (ItemHeight * (Count - VertSB.Pos))), WinWidth - (2 * HBorder) - VertSB.WinWidth, ItemHeight);
 		}
 		else
-			DrawItem(C, I, HBorder * GetHeightScale(), (VBorder + (ItemHeight * Count)) * GetHeightScale(), WinWidth - (2 * HBorder), ItemHeight);
+			DrawItem(C, I, HBorder * Class'M212HScale'.Static.UWindowGetHeightScale(Root), (VBorder + (ItemHeight * Count)) * Class'M212HScale'.Static.UWindowGetHeightScale(Root), WinWidth - (2 * HBorder), ItemHeight);
 		Count++;
 	}
 }
@@ -94,7 +89,7 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	C.SetClip(Root.RealWidth, Root.RealHeight);//ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.GUIScale);
 
 	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
-	C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+	C.DrawTileClipped( Tex, W * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), H * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), tX, tY, tW, tH);
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
@@ -106,7 +101,7 @@ function Resized()
 	
 	Super.Resized();
 	
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	// Metallicafan212:	Scale our wanted values
 	WinTop		= WY * HScale;

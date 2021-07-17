@@ -215,7 +215,7 @@ function RepositionChildControls()
 	gameBoxWidth 	= 128;
 
 	
-	CalcGameBut = gameBoxWidth / GetHeightScale();
+	CalcGameBut = gameBoxWidth / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	for(i = 0; i < ArrayCount(playerHarry.quidGameResults); i++)
 	{		
@@ -225,10 +225,10 @@ function RepositionChildControls()
 		
 		// Metallicafan212:	Figure out the additional move we need to make, so that the crest is 64 away from the edge of the gameBox
 		
-		opponentCrests[i].WinLeft 		= startGameButtons[i].WinLeft + CalcGameBut - (64 / GetHeightScale());
+		opponentCrests[i].WinLeft 		= startGameButtons[i].WinLeft + CalcGameBut - (64 / Class'M212HScale'.Static.UWindowGetHeightScale(Root));
 		opponentCrests[i].Resized();
 		
-		opponentScores[i].WinLeft 		= startGameButtons[i].WinLeft + CalcGameBut - (64 / GetHeightScale());
+		opponentScores[i].WinLeft 		= startGameButtons[i].WinLeft + CalcGameBut - (64 / Class'M212HScale'.Static.UWindowGetHeightScale(Root));
 		opponentScores[i].Resized();
 		
 	}
@@ -289,7 +289,7 @@ function Created()
 		myCrests[i].DownTexture			= crestIcons[0]; 
 		myCrests[i].OverTexture			= crestIcons[0]; 
 
-		opponentCrests[i]				= HGameButton(CreateControl(class'HGameButton', startX + (col * gameSpaceX) + (64 / GetHeightScale()), startY + (row * gameSpaceY) + 5, 64, 64));
+		opponentCrests[i]				= HGameButton(CreateControl(class'HGameButton', startX + (col * gameSpaceX) + (64 / Class'M212HScale'.Static.UWindowGetHeightScale(Root)), startY + (row * gameSpaceY) + 5, 64, 64));
 		opponentCrests[i].Align			= TA_Center;
 		opponentCrests[i].UpTexture		= crestIcons[1+(i%3)]; 
 		opponentCrests[i].DownTexture	= crestIcons[1+(i%3)]; 
@@ -317,7 +317,7 @@ function Created()
 		myScores[i].bShadowText				= true;
 		myScores[i].setText("");
 
-		opponentScores[i]					= HGameLabelControl(CreateControl(class'HGameLabelControl', startX + (col * gameSpaceX) + (64 / GetHeightScale()), startY + (row * gameSpaceY) + 5 + 64,64,20));
+		opponentScores[i]					= HGameLabelControl(CreateControl(class'HGameLabelControl', startX + (col * gameSpaceX) + (64 / Class'M212HScale'.Static.UWindowGetHeightScale(Root)), startY + (row * gameSpaceY) + 5 + 64,64,20));
 		opponentScores[i].setFont(4);
 		opponentScores[i].TextColor.r		= 255;
 		opponentScores[i].TextColor.g		= 255;

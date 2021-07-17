@@ -238,18 +238,13 @@ function GetScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
   Log("ERROR: states need to override GetScorePosition()");
 }
 
-function float GetHeightScale(Canvas C)
-{
-	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
-}
-
 function GetInProgressScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
 {
 	local float fScaleFactor;
 
 	fScaleFactor = GetScaleFactor(Canvas);
 	nIconX 		= Canvas.SizeX / 2 - (128 / 2 * fScaleFactor);
-	nIconY 		= 4 * fScaleFactor * GetHeightScale(Canvas);
+	nIconY 		= 4 * fScaleFactor * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 	return;
 }
 
@@ -259,7 +254,7 @@ function GetTallyScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
 
 	fScaleFactor 	= GetScaleFactor(Canvas);
 	nIconX 			= Canvas.SizeX / 2 - (128 / 2 * fScaleFactor);
-	nIconY 			= 2 * fScaleFactor * GetHeightScale(Canvas);
+	nIconY 			= 2 * fScaleFactor * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 }
 
 function GetCurrScoreTextXY (out int nMidX, out int nMidY)
@@ -295,10 +290,10 @@ function DrawScore (Canvas Canvas, bool bMenuMode)
 	
 	local float Offset;
 	
-	HScale = GetHeightScale(Canvas);
+	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 	
 	// Metallicafan212:	This offset is to recenter the icon
-	Offset = 256 - (256 * HScale);
+	Offset = (128.0 / HScale) - (128.0 * HScale);//256 - (256 * HScale);
 
 	if ( bMenuMode )
 	{
@@ -690,7 +685,7 @@ state PostTallyHoldPoints
 		}
 			
 		// Metallicafan212:	Get the scale
-		HScale = GetHeightScale(Canvas);
+		HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 		
 	
 		fScaleFactor = GetScaleFactor(Canvas) * HScale;

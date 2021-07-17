@@ -98,7 +98,7 @@ function PaintToolTipText (Canvas Canvas, float fScaleFactor)
 	// Metallicafan212:	Move it up
 	local float HScale;
 	
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 
 	PlayerHarry = harry(Root.Console.Viewport.Actor);
 	if ( Canvas.SizeX <= 512 )
@@ -150,8 +150,8 @@ function PaintObjectiveText (Canvas Canvas, float fScaleFactor)
 		colorText.G = 255;
 		colorText.B = 255;
 	
-		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,GetLocalFEString("InGameMenu_0027"), 14 * fScaleFactor, 400 * fScaleFactor * GetHeightScale(), 16 * fScaleFactor, colorText, fontText);
-		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strObjective, 14 * fScaleFactor, 416 * fScaleFactor * GetHeightScale(), 58 * fScaleFactor, colorText, fontText, 626.0 * fScaleFactor);
+		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,GetLocalFEString("InGameMenu_0027"), 14 * fScaleFactor, 400 * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root), 16 * fScaleFactor, colorText, fontText);
+		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strObjective, 14 * fScaleFactor, 416 * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root), 58 * fScaleFactor, colorText, fontText, 626.0 * fScaleFactor);
 	}
 }
 
@@ -163,7 +163,7 @@ function PaintCountText (Canvas Canvas, float fScaleFactor)
 	local float hScale;
 	
 	// Metallicafan212:	Calc once
-	hScale = GetHeightScale();
+	hScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 
 	managerStatus = harry(Root.Console.Viewport.Actor).managerStatus;
 	si = managerStatus.GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts');
@@ -190,7 +190,7 @@ function DrawCount (Canvas Canvas, float fScaleFactor, int nButtonLeft, int nBut
 	local float hScale;
 	
 	// Metallicafan212:	Calc once
-	hScale = GetHeightScale();
+	hScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 
 	fontSave = Canvas.Font;
 	managerStatus = harry(Root.Console.Viewport.Actor).managerStatus;
@@ -209,7 +209,7 @@ function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
 
 	fScaleFactor = nCanvasSizeX / WinWidth;
 	//return nCanvasSizeY - 88 * fScaleFactor = return;
-	return (nCanvasSizeY - 88 * fScaleFactor * GetHeightScale());
+	return (nCanvasSizeY - 88 * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root));
 }
 
 function Created ()

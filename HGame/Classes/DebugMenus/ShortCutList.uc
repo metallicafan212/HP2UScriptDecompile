@@ -17,15 +17,16 @@ function LaunchShortcut (int Row)
 
 function OnLaunchButton ()
 {
-  LaunchShortcut(SelectedRow);
+	LaunchShortcut(SelectedRow);
 }
 
 function Created ()
 {
-  Super.Created();
-  RowHeight = 12.0;
-  bShowHorizSB = True;
-  bAlwaysOnTop = True;
+	Super.Created();
+	
+	RowHeight = 12.0;
+	bShowHorizSB = True;
+	bAlwaysOnTop = True;
 }
 
 function Paint (Canvas Canvas, float X, float Y)
@@ -43,13 +44,13 @@ function DoubleClickRow (int Row)
 
 function SelectRow (int Row)
 {
-  local int CurRow;
+	local int CurRow;
 
-  CurRow = VertSB.Pos + Row;
-  if ( Row != SelectedRow && CurRow < NumRows )
-  {
-    SelectedRow = CurRow;
-  }
+	CurRow = VertSB.Pos + Row;
+	if ( Row != SelectedRow && CurRow < NumRows )
+	{
+		SelectedRow = CurRow;
+	}
 }
 
 function RightClickRow (int Row, float X, float Y)

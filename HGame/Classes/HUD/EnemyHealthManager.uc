@@ -95,11 +95,6 @@ auto state Idle
 {
 }
 
-function float GetHeightScale(Canvas C)
-{
-	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
-}
-
 state DisplayEnemyHealth
 {
 	event Tick (float fDelta)
@@ -126,7 +121,7 @@ state DisplayEnemyHealth
 		local float fSegmentWidth;
 		local float fSegmentStartAt;
   
-		fScaleFactor = GetScaleFactor(Canvas) * GetHeightScale(Canvas);
+		fScaleFactor = GetScaleFactor(Canvas) * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 		fIconX = 4.0 * fScaleFactor;
 		fIconY = Canvas.SizeY - fScaleFactor * 110.0;
 		Canvas.SetPos(fIconX,fIconY);

@@ -20,11 +20,6 @@ var Texture FEMessageBoxBg;
 var Texture FENormalButtonTexture;
 var Texture FEROButtonTexture;
 
-function float GetHeightScale()
-{
-	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
-}
-
 function ResolutionChanged(float W, float H)
 {
 	Super.ResolutionChanged(W, H);
@@ -39,7 +34,7 @@ function Resized()
 	
 	Super.Resized();
 	
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	// Metallicafan212:	Scale our wanted values
 	WinTop		= WY * HScale;
@@ -85,7 +80,7 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 
 	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
 	
-	C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+	C.DrawTileClipped( Tex, W * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), H * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), tX, tY, tW, tH);
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
@@ -152,7 +147,7 @@ function ScaleAndDraw (Canvas Canvas, float X, float Y, Texture Tex)
 	//FX = Canvas.SizeX / 640.0;
 	//fy = Canvas.SizeY / 480.0;
 	FX = 1.0;//(4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);//1.0;
-	fy = GetHeightScale();//1.0;
+	fy = Class'M212HScale'.Static.UWindowGetHeightScale(Root);//1.0;
 	DrawStretchedTexture(Canvas,X * FX, Y * FY, Tex.USize * FX, Tex.VSize * fy, Tex);
 }
 

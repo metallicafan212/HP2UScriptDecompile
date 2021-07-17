@@ -5,11 +5,6 @@ var float WX, WY, WW, WH, WEditBoxWidth;
 
 //var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
 
-// Metallicafan212:	Get the H Scale
-function float GetHeightScale()
-{
-	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
-}
 
 function float GetWidthScale()
 {
@@ -17,17 +12,49 @@ function float GetWidthScale()
 }
 
 function ResolutionChanged(float W, float H)
-{
+{	
 	Super.ResolutionChanged(W, H);
 	
 	// Metallicafan212:	Say we were resized
 	Resized();
+	
+	ClippingRegion.X = 0;
+	ClippingRegion.Y = 0;
+	ClippingRegion.W = WinWidth;
+	ClippingRegion.H = WinHeight;
+	
+	EditBox.WinLeft		= 0;
+	EditBox.WinWidth 	= WinWidth - 12;
+	EditBox.WinHeight	= WinHeight;
+	EditBox.Resized();
+	
+	Button.WinLeft		= 0;
+	Button.WinWidth 	= WinWidth - 12;
+	Button.Resized();
+	
+	if(LeftButton != none)
+	{
+		LeftButton.WinLeft		= 0;
+		LeftButton.WinWidth 	= WinWidth - 12;
+		LeftButton.Resized();
+	}
+	
+	if(RightButton != none)
+	{
+		RightButton.WinLeft		= 0;
+		RightButton.WinWidth 	= WinWidth - 12;
+		RightButton.Resized();
+	}
+		
 }
 
+/*
 function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float H, 
 									  float tX, float tY, float tW, float tH, texture Tex ) 
 {
-	local float OrgX, OrgY, ClipX, ClipY;
+	local float OrgX, OrgY, ClipX, ClipY, HScale;
+	
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 
 	OrgX = C.OrgX;
 	OrgY = C.OrgY;
@@ -38,11 +65,12 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	C.SetClip(Root.RealWidth, Root.RealHeight);//ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.GUIScale);
 
 	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
-	C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+	C.DrawTileClipped( Tex, W * Root.GUIScale * HScale, H * Root.GUIScale * HScale, tX, tY, tW, tH);
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
 }
+*/
 
 function Resized()
 {
@@ -50,12 +78,13 @@ function Resized()
 	
 	Super.Resized();
 	
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	// Metallicafan212:	Scale our wanted values
 	WinTop		= WY * HScale;
 	WinWidth	= WW * HScale;
 	WinHeight	= WH * HScale;
+	WinLeft		= WX;
 	
 	EditBoxWidth	= WEditBoxWidth * HScale;
 	
@@ -73,13 +102,6 @@ function Created()
 	WH = WinHeight;
 	
 	WEditBoxWidth = EditBoxWidth;
-	
-	/*
-	WUpRegion 			= UpRegion;
-	WDownRegion			= DownRegion;
-	WDisabledRegion		= DisabledRegion;
-	WOverRegion			= OverRegion;
-	*/
 	
 	// Metallicafan212:	Now scale them
 	Resized();

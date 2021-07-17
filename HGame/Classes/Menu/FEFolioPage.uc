@@ -145,8 +145,8 @@ function Created ()
 		SmallCardBmp[I].bStretched = True;
 	
 		// Metallicafan212:	Correct the card images
-		SmallCardBmp[i].WW = 60.0 / GetHeightScale();
-		SmallCardBmp[i].WH = 60.0 / GetHeightScale();
+		SmallCardBmp[i].WW = 60.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+		SmallCardBmp[i].WH = 60.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	}
 	GoldButton = HGameButton(CreateWindow(Class'HGameButton',12.0,70.0,50.0,48.0));
 	GoldButton.Register(self);
@@ -569,7 +569,7 @@ function Notify (UWindowDialogControl C, byte E)
 
 function float GetDHeightScale()
 {
-	return GetHeightScale() * GetHeightScale();
+	return Class'M212HScale'.Static.UWindowGetHeightScale(Root) * Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 }
 
 function RepositionChildControls()
@@ -584,8 +584,8 @@ function RepositionChildControls()
 	// Metallicafan212:	Correct the card images
 	for(I = 0; I < ArrayCount(SmallCardBmp); I++)
 	{
-		SmallCardBmp[i].WW = 60.0 / GetHeightScale();
-		SmallCardBmp[i].WH = 60.0 / GetHeightScale();
+		SmallCardBmp[i].WW = 60.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+		SmallCardBmp[i].WH = 60.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	}
 	
 }
@@ -594,8 +594,8 @@ function HiliteCurrCard()
 {
 	if ( nCurrItemOnPage < 10 )
 	{
-		nCardGlowLeft = SmallCardBmp[nCurrItemOnPage].WinLeft + (-33 * GetHeightScale());
-		nCardGlowTop = SmallCardBmp[nCurrItemOnPage].WinTop + (-33 * GetHeightScale());;
+		nCardGlowLeft = SmallCardBmp[nCurrItemOnPage].WinLeft + (-33 * Class'M212HScale'.Static.UWindowGetHeightScale(Root));
+		nCardGlowTop = SmallCardBmp[nCurrItemOnPage].WinTop + (-33 * Class'M212HScale'.Static.UWindowGetHeightScale(Root));;
 
 		switch (CurrCardGroup)
 		{
@@ -624,8 +624,8 @@ function HiliteCurrCard()
 	} 
 	else 
 	{
-		nCardGlowLeft 		= HarryCardBmp.WinLeft + (-64 * GetHeightScale());
-		nCardGlowTop 		= HarryCardBmp.WinTop + (-64 * GetHeightScale());
+		nCardGlowLeft 		= HarryCardBmp.WinLeft + (-64 * Class'M212HScale'.Static.UWindowGetHeightScale(Root));
+		nCardGlowTop 		= HarryCardBmp.WinTop + (-64 * Class'M212HScale'.Static.UWindowGetHeightScale(Root));
 		textureCurrGlow 	= textureGoldBigGlow;
 		HilitedCard 		= HarryCardBmp;
 		fHilitedCardScale 	= -0.5;
@@ -637,7 +637,7 @@ function AfterPaint (Canvas Canvas, float X, float Y)
 	local float fScaleFactor;
 
 	Super.AfterPaint(Canvas,X,Y);
-	fScaleFactor = (Canvas.SizeX / WinWidth) * GetHeightScale();
+	fScaleFactor = (Canvas.SizeX / WinWidth) * Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	PaintLargeCard(Canvas,fScaleFactor);
 	PaintWizardText(Canvas,fScaleFactor);
 	PaintCardStatData(Canvas,fScaleFactor);
@@ -656,7 +656,7 @@ function BeforePaint (Canvas Canvas, float X, float Y)
 	
 	// Metallicafan212:	Move it down
 	Canvas.SetPos(nCardGlowLeft * fScaleFactor, (nCardGlowTop * fScaleFactor));
-	Canvas.DrawIcon(textureCurrGlow, fScaleFactor * GetHeightScale());
+	Canvas.DrawIcon(textureCurrGlow, fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root));
 	Canvas.Style 	= nStyleSave;
 }
 
@@ -673,7 +673,7 @@ function HiliteSelectedCard (Canvas Canvas)
 		Canvas.Style 	= 3;
 		Canvas.SetPos(HilitedCard.WinLeft * fScaleFactor, HilitedCard.WinTop * fScaleFactor);
 		
-		Canvas.DrawIcon(HilitedCard.OverTexture, (fScaleFactor + fHilitedCardScale * fScaleFactor) * GetHeightScale() );
+		Canvas.DrawIcon(HilitedCard.OverTexture, (fScaleFactor + fHilitedCardScale * fScaleFactor) * Class'M212HScale'.Static.UWindowGetHeightScale(Root) );
 		Canvas.Style 	= nSaveStyle;
 	}
 }
@@ -758,80 +758,104 @@ function PaintWizardText (Canvas Canvas, float fScaleFactor)
 
 function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
 {
-  local Font fontSave;
-  local int nXPos;
-  local int nYPos;
-  local float fXTextLen;
-  local float fYTextLen;
-  local int I;
-  local float fWindowScaleFactor;
-  local Color colorOffWhite;
-  local Color colorBlack;
+	local Font fontSave;
+	local int nXPos;
+	local int nYPos;
+	local float fXTextLen;
+	local float fYTextLen;
+	local int I;
+	local float fWindowScaleFactor;
+	local Color colorOffWhite;
+	local Color colorBlack;
+  
+	// Metallicafan212:	Height scaling
+	local float HScale;
+	
+	local float fHWindowScaleFactor;
+	
+	// Metallicafan212:	Cache this stupid value
+	local float Over;
 
-  fontSave = Canvas.Font;
-  fWindowScaleFactor = Canvas.SizeX / WinWidth;
-  colorBlack.R = 0;
-  colorBlack.G = 0;
-  colorBlack.B = 0;
-  colorOffWhite.R = 206;
-  colorOffWhite.G = 200;
-  colorOffWhite.B = 190;
-  if ( Canvas.SizeX <= 512 )
-  {
-    Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
-  } else {
-    if ( Canvas.SizeX <= 640 )
-    {
-      Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
-    } else {
-      Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
+	
+	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
+
+	fontSave = Canvas.Font;
+	fWindowScaleFactor = Canvas.SizeX / WinWidth;
+	
+	fHWindowScaleFactor = fWindowScaleFactor * HScale;
+	
+	Over = fHWindowScaleFactor * 40;
+	
+	colorBlack.R = 0;
+	colorBlack.G = 0;
+	colorBlack.B = 0;
+	colorOffWhite.R = 206;
+	colorOffWhite.G = 200;
+	colorOffWhite.B = 190;
+	
+	if ( Canvas.SizeX <= 512 )
+	{
+		Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
+	} 
+	else if ( Canvas.SizeX <= 640 )
+	{
+		Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
+    } 
+	else 
+	{
+		Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
     }
-  }
-  Canvas.TextSize(strCardCountGold,fXTextLen,fYTextLen);
-  Canvas.SetPos(GoldButton.WinLeft * fWindowScaleFactor + 40 * fWindowScaleFactor - fXTextLen / 2,GoldButton.WinTop * fWindowScaleFactor + 40 * fWindowScaleFactor - fYTextLen / 2);
-  Canvas.DrawShadowText(strCardCountGold,colorOffWhite,colorBlack);
-  Canvas.TextSize(strCardCountSilver,fXTextLen,fYTextLen);
-  Canvas.SetPos(SilverButton.WinLeft * fWindowScaleFactor + 40 * fWindowScaleFactor - fXTextLen / 2,SilverButton.WinTop * fWindowScaleFactor + 40 * fWindowScaleFactor - fYTextLen / 2);
-  Canvas.DrawShadowText(strCardCountSilver,colorOffWhite,colorBlack);
-  Canvas.TextSize(strCardCountBronze,fXTextLen,fYTextLen);
-  Canvas.SetPos(BronzeButton.WinLeft * fWindowScaleFactor + 38 * fWindowScaleFactor - fXTextLen / 2,BronzeButton.WinTop * fWindowScaleFactor + 38 * fWindowScaleFactor - fYTextLen / 2);
-  Canvas.DrawShadowText(strCardCountBronze,colorOffWhite,colorBlack);
-  nXPos = (BronzeButton.WinLeft + BronzeButton.WinWidth + 24) * fWindowScaleFactor; 
-  nYPos = BronzeButton.WinTop * fWindowScaleFactor;
-  // if ( I < nBronzeHealthBars )
-  for(I = 0; I < nBronzeHealthBars; i++)
-  {
-    Canvas.SetPos(nXPos,nYPos);
-    Canvas.DrawIcon(textureBronzeHealth,fWindowScaleFactor);
-    nXPos += 14 * fWindowScaleFactor;
-    // goto JL038C;
-  }
-  nXPos = (SilverButton.WinLeft + SilverButton.WinWidth + 24) * fWindowScaleFactor;
-  nYPos = SilverButton.WinTop * fWindowScaleFactor;
-  // if ( I < nSilverKeys )
-  for(I = 0; I < nSilverKeys; I++)
-  {
-    Canvas.SetPos(nXPos,nYPos);
-    Canvas.DrawIcon(textureSilverKey,fWindowScaleFactor - 0.31);
-    nXPos += 28 * (fWindowScaleFactor - 0.31);
-    // goto JL0441;
-  }
-  Canvas.Font = fontSave;
+  
+	// Metallicafan212:	Gold count
+	Canvas.TextSize(strCardCountGold, fXTextLen, fYTextLen);
+	Canvas.SetPos(GoldButton.WinLeft * fWindowScaleFactor + Over - fXTextLen / 2, (GoldButton.WinTop * fWindowScaleFactor + Over - fYTextLen / 2));
+	Canvas.DrawShadowText(strCardCountGold,colorOffWhite,colorBlack);
+	
+	// Metallicafan212:	Silver count
+	Canvas.TextSize(strCardCountSilver, fXTextLen, fYTextLen);
+	Canvas.SetPos(SilverButton.WinLeft * fWindowScaleFactor + Over - fXTextLen / 2, (SilverButton.WinTop * fWindowScaleFactor + Over - fYTextLen / 2));
+	Canvas.DrawShadowText(strCardCountSilver,colorOffWhite,colorBlack);
+	
+	// Metallicafan212:	Bronze count
+	Canvas.TextSize(strCardCountBronze, fXTextLen, fYTextLen);
+	Canvas.SetPos(BronzeButton.WinLeft * fWindowScaleFactor + Over - fXTextLen / 2, (BronzeButton.WinTop * fWindowScaleFactor + Over - fYTextLen / 2));
+	Canvas.DrawShadowText(strCardCountBronze,colorOffWhite,colorBlack);
+	
+	nXPos = (BronzeButton.WinLeft + BronzeButton.WinWidth + 24) * fHWindowScaleFactor; 
+	nYPos = BronzeButton.WinTop * fWindowScaleFactor * HScale;
+	
+	for(I = 0; I < nBronzeHealthBars; i++)
+	{
+		Canvas.SetPos(nXPos,nYPos);
+		Canvas.DrawIcon(textureBronzeHealth, fHWindowScaleFactor);
+		nXPos += 14 * fHWindowScaleFactor;
+	}
+	
+	nXPos = (SilverButton.WinLeft + SilverButton.WinWidth + 24) * fHWindowScaleFactor;
+	nYPos = SilverButton.WinTop * fWindowScaleFactor * HScale;
+	
+	for(I = 0; I < nSilverKeys; I++)
+	{
+		Canvas.SetPos(nXPos,nYPos);
+		Canvas.DrawIcon(textureSilverKey, fHWindowScaleFactor - 0.31);
+		nXPos += 28 * (fHWindowScaleFactor - 0.31);
+	}
+	
+	Canvas.Font = fontSave;
 }
 
 function int GetStatusY ()
 {
-  // return 374;
-  return nSTATUS_BAR_Y;
+	return nSTATUS_BAR_Y;
 }
 
 function PreSwitchPage ()
 {
-  PlayerHarry = harry(Root.Console.Viewport.Actor);
-  InitHarryOwnedCards();
-  SetCardCountData();
-  SetInitialSelection();
-  Super.PreSwitchPage();
+	PlayerHarry = harry(Root.Console.Viewport.Actor);
+	InitHarryOwnedCards();
+	SetCardCountData();
+	SetInitialSelection();
+	Super.PreSwitchPage();
 }
 
 function InitHarryOwnedCards ()

@@ -5,12 +5,6 @@ var float WX, WY, WW, WH;
 
 //var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
 
-// Metallicafan212:	Get the H Scale
-function float GetHeightScale()
-{
-	return (4.0 / 3.0) / (Root.RealWidth / Root.RealHeight);
-}
-
 function float GetWidthScale()
 {
 	return (3.0 / 4.0) / (Root.RealHeight / Root.RealWidth);
@@ -30,7 +24,7 @@ function Resized()
 	
 	Super.Resized();
 	
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	// Metallicafan212:	Scale our wanted values
 	//WinLeft		= WX * (HScale * 2);
@@ -71,7 +65,7 @@ function BeforePaint(Canvas C, float X, float Y)
 	
 	//W *= GetHeightScale();
 	
-	TextY = ((WinHeight - H) * GetHeightScale()) / 2;
+	TextY = ((WinHeight - H) * Class'M212HScale'.Static.UWindowGetHeightScale(Root)) / 2;
 	
 	switch (Align)
 	{

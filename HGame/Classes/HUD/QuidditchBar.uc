@@ -96,11 +96,6 @@ auto state Idle
 {    
 }
 
-function float GetHeightScale(Canvas C)
-{
-	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
-}
-
 state DisplayQBar
 {
     event Tick(float fDelta)
@@ -144,7 +139,7 @@ state DisplayQBar
         local bool empty;
 
         colorSave = Canvas.DrawColor;
-        fScaleFactor = GetScaleFactor(Canvas) * GetHeightScale(Canvas);
+        fScaleFactor = GetScaleFactor(Canvas) * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
         fIconX = Canvas.SizeX - (fScaleFactor * 132.0);
         fIconY = Canvas.SizeY - (fScaleFactor * 80.0);
         Canvas.SetPos(fIconX, fIconY);

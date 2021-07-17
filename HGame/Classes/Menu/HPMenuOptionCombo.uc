@@ -74,6 +74,29 @@ function Paint (Canvas C, float X, float Y)
     }
 }
 
+// Metallicafan212:	Implement this here
+function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float H, 
+									  float tX, float tY, float tW, float tH, texture Tex ) 
+{
+	local float OrgX, OrgY, ClipX, ClipY, HScale;
+	
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+
+	OrgX = C.OrgX;
+	OrgY = C.OrgY;
+	ClipX = C.ClipX;
+	ClipY = C.ClipY;
+
+	C.SetOrigin(OrgX + ClippingRegion.X * Root.GUIScale, OrgY + ClippingRegion.Y * Root.GUIScale);
+	C.SetClip(Root.RealWidth, Root.RealHeight);//ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.GUIScale);
+
+	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
+	C.DrawTileClipped( Tex, W * Root.GUIScale * HScale, H * Root.GUIScale * HScale, tX, tY, tW, tH);
+	
+	C.SetClip(ClipX, ClipY);
+	C.SetOrigin(OrgX, OrgY);
+}
+
 function CloseUpWithNoSound ()
 {
 	bListVisible = False;

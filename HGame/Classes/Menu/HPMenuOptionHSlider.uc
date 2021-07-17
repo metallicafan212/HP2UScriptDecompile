@@ -46,7 +46,7 @@ function BeforePaint (Canvas C, float X, float Y)
 	
 	local float HScale;
 	
-	HScale = GetHeightScale();
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 
 	TextSize(C, Text, W, H);
 	
@@ -74,11 +74,11 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	
 	if(bStretchTex)
 	{
-		C.DrawTileClipped(Tex, W * Root.GUIScale, H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+		C.DrawTileClipped(Tex, W * Root.GUIScale, H * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), tX, tY, tW, tH);
 	}
 	else
 	{
-		C.DrawTileClipped( Tex, W * Root.GUIScale * GetHeightScale(), H * Root.GUIScale * GetHeightScale(), tX, tY, tW, tH);
+		C.DrawTileClipped( Tex, W * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), H * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), tX, tY, tW, tH);
 	}
 	
 	C.SetClip(ClipX, ClipY);

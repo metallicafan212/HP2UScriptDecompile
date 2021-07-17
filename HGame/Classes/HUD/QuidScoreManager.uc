@@ -180,11 +180,6 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
   //}
 }
 
-function float GetHeightScale(Canvas C)
-{
-	return (4.0 / 3.0) / (C.SizeX / float(C.SizeY));
-}
-
 function DrawQuidScore (Canvas Canvas)
 {
 	local float fScaleFactor;
@@ -205,7 +200,7 @@ function DrawQuidScore (Canvas Canvas)
 	local float HScale;
 	
 	// Metallicafan212:	Do scaling
-	HScale = GetHeightScale(Canvas);
+	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 
 
 	fontSave = Canvas.Font;
@@ -248,10 +243,10 @@ function DrawQuidScore (Canvas Canvas)
 		}
 	}
 	Canvas.TextSize(strGryffScore,nXTextLen,nYTextLen);
-	Canvas.SetPos(nGryffIconX + (45 * fScaleFactor) - nXTextLen / 2, (nGryffIconY + (50 * fScaleFactor) - nYTextLen / 2) * HScale);
+	Canvas.SetPos(nGryffIconX + (45 * fScaleFactor * HScale) - nXTextLen / 2, (nGryffIconY + (50 * fScaleFactor) - nYTextLen / 2) * HScale);
 	Canvas.DrawShadowText(strGryffScore,colorOffWhite,colorBlack);
 	Canvas.TextSize(strOpponentScore,nXTextLen,nYTextLen);
-	Canvas.SetPos(nOpponIconX + (45 * fScaleFactor) - nXTextLen / 2, (nOpponIconY + (50 * fScaleFactor) - nYTextLen / 2) * HScale);
+	Canvas.SetPos(nOpponIconX + (45 * fScaleFactor * HScale) - nXTextLen / 2, (nOpponIconY + (50 * fScaleFactor) - nYTextLen / 2) * HScale);
 	Canvas.DrawText(strOpponentScore,False);
 	Canvas.Font = fontSave;
 }
@@ -269,7 +264,7 @@ function DrawTallyHousepoints (Canvas Canvas)
 	
 	local float HScale;
 	
-	HScale = GetHeightScale(Canvas);
+	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 
 	colorSave = Canvas.DrawColor;
 	fontSave = Canvas.Font;
@@ -285,7 +280,7 @@ function DrawTallyHousepoints (Canvas Canvas)
 	Canvas.DrawColor.G = 0;
 	Canvas.DrawColor.B = 0;
 	Canvas.TextSize(strPoints,nXTextLen,nYTextLen);
-	Canvas.SetPos(nPointsIconX + 65 * fScaleFactor - (nXTextLen / 2), (nPointsIconY + 87 * fScaleFactor - (nYTextLen / 2)) * HScale);
+	Canvas.SetPos(nPointsIconX + 65 * fScaleFactor * HScale - (nXTextLen / 2), (nPointsIconY + 87 * fScaleFactor - (nYTextLen / 2)) * HScale);
 	Canvas.DrawText(strPoints,False);
 	Canvas.DrawColor = colorSave;
 	Canvas.Font = fontSave;

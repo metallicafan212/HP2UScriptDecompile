@@ -21,7 +21,7 @@ function BeforePaint (Canvas C, float X, float Y)
 	TextSize(C,Text,W,H);
 	
 	// Metallicafan212:	Scale it
-	TextY = ((WinHeight - H) * GetHeightScale()) / 2;
+	TextY = ((WinHeight - H) * Class'M212HScale'.Static.UWindowGetHeightScale(Root)) / 2;
 	switch (Align)
 	{
 		// case 0:

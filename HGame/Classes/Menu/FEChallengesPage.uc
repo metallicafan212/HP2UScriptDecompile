@@ -48,7 +48,7 @@ function Created()
     ScoreButtons[I].TextColor.G = 255;
     ScoreButtons[I].TextColor.B = 255;
     // ScoreButtons[I].Align = 0;
-	NameButtons[I].Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
+	ScoreButtons[I].Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
     ScoreButtons[I].bShadowText = True;
     // I++;
     // goto JL0104;

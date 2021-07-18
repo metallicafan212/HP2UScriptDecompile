@@ -198,7 +198,7 @@ function DrawCount (Canvas Canvas, float fScaleFactor, int nButtonLeft, int nBut
 	Canvas.DrawColor = si.GetCountColor();
 	Canvas.Font = si.GetCountFont(Canvas);
 	Canvas.TextSize(strCount,fXTextLen,fYTextLen);
-	Canvas.SetPos((nButtonLeft + 50) * fScaleFactor - fXTextLen / 2, (nButtonTop + 58) * (fScaleFactor * hScale) - fYTextLen / 2);
+	Canvas.SetPos(((nButtonLeft + (50 * HScale)) * fScaleFactor - fXTextLen / 2), (nButtonTop + 58) * (fScaleFactor * hScale) - fYTextLen / 2);
 	Canvas.DrawShadowText(strCount, si.GetCountColor(), si.GetCountColor(True));
 	Canvas.Font = fontSave;
 }

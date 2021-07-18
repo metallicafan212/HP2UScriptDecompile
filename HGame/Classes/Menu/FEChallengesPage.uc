@@ -15,63 +15,88 @@ var HGameLabelControl NoneWonLabel;
 
 function Created ()
 {
-  local int I;
-  local int nStartY;
+	local int I;
+	local int nStartY;
 
-  CreateBackPageButton();
-  CreateTitleButton(GetLocalFEString("Report_Card_0008"));
-  NoneWonLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',WinWidth / 2 - 200,100.0,400.0,30.0));
-  NoneWonLabel.SetFont(4);
-  NoneWonLabel.TextColor.R = 255;
-  NoneWonLabel.TextColor.G = 255;
-  NoneWonLabel.TextColor.B = 255;
-  // NoneWonLabel.Align = 2;
-  NoneWonLabel.Align = TA_Center; //from UWindowBase.uc in the proto -AdamJD 
-  NoneWonLabel.bShadowText = True;
-  NoneWonLabel.SetText(GetLocalFEString("Main_Menu_0011"));
-  nStartY = 100;
-  // I = 0;
-  // if ( I < 4 )
-  for(I = 0; I < 4; I++)
-  {
-    NameButtons[I] = HGameButton(CreateControl(Class'HGameButton',100.0,nStartY + I * 26,200.0,20.0));
-    NameButtons[I].SetFont(4);
-    NameButtons[I].TextColor.R = 255;
-    NameButtons[I].TextColor.G = 255;
-    NameButtons[I].TextColor.B = 255;
-    // NameButtons[I].Align = 0;
-	NameButtons[I].Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
-    NameButtons[I].bShadowText = True;
-    ScoreButtons[I] = HGameButton(CreateControl(Class'HGameButton',440.0,nStartY + I * 26,200.0,20.0));
-    ScoreButtons[I].SetFont(4);
-    ScoreButtons[I].TextColor.R = 255;
-    ScoreButtons[I].TextColor.G = 255;
-    ScoreButtons[I].TextColor.B = 255;
-    // ScoreButtons[I].Align = 0;
-	NameButtons[I].Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
-    ScoreButtons[I].bShadowText = True;
-    // I++;
-    // goto JL0104;
-  }
-  NameButtons[0].SetText(GetLocalFEString("Maps_0006"));
-  NameButtons[1].SetText(GetLocalFEString("Maps_0008"));
-  NameButtons[2].SetText(GetLocalFEString("Maps_0011"));
-  NameButtons[3].SetText(GetLocalFEString("Maps_0001"));
-  Super.Created();
+	CreateBackPageButton();
+	CreateTitleButton(GetLocalFEString("Report_Card_0008"));
+	
+	NoneWonLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',WinWidth / 2 - 200,100.0,400.0,30.0));
+	NoneWonLabel.SetFont(4);
+	NoneWonLabel.TextColor.R = 255;
+	NoneWonLabel.TextColor.G = 255;
+	NoneWonLabel.TextColor.B = 255;
+	
+	NoneWonLabel.Align = TA_Center; //from UWindowBase.uc in the proto -AdamJD 
+	NoneWonLabel.bShadowText = True;
+	NoneWonLabel.SetText(GetLocalFEString("Main_Menu_0011"));
+	nStartY = 100;
+	
+	for(I = 0; I < 4; I++)
+	{
+		NameButtons[I] = HGameButton(CreateControl(Class'HGameButton', 100.0, nStartY + I * 26, 200.0, 20.0));
+		NameButtons[I].SetFont(4);
+		NameButtons[I].TextColor.R 	= 255;
+		NameButtons[I].TextColor.G 	= 255;
+		NameButtons[I].TextColor.B 	= 255;
+		NameButtons[I].Align 		= TA_Left; //from UWindowBase.uc in the proto -AdamJD 
+		NameButtons[I].bShadowText 	= True;
+	
+		ScoreButtons[I] = HGameButton(CreateControl(Class'HGameButton', 440.0, nStartY + I * 26, 200.0, 20.0));
+		ScoreButtons[I].SetFont(4);
+		ScoreButtons[I].TextColor.R = 255;
+		ScoreButtons[I].TextColor.G = 255;
+		ScoreButtons[I].TextColor.B = 255;
+		ScoreButtons[I].Align 		= TA_Left; //from UWindowBase.uc in the proto -AdamJD 
+		ScoreButtons[I].bShadowText = True;
+	}
+	
+	NameButtons[0].SetText(GetLocalFEString("Maps_0006"));
+	NameButtons[1].SetText(GetLocalFEString("Maps_0008"));
+	NameButtons[2].SetText(GetLocalFEString("Maps_0011"));
+	NameButtons[3].SetText(GetLocalFEString("Maps_0001"));
+  
+	Super.Created();
+	
+	RepositionChildControls();
+}
+
+function RepositionChildControls()
+{
+	local int i;
+	
+	local float HScale, offset;
+	
+	HScale = class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	
+	Offset = (32.0 / HScale) - (32.0 * HScale);
+	
+	Super.RepositionChildControls();
+	
+	// Metallicafan212:	Move the name buttons over to the left, the score buttons to the right
+	for(i = 0; i < 4; i++)
+	{
+		NameButtons[i].WX = 100.0 * HScale;
+		NameButtons[i].Resized();
+		
+		ScoreButtons[i].WX = 440.0 + Offset;//440.0 / HScale;
+		ScoreButtons[i].Resized();
+	}
 }
 
 function Notify (UWindowDialogControl C, byte E)
 {
-  local int I;
+	local int I;
 
-  if ( E == 2 )
-  {
-    if ( C == BackPageButton )
-    {
-      FEBook(book).DoEscapeFromPage();
-    }
-  }
-  Super.Notify(C,E);
+	if ( E == 2 )
+	{
+		if ( C == BackPageButton )
+		{
+			FEBook(book).DoEscapeFromPage();
+		}
+	}
+	
+	Super.Notify(C,E);
 }
 
 function PreSwitchPage ()

@@ -1386,83 +1386,93 @@ function PostRender (Canvas Canvas)
 
 function RenderUWindow (Canvas Canvas)
 {
-  local LevelInfo lev;
-  local UWindowWindow NewFocusWindow;
-  local Texture curTexture;
+	local LevelInfo lev;
+	local UWindowWindow NewFocusWindow;
+	local Texture curTexture;
 
-  Canvas.bNoSmooth = True;
-  Canvas.Z = 1.0;
-  Canvas.Style = 1;
-  Canvas.DrawColor.R = 255;
-  Canvas.DrawColor.G = 255;
-  Canvas.DrawColor.B = 255;
-  if ( Viewport.bWindowsMouseAvailable && (Root != None) )
-  {
-    MouseX = Viewport.WindowsMouseX / Root.GUIScale;
-    MouseY = Viewport.WindowsMouseY / Root.HGUIScale;//Root.GUIScale;
-  }
-  if (  !bCreatedRoot )
-  {
-    CreateRootWindow(Canvas);
-    Root.SetScale(Root.RealWidth / 640);
-    Root.NormalCursor.tex2 = Texture(DynamicLoadObject("HP2_Menu.Icons.WandSpark",Class'FireTexture'));
-    Root.NormalCursor.Tex2XOffset = -32;
-    Root.NormalCursor.Tex2YOffset = -32;
-    Root.Cursor = Root.NormalCursor;
-    SetupLanguage();
-    menuBook = FEBook(Root.CreateWindow(Class'FEBook',0.0 * (Root.WinWidth / 2 - 320),0.0 * (Root.WinHeight / 2 - 240),640.0,480.0,Root));
-    menuBook.bGamePlaying = True;
-    menuBook.CloseBook();
-    HideConsole();
-  }
-  Root.bWindowVisible = True;
-  Root.bUWindowActive = bUWindowActive;
-  Root.bQuickKeyEnable = bQuickKeyEnable;
-  if ( (Canvas.ClipX != OldClipX) || (Canvas.ClipY != OldClipY) )
-  {
-    OldClipX = Canvas.ClipX;
-    OldClipY = Canvas.ClipY;
-    Root.WinTop = 0.0;
-    Root.WinLeft = 0.0;
-    Root.WinWidth = Canvas.ClipX / Root.GUIScale;
-    Root.WinHeight = Canvas.ClipY / Root.HGUIScale;//Root.GUIScale;
-    Root.RealWidth = Canvas.ClipX;
-    Root.RealHeight = Canvas.ClipY;
-    Root.ClippingRegion.X = 0;
-    Root.ClippingRegion.Y = 0;
-    Root.ClippingRegion.W = Root.WinWidth;
-	Root.ClippingRegion.H = Root.WinHeight;
-	Root.Resized();
-  }
-  if ( MouseX > Root.WinWidth )
-  {
-    MouseX = Root.WinWidth;
-  }
-  if ( MouseY > Root.WinHeight )
-  {
-    MouseY = Root.WinHeight;
-  }
-  if ( MouseX < 0 )
-  {
-    MouseX = 0.0;
-  }
-  if ( MouseY < 0 )
-  {
-    MouseY = 0.0;
-  }
-  NewFocusWindow = Root.CheckKeyFocusWindow();
-  if ( NewFocusWindow != Root.KeyFocusWindow )
-  {
-    Root.KeyFocusWindow.KeyFocusExit();
-    Root.KeyFocusWindow = NewFocusWindow;
-    Root.KeyFocusWindow.KeyFocusEnter();
-  }
-  Root.MoveMouse(MouseX,MouseY);
-  Root.WindowEvent(WM_Paint,Canvas,MouseX,MouseY,0);
-  if ( bUWindowActive || bQuickKeyEnable )
-  {
-    Root.DrawMouse(Canvas);
-  }
+	Canvas.bNoSmooth = false;//True;
+	Canvas.Z = 1.0;
+	Canvas.Style = 1;
+	Canvas.DrawColor.R = 255;
+	Canvas.DrawColor.G = 255;
+	Canvas.DrawColor.B = 255;
+  
+	if ( Viewport.bWindowsMouseAvailable && (Root != None) )
+	{
+		MouseX = Viewport.WindowsMouseX / Root.GUIScale;
+		MouseY = Viewport.WindowsMouseY / Root.HGUIScale;//Root.GUIScale;
+	}
+  
+	if (  !bCreatedRoot )
+	{
+		CreateRootWindow(Canvas);
+		Root.SetScale(Root.RealWidth / 640);
+		Root.NormalCursor.tex2 = Texture(DynamicLoadObject("HP2_Menu.Icons.WandSpark",Class'FireTexture'));
+		Root.NormalCursor.Tex2XOffset = -32;
+		Root.NormalCursor.Tex2YOffset = -32;
+		Root.Cursor = Root.NormalCursor;
+		SetupLanguage();
+		menuBook = FEBook(Root.CreateWindow(Class'FEBook', 0.0, 0.0 ,640.0, 480.0, Root));
+		menuBook.bGamePlaying = True;
+		menuBook.CloseBook();
+		HideConsole();
+	}
+	
+	Root.bWindowVisible = True;
+	Root.bUWindowActive = bUWindowActive;
+	Root.bQuickKeyEnable = bQuickKeyEnable;
+	if ( (Canvas.ClipX != OldClipX) || (Canvas.ClipY != OldClipY) )
+	{
+		OldClipX = Canvas.ClipX;
+		OldClipY = Canvas.ClipY;
+		Root.WinTop = 0.0;
+		Root.WinLeft = 0.0;
+		Root.WinWidth = Canvas.ClipX / Root.GUIScale;
+		Root.WinHeight = Canvas.ClipY / Root.HGUIScale;//Root.GUIScale;
+		Root.RealWidth = Canvas.ClipX;
+		Root.RealHeight = Canvas.ClipY;
+		Root.ClippingRegion.X = 0;
+		Root.ClippingRegion.Y = 0;
+		Root.ClippingRegion.W = Root.WinWidth;
+		Root.ClippingRegion.H = Root.WinHeight;
+		Root.Resized();
+	}
+  
+	if ( MouseX > Root.WinWidth )
+	{
+		MouseX = Root.WinWidth;
+	}
+	
+	if ( MouseY > Root.WinHeight )
+	{
+		MouseY = Root.WinHeight;
+	}
+	
+	if ( MouseX < 0 )
+	{
+		MouseX = 0.0;
+	}
+ 
+	if ( MouseY < 0 )
+	{
+		MouseY = 0.0;
+	}
+  
+	NewFocusWindow = Root.CheckKeyFocusWindow();
+	if ( NewFocusWindow != Root.KeyFocusWindow )
+	{
+		Root.KeyFocusWindow.KeyFocusExit();
+		Root.KeyFocusWindow = NewFocusWindow;
+		Root.KeyFocusWindow.KeyFocusEnter();
+	}
+	
+	Root.MoveMouse(MouseX,MouseY);
+	Root.WindowEvent(WM_Paint,Canvas,MouseX,MouseY,0);
+	
+	if ( bUWindowActive || bQuickKeyEnable )
+	{
+		Root.DrawMouse(Canvas);
+	}
 }
 
 event DrawLevelInfo (Canvas C, string URL)

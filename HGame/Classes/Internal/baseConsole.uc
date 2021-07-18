@@ -134,6 +134,12 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 {
 	local float OrgX, OrgY, ClipX, ClipY, HScale;
 	
+	local bool bOldNoSmooth;
+	
+	// Metallicafan212:	Disable no smooth
+	bOldNoSmooth = C.bNoSmooth;
+	C.bNoSmooth = false;
+	
 	HScale = GetHScale(C);//Class'M212HScale'.Static.CanvasGetHeightScale(C);
 
 	OrgX = C.OrgX;
@@ -150,6 +156,8 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
+	
+	C.bNoSmooth = bOldNoSmooth;
 }
 
 function DrawLevelAction (Canvas C)

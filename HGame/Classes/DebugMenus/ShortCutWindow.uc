@@ -32,9 +32,9 @@ function Created ()
 function BeginPlay ()
 {
 	Super.BeginPlay();
-	WindowTitle = "Shortcut Window";
+	WindowTitle = "Map selector";//"Shortcut Window";
 	ClientClass = Class'ShortCutClientWindow';
-	ToolTip("short cut tool tip");
+	//ToolTip("Select a map/bookmark");//("short cut tool tip");
 	SetAcceptsFocus();
 	bTransient = False;
 	bUWindowActive = True;

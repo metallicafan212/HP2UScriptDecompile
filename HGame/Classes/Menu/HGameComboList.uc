@@ -12,6 +12,39 @@ function float GetWidthScale()
 	return (3.0 / 4.0) / (Root.RealHeight / Root.RealWidth);
 }
 
+function SetSelected(float X, float Y)
+{
+	local UWindowComboListItem NewSelected, Item;
+	local int i, Count;
+	
+	// Metallicafan212:	Height scaling
+	local float HScale;
+	
+	HScale = class'M212HScale'.Static.UWindowGetHeightScale(Root);
+
+	Count = 0;
+	for( Item = UWindowComboListItem(Items.Next);Item != None; Item = UWindowComboListItem(Item.Next) )
+		Count++;
+
+	i = (Y - (VBorder * HScale)) / ((ItemHeight * HScale) + (VertSB.Pos * HScale));
+
+	if(i < 0)
+		i = 0;
+
+	if(i >= VertSB.Pos + Min(Count, MaxVisible))
+		i = VertSB.Pos + Min(Count, MaxVisible) - 1;
+
+	NewSelected = UWindowComboListItem(Items.FindEntry(i));
+
+	if(NewSelected != Selected)
+	{
+		if(NewSelected == None) 
+			Selected = None;
+		else
+			Selected = NewSelected;
+	}	
+}
+
 function ResolutionChanged(float W, float H)
 {
 	Super.ResolutionChanged(W, H);
@@ -79,6 +112,12 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 									  float tX, float tY, float tW, float tH, texture Tex ) 
 {
 	local float OrgX, OrgY, ClipX, ClipY;
+	
+	local bool bOldNoSmooth;
+	
+	// Metallicafan212:	Disable no smooth
+	bOldNoSmooth = C.bNoSmooth;
+	C.bNoSmooth = false;
 
 	OrgX = C.OrgX;
 	OrgY = C.OrgY;
@@ -93,6 +132,8 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
+	
+	C.bNoSmooth = bOldNoSmooth;
 }
 
 function Resized()

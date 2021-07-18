@@ -75,7 +75,7 @@ event Tick (float fDeltaTime)
 		curIconMessage.duration -= fDeltaTime;
 		if ( curIconMessage.duration < 0 )
 		{
-		curIconMessage.valid = False;
+			curIconMessage.valid = False;
 		}
 	}
 }
@@ -159,7 +159,8 @@ simulated function HUDSetup (Canvas Canvas)
 {
 	Canvas.Reset();
 	Canvas.SpaceX 		= 0.0;
-	Canvas.bNoSmooth 	= True;
+	// Metallicafan212:	We're going to do more high quality stuff, so disable by default
+	Canvas.bNoSmooth 	= False;//True;
 	Canvas.DrawColor.R 	= 255;
 	Canvas.DrawColor.G 	= 255;
 	Canvas.DrawColor.B 	= 255;

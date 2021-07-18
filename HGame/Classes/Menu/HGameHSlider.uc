@@ -22,6 +22,12 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 									  float tX, float tY, float tW, float tH, texture Tex ) 
 {
 	local float OrgX, OrgY, ClipX, ClipY;
+	
+	local bool bOldNoSmooth;
+	
+	// Metallicafan212:	Disable no smooth
+	bOldNoSmooth = C.bNoSmooth;
+	C.bNoSmooth = false;
 
 	OrgX = C.OrgX;
 	OrgY = C.OrgY;
@@ -36,6 +42,8 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
+	
+	C.bNoSmooth = bOldNoSmooth;
 }
 
 function BeforePaint(Canvas C, float X, float Y)

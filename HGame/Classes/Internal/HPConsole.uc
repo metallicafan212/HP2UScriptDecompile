@@ -1381,6 +1381,11 @@ function PostRender (Canvas Canvas)
     Canvas.DrawColor.G = 255;
     Canvas.DrawColor.B = 255;
     Canvas.SetPos(Canvas.SizeX - 200,Canvas.SizeY - 40);
+	Canvas.DrawText("Player @ "$int(Viewport.Actor.Location.X) $", "$int(Viewport.Actor.Location.Y) $", "$int(Viewport.Actor.Location.Z));
+  }
+  if(Harry(Viewport.Actor).bE3DemoLockout)
+  {
+	DrawE3DemoLockout(Canvas);
   }
 }
 

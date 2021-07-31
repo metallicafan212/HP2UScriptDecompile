@@ -13,7 +13,7 @@ class skdobby extends HPMesh
 #exec Anim Import Anim=skdobbyAnims AnimFile=Models\skdobbyAnims.psa Compress=1 MaxKeys=999999 ImportSeqs=1 
 #exec MeshMap Scale MeshMap=skdobbyMesh X=1.0 Y=1.0 Z=1.0 
 #exec Mesh DefaultAnim Mesh=skdobbyMesh Anim=skdobbyAnims
-#exec Anim Digest Anim=skdobbyAnims USERAWINFO VERBOSE 
+#exec Anim Digest Anim=skdobbyAnims VERBOSE 
 
 //texture import (skdobbyTex0) -AdamJD 
 #exec Texture Import File=Textures\skdobbyTex0.png Name=skdobbyTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 

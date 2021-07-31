@@ -239,7 +239,6 @@ state stateWaiting
     Sleep(RandRange(1.0,2.0));
   }
   until(false);
-  // if (! False ) goto JL0000;
 }
 
 state stateTail

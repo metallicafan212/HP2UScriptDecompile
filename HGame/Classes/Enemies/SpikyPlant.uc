@@ -55,8 +55,7 @@ auto state ReadyAndWaiting
       break;
       default:
     }
-    // I = 0;
-    // if ( I < NumSpikes )
+	
 	for(I = 0; I < NumSpikes; ++I)
     {
       rotate_spike.Yaw = (65536 / NumSpikes) * I;
@@ -67,8 +66,6 @@ auto state ReadyAndWaiting
       aSpike.Lift = SpikeLift;
       aSpike.Speed = SpikeSpeed;
       aSpike.DrawScale = DrawScale;
-      // ++I;
-      // goto JL00B9;
     }
   }
   
@@ -194,7 +191,7 @@ defaultproperties
 
     SizeModifier=0.90
 
-    CentreOffset=(X=0.00,Y=0.00,Z=25.00),
+    CentreOffset=(X=0.00,Y=0.00,Z=25.00)
 
     Mesh=SkeletalMesh'HPModels.skSpikyPlantMesh'
 

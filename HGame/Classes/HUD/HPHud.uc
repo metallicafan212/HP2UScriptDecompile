@@ -103,8 +103,7 @@ function RegisterPickupProp (HProp Prop)
   local bool bFoundSlot;
 
   bFoundSlot = False;
-  // I = 0;
-  // if ( I < 20 )
+
   for(I = 0; I < 20; I++)
   {
     if ( propArray[I] == None )
@@ -112,10 +111,7 @@ function RegisterPickupProp (HProp Prop)
       bFoundSlot = True;
       propArray[I] = Prop;
 	  break;
-    } //else {
-      //I++;
-      //goto JL000F;
-    //}
+    }
   }
   if ( bFoundSlot == False )
   {
@@ -129,28 +125,18 @@ function UnregisterPickupProp (HProp Prop)
   local int I;
   local int J;
 
-  // I = 0;
-  // if ( I < 20 )
   for(I = 0; I < 20; I++)
   {
     if ( propArray[I] == Prop )
     {
       propArray[I] = None;
-      // J = I + 1;
-      // if ( J < 20 )
 	  for(J = I + 1; J < 20; J++)
       {
         propArray[J - 1] = propArray[J];
         propArray[J] = None;
-        // J++;
-        // goto JL0043;
       }
-	  
 	  break;
-    } //else {
-      //I++;
-      //goto JL0007;
-    //}
+    }
   }
 }
 
@@ -210,13 +196,10 @@ simulated function PreBeginPlay()
   {
     managerCutScene = Spawn(Class'CutSceneManager');
   }
-  // I = 0;
-  // if ( I < 20 )
+
   for(I = 0; I < 20; I++)
   {
     propArray[I] = None;
-    // I++;
-    // goto JL0026;
 	break;
   }
 }
@@ -300,19 +283,15 @@ simulated function PostRender (Canvas Canvas)
     {
       harry(Owner).managerStatus.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
     }
-    // I = 0;
-    // if ( I < 20 )
+
 	for(I = 0; I < 20; I++)
     {
       if ( propArray[I] == None )
       {
-        // goto JL02F6;
 		break;
       } else {
         propArray[I].RenderHud(Canvas);
       }
-      // I++;
-      // goto JL02AF;
     }
     if ( CurrVendorManager != None )
     {
@@ -328,7 +307,6 @@ simulated function PostRender (Canvas Canvas)
     }
     if ( managerSpellLesson != None )
     {
-// JL02AF:
       managerSpellLesson.RenderHudItems(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
     }
     DrawPopup(Canvas);

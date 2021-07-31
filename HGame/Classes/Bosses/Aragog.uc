@@ -1094,15 +1094,12 @@ state stateHitByRictusempra
  begin:
   TempFloat = 0.44999999;
   PlayAnim('KnockBack',TempFloat,0.2);
-  //UTPT doesn't decompile the PlaySound  function correctly... -AdamJD
-  // PlaySound(Sound'pig_squeal1',0,1.0,,1000000.0,0.81);
   PlaySound(Sound'pig_squeal1',Slot_None,1.0,,1000000.0,0.81);
   PlaySound(Sound'Basilisk_attack3',Slot_None,1.0,,1000000.0,0.89999998);
   PlaySound(Sound'BasilAttackWarning00',Slot_None,1.0,,1000000.0,0.81);
   SetTimer(0.5,False);
   Sleep(12.0 / 30.0 / TempFloat);
   PlaySound(Sound'Basilisk_attack3',Slot_None,1.0,,1000000.0,0.81);
-// JL00AB:
   DoStomp(True);
   // Sleep(0.01);
   
@@ -1113,11 +1110,9 @@ state stateHitByRictusempra
   }
   until(AnimFrame >= 17.0 / 46.0);
   
-  // if (! AnimFrame >= 17.0 / 46.0 ) goto JL00AB;
   AnimRate = 0.75;
   PlaySound(Sound'Arragog_attack05',Slot_None,1.0,,1000000.0,RandRange(0.81,1.25));
   // Sleep(0.01);
-  // if (! AnimFrame >= 24.0 / 46.0 ) goto JL00F6;
   
   //do and until -AdamJD
   do 

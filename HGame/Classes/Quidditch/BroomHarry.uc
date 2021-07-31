@@ -289,8 +289,7 @@ function bool CutCommand_FlyOnPath (string Command, optional string cue, optiona
 			{
 			  StartPoint = IP.Position;
 			  break;
-			} //else {
-			//}
+			}
 		  }
 		  if ( StartPoint == -1 )
 		  {
@@ -305,7 +304,6 @@ function bool CutCommand_FlyOnPath (string Command, optional string cue, optiona
 	  }
   }
   until(Token == "");
-  // if (! Token == "" ) goto JL0027;
   
   if ( bFastFlag )
   {
@@ -316,8 +314,7 @@ function bool CutCommand_FlyOnPath (string Command, optional string cue, optiona
         SetLocation(IP.Location);
         SetRotation(IP.Rotation);
 		break;
-      } //else {
-      //}
+      }
     }
     CutCue(cue);
   } else {
@@ -705,8 +702,7 @@ function FlyOnPath (name CutScenePath, optional int StartPoint)
     if ( IM == None )
     {
       Log("Harry couldn't find path " $ string(CutScenePath));
-    } //else {
-    //}
+    }
   }
 }
 
@@ -755,8 +751,7 @@ function bool GetOnPath (name Path, optional int StartPoint)
         fTransDistance = fDistance;
         iTransPoint = I.Position;
 		break;
-      } //else {
-      //}
+      }
     }
   } else {
     ClosestPoint = None;
@@ -1058,7 +1053,6 @@ function float GetReversalsPerSecond()
 	  ++iReversals;
   }
   until(iReversals >= MAX_REVERSAL_STATS);
-  // if (! iReversals >= 20 ) goto JL0012;
   
   fReversalRate = iReversals / fReversalsStatPeriod;
   return fReversalRate;
@@ -1247,8 +1241,10 @@ state PlayerWalking
       // case 1:
 	  case DEVICE_Mouse:
 		  fMouseYaw += aBroomYaw * fBroomSensitivity;
-		  //KW left this if statement empty? -AdamJD
-		  // if (! Abs(aBroomYaw) > 0.05 ) goto JL028F;
+		  if ( Abs(aBroomYaw) > 0.05 )
+		  {
+			//KW left this if statement empty? -AdamJD
+		  }
 		  if ( fMouseYaw > 1.5 )
 		  {
 			fMouseYaw = 1.5;

@@ -15,7 +15,7 @@ class skBathroomToilet extends HPMeshActor;
 #exec Anim Digest Anim=skBathroomToiletAnims VERBOSE 
 
 //texture import (skBathroomToiletTex0) -AdamJD 
-#exec Texture Import File=Textures\skBathroomToiletTex0.png Name=skBathroomToiletTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skBathroomToiletTex0.png Name=skBathroomToiletTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBathroomToiletMesh Num=0 Texture=skBathroomToiletTex0
 
 defaultproperties

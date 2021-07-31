@@ -54,6 +54,7 @@ auto state wwellbottlo
 		}
 	}
 	begin:
+	loop:
 		Sleep(1.0);
 		goto ('Loop');
 }

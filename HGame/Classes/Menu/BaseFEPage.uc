@@ -2,7 +2,7 @@
 // baseFEPage.
 //================================================================================
 
-class baseFEPage extends UWindowDialogClientWindow;
+class baseFEPage extends UWindowDialogClientWindow; 
 
 struct CurrRolloverInfo
 {
@@ -120,7 +120,7 @@ function int GetStatusY()
 
 function Notify (UWindowDialogControl C, byte E)
 {
-	if (E == 12 )
+	if ( E == DE_MouseEnter )
 	{
 		if ( C == BackPageButton )
 		{
@@ -129,7 +129,7 @@ function Notify (UWindowDialogControl C, byte E)
 	} 
 	else 
 	{
-		if ( E == 9 )
+		if ( E == DE_MouseLeave )
 		{
 			if ( C == BackPageButton )
 			{

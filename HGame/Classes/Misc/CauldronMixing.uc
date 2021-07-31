@@ -197,8 +197,7 @@ begin:
   vTopOfCauldron = Location;
   vTopOfCauldron.Z += 40;
   nPotionCount = GetNumPotionsToMake();
-  // I = 0;
-  // if ( I < nPotionCount )
+
   for(I = 0; I < nPotionCount; I++)
   {
     vFlobberHudLoc = sgPotionIngr.GetItemLocation(Class'StatusItemFlobberMucus',False);
@@ -213,13 +212,10 @@ begin:
     propTemp.fMaxFlyToHudScale = 0.41;
     propTemp.DoDropOffProp(vTopOfCauldron,True);
     Sleep(0.1);
-    // I++;
-    // goto JL0082;
   }
   PlayerHarry.DoPotionMixingStir();
   Sleep(1.0);
-  // I = 0;
-  // if ( I < nPotionCount )
+
   for(I = 0; I < nPotionCount; I++)
   {
     vWWellPotionHudLoc = sgPotions.GetItemLocation(Class'StatusItemWiggenwell',False);
@@ -229,10 +225,7 @@ begin:
     propTemp.fMinFlyToHudScale = 0.81;
     propTemp.DoPickupProp();
     Sleep(0.25);
-    // I++;
-    // goto JL01B3;
   }
-  // SetCauldronFX(1);
   SetCauldronFX(CauldronFX_Mixed);
   Sleep(0.31);
   PlayerHarry.DoPotionMixingIdle();

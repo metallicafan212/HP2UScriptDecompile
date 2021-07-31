@@ -260,7 +260,6 @@ function Landed (Vector HitNormal)
   {
     GotoState('stateGotAwayFromHarry');
   }
-  // if (!  !IsInState('stateIdle') ) goto JL0076;
 }
 
 function ThrownLanded (Vector HitNormal)

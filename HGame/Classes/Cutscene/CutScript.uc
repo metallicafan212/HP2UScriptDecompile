@@ -57,8 +57,7 @@ function bool CaptureActor (string actName)
       return False;
     }
   }
-  // I = 0;
-  // if ( I < 30 )
+
   for(I = 0; I < MAX_CAPTURED_ACTORS; I++)
   {
     if ( aCapturedActors[I] == None )
@@ -77,8 +76,6 @@ function bool CaptureActor (string actName)
         return False;
       }
     }
-    // I++;
-    // goto JL0192;
   }
   CutError("Failed to Capture " $ actName $ ". Too many captured actors.");
   return False;
@@ -107,8 +104,7 @@ function bool ReCaptureActor (string actName)
     CutError("Can't ReCapture " $ actName $ ". Actor not already captured.");
     return False;
   }
-  // I = 0;
-  // if ( I < 30 )
+
   for(I = 0; I < MAX_CAPTURED_ACTORS; I++)
   {
     if ( aCapturedActors[I] == None )
@@ -121,8 +117,6 @@ function bool ReCaptureActor (string actName)
       }
       return True;
     }
-    // I++;
-    // goto JL00CC;
   }
   CutError("Failed to ReCapture " $ actName $ ". Too many captured actors.");
   return False;
@@ -132,8 +126,6 @@ function bool ReleaseActor (string actName)
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 30 )
   for(I = 0; I < MAX_CAPTURED_ACTORS; I++)
   {
     if ( (aCapturedActors[I] != None) && (aCapturedActors[I].CutName ~= actName) )
@@ -153,8 +145,6 @@ function bool ReleaseActor (string actName)
         return False;
       }
     }
-    // I++;
-    // goto JL0007;
   }
   CutError("Failed to Release " $ actName $ ". Actor not captured.");
   return False;
@@ -169,16 +159,13 @@ function Actor FindCutSubject (string subjectName)
     bUsingBaseCam = True;
     return harry(Level.PlayerHarryActor).Cam;
   }
-  // I = 0;
-  // if ( I < 30 )
+
   for(I = 0; I < MAX_CAPTURED_ACTORS; I++)
   {
     if ( (aCapturedActors[I] != None) && (aCapturedActors[I].CutName ~= subjectName) )
     {
       return aCapturedActors[I];
     }
-    // I++;
-    // goto JL003F;
   }
   CutError("Failed to find " $ subjectName $ ". Actor not captured.");
   return None;
@@ -273,8 +260,6 @@ function CutCue (string cue)
   }
   if ( nPendingCues > 0 )
   {
-    // I = 0;
-    // if ( I < nPendingCues )
 	for(I = 0; I < nPendingCues; I++)
     {
       if ( aPendingCues[I] ~= cue )
@@ -288,8 +273,6 @@ function CutCue (string cue)
           nPendingCues--;
         }
       }
-      // I++;
-      // goto JL0084;
     }
   }
 }
@@ -302,20 +285,16 @@ function AddPendingCue (string cue)
   {
     CutError("Error blank Pending cue");
   }
-  // I = 0;
-  // if ( I < nCues )
+
   for(I = 0; I < nCues; I++)
   {
     if ( aCues[I] ~= cue )
     {
       return;
     }
-    // I++;
-    // goto JL0032;
   }
   aPendingCues[nPendingCues] = cue;
   nPendingCues++;
-  // if ( nPendingCues > 210 )
   if(nPendingCues > MAX_CUES)
   {
     CutError("Failed to AddPendingCue. Exceeded Pending MAX_CUES");
@@ -592,9 +571,7 @@ function FastForward()
       TC.Timer();
     }
   }
-// JL005C:
-  // I = 0;
-  // if ( I < 30 )
+  
   for(I = 0; I < MAX_CAPTURED_ACTORS; I++)
   {
     if ( aCapturedActors[I] != None )
@@ -602,8 +579,6 @@ function FastForward()
       aCapturedActors[I].CutBypass();
       aCapturedActors[I].GlobalCutBypass();
     }
-    // I++;
-    // goto JL005C;
   }
   bFastForward = True;
 }
@@ -639,7 +614,6 @@ state Running
     local string Command;
   
     bScriptAdvancing = False;
-    // if ( nPendingCues == 0 )
 	while ( nPendingCues == 0 )
     {
       if (  !GetNextCommand(Command) )
@@ -660,7 +634,6 @@ state Running
       {
         return;
       }
-      // goto JL0008;
     }
   }
   

@@ -330,7 +330,7 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
     switch (C)
     {
@@ -374,7 +374,7 @@ function Notify (UWindowDialogControl C, byte E)
   } 
   else 
   {
-    if ( E == 12 )
+    if ( E == DE_MouseEnter )
     {
       switch (C)
       {
@@ -413,7 +413,7 @@ function Notify (UWindowDialogControl C, byte E)
     } 
 	else 
 	{
-      if ( E == 9 )
+      if ( E == DE_MouseLeave )
       {
         switch (C)
         {

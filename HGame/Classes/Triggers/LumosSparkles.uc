@@ -79,7 +79,6 @@ function TurnOnEdgeEffects()
 	for(I = 0; I < 12; ++I) //for loop -AdamJD
     {
       fxEdgeSparkles[I] = Spawn(fxEdgeSparklesClass,self,,Location);
-// JL0090:
       fxEdgeSparkles[I].SourceDepth.Base = fEdgeSparklesThickness;
       fxEdgeSparkles[I].SourceWidth.Base = fEdgeSparklesThickness;
       fxEdgeSparkles[I].SourceHeight.Base = fEdgeSparklesThickness;
@@ -148,8 +147,6 @@ function TurnOffEdgeEffects()
 
   if ( fxEdgeSparkles[0] != None )
   {
-    // I = 0;
-    // if ( I < 12 )
 	for(I = 0; I < 12; ++I) 
     {
       if ( fxEdgeSparkles[I] != None )
@@ -157,8 +154,6 @@ function TurnOffEdgeEffects()
         fxEdgeSparkles[I].Shutdown();
         fxEdgeSparkles[I] = None;
       }
-      // ++I;
-      // goto JL0014;
     }
   }
   StopSound(Sound'Lumos_glow_loop',SLOT_Interact);

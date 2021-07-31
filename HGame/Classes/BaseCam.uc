@@ -846,7 +846,7 @@ function bool CheckCollisionWithWorld()
 		if ( aHitActor == Owner )
 		{
 			continue;
-		} //else {
+		}
 		if ( aHitActor.IsA('LevelInfo') || aHitActor.bBlockCamera )
 		{
 			vDestPosition = HitLocation + vCusionFromWorld;
@@ -854,7 +854,6 @@ function bool CheckCollisionWithWorld()
 			fCurrLookAtDistance = fDestLookAtDistance;
 			return True;
 		}
-		//}
 	}
 	return False;
 }

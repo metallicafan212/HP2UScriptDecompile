@@ -152,7 +152,6 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 			Canvas.DrawTile(textureHealthOrangeInside, textureHudIcon.USize * fScaleFactor, fSegmentHeight * fScaleFactor, 0.0, fSegmentStartAt, textureHudIcon.USize, fSegmentHeight);
 		}
 		nX += nActualIconW * fScaleFactor;
-		//goto JL00AB;
 	}
 	Canvas.DrawColor = colorSave;
 }

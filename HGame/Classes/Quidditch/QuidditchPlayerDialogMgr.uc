@@ -87,7 +87,6 @@ function PostBeginPlay()
   Super.PostBeginPlay();
   foreach AllActors(Class'BroomHarry',harry)
   {
-    // goto JL001A;
 	break;
   }
   SpeakingPlayers = None;
@@ -140,7 +139,6 @@ function PickNextSpeakingPlayer()
     return;
   }
   nSkip = Rand(NumSpeakingPlayers - 1) + 1;
-  // if ( nSkip > 0 )
   while (nSkip > 0)
   {
     CurrentSpeakingPlayer = CurrentSpeakingPlayer.NextSpeakingPlayer;
@@ -149,7 +147,6 @@ function PickNextSpeakingPlayer()
       CurrentSpeakingPlayer = SpeakingPlayers;
     }
     --nSkip;
-    // goto JL002D;
   }
 }
 
@@ -287,7 +284,6 @@ function bool SayDialogLine (optional bool bNoGap)
 		  ++iCandidate;
 		}
 		++Variant;
-		// goto JL015B;
 	  }
 	  switch (eHouse)
 	  {
@@ -307,7 +303,6 @@ function bool SayDialogLine (optional bool bNoGap)
 	  }
   }
   until(bDone);
-  // if (! bDone ) goto JL0154;
   
   NumCandidates = iCandidate;
   if ( NumCandidates <= 0 )
@@ -317,18 +312,15 @@ function bool SayDialogLine (optional bool bNoGap)
   }
   iCandidate = 0;
   fChoice = FRand() * fTotalWeight;
-  // if ( iCandidate < NumCandidates - 1 )
   while ( iCandidate < NumCandidates - 1 )
   {
     if ( Candidates[iCandidate].fWeight > fChoice )
     {
-      // goto JL03D1;
 	  break;
     } else {
       fChoice -= Candidates[iCandidate].fWeight;
       ++iCandidate;
     }
-    // goto JL037E;
   }
   eHouse = Candidates[iCandidate].eHouse;
   Variant = Candidates[iCandidate].Variant;
@@ -376,17 +368,11 @@ function fillDialogArray()
   local int V;
   local string sndId;
 
-  // S = 0;
-  // if ( S < 2 )
   for(S = 0; S < MAX_QUID_DIALOG_SEX_NAMES; S++)
   {
-    // H = 0;
-    // if ( H < 6 )
 	for(H = 0; H < MAX_QUID_DIALOG_HOUSE_NAMES; H++)
     {
       Dialog[S].House[H].Variations = QC_MAX_DIALOG_VARIANTS;
-      // V = 0;
-      // if ( V < 30 )
 	  for(V = 0; V < QC_MAX_DIALOG_VARIANTS; V++)
       {
         sndId = GetDialogLineId(S,H,V);
@@ -397,16 +383,9 @@ function fillDialogArray()
         } else {
           Dialog[S].House[H].Variations = V;
 		  break;
-          // goto JL0125;
         }
-        // V++;
-        // goto JL004B;
       }
-      // H++;
-      // goto JL001A;
     }
-    // S++;
-    // goto JL0007;
   }
 }
 

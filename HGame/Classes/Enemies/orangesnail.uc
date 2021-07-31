@@ -193,13 +193,10 @@ function EndTrail()
   local int I;
 
   bLeaveTrail = False;
-  // I = 0;
-  // if ( I < nMaxTrailSegments )
+
   for(I = 0; I < nMaxTrailSegments; I++)
   {
     arrayTrail[I].StopUsing();
-    // I++;
-    // goto JL000F;
   }
 }
 
@@ -548,5 +545,5 @@ defaultproperties
 
     CollisionHeight=30.00
 
-    RotationRate=(Pitch=10500,Yaw=10500,Roll=10500),
+    RotationRate=(Pitch=10500,Yaw=10500,Roll=10500)
 }

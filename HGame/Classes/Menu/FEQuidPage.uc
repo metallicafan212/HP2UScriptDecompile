@@ -613,14 +613,13 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
     if ( C == BackPageButton )
     {
       FEBook(book).DoEscapeFromPage();
     }
-    // I = 0;
-    // if ( I < 6 )
+
 	for(I = 0; I < 6; I++)
     {
       if ( startGameButtons[I] == C )
@@ -642,8 +641,6 @@ function Notify (UWindowDialogControl C, byte E)
           LaunchQuidditch();
         }
       }
-      // I++;
-      // goto JL0037;
     }
   }
   Super.Notify(C,E);

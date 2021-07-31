@@ -5,12 +5,12 @@
 class FEFolioPage extends baseFEPage;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\CardGlowBronze.PNG	GROUP=Icons	Name=CardGlowBronze COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\CardGlowGold.PNG	GROUP=Icons	Name=CardGlowGold COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\CardGlowGoldBig.PNG	GROUP=Icons	Name=CardGlowGoldBig COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\CardGlowSilver.PNG	GROUP=Icons	Name=CardGlowSilver COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardMissingBigTexture.PNG	GROUP=Icons	Name=WizCardMissingBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardMissingSmallTexture.PNG	GROUP=Icons	Name=WizCardMissingSmallTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\CardGlowBronze.PNG	GROUP=Icons	Name=CardGlowBronze COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\CardGlowGold.PNG	GROUP=Icons	Name=CardGlowGold COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\CardGlowGoldBig.PNG	GROUP=Icons	Name=CardGlowGoldBig COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\CardGlowSilver.PNG	GROUP=Icons	Name=CardGlowSilver COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardMissingBigTexture.PNG	GROUP=Icons	Name=WizCardMissingBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardMissingSmallTexture.PNG	GROUP=Icons	Name=WizCardMissingSmallTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 
 const nCARDGLOW_BIG_OFFSET_Y= -64;
 const nCARDGLOW_BIG_OFFSET_X= -64;
@@ -136,14 +136,11 @@ function Created()
   SmallCardBmp[7] = UWindowButton(CreateWindow(Class'UWindowButton',446.0,254.0,60.0,60.0));
   SmallCardBmp[8] = UWindowButton(CreateWindow(Class'UWindowButton',509.0,254.0,60.0,60.0));
   SmallCardBmp[9] = UWindowButton(CreateWindow(Class'UWindowButton',572.0,254.0,60.0,60.0));
-  // I = 0;
-  // if ( I != 10 )
+
   for(I = 0; I !=10; ++I)
   {
     SmallCardBmp[I].Register(self);
     SmallCardBmp[I].bStretched = True;
-    // ++I;
-    // goto JL0586;
   }
   GoldButton = UWindowButton(CreateWindow(Class'UWindowButton',12.0,70.0,50.0,48.0));
   GoldButton.Register(self);
@@ -340,8 +337,7 @@ function UpdatePageCards()
   textureCurrLargeCard = textureBigEmptyCard;	 //Texture'WizCardMissingBigTexture';
   classCurWC = None;
   strCurrDesc = "";
-  // I = 0;
-  // if ( I < 10 )
+
   for(I = 0; I < 10; I++)
   {
     nCardIdx = I + nCurrPage * 10;
@@ -374,8 +370,6 @@ function UpdatePageCards()
     }
     SmallCardBmp[I].DownTexture = SmallCardBmp[I].UpTexture;
     SmallCardBmp[I].OverTexture = SmallCardBmp[I].UpTexture;
-    // I++;
-    // goto JL00FF;
   }
   if ( CurrCardGroup == CardGroup_Gold )
   {
@@ -448,7 +442,7 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
     switch (C)
     {
@@ -504,23 +498,18 @@ function Notify (UWindowDialogControl C, byte E)
       FEBook(book).DoEscapeFromPage();
       break;
       default:
-      // I = 0;
-      // if ( I != 10 )
 	  for(I = 0; I != 10; ++I)
       {
         if ( SmallCardBmp[I] == C )
         {
           nCurrItemOnPage = I;
           UpdateDisplayDetails();
-        } //else {
-          //++I;
-          //goto JL0159;
-        //}
+        }
       }
       break;
     }
   } else {
-    if ( E == 12 )
+    if ( E == DE_MouseEnter )
     {
       switch (C)
       {
@@ -542,7 +531,7 @@ function Notify (UWindowDialogControl C, byte E)
         default:
       }
     } else {
-      if ( E == 9 )
+      if ( E == DE_MouseLeave )
       {
         switch (C)
         {
@@ -751,23 +740,21 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
   Canvas.DrawShadowText(strCardCountBronze,colorOffWhite,colorBlack);
   nXPos = (BronzeButton.WinLeft + BronzeButton.WinWidth + 24) * fWindowScaleFactor; 
   nYPos = BronzeButton.WinTop * fWindowScaleFactor;
-  // if ( I < nBronzeHealthBars )
+
   for(I = 0; I < nBronzeHealthBars; i++)
   {
     Canvas.SetPos(nXPos,nYPos);
     Canvas.DrawIcon(textureBronzeHealth,fWindowScaleFactor);
     nXPos += 14 * fWindowScaleFactor;
-    // goto JL038C;
   }
   nXPos = (SilverButton.WinLeft + SilverButton.WinWidth + 24) * fWindowScaleFactor;
   nYPos = SilverButton.WinTop * fWindowScaleFactor;
-  // if ( I < nSilverKeys )
+
   for(I = 0; I < nSilverKeys; I++)
   {
     Canvas.SetPos(nXPos,nYPos);
     Canvas.DrawIcon(textureSilverKey,fWindowScaleFactor - 0.31);
     nXPos += 28 * (fWindowScaleFactor - 0.31);
-    // goto JL0441;
   }
   Canvas.Font = fontSave;
 }
@@ -799,8 +786,7 @@ function InitHarryOwnedCards()
   siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemGoldCards'));
   StatusItemGoldCards(siCards).MoveHarryCardToEnd();
   nHarrysGoldCount = 0;
-  // I = 0;
-  // if ( I < 11 )
+  
   for(I = 0; I < 11; I++)
   {
     nCardId = siCards.GetCardId(I);
@@ -812,21 +798,15 @@ function InitHarryOwnedCards()
         nHarrysGoldCount++;
       }
     }
-    // I++;
-    // goto JL0069;
   }
-  // I = nHarrysGoldCount;
-  // if ( I < 11 )
+
   for(I = nHarrysGoldCount; I < 11; I++)
   {
     HarrysGold[I] = 0;
-    // I++;
-    // goto JL00DE;
   }
   siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemSilverCards'));
   nHarrysSilverCount = 0;
-  // I = 0;
-  // if ( I < 40 )
+
   for(I = 0; I < 40; I++)
   {
     nCardId = siCards.GetCardId(I);
@@ -838,21 +818,15 @@ function InitHarryOwnedCards()
         nHarrysSilverCount++;
       }
     }
-    // I++;
-    // goto JL012E;
   }
-  // I = nHarrysSilverCount;
-  // if ( I < 40 )
+
   for(I = nHarrysSilverCount; I < 40; I++)
   {
     HarrysSilver[I] = 0;
-    // I++;
-    // goto JL01A6;
   }
   siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemBronzeCards'));
   nHarrysBronzeCount = 0;
-  // I = 0;
-  // if ( I < 50 )
+
   for(I = 0; I < 50; I++)
   {
     nCardId = siCards.GetCardId(I);
@@ -863,19 +837,12 @@ function InitHarryOwnedCards()
         HarrysBronze[nHarrysBronzeCount] = nCardId;
         nHarrysBronzeCount++;
       }
-    } //else {
-      //I++;
-    //}
-    // I++;
-    // goto JL01F6;
+    }
   }
-  // I = nHarrysBronzeCount;
-  // if ( I < 50 )
+
   for(I = nHarrysBronzeCount; I < 50; I++)
   {
     HarrysBronze[I] = 0;
-    // I++;
-    // goto JL0278;
   }
 }
 

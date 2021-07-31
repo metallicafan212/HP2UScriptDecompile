@@ -158,16 +158,12 @@ event Destroyed()
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 2 )
   for(I = 0; I < NUM_ATTACHED_PARTICLE_FX; I++)
   {
     if ( attachedParticleFX[I] != None )
     {
       attachedParticleFX[I].Shutdown();
     }
-    // I++;
-    // goto JL0007;
   }
   if ( _FlyToController != None )
   {
@@ -180,8 +176,6 @@ function CreateAttachedParticleFX()
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 2 )
   for(I = 0; I < NUM_ATTACHED_PARTICLE_FX; I++)
   {
     if ( attachedParticleClass[I] != None )
@@ -195,8 +189,6 @@ function CreateAttachedParticleFX()
         attachedParticleFX[I].PrePivot = attachedParticleOffset[I];
       }
     }
-    // I++;
-    // goto JL0007;
   }
 }
 
@@ -204,8 +196,6 @@ function killAttachedParticleFX (float Time)
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 2 )
   for(I = 0; I < NUM_ATTACHED_PARTICLE_FX; I++)
   {
     if ( attachedParticleFX[I] != None )
@@ -219,8 +209,6 @@ function killAttachedParticleFX (float Time)
         attachedParticleFX[I].LifeSpan = Time;
       }
     }
-    // I++;
-    // goto JL0007;
   }
 }
 
@@ -611,15 +599,12 @@ idleloop:
           {
             if ( navP.Name == FirstObjectName )
             {
-              // goto JL0306;
 			  break;
             }
           }
         }
 		break;
-      } //else {
-        // goto JL0262;
-      //}
+      }
     }
   }
   NextPathPoint = None;
@@ -789,15 +774,14 @@ function PatrolPoint FindClosestPatrolPoint (Actor ExclusionActor1, Actor Exclus
     if ( (PatrolPointLinkTag != 'None') && (PatrolPointLinkTag != tempPatrolPoint.PatrolPointLinkTag) )
     {
       continue;
-    } //else {
-      fDist = VSize(Location - tempPatrolPoint.Location);
-      if ( (tempPatrolPoint != ExclusionActor1) && (tempPatrolPoint != ExclusionActor2) && (fDist < fClosestDist) )
-      {
-        fClosestDist = fDist;
-        ClosestActor = tempPatrolPoint;
-      }
     }
-  //}
+    fDist = VSize(Location - tempPatrolPoint.Location);
+    if ( (tempPatrolPoint != ExclusionActor1) && (tempPatrolPoint != ExclusionActor2) && (fDist < fClosestDist) )
+    {
+      fClosestDist = fDist;
+      ClosestActor = tempPatrolPoint;
+    }
+  }
   return ClosestActor;
 }
 
@@ -1005,7 +989,6 @@ begin:
 	}
 	Sleep(0.2);
   }
-  // if (! False ) goto JL00E4;
   until(False);
 }
 
@@ -1022,7 +1005,6 @@ function bool LeadActor_ShouldMoveToNextPatrolPoint (Actor Other)
   {
 	  if ( pP == None )
 	  {
-		// goto JL0099;
 		break;
 	  }
 	  if ( VSize(Other.Location - pP.Location) < 300 )
@@ -1032,11 +1014,9 @@ function bool LeadActor_ShouldMoveToNextPatrolPoint (Actor Other)
 	  pP = pP.NextPatrolPoint;
 	  if ( pP == navP )
 	  {
-		// goto JL0099;
 		break;
 	  }
   }
-  // if (! False ) goto JL0034;
   until(False);
   
   return False;
@@ -1346,8 +1326,6 @@ function bool CutCommand_CastSpell (string Command, optional string cue, optiona
   local bool bFoundTarget;
   local int I;
 
-  // I = 1;
-  // if ( I < 4 )
   for(I = 1; I < 4; I++)
   {
     sString = ParseDelimitedString(Command," ",I,False);
@@ -1361,13 +1339,10 @@ function bool CutCommand_CastSpell (string Command, optional string cue, optiona
       } else //{
         if ( sString == "" )
         {
-          // goto JL00A0;
 		  break;
         }
       //}
     //}
-    // I++;
-    // goto JL0007;
   }
   if ( SpellTarget == "" )
   {
@@ -1381,8 +1356,7 @@ function bool CutCommand_CastSpell (string Command, optional string cue, optiona
     {
       bFoundTarget = True;
 	  break;
-    } //else {
-    //}
+    } 
   }
   if (  !bFoundTarget )
   {

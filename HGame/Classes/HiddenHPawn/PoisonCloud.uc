@@ -56,7 +56,6 @@ function Touch (Actor Other)
 	if ( (Other == PlayerHarry) && (bCanBeTouched) )
 	{
 		return;
-		//goto JL012F;
 	}
 	if ( Other.IsA('HPawn') &&  !Other.IsA('PoisonCloud') &&  !Other.IsA('ThrownPoisonCloud') &&  !Other.IsA('HorklumpsHead') &&  !Other.IsA('HorklumpsStem') && (bCanBeThrown) )
 	{

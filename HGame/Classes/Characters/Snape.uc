@@ -108,8 +108,7 @@ function Tick (float DeltaTime)
     {
       vLastLocation = Location;
       GotoState('stateGotoHarry');
-    } //else {
-    //}
+    }
   }
 }
 

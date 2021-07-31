@@ -5,10 +5,10 @@
 class WCBott extends Goldcards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardBottBigTexture.PNG	GROUP=Icons	Name=WizCardBottBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardBertieBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardBertieBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardBertieBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardBertieBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardBertieBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardBertieBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardBottBigTexture.PNG	GROUP=Icons	Name=WizCardBottBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardBertieBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardBertieBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardBertieBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardBertieBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardBertieBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardBertieBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardBottTex0.PNG	GROUP=Skins	Name=WizardCardBottTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
 function PostBeginPlay()

@@ -76,16 +76,15 @@ function bool MyLineOfSightTo (Actor End)
     if ( aHitActor == self )
     {
       continue;
-    } //else {
-      if ( aHitActor == Level )
-      {
-        return False;
-      }
-      if ( aHitActor.bBlockActors )
-      {
-        return False;
-      }
-    //}
+    } 
+    if ( aHitActor == Level )
+    {
+      return False;
+    }
+    if ( aHitActor.bBlockActors )
+    {
+      return False;
+    }
   }
   return False;
 }

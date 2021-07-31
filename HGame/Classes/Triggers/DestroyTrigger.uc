@@ -14,8 +14,6 @@ event Trigger (Actor Other, Pawn EventInstigator)
 
   if ( bActivatedByTrigger )
   {
-    // I = 0;
-    // if ( I < 8 )
 	for(I = 0; I < 8; I++)
     {
       if ( Events[I] != 'None' )
@@ -25,8 +23,6 @@ event Trigger (Actor Other, Pawn EventInstigator)
           A.Destroy();
         }
       }
-      // I++;
-      // goto JL0010;
     }
   }
 }
@@ -36,8 +32,6 @@ function PassThru (Actor Other)
   local Actor A;
   local int I;
 
-  // I = 0;
-  // if ( I < 8 )
   for(I = 0; I < 8; I++)
   {
     if ( Events[I] != 'None' )
@@ -47,8 +41,6 @@ function PassThru (Actor Other)
         A.Destroy();
       }
     }
-    // I++;
-    // goto JL0007;
   }
   if ( Message != "" )
   {
@@ -64,8 +56,6 @@ function Touch (Actor Other)
 
   if ( IsRelevant(Other) )
   {
-    // I = 0;
-    // if ( I < 8 )
 	for(I = 0; I < 8; I++)
     {
       if ( Events[I] != 'None' )
@@ -75,8 +65,6 @@ function Touch (Actor Other)
           A.Destroy();
         }
       }
-      // I++;
-      // goto JL0015;
     }
     Destroy();
   }

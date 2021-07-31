@@ -68,7 +68,6 @@ begin:
 	  }
   }
   until(false);
-  // if (! False ) goto JL0016;
 }
 
 function SpawnFireBall()

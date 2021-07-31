@@ -30,8 +30,7 @@ function Reset()
   local int I;
 
   NumRows = MasterCount;
-  // I = 0;
-  // if ( I < NumRows )
+
   for(I = 0; I < NumRows; I++)
   {
     if ( MasterText[I] == "" )
@@ -45,8 +44,6 @@ function Reset()
         status[I] = "OK";
       }
     }
-    // I++;
-    // goto JL0012;
   }
 }
 
@@ -82,7 +79,6 @@ function PaintColumn (Canvas C, UWindowGridColumn Column, float MouseX, float Mo
   }
   CurOffset = 0;
   C.DrawColor.G = 255;
-  // if ( CurRow < LastRow )
   while ( CurRow < LastRow )
   {
     if ( CurRow == SelectedRow )
@@ -111,7 +107,6 @@ function PaintColumn (Canvas C, UWindowGridColumn Column, float MouseX, float Mo
     }
     CurOffset += RowHeight;
 	++CurRow;
-    // goto JL00DF;
   }
 }
 
@@ -121,7 +116,6 @@ function MouseMove (float X, float Y)
   {
     HPConsole(Root.Console).Viewport.Actor.ClientMessage("mmove " $ string(X) $ " " $ string(Y));
     SelectedRow = VertSB.Pos;
-    // There are 1 jump destination(s) inside the last statement!
   }
   
   Super.MouseMove(X,Y);

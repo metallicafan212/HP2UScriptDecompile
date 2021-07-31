@@ -685,8 +685,7 @@ function MakePurchase()
 	  PlaySound(Sound'vendor_spawn_ingred');
 	  break;
     }
-  } //else {
-  //}
+  }
 }
 
 function name GetTalkAnimName()
@@ -886,7 +885,6 @@ begin:
 	  PlayAnim('vendor_idle',RandRange(0.75,1.29999995),0.2);
 	  FinishAnim();
   }
-  // if (! False ) goto JL0000;
   until(False);
 }
 

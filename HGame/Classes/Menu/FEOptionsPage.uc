@@ -130,7 +130,7 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
     switch (C)
     {
@@ -145,8 +145,7 @@ function Notify (UWindowDialogControl C, byte E)
       break;
       default:
     }
-  } //else {
-  //}
+  }
 }
 
 function PreSwitchPage()

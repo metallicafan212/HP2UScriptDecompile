@@ -295,7 +295,6 @@ function GetItemPosition (Class<StatusItem> classItem, bool bMenuMode, out int n
 		}
 		if ( siLoop.Class == si.Class )
 		{
-			//goto JL01B5;
 			break;
 		}
 		if ( bDisplayHorizontally )

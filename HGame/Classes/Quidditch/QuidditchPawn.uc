@@ -233,11 +233,9 @@ function ChooseNextPath()
 		  }
 		  --BailOut;
 	  }
-	  // if (! (Path[CurPath] != 'None') || (BailOut <= 0) ) goto JL0030;
 	  until( (Path[CurPath] != 'None') || (BailOut <= 0) )
 	  --Skip;
   }
-  // if (! (Skip <= 0) || (BailOut <= 0) ) goto JL0028;
   until ( (Skip <= 0) || (BailOut <= 0) )
   
   Log(string(Name) $ " chose new path: " $ string(Path[CurPath]) $ ".");

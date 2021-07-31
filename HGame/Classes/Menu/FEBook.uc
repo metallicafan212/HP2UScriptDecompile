@@ -555,7 +555,7 @@ function ExitFromConsole()
 
 function Notify (UWindowDialogControl C, byte E)
 {
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
     switch (C)
     {
@@ -563,9 +563,9 @@ function Notify (UWindowDialogControl C, byte E)
       CloseBook();
       break;
       default:
+	  Log("FEBook::Notify " $ string(C));
+	  break;
     }
-    Log("FEBook::Notify " $ string(C));
-  } else {
   }
 }
 

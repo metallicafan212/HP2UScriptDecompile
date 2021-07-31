@@ -15,11 +15,11 @@ class skChairsHagridsWood extends HPMeshActor;
 #exec Anim Digest Anim=skChairsHagridsWoodAnims VERBOSE 
 
 //texture import (skChairsHagridsWoodTex0) -AdamJD 
-#exec Texture Import File=Textures\skChairsHagridsWoodTex0.png Name=skChairsHagridsWoodTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skChairsHagridsWoodTex0.png Name=skChairsHagridsWoodTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChairsHagridsWoodMesh Num=0 Texture=skChairsHagridsWoodTex0
 
 //texture import (skChairsHagridsWoodTex1) -AdamJD 
-#exec Texture Import File=Textures\skChairsHagridsWoodTex1.png Name=skChairsHagridsWoodTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skChairsHagridsWoodTex1.png Name=skChairsHagridsWoodTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChairsHagridsWoodMesh Num=1 Texture=skChairsHagridsWoodTex1
 
 defaultproperties

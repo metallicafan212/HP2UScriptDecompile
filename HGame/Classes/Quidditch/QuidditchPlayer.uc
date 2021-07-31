@@ -308,8 +308,7 @@ function SplicePaths (name Path1, name Path2, optional int iPath2SplicePointPos)
     {
       EndPoint = IP;
 	  break;
-    } //else {
-    //}
+    }
   }
   if ( EndPoint == None )
   {

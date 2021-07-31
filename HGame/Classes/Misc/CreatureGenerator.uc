@@ -52,21 +52,16 @@ function PostBeginPlay()
     {
       FirstPP = pP;
 	  break;
-    } //else {
-    //}
+    }
   }
   HowManyBaseCreatures = 0;
-  // I = 0;
-  // if ( I < 16 )
+
   for(I = 0; I < 16; I++)
   {
     if ( BaseCreatureToSpawn[I] == None )
     {
-      // goto JL009A;
 	  break;
     }
-    // I++;
-    // goto JL0070;
   }
   HowManyBaseCreatures = I;
 }
@@ -133,13 +128,9 @@ function UpdateCreaturesLife (float DeltaTime)
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 20 )
   for(I = 0; I < MAX_CREATURES; I++)
   {
     UpdateCreatureLife(I,DeltaTime);
-    // I++;
-    // goto JL0007;
   }
 }
 
@@ -169,13 +160,9 @@ function DestroyCreatures()
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 20 )
   for(I = 0; I < MAX_CREATURES; I++)
   {
     DestroyCreature(I);
-    // I++;
-    // goto JL0007;
   }
 }
 
@@ -224,7 +211,6 @@ function GenerateCreature()
   {
     I = 0;
   } else {
-    // if ( True )
 	while ( True )
     {
       I = Rand(HowManyBaseCreatures);
@@ -232,9 +218,7 @@ function GenerateCreature()
       {
         PreviousBaseCreatureIndex = I;
 		break;
-      } //else {
-        //goto JL011E;
-      //}
+      } 
     }
   }
   A = Spawn(BaseCreatureToSpawn[I],,,FirstPP.Location,rotator(FirstPP.NextPatrolPoint.Location - FirstPP.Location));

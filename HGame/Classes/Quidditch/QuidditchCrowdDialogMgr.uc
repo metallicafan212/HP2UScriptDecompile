@@ -138,7 +138,6 @@ function PickNextSpeakingCrowd()
     return;
   }
   nSkip = Rand(NumSpeakingCrowds - 1) + 1;
-  // if ( nSkip > 0 )
   while ( nSkip > 0 )
   {
     CurrentSpeakingCrowd = CurrentSpeakingCrowd.NextSpeakingCrowd;
@@ -147,7 +146,6 @@ function PickNextSpeakingCrowd()
       CurrentSpeakingCrowd = SpeakingCrowds;
     }
     --nSkip;
-    // goto JL002D;
   }
 }
 
@@ -236,7 +234,6 @@ function bool SayDialogLine (optional bool bNoGap)
   {
 	  while ( Variant < Dialog.House[eHouse].Variations )
 	  {
-	// JL00D5:
 		if (  !Dialog.House[eHouse].Variant[Variant].bHasBeenSaid )
 		{
 		  fAge = 300.0;
@@ -256,7 +253,6 @@ function bool SayDialogLine (optional bool bNoGap)
 		  ++iCandidate;
 		}
 		++Variant;
-		// goto JL00D5;
 	  }
 	  switch (eHouse)
 	  {
@@ -282,7 +278,7 @@ function bool SayDialogLine (optional bool bNoGap)
 	  }
   }
   until(bDone)
-  // if (! bDone ) goto JL00CE;
+  
   NumCandidates = iCandidate;
   if ( NumCandidates <= 0 )
   {
@@ -291,18 +287,15 @@ function bool SayDialogLine (optional bool bNoGap)
   }
   iCandidate = 0;
   fChoice = FRand() * fTotalWeight;
-  // if ( iCandidate < NumCandidates - 1 )
   while ( iCandidate < NumCandidates - 1 )
   {
     if ( Candidates[iCandidate].fWeight > fChoice )
     {
-      // goto JL033B;
 	  break;
     } else {
       fChoice -= Candidates[iCandidate].fWeight;
       ++iCandidate;
     }
-    // goto JL02E8;
   }
   eHouse = Candidates[iCandidate].eHouse;
   Variant = Candidates[iCandidate].Variant;
@@ -358,8 +351,6 @@ function fillDialogArray()
   local bool B;
   local string sndId;
 
-  // H = 0;
-  // if ( H < 6 )
   for(H = 0; H < MAX_QUID_DIALOG_HOUSE_NAMES; H++)
   {
     V = 0;
@@ -368,12 +359,8 @@ function fillDialogArray()
 	//do and for loops -AdamJD
 	do
 	{
-		// S = 0;
-		// if ( S < 2 )
 		for(S = 0; S < MAX_QUID_DIALOG_SEX_NAMES; S++)
 		{
-		  // L = 0;
-		  // if ( L < 30 )
 		  for(L = 0; L < QC_MAX_DIALOG_VARIANTS; L++)
 		  {
 			sndId = GetDialogLineId(S,H,L,B);
@@ -383,22 +370,14 @@ function fillDialogArray()
 			  Dialog.House[H].Variant[V].dlgSound = Sound(DynamicLoadObject("AllDialog." $ sndId,Class'Sound'));
 			  ++V;
 			} else {
-			  //goto JL00F6;
 			  break;
 			}
-			// L++;
-			// goto JL003C;
 		  }
-		  // S++;
-		  // goto JL0029;
 		}
 		B =  !B;
 	}
 	until(B);
-    // if (! B ) goto JL0022;
     Dialog.House[H].Variations = V;
-    // H++;
-    // goto JL0007;
   }
 }
 

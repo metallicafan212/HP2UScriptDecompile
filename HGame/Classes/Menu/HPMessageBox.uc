@@ -114,7 +114,7 @@ function Notify (UWindowDialogControl C, byte E)
   }
   switch (E)
   {
-    case 2:
+    case DE_Click:
     switch (C)
     {
       case button1:

@@ -1595,8 +1595,7 @@ function int FindNearestSavePointID()
       Log("Found ID Str = " $ Str);
       ReturnID = int(Str);
 	  
-    } //else {
-    //}
+    }
   }
   return ReturnID;
 }
@@ -2218,7 +2217,6 @@ function StartBossEncounter (baseBoss Boss, bool in_bHarryShouldLockOntoBoss, bo
   } else {
     SpellCursor.SetLOSDistance(0.0);
   }
-  // if (!(bStrafe == 0 )) goto JL014A;
   if ( in_bHarryShouldLockOntoBoss && Boss != None )
   {
     if (  !Boss.SetCamMode() )
@@ -2228,7 +2226,6 @@ function StartBossEncounter (baseBoss Boss, bool in_bHarryShouldLockOntoBoss, bo
   }
   if ( Boss != None )
   {
-// JL014A:
     Boss.StartBossEncounter();
     if (  !in_bDontShowBossMeter )
     {
@@ -3924,9 +3921,6 @@ state CelebrateCardSet
 	  while ( Cam.CameraMode == Cam.ECamMode.CM_CutScene )
 	  {
 		Sleep(0.1);
-		//goto JL011E;
-		//goto begin;
-		//return;
 	  }
 	  GotoState('PlayerWalking');
 }
@@ -5064,7 +5058,6 @@ state PlayerWalking
     }
     foreach AllActors(Class'BaseCam',Cam)
     {
-      //goto JL007F;
 	  break;
     }
   }

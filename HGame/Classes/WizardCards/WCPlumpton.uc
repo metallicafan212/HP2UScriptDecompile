@@ -5,7 +5,7 @@
 class WCPlumpton extends BronzeCards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardPlumptonBigTexture.PNG	GROUP=Icons	Name=WizCardPlumptonBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardPlumptonBigTexture.PNG	GROUP=Icons	Name=WizCardPlumptonBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardPlumptonTex0.PNG	GROUP=Skins	Name=WizardCardPlumptonTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
 function PostBeginPlay()

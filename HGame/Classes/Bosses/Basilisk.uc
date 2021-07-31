@@ -156,8 +156,7 @@ function PostBeginPlay()
     if ( VSize2D(A.Location - Location) < 70 )
     {
       BasilStartPoint = A;
-    } //else {
-    // }
+    }
   }
   AttackTimer = b1_TimeBetweenAttackStart;
   EyeGlowL = Spawn(Class'BasilEyeGlow',self);
@@ -167,7 +166,7 @@ function PostBeginPlay()
   EyeGlowR.AttachToOwner('Bone118');
   EyeGlowR.EnableEmission(False);
   NumHoles = 4;
-  // I = 0;
+
   for ( I = 0; I < NumHoles; I++ )
   {
     foreach AllActors(Class'Actor',A,name(string(HoleMarkerCommonTag) $ string(I)))
@@ -175,8 +174,6 @@ function PostBeginPlay()
       HoleMarker[I] = A;
       Log("************** hole:" $ string(A.Name));
     }
-    // I++;
-    // goto JL0194;
   }
   AcidSpitPeriod = 1.0 / AcidSpitFreq;
 }
@@ -621,9 +618,7 @@ state stateWait1
   
   RotateToHarry(,120.0);
   
-// JL0077:
   // Sleep(0.01);
-  // if (! ActualYaw == DesiredYaw ) goto JL0077;
   
   //do and until -AdamJD
   do
@@ -1295,7 +1290,6 @@ begin:
     PlayHissSound();
     RotateTo(110.0,,HeadSpazSpeed);
     // Sleep(0.01);
-    // if (! ActualYaw == DesiredYaw ) goto JL002E;
 	
 	//do and until -AdamJD
 	do
@@ -1307,7 +1301,6 @@ begin:
     PlayHissSound();
     RotateTo(-110.0,,HeadSpazSpeed);
     // Sleep(0.01);
-    // if (! ActualYaw == DesiredYaw ) goto JL005C;
 	
 	//do and until -AdamJD
 	do
@@ -1319,7 +1312,6 @@ begin:
     PlayHissSound();
     RotateTo(-110.0,,HeadSpazSpeed);
     // Sleep(0.01);
-    // if (! ActualYaw == DesiredYaw ) goto JL008D;
 	
 	//do and until -AdamJD
 	do
@@ -1331,7 +1323,6 @@ begin:
     PlayHissSound();
     RotateTo(110.0,,HeadSpazSpeed);
     // Sleep(0.01);
-    // if (! ActualYaw == DesiredYaw ) goto JL00BB;
 	
 	//do and until -AdamJD
 	do
@@ -1343,7 +1334,6 @@ begin:
   PlayHissSound();
   RotateTo(TempYawSave,,HeadSpazSpeed);
   // Sleep(0.01);
-  // if (! ActualYaw == DesiredYaw ) goto JL00E9;
   
   //do and until -AdamJD
   do
@@ -1425,8 +1415,6 @@ state stateEyeSpell
   AttackTimer = TempFloat / 2;
   RotateTo(DegreeRotToActor(aEyeTarget),,40.0);
   // Sleep(0.01);
-// JL00D1:
-  // if (! ActualYaw == DesiredYaw ) goto JL00E8;
   
   //do and until -AdamJD
   do
@@ -1434,9 +1422,7 @@ state stateEyeSpell
 	Sleep(0.01);
   }
   until (ActualYaw == DesiredYaw);
-  
-  // if (! AttackTimer <= byte(0) ) goto JL00D1;
-  
+    
   //do and until -AdamJD
   do
   {
@@ -1506,7 +1492,6 @@ state stateHitThenEyeSpell
   PlayerHarry.ShakeView(1.5,100.0,100.0);
   _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_death',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.12));
   // Sleep(0.01);
-  // if (! _AnimChannel.bAnimDone ) goto JL0086;
   
   //do and until -AdamJD
   do
@@ -1674,7 +1659,6 @@ JL00D9:
 		GotoState('stateAttack');
 	  }
   }
-  // if (! False ) goto JL00BC;
   until (False);
   
   //UTPT didn't add these... -AdamJD
@@ -1763,8 +1747,6 @@ state stateAttack
   _BasiliskHeadColObj.PlaySound(Sound'Basilisk_roar',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.12));
   PlayerHarry.ShakeView(1.5,50.0,50.0);
   // Sleep(0.01);
-// JL00A0:
-  // if (! _AnimChannel.bAnimDone ) goto JL00A0;
   
   //do and until -AdamJD
   do
@@ -1788,7 +1770,6 @@ state stateHitThenAttack
   PlayerHarry.ShakeView(1.5,75.0,75.0);
   _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_death',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.12));
   // Sleep(0.01);
-  // if (! _AnimChannel.bAnimDone ) goto JL005E;
   
   //do and until -AdamJD
   do
@@ -1825,7 +1806,6 @@ state stateAttackLunge
     RotateToHarry(0.2);
   }
   // Sleep(0.01);
-  // if (! _AnimChannel.bAnimDone ) goto JL00E0;
   
   //do and until -AdamJD
   do

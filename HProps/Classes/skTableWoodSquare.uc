@@ -15,7 +15,7 @@ class skTableWoodSquare extends HPMeshActor;
 #exec Anim Digest Anim=skTableWoodSquareAnims VERBOSE 
 
 //texture import (skTableWoodSquareTex0) -AdamJD 
-#exec Texture Import File=Textures\skTableWoodSquareTex0.png Name=skTableWoodSquareTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skTableWoodSquareTex0.png Name=skTableWoodSquareTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTableWoodSquareMesh Num=0 Texture=skTableWoodSquareTex0
 
 defaultproperties

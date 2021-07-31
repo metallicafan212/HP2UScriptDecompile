@@ -98,13 +98,9 @@ function AttachAllLimbs()
 {
   local int I;
 
-  // I = 0;
-  // if ( I < NumLimbs ) 
   for(I = 0; I < NumLimbs; I++)
   {
     AttachLimb(I);
-    // I++;
-    // goto JL0007;
   }
   PlayerHarry.ClientMessage("Attach...............................");
   bHasGoodLimbs = True;
@@ -135,13 +131,9 @@ function DeAttachAllLimbs()
 {
   local int I;
 
-  // I = 0;
-  // if ( I < NumLimbs )
   for(I = 0; I < NumLimbs; I++)
   {
     DeAttachLimb(I);
-    // I++;
-    // goto JL0007;
   }
   PlayerHarry.ClientMessage("Deattach...............................");
   bHasGoodLimbs = False;
@@ -195,8 +187,7 @@ function PostBeginPlay()
 		rYaw[3] = 8192.0 * 2;
 		break;
   }
-  // I = 0;
-  // if ( I < NumLimbs )
+
   for(I = 0; I < NumLimbs; I++)
   {
     limbs[I] = Spawn(Class'TentaculaLimb',,,);
@@ -204,7 +195,6 @@ function PostBeginPlay()
     limbs[I].DrawScale *= Scale;
     limbs[I].TooClose = TooClose * Scale;
     limbs[I].relYaw = rYaw[I];
-    // limbs[I].SetPhysics(0);
     limbs[I].SetPhysics(PHYS_None);
     limbs[I].SetCollision(False,False,False);
     limbs[I].spellBox = Spawn(Class'TentaculaSpell',,,);
@@ -217,8 +207,6 @@ function PostBeginPlay()
       limbs[I].spellBox.SetCollision(False,False,False);
     }
     limbs[I].headBox = Spawn(Class'GenericColObj',self);
-    // I++;
-    // goto JL01A6;
   }
 }
 
@@ -226,16 +214,12 @@ function bool HasLimbs()
 {
   local int I;
 
-  // I = 0;
-  // if ( I < NumLimbs )
   for(I = 0; I < NumLimbs; I++)
   {
     if ( (limbs[I].GetStateName() != 'stateTwitch') && (limbs[I].GetStateName() != 'stateDie') )
     {
       return True;
     }
-    // I++;
-    // goto JL0007;
   }
   return False;
 }
@@ -255,8 +239,7 @@ function int ClosestLimb()
   v1.Z = 0.0;
   maxcos = -2.0;
   maxi = -1;
-  // I = 0;
-  // if ( I < NumLimbs )
+
   for(I = 0; I < NumLimbs; I++)
   {
     if ( (limbs[I].GetStateName() != 'stateTwitch') && (limbs[I].GetStateName() != 'stateDie') )
@@ -272,8 +255,6 @@ function int ClosestLimb()
         maxi = I;
       }
     }
-    // I++;
-    // goto JL0048;
   }
   if ( maxi >= 0 )
   {
@@ -289,38 +270,30 @@ function bool HandleSpellDiffindo (optional baseSpell spell, optional Vector vHi
   local int I;
 
   PlaySoundOuch();
-  // I = 0;
-  // if ( I < NumLimbs )
+
   for(I = 0; I < NumLimbs; I++)
   {
     if ( limbs[I].GetStateName() == 'stateStun' )
     {
-      // goto JL00CD;
 	  continue;
     }
     if ( limbs[I].GetStateName() == 'stateStunned' )
     {
-      // goto JL00CD;
 	  continue;
     }
     if ( limbs[I].GetStateName() == 'stateWake' )
     {
-      // goto JL00CD;
 	  continue;
     }
     if ( limbs[I].GetStateName() == 'stateDie' )
     {
-      // goto JL00CD;
 	  continue;
     }
     if ( limbs[I].GetStateName() == 'stateTwitch' )
     {
-      // goto JL00CD;
 	  continue;
     }
     limbs[I].GotoState('stateStun');
-    // I++;
-    // goto JL000D;
   }
   GotoState('stateStun');
   return True;

@@ -197,8 +197,7 @@ function InitSpider()
     if ( (Marker.bCenter == True) && (Marker.GroupName == GroupName) )
     {
       currentMarker = Marker;
-    } //else {
-    //}
+    }
   }
   if ( currentMarker == None )
   {

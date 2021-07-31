@@ -5,7 +5,7 @@
 class baseSpell extends Projectile;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\Icons\defaultSpellIcon.PNG	GROUP=Icons Name=defaultSpellIcon COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\defaultSpellIcon.PNG	GROUP=Icons Name=defaultSpellIcon COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 
 var ESpellType SpellType;
 var Texture SpellIcon;

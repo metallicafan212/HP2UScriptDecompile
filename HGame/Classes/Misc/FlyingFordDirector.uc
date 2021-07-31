@@ -109,8 +109,7 @@ function OnTouchEvent (Pawn Subject, Actor Object)
         {
           lightningZone = FlyingFordLightning(Object);
           GotoState('GameLightning');
-        } //else {
-        //}
+        }
       //}
     //}
   //}
@@ -137,8 +136,7 @@ function OnUnTouchEvent (Pawn Subject, Actor Object)
           PlayerHarry.ClientMessage("Return to state GamePlay from an UNTouch message  " $ string(GetStateName()));
           GotoState('GamePlay');
         }
-      } //else {
-      //}
+      }
     //}
   //}
   if ( SetCarLocation() )
@@ -164,8 +162,7 @@ function OnTriggerEvent (Actor Other, Pawn EventInstigator)
   {
     PlayerHarry.ClientMessage("We have triggered an airplane");
     GotoState('GameAirplane');
-  } //else {
-  //}
+  }
 }
 
 function Trigger (Actor Other, Pawn EventInstigator)

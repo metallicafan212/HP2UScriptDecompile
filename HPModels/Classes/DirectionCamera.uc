@@ -15,7 +15,7 @@ class DirectionCamera extends Actor;
 #exec Anim Digest Anim=DirectionCameraAnims VERBOSE 
 
 //texture import (DirectionCameraTex0) -AdamJD 
-#exec Texture Import File=Textures\DirectionCameraTex0.png Name=DirectionCameraTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\DirectionCameraTex0.png Name=DirectionCameraTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
 #exec MeshMap SetTexture MeshMap=DirectionCameraMesh Num=0 Texture=DirectionCameraTex0
 
 defaultproperties

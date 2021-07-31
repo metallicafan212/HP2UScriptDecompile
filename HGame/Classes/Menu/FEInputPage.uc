@@ -129,15 +129,12 @@ function LocalizeStrings()
   KeyboardText = GetLocalFEString("Options_0018");
   InvertBroomText = GetLocalFEString("Flying_0003");
   optionsText = GetLocalFEString("Options_0040");
-  // I = 0;
-  // if ( I < 255 )
+
   for(I = 0; I < 255; I++)
   {
     tmpStr = "0000" $ string(I);
     tmpStr = "Localized_kn_" $ Right(tmpStr,4);
     LocalizedKeyName[I] = Localize("all",tmpStr,"HPMenu");
-    // I++;
-    // goto JL0237;
   }
   MouseSmoothText = "Mouse Smoothing";
   MiscText = GetLocalFEString("Options_0042");
@@ -273,10 +270,7 @@ function Created()
   InvertBroomCheck.SetFont(0);
   InvertBroomCheck.TextColor = LabelTextColor;
   ctlY += InQuidditch_VertSpacing[0];
-  // I = 0;
-  // J0x85D:
-  // End:0xA3A [Loop If]
-  // if(I < 1)
+
   for(I = 0; I < 1; I++)
   {
       InQuidditch_KeyNames[I] = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY + textOffsetY, labelWidth + 200, 1.0));
@@ -295,9 +289,6 @@ function Created()
       InQuidditch_KeyButtons[I].bIgnoreRDoubleClick = true;
       InQuidditch_KeyButtons[I].TextColor = ButtonTextColor;
       ctlY += InQuidditch_VertSpacing[I];
-      // ++ I;
-      // [Loop Continue]
-      // goto J0x85D;
   }
   ctlY += 13;
   InWizardDuel_Label = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY, ctlW, 1.0));
@@ -305,10 +296,7 @@ function Created()
   InWizardDuel_Label.SetFont(1);
   InWizardDuel_Label.TextColor = GoupLabelTextColor;
   ctlY += 25;
-  // I = 0;
-  // J0xAB8:
-  // End:0xC91 [Loop If]
-  // if(I < 1)
+
   for(I = 0; I < 1; I++)
   {
       InWizardDuel_KeyNames[I] = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
@@ -327,9 +315,6 @@ function Created()
       InWizardDuel_KeyButtons[I].bIgnoreRDoubleClick = true;
       InWizardDuel_KeyButtons[I].TextColor = ButtonTextColor;
       ctlY += InWizardDuel_VertSpacing[I];
-      // ++ I;
-      // [Loop Continue]
-      // goto J0xAB8;
   }
   ctlY = 40 - offsetY;
   ctlX = 430 - offsetX;
@@ -339,10 +324,7 @@ function Created()
   InGame_Label.SetFont(1);
   InGame_Label.TextColor = GoupLabelTextColor;
   ctlY += 25;
-  // I = 0;
-  // J0xD39:
-  // End:0xF13 [Loop If]
-  // if(I < 11)
+
   for(I = 0; I < 11; I++)
   {
       InGame_KeyNames[I] = UWindowLabelControl(CreateControl(class'UWindowLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
@@ -361,9 +343,6 @@ function Created()
       InGame_KeyButtons[I].bIgnoreRDoubleClick = true;
       InGame_KeyButtons[I].TextColor = ButtonTextColor;
       ctlY += InGame_VertSpacing[I];
-      // ++ I;
-      // [Loop Continue]
-      // goto J0xD39;
   }
 	
   LoadAvailableSettings();
@@ -404,8 +383,6 @@ function BeforePaint (Canvas C, float X, float Y)
   local int I;
   local int J;
 
-  // I = 0;
-  // if ( I < 11 )
   for(I = 0; I < 11; I++)
   {
     if ( BoundKey1[I] == 0 )
@@ -419,11 +396,8 @@ function BeforePaint (Canvas C, float X, float Y)
         InGame_KeyButtons[I].SetText(LocalizedKeyName[BoundKey1[I]] $ OrString $ LocalizedKeyName[BoundKey2[I]]);
       }
     //}
-    // I++;
-    // goto JL0007;
   }
-  // I = 0;
-  // if ( I < 2 )
+
   for(I = 0; I < 2; I++)
   {
     J = 11 + I;
@@ -438,11 +412,7 @@ function BeforePaint (Canvas C, float X, float Y)
         InQuidditch_KeyButtons[I].SetText(LocalizedKeyName[BoundKey1[J]] $ OrString $ LocalizedKeyName[BoundKey2[J]]);
       }
     //}
-    // I++;
-    // goto JL00C9;
   }
-  // I = 0;
-  // if ( I < 1 )
   for(I = 0; I < 1; I++)
   {
     J = 12 + I;
@@ -457,8 +427,6 @@ function BeforePaint (Canvas C, float X, float Y)
         InWizardDuel_KeyButtons[I].SetText(LocalizedKeyName[BoundKey1[J]] $ OrString $ LocalizedKeyName[BoundKey2[J]]);
       }
     //}
-    // I++;
-    // goto JL019A;
   }
 }
 
@@ -530,8 +498,7 @@ function LoadExistingKeys()
       if ( Alias != "" )
       {
         Alias = Caps(Alias);
-        // J = 0;
-        // if ( J < 14 )
+
 		for(J = 0; J < ArrayCount(AliasNames1); J++)
         {
           if ( AliasNames1[J] != "" && InStr(Alias,Caps(AliasNames1[J])) != -1 )
@@ -547,13 +514,9 @@ function LoadExistingKeys()
             //}
             Log(" Found in AliasNames1[" $ string(J) $ "] (" $ AliasNames1[J] $ ") set to BoundKey[" $ string(J) $ "] ");
 		  }
-          // J++;
-          // goto JL0141;
         }
       }
     }
-    // I++;
-    // goto JL00A6;
   }
 }
 
@@ -1205,7 +1168,7 @@ function Notify (UWindowDialogControl C, byte E)
   Super.Notify(C,E);
   switch (E)
   {
-    case 1:
+    case DE_Change:
     switch (C)
     {
       case DifficultyCombo:
@@ -1237,7 +1200,7 @@ function Notify (UWindowDialogControl C, byte E)
       break;
       default:
     }
-    case 2:
+    case DE_Click:
     if ( bPolling )
     {
       bPolling = False;
@@ -1251,8 +1214,7 @@ function Notify (UWindowDialogControl C, byte E)
     if ( UWindowButton(C) != None )
     {
       PlayClick();
-      // I = 0;
-      // if ( I < 11 )
+
 	  for(I = 0; I < 11; I++)
       {
         if ( InGame_KeyButtons[I] == C )
@@ -1268,11 +1230,8 @@ function Notify (UWindowDialogControl C, byte E)
           SelectedButton.bDisabled = True;
           return;
         }
-        // I++;
-        // goto JL011B;
       }
-      // I = 0;
-      // if ( I < 2 )
+
 	  for(I = 0; I < 2; I++)
       {
         if ( InQuidditch_KeyButtons[I] == C )
@@ -1288,11 +1247,8 @@ function Notify (UWindowDialogControl C, byte E)
           SelectedButton.bDisabled = True;
           return;
         }
-        // I++;
-        // goto JL0208;
       }
-      // I = 0;
-      // if ( I < 1 )
+
 	  for(I = 0; I < 1; I++)
       {
         if ( InWizardDuel_KeyButtons[I] == C )
@@ -1308,8 +1264,6 @@ function Notify (UWindowDialogControl C, byte E)
           SelectedButton.bDisabled = True;
           return;
         }
-        // I++;
-        // goto JL02FF;
       }
     }
     switch (C)
@@ -1319,7 +1273,7 @@ function Notify (UWindowDialogControl C, byte E)
       return;
     }
     break;
-    case 6:
+    case DE_RClick:
     if ( bPolling )
     {
       bPolling = False;
@@ -1331,7 +1285,7 @@ function Notify (UWindowDialogControl C, byte E)
       }
     }
     break;
-    case 5:
+    case DE_MClick:
     if ( bPolling )
     {
       bPolling = False;

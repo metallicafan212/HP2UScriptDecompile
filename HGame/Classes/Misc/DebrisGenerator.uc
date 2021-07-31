@@ -35,40 +35,30 @@ function PostBeginPlay()
   Super.PostBeginPlay();
   ScaleDown = 1.0;
   NumMeshs = 0;
-  // I = 0;
-  // if ( I < 8 )
+
   for(I = 0; I < 8; I++)
   {
     if ( BaseDebris[I].aMesh == None )
     {
       NumMeshs = I;
 	  break;
-    } //else {
-      // I++;
-      // goto JL001F;
-    //}
+    } 
   }
-  // I = 0;
-  // if ( I < 8 )
+
   for(I = 0; I < 8; I++)
   {
     if ( BaseDebris[I].Velocity == 0 )
     {
       BaseDebris[I].Velocity = 250;
     }
-    // I++;
-    // goto JL0060;
   }
-  // I = 0;
-  // if ( I < 8 )
+  
   for(I = 0; I < 8; I++)
   {
     if ( BaseDebris[I].DrawScale == 0 )
     {
       BaseDebris[I].DrawScale = 1.0;
     }
-    // I++;
-    // goto JL00A6;
   }
 }
 
@@ -152,8 +142,7 @@ function Disintegrate (Vector start_locn, Rotator dirn)
   {
     return;
   }
-  // I = 0;
-  // if ( I < nums )
+
   for(I = 0; I < nums; ++I)
   {
     iIndex = Rand(NumMeshs);
@@ -174,8 +163,6 @@ function Disintegrate (Vector start_locn, Rotator dirn)
       A.InitializeDebris();
     }
     start_locn += vectGap;
-    // ++I;
-    // goto JL01C7;
   }
   if ( JustOnce )
   {

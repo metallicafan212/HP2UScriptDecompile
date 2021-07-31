@@ -2,7 +2,7 @@
 // baseSpellPage.
 //================================================================================
 
-class baseSpellPage extends basePopup;
+class baseSpellPage extends basePopup; 
 
 var Texture pagePieces[4];
 var int yOffset;

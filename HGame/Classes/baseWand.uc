@@ -374,12 +374,10 @@ function ShowCastedSpellList (optional int iNumSpells)
     iNumSpells = 8;
   }
   PlayerHarry.ClientMessage("***Number of Casted Spells: " $ string(NumCastedSpells));
-  // I = 0;
+
   for ( I= 0; I < iNumSpells; ++I )
   {
     PlayerHarry.ClientMessage(" spell[" $ string(I) $ "] = " $ string(CastedSpellList[I]));
-    // ++I;
-    // goto JL005D;
   }
 }
 
@@ -406,7 +404,6 @@ function SubtractFromCastedSpellList (baseSpell spell)
   local int iIndex;
   local bool bFound;
 
-  // I = 0;
   for ( I=0; I < NumCastedSpells; ++I )
   {
     if ( CastedSpellList[I] == spell )
@@ -416,19 +413,13 @@ function SubtractFromCastedSpellList (baseSpell spell)
       CastedSpellList[I] = None;
       NumCastedSpells--;
 	  break;
-    } //else {
-      // ++I;
-      // goto JL0007;
-   // }
+    }
   }
   if ( bFound )
   {
-    // I = Index;
     for ( I=iIndex; I < 8 - 1; ++I )
     {
       CastedSpellList[I] = CastedSpellList[I + 1];
-      // ++I;
-      // goto JL0073;
     }
   } else {
     PlayerHarry.ClientMessage("baseWand: Could not find spell: " $ string(spell) $ " to subtract from list!!!");
@@ -668,7 +659,7 @@ defaultproperties
 
     bSplashDamage=True
 
-    FireOffset=(X=0.00,Y=-6.00,Z=-7.00),
+    FireOffset=(X=0.00,Y=-6.00,Z=-7.00)
 
     AltProjectileClass=Class'baseSpell'
 
@@ -686,7 +677,7 @@ defaultproperties
 
     ItemName="Wand"
 
-    PlayerViewOffset=(X=3.50,Y=-1.80,Z=-2.00),
+    PlayerViewOffset=(X=3.50,Y=-1.80,Z=-2.00)
 
     ThirdPersonMesh=SkeletalMesh'HPModels.WandMesh'
 

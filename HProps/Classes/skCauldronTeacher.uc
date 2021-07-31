@@ -15,7 +15,7 @@ class skCauldronTeacher extends HPMeshActor;
 #exec Anim Digest Anim=skCauldronTeacherAnims VERBOSE 
 
 //texture import (skCauldronTeacherTex0) -AdamJD 
-#exec Texture Import File=Textures\skCauldronTeacherTex0.png Name=skCauldronTeacherTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skCauldronTeacherTex0.png Name=skCauldronTeacherTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skCauldronTeacherMesh Num=0 Texture=skCauldronTeacherTex0
 
 defaultproperties

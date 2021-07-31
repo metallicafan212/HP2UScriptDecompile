@@ -15,7 +15,7 @@ class skPlantsCactus1 extends HPMeshActor;
 #exec Anim Digest Anim=skPlantsCactus1Anims VERBOSE 
 
 //texture import (skPlantsCactus1Tex0) -AdamJD 
-#exec Texture Import File=Textures\skPlantsCactus1Tex0.png Name=skPlantsCactus1Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skPlantsCactus1Tex0.png Name=skPlantsCactus1Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skPlantsCactus1Mesh Num=0 Texture=skPlantsCactus1Tex0
 
 defaultproperties

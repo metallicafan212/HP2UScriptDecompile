@@ -214,44 +214,40 @@ function UpdateCursor (optional bool bJustStopAtClosestPawnOrWall)
     if ( aHitActor == Owner || aHitActor.IsA('harry') ||  (!aHitActor.IsA('Pawn') &&  !aHitActor.IsA('GridMover') &&  !aHitActor.IsA('spellTrigger')) )
     {
       continue;
-    } //else {
-      if ( bEmit && bDebugMode )
-      {
-        PlayerHarry.ClientMessage(" TraceActors Hit actor -> " $ string(HitActor));
-      }
-      if (  !bHitActor &&  !aHitActor.bHidden )
-      {
-        bHitSomething = True;
-        bHitActor = True;
-        vFirstHitPos = vHitLocation;
-      }
-      if ( aHitActor.eVulnerableToSpell == SPELL_None )
-      {
-        continue;
-      } //else {
-        if ( PlayerHarry.IsInSpellBook(aHitActor.eVulnerableToSpell) || (bJustStopAtClosestPawnOrWall) )
-        {
-          if ( aHitActor.IsA('spellTrigger') && !spellTrigger(aHitActor).bInitiallyActive )
-          {
-            continue;
-          } //else {
-              if ( spellTrigger(aHitActor).bHitJustFromFront &&  !IsHarryFacingTarget(HitActor) )
-              {
-                continue;
-              } //else {
-                if (  !bJustStopAtClosestPawnOrWall )
-                {
-                  aPossibleTarget = aHitActor;
-                  vTargetOffset = vHitLocation - aPossibleTarget.Location;
-                }
-                vLastValidHitPos = vHitLocation;
+    } 
+    if ( bEmit && bDebugMode )
+    {
+      PlayerHarry.ClientMessage(" TraceActors Hit actor -> " $ string(HitActor));
     }
-          // }
-        // }
-      // }
-    // }
-	 vLOS_End = vHitLocation;
-	 break;
+    if (  !bHitActor &&  !aHitActor.bHidden )
+    {
+      bHitSomething = True;
+      bHitActor = True;
+      vFirstHitPos = vHitLocation;
+    }
+    if ( aHitActor.eVulnerableToSpell == SPELL_None )
+    {
+      continue;
+    } 
+    if ( PlayerHarry.IsInSpellBook(aHitActor.eVulnerableToSpell) || (bJustStopAtClosestPawnOrWall) )
+    {
+       if ( aHitActor.IsA('spellTrigger') && !spellTrigger(aHitActor).bInitiallyActive )
+       {
+         continue;
+       } 
+       if ( spellTrigger(aHitActor).bHitJustFromFront &&  !IsHarryFacingTarget(HitActor) )
+       {
+         continue;
+       } 
+       if (  !bJustStopAtClosestPawnOrWall )
+       {
+          aPossibleTarget = aHitActor;
+          vTargetOffset = vHitLocation - aPossibleTarget.Location;
+       }
+       vLastValidHitPos = vHitLocation;
+    }
+	vLOS_End = vHitLocation;
+	break;
   }
   if ( aPossibleTarget == None && bHitActor )
   {

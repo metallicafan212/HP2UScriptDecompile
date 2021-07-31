@@ -96,7 +96,7 @@ function Notify (UWindowDialogControl C, byte E)
   Super.Notify(C,E);
   switch (E)
   {
-    case 1:
+    case DE_Change:
     switch (C)
     {
       case ComboBoxListTypes:
@@ -108,7 +108,7 @@ function Notify (UWindowDialogControl C, byte E)
       default:
     }
     break;
-    case 2:
+    case DE_Click:
     switch (C)
     {
       case buttonLaunch:
@@ -134,7 +134,6 @@ function ListTypeComboBoxChanged()
 
   I = 0;
   strNewName = ComboBoxListTypes.GetValue();
-  // if ( I < 8 )
   while(I < MAX_LISTS)
   {
     if ( strNewName == ListArray[I].strName )
@@ -149,7 +148,6 @@ function ListTypeComboBoxChanged()
       return;
     }
     ++I;
-    // goto JL001C;
   }
 }
 

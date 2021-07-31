@@ -30,8 +30,7 @@ function Created()
   NoneWonLabel.bShadowText = True;
   NoneWonLabel.SetText(GetLocalFEString("Main_Menu_0011"));
   nStartY = 100;
-  // I = 0;
-  // if ( I < 4 )
+
   for(I = 0; I < 4; I++)
   {
     NameButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',100.0,nStartY + I * 26,200.0,20.0));
@@ -50,8 +49,6 @@ function Created()
     // ScoreButtons[I].Align = 0;
 	ScoreButtons[I].Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
     ScoreButtons[I].bShadowText = True;
-    // I++;
-    // goto JL0104;
   }
   NameButtons[0].SetText(GetLocalFEString("Maps_0006"));
   NameButtons[1].SetText(GetLocalFEString("Maps_0008"));
@@ -64,7 +61,7 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
     if ( C == BackPageButton )
     {

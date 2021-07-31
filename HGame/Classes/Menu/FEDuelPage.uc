@@ -32,8 +32,7 @@ function Created()
   CreateBackPageButton();
   CreateTitleButton(GetLocalFEString("InGameMenu_0041"));
   StartY = 100;
-  // I = 0;
-  // if ( I < 10 )
+
   for(I = 0; I < 10; I++)
   {
     rankingButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',WinWidth / 2 - 180 / 2,StartY + I * 28,180.0,26.0));
@@ -48,8 +47,6 @@ function Created()
     rankingButtons[I].UpTexture = Texture'FEComboIdleTexture';
     rankingButtons[I].DownTexture = Texture'FEComboIdleTexture';
     rankingButtons[I].OverTexture = Texture'FEComboIdleTexture';
-    // I++;
-    // goto JL0062;
   }
   duelistNames[10] = GetLocalDuelName("PC_Her_Trans2Goyle_21",10);
   duelistNames[9] = GetLocalDuelName("PC_Snp_DuelComments_27",9);
@@ -107,8 +104,7 @@ function PreSwitchPage()
     PlayerHarry.lastUnlockedDuelist = 0;
   }
   Count = 0;
-  // I = 0;
-  // if ( I < 10 )
+
   for(I = 0; I < 10; I++)
   {
     if ( I == PlayerHarry.curWizardDuelRank )
@@ -118,11 +114,8 @@ function PreSwitchPage()
       sortedDuelistNames[I] = "" $ string(I + 1) $ ". " $ duelistNames[Count];
       Count++;
     }
-    // I++;
-    // goto JL0139;
   }
-  // I = 0;
-  // if ( I < 10 )
+
   for(I = 0; I < 10; I++)
   {
     rankingButtons[I].TextColor.R = 255;
@@ -135,8 +128,6 @@ function PreSwitchPage()
       rankingButtons[I].TextColor.B = 0;
     }
     rankingButtons[I].SetText(sortedDuelistNames[I]);
-    // I++;
-    // goto JL01CD;
   }
   Super.PreSwitchPage();
 }
@@ -184,14 +175,13 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
     if ( C == BackPageButton )
     {
       FEBook(book).DoEscapeFromPage();
     }
-    // I = 0;
-    // if ( I < 10 )
+
 	for(I = 0; I < 10; I++)
     {
       if ( rankingButtons[I] == C )
@@ -205,8 +195,6 @@ function Notify (UWindowDialogControl C, byte E)
           return;
         }
       }
-      // I++;
-      // goto JL0037;
     }
   }
   Super.Notify(C,E);

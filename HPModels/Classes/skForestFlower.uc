@@ -16,6 +16,6 @@ class skForestFlower extends HPMesh
 #exec Anim Digest Anim=skForestFlowerAnims VERBOSE 
 
 //texture import (skForestFlowerTex0) -AdamJD 
-#exec Texture Import File=Textures\skForestFlowerTex0.png Name=skForestFlowerTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skForestFlowerTex0.png Name=skForestFlowerTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skForestFlowerMesh Num=0 Texture=skForestFlowerTex0
 

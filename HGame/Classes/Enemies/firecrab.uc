@@ -349,5 +349,5 @@ defaultproperties
 
     Mass=130.00
 
-    RotationRate=(Pitch=100000,Yaw=100000,Roll=100000),
+    RotationRate=(Pitch=100000,Yaw=100000,Roll=100000)
 }

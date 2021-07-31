@@ -60,18 +60,14 @@ function PreBeginPlay()
     ThrowDelay = 0.01;
   }
   NumMeshs = 0;
-  // I = 0;
-  // if ( I < 8 )
+
   for(I = 0; I < 8; I++)
   {
     if ( Meshs[I] == None )
     {
       NumMeshs = I;
 	  break;
-    } //else {
-      // I++;
-      // goto JL0036;
-    //}
+    }
   }
   if ( NumMeshs == 0 )
   {

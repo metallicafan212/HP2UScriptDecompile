@@ -303,8 +303,6 @@ function UpdateDisplayDetails()
   local bool bHarryShownOnMap;
   local name N;
 
-  // I = 0;
-  // if ( I < TotalNumMapButtons )
   for(I = 0; I < TotalNumMapButtons; I++)
   {
     if ( (I >= MapButtonIdx[nCurrPage]) && (I < MapButtonIdx[nCurrPage] + NumMapButtons[nCurrPage]) )
@@ -315,13 +313,10 @@ function UpdateDisplayDetails()
       Buttons[I].MapButton.bDisabled = True;
       Buttons[I].MapButton.HideWindow();
     }
-    // I++;
-    // goto JL0007;
   }
   S = GetCurrentUnrFileName();
   N = PlayerHarry.HarryAtMapMarker();
-  // I = 0;
-  // if ( I < 43 )
+
   for(I = 0; I < 43; I++)
   {
     if ( (nCurrPage == HarryLocInfo[I].MapIdx) && (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag == N) )
@@ -334,10 +329,7 @@ function UpdateDisplayDetails()
       HarryLocationButton.WinLeft = HarryLocX;
       HarryLocationButton.WinTop = HarryLocY;
 	  break;
-    } //else {
-      // I++;
-      // goto JL00F0;
-    //}
+    } 
   }
   if (  !bHarryShownOnMap )
   {
@@ -357,7 +349,6 @@ function string GetCurrentUnrFileName()
   local int I;
 
   S = GetLevel().LevelEnterText;
-  // if ( True )
   while ( True )
   {
     I = InStr(S,"\\");
@@ -365,10 +356,8 @@ function string GetCurrentUnrFileName()
     {
       S = Mid(S,I + 1);
     } else {
-     // goto JL0052;
 	 break;
     }
-    //goto JL0015;
   }
   S2 = Caps(S);
   if ( InStr(S2,".UNR") < 0 )
@@ -391,10 +380,8 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
-    // I = MapButtonIdx[nCurrPage];
-    // if ( I < MapButtonIdx[nCurrPage] + NumMapButtons[nCurrPage] )
     for(I = MapButtonIdx[nCurrPage]; I < MapButtonIdx[nCurrPage] + NumMapButtons[nCurrPage]; I++)
 	{
       if ( (C == Buttons[I].MapButton) && (Buttons[I].MapLink != -1) )
@@ -402,8 +389,6 @@ function Notify (UWindowDialogControl C, byte E)
         nCurrPage = Buttons[I].MapLink;
         UpdateDisplayDetails();
       }
-      // I++;
-      // goto JL001E;
     }
     if ( C == BackPageButton )
     {
@@ -519,33 +504,24 @@ function SetInitialSelection()
   S = GetCurrentUnrFileName();
   nCurrPage = -1;
   HarryAtMapMarkerName = PlayerHarry.HarryAtMapMarker();
-  // I = 0;
-  // if ( I < 43 )
+
   for(I = 0; I < 43; I++)
   {
     if ( (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag != 'None') && (HarryLocInfo[I].Tag == HarryAtMapMarkerName) )
     {
       nCurrPage = HarryLocInfo[I].MapIdx;
 	  break;
-    } //else {
-      //I++;
-      //goto JL0033;
-    //}
+    }
   }
   if ( nCurrPage == -1 )
   {
-    // I = 0;
-    // if ( I < 43 )
 	for(I = 0; I < 43; I++)
     {
       if ( (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag == HarryAtMapMarkerName) )
       {
         nCurrPage = HarryLocInfo[I].MapIdx;
 		break;
-      } //else {
-        //I++;
-        //goto JL00CA;
-      //}
+      } 
     }
   }
   if ( nCurrPage == -1 )

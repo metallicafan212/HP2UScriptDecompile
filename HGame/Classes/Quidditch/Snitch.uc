@@ -328,8 +328,7 @@ function Vector GetTargetVector (Vector vActor, float BestDistance)
   local int I;
 
   cd = 999999.0;
-  // I = 0;
-  // if ( I < 4 )
+
   for(I = 0; I < NUM_POSITION_HISTORY; I++)
   {
     D = Abs(VSize(vPositionHistory[I] - vActor) - BestDistance);
@@ -338,8 +337,6 @@ function Vector GetTargetVector (Vector vActor, float BestDistance)
       cd = D;
       V = vPositionHistory[I];
     }
-    // I++;
-    // goto JL0012;
   }
   return V;
 }

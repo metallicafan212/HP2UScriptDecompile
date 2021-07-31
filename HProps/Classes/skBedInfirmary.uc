@@ -15,11 +15,11 @@ class skBedInfirmary extends HPMeshActor;
 #exec Anim Digest Anim=skBedInfirmaryAnims VERBOSE 
 
 //texture import (skBedInfirmaryTex0) -AdamJD 
-#exec Texture Import File=Textures\skBedInfirmaryTex0.png Name=skBedInfirmaryTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skBedInfirmaryTex0.png Name=skBedInfirmaryTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBedInfirmaryMesh Num=0 Texture=skBedInfirmaryTex0
 
 //texture import (skBedInfirmaryTex1) -AdamJD 
-#exec Texture Import File=Textures\skBedInfirmaryTex1.png Name=skBedInfirmaryTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skBedInfirmaryTex1.png Name=skBedInfirmaryTex1 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBedInfirmaryMesh Num=1 Texture=skBedInfirmaryTex1
 
 defaultproperties

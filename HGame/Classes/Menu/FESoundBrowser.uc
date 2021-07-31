@@ -77,8 +77,7 @@ function PreSwitchPage()
   }
   bAlreadyLoaded = True;
   LoadDialogKeys();
-  // I = 0;
-  // if ( I < MasterCount )
+
   for(I = 0; I < MasterCount; I++)
   {
     Sound = Sound(DynamicLoadObject("ALLDialog." $ MasterList[I],Class'Sound'));
@@ -93,8 +92,6 @@ function PreSwitchPage()
         status[I] = "OK";
       }
     }
-    // I++;
-    // goto JL0020;
   }
 }
 
@@ -102,8 +99,7 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  // if (! bool(E) == 2 ) goto JL000D;
-  if (E == 2)
+  if (E == DE_Click)
   {
 	//KW left this empty? -AdamJD
   }

@@ -31,20 +31,17 @@ function PostBeginPlay()
   local Vector Position;
 
   Super.PostBeginPlay();
-// JL001A:
+
   foreach AllActors(Class'harry',PlayerHarry)
   {
-    // goto JL001A;
 	break;
   }
   foreach AllActors(Class'Director',Director)
   {
-    // goto JL002F;
 	break;
   }
   CurrentStage = 1;
-  // I = 0;
-  // if ( I < 5 )
+
   for(I = 0; I < 5; ++I)
   {
     Position.X = (I + 1) * 20;
@@ -53,8 +50,6 @@ function PostBeginPlay()
     Hoops[I] = Spawn(Class'BroomHoop',None,'Hoop',Position,rot(0,0,0));
     Hoops[I].HoopNumber = I;
     Hoops[I].Stage = 0;
-    // ++I;
-    // goto JL003E;
   }
   InitialState = 'TrailOff';
 }
@@ -97,8 +92,7 @@ function ChangeHoopAppearance (BroomHoop Hoop, int ParticleStage)
   if ( bHoopsVisible )
   {
     Hoop.changeAttachedParticleFX(Hoop.attachedParticleClass[0]);
-  } //else {
-  //}
+  }
 }
 
 function SetTrailEnd (int NewTrailEnd)
@@ -108,8 +102,7 @@ function SetTrailEnd (int NewTrailEnd)
   local int I;
 
   I = NewTrailEnd;
-  // HoopsToDo = 5 - TrailLen;
-  // if ( HoopsToDo > 0 )
+
   for(HoopsToDo = MaxHoops - TrailLen; HoopsToDo > 0; --HoopsToDo)
   {
     --I;
@@ -122,15 +115,11 @@ function SetTrailEnd (int NewTrailEnd)
     {
       Hoop.GotoState('HoopDisappearing');
     }
-    // --HoopsToDo;
-    // goto JL001A;
   }
   I = NewTrailEnd;
-  // HoopsToDo = TrailLen;
-  // if ( (HoopsToDo > 0) && (I != NextHoopToUse) )
+
   for(HoopsToDo = TrailLen; (HoopsToDo > 0) && (I != NextHoopToUse); --HoopsToDo)
   {
-// JL00AD:
     Hoop = Hoops[I];
     if ( (I < ValidHoops) && (Hoop.IsInState('HoopInvisible') || Hoop.IsInState('HoopDisappearing')) )
     {
@@ -146,8 +135,6 @@ function SetTrailEnd (int NewTrailEnd)
     {
       I = 0;
     }
-    // --HoopsToDo;
-    // goto JL00AD;
   }
 }
 
@@ -172,13 +159,9 @@ state TrailOff
   {
     local int I;
   
-    // I = 0;
-    // if ( I < 5 )
 	for(I = 0; I < MaxHoops; ++I)
     {
       Hoops[I].GotoState('HoopInvisible');
-      // ++I;
-      // goto JL0007;
     }
   }
   

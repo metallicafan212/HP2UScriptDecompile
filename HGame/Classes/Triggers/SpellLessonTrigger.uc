@@ -432,8 +432,6 @@ function bool WandAtInterpolationPoint (InterpolationPoint IPoint, Interpolation
             IPPassedArrow[I] = None;
           }
         }
-        // I++;
-        // goto JL00E9;
       }
       if ( SpellLessonInterpolationPoint(IPoint).IsActive(nLevel) )
       {
@@ -444,10 +442,7 @@ function bool WandAtInterpolationPoint (InterpolationPoint IPoint, Interpolation
           if ( IPPassedArrow[I] == None )
           {
             IPPassedArrow[I] = SpellLessonInterpolationPoint(IPoint);
-          } //else {
-            // I++;
-            // goto JL0187;
-          //}
+          }
         }
       }
       if ( (nCurrTimesAround % 2 != 0) && (nHitPointsPassed == nHitPointsInLevel / 2) )
@@ -687,12 +682,7 @@ function float SayLessonDialog (string strDialogID, bool bDisplayText)
   } else {
     fSoundLen = Len(strDialog) * 0.01 + 3.0;
   }
-  
-  /*
-  if ( Professor != None )
-  {
-  */
-  
+    
   //added from the proto because UTPT didn't decompile this -AdamJD
   // ***************************************************************************
   // Handle emotions
@@ -728,17 +718,11 @@ function SayTryAgain (bool bLastTimeAround)
       if ( strTryOneLastTime[iSayTryAgain] != "" )
       {
         ++nTryLastTimeEntries;
-      } //else {
-        //goto JL0045;
-      //}
-// JL0045:
-      // I++;
-      // goto JL0010;
+      }
     }
   }
   if ( bLastTimeAround && (nTryLastTimeEntries > 0) )
   {
-    // I = RandRange(0.0,byte(nTryLastTimeEntries - 1)) = SayLessonDialog(strTryOneLastTime[I],False);
 	iSayTryAgain = RandRange(0.0,nTryLastTimeEntries - 1);
 	SayLessonDialog(strTryOneLastTime[iSayTryAgain],False);
   } else {
@@ -749,15 +733,10 @@ function SayTryAgain (bool bLastTimeAround)
       if ( strTryAgain[iSayTryAgain] != "" )
       {
         ++nTryAgainEntries;
-      } //else {
-        //goto JL00C4;
-      //}
-      // I++;
-      // goto JL008F;
+      }
     }
     if ( nTryAgainEntries > 0 )
     {
-      // I = RandRange(0.0,byte(nTryAgainEntries - 1)) = SayLessonDialog(strTryAgain[I],False);
 	  iSayTryAgain = RandRange(0.0,nTryAgainEntries - 1);
 	  SayLessonDialog(strTryAgain[iSayTryAgain],False);
     }
@@ -788,17 +767,11 @@ function SayEncouragement()
       if ( strEncourageDoingGood[iSayEncouragement] != "" )
       {
         ++nDoingGoodEntries;
-      } //else {
-        //goto JL006A;
-      //}
-      // I++;
-      // goto JL0035;
+      }
     }
   }
-// JL006A:
   if ( bDoingGood && (nDoingGoodEntries > 0) )
   {
-    // I = RandRange(0.0,byte(nDoingGoodEntries - 1)) = SayLessonDialog(strEncourageDoingGood[I],False);
 	iSayEncouragement = RandRange(0.0,nDoingGoodEntries - 1);
 	SayLessonDialog(strEncourageDoingGood[iSayEncouragement],False);
   } else {
@@ -809,15 +782,10 @@ function SayEncouragement()
       if ( strEncourageAny[iSayEncouragement] != "" )
       {
         ++nEncourageAnyEntries;
-      } //else {
-        //goto JL00E9;
-      //}
-      // I++;
-      // goto JL00B4;
+      }
     }
     if ( nEncourageAnyEntries > 0 )
     {
-      // I = RandRange(0.0,byte(nEncourageAnyEntries - 1)) = SayLessonDialog(strEncourageAny[I],False);
 	  iSayEncouragement = RandRange(0.0,nEncourageAnyEntries - 1); 
 	  SayLessonDialog(strEncourageAny[iSayEncouragement],False);
     }

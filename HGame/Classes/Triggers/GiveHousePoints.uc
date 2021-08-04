@@ -15,7 +15,7 @@ function Touch (Actor Other)
 {
 }
 
-function ProcessTrigger ()
+function ProcessTrigger()
 {
   local harry A;
 

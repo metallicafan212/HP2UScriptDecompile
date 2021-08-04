@@ -15,7 +15,7 @@ class skBooksBookRow1 extends HPMeshActor;
 #exec Anim Digest Anim=skBooksBookRow1Anims VERBOSE 
 
 //texture import (skBooksBookRow1Tex0) -AdamJD 
-#exec Texture Import File=Textures\skBooksBookRow1Tex0.png Name=skBooksBookRow1Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skBooksBookRow1Tex0.png Name=skBooksBookRow1Tex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBooksBookRow1Mesh Num=0 Texture=skBooksBookRow1Tex0
 
 defaultproperties

@@ -5,13 +5,13 @@
 class WCDumbledore extends Goldcards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardDumbledoreBigTexture.PNG	GROUP=Icons	Name=WizCardDumbledoreBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardAlbusBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardAlbusBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardAlbusBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardAlbusBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardAlbusBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardAlbusBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardDumbledoreBigTexture.PNG	GROUP=Icons	Name=WizCardDumbledoreBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardAlbusBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardAlbusBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardAlbusBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardAlbusBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardAlbusBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardAlbusBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardDumbledoreTex0.PNG	GROUP=Skins	Name=WizardCardDumbledoreTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Albus Dumbledore";
   Super.PostBeginPlay();

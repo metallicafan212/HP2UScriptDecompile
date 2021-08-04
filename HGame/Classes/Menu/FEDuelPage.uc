@@ -13,7 +13,6 @@ var HGameButton rankingButtons[10];
 var HGameButton lockedButtons[10];
 var Texture lockedTexture;
 var string duelistNames[11];
-var string duelistNamesInEnglish[11];
 
 function RepositionChildControls()
 {
@@ -80,7 +79,7 @@ function Created ()
 	RepositionChildControls();
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
 	local int I;
 	local int Count;
@@ -178,7 +177,7 @@ function Paint (Canvas Canvas, float X, float Y)
 	Super.Paint(Canvas,X,Y);
 }
 
-function LaunchWizardDuel ()
+function LaunchWizardDuel()
 {
 	local string levName;
 
@@ -205,7 +204,7 @@ function Notify (UWindowDialogControl C, byte E)
 {
 	local int I;
 
-	if ( E == 2 )
+	if ( E == DE_Click )
 	{
 		if ( C == BackPageButton )
 		{

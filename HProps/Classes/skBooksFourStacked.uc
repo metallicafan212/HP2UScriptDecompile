@@ -15,7 +15,7 @@ class skBooksFourStacked extends HPMeshActor;
 #exec Anim Digest Anim=skBooksFourStackedAnims VERBOSE 
 
 //texture import (skBooksFourStackedTex0) -AdamJD 
-#exec Texture Import File=Textures\skBooksFourStackedTex0.png Name=skBooksFourStackedTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skBooksFourStackedTex0.png Name=skBooksFourStackedTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBooksFourStackedMesh Num=0 Texture=skBooksFourStackedTex0
 
 defaultproperties

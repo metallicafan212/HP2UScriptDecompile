@@ -25,19 +25,14 @@ function load (string threadName, string FileName)
   local int I;
   local string Line;
 
-  // I = 0;
-  // if ( I < 9999 )
   for(I = 0; I < 9999; I++)
   {
     Line = Localize(threadName,"line_"$I,FileName);
     if ( Line == "" || InStr(Line,"<?") > -1 )
     {
-      // goto JL007C;
 	  break;
     }
     lineArray[I] = Line;
-    // I++;
-    // goto JL0007;
   }
 }
 

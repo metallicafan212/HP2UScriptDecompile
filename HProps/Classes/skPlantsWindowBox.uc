@@ -15,7 +15,7 @@ class skPlantsWindowBox extends HPMeshActor;
 #exec Anim Digest Anim=skPlantsWindowBoxAnims VERBOSE 
 
 //texture import (skPlantsWindowBoxTex0) -AdamJD 
-#exec Texture Import File=Textures\skPlantsWindowBoxTex0.png Name=skPlantsWindowBoxTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skPlantsWindowBoxTex0.png Name=skPlantsWindowBoxTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skPlantsWindowBoxMesh Num=0 Texture=skPlantsWindowBoxTex0
 
 //texture import (skPlantsWindowBoxTex1) -AdamJD 

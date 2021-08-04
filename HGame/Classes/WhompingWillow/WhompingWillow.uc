@@ -20,7 +20,7 @@ var() int Damage2;
 var() int Damage3;
 
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local WhompWRController Root;
 

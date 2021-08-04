@@ -68,7 +68,7 @@ function MakeSpellFX (Class<ParticleFX> FX, optional float Scale)
   NumSpellFX++;
 }
 
-function RepositionSpellFXs ()
+function RepositionSpellFXs()
 {
   local int Count;
 
@@ -127,7 +127,7 @@ function Bump (Actor Other)
   Touch(Other);
 }
 
-event Destroyed ()
+event Destroyed()
 {
   local int Count;
 

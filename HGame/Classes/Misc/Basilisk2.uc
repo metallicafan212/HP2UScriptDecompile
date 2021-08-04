@@ -24,7 +24,7 @@ var() float HeadAttackFarthest;
 var name HeadAttackAnimName[6];
 var Rotator TempRot;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local GenericColObj A;
 
@@ -104,7 +104,7 @@ function RotateToHarry (optional float Time, optional float Rate)
   RotateTo(IntRotToHarry(),Time,Rate);
 }
 
-function float IntRotToHarry ()
+function float IntRotToHarry()
 {
   local int YawToHarry;
 
@@ -150,7 +150,7 @@ function SetBasilYaw (int Yaw)
   DesiredRotation = R;
 }
 
-function HideBasil ()
+function HideBasil()
 {
   SetLocation(Location + vect(0.00,0.00,-200.00));
 }
@@ -183,7 +183,7 @@ begin:
   Trigger(None,None);
 }
 
-function PawnHearHarryNoise ()
+function PawnHearHarryNoise()
 {
   LastNoiseLoc = PlayerHarry.Location;
   TimeSinceLastHearNoise = 0.0;
@@ -195,7 +195,7 @@ function PawnHearHarryNoise ()
 
 state stateWaiting
 {  
-  function BeginState ()
+  function BeginState()
   {
     TimeSinceLastHearNoise = 0.0;
     HarryMakingNoiseTimer = 0.0;
@@ -210,7 +210,7 @@ state stateWaiting
 	}
   }
   
-  function Timer ()
+  function Timer()
   {
     switch (4)
     {
@@ -239,16 +239,15 @@ state stateWaiting
     Sleep(RandRange(1.0,2.0));
   }
   until(false);
-  // if (! False ) goto JL0000;
 }
 
 state stateTail
 {
-  function BeginState ()
+  function BeginState()
   {
   }
   
-  function EndState ()
+  function EndState()
   {
     Mesh = SkeletalMesh'skbasiliskMesh';
   }
@@ -324,7 +323,7 @@ begin:
   GotoState('stateWaiting');
 }
 
-function MoveToRandomVisibleHole ()
+function MoveToRandomVisibleHole()
 {
   local int NumVisibleHoles;
   local int NumHoles;
@@ -379,13 +378,13 @@ function DoHarryAttack (Vector vDir)
 
 state stateAttackHarry
 {
-  function BeginState ()
+  function BeginState()
   {
     bRotateToDesired = True;
     DesiredRotation = Rotation;
   }
   
-  function EndState ()
+  function EndState()
   {
     bRotateToDesired = False;
   }
@@ -398,7 +397,7 @@ state stateAttackHarry
   GotoState('stateWaiting');
 }
 
-function PlayLungeAnim ()
+function PlayLungeAnim()
 {
   local int I;
   local int W;

@@ -16,19 +16,19 @@ var() float fDistanceForAreaEffects;
 var() float fDistanceForEdgeEffects;
 var float fDistanceToLumosSource;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   PlayerHarry = harry(Level.PlayerHarryActor);
 }
 
-event Destroyed ()
+event Destroyed()
 {
   TurnOffAreaEffects();
   TurnOffEdgeEffects();
 }
 
-function TurnOnAreaEffects ()
+function TurnOnAreaEffects()
 {
   local Vector hwd;
   local Vector hwdRotated;
@@ -51,7 +51,7 @@ function TurnOnAreaEffects ()
   }
 }
 
-function TurnOffAreaEffects ()
+function TurnOffAreaEffects()
 {
   if ( fxAreaSparkles != None )
   {
@@ -60,7 +60,7 @@ function TurnOffAreaEffects ()
   }
 }
 
-function TurnOnEdgeEffects ()
+function TurnOnEdgeEffects()
 {
   local BoundingBox bbox;
   local float fBoxWidth;
@@ -79,7 +79,6 @@ function TurnOnEdgeEffects ()
 	for(I = 0; I < 12; ++I) //for loop -AdamJD
     {
       fxEdgeSparkles[I] = Spawn(fxEdgeSparklesClass,self,,Location);
-// JL0090:
       fxEdgeSparkles[I].SourceDepth.Base = fEdgeSparklesThickness;
       fxEdgeSparkles[I].SourceWidth.Base = fEdgeSparklesThickness;
       fxEdgeSparkles[I].SourceHeight.Base = fEdgeSparklesThickness;
@@ -142,14 +141,12 @@ function TurnOnEdgeEffects ()
   PlaySound(Sound'Lumos_glow_loop',SLOT_Interact,0.5,True,,,,True);
 }
 
-function TurnOffEdgeEffects ()
+function TurnOffEdgeEffects()
 {
   local int I;
 
   if ( fxEdgeSparkles[0] != None )
   {
-    // I = 0;
-    // if ( I < 12 )
 	for(I = 0; I < 12; ++I) 
     {
       if ( fxEdgeSparkles[I] != None )
@@ -157,14 +154,12 @@ function TurnOffEdgeEffects ()
         fxEdgeSparkles[I].Shutdown();
         fxEdgeSparkles[I] = None;
       }
-      // ++I;
-      // goto JL0014;
     }
   }
   StopSound(Sound'Lumos_glow_loop',SLOT_Interact);
 }
 
-function UpdateSparkles ()
+function UpdateSparkles()
 {
   fDistanceToLumosSource = VSize(PlayerHarry.Cam.Location - Location);
   if ( fDistanceToLumosSource < fDistanceForEdgeEffects )
@@ -189,14 +184,14 @@ function UpdateSparkles ()
 
 auto state StateLumosOff
 {
-  function BeginState ()
+  function BeginState()
   {
     PlayerHarry.ClientMessage(" LumosSparkles " $ string(self) $ " BeginState LumosOff called!!");
     TurnOffAreaEffects();
     TurnOffEdgeEffects();
   }
   
-  function OnLumosOn ()
+  function OnLumosOn()
   {
     GotoState('StateWaitingToTurnOn');
   }
@@ -215,7 +210,7 @@ state StateWaitingToTurnOn
     }
   }
   
-  function OnLumosOff ()
+  function OnLumosOff()
   {
     GotoState('StateLumosOff');
   }
@@ -230,7 +225,7 @@ state StateLumosOn
     UpdateSparkles();
   }
   
-  function OnLumosOff ()
+  function OnLumosOff()
   {
     GotoState('StateLumosOff');
   }

@@ -23,7 +23,7 @@ auto state Fall
     }
   }
   
-  function initfall ()
+  function initfall()
   {
     local Rotator randx;
   

@@ -6,7 +6,7 @@ class Seeker extends QuidditchPlayer;
 
 state Fly
 {
-  function BeginState ()
+  function BeginState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' Begin Seeking'));
     Log(string(Name) $ string(' Begin Seeking'));
@@ -17,7 +17,7 @@ state Fly
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' End Seeking'));
     Log(string(Name) $ string(' End Seeking'));

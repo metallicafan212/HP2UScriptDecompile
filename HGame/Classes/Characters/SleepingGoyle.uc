@@ -10,7 +10,7 @@ var() int WakeUpDistance;
 var() string CurrLevelName;
 var() string NextLevelName;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local ChickenLeg leg;
 
@@ -42,7 +42,7 @@ function Tick (float deltaT)
   }
 }
 
-function PigWakeGoyle ()
+function PigWakeGoyle()
 {
   if ( GetStateName() != 'stateSleep' )
   {
@@ -56,7 +56,7 @@ function PigWakeGoyle ()
   GotoState('stateWakeUp');
 }
 
-function bool TooCloseToHarry ()
+function bool TooCloseToHarry()
 {
   local Vector vDifference;
 

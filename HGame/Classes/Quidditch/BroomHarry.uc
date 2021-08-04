@@ -91,7 +91,7 @@ var float fTimeForNextWatchUpdate;
 var float fTimesOfLastReversals[20];
 var int iNextReversalStat;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   bInvincible = False;
@@ -104,7 +104,7 @@ function PreBeginPlay ()
   PathSpeed = IPSpeed;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int iStat;
 
@@ -154,7 +154,7 @@ function PostBeginPlay ()
   iNextReversalStat = 0;
 }
 
-event Possess ()
+event Possess()
 {
   Super.Possess();
   Log("BroomHarry in State " $ string(GetStateName()) $ ".");
@@ -168,7 +168,7 @@ event Possess ()
   }
 }
 
-event TravelPostAccept ()
+event TravelPostAccept()
 {
   Super.TravelPostAccept();
   QuidArmorStatus = StatusItemQArmor(managerStatus.GetStatusItem(Class'StatusGroupQGear',Class'StatusItemQArmor'));
@@ -211,7 +211,7 @@ event PlayerInput (float DeltaTime)
   }
 }
 
-function DoCapture ()
+function DoCapture()
 {
   StopFlyingOnPath();
   SetSecondaryAnimation('None');
@@ -289,8 +289,7 @@ function bool CutCommand_FlyOnPath (string Command, optional string cue, optiona
 			{
 			  StartPoint = IP.Position;
 			  break;
-			} //else {
-			//}
+			}
 		  }
 		  if ( StartPoint == -1 )
 		  {
@@ -305,7 +304,6 @@ function bool CutCommand_FlyOnPath (string Command, optional string cue, optiona
 	  }
   }
   until(Token == "");
-  // if (! Token == "" ) goto JL0027;
   
   if ( bFastFlag )
   {
@@ -316,8 +314,7 @@ function bool CutCommand_FlyOnPath (string Command, optional string cue, optiona
         SetLocation(IP.Location);
         SetRotation(IP.Rotation);
 		break;
-      } //else {
-      //}
+      }
     }
     CutCue(cue);
   } else {
@@ -359,7 +356,7 @@ function SetSecondaryAnimation (name NewSecondaryAnim, optional float Rate, opti
   }
 }
 
-function DeterminePrimaryAnim ()
+function DeterminePrimaryAnim()
 {
   local float Speed;
 
@@ -454,7 +451,7 @@ function SetKickTargetClass (name NewKickTargetClassName)
   KickTargetClassName = NewKickTargetClassName;
 }
 
-function UpdateKickTarget ()
+function UpdateKickTarget()
 {
   //local Pawn Target;
   local Pawn pTarget;
@@ -535,7 +532,7 @@ function DoKick (Pawn KickTarget)
   fTimeLastKicked = Level.TimeSeconds;
 }
 
-function UpdateWatchTarget ()
+function UpdateWatchTarget()
 {
   local bool bLookAtKickTarget;
   local Vector WatchOffset;
@@ -581,7 +578,7 @@ function UpdateWatchTarget ()
   //}
 }
 
-function PlayFastWhooshSound ()
+function PlayFastWhooshSound()
 {
   switch (Rand(3))
   {
@@ -590,7 +587,7 @@ function PlayFastWhooshSound ()
   }
 }
 
-function PlaySlowWhooshSound ()
+function PlaySlowWhooshSound()
 {
   switch (Rand(3))
   {
@@ -599,7 +596,7 @@ function PlaySlowWhooshSound ()
   }
 }
 
-function UpdateBroomSound ()
+function UpdateBroomSound()
 {
   local float fSpeed;
   local float fSpeedFactor;
@@ -705,12 +702,11 @@ function FlyOnPath (name CutScenePath, optional int StartPoint)
     if ( IM == None )
     {
       Log("Harry couldn't find path " $ string(CutScenePath));
-    } //else {
-    //}
+    }
   }
 }
 
-function StopFlyingOnPath ()
+function StopFlyingOnPath()
 {
   local InterpolationManager IM_ToStop;
 
@@ -755,8 +751,7 @@ function bool GetOnPath (name Path, optional int StartPoint)
         fTransDistance = fDistance;
         iTransPoint = I.Position;
 		break;
-      } //else {
-      //}
+      }
     }
   } else {
     ClosestPoint = None;
@@ -1006,7 +1001,7 @@ function KillHarry (bool bImmediateDeath)
   GotoState('BroomDying');
 }
 
-function DoDrinkWiggenwell ()
+function DoDrinkWiggenwell()
 {
   if (  !IsInState('PlayerWalking') || bHit || bHitWall )
   {
@@ -1017,15 +1012,15 @@ function DoDrinkWiggenwell ()
   Super.DoDrinkWiggenwell();
 }
 
-function PlayInAir ()
+function PlayInAir()
 {
 }
 
-function PlayWaiting ()
+function PlayWaiting()
 {
 }
 
-function NoteAnotherReversal ()
+function NoteAnotherReversal()
 {
   fTimesOfLastReversals[iNextReversalStat] = Level.TimeSeconds;
   ++iNextReversalStat;
@@ -1035,7 +1030,7 @@ function NoteAnotherReversal ()
   }
 }
 
-function float GetReversalsPerSecond ()
+function float GetReversalsPerSecond()
 {
   local int iStat;
   local int iReversals;
@@ -1058,7 +1053,6 @@ function float GetReversalsPerSecond ()
 	  ++iReversals;
   }
   until(iReversals >= MAX_REVERSAL_STATS);
-  // if (! iReversals >= 20 ) goto JL0012;
   
   fReversalRate = iReversals / fReversalsStatPeriod;
   return fReversalRate;
@@ -1068,7 +1062,7 @@ state PlayerWalking
 {
   ignores  Mount, AltFire;
   
-  function BeginState ()
+  function BeginState()
   {
     local BaseCam Camera;
     //local Seeker WatchTarget;
@@ -1095,7 +1089,7 @@ state PlayerWalking
     fTimeForNextWatchUpdate = Level.TimeSeconds;
   }
   
-  function EndState ()
+  function EndState()
   {
     ClientMessage("BroomHarry: Exited " $ string(GetStateName()) $ " State");
     Log("BroomHarry: Exited " $ string(GetStateName()) $ " State");
@@ -1247,8 +1241,10 @@ state PlayerWalking
       // case 1:
 	  case DEVICE_Mouse:
 		  fMouseYaw += aBroomYaw * fBroomSensitivity;
-		  //KW left this if statement empty? -AdamJD
-		  // if (! Abs(aBroomYaw) > 0.05 ) goto JL028F;
+		  if ( Abs(aBroomYaw) > 0.05 )
+		  {
+			//KW left this if statement empty? -AdamJD
+		  }
 		  if ( fMouseYaw > 1.5 )
 		  {
 			fMouseYaw = 1.5;
@@ -1567,13 +1563,13 @@ state PlayerWalking
     }
   }
   
-  event Timer ()
+  event Timer()
   {
     PlayAnim('Look',,1.0);
     SetTimer(FRand() * 4.0 + 1.5,False);
   }
   
-  function AnimEnd ()
+  function AnimEnd()
   {
     if ( PrimaryAnim != 'None' )
     {
@@ -1616,7 +1612,7 @@ state stateCutIdle
 {
   ignores  Mount, AltFire;
   
-  function BeginState ()
+  function BeginState()
   {
     ClientMessage("BroomHarry: Entered " $ string(GetStateName()) $ " State");
     Log("BroomHarry: Entered " $ string(GetStateName()) $ " State");
@@ -1630,7 +1626,7 @@ state stateCutIdle
     UpdateBroomSound();
   }
   
-  function AnimEnd ()
+  function AnimEnd()
   {
     if ( PrimaryAnim != 'None' )
     {
@@ -1648,7 +1644,7 @@ state FlyingOnPath
 {
   ignores  Mount, AltFire;
   
-  function BeginState ()
+  function BeginState()
   {
     ClientMessage("BroomHarry: Entered " $ string(GetStateName()) $ " State");
     Log("BroomHarry: Entered " $ string(GetStateName()) $ " State");
@@ -1662,7 +1658,7 @@ state FlyingOnPath
     UpdateBroomSound();
   }
   
-  function AnimEnd ()
+  function AnimEnd()
   {
     if ( PrimaryAnim != 'None' )
     {
@@ -1694,7 +1690,7 @@ state Pursue
 {
   ignores  Mount, AltFire;
   
-  function BeginState ()
+  function BeginState()
   {
     ClientMessage("BroomHarry: Entered " $ string(GetStateName()) $ " State");
     Log("BroomHarry: Entered " $ string(GetStateName()) $ " State");
@@ -1733,7 +1729,7 @@ state Pursue
     UpdateBroomSound();
   }
   
-  function EndState ()
+  function EndState()
   {
     ClientMessage("BroomHarry: End Pursue");
     Log("BroomHarry: End Pursue");
@@ -1745,7 +1741,7 @@ state Hit
 {
   ignores  Mount, AltFire;
   
-  function BeginState ()
+  function BeginState()
   {
     ClientMessage("BroomHarry: Entered " $ string(GetStateName()) $ " State");
     Log("BroomHarry: Entered " $ string(GetStateName()) $ " State");
@@ -1768,7 +1764,7 @@ state BroomDying
 {
   ignores  Mount, AltFire;
   
-  function BeginState ()
+  function BeginState()
   {
     ClientMessage("BroomHarry: Entered " $ string(GetStateName()) $ " State");
     Log("BroomHarry: Entered " $ string(GetStateName()) $ " State");
@@ -1786,12 +1782,12 @@ state BroomDying
     SetTimer(0.0,False);
   }
   
-  function Timer ()
+  function Timer()
   {
     Director.OnPlayersDeath();
   }
   
-  function AnimEnd ()
+  function AnimEnd()
   {
   }
   
@@ -1812,7 +1808,7 @@ state Catching
 {
   ignores  Mount, AltFire;
   
-  function BeginState ()
+  function BeginState()
   {
     ClientMessage("BroomHarry: Entered " $ string(GetStateName()) $ " State");
     Log("BroomHarry: Entered " $ string(GetStateName()) $ " State");
@@ -1832,7 +1828,7 @@ state Catching
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     ClientMessage("BroomHarry: Exited " $ string(GetStateName()) $ " State");
     Log("BroomHarry: Exited " $ string(GetStateName()) $ " State");
@@ -1849,7 +1845,7 @@ state Catching
     }
   }
   
-  function DoCatch ()
+  function DoCatch()
   {
     local Actor ActualTarget;
   

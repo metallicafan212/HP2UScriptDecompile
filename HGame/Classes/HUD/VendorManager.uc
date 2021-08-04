@@ -172,7 +172,7 @@ function DoEngageVendor (name nameSaveState)
 	GotoState('EngageVendor');
 }
 
-function string GetAnimParam ()
+function string GetAnimParam()
 {
 	switch (Rand(3))
 	{
@@ -227,7 +227,7 @@ function DoCutTalk (Actor actorTalk, string strDialogID, string strTalkAnimName,
     }
 }
 
-function DoNarratorInstructions ()
+function DoNarratorInstructions()
 {
 	if ( Vendor.GetVendorInstructionId() == "" )
 	{
@@ -243,7 +243,7 @@ function DoNarratorInstructions ()
     }
 }
 
-function bool WantInstructions ()
+function bool WantInstructions()
 {
 	return (harry(Level.PlayerHarryActor).bSaidVendorInstructions == False || Vendor.IsDuelVendor());
 }
@@ -385,12 +385,12 @@ state VendorTransaction
 		}
 	}
   
-	event BeginState ()
+	event BeginState()
 	{
 		SetConsoleVendorBarFlags(True);
 	}
   
-	event EndState ()
+	event EndState()
 	{
 		SetConsoleVendorBarFlags(False);
 	}
@@ -460,7 +460,7 @@ state MakePurchase
         }
 	}
   
-	event BeginState ()
+	event BeginState()
 	{
 		managerStatus = harry(Level.PlayerHarryActor).managerStatus;
 	}
@@ -525,7 +525,7 @@ state NotEnoughBeans
 		}
 }
 
-function DoDisengageVendor ()
+function DoDisengageVendor()
 {
 	local StatusGroup sgJellyBeans;
 	//local Characters WeasleyTwin;
@@ -672,7 +672,7 @@ function float GetVendorBarY (Canvas canvas)
 	return (canvas.GetHudScaleFactor() * fVENDORBAR_Y);
 }
 
-function bool IsMouseOverVendorYes ()
+function bool IsMouseOverVendorYes()
 {
 	return (IsMouseOverVendorButton(fVENDORBAR_YESBUTTON_X * HScale, fVENDORBAR_YESBUTTON_Y * HScale, fVENDORBAR_BUTTON_W, fVENDORBAR_BUTTON_H));
 }

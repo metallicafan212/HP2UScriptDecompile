@@ -32,7 +32,7 @@ function CutSceneLog (string Str)
   Log("CutSceneLog:<" $ FileName $ ">" $ Str);
 }
 
-function OpenCutConsole ()
+function OpenCutConsole()
 {
   HPConsole(Level.PlayerHarryActor.Player.Console).ShowCutConsole(True);
 }
@@ -41,20 +41,16 @@ function CutCue (string cue)
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 20 )
   for(I = 0; I < MAX_THREADS; I++)
   {
     if ( aThreads[I] != None )
     {
       aThreads[I].CutCue(cue);
     }
-    // I++;
-    // goto JL0007;
   }
 }
 
-event OnResolveGameState ()
+event OnResolveGameState()
 {
   if (  !bInCurrentGameState )
   {
@@ -75,7 +71,7 @@ event OnResolveGameState ()
   }
 }
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   if ( bLevelLoadStarts )
   {
@@ -83,7 +79,7 @@ event PostBeginPlay ()
   }
 }
 
-function CreateThreads ()
+function CreateThreads()
 {
   local int I;
   local int t;
@@ -91,8 +87,6 @@ function CreateThreads ()
 
   if ( FileName != "" )
   {
-    // t = 0;
-    // if ( t < 20 )
 	for(t = 0; t < MAX_THREADS; t++)
     {
       Line = Localize("thread_"$t,"line_0","Cutscenes\\" $FileName);
@@ -104,12 +98,8 @@ function CreateThreads ()
         aThreads[t].threadNum = t;
         aThreads[t].Play();
       }
-      // t++;
-      // goto JL0013;
     }
   } else {
-    // I = 0;
-    // if ( I < 20 )
 	for(I = 0; I < MAX_THREADS; I++)
     {
       if ( Len(aThreadScripts[I]) > 0 )
@@ -120,32 +110,26 @@ function CreateThreads ()
         aThreads[t].threadNum = t;
         aThreads[I].Play();
       }
-      // I++;
-      // goto JL0117;
     }
   }
 }
 
-function DeleteThreads ()
+function DeleteThreads()
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 20 )
   for(I = 0; I < MAX_THREADS; I++)
   {
     if ( aThreads[I] != None )
     {
       aThreads[I].Destroy();
     }
-    // I++;
-    // goto JL0007;
   }
 }
 
 auto state disabled
 {
-  event BeginState ()
+  event BeginState()
   {
     harry(Level.PlayerHarryActor).ClientMessage(string(self) $ " Entering DISABLED state");
     if ( bPlaying || bFastForwarding )
@@ -170,7 +154,7 @@ auto state disabled
   {
   }
   
-  function Play ()
+  function Play()
   {
   }
   
@@ -178,7 +162,7 @@ auto state disabled
 
 state Idle
 {
-  event BeginState ()
+  event BeginState()
   {
     harry(Level.PlayerHarryActor).ClientMessage(string(self) $ " Entering ENABLED state");
     if (  !bInCurrentGameState )
@@ -231,65 +215,56 @@ state Idle
   }
 }
 
-function ForceFinish ()
+function ForceFinish()
 {
   local int I;
 
   CutSceneLog("***Force Finishing");
-  // I = 0;
-  // if ( I < 20 )
+
   for(I = 0; I < MAX_THREADS; I++)
   {
     if ( (aThreads[I] != None) && aThreads[I].bPlaying )
     {
       aThreads[I].GotoState('Finished');
     }
-    // I++;
-    // goto JL0021;
   }
 }
 
-function bool CheckFinished ()
+function bool CheckFinished()
 {
   local int I;
   local bool bStillRunning;
 
   bStillRunning = False;
-  // I = 0;
-  // if ( I < 20 )
+
   for(I = 0; I < MAX_THREADS; I++)
   {
     if ( (aThreads[I] != None) && aThreads[I].bPlaying )
     {
       bStillRunning = True;
     }
-    // I++;
-    // goto JL000F;
   }
   return  !bStillRunning;
 }
 
-function bool CheckAdvancing ()
+function bool CheckAdvancing()
 {
   local int I;
   local bool bStillAdvancing;
 
   bStillAdvancing = False;
-  // I = 0;
-  // if ( I < 20 )
+
   for(I = 0; I < MAX_THREADS; I++)
   {
     if ( (aThreads[I] != None) && aThreads[I].bPlaying && aThreads[I].bScriptAdvancing )
     {
       bStillAdvancing = True;
     }
-    // I++;
-    // goto JL000F;
   }
   return bStillAdvancing;
 }
 
-function FastForward ()
+function FastForward()
 {
   if ( bPlaying || bFastForwarding )
   {
@@ -306,7 +281,7 @@ state Running
   {
   }
   
-  function FastForward ()
+  function FastForward()
   {
     if ( bSkipAllowed )
     {
@@ -329,7 +304,7 @@ state Running
   goto ('Loop');
 }
 
-function DumpCurState ()
+function DumpCurState()
 {
   local int I;
 
@@ -340,16 +315,13 @@ function DumpCurState ()
   CutSceneLog("*CutScene State:" $ string(GetStateName()));
   CutSceneLog("*CutScene Status:" $ " bPlaying:" $ string(bPlaying) $ " bFastForwarding:" $ string(bFastForwarding) $ " safetyLoopCount:" $ string(safetyLoopCount) $ " nPlayedCount:" $ string(nPlayedCount));
   CutSceneLog("*****************************************************************************");
-  // I = 0;
-  // if ( I < 20 )
+
   for(I = 0; I < MAX_THREADS; I++)
   {
     if ( (aThreads[I] != None) && aThreads[I].bPlaying )
     {
       aThreads[I].DumpCurState();
     }
-    // I++;
-    // goto JL02AC;
   }
   CutSceneLog("*****************************************************************************");
   CutSceneLog("*****************************************************************************");
@@ -357,31 +329,27 @@ function DumpCurState ()
 
 state FastForwarding
 {
-  event BeginState ()
+  event BeginState()
   {
     safetyLoopCount = 0;
     bFastForwarding = True;
     harry(Level.PlayerHarryActor).ClientMessage(string(self) $ " FastForwarding");
   }
   
-  function StartThreadsFF ()
+  function StartThreadsFF()
   {
     local int I;
   
-    // I = 0;
-    // if ( I < 20 )
 	for(I = 0; I < MAX_THREADS; I++)
     {
       if ( (aThreads[I] != None) && aThreads[I].bPlaying )
       {
         aThreads[I].FastForward();
       }
-      // I++;
-      // goto JL0007;
     }
   }
   
-  function FastForward ()
+  function FastForward()
   {
     CutSceneLog("***Fastforward called while already fastforwarding");
   }
@@ -422,7 +390,7 @@ Loop:
   }
 }
 
-function Play ()
+function Play()
 {
   if ( bPlaying )
   {

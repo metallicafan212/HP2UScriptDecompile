@@ -5,19 +5,19 @@
 class PixieMarker extends Actor;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\HiddenPawn.PNG Name=HiddenPawn COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\HiddenPawn.PNG Name=HiddenPawn COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 
 const BOOL_DEBUG_AI= false;
 var() name GroupName;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   SetCollision(,,);
   bCollideWorld = False;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   SetCollision(True,False,False);
 }

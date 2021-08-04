@@ -5,10 +5,10 @@
 class WCGrunnion extends SilverCards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardGrunnionBigTexture.PNG	GROUP=Icons	Name=WizCardGrunnionBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardGrunnionBigTexture.PNG	GROUP=Icons	Name=WizCardGrunnionBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardGrunnionTex0.PNG	GROUP=Skins	Name=WizardCardGrunnionTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Alberic Grunnion";
   Super.PostBeginPlay();

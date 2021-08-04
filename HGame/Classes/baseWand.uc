@@ -37,7 +37,7 @@ function SetDebugMode (bool bOn)
   bUseDebugMode = bOn;
 }
 
-simulated function PostBeginPlay ()
+simulated function PostBeginPlay()
 {
   Super.PostBeginPlay();
   PlayerHarry = harry(Level.PlayerHarryActor);
@@ -48,13 +48,13 @@ simulated function PostBeginPlay ()
   }
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   fxSwordParticles = Spawn(Class'SwordBlade2FX');
   fxSwordParticles.EnableEmission(False);
 }
 
-event Destroyed ()
+event Destroyed()
 {
   if ( fxChargeParticles != None )
   {
@@ -71,7 +71,7 @@ event Destroyed ()
   Super.Destroyed();
 }
 
-function float ChargingLevel ()
+function float ChargingLevel()
 {
   if ( bUsingSword )
   {
@@ -97,7 +97,7 @@ function StartGlowingWand (Class<baseSpell> GlowSpellClass)
   bGlowingWand = True;
 }
 
-function StopGlowingWand ()
+function StopGlowingWand()
 {
   bGlowingWand = False;
   if ( fxChargeParticles != None )
@@ -132,7 +132,7 @@ function StartChargingSpell (bool bChargeSpell, optional bool in_bHarryUsingSwor
   fSwordFXTime = 0.0;
 }
 
-function StopChargingSpell ()
+function StopChargingSpell()
 {
   bSpellCharges = False;
   fSpellChargeTime = 0.0;
@@ -286,7 +286,7 @@ function SetInstantFire (bool in_bInstantFire)
   bInstantFire = in_bInstantFire;
 }
 
-function ToggleUseSword ()
+function ToggleUseSword()
 {
   bUsingSword =  !bUsingSword;
   fxChargeParticles.EnableEmission(False);
@@ -300,7 +300,7 @@ function ToggleUseSword ()
   ThirdPersonMesh = Mesh;
 }
 
-function Vector GetWandEndPoint ()
+function Vector GetWandEndPoint()
 {
   return Pawn(Owner).WeaponLoc - (Vec(0.0,0.0,20.0) >> Pawn(Owner).WeaponRot);
 }
@@ -374,12 +374,10 @@ function ShowCastedSpellList (optional int iNumSpells)
     iNumSpells = 8;
   }
   PlayerHarry.ClientMessage("***Number of Casted Spells: " $ string(NumCastedSpells));
-  // I = 0;
+
   for ( I= 0; I < iNumSpells; ++I )
   {
     PlayerHarry.ClientMessage(" spell[" $ string(I) $ "] = " $ string(CastedSpellList[I]));
-    // ++I;
-    // goto JL005D;
   }
 }
 
@@ -406,7 +404,6 @@ function SubtractFromCastedSpellList (baseSpell spell)
   local int iIndex;
   local bool bFound;
 
-  // I = 0;
   for ( I=0; I < NumCastedSpells; ++I )
   {
     if ( CastedSpellList[I] == spell )
@@ -416,19 +413,13 @@ function SubtractFromCastedSpellList (baseSpell spell)
       CastedSpellList[I] = None;
       NumCastedSpells--;
 	  break;
-    } //else {
-      // ++I;
-      // goto JL0007;
-   // }
+    }
   }
   if ( bFound )
   {
-    // I = Index;
     for ( I=iIndex; I < 8 - 1; ++I )
     {
       CastedSpellList[I] = CastedSpellList[I + 1];
-      // ++I;
-      // goto JL0073;
     }
   } else {
     PlayerHarry.ClientMessage("baseWand: Could not find spell: " $ string(spell) $ " to subtract from list!!!");
@@ -499,7 +490,7 @@ function CastSpell (optional Actor aTarget, optional Vector aTargetOffset, optio
   }
 }
 
-function bool SwordChargedUpEnough ()
+function bool SwordChargedUpEnough()
 {
   return fSwordFXTime >= fSwordFXTimeSpan / 2;
 }
@@ -579,23 +570,23 @@ function Projectile ProjectileFire2 (Class<Projectile> ProjClass, float ProjSpee
   return proj;
 }
 
-function bool IsLumosOn ()
+function bool IsLumosOn()
 {
   return PlayerHarry.bLumosOn;
 }
 
-function LumosTurnOn ()
+function LumosTurnOn()
 {
   TheLumosLight.TurnOn();
 }
 
-function BecomeItem ()
+function BecomeItem()
 {
   Super.BecomeItem();
   bHidden = False;
 }
 
-function Texture GetSpellIcon ()
+function Texture GetSpellIcon()
 {
   if ( CurrentSpell != None )
   {
@@ -619,12 +610,12 @@ function float RateSelf (out int bUseAltMode)
   return 99.0;
 }
 
-function BecomePickup ()
+function BecomePickup()
 {
   Super.BecomePickup();
 }
 
-function Finish ()
+function Finish()
 {
   if ( (Pawn(Owner).bFire != 0) && (FRand() < 0.62) )
   {
@@ -633,12 +624,12 @@ function Finish ()
   Super.Finish();
 }
 
-function PlayFiring ()
+function PlayFiring()
 {
   PlayAnim('All',0.5,0.05);
 }
 
-function PlayIdleAnim ()
+function PlayIdleAnim()
 {
 }
 
@@ -668,7 +659,7 @@ defaultproperties
 
     bSplashDamage=True
 
-    FireOffset=(X=0.00,Y=-6.00,Z=-7.00),
+    FireOffset=(X=0.00,Y=-6.00,Z=-7.00)
 
     AltProjectileClass=Class'baseSpell'
 
@@ -686,7 +677,7 @@ defaultproperties
 
     ItemName="Wand"
 
-    PlayerViewOffset=(X=3.50,Y=-1.80,Z=-2.00),
+    PlayerViewOffset=(X=3.50,Y=-1.80,Z=-2.00)
 
     ThirdPersonMesh=SkeletalMesh'HPModels.WandMesh'
 

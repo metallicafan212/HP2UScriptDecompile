@@ -4,7 +4,7 @@
 
 class ThrownSpike extends HChar;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
 }
 

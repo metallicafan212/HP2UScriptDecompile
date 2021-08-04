@@ -79,7 +79,7 @@ var float fGapTime;
 var bool bSeekersInRange;
 var float fTimeInRange;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int Variant;
   local QuidditchPlayer Player;
@@ -87,20 +87,17 @@ function PostBeginPlay ()
   Super.PostBeginPlay();
   foreach AllActors(Class'BroomHarry',harry)
   {
-    // goto JL001A;
 	break;
   }
   foreach AllActors(Class'Seeker',Seeker)
   {
     if ( Seeker.Team == TA_Opponent)
     {
-      // goto JL0046;
 	  break;
     }
   }
   foreach AllActors(Class'QuidditchCommentator',Commentator)
   {
-    // goto JL005B;
 	break;
   }
   fNextTimeALineCanBeSaid = 0.0;
@@ -116,7 +113,7 @@ function SetOpponent (HouseAffiliation eNewOpponent)
   Log("QuidditchTauntMgr: Opponent = " $ string(eOpponent) $ ".");
 }
 
-function StartTaunts ()
+function StartTaunts()
 {
   bSeekersInRange = False;
   fTimeInRange = -1.0;
@@ -124,7 +121,7 @@ function StartTaunts ()
   SetTimer(FMax(0.2,TimeLeftUntilSafeToSayALine(True)),False);
 }
 
-function StopTaunts ()
+function StopTaunts()
 {
   SetTimer(0.0,False);
   if ( (Commentator != None) && (Commentator.fVolume > 0.62) )
@@ -133,13 +130,13 @@ function StopTaunts ()
   }
 }
 
-event Timer ()
+event Timer()
 {
   SayATaunt();
   SetTimer(FMax(0.2,TimeLeftUntilSafeToSayALine(True)),False);
 }
 
-function bool SayATaunt ()
+function bool SayATaunt()
 {
   local bool bSaid;
   local float fTimeSinceDrank;
@@ -293,7 +290,6 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
   iCandidate = 0;
   fTotalWeight = 0.0;
   Variant = 0;
-  // if ( Variant < Taunts[bool(eTaunt)].House[bool(eHouse)].Variations )
   while ( Variant < Taunts[eTaunt].House[eHouse].Variations )
   {
     if (  !Taunts[eTaunt].House[eHouse].Variant[Variant].bHasBeenSaid )
@@ -314,7 +310,6 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
       ++iCandidate;
     }
     ++Variant;
-    // goto JL00C9;
   }
   NumCandidates = iCandidate;
   if ( NumCandidates <= 0 )
@@ -324,18 +319,15 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
   }
   iCandidate = 0;
   fChoice = FRand() * fTotalWeight;
-  // if ( iCandidate < NumCandidates - 1 )
   while ( iCandidate < NumCandidates - 1 )
   {
     if ( Candidates[iCandidate].fWeight > fChoice )
     {
-      // goto JL02E0;
 	  break;
     } else {
       fChoice -= Candidates[iCandidate].fWeight;
       ++iCandidate;
     }
-    // goto JL028D;
   }
   Variant = Candidates[iCandidate].Variant;
   dlgSound = Taunts[eTaunt].House[eHouse].Variant[Variant].dlgSound;
@@ -360,31 +352,22 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
   return bSaid;
 }
 
-function InitTauntArray ()
+function InitTauntArray()
 {
   local int C;
   local int H;
   local int V;
 
-  // H = 0;
-  // if ( H < 6 )
   for(H = 0; H < MAX_QUID_TAUNT_HOUSE_NAMES; H++)
   {
     Taunts[0].House[H].Variations = 0;
-    // H++;
-    // goto JL0007;
   }
   C = 1;
-  // if ( C < 4 )
   for(C = 1; C < MAX_QUID_TAUNT_NAMES; C++)
   {
-    // H = 0;
-    // if ( H < 6 )
 	for(H = 0; H < MAX_QUID_TAUNT_HOUSE_NAMES; H++)
     {
       Taunts[C].House[H].Variations = QT_MAX_TAUNT_VARIANTS;
-      // V = 0;
-      // if ( V < 5 )
 	  for(V = 0; V < QT_MAX_TAUNT_VARIANTS; V++)
       {
         if ( Taunts[C].House[H].Variant[V].DlgName != "" )
@@ -397,16 +380,9 @@ function InitTauntArray ()
         } else {
           Taunts[C].House[H].Variations = V;
 		  break;
-          // goto JL01E5;
         }
-        // V++;
-        // goto JL0081;
       }
-      // H++;
-      // goto JL0050;
     }
-    // C++;
-    // goto JL003D;
   }
 }
 

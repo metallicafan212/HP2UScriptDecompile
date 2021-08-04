@@ -15,7 +15,7 @@ class skPlantsBushDragon extends HPMeshActor;
 #exec Anim Digest Anim=skPlantsBushDragonAnims VERBOSE 
 
 //texture import (skPlantsBushDragonTex0) -AdamJD 
-#exec Texture Import File=Textures\skPlantsBushDragonTex0.png Name=skPlantsBushDragonTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skPlantsBushDragonTex0.png Name=skPlantsBushDragonTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skPlantsBushDragonMesh Num=0 Texture=skPlantsBushDragonTex0
 
 defaultproperties

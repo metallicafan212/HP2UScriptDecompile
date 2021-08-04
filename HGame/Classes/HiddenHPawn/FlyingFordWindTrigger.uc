@@ -8,7 +8,7 @@ const BOOL_DEBUG_AI= false;
 var bool bTouch;
 var FlyingFordDirector Director;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	foreach AllActors(Class'FlyingFordDirector',Director)

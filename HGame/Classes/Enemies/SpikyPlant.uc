@@ -13,7 +13,7 @@ var() int SpikeSpeed;
 var() int NumberOfSpikes;
 var() float durationNoSpikes;
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   GotoState('CutIdle');
 }
@@ -23,14 +23,14 @@ state CutIdle
 begin:
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   GotoState('ReadyAndWaiting');
 }
 
 auto state ReadyAndWaiting
 {
-  function ShootSpikes ()
+  function ShootSpikes()
   {
     local int I;
     local int NumSpikes;
@@ -55,8 +55,7 @@ auto state ReadyAndWaiting
       break;
       default:
     }
-    // I = 0;
-    // if ( I < NumSpikes )
+	
 	for(I = 0; I < NumSpikes; ++I)
     {
       rotate_spike.Yaw = (65536 / NumSpikes) * I;
@@ -67,12 +66,10 @@ auto state ReadyAndWaiting
       aSpike.Lift = SpikeLift;
       aSpike.Speed = SpikeSpeed;
       aSpike.DrawScale = DrawScale;
-      // ++I;
-      // goto JL00B9;
     }
   }
   
-  function KillMaimDestroy ()
+  function KillMaimDestroy()
   {
     local SpikyBushNoThorns replaceBush;
   
@@ -126,7 +123,7 @@ auto state ReadyAndWaiting
 
 state Wilted
 {
-  event AnimEnd ()
+  event AnimEnd()
   {
     SetCollision(True,False,False);
     SetCollisionSize(0.0,0.0);
@@ -140,7 +137,7 @@ state Wilted
 
 state GrowBack
 {
-  function ShowNoThorns ()
+  function ShowNoThorns()
   {
     SetCollision(False,False,False);
     bHidden = True;
@@ -156,7 +153,7 @@ state GrowBack
     }
   }
   
-  function ShowThorns ()
+  function ShowThorns()
   {
     bHidden = False;
     noSpikesBush.Destroy();
@@ -194,7 +191,7 @@ defaultproperties
 
     SizeModifier=0.90
 
-    CentreOffset=(X=0.00,Y=0.00,Z=25.00),
+    CentreOffset=(X=0.00,Y=0.00,Z=25.00)
 
     Mesh=SkeletalMesh'HPModels.skSpikyPlantMesh'
 

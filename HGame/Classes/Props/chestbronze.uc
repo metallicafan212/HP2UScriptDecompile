@@ -14,13 +14,13 @@ var() bool bMakeSpawnPersistent;
 var bool bOpened;
 var int iBean;
 
-function int GetMaxEjectedObjects ()
+function int GetMaxEjectedObjects()
 {
   // return 8;
   return nMAX_EJECTED_OBJECTS;
 }
 
-function SetupRandomBeans ()
+function SetupRandomBeans()
 {
   //local int iBean;
 
@@ -67,7 +67,7 @@ begin:
 
 auto state waitforspell
 {
-  function BeginState ()
+  function BeginState()
   {
     if ( bOpened )
     {
@@ -93,13 +93,13 @@ auto state waitforspell
 
 state turnover
 {
-  function BeginState ()
+  function BeginState()
   {
     bOpened = True;
     Level.PlayerHarryActor.ClientMessage(" Chest " $ string(self) $ " is opening so bOpened = " $ string(bOpened));
   }
   
-  function generateobject ()
+  function generateobject()
   {
     local Vector Dir;
     local Vector Vel;

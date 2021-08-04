@@ -14,7 +14,7 @@ var FlyingFordWindTrigger windTrigger;
 var(VisualFX) ParticleFX fxWindParticleEffect;
 var(VisualFX) Class<ParticleFX> fxWindParticleEffectClass;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	foreach AllActors(Class'FlyingFordDirector',Director)
@@ -66,12 +66,12 @@ function Bump (Actor Other)
 	Touch(Other);
 }
 
-function StartWind ()
+function StartWind()
 {
 	fxWindParticleEffect = Spawn(fxWindParticleEffectClass,,,Location);
 }
 
-function StopWind ()
+function StopWind()
 {
 	if ( fxWindParticleEffect != None )
 	{

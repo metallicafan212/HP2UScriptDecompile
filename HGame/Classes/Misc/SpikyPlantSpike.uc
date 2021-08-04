@@ -15,7 +15,7 @@ var SpikyBushSmoke Smoke;
 
 auto state Flying
 {
-  function Disintegrate ()
+  function Disintegrate()
   {
     Destroy();
   }
@@ -59,7 +59,7 @@ auto state Flying
     Disintegrate();
   }
   
-  function BeginState ()
+  function BeginState()
   {
     Disable('Tick');
     start_location = Location;

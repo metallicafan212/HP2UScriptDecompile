@@ -7,12 +7,12 @@ class HAlohomora extends HProp;
 var ParticleFX fxExplode;
 var() Class<ParticleFX> fxExplodeClass;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   PlayerHarry = harry(Level.PlayerHarryActor);
 }
 
-event Destroyed ()
+event Destroyed()
 {
   if ( fxExplode != None )
   {
@@ -27,7 +27,7 @@ function bool HandleSpellAlohomora (optional baseSpell spell, optional Vector vH
   return True;
 }
 
-function OnAlohomoraExplode ()
+function OnAlohomoraExplode()
 {
   TriggerEvent(Event,None,None);
   Destroy();

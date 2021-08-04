@@ -9,13 +9,13 @@ var float fLifetime;
 var(VisualFX) ParticleFX fxGrenadeParticleEffect;
 var float iDamage;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	SetTimer(fLifetime,False);
 	fxGrenadeParticleEffect = Spawn(Class'Crabfireball');
 }
 
-function Timer ()
+function Timer()
 {
 	fxGrenadeParticleEffect.Shutdown();
 	Destroy();

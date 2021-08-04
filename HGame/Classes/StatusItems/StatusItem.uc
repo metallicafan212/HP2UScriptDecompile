@@ -43,7 +43,7 @@ var ECountColor CountShadowColor;
 
 
 
-event PreBeginPlay ()
+event PreBeginPlay()
 {
 	if ( strHudIcon != "" )
 	{
@@ -85,12 +85,12 @@ function SetCount (int nNum)
 	}
 }
 
-function int GetCount ()
+function int GetCount()
 {
 	return nCount;
 }
 
-function int GetPotentialCount ()
+function int GetPotentialCount()
 {
 	return nCurrCountPotential;
 }
@@ -111,12 +111,12 @@ function IncrementCountPotential (int nNum)
 	}
 }
 
-function SetCountToMaxPotential ()
+function SetCountToMaxPotential()
 {
 	nCount = nCurrCountPotential;
 }
 
-function float GetPotentialToMaxCountRatio ()
+function float GetPotentialToMaxCountRatio()
 {
 	if ( nMaxCount != 0 )
 	{
@@ -129,7 +129,7 @@ function float GetPotentialToMaxCountRatio ()
 	}
 }
 
-function float GetCountToMaxCountRatio ()
+function float GetCountToMaxCountRatio()
 {
 	if ( nMaxCount > 0 )
 	{
@@ -142,7 +142,7 @@ function float GetCountToMaxCountRatio ()
 	}
 }
 
-function float GetCountToCurrPotentialRatio ()
+function float GetCountToCurrPotentialRatio()
 {
 	return float(nCount) / float(nCurrCountPotential);
 }
@@ -280,7 +280,7 @@ function DrawCount (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 	DrawSpecifiedCount(Canvas, nCurrX, nCurrY, fScaleFactor, nCount);
 }
 
-function int GetHudIconUSize ()
+function int GetHudIconUSize()
 {
 	if ( nActualIconW == 0 )
 	{
@@ -292,7 +292,7 @@ function int GetHudIconUSize ()
 	}
 }
 
-function int GetHudIconVSize ()
+function int GetHudIconVSize()
 {
 	if ( nActualIconH == 0 )
 	{
@@ -304,7 +304,7 @@ function int GetHudIconVSize ()
 	}
 }
 
-function string GetToolTip ()
+function string GetToolTip()
 {
 	return Localize("All",strToolTipId,"HPMenu");
 }

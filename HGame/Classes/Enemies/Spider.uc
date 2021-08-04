@@ -41,7 +41,7 @@ var float EdgeCounter;
 var() enumPreAttackAnim ePreAttackAnim;
 var Sound squishSound;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   if ( bJumper == True )
@@ -63,13 +63,13 @@ function PreBeginPlay ()
   }
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   UpdateFriendsList();
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   SavedState = GetStateName();
   if ( SavedState != 'OutForTheCount' )
@@ -78,7 +78,7 @@ function PlayerCutCapture ()
   }
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   if ( SavedState != 'OutForTheCount' )
   {
@@ -86,7 +86,7 @@ function PlayerCutRelease ()
   }
 }
 
-function UpdateFriendsList ()
+function UpdateFriendsList()
 {
   local SpiderLarge tempSpider;
 
@@ -106,7 +106,7 @@ function UpdateFriendsList ()
   }
 }
 
-function playSquishSound ()
+function playSquishSound()
 {
   local int randNum;
 
@@ -126,7 +126,7 @@ function playSquishSound ()
   PlaySound(squishSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
-function playAttackSound ()
+function playAttackSound()
 {
   local Sound AttackSound;
   local int randNum;
@@ -148,7 +148,7 @@ function playAttackSound ()
   PlaySound(AttackSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
-function bool AttackHarryCheck ()
+function bool AttackHarryCheck()
 {
   local bool Attack;
   local Vector vTargetDir;
@@ -188,7 +188,7 @@ function Touch (Actor Other)
   }
 }
 
-function InitSpider ()
+function InitSpider()
 {
   local SpiderMarker Marker;
 
@@ -197,8 +197,7 @@ function InitSpider ()
     if ( (Marker.bCenter == True) && (Marker.GroupName == GroupName) )
     {
       currentMarker = Marker;
-    } //else {
-    //}
+    }
   }
   if ( currentMarker == None )
   {
@@ -213,7 +212,7 @@ function InitSpider ()
   }
 }
 
-function Vector getNewDirection ()
+function Vector getNewDirection()
 {
   local Vector vToMarker;
   local Vector vUp;
@@ -351,7 +350,7 @@ state WalkForward
 {
   // ignores  Tick; //UTPT added this for some reason -AdamJD
   
-  function BeginState ()
+  function BeginState()
   {
     LoopAnim('Walk');
   }
@@ -464,7 +463,7 @@ state Wander
 
 state walkAway
 {
-  function BeginState ()
+  function BeginState()
   {
     EdgeCounter = FRand() * 1.5 + 1.5;
   }
@@ -528,7 +527,7 @@ state jumpOffWall
 	}
   }
   
-  function Vector findWallNormal ()
+  function Vector findWallNormal()
   {
     local Vector newNormal;
     local Vector X;

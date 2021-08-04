@@ -13,7 +13,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
 
 state OpenUp
 {
-  function AlterRotation ()
+  function AlterRotation()
   {
     local Rotator R;
   

@@ -2,4 +2,4 @@
 // baseFEBook.
 //================================================================================
 
-class baseFEBook extends UWindowDialogClientWindow;
+class baseFEBook extends UWindowDialogClientWindow; 

@@ -38,7 +38,7 @@ function Tick (float dtime)
     }
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   vLoc = Location;
@@ -48,7 +48,7 @@ function PreBeginPlay ()
   SoundPitch = Default.SoundPitch;
 }
 
-function OnSaveGame ()
+function OnSaveGame()
 {
   //local int Health;
   local int iHarryHealth;

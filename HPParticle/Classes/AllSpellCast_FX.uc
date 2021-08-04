@@ -4,7 +4,7 @@
 
 class AllSpellCast_FX extends ParticleFX;
 
-event FellOutOfWorld ()
+event FellOutOfWorld()
 {
 }
 

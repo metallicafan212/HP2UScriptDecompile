@@ -5,11 +5,11 @@
 class spellTrigger extends Trigger;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\spell_trigger.PNG Name=spell_trigger COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\spell_trigger.PNG Name=spell_trigger COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 
 var() bool bHitJustFromFront;
 
-function BeginPlay ()
+function BeginPlay()
 {
 	Super.BeginPlay();
 }

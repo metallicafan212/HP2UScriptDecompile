@@ -18,7 +18,7 @@ function Touch (Actor Other)
   }
 }
 
-function DestroyTwig ()
+function DestroyTwig()
 {
   local Actor p;
 

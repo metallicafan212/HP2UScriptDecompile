@@ -107,7 +107,7 @@ var Sex eSex;
 var QuidditchPlayer NextSpeakingPlayer;
 
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   LookForTarget = None;
@@ -121,7 +121,7 @@ function PreBeginPlay ()
   bEasingUpToSpeed = True;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   foreach AllActors(Class'Director',Director)
@@ -150,7 +150,7 @@ function PostBeginPlay ()
   fNextTimeSafeToWoosh = Level.TimeSeconds;
 }
 
-function DoCapture ()
+function DoCapture()
 {
   bCapturedByCutScene = True;
   StopFlyingOnPath();
@@ -283,7 +283,7 @@ function FlyOnPath (name Path, optional int StartPoint)
   }
 }
 
-function StopFlyingOnPath ()
+function StopFlyingOnPath()
 {
   local InterpolationManager IM_ToStop;
 
@@ -308,8 +308,7 @@ function SplicePaths (name Path1, name Path2, optional int iPath2SplicePointPos)
     {
       EndPoint = IP;
 	  break;
-    } //else {
-    //}
+    }
   }
   if ( EndPoint == None )
   {
@@ -390,7 +389,7 @@ function SetKickTargetClass (name NewKickTargetClassName)
   KickTargetClassName = NewKickTargetClassName;
 }
 
-function UpdateKickTarget ()
+function UpdateKickTarget()
 {
   //local Pawn Target;
   local Pawn pTarget;
@@ -472,7 +471,7 @@ function DoKick (Pawn KickTarget)
   fTimeLastKicked = Level.TimeSeconds;
 }
 
-function UpdateWatchTarget ()
+function UpdateWatchTarget()
 {
   local bool bLookAtKickTarget;
   local Vector WatchOffset;
@@ -522,7 +521,7 @@ function UpdateWoosh (float DeltaTime)
   fLastDistanceFromCamera = fDistanceFromCamera;
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
   return fHealth / 100.0;
 }
@@ -639,21 +638,21 @@ function HitWall (Vector HitNormal, Actor Wall)
   vDodgeVel = BroomHarry(PlayerHarry).GetDodgeVelFromHitwall(self,HitNormal,LookForTarget);
 }
 
-event AnimEnd ()
+event AnimEnd()
 {
   bHit = False;
 }
 
 auto state() WaitForIntro
 {
-  function BeginState ()
+  function BeginState()
   {
     LoopAnim('hover',RandRange(0.922,1.084));
     PlayerHarry.ClientMessage(string(Name) $ string(' Waiting for Intro'));
     Log(string(Name) $ string(' Waiting for Intro'));
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' Done waiting for Intro'));
     Log(string(Name) $ string(' Done waiting for Intro'));
@@ -685,7 +684,7 @@ loop:
 
 state() Fly
 {
-  function BeginState ()
+  function BeginState()
   {
     LoopAnim('Fly_forward',RandRange(0.922,1.084));
     if (  !bCapturedByCutScene )
@@ -696,7 +695,7 @@ state() Fly
     Log(string(Name) $ string(' Begin Flying'));
   }
   
-  function EndState ()
+  function EndState()
   {
     StopFlyingOnPath();
     LoopAnim('hover',RandRange(0.922,1.084),0.5);
@@ -751,7 +750,7 @@ state Pursue
   //UTPT added these for some reason -AdamJD
   // ignores  HitWall, Tick;
   
-  function BeginState ()
+  function BeginState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' Begin Pursue'));
     Log(string(Name) $ string(' Begin Pursue'));
@@ -874,7 +873,7 @@ state Pursue
 	}
   }
   
-  event AnimEnd ()
+  event AnimEnd()
   {
     bHit = False;
     if ( bStunned && (Level.TimeSeconds > fTimeToFallAway - (3.0 + 0.1)) )
@@ -889,7 +888,7 @@ state Pursue
 	Global.HitWall(HitNormal, Wall);
   }
   
-  function CatchTarget ()
+  function CatchTarget()
   {
     local Actor TargetToCatch;
   
@@ -935,7 +934,7 @@ state GetBackOnPath extends Fly
   //UTPT added this for some reason -AdamJD
   // ignores  HitWall, Tick;
   
-  function BeginState ()
+  function BeginState()
   {
     local float fDistance;
     local InterpolationPoint I;
@@ -1048,7 +1047,7 @@ state GetBackOnPath extends Fly
 	Super.HitWall(HitNormal, Wall);
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' End GetBackOnPath'));
     Log(string(Name) $ string(' End GetBackOnPath'));

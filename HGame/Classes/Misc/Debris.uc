@@ -18,7 +18,7 @@ var float LifeRand;
 var int MaxParticles;
 var int VelocityMultiplier;
 
-function InitializeDebris ()
+function InitializeDebris()
 {
   local Rotator randRotVelocity;
   local int velocityMult;
@@ -34,7 +34,7 @@ function InitializeDebris ()
 
 auto state isFalling
 {
-  function BeginState ()
+  function BeginState()
   {
     MaxLiveTime = 1.0;
   }

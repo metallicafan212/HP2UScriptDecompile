@@ -212,7 +212,7 @@ function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
 	return (nCanvasSizeY - 88 * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root));
 }
 
-function Created ()
+function Created()
 {
 	// Metallicafan212:	Move the buttons
 	//local float HScale;
@@ -373,7 +373,7 @@ function Notify (UWindowDialogControl C, byte E)
 {
 	local int I;
 
-	if ( E == 2 )
+	if ( E == DE_Click )
 	{
 		switch (C)
 		{
@@ -427,7 +427,7 @@ function Notify (UWindowDialogControl C, byte E)
 	} 
 	else 
 	{
-		if ( E == 12 )
+		if ( E == DE_MouseEnter )
 		{
 			switch (C)
 			{
@@ -474,7 +474,7 @@ function Notify (UWindowDialogControl C, byte E)
 		} 
 		else 
 		{
-			if ( E == 9 )
+			if ( E == DE_MouseLeave )
 			{
 				switch (C)
 				{
@@ -498,7 +498,7 @@ function Notify (UWindowDialogControl C, byte E)
 	Super.Notify(C,E);
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
 	Super.PreSwitchPage();
 	strSecretsCount = GetSecretsCount();
@@ -517,7 +517,7 @@ function ToolTip (string strSetTip)
 	strCurrToolTip = strSetTip;
 }
 
-function string GetSecretsCount ()
+function string GetSecretsCount()
 {
 	local string strSecrets;
 	local int nNumSecrets;

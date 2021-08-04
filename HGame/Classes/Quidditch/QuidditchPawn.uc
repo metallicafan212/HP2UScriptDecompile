@@ -55,7 +55,7 @@ var(Quidditch) Sound ExplosionSound;
 var Sound WooshSounds[4];
 var bool bCapturedByCutScene;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   foreach AllActors(Class'harry',PlayerHarry)
@@ -66,7 +66,7 @@ function PreBeginPlay ()
   bCapturedByCutScene = False;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local InterpolationPoint I;
 
@@ -111,7 +111,7 @@ function PostBeginPlay ()
   }
 }
 
-function Destroyed ()
+function Destroyed()
 {
   StopFlyingOnPath();
   if ( Trail != None )
@@ -153,7 +153,7 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
   //}
 }
 
-function Hide ()
+function Hide()
 {
   bHidden = True;
   if ( FlyingSound != None )
@@ -174,7 +174,7 @@ function Hide ()
   }
 }
 
-function Show ()
+function Show()
 {
   bHidden = False;
   if ( FlyingSound != None )
@@ -206,7 +206,7 @@ function bool TargetCanSeeMe (Pawn Target)
   return bCanSee;
 }
 
-function ChooseNextPath ()
+function ChooseNextPath()
 {
   local int Skip;
   local int BailOut;
@@ -233,11 +233,9 @@ function ChooseNextPath ()
 		  }
 		  --BailOut;
 	  }
-	  // if (! (Path[CurPath] != 'None') || (BailOut <= 0) ) goto JL0030;
 	  until( (Path[CurPath] != 'None') || (BailOut <= 0) )
 	  --Skip;
   }
-  // if (! (Skip <= 0) || (BailOut <= 0) ) goto JL0028;
   until ( (Skip <= 0) || (BailOut <= 0) )
   
   Log(string(Name) $ " chose new path: " $ string(Path[CurPath]) $ ".");
@@ -293,7 +291,7 @@ function FlyOnPath (name Path, optional int StartPoint)
   }
 }
 
-function StopFlyingOnPath ()
+function StopFlyingOnPath()
 {
   local InterpolationManager IM_ToStop;
 
@@ -334,7 +332,7 @@ function ApplySpeedChange (float fSpeedChange)
   fLaunchSpeed *= fSpeedChange;
 }
 
-function CheckIfTimeForSpeedChange ()
+function CheckIfTimeForSpeedChange()
 {
   if ( (fSpeedChangeFactor != 1.0) && (MaxSpeedChanges > 0) && (fSpeedChangeNextTime <= fSpeedChangeLastTime) && (Level.TimeSeconds >= fSpeedChangeNextTime) )
   {
@@ -383,7 +381,7 @@ event FinishedInterpolation (InterpolationPoint Other)
   }
 }
 
-function SwitchPaths ()
+function SwitchPaths()
 {
   ChooseNextPath();
   if ( fHideTime > 0.0 )
@@ -400,7 +398,7 @@ function SwitchPaths ()
   //}
 }
 
-function Timer ()
+function Timer()
 {
   FlyOnPath(Path[CurPath]);
   Show();
@@ -460,7 +458,7 @@ function ConvertIntoProjectile (Actor NewEmitter, Vector NewVelocity, optional f
   }
 }
 
-function FinishProjectile ()
+function FinishProjectile()
 {
   PlayerHarry.ClientMessage(string(Name) $ " done targeting");
   Log(string(Name) $ " done targeting");
@@ -526,7 +524,7 @@ function DeployAsMine (Pawn NewTarget, optional Actor NewEmitter, optional float
   GotoState('LyingInWait');
 }
 
-function ExplodeMine ()
+function ExplodeMine()
 {
   if ( ExplosionSound != None )
   {
@@ -539,7 +537,7 @@ function ExplodeMine ()
   FinishMine();
 }
 
-function FinishMine ()
+function FinishMine()
 {
   PlayerHarry.ClientMessage(string(Name) $ " done lying in wait");
   Log(string(Name) $ " done lying in wait");
@@ -588,7 +586,7 @@ Loop:
 
 state() Targeting
 {
-  function EndState ()
+  function EndState()
   {
     if ( fLifeSpanAsProjectile != 0 )
     {
@@ -596,7 +594,7 @@ state() Targeting
     }
   }
   
-  function Timer ()
+  function Timer()
   {
     if ( bProjectile )
     {
@@ -618,7 +616,7 @@ loop:
 
 state() LyingInWait
 {
-  function EndState ()
+  function EndState()
   {
     if ( fLifeSpanAsMine != 0 )
     {
@@ -626,7 +624,7 @@ state() LyingInWait
     }
   }
   
-  function Timer ()
+  function Timer()
   {
     if ( bMine )
     {
@@ -662,7 +660,7 @@ state Pursue
   //UTPT added this for some reason -AdamJD
   // ignores  Tick;
   
-  function BeginState ()
+  function BeginState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' Begin Pursue'));
     Log(string(Name) $ string(' Begin Pursue at speed ') $ string(fLaunchSpeed));
@@ -687,7 +685,7 @@ state Pursue
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' End Pursue'));
     if ( fPursuitTimeLimit != 0 )
@@ -758,7 +756,7 @@ state Pursue
     GotoState('GetBackOnPath');
   }
   
-  function Timer ()
+  function Timer()
   {
     if ( Commentator != None )
     {
@@ -774,7 +772,7 @@ state GetBackOnPath
   //UTPT added this for some reason -AdamJD
   // ignores  Tick;
   
-  function BeginState ()
+  function BeginState()
   {
     local float fDistance;
     local InterpolationPoint I;
@@ -885,7 +883,7 @@ state GetBackOnPath
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' End GetBackOnPath'));
     Log(string(Name) $ string(' End GetBackOnPath'));

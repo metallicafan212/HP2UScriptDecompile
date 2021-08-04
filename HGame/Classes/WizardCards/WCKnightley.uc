@@ -5,13 +5,13 @@
 class WCKnightley extends Goldcards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardKnightleyBigTexture.PNG	GROUP=Icons	Name=WizCardKnightleyBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardMontagueBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardMontagueBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardMontagueBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardMontagueBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\WizCardMontagueBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardMontagueBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardKnightleyBigTexture.PNG	GROUP=Icons	Name=WizCardKnightleyBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardMontagueBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardMontagueBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardMontagueBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardMontagueBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardMontagueBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardMontagueBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardKnightleyTex0.PNG	GROUP=Skins	Name=WizardCardKnightleyTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Montague Knightley";
   Super.PostBeginPlay();

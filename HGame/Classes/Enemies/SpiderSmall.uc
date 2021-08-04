@@ -15,12 +15,12 @@ var Sound spiderBiteSound;
 var Vector BonePosition;
 var Rotator currentRotation;
 
-function Timer ()
+function Timer()
 {
   Destroy();
 }
 
-function bool harryIsStill ()
+function bool harryIsStill()
 {
   if ( VSize(PlayerHarry.Velocity) < 5 )
   {
@@ -123,12 +123,12 @@ begin:
 
 state AttachToHarry
 {
-  function BeginState ()
+  function BeginState()
   {
     iteratorCheck = 10;
   }
   
-  function EndState ()
+  function EndState()
   {
   }
   

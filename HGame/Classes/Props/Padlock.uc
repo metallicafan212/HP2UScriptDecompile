@@ -6,7 +6,7 @@ class Padlock extends HAlohomora;
 
 defaultproperties
 {
-    attachedParticleClass=Class'HPParticle.Lock'
+    attachedParticleClass(0)=Class'HPParticle.Lock'
 
     Mesh=SkeletalMesh'HProps.skPadlockMesh'
 

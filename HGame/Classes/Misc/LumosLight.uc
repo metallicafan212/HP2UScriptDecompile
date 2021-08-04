@@ -33,12 +33,12 @@ simulated function Explode (Vector HitLocation, Vector HitNormal)
 {
 }
 
-function bool IsRelevantToMover ()
+function bool IsRelevantToMover()
 {
   return False;
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   PlayerHarry = harry(Level.PlayerHarryActor);
   // SetPhysics(0);
@@ -49,7 +49,7 @@ function PreBeginPlay ()
   PlayerHarry.bLumosOn = False;
 }
 
-event Destroyed ()
+event Destroyed()
 {
   PlayerHarry.ClientMessage("LumosLight: Destroyed() CALLED!!!!!!!!!!!!!! while playerHarry.bLumosOn = " $ string(PlayerHarry.bLumosOn));
   TurnOff();
@@ -59,11 +59,11 @@ event Destroyed ()
   }
 }
 
-event FellOutOfWorld ()
+event FellOutOfWorld()
 {
 }
 
-function ShowDebugInfo ()
+function ShowDebugInfo()
 {
   PlayerHarry.ClientMessage("bLumosOn = " $ string(bLumosOn));
   PlayerHarry.ClientMessage("LightRadius   = " $ string(LightRadius));
@@ -106,7 +106,7 @@ function UpdateLocation (Vector NewLocation)
   Particles.SetLocation(NewLocation);
 }
 
-function TurnOn ()
+function TurnOn()
 {
   local Actor A;
 
@@ -143,7 +143,7 @@ function TurnOn ()
   }
 }
 
-function TurnOff ()
+function TurnOff()
 {
   local Actor A;
 
@@ -170,7 +170,7 @@ function TurnOff ()
   }
 }
 
-function TurnDynamicLightOn ()
+function TurnDynamicLightOn()
 {
   // LightType = 1;
   LightType = LT_Steady;
@@ -183,7 +183,7 @@ function TurnDynamicLightOn ()
   LightRadiusInner = 5;
 }
 
-function TurnDynamicLightOff ()
+function TurnDynamicLightOff()
 {
   // LightType = 0;
   LightType = LT_None;

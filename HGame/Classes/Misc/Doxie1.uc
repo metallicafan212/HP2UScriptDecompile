@@ -26,7 +26,7 @@ var float fDestroyFlyTime;
 var ParticleFX ParticleFXActor;
 var() float fParticleTrailLife;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   // SetPhysics(4);
@@ -40,7 +40,7 @@ function PostBeginPlay ()
   OldAirSpeed = AirSpeed;
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
   return strength / startstrength;
 }
@@ -112,7 +112,7 @@ state patrol
     return True;
   }
   
-  function EndState ()
+  function EndState()
   {
     LastLevelTime = 0.0;
   }

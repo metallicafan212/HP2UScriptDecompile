@@ -62,7 +62,7 @@ function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
   }
 }
 
-function Created ()
+function Created()
 {
   textureLionClick = Texture(DynamicLoadObject("HP_Menu.Hud.MenuLionButtonClick",Class'Texture'));
   textureLionIdle = Texture(DynamicLoadObject("HP_Menu.Hud.MenuLionButtonIdle",Class'Texture'));
@@ -130,7 +130,7 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
     switch (C)
     {
@@ -145,11 +145,10 @@ function Notify (UWindowDialogControl C, byte E)
       break;
       default:
     }
-  } //else {
-  //}
+  }
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
   Super.PreSwitchPage();
 }

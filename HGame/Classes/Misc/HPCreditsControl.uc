@@ -8,14 +8,14 @@ var float _StartTime;
 var int _FirstVisibleCreditIdx;
 var float _FirstVisibleCreditYDelta;
 
-function Created ()
+function Created()
 {
   Super.Created();
   _StartTime = -1.0;
   bAlwaysOnTop = True;
 }
 
-function Reset ()
+function Reset()
 {
   _StartTime = -1.0;
 }

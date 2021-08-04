@@ -7,7 +7,7 @@ class GoldCardTimerManager extends CountdownTimerManager;
 const strFULL_BAR= "HP2_Menu.Icon.HP2GoldCardTimerFull";
 const strTIMER_EMPTY= "HP2_Menu.Icon.HP2GoldCardTimerEmpty";
 
-function LoadTimerBarGraphics ()
+function LoadTimerBarGraphics()
 {
   fFULL_OFFSET_X = 55.0;
   fFULL_OFFSET_Y = 22.0;

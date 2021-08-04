@@ -15,7 +15,7 @@ class skArmoire extends HPMeshActor;
 #exec Anim Digest Anim=skArmoireAnims VERBOSE 
 
 //texture import (skArmoireTex0) -AdamJD 
-#exec Texture Import File=Textures\skArmoireTex0.png Name=skArmoireTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skArmoireTex0.png Name=skArmoireTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins
 #exec MeshMap SetTexture MeshMap=skArmoireMesh NUM=0 Texture=skArmoireTex0
 
 defaultproperties

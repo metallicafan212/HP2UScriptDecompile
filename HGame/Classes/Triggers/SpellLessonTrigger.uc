@@ -123,7 +123,7 @@ function ForceStasis (bool bOn)
   }
 }
 
-function CheckForMissedArrows ()
+function CheckForMissedArrows()
 {
   local float fDist;
   local float fAdjustedMissRange;
@@ -156,7 +156,7 @@ event PlayerInput (float DeltaTime)
 {
 }
 
-function InitDialogStrings ()
+function InitDialogStrings()
 {
   switch (LessonShape)
   {
@@ -288,7 +288,7 @@ function InitDialogStrings ()
   }
 }
 
-function FindLessonActors ()
+function FindLessonActors()
 {
   foreach AllActors(Class'harry',PlayerHarry)
   {
@@ -321,7 +321,7 @@ function Actor GetLessonActor (Class<Actor> classActor, name nameActor)
   return None;
 }
 
-function Characters GetLessonProfessor ()
+function Characters GetLessonProfessor()
 {
   local Class<Actor> classProf;
   local Actor Prof;
@@ -432,8 +432,6 @@ function bool WandAtInterpolationPoint (InterpolationPoint IPoint, Interpolation
             IPPassedArrow[I] = None;
           }
         }
-        // I++;
-        // goto JL00E9;
       }
       if ( SpellLessonInterpolationPoint(IPoint).IsActive(nLevel) )
       {
@@ -444,10 +442,7 @@ function bool WandAtInterpolationPoint (InterpolationPoint IPoint, Interpolation
           if ( IPPassedArrow[I] == None )
           {
             IPPassedArrow[I] = SpellLessonInterpolationPoint(IPoint);
-          } //else {
-            // I++;
-            // goto JL0187;
-          //}
+          }
         }
       }
       if ( (nCurrTimesAround % 2 != 0) && (nHitPointsPassed == nHitPointsInLevel / 2) )
@@ -459,7 +454,7 @@ function bool WandAtInterpolationPoint (InterpolationPoint IPoint, Interpolation
   }
 }
 
-function InitHitPointRotation ()
+function InitHitPointRotation()
 {
   local SpellLessonInterpolationPoint IP;
 
@@ -472,7 +467,7 @@ function InitHitPointRotation ()
   }
 }
 
-function HideHitPoints ()
+function HideHitPoints()
 {
   local SpellLessonInterpolationPoint IP;
 
@@ -485,7 +480,7 @@ function HideHitPoints ()
   }
 }
 
-function ResetHitPoints ()
+function ResetHitPoints()
 {
   local SpellLessonInterpolationPoint IP;
 
@@ -653,13 +648,13 @@ function DrawRoundText (Canvas Canvas)
   Canvas.DrawColor = colorSave;
 }
 
-function StartCutSequence ()
+function StartCutSequence()
 {
   PlayerHarry.bIsCaptured = True;
   PlayerHarry.myHUD.StartCutScene();
 }
 
-function EndCutSequence ()
+function EndCutSequence()
 {
   PlayerHarry.myHUD.EndCutScene();
   PlayerHarry.bIsCaptured = False;
@@ -687,12 +682,7 @@ function float SayLessonDialog (string strDialogID, bool bDisplayText)
   } else {
     fSoundLen = Len(strDialog) * 0.01 + 3.0;
   }
-  
-  /*
-  if ( Professor != None )
-  {
-  */
-  
+    
   //added from the proto because UTPT didn't decompile this -AdamJD
   // ***************************************************************************
   // Handle emotions
@@ -728,17 +718,11 @@ function SayTryAgain (bool bLastTimeAround)
       if ( strTryOneLastTime[iSayTryAgain] != "" )
       {
         ++nTryLastTimeEntries;
-      } //else {
-        //goto JL0045;
-      //}
-// JL0045:
-      // I++;
-      // goto JL0010;
+      }
     }
   }
   if ( bLastTimeAround && (nTryLastTimeEntries > 0) )
   {
-    // I = RandRange(0.0,byte(nTryLastTimeEntries - 1)) = SayLessonDialog(strTryOneLastTime[I],False);
 	iSayTryAgain = RandRange(0.0,nTryLastTimeEntries - 1);
 	SayLessonDialog(strTryOneLastTime[iSayTryAgain],False);
   } else {
@@ -749,22 +733,17 @@ function SayTryAgain (bool bLastTimeAround)
       if ( strTryAgain[iSayTryAgain] != "" )
       {
         ++nTryAgainEntries;
-      } //else {
-        //goto JL00C4;
-      //}
-      // I++;
-      // goto JL008F;
+      }
     }
     if ( nTryAgainEntries > 0 )
     {
-      // I = RandRange(0.0,byte(nTryAgainEntries - 1)) = SayLessonDialog(strTryAgain[I],False);
 	  iSayTryAgain = RandRange(0.0,nTryAgainEntries - 1);
 	  SayLessonDialog(strTryAgain[iSayTryAgain],False);
     }
   }
 }
 
-function SayEncouragement ()
+function SayEncouragement()
 {
   local int nDoingGoodEntries;
   local int nEncourageAnyEntries;
@@ -788,17 +767,11 @@ function SayEncouragement ()
       if ( strEncourageDoingGood[iSayEncouragement] != "" )
       {
         ++nDoingGoodEntries;
-      } //else {
-        //goto JL006A;
-      //}
-      // I++;
-      // goto JL0035;
+      }
     }
   }
-// JL006A:
   if ( bDoingGood && (nDoingGoodEntries > 0) )
   {
-    // I = RandRange(0.0,byte(nDoingGoodEntries - 1)) = SayLessonDialog(strEncourageDoingGood[I],False);
 	iSayEncouragement = RandRange(0.0,nDoingGoodEntries - 1);
 	SayLessonDialog(strEncourageDoingGood[iSayEncouragement],False);
   } else {
@@ -809,22 +782,17 @@ function SayEncouragement ()
       if ( strEncourageAny[iSayEncouragement] != "" )
       {
         ++nEncourageAnyEntries;
-      } //else {
-        //goto JL00E9;
-      //}
-      // I++;
-      // goto JL00B4;
+      }
     }
     if ( nEncourageAnyEntries > 0 )
     {
-      // I = RandRange(0.0,byte(nEncourageAnyEntries - 1)) = SayLessonDialog(strEncourageAny[I],False);
 	  iSayEncouragement = RandRange(0.0,nEncourageAnyEntries - 1); 
 	  SayLessonDialog(strEncourageAny[iSayEncouragement],False);
     }
   }
 }
 
-function ResetForNextLevel ()
+function ResetForNextLevel()
 {
   ResetHitPoints();
   nCurrTimesAround = 0;
@@ -832,13 +800,13 @@ function ResetForNextLevel ()
   GameWand.bHidden = False;
 }
 
-function ResetForNextLoop ()
+function ResetForNextLoop()
 {
   ResetHitPoints();
   GameWand.SetLocation(GameIPStart.Location);
 }
 
-function EndLesson ()
+function EndLesson()
 {
   GameWand.bHidden = True;
   GameShape.bHidden = True;
@@ -960,7 +928,7 @@ state DeclareNewRound
     }
   }
   
-  event BeginState ()
+  event BeginState()
   {
     strCurrRound = "";
   }
@@ -1042,7 +1010,7 @@ state PlayGame
     vectLastWandLoc = GameWand.Location;
   }
   
-  event EndState ()
+  event EndState()
   {
     PlayerHarry.StopAllMusic(0.5);
     GameWand.StopSound(soundWand,SLOT_Interact);
@@ -1078,14 +1046,14 @@ state LevelOver
     sgHousePts.RenderHudItemManager(Canvas,bMenuMode,bFullCutMode,bHalfCutMode);
   }
   
-  event BeginState ()
+  event BeginState()
   {
     sgHousePts = PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupHousePoints');
     siGryffPts = sgHousePts.GetStatusItem(Class'StatusItemGryffindorPts');
     sgHousePts.SetCutSceneRenderMode(True);
   }
   
-  event EndState ()
+  event EndState()
   {
     sgHousePts.SetCutSceneRenderModeToNormal();
   }

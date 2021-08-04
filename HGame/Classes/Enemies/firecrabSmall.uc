@@ -59,7 +59,7 @@ function bool HandleSpellRictusempra (optional baseSpell spell, optional Vector 
   return True;
 }
 
-function bool CheckStayFlipped ()
+function bool CheckStayFlipped()
 {
   local bool bFlipped;
 
@@ -90,7 +90,7 @@ function Tick (float DeltaTime)
   }
 }
 
-function PlayRoarSound ()
+function PlayRoarSound()
 {
   local int randNum;
 
@@ -116,7 +116,7 @@ function PlayRoarSound ()
 
 state stateHitBySpell
 {
-  function BeginState ()
+  function BeginState()
   {
     AmbientSound = None;
   }
@@ -154,7 +154,7 @@ state stateHitBySpell
 
 state DoFlip
 {
-  function BeginState ()
+  function BeginState()
   {
     playHitSound();
   }
@@ -250,7 +250,7 @@ state AttackHarry
 
 state throwing
 {
-  function BeginState ()
+  function BeginState()
   {
     iNumShots = iNumShotsBetweenPreAttack;
   }
@@ -352,13 +352,13 @@ state throwing
 
 state strafeAround
 {
-  function BeginState ()
+  function BeginState()
   {
     NormalSpeed = GroundSpeed;
     GroundSpeed = strafeSpeed;
   }
   
-  function EndState ()
+  function EndState()
   {
     GroundSpeed = NormalSpeed;
   }

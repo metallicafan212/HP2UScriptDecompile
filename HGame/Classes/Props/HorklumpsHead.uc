@@ -14,7 +14,7 @@ var float tempY;
 var Vector HeadLocation;
 var Rotator HeadRotation;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   tempX = FRand() * 4.0;
   tempY = FRand() * 4.0;
@@ -51,7 +51,7 @@ function ThrownLanded (Vector HitNormal)
   ShootPoison();
 }
 
-function ShootPoison ()
+function ShootPoison()
 {
   if ( BOOL_DEBUG_AI )
   {

@@ -35,7 +35,7 @@ var() EStartMixOn StartMixOn;
 var() bool bMixingEnabled;
 
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   Super.PostBeginPlay();
   sgPotionIngr = PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupPotionIngr');
@@ -129,19 +129,19 @@ function SetCauldronFX (ECauldronFX FX)
   CreateAttachedParticleFX();
 }
 
-function int GetNumPotionsToMake ()
+function int GetNumPotionsToMake()
 {
   return Min(siWiggenBark.nCount,siFlobberMucus.nCount);
 }
 
-function bool HaveWiggenPotionIngredients ()
+function bool HaveWiggenPotionIngredients()
 {
   return (siWiggenBark.nCount >= 1) && (siFlobberMucus.nCount >= 1);
 }
 
 auto state Idle
 {
-  event BeginState ()
+  event BeginState()
   {
     Super.BeginState();
     // SetCauldronFX(0);
@@ -161,7 +161,7 @@ ignores Bump;
     }
   }
   
-  event BeginState ()
+  event BeginState()
   {
     local string strDialog;
     local string strDialogID;
@@ -197,8 +197,7 @@ begin:
   vTopOfCauldron = Location;
   vTopOfCauldron.Z += 40;
   nPotionCount = GetNumPotionsToMake();
-  // I = 0;
-  // if ( I < nPotionCount )
+
   for(I = 0; I < nPotionCount; I++)
   {
     vFlobberHudLoc = sgPotionIngr.GetItemLocation(Class'StatusItemFlobberMucus',False);
@@ -213,13 +212,10 @@ begin:
     propTemp.fMaxFlyToHudScale = 0.41;
     propTemp.DoDropOffProp(vTopOfCauldron,True);
     Sleep(0.1);
-    // I++;
-    // goto JL0082;
   }
   PlayerHarry.DoPotionMixingStir();
   Sleep(1.0);
-  // I = 0;
-  // if ( I < nPotionCount )
+
   for(I = 0; I < nPotionCount; I++)
   {
     vWWellPotionHudLoc = sgPotions.GetItemLocation(Class'StatusItemWiggenwell',False);
@@ -229,10 +225,7 @@ begin:
     propTemp.fMinFlyToHudScale = 0.81;
     propTemp.DoPickupProp();
     Sleep(0.25);
-    // I++;
-    // goto JL01B3;
   }
-  // SetCauldronFX(1);
   SetCauldronFX(CauldronFX_Mixed);
   Sleep(0.31);
   PlayerHarry.DoPotionMixingIdle();

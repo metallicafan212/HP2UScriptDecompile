@@ -26,7 +26,7 @@ const nHEALTH_X= 4;
 const BOTTOM_OFFSET= 11;
 const TOP_OFFSET= 1;
 
-event PreBeginPlay ()
+event PreBeginPlay()
 {
 	local string strHealthBorder;
 	local string strHealthGreenInside;
@@ -59,7 +59,7 @@ function IncrementCountPotential (int nNum)
 	}
 }
 
-function Color GetHealthDrawColor ()
+function Color GetHealthDrawColor()
 {
 	local Color colorReturn;
 
@@ -69,7 +69,7 @@ function Color GetHealthDrawColor ()
 	return colorReturn;
 }
 
-function Color GetChangeInHealthDrawColor ()
+function Color GetChangeInHealthDrawColor()
 {
 	local Color colorReturn;
 
@@ -190,7 +190,7 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 
 auto state NormalDisplay
 {
-	function BeginState ()
+	function BeginState()
 	{
 		nCurrChange = 0;
 	}
@@ -198,12 +198,12 @@ auto state NormalDisplay
 
 state HoldChange
 {
-	function Timer ()
+	function Timer()
 	{
 		GotoState('FadeChangeOut');
 	}
   
-	function Color GetHealthDrawColor ()
+	function Color GetHealthDrawColor()
 	{
 		local Color colorReturn;
   
@@ -221,7 +221,7 @@ state HoldChange
 		return colorReturn;
 	}
   
-	function Color GetChangeInHealthDrawColor ()
+	function Color GetChangeInHealthDrawColor()
 	{
 		local Color colorReturn;
   
@@ -231,7 +231,7 @@ state HoldChange
 		return colorReturn;
 	}
   
-	function float GetHoldChangeTime ()
+	function float GetHoldChangeTime()
 	{
 		local float fHoldTime;
   
@@ -243,7 +243,7 @@ state HoldChange
 		return fHoldTime;
 	}
   
-	function BeginState ()
+	function BeginState()
 	{
 		SetTimer(GetHoldChangeTime(),False);
 	}
@@ -269,7 +269,7 @@ state FadeChangeOut
 		}
 	}
   
-	function float GetFadeChangeTime ()
+	function float GetFadeChangeTime()
 	{
 		local float fChangeTime;
   
@@ -281,7 +281,7 @@ state FadeChangeOut
 		return fChangeTime;
 	}
   
-	function BeginState ()
+	function BeginState()
 	{
 		fCurrFadeTime = 0.0;
 		fTotalFadeTime = GetFadeChangeTime();

@@ -5,7 +5,7 @@
 class baseSpell extends Projectile;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\Icons\defaultSpellIcon.PNG	GROUP=Icons Name=defaultSpellIcon COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\defaultSpellIcon.PNG	GROUP=Icons Name=defaultSpellIcon COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 
 var ESpellType SpellType;
 var Texture SpellIcon;
@@ -57,7 +57,7 @@ function InitSpell (Actor CastedBy, Actor CastedAt, optional Vector CastedAtOffs
   OnSpellInit();
 }
 
-simulated function PostBeginPlay ()
+simulated function PostBeginPlay()
 {
   //local float Scale;
 
@@ -66,7 +66,7 @@ simulated function PostBeginPlay ()
   CurrentDir = vector(Rotation);
 }
 
-event Destroyed ()
+event Destroyed()
 {
   if ( SpellWand != None )
   {
@@ -79,15 +79,15 @@ event Destroyed ()
   OnSpellShutdown();
 }
 
-function OnSpellInit ()
+function OnSpellInit()
 {
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
-event FellOutOfWorld ()
+event FellOutOfWorld()
 {
 }
 
@@ -224,12 +224,12 @@ function ProcessTouch (Actor Other, Vector HitLocation)
   Destroy();
 }
 
-static function Texture GetSpellIcon ()
+static function Texture GetSpellIcon()
 {
   return Default.SpellIcon;
 }
 
-function bool IsRelevantToMover ()
+function bool IsRelevantToMover()
 {
   return True;
 }
@@ -316,7 +316,7 @@ function SetSpellDirection (Vector Dir)
   fxFlyParticleEffect.SetRotation(DesiredRotation);
 }
 
-function Vector GetTargetHitLocation ()
+function Vector GetTargetHitLocation()
 {
   return TargetActor.Location + TargetOffset;
 }

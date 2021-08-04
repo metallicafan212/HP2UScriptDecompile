@@ -11,7 +11,7 @@ var int LastAnimFrame;
 var int NumWillowRootFrames;
 var() int Damage;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   local GenericColObj A;
 
@@ -32,7 +32,7 @@ function ColObjTouch (Actor Other, GenericColObj ColObj)
 
 auto state stateIdle
 {
-  function Timer ()
+  function Timer()
   {
     SetTimer(RandRange(0.62,0.89999998),True);
     if ( VSize2D(PlayerHarry.Location - Location) < fGetAngryDistance )
@@ -55,7 +55,7 @@ auto state stateIdle
 
 state stateAngry
 {
-  function Timer ()
+  function Timer()
   {
     SetTimer(RandRange(0.62,0.89999998),True);
     if ( VSize2D(PlayerHarry.Location - Location) > fGetAngryDistance + 50 )

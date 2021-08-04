@@ -20,7 +20,7 @@ var() Texture stexHufflepuff;
 var() Texture stexRavenclaw;
 
 
-function Timer ()
+function Timer()
 {
   local harry PlayerHarry;
   local StatusGroupHousePoints sgHousePts;
@@ -33,7 +33,7 @@ function Timer ()
   }
 }
 
-function BeginPlay ()
+function BeginPlay()
 {
   if ( (stexGryffindor == None) || (stexSlytherin == None) || (stexHufflepuff == None) || (stexRavenclaw == None) )
   {
@@ -43,11 +43,11 @@ function BeginPlay ()
   SetTimer(0.1,True);
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 }
 
-function Destroyed ()
+function Destroyed()
 {
   SetSTexturesNotifyActor(None);
 }
@@ -119,7 +119,7 @@ function SetSTexturesNotifyActor (Actor aSet)
   }
 }
 
-function EnsureTexturesInitialized ()
+function EnsureTexturesInitialized()
 {
   SetSTexturesNotifyActor(self);
 }

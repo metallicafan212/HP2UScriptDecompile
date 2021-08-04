@@ -119,7 +119,7 @@ var float fGapTime;
 var bool bMute;
 var float fVolume;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int Variant;
 
@@ -264,7 +264,6 @@ function bool SayComment (QuidComment eComment, optional TeamAffiliation eTeam, 
 	  }
   }
   until(bDone);
-  // if (! bDone ) goto JL00D3;
   
   NumCandidates = iCandidate;
   if ( NumCandidates <= 0 )
@@ -280,13 +279,11 @@ function bool SayComment (QuidComment eComment, optional TeamAffiliation eTeam, 
   {
     if ( Candidates[iCandidate].fWeight > fChoice )
     {
-      // goto JL034E;
 	  break;
     } else {
       fChoice -= Candidates[iCandidate].fWeight;
       ++iCandidate;
     }
-    // goto JL02FB;
   }
   eHouse = Candidates[iCandidate].eHouse;
   Variant = Candidates[iCandidate].Variant;
@@ -295,7 +292,6 @@ function bool SayComment (QuidComment eComment, optional TeamAffiliation eTeam, 
   if ( dlgSound != None )
   {
     PlaySound(dlgSound,SLOT_Talk,fVolume,,20000.0);
-// JL02FB:
 	bSaid = True;
   } else {
     Log("QuidditchCommentator: Failed to say dialog for comment type " $ string(eComment) $ "; DlgName = " $ Comments[eComment].House[eHouse].Variant[Variant].DlgName $ ".");
@@ -339,7 +335,7 @@ function string GetCommentId (int eventNum, int House, int Variant)
   }
 }
 
-function fillCommentArray ()
+function fillCommentArray()
 {
   local int C;
   local int H;
@@ -347,25 +343,18 @@ function fillCommentArray ()
   local string sndId;
   local QuidComment vvv;
 
-  // H = 0;
-  // if ( H < 6 )
   for(H = 0; H < MAX_QUID_COMMENT_HOUSE_NAMES; H++)
   {
     Comments[0].House[H].Variations = 0;
-    // H++;
-    // goto JL0007;
   }
   C = 1;
-  // if ( C < 43 )
+
   for(C = 1; C < MAX_QUID_COMMENT_NAMES; C++)
   {
-    // H = 0;
-    // if ( H < 6 )
 	for(H = 0; H < MAX_QUID_COMMENT_HOUSE_NAMES; H++)
     {
       Comments[C].House[H].Variations = QC_MAX_COMMENT_VARIANTS;
       V = 0;
-      // if ( V < 30 )
 	  for(V = 0; V < QC_MAX_COMMENT_VARIANTS; V++)
       {
         sndId = GetCommentId(C,H,V);
@@ -375,17 +364,10 @@ function fillCommentArray ()
           Comments[C].House[H].Variant[V].dlgSound = Sound(DynamicLoadObject("AllDialog." $sndId,Class'Sound'));
         } else {
           Comments[C].House[H].Variations = V;
-          // goto JL015B;
 		  break;
         }
-        // V++;
-        // goto JL0081;
       }
-      // H++;
-      // goto JL0050;
     }
-    // C++;
-    // goto JL003D;
   }
 }
 

@@ -10,7 +10,7 @@ defaultproperties
 
     Snds=(Opening=None,Closing=None,Spawning=Sound'HPSounds.hub1_sfx.vase_breaking')
 
-    Limits=(Max=1,Min=1),
+    Limits=(Max=1,Min=1)
 
     BaseParticles=Class'HPParticle.GlassJarBreak'
 

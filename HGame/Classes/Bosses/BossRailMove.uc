@@ -45,7 +45,7 @@ var Sound tempSound;
 var float TempTime;
 var Rotator TempRotator;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local baseWand weap;
   local NavigationPoint A;
@@ -94,7 +94,7 @@ function PostBeginPlay ()
   SetTimer(0.2,True);
 }
 
-function Timer ()
+function Timer()
 {
   if ( PlayHarryHurtTimer > 0 )
   {
@@ -116,7 +116,7 @@ function Timer ()
   }
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
   return float(iNumHitsToBeat - iNumHits) / float (iNumHitsToBeat);
 }
@@ -150,12 +150,12 @@ function bool HandleSpellSkurge (optional baseSpell spell, optional Vector vHitL
   return True;
 }
 
-function bool FlyBackToVPosSave ()
+function bool FlyBackToVPosSave()
 {
   return False;
 }
 
-function bool RespondToDamage ()
+function bool RespondToDamage()
 {
   return True;
 }
@@ -192,7 +192,7 @@ event TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector Mome
   }
 }
 
-function PlayRunAnim ()
+function PlayRunAnim()
 {
   if ( bMovingLeft )
   {
@@ -202,7 +202,7 @@ function PlayRunAnim ()
   }
 }
 
-function FindNewMoveToLoc ()
+function FindNewMoveToLoc()
 {
   local int I;
   local float D;
@@ -244,7 +244,7 @@ function FindNewMoveToLoc ()
 
 auto state stateIdle
 {
-  function bool RespondToDamage ()
+  function bool RespondToDamage()
   {
     return False;
   }
@@ -255,7 +255,7 @@ auto state stateIdle
 
 state PatrolForHarry
 {
-  function BeginState ()
+  function BeginState()
   {
     FindNewMoveToLoc();
   }
@@ -364,12 +364,12 @@ begin:
 
 state stateTaunt1
 {
-  function bool FlyBackToVPosSave ()
+  function bool FlyBackToVPosSave()
   {
     return True;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     vPosSave = Location;
     // DoFlyTo_Actor(PlayerHarry,vect(30.00,0.00,80.00),4,0.64999998,False,True);
@@ -414,7 +414,7 @@ state stateTaunt1
     }
   }
   
-  function EndState ()
+  function EndState()
   {
     DestroyControllers();
   }
@@ -431,12 +431,12 @@ state stateTaunt1
 
 state stateTaunt2
 {
-  function bool FlyBackToVPosSave ()
+  function bool FlyBackToVPosSave()
   {
     return True;
   }
   
-  function EndState ()
+  function EndState()
   {
     DestroyControllers();
   }
@@ -488,7 +488,7 @@ begin:
   GotoState('PatrolForHarry');
 }
 
-function ShootSpell ()
+function ShootSpell()
 {
   local spellEcto A;
   local Rotator R;
@@ -502,12 +502,12 @@ function ShootSpell ()
 
 state stateHit2
 {
-  function bool RespondToDamage ()
+  function bool RespondToDamage()
   {
     return False;
   }
   
-  function EndState ()
+  function EndState()
   {
     DestroyControllers();
   }
@@ -527,17 +527,17 @@ state stateHit2
 
 state stateHit3
 {
-  function bool FlyBackToVPosSave ()
+  function bool FlyBackToVPosSave()
   {
     return True;
   }
   
-  function bool RespondToDamage ()
+  function bool RespondToDamage()
   {
     return False;
   }
   
-  function BeginState ()
+  function BeginState()
   {
     TempRotator = Rotation;
     TempRotator.Pitch = 0;
@@ -615,7 +615,7 @@ function PlayOuchSfx (bool bPlayTalkingOuches)
   }
 }
 
-function PlayHitSfx ()
+function PlayHitSfx()
 {
   local Sound snd;
   local string Str;
@@ -637,7 +637,7 @@ function PlayHitSfx ()
   PlayNoSoundsTimer = 3.0;
 }
 
-function PlayRandomSfx ()
+function PlayRandomSfx()
 {
   local Sound snd;
   local string Str;
@@ -659,7 +659,7 @@ function PlayRandomSfx ()
   PlayNoSoundsTimer = 3.0;
 }
 
-function PlayMalfoyHitHarrySfx ()
+function PlayMalfoyHitHarrySfx()
 {
   local Sound snd;
   local string Str;
@@ -689,7 +689,7 @@ function HarryWasHurt (bool bHarryWasKilled)
   }
 }
 
-function CleanupAfterBoss ()
+function CleanupAfterBoss()
 {
   local Actor A;
 

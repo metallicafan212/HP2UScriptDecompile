@@ -17,7 +17,7 @@ var Texture CListLarge;
 var Texture CListSmall;
 
 
-function Created ()
+function Created()
 {
 	Super.Created();
 }

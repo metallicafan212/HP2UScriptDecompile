@@ -4,7 +4,7 @@
 
 class AragogSpellWeb extends baseSpell;
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -26,7 +26,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
   }

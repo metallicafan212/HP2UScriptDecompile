@@ -21,7 +21,7 @@ function OnEvent (name EventName)
   }
 }
 
-function FollowNextSplinePath ()
+function FollowNextSplinePath()
 {
   CurrentPiece++;
   if ( CurrentPiece >= 3 )
@@ -49,7 +49,7 @@ state patrolFollowSpline
     }
   }
   
-  function Timer ()
+  function Timer()
   {
   }
   

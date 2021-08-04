@@ -5,13 +5,13 @@
 class SecretAreaMarker extends HiddenHPawn;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\SecretTexture.PNG Name=SecretTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\SecretTexture.PNG Name=SecretTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 
 var() bool bUseCollision;
 var bool bFound;
 var Sound FoundSound;
 
-function OnFound ()
+function OnFound()
 {
 	if (  !bFound )
 	{
@@ -24,7 +24,7 @@ function OnFound ()
 	bFound = True;
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
 	if (  !bUseCollision )
 	{

@@ -15,7 +15,7 @@ class skTableWoodRound extends HPMeshActor;
 #exec Anim Digest Anim=skTableWoodRoundAnims VERBOSE 
 
 //texture import (skTableWoodRoundTex0) -AdamJD 
-#exec Texture Import File=Textures\skTableWoodRoundTex0.png Name=skTableWoodRoundTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skTableWoodRoundTex0.png Name=skTableWoodRoundTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTableWoodRoundMesh Num=0 Texture=skTableWoodRoundTex0
 
 defaultproperties

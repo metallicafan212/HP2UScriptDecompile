@@ -35,7 +35,7 @@ var Texture textureSpellExpelliarmusSel;
 var ESpellSelection CurrSelection;
 
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	
@@ -49,14 +49,14 @@ event PostBeginPlay ()
 	SetTimer(0.2,True);
 }
 
-event Destroyed ()
+event Destroyed()
 {
 	harry(Level.PlayerHarryActor).ClientMessage("spellselector destroyed");
 	HPHud(harry(Level.PlayerHarryActor).myHUD).RegisterSpellSelector(None);
 	Super.Destroyed();
 }
 
-event Timer ()
+event Timer()
 {
 	if ( Level.PlayerHarryActor.myHUD != None )
 	{

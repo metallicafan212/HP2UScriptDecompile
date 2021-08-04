@@ -15,7 +15,7 @@ class skBooksFloorPedestal extends HPMeshActor;
 #exec Anim Digest Anim=skBooksFloorPedestalAnims VERBOSE 
 
 //texture import (skBooksFloorPedestalTex0) -AdamJD 
-#exec Texture Import File=Textures\skBooksFloorPedestalTex0.png Name=skBooksFloorPedestalTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skBooksFloorPedestalTex0.png Name=skBooksFloorPedestalTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBooksFloorPedestalMesh Num=0 Texture=skBooksFloorPedestalTex0
 
 defaultproperties

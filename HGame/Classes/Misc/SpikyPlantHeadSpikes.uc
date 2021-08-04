@@ -13,7 +13,7 @@ var float tempX;
 var float tempY;
 var float scaleIncrement;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   tempX = FRand() * 4.0;
   tempY = FRand() * 4.0;
@@ -37,7 +37,7 @@ function ThrownLanded (Vector HitNormal)
   ShootSpikes();
 }
 
-function ShootSpikes ()
+function ShootSpikes()
 {
   local int I;
   local int NumSpikes;

@@ -56,7 +56,7 @@ function Paint (Canvas Canvas, float X, float Y)
   Canvas.Font = saveFont;
 }
 
-function Created ()
+function Created()
 {
   local int I;
   local Texture tempTexture;
@@ -82,8 +82,6 @@ function Created ()
   H = 14.0;
   if (  !bE3DemoMode )
   {
-    // I = 0;
-    // if ( I < FirstPreviewIndex )
 	for(I = 0; I < FirstPreviewIndex; I++)
     {
       if ( LevelList[I].LevelName != "" )
@@ -103,8 +101,6 @@ function Created ()
         LevelList[I].Button.ToolTipString = LevelList[I].LevelName;
         Y += H;
       }
-      // I++;
-      // goto JL0121;
     }
     Y += H;
     ExitButton = HGameButton(CreateControl(Class'HGameButton',X,Y,W,H));
@@ -122,8 +118,7 @@ function Created ()
     ExitButton.ToolTipString = "Exit To Windows";
     X = 32.0;
     Y = 210.0;
-    // I = FirstPreviewIndex;
-    // if ( I < 30 )
+
 	for(I = FirstPreviewIndex; I < 30; I++)
     {
       if ( LevelList[I].LevelName != "" )
@@ -144,8 +139,6 @@ function Created ()
         LevelList[I].Button.ToolTipString = LevelList[I].LevelName;
         Y += H;
       }
-      // I++;
-      // goto JL0443;
     }
   } else {
     E3DemoStartButton = HGameButton(CreateControl(Class'HGameButton',WinWidth / 2 - 80,WinHeight - 100,160.0,60.0));
@@ -195,18 +188,14 @@ function Notify (UWindowDialogControl C, byte E)
 {
   local int I;
 
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
-    // I = 0;
-    // if ( I < 30 )
 	for(I = 0; I < 30; I++)
     {
       if ( LevelList[I].Button == C )
       {
         FEBook(book).RunURL(LevelList[I].LevelUrl,False);
       }
-      // I++;
-      // goto JL0014;
     }
     if ( E3DemoStartButton == C )
     {
@@ -245,7 +234,7 @@ function Notify (UWindowDialogControl C, byte E)
   }
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
 }
 

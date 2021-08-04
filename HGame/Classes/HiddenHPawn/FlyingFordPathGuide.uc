@@ -9,7 +9,7 @@ var Director Director;
 var name PathName;
 var float AirSpeedNormal;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	foreach AllActors(Class'Director',Director)
 	{

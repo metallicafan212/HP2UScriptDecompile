@@ -14,7 +14,7 @@ var float fOriginalParticlesPerSec;
 var bool bPulseUp;
 var float fGlowOutRate;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   // DrawType = 0;
@@ -48,7 +48,7 @@ function changeAttachedParticleFX (Class<ParticleFX> newFX)
 
 state HoopInvisible
 {
-  function BeginState ()
+  function BeginState()
   {
     if ( attachedParticleFX[0] != None )
     {
@@ -61,7 +61,7 @@ state HoopInvisible
 
 state HoopAppearing
 {
-  function BeginState ()
+  function BeginState()
   {
     bHidden = False;
     if ( attachedParticleFX[0] != None )
@@ -74,7 +74,7 @@ state HoopAppearing
     PlayAnim('hold1',,0.0);
   }
   
-  event AnimEnd ()
+  event AnimEnd()
   {
     GotoState('HoopVisible');
     LoopAnim('hold1');
@@ -84,7 +84,7 @@ state HoopAppearing
 
 state HoopVisible
 {
-  function BeginState ()
+  function BeginState()
   {
     bHidden = False;
     if ( attachedParticleFX[0] != None )
@@ -100,7 +100,7 @@ state HoopVisible
 
 state HoopNextToHit
 {
-  function BeginState ()
+  function BeginState()
   {
     bHidden = False;
     if ( attachedParticleFX[0] != None )
@@ -114,7 +114,7 @@ state HoopNextToHit
     bPulseUp = True;
   }
   
-  event AnimEnd ()
+  event AnimEnd()
   {
     LoopAnim('hold3');
   }
@@ -144,7 +144,7 @@ state HoopNextToHit
 
 state HoopDisappearing
 {
-  function BeginState ()
+  function BeginState()
   {
     bHidden = False;
     if ( attachedParticleFX[0] != None )
@@ -156,7 +156,7 @@ state HoopDisappearing
     fGlowOutRate = ScaleGlow / 0.69999999;
   }
   
-  event AnimEnd ()
+  event AnimEnd()
   {
   }
   

@@ -6,7 +6,7 @@ class HPMenuRaisedButton extends HGameButton;
 
 var int textOffsetX;
 
-function Created ()
+function Created()
 {
 	Super.Created();
 }

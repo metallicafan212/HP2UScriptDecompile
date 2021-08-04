@@ -39,11 +39,11 @@ begin:
   Destroy();
 }
 
-function AddWebs ()
+function AddWebs()
 {
 }
 
-function SubWebs ()
+function SubWebs()
 {
 }
 
@@ -97,7 +97,7 @@ function UnTouch (Actor Other)
   }
 }
 
-function bool ReadyPosition ()
+function bool ReadyPosition()
 {
   if ( VSize(PlayerHarry.Location - Location) < savedCollision + PlayerHarry.CollisionRadius - (9 * DrawScale) )
   {
@@ -165,7 +165,7 @@ state AttackHarry
 {
   // ignores  Tick; //UTPT added this for some reason -AdamJD
   
-  function BeginState ()
+  function BeginState()
   {
     if ( DrawScale >= 1.0 )
     {
@@ -199,11 +199,11 @@ state AttackHarry
 
 state stateBiteHarry
 {
-  function BeginState ()
+  function BeginState()
   {
   }
   
-  function EndState ()
+  function EndState()
   {
     SetCollisionSize(Default.CollisionRadius * DrawScale / Default.DrawScale,Default.CollisionHeight * DrawScale / Default.DrawScale);
     SetCollision(True,True,True);
@@ -245,7 +245,7 @@ state HitBySpell
 {
   // ignores  Tick; //UTPT added this for some reason -AdamJD
   
-  function BeginState ()
+  function BeginState()
   {
     fStunned = timeStunnedWhenHit;
     SetCollisionSize(Default.CollisionRadius * DrawScale / Default.DrawScale,Default.CollisionHeight * DrawScale / Default.DrawScale);
@@ -268,7 +268,7 @@ state HitBySpell
 	}
   }
   
-  function EndState ()
+  function EndState()
   {
     bStunned = False;
   }
@@ -296,7 +296,7 @@ state HitBySpell
 
 state OutForTheCount
 {
-  function BeginState ()
+  function BeginState()
   {
     if ( Rotation.Pitch != PlayerHarry.Rotation.Pitch )
     {

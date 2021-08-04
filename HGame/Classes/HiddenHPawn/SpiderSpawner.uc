@@ -30,7 +30,7 @@ var SpiderSmall smallSpider;
 var SpiderLarge largeSpider;
 var() SpiderSpawnerParams theSpiders[5];
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	bCollideWorld = True;
 }

@@ -15,7 +15,7 @@ var FadeViewController FadeController;
 var bool bTriggered;
 var harry PlayerHarry;
 
-event BeginPlay ()
+event BeginPlay()
 {
   Super.BeginPlay();
   PlayerHarry = harry(Level.PlayerHarryActor);

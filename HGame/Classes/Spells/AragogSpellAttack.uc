@@ -12,7 +12,7 @@ var() float fHitTimeIncrement;
 var int iDamage;
 var Vector hitTarget;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   fxFlyParticleEffect = Spawn(fxFlyParticleEffectClass);
@@ -22,12 +22,12 @@ function PostBeginPlay ()
   SetTimer(0.25,False);
 }
 
-function Timer ()
+function Timer()
 {
   SetCollisionSize(20.0,20.0);
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
   if ( fxHeadParticleEffect != None )
   {
@@ -44,11 +44,11 @@ function bool OnSpellHitHPawn (Actor aHit, Vector vHitLocation)
 {
 }
 
-function GetTarget ()
+function GetTarget()
 {
 }
 
-function float getTime ()
+function float getTime()
 {
   local float t;
   local float Distance;
@@ -58,7 +58,7 @@ function float getTime ()
   return t;
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   GotoState('CutIdle');
 }
@@ -79,7 +79,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = ComputeTrajectoryByTime(Location,hitTarget,0.75);
     LoopAnim('Idle');

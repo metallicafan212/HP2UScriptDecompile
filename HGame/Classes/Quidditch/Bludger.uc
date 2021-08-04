@@ -10,7 +10,7 @@ var Sound HitSounds[2];
 var(Quidditch) int Damage;
 var float fTimeOfLastDamage;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   if ( Mesh == None )
   {

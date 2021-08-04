@@ -4,7 +4,7 @@
 
 class HPMenuOptionComboButton extends HGameComboButton;
 
-function Created ()
+function Created()
 {
 	Super.Created();
 }

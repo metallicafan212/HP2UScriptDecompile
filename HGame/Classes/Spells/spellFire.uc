@@ -21,19 +21,19 @@ var bool bBounce;
 var Vector currentVelocity;
 
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   CurrentDir = Normal(vector(Rotation) + Vec(0.0,0.0,0.41));
   SetRotation(rotator(CurrentDir));
 }
 
-function Timer ()
+function Timer()
 {
   bBounce = False;
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -60,7 +60,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
     currentVelocity = Velocity;

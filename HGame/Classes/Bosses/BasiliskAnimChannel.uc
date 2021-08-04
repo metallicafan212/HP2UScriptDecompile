@@ -13,13 +13,13 @@ function _SetOwner (Actor o)
   Basil = Basilisk(o);
 }
 
-function AnimEnd ()
+function AnimEnd()
 {
   bAnimDone = True;
   Basil.RealAnimEnd();
 }
 
-function PlayHissSound ()
+function PlayHissSound()
 {
   Basil.PlayHissSound();
 }

@@ -4,7 +4,7 @@
 
 class Halo extends Sprite;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   if ( Owner != None )
   {

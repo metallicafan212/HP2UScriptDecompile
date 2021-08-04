@@ -25,7 +25,7 @@ var() bool bFallDistanceCheck;
 var() float fTimeSpentOnBack;
 var float fTimeOnBack;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   if ( (DrawScale != Default.DrawScale) && self.IsA('firecrabLarge') )
@@ -35,7 +35,7 @@ function PreBeginPlay ()
   AmbientSound = WalkingSound;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   // SetPhysics(1);
@@ -48,7 +48,7 @@ function PostBeginPlay ()
   fTimeOnBack = fTimeSpentOnBack;
 }
 
-function playHitSound ()
+function playHitSound()
 {
   local Sound HitSound;
   local Sound hardHitSound;
@@ -73,7 +73,7 @@ function playHitSound ()
   PlaySound(hardHitSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
-function playFlipSound ()
+function playFlipSound()
 {
   local Sound flipSound;
   local int randNum;
@@ -100,7 +100,7 @@ event TakeDamage (int Damage, Pawn EventInstigator, Vector HitLocation, Vector M
   }
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   if (  !IsInState('stayFlipped') )
   {
@@ -115,7 +115,7 @@ begin:
   GotoState('patrol');
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   TimeUntilNextFire = TimeUntilNextFireDefault;
   // eVulnerableToSpell = 22;
@@ -137,7 +137,7 @@ function bool OnALedge (Vector Loc)
   return False;
 }
 
-function Vector pushDirection ()
+function Vector pushDirection()
 {
   local float fRotation[16];
   local int Count;
@@ -210,7 +210,7 @@ function Landed (Vector HitNormal)
   PlayerHarry.ClientMessage("How far did the firecrab fall : " $ string(fFallDistanceZ));
 }
 
-function Falling ()
+function Falling()
 {
   Super.Falling();
   if ( BOOL_DEBUG_AI )
@@ -243,7 +243,7 @@ begin:
 
 state FallOverLedge
 {
-  function BeginState ()
+  function BeginState()
   {
     cm("Entered state FallOverLedge");
     fHighestZ = Location.Z;
@@ -349,5 +349,5 @@ defaultproperties
 
     Mass=130.00
 
-    RotationRate=(Pitch=100000,Yaw=100000,Roll=100000),
+    RotationRate=(Pitch=100000,Yaw=100000,Roll=100000)
 }

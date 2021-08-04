@@ -106,7 +106,7 @@ var int TempCount2;
 var Rotator TempRotator;
 var Vector TempVector;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local AragogWebAnchor A;
   local int triggerCounter;
@@ -141,7 +141,7 @@ function PostBeginPlay ()
   RearUpTime = RearUpTimeStart;
 }
 
-function BeatBoss ()
+function BeatBoss()
 {
   Health = 0;
   HandleSpellRictusempra();
@@ -198,7 +198,7 @@ function bool HandleSpellRictusempra (optional baseSpell spell, optional Vector 
   return True;
 }
 
-function PlayOuchSound ()
+function PlayOuchSound()
 {
   switch (Rand(6))
   {
@@ -228,7 +228,7 @@ function PlayOuchSound ()
   PlaySound( aragogVoice, SLOT_Talk, 256,, [Radius]1000000); 
 }
 
-function PlayRandomSound ()
+function PlayRandomSound()
 {
   switch (Rand(6))
   {
@@ -257,7 +257,7 @@ function PlayRandomSound ()
   PlaySound(aragogVoice,Slot_Talk,256.0,,1000000.0);
 }
 
-function PlayMinionSound ()
+function PlayMinionSound()
 {
   switch (Rand(4))
   {
@@ -281,7 +281,7 @@ function PlayMinionSound ()
   PlaySound( aragogVoice, SLOT_Talk, 256,, [Radius]1000000); 
 }
 
-function PlayAttackingSound ()
+function PlayAttackingSound()
 {
   switch (Rand(6))
   {
@@ -311,7 +311,7 @@ function PlayAttackingSound ()
   PlaySound( aragogVoice, SLOT_Talk, 256,, [Radius]1000000); 
 }
 
-function PlayFoiledSound ()
+function PlayFoiledSound()
 {
   switch (Rand(3))
   {
@@ -332,7 +332,7 @@ function PlayFoiledSound ()
   PlaySound( aragogVoice, SLOT_Talk, 256,, [Radius]1000000); 
 }
 
-function PlayConfidentSound ()
+function PlayConfidentSound()
 {
   switch (Rand(3))
   {
@@ -393,12 +393,12 @@ function float SetRotationDirection (float Y)
   return Dir;
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   GotoState('CutIdle');
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   if ( cutSceneCounter == 1 )
   {
@@ -418,7 +418,7 @@ function PlayerCutRelease ()
   }
 }
 
-function bool IsAttacking ()
+function bool IsAttacking()
 {
   local bool ret;
 
@@ -564,7 +564,7 @@ function Tick (float DeltaTime)
   }
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
   return float(Health) / 100;
 }
@@ -633,7 +633,7 @@ function AragogAttendentSpawner FindClosestSpawner (Vector Loc)
   return retSpawner;
 }
 
-function destroyAllSpiders ()
+function destroyAllSpiders()
 {
   local SpiderSmall smallSpider;
   local SpiderLarge largeSpider;
@@ -653,7 +653,7 @@ function destroyAllSpiders ()
   }
 }
 
-function MoveAwayFromThePit ()
+function MoveAwayFromThePit()
 {
   local AragogHarrySafeZone safeZone;
   local Vector TowardHarryDirection;
@@ -792,7 +792,7 @@ begin:
 
 state stateMovetoAttack
 {
-  function BeginState ()
+  function BeginState()
   {
     bMove = False;
   }
@@ -856,7 +856,7 @@ begin:
 
 state stateGoHome
 {
-  function BeginState ()
+  function BeginState()
   {
     bMove = False;
   }
@@ -952,7 +952,7 @@ function DoStomp (bool bBigStomp, optional bool bDeepStomp)
 
 state stateShootSpell
 {
-  function BeginState ()
+  function BeginState()
   {
     spellLocation = vect(0.00,0.00,0.00);
     TempCount = 0;
@@ -1086,7 +1086,7 @@ state stateShootSpell
 
 state stateHitByRictusempra
 {
-  function Timer ()
+  function Timer()
   {
     PlaySound(Sound'Basilisk_attack3',SLOT_None,1.0,,1000000.0,0.69999999);
   }
@@ -1094,15 +1094,12 @@ state stateHitByRictusempra
  begin:
   TempFloat = 0.44999999;
   PlayAnim('KnockBack',TempFloat,0.2);
-  //UTPT doesn't decompile the PlaySound  function correctly... -AdamJD
-  // PlaySound(Sound'pig_squeal1',0,1.0,,1000000.0,0.81);
   PlaySound(Sound'pig_squeal1',Slot_None,1.0,,1000000.0,0.81);
   PlaySound(Sound'Basilisk_attack3',Slot_None,1.0,,1000000.0,0.89999998);
   PlaySound(Sound'BasilAttackWarning00',Slot_None,1.0,,1000000.0,0.81);
   SetTimer(0.5,False);
   Sleep(12.0 / 30.0 / TempFloat);
   PlaySound(Sound'Basilisk_attack3',Slot_None,1.0,,1000000.0,0.81);
-// JL00AB:
   DoStomp(True);
   // Sleep(0.01);
   
@@ -1113,11 +1110,9 @@ state stateHitByRictusempra
   }
   until(AnimFrame >= 17.0 / 46.0);
   
-  // if (! AnimFrame >= 17.0 / 46.0 ) goto JL00AB;
   AnimRate = 0.75;
   PlaySound(Sound'Arragog_attack05',Slot_None,1.0,,1000000.0,RandRange(0.81,1.25));
   // Sleep(0.01);
-  // if (! AnimFrame >= 24.0 / 46.0 ) goto JL00F6;
   
   //do and until -AdamJD
   do 

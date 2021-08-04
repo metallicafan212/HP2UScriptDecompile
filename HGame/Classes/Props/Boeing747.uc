@@ -27,7 +27,7 @@ function OnEvent (name EventName)
   }
 }
 
-function bool StartTransPath ()
+function bool StartTransPath()
 {
   local float fDistance;
   local InterpolationPoint I;
@@ -47,8 +47,7 @@ function bool StartTransPath ()
       TransPoint = I;
       fTransDistance = fDistance;
       iTransPoint = I.Position;
-    } //else {
-    //}
+    }
   }
   if ( TransPoint == None )
   {
@@ -92,7 +91,7 @@ function bool StartTransPath ()
   return True;
 }
 
-function DestroyTransPath ()
+function DestroyTransPath()
 {
   local InterpolationManager IM_ToStop;
 
@@ -106,7 +105,7 @@ function DestroyTransPath ()
   TransPath[1].Destroy();
 }
 
-function StartOnPath ()
+function StartOnPath()
 {
   FollowSplinePath(PathName,PathSpeed,0.0,);
 }

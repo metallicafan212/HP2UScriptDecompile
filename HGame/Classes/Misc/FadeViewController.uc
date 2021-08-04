@@ -11,7 +11,7 @@ var Plane FadeStart;
 var float CurTime;
 var harry PlayerHarry;
 
-event BeginPlay ()
+event BeginPlay()
 {
   Super.BeginPlay();
   PlayerHarry = harry(Level.PlayerHarryActor);
@@ -39,7 +39,7 @@ function Init (float A, float R, float G, float B, float fTime, optional bool bF
   PlayerHarry.ClientMessage("Fade translated " $ "R:" $ string(FadeEnd.X) $ "G:" $ string(FadeEnd.Y) $ "B:" $ string(FadeEnd.Z) $ "A:" $ string(FadeEnd.W));
 }
 
-function DestroyAllFadeViewControllers ()
+function DestroyAllFadeViewControllers()
 {
   local FadeViewController A;
 
@@ -52,11 +52,11 @@ function DestroyAllFadeViewControllers ()
   }
 }
 
-function Finish ()
+function Finish()
 {
 }
 
-function CutBypass ()
+function CutBypass()
 {
   Finish();
   Super.CutBypass();
@@ -81,7 +81,7 @@ auto state stateFade
     }
   }
   
-  function Finish ()
+  function Finish()
   {
     PlayerHarry.ConstantGlowFog = FadeEnd;
     Destroy();
@@ -116,7 +116,7 @@ state stateFlash
     }
   }
   
-  function Finish ()
+  function Finish()
   {
     if ( bFadeFlash )
     {

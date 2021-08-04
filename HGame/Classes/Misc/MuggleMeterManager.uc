@@ -51,7 +51,7 @@ event Tick (float fDelta)
   }
 }
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   Super.PostBeginPlay();
   textureEye1 = Texture(DynamicLoadObject("HP_Menu.Hud.MuggleEye1",Class'Texture'));
@@ -62,13 +62,13 @@ event PostBeginPlay ()
   textureBarFull = Texture(DynamicLoadObject("HP_Menu.Hud.MuggleBarFull",Class'Texture'));
 }
 
-function BeginDetection ()
+function BeginDetection()
 {
   HPHud(PlayerHarry.myHUD).RegisterMuggleMeter(self);
   GotoState('DetectMuggles');
 }
 
-function EndDetection ()
+function EndDetection()
 {
   HPHud(PlayerHarry.myHUD).RegisterMuggleMeter(None);
   GotoState('Idle');
@@ -167,7 +167,7 @@ state DetectMuggles
     Canvas.DrawIcon(textureCurrEye,fScaleFactor);
   }
   
-  event BeginState ()
+  event BeginState()
   {
     textureCurrEye = textureEye1;
     fBarFullAmount = 0.0;

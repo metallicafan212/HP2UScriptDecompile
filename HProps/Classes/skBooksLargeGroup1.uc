@@ -15,7 +15,7 @@ class skBooksLargeGroup1 extends HPMeshActor;
 #exec Anim Digest Anim=skBooksLargeGroup1Anims VERBOSE 
 
 //texture import (skBooksLargeGroup1Tex0) -AdamJD 
-#exec Texture Import File=Textures\skBooksLargeGroup1Tex0.png Name=skBooksLargeGroup1Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skBooksLargeGroup1Tex0.png Name=skBooksLargeGroup1Tex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBooksLargeGroup1Mesh Num=0 Texture=skBooksLargeGroup1Tex0
 
 defaultproperties

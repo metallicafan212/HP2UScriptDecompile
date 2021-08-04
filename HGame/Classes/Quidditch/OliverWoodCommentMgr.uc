@@ -56,14 +56,13 @@ var HChar Speaker;
 var bool bMute;
 var float fVolume;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int Variant;
 
   Super.PostBeginPlay();
   foreach AllActors(Class'BroomHarry',harry)
   {
-    // goto JL001A;
 	break;
   }
   fNextTimeACommentCanBeSaid = 0.0;
@@ -120,7 +119,6 @@ function bool SayComment (WoodComment eComment, optional bool bNoGap)
   local Sound dlgSound;
 
   bSaid = False;
-  // if ( (bool(eComment) == bool(0)) || bMute || (Speaker == None) )
   if ( (eComment == WC_None) || bMute || (Speaker == None) )
   {
     return False;
@@ -166,7 +164,6 @@ function bool SayComment (WoodComment eComment, optional bool bNoGap)
       ++iCandidate;
     }
     ++Variant;
-    // goto JL009F;
   }
   NumCandidates = iCandidate;
   if ( NumCandidates <= 0 )
@@ -176,18 +173,15 @@ function bool SayComment (WoodComment eComment, optional bool bNoGap)
   }
   iCandidate = 0;
   fChoice = FRand() * fTotalWeight;
-  // if ( iCandidate < NumCandidates - 1 )
   while ( iCandidate < NumCandidates - 1 )
   {
     if ( Candidates[iCandidate].fWeight > fChoice )
     {
-      // goto JL029D;
 	  break;
     } else {
       fChoice -= Candidates[iCandidate].fWeight;
       ++iCandidate;
     }
-    // goto JL024A;
   }
   Variant = Candidates[iCandidate].Variant;
   
@@ -211,7 +205,7 @@ function bool SayComment (WoodComment eComment, optional bool bNoGap)
   return bSaid;
 }
 
-function InitCommentArray ()
+function InitCommentArray()
 {
   local int C;
   local int V;
@@ -219,12 +213,9 @@ function InitCommentArray ()
   Comments[0].Variations = 0;
   
   C = 1;
-  // if ( C < 8 )
   for(C = 1; C < MAX_WOOD_COMMENT_NAMES; C++)
   {
     Comments[C].Variations = MAX_WOOD_COMMENT_NAMES;
-    // V = 0;
-    // if ( V < 6 )
 	for(V = 0; V < WC_MAX_COMMENT_VARIANTS; V++)
     {
       if ( Comments[C].Variant[V].DlgName != "" )
@@ -236,14 +227,9 @@ function InitCommentArray ()
         }
       } else {
         Comments[C].Variations = V;
-        // goto JL016D;
 		break;
       }
-      // V++;
-      // goto JL003B;
     }
-    // C++;
-    // goto JL0015;
   }
 }
 

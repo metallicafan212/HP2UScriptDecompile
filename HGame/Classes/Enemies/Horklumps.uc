@@ -14,7 +14,7 @@ var() float cloudDamage;
 var() float cloudRadius;
 var() float cloudDamageInterval;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   SetCollisionSize(CollisionRadius * DrawScale,CollisionHeight * DrawScale);
@@ -28,7 +28,7 @@ auto state ReadyAndWaiting
     waitTime += DeltaTime;
   }
   
-  function ShootPoison ()
+  function ShootPoison()
   {
     if ( waitTime > 2 )
     {
@@ -41,7 +41,7 @@ auto state ReadyAndWaiting
     }
   }
   
-  function ShootPoisonCut ()
+  function ShootPoisonCut()
   {
     if ( waitTime > 2 )
     {
@@ -53,7 +53,7 @@ auto state ReadyAndWaiting
     }
   }
   
-  function LoseHead ()
+  function LoseHead()
   {
     local HorklumpsHead replaceHead;
     local HorklumpsStem replaceStem;

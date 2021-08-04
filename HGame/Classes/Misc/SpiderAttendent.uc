@@ -55,12 +55,12 @@ function Landed (Vector HitNormal)
   }
 }
 
-function bool PawnCantStandOnMe ()
+function bool PawnCantStandOnMe()
 {
   return False;
 }
 
-function bool ReadyPosition ()
+function bool ReadyPosition()
 {
   if ( VSize(PlayerHarry.Location - Location) < savedCollision + PlayerHarry.CollisionRadius - 9 * DrawScale )
   {
@@ -69,7 +69,7 @@ function bool ReadyPosition ()
   return False;
 }
 
-function Timer ()
+function Timer()
 {
   SetCollision(True,True);
 }
@@ -119,7 +119,7 @@ state stateFlyIn
   
 }
 
-function PlayScream ()
+function PlayScream()
 {
   PlaySound(Sound'snail_falling',SLOT_None,,,,RandRange(0.81,1.25));
   PlaySound(Sound'imp_ouch_03',SLOT_None,,,,RandRange(0.81,1.25));
@@ -129,7 +129,7 @@ function PlayScream ()
 
 state stateCrawlIn extends patrol
 {
-  function patrolPlayRunAnim ()
+  function patrolPlayRunAnim()
   {
     LoopAnim('Walk');
   }
@@ -219,7 +219,7 @@ state AttackHarry
   //UTPT added this for some reason -AdamJD
   // ignores  Tick; 
   
-  function BeginState ()
+  function BeginState()
   {
     if ( DrawScale >= 1.0 )
     {
@@ -264,7 +264,7 @@ state stateBeMenacing
   //UTPT added this for some reason -AdamJD
   // ignores  Tick;
   
-  function BeginState ()
+  function BeginState()
   {
     menacingTime = Rand(3) + 1;
   }
@@ -299,7 +299,7 @@ state stateBeMenacing
 
 state stateBiteHarry
 {
-  function EndState ()
+  function EndState()
   {
     SetCollisionSize(Default.CollisionRadius * DrawScale / Default.DrawScale,Default.CollisionHeight * DrawScale / Default.DrawScale);
     SetCollision(True,True,True);
@@ -336,7 +336,7 @@ state HitBySpell
   //UTPT added this for some reason -AdamJD
   // ignores  Tick;
   
-  function BeginState ()
+  function BeginState()
   {
     bStunned = False;
     fStunned = timeStunnedWhenHit;
@@ -360,7 +360,7 @@ state HitBySpell
 	}
   }
   
-  function EndState ()
+  function EndState()
   {
     bStunned = False;
   }

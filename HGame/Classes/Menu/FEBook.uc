@@ -76,11 +76,11 @@ var bool bMapQuickLook;
 var transient int nMusicHandle;
 var transient bool bNeedToStartMusic;
 
-function SaveSelectedSlot ()
+function SaveSelectedSlot()
 {
 }
 
-function LoadSelectedSlot ()
+function LoadSelectedSlot()
 {
 }
 
@@ -232,7 +232,7 @@ function ChangePage (baseFEPage Page)
 	}
 }
 
-function ChangePagePrevious ()
+function ChangePagePrevious()
 {
 	if ( (prevPage != None) && (prevPage != curPage) )
 	{
@@ -322,7 +322,7 @@ event Tick (float Delta)
   }
 }
 
-function Created ()
+function Created()
 {
 	local int I;
 	local Texture tempTexture;
@@ -556,7 +556,7 @@ function OpenBook (optional string pageName)
 	}
 }
 
-function CloseBook ()
+function CloseBook()
 {
 	if ( nMusicHandle != 0 )
 	{
@@ -579,12 +579,12 @@ function CloseBook ()
 	}
 }
 
-function bool IsInGameMenuShowing ()
+function bool IsInGameMenuShowing()
 {
 	return bIsOpen && ((curPage == InGamePage) || (curPage == FolioPage));
 }
 
-function bool IsInGameSubMenuShowing ()
+function bool IsInGameSubMenuShowing()
 {
 	return bIsOpen && (curPage != InGamePage);
 }
@@ -599,7 +599,7 @@ function HPMessageBox doHPMessageBox (string Msg, string textButton1, optional s
 	return W;
 }
 
-function ExitFromGame ()
+function ExitFromGame()
 {
   if ( HPConsole(Root.Console).bLocked )
   {
@@ -630,7 +630,7 @@ function WindowDone (UWindowWindow W)
   }
 }
 
-function OnLevelLoadDone ()
+function OnLevelLoadDone()
 {
   if ( bIsOpen && (curPage == MainPage) )
   {
@@ -638,7 +638,7 @@ function OnLevelLoadDone ()
   }
 }
 
-function EscFromConsole ()
+function EscFromConsole()
 {
   if ( HPConsole(Root.Console).bLocked )
   {
@@ -650,7 +650,7 @@ function EscFromConsole ()
   ChangePage(InGamePage);
 }
 
-function TurnMapOn ()
+function TurnMapOn()
 {
   if ( curPage != MapPage )
   {
@@ -661,7 +661,7 @@ function TurnMapOn ()
   }
 }
 
-function TurnMapOff ()
+function TurnMapOff()
 {
   if ( curPage == MapPage )
   {
@@ -669,7 +669,7 @@ function TurnMapOff ()
   }
 }
 
-function ToggleMap ()
+function ToggleMap()
 {
   if ( curPage == MapPage )
   {
@@ -684,7 +684,7 @@ function ToggleMap ()
   }
 }
 
-function DoMapFromConsole ()
+function DoMapFromConsole()
 {
   if ( HPConsole(Root.Console).bLocked )
   {
@@ -696,7 +696,7 @@ function DoMapFromConsole ()
   ChangePage(MapPage);
 }
 
-function ExitFromConsole ()
+function ExitFromConsole()
 {
   if ( HPConsole(Root.Console).bLocked )
   {
@@ -711,7 +711,7 @@ function ExitFromConsole ()
 
 function Notify (UWindowDialogControl C, byte E)
 {
-  if ( E == 2 )
+  if ( E == DE_Click )
   {
     switch (C)
     {
@@ -719,9 +719,9 @@ function Notify (UWindowDialogControl C, byte E)
       CloseBook();
       break;
       default:
+	  Log("FEBook::Notify " $ string(C));
+	  break;
     }
-    Log("FEBook::Notify " $ string(C));
-  } else {
   }
 }
 
@@ -794,7 +794,7 @@ function bool KeyEvent (byte Key, byte Action, float Delta)
   return False;
 }
 
-function bool DoEscapeFromPage ()
+function bool DoEscapeFromPage()
 {
   if ( curPage == InGamePage )
   {
@@ -831,12 +831,12 @@ function RunURL (string levURL, bool bTravelItems)
   bGamePlaying = True;
 }
 
-function EndGame ()
+function EndGame()
 {
   bInEndGame = True;
 }
 
-function RunTheCredits ()
+function RunTheCredits()
 {
   if ( HPConsole(Root.Console).bLocked )
   {
@@ -847,7 +847,7 @@ function RunTheCredits ()
   ShowCredits();
 }
 
-function ShowCredits ()
+function ShowCredits()
 {
   bInEndGame = True;
   if ( CreditsPage == None )

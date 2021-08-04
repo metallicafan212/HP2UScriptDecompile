@@ -33,8 +33,7 @@ function Tick (float t)
   {
     return;
   }
-  // I = 0;
-  // if ( I < 4 )
+
   for(I = 0; I < 4; I++)
   {
     Facing = GetFacing(self);
@@ -49,8 +48,6 @@ function Tick (float t)
         }
       }
     }
-    // I++;
-    // goto JL0014;
   }
 }
 

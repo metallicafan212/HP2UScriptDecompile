@@ -18,7 +18,7 @@ var bool bGoDisabled;
 var int Damage;
 var Sound BackGroundRootSound;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   tree = WhompingWillow(Owner);
   PlayerHarry = tree.PlayerHarry;
@@ -63,8 +63,6 @@ state ThrashingAndSmashing
     local Vector V;
     local float D;
   
-    // I = 0;
-    // if ( I < 3 )
 	for(I = 0; I < 3; I++)
     {
       if ( AnimSequence == RootAnimNameUp && AnimFrame < ColTime1[I] || AnimSequence == RootAnimNameDown && AnimFrame > ColTime2[I] )
@@ -79,12 +77,8 @@ state ThrashingAndSmashing
           ColObj[I].SetCollision(True,True,False);
         }
       }
-      // I++;
-      // goto JL0007;
     }
 	
-    // I = 0;
-    // if ( I < 3 )
 	for(I = 0; I < 3; I++)
     {
 	/*
@@ -250,7 +244,6 @@ state ThrashingAndSmashing
       Sleep(0.01);
 	}
 	until( AnimFrame > 3.0 / 9.0 );
-    // if (! AnimFrame > 3.0 / 9.0 ) goto JL0203;
     DoHitGroundEffects();
     AnimRate = 1.0;
     FinishAnim();
@@ -264,11 +257,10 @@ state ThrashingAndSmashing
     }
   }
   until((VSize2D(PlayerHarry.Location - ColObj[1].Location) > 500) || bGoDisabled)
-  // if (! (VSize2D(PlayerHarry.Location - ColObj[1].Location) > byte(500)) || bGoDisabled ) goto JL0000;
   GotoState('stateIdle');
 }
 
-function DoHitGroundEffects ()
+function DoHitGroundEffects()
 {
   local Vector vX;
   local Vector vY;
@@ -286,33 +278,23 @@ function DoHitGroundEffects ()
   vZ *=  -ColObj[0].CollisionHeight;
   NumDustParts = RandRange(3.0,4.0);
   
-  // I = 0;
-  // if ( I < NumDustParts )
   for(I = 0; I < NumDustParts; I++)
   {
     Spawn(PickRandomDustParticle(),None,,ColObj[0].Location + vX + vY * RandRange(-1.0,1.0) + vZ);
-    // I++;
-    // goto JL00C3;
   }
   
   NumDustParts = RandRange(2.0,4.0);
-  // I = 0;
-  // if ( I < NumDustParts )
+
   for(I = 0; I < NumDustParts; I++)
   {
     Spawn(PickRandomDustParticle(),None,,ColObj[1].Location + vX + vY * RandRange(-1.0,1.0) + vZ);
-    // I++;
-    // goto JL0136;
   }
   
   NumDustParts = RandRange(1.0,2.0);
-  // I = 0;
-  // if ( I < NumDustParts )
+
   for(I = 0; I < NumDustParts; I++)
   {
     Spawn(PickRandomDustParticle(),None,,ColObj[2].Location + vX + vY * RandRange(-1.0,1.0) + vZ);
-    // I++;
-    // goto JL01A9;
   }
   
   switch (Rand(3))
@@ -332,7 +314,7 @@ function DoHitGroundEffects ()
   PlayerHarry.ShakeView(0.5,200.0,200.0);
 }
 
-function Class<Dustclouds> PickRandomDustParticle ()
+function Class<Dustclouds> PickRandomDustParticle()
 {
   local int I;
 

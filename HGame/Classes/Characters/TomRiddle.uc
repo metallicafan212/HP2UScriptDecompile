@@ -8,7 +8,7 @@ defaultproperties
 {
     ShadowClass=None
 
-    attachedParticleClass=Class'HPParticle.TomRiddleFX'
+    attachedParticleClass(0)=Class'HPParticle.TomRiddleFX'
 
     Mesh=SkeletalMesh'HPModels.skTomRiddleMesh'
 

@@ -12,13 +12,13 @@ var float GrenadeExplosionGravity;
 var float iDamage;
 var float smallDamage;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	SetTimer(fLifetime,False);
 	fxGrenadeParticleEffect = Spawn(Class'Crabfire3');
 }
 
-function ShootFireballs ()
+function ShootFireballs()
 {
 	local int I;
 	local Crabfire Fireball;
@@ -68,7 +68,7 @@ function ShootFireballs ()
 	centerFire.iDamage 	= iDamage;
 }
 
-function Timer ()
+function Timer()
 {
 	ShootFireballs();
 }

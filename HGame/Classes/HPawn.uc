@@ -89,7 +89,7 @@ var() bool bIgnoreZonePainDamage;
 var Actor ActorToLinkToWeapBone;
 
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   PlayerHarry = harry(Level.PlayerHarryActor);
@@ -109,7 +109,7 @@ function PreBeginPlay ()
   CreateAttachedParticleFX();
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   if ( CutName == "" )
@@ -131,12 +131,12 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
   }
 }
 
-function bool PawnCantStandOnMe ()
+function bool PawnCantStandOnMe()
 {
   return bCantStandOnMe;
 }
 
-event OnResolveGameState ()
+event OnResolveGameState()
 {
   if (  !bInCurrentGameState )
   {
@@ -149,25 +149,21 @@ function ColObjTouch (Actor Other, GenericColObj ColObj)
 {
 }
 
-function bool ShouldPlayIdleOnRelease ()
+function bool ShouldPlayIdleOnRelease()
 {
   return True;
 }
 
-event Destroyed ()
+event Destroyed()
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 2 )
   for(I = 0; I < NUM_ATTACHED_PARTICLE_FX; I++)
   {
     if ( attachedParticleFX[I] != None )
     {
       attachedParticleFX[I].Shutdown();
     }
-    // I++;
-    // goto JL0007;
   }
   if ( _FlyToController != None )
   {
@@ -176,12 +172,10 @@ event Destroyed ()
   Super.Destroyed();
 }
 
-function CreateAttachedParticleFX ()
+function CreateAttachedParticleFX()
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 2 )
   for(I = 0; I < NUM_ATTACHED_PARTICLE_FX; I++)
   {
     if ( attachedParticleClass[I] != None )
@@ -195,8 +189,6 @@ function CreateAttachedParticleFX ()
         attachedParticleFX[I].PrePivot = attachedParticleOffset[I];
       }
     }
-    // I++;
-    // goto JL0007;
   }
 }
 
@@ -204,8 +196,6 @@ function killAttachedParticleFX (float Time)
 {
   local int I;
 
-  // I = 0;
-  // if ( I < 2 )
   for(I = 0; I < NUM_ATTACHED_PARTICLE_FX; I++)
   {
     if ( attachedParticleFX[I] != None )
@@ -219,8 +209,6 @@ function killAttachedParticleFX (float Time)
         attachedParticleFX[I].LifeSpan = Time;
       }
     }
-    // I++;
-    // goto JL0007;
   }
 }
 
@@ -263,7 +251,7 @@ state stateBeingThrown
   goto ('Begin');
 }
 
-function PawnHearHarryNoise ()
+function PawnHearHarryNoise()
 {
 }
 
@@ -291,12 +279,12 @@ function AttachActorToWeaponBone (Actor A)
   A.SetPhysics(PHYS_None);
 }
 
-function UnAttachActorFromWeaponBone ()
+function UnAttachActorFromWeaponBone()
 {
   ActorToLinkToWeapBone = None;
 }
 
-function DestroyControllers ()
+function DestroyControllers()
 {
   if ( _FlyToController != None )
   {
@@ -305,7 +293,7 @@ function DestroyControllers ()
   Super.DestroyControllers();
 }
 
-function GlobalCutBypass ()
+function GlobalCutBypass()
 {
   Super.GlobalCutBypass();
   if ( (_FlyToController != None) && _FlyToController.bEnabled )
@@ -428,12 +416,12 @@ state() patrol
   //UTPT added this for some reason -AdamJD
   //ignores  Tick;
   
-  function bool ShouldPlayIdleOnRelease ()
+  function bool ShouldPlayIdleOnRelease()
   {
     return False;
   }
   
-  function startup ()
+  function startup()
   {
     if ( ePatrolType == PATROLTYPE_PATROL_POINTS )
     {
@@ -496,7 +484,7 @@ state() patrol
 	}
   }
   
-  function EndState ()
+  function EndState()
   {
     LastLevelTime = 0.0;
     bMoveRequest = False;
@@ -611,22 +599,19 @@ idleloop:
           {
             if ( navP.Name == FirstObjectName )
             {
-              // goto JL0306;
 			  break;
             }
           }
         }
 		break;
-      } //else {
-        // goto JL0262;
-      //}
+      }
     }
   }
   NextPathPoint = None;
   goto ('moveLoop');
 }
 
-function RestartPatrol ()
+function RestartPatrol()
 {
   SetLocation2(SavedFirstNavP.Location);
   bPlayRunAnim = False;
@@ -636,7 +621,7 @@ function RestartPatrol ()
 
 state statePatrolPointPause
 {
-  function bool ShouldPlayIdleOnRelease ()
+  function bool ShouldPlayIdleOnRelease()
   {
     return False;
   }
@@ -653,7 +638,7 @@ state statePatrolPointPause
   GotoState('patrol');
 }
 
-function bool MoveTo_FraySpline ()
+function bool MoveTo_FraySpline()
 {
   local float dtime;
   local float D;
@@ -722,7 +707,7 @@ function bool MoveTo_FraySpline ()
   }
 }
 
-function bool MoveTo_Fray ()
+function bool MoveTo_Fray()
 {
   local float dtime;
   local float D;
@@ -766,12 +751,12 @@ function bool MoveTo_Fray ()
   }
 }
 
-function patrolPlayRunAnim ()
+function patrolPlayRunAnim()
 {
   LoopAnim(RunAnimName,fPatrolAnimRate,0.75);
 }
 
-function patrolPlayWalkAnim ()
+function patrolPlayWalkAnim()
 {
   LoopAnim(WalkAnimName,fPatrolAnimRate,0.75);
 }
@@ -789,15 +774,14 @@ function PatrolPoint FindClosestPatrolPoint (Actor ExclusionActor1, Actor Exclus
     if ( (PatrolPointLinkTag != 'None') && (PatrolPointLinkTag != tempPatrolPoint.PatrolPointLinkTag) )
     {
       continue;
-    } //else {
-      fDist = VSize(Location - tempPatrolPoint.Location);
-      if ( (tempPatrolPoint != ExclusionActor1) && (tempPatrolPoint != ExclusionActor2) && (fDist < fClosestDist) )
-      {
-        fClosestDist = fDist;
-        ClosestActor = tempPatrolPoint;
-      }
     }
-  //}
+    fDist = VSize(Location - tempPatrolPoint.Location);
+    if ( (tempPatrolPoint != ExclusionActor1) && (tempPatrolPoint != ExclusionActor2) && (fDist < fClosestDist) )
+    {
+      fClosestDist = fDist;
+      ClosestActor = tempPatrolPoint;
+    }
+  }
   return ClosestActor;
 }
 
@@ -821,11 +805,11 @@ function NavigationPoint FindClosestNavigationPoint (name PathTag)
   return ClosestActor;
 }
 
-function PawnAtStation ()
+function PawnAtStation()
 {
 }
 
-function PawnAtDestination ()
+function PawnAtDestination()
 {
   OnEvent('ActionDone');
 }
@@ -898,7 +882,7 @@ function DoFlyTo_Actor (Actor A, Vector vOffset, enumMoveType MoveType, float Ti
   _FlyToController.TickParent = A;
 }
 
-function DoFlyToSetup ()
+function DoFlyToSetup()
 {
   if ( _FlyToController == None )
   {
@@ -915,7 +899,7 @@ function DoFlyToSetup ()
   }
 }
 
-function OnFlyToDone ()
+function OnFlyToDone()
 {
   PlayerHarry.ClientMessage("Flew to:" $ string(vFlyToDest) $ "  Location:" $ string(Location) $ " cue:" $ sCutNotifyCue);
   OnEvent('ActionDone');
@@ -937,7 +921,7 @@ function LeadActor (Actor Other, name StartPatrolPoint, name EndPatrolPoint, nam
 
 state stateLeadingActor extends patrol
 {
-  function bool ShouldPlayIdleOnRelease ()
+  function bool ShouldPlayIdleOnRelease()
   {
     return False;
   }
@@ -960,12 +944,12 @@ state stateLeadingActorPause
     DesiredRotation.Yaw = rotator(LeadingActor.Location - Location).Yaw;
   }
   
-  function bool ShouldPlayIdleOnRelease ()
+  function bool ShouldPlayIdleOnRelease()
   {
     return False;
   }
   
-  function AnimEnd ()
+  function AnimEnd()
   {
     if ( AnimSequence == LeadAnim )
     {
@@ -1005,7 +989,6 @@ begin:
 	}
 	Sleep(0.2);
   }
-  // if (! False ) goto JL00E4;
   until(False);
 }
 
@@ -1022,7 +1005,6 @@ function bool LeadActor_ShouldMoveToNextPatrolPoint (Actor Other)
   {
 	  if ( pP == None )
 	  {
-		// goto JL0099;
 		break;
 	  }
 	  if ( VSize(Other.Location - pP.Location) < 300 )
@@ -1032,11 +1014,9 @@ function bool LeadActor_ShouldMoveToNextPatrolPoint (Actor Other)
 	  pP = pP.NextPatrolPoint;
 	  if ( pP == navP )
 	  {
-		// goto JL0099;
 		break;
 	  }
   }
-  // if (! False ) goto JL0034;
   until(False);
   
   return False;
@@ -1346,8 +1326,6 @@ function bool CutCommand_CastSpell (string Command, optional string cue, optiona
   local bool bFoundTarget;
   local int I;
 
-  // I = 1;
-  // if ( I < 4 )
   for(I = 1; I < 4; I++)
   {
     sString = ParseDelimitedString(Command," ",I,False);
@@ -1361,13 +1339,10 @@ function bool CutCommand_CastSpell (string Command, optional string cue, optiona
       } else //{
         if ( sString == "" )
         {
-          // goto JL00A0;
 		  break;
         }
       //}
     //}
-    // I++;
-    // goto JL0007;
   }
   if ( SpellTarget == "" )
   {
@@ -1381,8 +1356,7 @@ function bool CutCommand_CastSpell (string Command, optional string cue, optiona
     {
       bFoundTarget = True;
 	  break;
-    } //else {
-    //}
+    } 
   }
   if (  !bFoundTarget )
   {
@@ -2010,15 +1984,15 @@ function Vector LocationSameZ (Vector Loc, optional Vector ZRef)
   return V;
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
 }
 
-function SetDespawnFlag ()
+function SetDespawnFlag()
 {
   bDespawned = True;
 }

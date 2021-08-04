@@ -63,7 +63,7 @@ auto state Idle
 
 state GiveHarryBeans
 {
-  function CutBypass ()
+  function CutBypass()
   {
     Super.CutBypass();
     GotoState('Idle');
@@ -103,7 +103,7 @@ state GiveHarryBeans
     //}
   }
   
-  function BeginState ()
+  function BeginState()
   {
     vTopOfJar = Location;
     vTopOfJar.Z += CollisionHeight;
@@ -120,7 +120,7 @@ state GiveHarryBeans
     fTimeBetweenBeans = 0.1;
   }
   
-  function EndState ()
+  function EndState()
   {
     if ( nAddBeans > 0 )
     {

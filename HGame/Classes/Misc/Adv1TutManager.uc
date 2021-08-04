@@ -15,7 +15,7 @@ var harry PlayerHarry;
 var bool bTriggerReceived;
 var bool bConditionMet;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   foreach AllActors(Class'Ron',Ron)
   {
@@ -30,19 +30,19 @@ function PostBeginPlay ()
   }
 }
 
-function ForwardPushed ()
+function ForwardPushed()
 {
 }
 
-function BackwardPushed ()
+function BackwardPushed()
 {
 }
 
-function StrafeLeftPushed ()
+function StrafeLeftPushed()
 {
 }
 
-function StrafeRightPushed ()
+function StrafeRightPushed()
 {
 }
 
@@ -79,7 +79,7 @@ begin:
 
 state stateWaitForHarryMoveForward
 {
-  function BeginState ()
+  function BeginState()
   {
     bTriggerReceived = False;
     bConditionMet = False;
@@ -92,7 +92,7 @@ state stateWaitForHarryMoveForward
     PlayerHarry.bLockOutForward = False;
   }
   
-  function ForwardPushed ()
+  function ForwardPushed()
   {
     PlayerHarry.ClientMessage("*** pushforward");
     if ( bTriggerReceived )
@@ -118,7 +118,7 @@ state stateWaitForHarryMoveForward
 
 state stateWaitForHarryMoveBackward
 {
-  function BeginState ()
+  function BeginState()
   {
     bTriggerReceived = False;
     bConditionMet = False;
@@ -130,7 +130,7 @@ state stateWaitForHarryMoveBackward
     PlayerHarry.bLockOutBackward = False;
   }
   
-  function BackwardPushed ()
+  function BackwardPushed()
   {
     if ( bTriggerReceived )
     {
@@ -155,7 +155,7 @@ state stateWaitForHarryMoveBackward
 
 state stateWaitForHarryStrafeLeft
 {
-  function BeginState ()
+  function BeginState()
   {
     bTriggerReceived = False;
     bConditionMet = False;
@@ -167,7 +167,7 @@ state stateWaitForHarryStrafeLeft
     PlayerHarry.bLockOutStrafeLeft = False;
   }
   
-  function StrafeLeftPushed ()
+  function StrafeLeftPushed()
   {
     if ( bTriggerReceived )
     {
@@ -194,7 +194,7 @@ state stateWaitForHarryStrafeLeft
 
 state stateWaitForHarryStrafeRight
 {
-  function BeginState ()
+  function BeginState()
   {
     bTriggerReceived = False;
     bConditionMet = False;
@@ -206,7 +206,7 @@ state stateWaitForHarryStrafeRight
     PlayerHarry.bLockOutStrafeRight = False;
   }
   
-  function StrafeRightPushed ()
+  function StrafeRightPushed()
   {
     if ( bTriggerReceived )
     {

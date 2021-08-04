@@ -5,11 +5,11 @@
 class HiddenHPawn extends HPawn;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\HiddenPawn.PNG Name=HiddenPawn COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\HiddenPawn.PNG Name=HiddenPawn COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 
 var bool bShowHiddenPawns;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
 	Super.PreBeginPlay();
 	SetCollision(,);

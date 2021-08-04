@@ -27,7 +27,7 @@ var Texture LeftTextures[3];
 var Texture RightTextures[3];
 
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   UpTextures[0] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_up_idle",Class'Texture'));
   UpTextures[1] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_up_hit",Class'Texture'));

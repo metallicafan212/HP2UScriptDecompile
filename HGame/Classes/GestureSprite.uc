@@ -4,7 +4,7 @@
 
 class GestureSprite extends Sprite;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   SetCollision(,,);

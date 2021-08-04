@@ -13,20 +13,20 @@ var() float fZDistanceCheck;
 var() float fDistanceCheck;
 var harry PlayerHarry;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   PlayerHarry = harry(Level.PlayerHarryActor);
 }
 
-function bool IsSafeToTurnLumosOff ()
+function bool IsSafeToTurnLumosOff()
 {
   local HPawn HPawn;
 
   return True;
 }
 
-function bool InLumosRadius ()
+function bool InLumosRadius()
 {
   if ( VSize(Location - PlayerHarry.Location) < fDistanceCheck )
   {
@@ -37,7 +37,7 @@ function bool InLumosRadius ()
 
 auto state StateLumosOff
 {
-  function OnLumosOn ()
+  function OnLumosOn()
   {
     if (  !bFirstEventSent )
     {
@@ -49,7 +49,7 @@ auto state StateLumosOff
 
 state StateWaitingToTurnOn
 {
-  function BeginState ()
+  function BeginState()
   {
     PlayerHarry.ClientMessage(" LumosTrigger " $ string(self) $ " Waiting To turn on once we are within lumos range!");
   }
@@ -70,7 +70,7 @@ state StateWaitingToTurnOn
     }
   }
   
-  function OnLumosOff ()
+  function OnLumosOff()
   {
     GotoState('StateLumosOff');
   }
@@ -80,7 +80,7 @@ state StateWaitingToTurnOn
 
 state StateLumosOn
 {
-  function BeginState ()
+  function BeginState()
   {
     if ( bEventEntering &&  !bFirstEventSent )
     {
@@ -99,7 +99,7 @@ state StateLumosOn
     }
   }
   
-  function OnLumosOff ()
+  function OnLumosOff()
   {
     if ( bEventLeaving &&  !bFirstEventSent )
     {

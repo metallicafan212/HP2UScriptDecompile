@@ -14,7 +14,7 @@ var Actor aSlimedHPawn;
 var() Sound ShrinkSound;
 var float fxParticlesPerSecond;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   if (  !bInCurrentGameState )
@@ -59,19 +59,19 @@ function PreBeginPlay ()
   }
 }
 
-function float GetDefaultDrawScale ()
+function float GetDefaultDrawScale()
 {
   return Default.DrawScale;
 }
 
-function UpdateFX ()
+function UpdateFX()
 {
   local Vector colRotated;
 
   return;
 }
 
-simulated function Timer ()
+simulated function Timer()
 {
   if ( (VSize2D(PlayerHarry.Location - Location) < PlayerHarry.CollisionRadius + CollisionRadius * DrawScale) && (Abs(PlayerHarry.Location.Z - Location.Z) < PlayerHarry.CollisionHeight + CollisionHeight) && (iDamage > 0) )
   {
@@ -82,7 +82,7 @@ simulated function Timer ()
 
 auto state stateGrowing
 {
-  function BeginState ()
+  function BeginState()
   {
     DrawScale = 0.0;
     bCollideWorld = True;
@@ -111,7 +111,7 @@ auto state stateGrowing
 
 state stateShrinking
 {
-  function BeginState ()
+  function BeginState()
   {
     fTimeSpent = 0.0;
   }

@@ -22,7 +22,7 @@ var Vector myHitLocation;
 var float fWebLifetime;
 var SpiderStickyWeb Web;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   fxHeadParticleEffect = Spawn(fxHeadParticleEffectClass);
@@ -30,11 +30,11 @@ function PostBeginPlay ()
   fxHeadParticleEffect.SetRotation(fxHeadParticleEffect.Default.Rotation);
 }
 
-function Timer ()
+function Timer()
 {
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
   if ( fxHeadParticleEffect != None )
   {
@@ -63,7 +63,7 @@ function bounce (Vector HitNormal)
   SetRotation(rotator(CurrentDir));
 }
 
-function Vector GetTarget ()
+function Vector GetTarget()
 {
   local Rotator AroundHarry;
   //local Vector Target;
@@ -75,7 +75,7 @@ function Vector GetTarget ()
   return vTarget;
 }
 
-function float getTime ()
+function float getTime()
 {
   local float t;
   local float Distance;
@@ -85,7 +85,7 @@ function float getTime ()
   return t;
 }
 
-function float SetAngle ()
+function float SetAngle()
 {
   //local float Speed;
   local float fSpeed;
@@ -117,7 +117,7 @@ function float SetAngle ()
   return angle;
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   GotoState('CutIdle');
 }
@@ -162,7 +162,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = ComputeTrajectoryByTime(Location,PlayerHarry.Location,getTime());
   }

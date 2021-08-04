@@ -9,7 +9,7 @@ var Vector vOffset;
 var bool bRelative;
 var BaseCam Cam;
 
-function bool IsAttached ()
+function bool IsAttached()
 { 
   return aAttachedTo != None;
 }
@@ -129,7 +129,7 @@ event Tick (float fTimeDelta)
   UpdateOrientation();
 }
 
-function UpdateOrientation ()
+function UpdateOrientation()
 {
   local Vector Delta;
 

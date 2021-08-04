@@ -6,7 +6,7 @@ class FECreditsPage extends baseFEPage;
 
 var HPCreditsControl CreditsTextWindow;
 
-function Created ()
+function Created()
 {
   if ( CreditsTextWindow == None )
   {
@@ -29,7 +29,7 @@ function bool KeyEvent (byte Key, byte Action, float Delta)
   return False;
 }
 
-function ShowWindow ()
+function ShowWindow()
 {
   Root.DisableMouse();
   CreditsTextWindow.Reset();

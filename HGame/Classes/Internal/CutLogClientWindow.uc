@@ -6,7 +6,7 @@ class CutLogClientWindow extends UWindowDialogClientWindow;
 
 var UWindowConsoleTextAreaControl TextArea;
 
-function Created ()
+function Created()
 {
   TextArea = UWindowConsoleTextAreaControl(CreateWindow(Class'UWindowConsoleTextAreaControl',0.0,0.0,WinWidth,WinHeight));
 }
@@ -18,12 +18,12 @@ function Notify (UWindowDialogControl C, byte E)
   Super.Notify(C,E);
   switch (E)
   {
-    case 7:
+    case DE_EnterPressed:
     break;
-    case 14:
+    case DE_WheelUpPressed:
     TextArea.VertSB.Scroll(-1.0);
     break;
-    case 15:
+    case DE_WheelDownPressed:
     TextArea.VertSB.Scroll(1.0);
     break;
     default:

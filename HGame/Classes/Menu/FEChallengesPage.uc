@@ -13,7 +13,7 @@ var HGameButton ScoreButtons[4];
 var HGameLabelControl NoneWonLabel;
 
 
-function Created ()
+function Created()
 {
 	local int I;
 	local int nStartY;
@@ -88,7 +88,7 @@ function Notify (UWindowDialogControl C, byte E)
 {
 	local int I;
 
-	if ( E == 2 )
+	if ( E == DE_Click )
 	{
 		if ( C == BackPageButton )
 		{
@@ -99,7 +99,7 @@ function Notify (UWindowDialogControl C, byte E)
 	Super.Notify(C,E);
 }
 
-function PreSwitchPage ()
+function PreSwitchPage()
 {
   local harry PlayerHarry;
   local int nHighScore;

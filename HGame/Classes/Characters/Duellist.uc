@@ -82,7 +82,7 @@ var bool bReboundingSpells;
 var Class<baseSpell> CurrentSpellClass;
 
 
-function bool HarrySpellAboutToHitMe ()
+function bool HarrySpellAboutToHitMe()
 {
 	local int I;
 	local baseSpell CurrCastedSpell;
@@ -102,7 +102,7 @@ function bool HarrySpellAboutToHitMe ()
 	return False;
 }
 
-function bool HarrySpellGoesInMyDirection ()
+function bool HarrySpellGoesInMyDirection()
 {
 	local int I;
 	local float Y;
@@ -143,7 +143,7 @@ function bool HarrySpellGoesInMyDirection ()
 	return False;
 }
 
-function StartCharging ()
+function StartCharging()
 {
 	if ( PlayerHarry.bDuelIsOver )
 	{
@@ -176,31 +176,31 @@ function StartCharging ()
 	DuellistAnimChannel.DoCharging();
 }
 
-function StartChargingDefence ()
+function StartChargingDefence()
 {
 	CurrentSpellClass = Class'spellDuelExpelliarmus';
 	baseWand(Weapon).StartChargingSpell(True,False,CurrentSpellClass);
 	DuellistAnimChannel.DoCharging();
 }
 
-function StopCharging ()
+function StopCharging()
 {
 	baseWand(Weapon).StopChargingSpell();
 }
 
-function TurnOffSpellCursor ()
+function TurnOffSpellCursor()
 {
 	SpellCursor.TurnTargetingOff();
 	baseWand(Weapon).StopChargingSpell();
 }
 
-function Cast ()
+function Cast()
 {
 	baseWand(Weapon).CastSpell(PlayerHarry,,CurrentSpellClass);
 	TurnOffSpellCursor();
 }
 
-function Defence ()
+function Defence()
 {
 	PlaySound(Sound'Dueling_EXP_swoosh');
 	baseWand(Weapon).CastSpell(PlayerHarry,,Class'spellDuelExpelliarmus');
@@ -355,7 +355,7 @@ function string GetCommentId (int eventNum, int House, int Variant)
 	}
 }
 
-function fillCommentArray ()
+function fillCommentArray()
 {
 	local int C;
 	local int H;
@@ -378,7 +378,7 @@ function fillCommentArray ()
 	}
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	local Weapon weap;
 	local string AnimName;
@@ -420,7 +420,7 @@ function PostBeginPlay ()
 	bRotateToDesired = Default.bRotateToDesired;
 }
 
-function SetHealthBar ()
+function SetHealthBar()
 {
   local EnemyHealthManager EHealth;
 
@@ -487,12 +487,12 @@ function int DeltaHealth (bool HarryHealth, int SpellType, float SpellCharge)
 	return iDelta;
 }
 
-function float GetHealth ()
+function float GetHealth()
 {
 	return float(Health) / nMaxHealth;
 }
 
-function PlayIdle ()
+function PlayIdle()
 {
 	LoopAnim('duel_idle',0.81,0.25,,DuellistAnimType);
 }
@@ -502,7 +502,7 @@ function bool HandleSpellDuelExpelliarmus (optional baseSpell spell, optional Ve
 	return False;
 }
 
-function bool DuellistSex ()
+function bool DuellistSex()
 {
 	if ( Mesh == SkeletalMesh'skhp2_genmale1Mesh' )
 	{
@@ -519,7 +519,7 @@ function bool DuellistSex ()
 	return False;
 }
 
-function PlaySoundOuch ()
+function PlaySoundOuch()
 {
 	if ( DuellistSex() )
 	{
@@ -585,7 +585,7 @@ function PlaySoundOuch ()
 	}
 }
 
-function HarryWonDuel ()
+function HarryWonDuel()
 {
 	if ( PlayerHarry.bDuelIsOver )
 	{
@@ -666,7 +666,7 @@ function bool HandleSpellDuelMimblewimble (optional baseSpell spell, optional Ve
 	return True;
 }
 
-function bool CouldTauntHarry ()
+function bool CouldTauntHarry()
 {
 	if ( PlayerHarry.fTimeAfterHit < 1 + (4 * Intellect) )
 	{
@@ -700,7 +700,7 @@ state stateIdle
 state stateShot
 {
   
-	function BeginState ()
+	function BeginState()
 	{
 		DuellistAnimChannel.bCasting = True;
 	}
@@ -735,7 +735,7 @@ state stateShot
 state stateDefence
 {
   
-	function BeginState ()
+	function BeginState()
 	{
 		DuellistAnimChannel.bCasting = True;
 	}
@@ -979,7 +979,7 @@ state stateStartDuel
 
 state stateDead
 {
-	function BeginState ()
+	function BeginState()
 	{
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);

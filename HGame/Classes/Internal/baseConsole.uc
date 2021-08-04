@@ -60,15 +60,15 @@ var Font LocalTinyFont;
 var Font IntMedFont;
 
 
-function ExitFromGame ()
+function ExitFromGame()
 {
 }
 
-function SaveSelectedSlot ()
+function SaveSelectedSlot()
 {
 }
 
-function LoadSelectedSlot ()
+function LoadSelectedSlot()
 {
 }
 

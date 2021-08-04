@@ -22,7 +22,7 @@ var Texture textureSliderKnob;
 var bool bStretchTex;
 
 
-function Created ()
+function Created()
 {
 	// Metallicafan212:	Needed for scaling
 	WinHeight 		= 24.0;

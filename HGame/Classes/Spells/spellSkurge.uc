@@ -4,13 +4,13 @@
 
 class spellSkurge extends baseSpell;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   CurrentDir = Normal(vector(Rotation) + Vec(0.0,0.0,0.25));
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -27,7 +27,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
     Velocity = vector(Rotation) * Speed;
   }

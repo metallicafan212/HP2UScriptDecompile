@@ -6,7 +6,7 @@ class FireflyActor extends HChar;
 
 defaultproperties
 {
-    attachedParticleClass=Class'HPParticle.Firefly2'
+    attachedParticleClass(0)=Class'HPParticle.Firefly2'
 
     SplineSpeed=10.00
 

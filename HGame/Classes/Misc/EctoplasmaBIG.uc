@@ -4,7 +4,7 @@
 
 class EctoplasmaBIG extends Ectoplasma;
 
-function float GetDefaultDrawScale ()
+function float GetDefaultDrawScale()
 {
   return Default.DrawScale;
 }

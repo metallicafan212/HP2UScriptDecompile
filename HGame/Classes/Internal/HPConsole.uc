@@ -38,12 +38,12 @@ exec function DestroyClass (string Input)
   harry(Viewport.Actor).DestroyClass(Input);
 }
 
-exec function ListGroups ()
+exec function ListGroups()
 {
   harry(Viewport.Actor).ListGroups();
 }
 
-exec function ShortCut ()
+exec function ShortCut()
 {
   if ( SCWindow == None )
   {
@@ -81,7 +81,7 @@ function ShowCutConsole (bool flag)
   }
 }
 
-exec function Lumos_Debug ()
+exec function Lumos_Debug()
 {
   if ( baseWand(harry(Viewport.Actor).Weapon).TheLumosLight != None )
   {
@@ -109,7 +109,7 @@ exec function Cam_Mode (string sInput)
   harry(Viewport.Actor).Cam.SetModeByString(sInput);
 }
 
-exec function Cam_Settings ()
+exec function Cam_Settings()
 {
   harry(Viewport.Actor).Cam.ShowSettings();
 }
@@ -244,12 +244,12 @@ exec function SetGState (string Str)
   harry(Viewport.Actor).SetGameState(Str);
 }
 
-exec function ShowGState ()
+exec function ShowGState()
 {
   harry(Viewport.Actor).ClientMessage("Current GameState : " $ harry(Viewport.Actor).CurrentGameState);
 }
 
-exec function ShowCardData ()
+exec function ShowCardData()
 {
   harry(Viewport.Actor).managerStatus.ShowCardData();
 }
@@ -344,22 +344,22 @@ exec function AddLock4 (int nCount)
   harry(Viewport.Actor).managerStatus.AddLock4(nCount);
 }
 
-exec function ShowLock1Count ()
+exec function ShowLock1Count()
 {
   harry(Viewport.Actor).ClientMessage(string(harry(Viewport.Actor).managerStatus.GetLock1Count()));
 }
 
-exec function ShowLock2Count ()
+exec function ShowLock2Count()
 {
   harry(Viewport.Actor).ClientMessage(string(harry(Viewport.Actor).managerStatus.GetLock2Count()));
 }
 
-exec function ShowLock3Count ()
+exec function ShowLock3Count()
 {
   harry(Viewport.Actor).ClientMessage(string(harry(Viewport.Actor).managerStatus.GetLock3Count()));
 }
 
-exec function ShowLock4Count ()
+exec function ShowLock4Count()
 {
   harry(Viewport.Actor).ClientMessage(string(harry(Viewport.Actor).managerStatus.GetLock4Count()));
 }
@@ -369,7 +369,7 @@ exec function GiveCardToHarry (int nCardId)
   harry(Viewport.Actor).managerStatus.GiveCardToHarry(nCardId);
 }
 
-exec function GiveAllCardsToHarry ()
+exec function GiveAllCardsToHarry()
 {
   harry(Viewport.Actor).managerStatus.GiveAllCardsToHarry();
 }
@@ -384,17 +384,17 @@ exec function GiveSpell (string Str)
   harry(Viewport.Actor).AddToSpellBookByString(Str);
 }
 
-exec function GiveAllSpells ()
+exec function GiveAllSpells()
 {
   harry(Viewport.Actor).AddAllSpellsToSpellBook();
 }
 
-exec function TakeAllSpells ()
+exec function TakeAllSpells()
 {
   harry(Viewport.Actor).ClearSpellBook();
 }
 
-exec function ArtTest ()
+exec function ArtTest()
 {
   local harry PlayerHarry;
   local StatusManager managerStatus;
@@ -473,20 +473,20 @@ exec function Opacity (float fOpacity)
   harry(Viewport.Actor).Opacity = fOpacity;
 }
 
-exec function GoyleMode ()
+exec function GoyleMode()
 {
   harry(Viewport.Actor).bIsGoyle =  !harry(Viewport.Actor).bIsGoyle;
   harry(Viewport.Actor).SetNewMesh();
 }
 
-exec function FPSMode ()
+exec function FPSMode()
 {
   harry(Viewport.Actor).Cam.SetDistance(0.0);
   harry(Viewport.Actor).Cam.SetZOffset(32.0);
   harry(Viewport.Actor).Opacity = 0.0;
 }
 
-exec function SwordMode ()
+exec function SwordMode()
 {
   harry(Viewport.Actor).ToggleUseSword();
   if ( harry(Viewport.Actor).bHarryUsingSword )
@@ -504,7 +504,7 @@ exec function SwordMode ()
   }
 }
 
-exec function DuelingMode ()
+exec function DuelingMode()
 {
   if ( harry(Viewport.Actor).bInDuelingMode )
   {
@@ -602,7 +602,7 @@ function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
 }
 */
 
-function ToggleDebugMode ()
+function ToggleDebugMode()
 {
   if (  !Class'Version'.Default.bDebugEnabled )
   {
@@ -611,19 +611,19 @@ function ToggleDebugMode ()
   bDebugMode =  !bDebugMode;
 }
 
-function SaveSelectedSlot ()
+function SaveSelectedSlot()
 {
   harry(Viewport.Actor).SloMo(1.0);
   menuBook.SaveSelectedSlot();
 }
 
-function LoadSelectedSlot ()
+function LoadSelectedSlot()
 {
   menuBook.LoadSelectedSlot();
   harry(Viewport.Actor).SloMo(1.0);
 }
 
-function ShowConsole ()
+function ShowConsole()
 {
   if (  !bDebugMode )
   {
@@ -636,7 +636,7 @@ function ShowConsole ()
   }
 }
 
-function HideConsole ()
+function HideConsole()
 {
   bShowConsole = False;
   if ( bCreatedRoot )
@@ -738,7 +738,7 @@ function LaunchUWindow (optional bool bPause)
   Super.LaunchUWindow(bPause);
 }
 
-function CloseUWindow ()
+function CloseUWindow()
 {
   Super.CloseUWindow();
 }
@@ -757,7 +757,7 @@ event Tick (float Delta)
   }
 }
 
-function StartFastForward ()
+function StartFastForward()
 {
 	local CutScene cut;
 
@@ -777,7 +777,7 @@ function StartFastForward ()
 	}
 }
 
-function HandleFastForward ()
+function HandleFastForward()
 {
   local CutScene cut;
   local bool bStillFastForwarding;
@@ -857,7 +857,7 @@ function doLevelSave (int I)
   PlayerPawn.SaveGameSaveInfo("GameSaveInfo" $ string(I),GameSaveInfo);
 }
 
-exec function LangBrowser ()
+exec function LangBrowser()
 {
   menuBook.OpenBook("Lang");
 }
@@ -938,22 +938,22 @@ state UWindow
 	} 
 }
 
-exec function ShowPos ()
+exec function ShowPos()
 {
   bShowPos =  !bShowPos;
 }
 
-exec function giveAllCards ()
+exec function giveAllCards()
 {
   GiveAllCardsToHarry();
 }
 
-function ExitFromGame ()
+function ExitFromGame()
 {
   menuBook.ExitFromGame();
 }
 
-function WarpHarryToCameraLocation ()
+function WarpHarryToCameraLocation()
 {
   local Rotator Rot;
 
@@ -1276,7 +1276,7 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 	return False;
 }
 
-function handleMenuEvent ()
+function handleMenuEvent()
 {
 }
 
@@ -1292,7 +1292,7 @@ function drawBack (Canvas Canvas)
 {
 }
 
-function SetupLanguage ()
+function SetupLanguage()
 {
   local string f1;
   local string f2;
@@ -1381,6 +1381,11 @@ function PostRender (Canvas Canvas)
     Canvas.DrawColor.G = 255;
     Canvas.DrawColor.B = 255;
     Canvas.SetPos(Canvas.SizeX - 200,Canvas.SizeY - 40);
+	Canvas.DrawText("Player @ "$int(Viewport.Actor.Location.X) $", "$int(Viewport.Actor.Location.Y) $", "$int(Viewport.Actor.Location.Z));
+  }
+  if(Harry(Viewport.Actor).bE3DemoLockout)
+  {
+	DrawE3DemoLockout(Canvas);
   }
 }
 

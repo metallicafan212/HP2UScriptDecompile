@@ -15,7 +15,7 @@ class skCandlesPlainCandle extends HPMeshActor;
 #exec Anim Digest Anim=skCandlesPlainCandleAnims VERBOSE 
 
 //texture import (skCandlesPlainCandleTex0) -AdamJD 
-#exec Texture Import File=Textures\skCandlesPlainCandleTex0.png Name=skCandlesPlainCandleTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914 Group=Skins 
+#exec Texture Import File=Textures\skCandlesPlainCandleTex0.png Name=skCandlesPlainCandleTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skCandlesPlainCandleMesh Num=0 Texture=skCandlesPlainCandleTex0
 
 defaultproperties

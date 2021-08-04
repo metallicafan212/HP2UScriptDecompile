@@ -68,7 +68,7 @@ function Tick (float DeltaTime)
   }
 }
 
-function PlayRoarSound ()
+function PlayRoarSound()
 {
   local int randNum;
 
@@ -150,7 +150,7 @@ begin:
 
 state throwing
 {
-  function BeginState ()
+  function BeginState()
   {
     spellLocation = vect(0.00,0.00,0.00);
   }

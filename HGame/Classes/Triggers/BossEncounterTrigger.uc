@@ -55,7 +55,7 @@ function Touch (Actor Other)
   }
 }
 
-function ProcessTrigger ()
+function ProcessTrigger()
 {
   local harry H;
   local baseBoss Boss;

@@ -11,12 +11,12 @@ var float timeSafe;
 var bool bCanBeTouched;
 var() int sleepyInterval;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	SetTimer(fLifetime,False);
 }
 
-function Timer ()
+function Timer()
 {
 	Destroy();
 }
@@ -52,7 +52,7 @@ defaultproperties
 
     sleepyInterval=2
 
-    attachedParticleClass=Class'HPParticle.PixieFloating'
+    attachedParticleClass(0)=Class'HPParticle.PixieFloating'
 
     DrawType=DT_None
 

@@ -15,7 +15,7 @@ class skBooksFlourishStand extends HPMeshActor;
 #exec Anim Digest Anim=skBooksFlourishStandAnims VERBOSE 
 
 //texture import (skBooksFlourishStandTex0) -AdamJD 
-#exec Texture Import File=Textures\skBooksFlourishStandTex0.png Name=skBooksFlourishStandTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skBooksFlourishStandTex0.png Name=skBooksFlourishStandTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBooksFlourishStandMesh Num=0 Texture=skBooksFlourishStandTex0
 
 defaultproperties

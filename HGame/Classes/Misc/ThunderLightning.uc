@@ -9,7 +9,7 @@ var() float flashTiming[5];
 var bool bLightningActive;
 var() name stormName;
 
-function BeginPlay ()
+function BeginPlay()
 {
   SetTimer(2.0 + FRand() * 6,False);
   // LightType = 0;
@@ -17,7 +17,7 @@ function BeginPlay ()
   bLightningActive = False;
 }
 
-function Timer ()
+function Timer()
 {
   // if ( LightType == 4 )
   if ( LightType == LT_Flicker )

@@ -83,7 +83,7 @@ var name PersistentLeadingActor;
 var name PersistentNavPName;
 
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   local Actor A;
 
@@ -121,7 +121,7 @@ event PostBeginPlay ()
   Super.PostBeginPlay();
 }
 
-event OnResolveGameState ()
+event OnResolveGameState()
 {
   Super.OnResolveGameState();
   if (  !bInCurrentGameState && IsInState('VendorIdle') )
@@ -130,7 +130,7 @@ event OnResolveGameState ()
   }
 }
 
-function VendorInit ()
+function VendorInit()
 {
   if ( VendorDialogSet == VDialog_GenericFemale2 )
   {
@@ -270,47 +270,47 @@ function VendorInit ()
   }
 }
 
-function string GetVendorHarryInquiryId ()
+function string GetVendorHarryInquiryId()
 {
   return VendorDialog.strHarryWhatYouGotId;
 }
 
-function string GetVendorInstructionId ()
+function string GetVendorInstructionId()
 {
   return VendorDialog.strNarratorInstrId;
 }
 
-function string GetVendorLureId ()
+function string GetVendorLureId()
 {
   return VendorDialog.strLureId;
 }
 
-function string GetVendorRanOutOfBeansId ()
+function string GetVendorRanOutOfBeansId()
 {
   return VendorDialog.strRanOutOfBeansId;
 }
 
-function string GetVendorNotEnoughBeansId ()
+function string GetVendorNotEnoughBeansId()
 {
   return VendorDialog.strNotEnoughBeansId;
 }
 
-function string GetVendorTransactionDoneId ()
+function string GetVendorTransactionDoneId()
 {
   return VendorDialog.strTransactionDoneId;
 }
 
-function string GetVendorOutOfStockId ()
+function string GetVendorOutOfStockId()
 {
   return VendorDialog.strOutOfStockId;
 }
 
-function string GetVendorDeclineId ()
+function string GetVendorDeclineId()
 {
   return VendorDialog.strDeclineId;
 }
 
-function string GetSellDialogId ()
+function string GetSellDialogId()
 {
   local string strDialogID;
 
@@ -359,7 +359,7 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
   return Super.CutCommand(Command,cue,bFastFlag);
 }
 
-event PreSaveGame ()
+event PreSaveGame()
 {
   Super.PreSaveGame();
   if ( managerVendor != None )
@@ -398,7 +398,7 @@ event Bump (Actor Other)
   }
 }
 
-function InterruptOtherVendorPopup ()
+function InterruptOtherVendorPopup()
 {
   local Characters character;
 
@@ -411,7 +411,7 @@ function InterruptOtherVendorPopup ()
   }
 }
 
-function OtherVendorInterruptedPopup ()
+function OtherVendorInterruptedPopup()
 {
   StopSound(soundCurrVendorPopup);
   if ( IsInVendorPopupState() )
@@ -421,12 +421,12 @@ function OtherVendorInterruptedPopup ()
   }
 }
 
-function bool IsInVendorPopupState ()
+function bool IsInVendorPopupState()
 {
   return (IsInState('SayVendorLureLine') || IsInState('SayOutOfStockLine'));
 }
 
-function int GetSellingPrice ()
+function int GetSellingPrice()
 {
   switch (CharacterSells)
   {
@@ -449,7 +449,7 @@ function int GetSellingPrice ()
   }
 }
 
-function bool HaveSomethingToSell ()
+function bool HaveSomethingToSell()
 {
   if ( harry(Level.PlayerHarryActor).bIsGoyle )
   {
@@ -476,7 +476,7 @@ function bool HaveSomethingToSell ()
   }
 }
 
-function bool SellsSomethingButOutOfStock ()
+function bool SellsSomethingButOutOfStock()
 {
   return (CharacterSells != Sells_Nothing) &&  !HaveSomethingToSell();
 }
@@ -541,7 +541,7 @@ event Tick (float fDeltaTime)
   }
 }
 
-function OnHarryCaptured ()
+function OnHarryCaptured()
 {
   if ( IsInVendorPopupState() )
   {
@@ -551,7 +551,7 @@ function OnHarryCaptured ()
   }
 }
 
-function Characters GetWeasleyTwin ()
+function Characters GetWeasleyTwin()
 {
   local Characters Weasley;
   local Characters NearestWeasley;
@@ -591,7 +591,7 @@ function Characters GetWeasleyTwin ()
   return NearestWeasley;
 }
 
-function MakePurchase ()
+function MakePurchase()
 {
   local StatusManager managerStatus;
   local StatusItemWizardCards siWizardCards;
@@ -685,11 +685,10 @@ function MakePurchase ()
 	  PlaySound(Sound'vendor_spawn_ingred');
 	  break;
     }
-  } //else {
-  //}
+  }
 }
 
-function name GetTalkAnimName ()
+function name GetTalkAnimName()
 {
   switch (Rand(3))
   {
@@ -760,12 +759,12 @@ state SayVendorLureLine
     }
   }
   
-  function BeginState ()
+  function BeginState()
   {
     InterruptOtherVendorPopup();
   }
   
-  function EndState ()
+  function EndState()
   {
   }
   
@@ -809,12 +808,12 @@ ignores Bump;
     }
   }
   
-  function BeginState ()
+  function BeginState()
   {
     InterruptOtherVendorPopup();
   }
   
-  function EndState ()
+  function EndState()
   {
   }
   
@@ -845,7 +844,7 @@ state VendorIdle
   //UTPT added this for some reason -AdamJD
   //ignores  Tick;
   
-  function BeginState ()
+  function BeginState()
   {
     if (  !bHidden && (CharacterSells != Sells_Nothing) &&  !IsDuelVendor() )
     {
@@ -872,7 +871,7 @@ state VendorIdle
 	Global.Tick(fDelta);
   }
   
-  function EndState ()
+  function EndState()
   {
     if ( VendorJellybean != None )
     {
@@ -886,13 +885,12 @@ begin:
 	  PlayAnim('vendor_idle',RandRange(0.75,1.29999995),0.2);
 	  FinishAnim();
   }
-  // if (! False ) goto JL0000;
   until(False);
 }
 
 auto state patrol
 {
-  function startup ()
+  function startup()
   {
     if ( CharacterSells != Sells_Nothing )
     {
@@ -904,7 +902,7 @@ auto state patrol
   
 }
 
-function bool IsDuelVendor ()
+function bool IsDuelVendor()
 {
   if ( CharacterSells != Sells_Duel )
   {
@@ -921,7 +919,7 @@ function bool IsDuelVendor ()
   return True;
 }
 
-function SetEverythingForTheDuel ()
+function SetEverythingForTheDuel()
 {
   local string DuelLevelName;
   local int nGameState;

@@ -25,7 +25,7 @@ var HChar Enemy;
 var bool bRegisteredWithHud;
 
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	textureBarEmpty = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EnemyHealthEmpty",Class'Texture'));
@@ -84,7 +84,7 @@ function Start (HChar EnemyIn)
 	GotoState('DisplayEnemyHealth');
 }
 
-function End ()
+function End()
 {
 	HPHud(harry(Level.PlayerHarryActor).myHUD).RegisterEnemyHealth(None);
 	bRegisteredWithHud = False;

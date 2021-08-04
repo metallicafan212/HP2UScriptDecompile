@@ -170,7 +170,7 @@ begin:
   }
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local int I;
 
@@ -181,17 +181,13 @@ function PostBeginPlay ()
     bInitialized = True;
   }
   HowManyObjectsToSpawn = 0;
-  // I = 0;
-  // if ( I < 8 )
+
   for(I = 0; I < 8; I++)
   {
     if ( GoodieToSpawn[I] == None )
     {
-      // goto JL005C;
 	  break;
     }
-    // I++;
-    // goto JL0032;
   }
   HowManyObjectsToSpawn = I;
   if ( Lives <= 0 )
@@ -199,25 +195,21 @@ function PostBeginPlay ()
     HowManyObjectsToSpawn = 0;
   }
   bSpawnExactNumbers = False;
-  // I = 0;
-  // if ( I < 8 )
+
   for(I = 0; I < 8; I++)
   {
     if ( GoodiesNumber[I] != 0 )
     {
       bSpawnExactNumbers = True;
     }
-    // I++;
-    // goto JL0088;
   }
   if ( HowManyObjectsToSpawn <= 0 )
   {
-    // eVulnerableToSpell = 0;
 	eVulnerableToSpell = SPELL_None;
   }
 }
 
-function FindBaseParticlePos ()
+function FindBaseParticlePos()
 {
   local Vector Dir;
   local int bNum;

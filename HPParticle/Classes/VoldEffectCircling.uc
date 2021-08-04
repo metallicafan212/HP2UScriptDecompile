@@ -15,7 +15,7 @@ var Vector vStartLoc;
 var() float zIncSpeed;
 var float Z;
 
-event PostBeginPlay ()
+event PostBeginPlay()
 {
   vStartLoc = Location;
   Z = Location.Z + FRand() * 40 - 20;

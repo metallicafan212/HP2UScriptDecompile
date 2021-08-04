@@ -17,16 +17,16 @@ function Color Col (float R, float G, float B)
   return C;
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
 }
 
-function OnSpellInit ()
+function OnSpellInit()
 {
 }
 
-function OnSpellShutdown ()
+function OnSpellShutdown()
 {
 }
 
@@ -48,7 +48,7 @@ begin:
 
 state StateFlying
 {
-  function BeginState ()
+  function BeginState()
   {
   }
   

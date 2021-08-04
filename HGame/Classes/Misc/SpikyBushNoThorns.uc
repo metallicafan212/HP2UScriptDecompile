@@ -6,7 +6,7 @@ class SpikyBushNoThorns extends HChar;
 
 auto state Wilted
 {
-  event AnimEnd ()
+  event AnimEnd()
   {
     SetCollision(False,False,False);
     SetCollisionSize(0.0,0.0);

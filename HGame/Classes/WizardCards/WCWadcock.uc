@@ -5,10 +5,10 @@
 class WCWadcock extends SilverCards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardWadcockBigTexture.PNG	GROUP=Icons	Name=WizCardWadcockBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\WizCardWadcockBigTexture.PNG	GROUP=Icons	Name=WizCardWadcockBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardWadcockTex0.PNG	GROUP=Skins	Name=WizardCardWadcockTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   WizardName = "Joscelind Wadcock";
   Super.PostBeginPlay();

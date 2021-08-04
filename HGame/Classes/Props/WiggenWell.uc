@@ -8,7 +8,7 @@ var float fPickupFlyTime;
 var bool bTiming;
 var float fTimeout;
 
-function Spawned ()
+function Spawned()
 {
 	SetPhysics(PHYS_Falling);
 	bTiming = False;
@@ -21,7 +21,7 @@ function Touch (Actor Other)
 
 auto state wwellbottlo
 {
-	function BeginState ()
+	function BeginState()
 	{
 		bTiming = False;
 		fTimeout = 5.0;
@@ -54,6 +54,7 @@ auto state wwellbottlo
 		}
 	}
 	begin:
+	loop:
 		Sleep(1.0);
 		goto ('Loop');
 }

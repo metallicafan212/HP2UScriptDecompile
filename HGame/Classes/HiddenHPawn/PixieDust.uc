@@ -11,13 +11,13 @@ var float timeSafe;
 var bool bCanBeTouched;
 var() int sleepyInterval;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	SetTimer(fLifetime,False);
 	bCollideWorld = True;
 }
 
-function Timer ()
+function Timer()
 {
 	Destroy();
 }
@@ -53,7 +53,7 @@ defaultproperties
 
     sleepyInterval=2
 
-    attachedParticleClass=Class'HPParticle.PixieGroundDust'
+    attachedParticleClass(0)=Class'HPParticle.PixieGroundDust'
 
     Physics=PHYS_Falling
 

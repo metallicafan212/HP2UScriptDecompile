@@ -15,7 +15,7 @@ class skCartMiners extends HPMeshActor;
 #exec Anim Digest Anim=skCartMinersAnims VERBOSE 
 
 //texture import (skCartMinersTex0) -AdamJD 
-#exec Texture Import File=Textures\skCartMinersTex0.png Name=skCartMinersTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skCartMinersTex0.png Name=skCartMinersTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skCartMinersMesh Num=0 Texture=skCartMinersTex0
 
 defaultproperties

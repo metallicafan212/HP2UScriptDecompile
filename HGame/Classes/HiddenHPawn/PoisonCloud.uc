@@ -15,14 +15,14 @@ var float DamageInterval;
 var float waitTime;
 var float collideRadius;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	local HPawn Pawn;
 
 	SetTimer(fLifetime,False);
 }
 
-function Timer ()
+function Timer()
 {
 	Destroy();
 }
@@ -56,7 +56,6 @@ function Touch (Actor Other)
 	if ( (Other == PlayerHarry) && (bCanBeTouched) )
 	{
 		return;
-		//goto JL012F;
 	}
 	if ( Other.IsA('HPawn') &&  !Other.IsA('PoisonCloud') &&  !Other.IsA('ThrownPoisonCloud') &&  !Other.IsA('HorklumpsHead') &&  !Other.IsA('HorklumpsStem') && (bCanBeThrown) )
 	{
@@ -82,7 +81,7 @@ function Bump (Actor Other)
 	Touch(Other);
 }
 
-function playCloudSound ()
+function playCloudSound()
 {
 	local Sound cloudSound;
 	local int randNum;
@@ -134,7 +133,7 @@ defaultproperties
 
     DamageInterval=0.50
 
-    attachedParticleClass=Class'HPParticle.Hork01'
+    attachedParticleClass(0)=Class'HPParticle.Hork01'
 
     DrawType=DT_None
 

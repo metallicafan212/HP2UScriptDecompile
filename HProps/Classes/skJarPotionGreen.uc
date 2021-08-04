@@ -15,7 +15,7 @@ class skJarPotionGreen extends HPMeshActor;
 #exec Anim Digest Anim=skJarPotionGreenAnims VERBOSE 
 
 //texture import (skJarPotionGreenTex0) -AdamJD 
-#exec Texture Import File=Textures\skJarPotionGreenTex0.png Name=skJarPotionGreenTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
+#exec Texture Import File=Textures\skJarPotionGreenTex0.png Name=skJarPotionGreenTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=0 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skJarPotionGreenMesh Num=0 Texture=skJarPotionGreenTex0
 
 defaultproperties

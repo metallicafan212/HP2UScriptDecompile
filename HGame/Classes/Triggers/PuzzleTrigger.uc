@@ -12,7 +12,7 @@ var float fCurrTime;
 var bool bIsOpen;
 var int Pieces;
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local ElevatorMover EM;
   local int Count;
@@ -34,7 +34,7 @@ function PostBeginPlay ()
   Pieces = Count;
 }
 
-function MyOpenDoor ()
+function MyOpenDoor()
 {
   if (  !bIsOpen )
   {
@@ -43,7 +43,7 @@ function MyOpenDoor ()
   }
 }
 
-function MyCloseDoor ()
+function MyCloseDoor()
 {
   if ( bIsOpen )
   {
@@ -52,7 +52,7 @@ function MyCloseDoor ()
   }
 }
 
-function MyToggleDoor ()
+function MyToggleDoor()
 {
   local Trigger t;
   local Mover M;
@@ -87,29 +87,20 @@ function Tick (float DeltaTime)
     return;
   }
   fCurrTime = 0.0;
-  // I = 0;
-  // if ( I < Pieces )
   for(I = 0; I < Pieces; I++) 
   {
     Test[I] = 0;
-    // I++;
-    // goto JL0047;
   }
   foreach AllActors(Class'ElevatorMover',EM)
   {
     if ( EM.PuzzleName == PuzzleName )
     {
-      // I = 0;
-      // if ( I < Pieces )
 	  for(I = 0; I < Pieces; I++)
       {
         if ( (EM.Tag != 'None') && (EM.Tag == Tags[I]) )
         {
-          // goto JL00F0;
 		  break;
         }
-        // I++;
-        // goto JL009C;
       }
       if ( I < Pieces )
       {
@@ -121,16 +112,13 @@ function Tick (float DeltaTime)
     }
   }
   DoOpen = True;
-  // I = 0;
-  // if ( I < Pieces )
+
   for(I = 0; I < Pieces; I++)
   {
     if ( Test[I] == 0 )
     {
       DoOpen = False;
     }
-    // I++;
-    // goto JL013C;
   }
   if ( DoOpen )
   {

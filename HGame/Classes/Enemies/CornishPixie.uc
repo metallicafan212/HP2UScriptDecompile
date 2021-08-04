@@ -38,7 +38,7 @@ var() float StayOnSplineDefault;
 var float StayOnSpline;
 var() float StopAttackDistance;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   vHome = Location;
@@ -47,7 +47,7 @@ function PreBeginPlay ()
   LoopAnim('Idle');
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local CornishPixie tempPixie;
   local PixieMarker Marker;
@@ -72,7 +72,7 @@ function PostBeginPlay ()
   }
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   GotoState('CutIdle');
 }
@@ -85,13 +85,13 @@ begin:
   GotoState('waitingForTrigger');
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   LoopAnim('Fly');
   GotoState('stateLoopSplinePath');
 }
 
-function Timer ()
+function Timer()
 {
   GotoState('BlowUpAndDie');
 }
@@ -114,7 +114,7 @@ function Landed (Vector HitNormal)
   GotoState('HitGround');
 }
 
-function bool GoAfterHarry ()
+function bool GoAfterHarry()
 {
   local bool bRet;
   local Vector vVectorToHarry;
@@ -128,7 +128,7 @@ function bool GoAfterHarry ()
   return bRet;
 }
 
-function playTalkSound ()
+function playTalkSound()
 {
   local Sound talkSound;
   local int randNum;
@@ -161,7 +161,7 @@ function playTalkSound ()
   PlaySound(talkSound,SLOT_None,RandRange(0.81,1.0),,1000.0,RandRange(0.81,1.25),,False);
 }
 
-function playAttackSound ()
+function playAttackSound()
 {
   local Sound AttackSound;
   local int randNum;
@@ -191,7 +191,7 @@ function playAttackSound ()
   PlaySound(AttackSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
-function playHitSound ()
+function playHitSound()
 {
   local Sound HitSound;
   local int randNum;
@@ -224,7 +224,7 @@ function playHitSound ()
   PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
 }
 
-function playBiteSound ()
+function playBiteSound()
 {
   local Sound HitSound;
   local int randNum;
@@ -273,7 +273,7 @@ begin:
 
 state stateLoopSplinePath
 {
-  function BeginState ()
+  function BeginState()
   {
     LoopAnim('Fly');
     AmbientSound = pixieLoopSound;
@@ -283,7 +283,7 @@ state stateLoopSplinePath
     fxFlyParticleEffect = Spawn(fxFlyParticleEffectClass,,,Location);
   }
   
-  function EndState ()
+  function EndState()
   {
     if ( BOOL_DEBUG_AI )
     {

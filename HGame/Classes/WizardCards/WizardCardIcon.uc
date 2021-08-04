@@ -25,12 +25,12 @@ var bool bIsLayered;
 var bool bLastLayerIsFire;
 var Texture textureLayers[3];
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
 }
 
-function Spawned ()
+function Spawned()
 {
   local ParticleFX explosion;
 
@@ -42,7 +42,7 @@ function Spawned ()
   GotoState('bouncing');
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
 }

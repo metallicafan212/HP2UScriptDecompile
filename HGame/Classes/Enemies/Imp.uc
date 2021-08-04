@@ -38,7 +38,7 @@ event KilledBy (Pawn EventInstigator)
   GotoState('stateDied');
 }
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   vHome = Location;
@@ -47,7 +47,7 @@ function PreBeginPlay ()
   LoopAnim('Idle');
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   local Imp tempImp;
 
@@ -56,7 +56,7 @@ function PostBeginPlay ()
   attackDistance = PlayerHarry.CollisionRadius + CollisionRadius + 5;
 }
 
-function SetDifficulty ()
+function SetDifficulty()
 {
   randomRunningSpeed = GroundRunSpeed - 10 + FRand() * 35;
   cm("What is difficulty: " $ string(Level.Game.Difficulty));
@@ -104,7 +104,7 @@ function SetDifficulty ()
   runningForHarry = BreathingTimeInterval;
 }
 
-function PlayerCutCapture ()
+function PlayerCutCapture()
 {
   SavedState = GetStateName();
   cm(string(Name) $ " saved state : " $ string(SavedState));
@@ -125,12 +125,12 @@ state CutIdle
   LoopAnim('Idle');
 }
 
-function PlayerCutRelease ()
+function PlayerCutRelease()
 {
   GotoState(SavedState);
 }
 
-function playHitSound ()
+function playHitSound()
 {
   local Sound HitSound;
   local int randNum;
@@ -160,7 +160,7 @@ function playHitSound ()
   PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
 }
 
-function playDieSound ()
+function playDieSound()
 {
   local Sound HitSound;
   local int randNum;
@@ -184,7 +184,7 @@ function playDieSound ()
   PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
 }
 
-function playAttackSound ()
+function playAttackSound()
 {
   local Sound HitSound;
   local int randNum;
@@ -214,13 +214,13 @@ function playAttackSound ()
   PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
 }
 
-function playThrownSound ()
+function playThrownSound()
 {
   impThrownSound = Sound'imp_scream';
   PlaySound(impThrownSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
 }
 
-function playBiteSound ()
+function playBiteSound()
 {
   local Sound biteSound;
   local int randNum;
@@ -260,7 +260,6 @@ function Landed (Vector HitNormal)
   {
     GotoState('stateGotAwayFromHarry');
   }
-  // if (!  !IsInState('stateIdle') ) goto JL0076;
 }
 
 function ThrownLanded (Vector HitNormal)
@@ -288,7 +287,7 @@ function ThrownLanded (Vector HitNormal)
   }
 }
 
-function bool GoAfterHarry ()
+function bool GoAfterHarry()
 {
   local bool bRet;
   local Vector vVectorToHarry;
@@ -302,7 +301,7 @@ function bool GoAfterHarry ()
   return bRet;
 }
 
-function bool ReadyPosition ()
+function bool ReadyPosition()
 {
   if ( VSize2D(PlayerHarry.Location - Location) < attackDistance )
   {
@@ -407,7 +406,7 @@ begin:
 
 state stateMoveTowardHarry
 {
-  function BeginState ()
+  function BeginState()
   {
     runningForHarry = BreathingTimeInterval;
   }
@@ -435,7 +434,7 @@ state stateMoveTowardHarry
 
 state takeABreather
 {
-  function BeginState ()
+  function BeginState()
   {
     runningForHarry = BreathingTimeInterval;
   }
@@ -521,7 +520,7 @@ begin:
 
 state stateBeingThrown
 {
-  function BeginState ()
+  function BeginState()
   {
     SetCollisionSize(5.0,13.0);
   }
@@ -582,7 +581,7 @@ begin:
 
 state HitGroundWhenThrown
 {
-  function BeginState ()
+  function BeginState()
   {
     timeStunned = timeStunnedDefault;
     bStunned = True;
@@ -596,12 +595,12 @@ state HitGroundWhenThrown
 
 state stateBeingCarried
 {
-  function BeginState ()
+  function BeginState()
   {
     bCarried = True;
   }
   
-  function EndState ()
+  function EndState()
   {
     bCarried = False;
     bStunned = False;

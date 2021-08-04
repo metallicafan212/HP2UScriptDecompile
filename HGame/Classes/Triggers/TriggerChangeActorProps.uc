@@ -19,7 +19,7 @@ function Touch (Actor Other)
   ProcessTrigger();
 }
 
-function ProcessTrigger ()
+function ProcessTrigger()
 {
   local Actor A;
   local bool bNewColActors;

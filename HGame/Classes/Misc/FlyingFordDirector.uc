@@ -44,7 +44,7 @@ var int iLightningLoops;
 var float fTimeBetweenchanges;
 var CarLocations CarLocation;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   local DynamicInterpolationPoint p;
   local int Counter;
@@ -75,7 +75,7 @@ function PreBeginPlay ()
   Hedwig = Spawn(Class'FlyingFordHedwig',,,Location + Vec(50.0,50.0,-50.0),Rotation);
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
   Super.PostBeginPlay();
   InitialState = 'GameIntro';
@@ -109,8 +109,7 @@ function OnTouchEvent (Pawn Subject, Actor Object)
         {
           lightningZone = FlyingFordLightning(Object);
           GotoState('GameLightning');
-        } //else {
-        //}
+        }
       //}
     //}
   //}
@@ -137,8 +136,7 @@ function OnUnTouchEvent (Pawn Subject, Actor Object)
           PlayerHarry.ClientMessage("Return to state GamePlay from an UNTouch message  " $ string(GetStateName()));
           GotoState('GamePlay');
         }
-      } //else {
-      //}
+      }
     //}
   //}
   if ( SetCarLocation() )
@@ -164,8 +162,7 @@ function OnTriggerEvent (Actor Other, Pawn EventInstigator)
   {
     PlayerHarry.ClientMessage("We have triggered an airplane");
     GotoState('GameAirplane');
-  } //else {
-  //}
+  }
 }
 
 function Trigger (Actor Other, Pawn EventInstigator)
@@ -183,7 +180,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
   }
 }
 
-function OnPlayerPossessed ()
+function OnPlayerPossessed()
 {
   Super.OnPlayerPossessed();
   Log("Player possessed");
@@ -191,18 +188,18 @@ function OnPlayerPossessed ()
   TriggerEvent('FlyingFordIntro',self,None);
 }
 
-function OnPlayerDying ()
+function OnPlayerDying()
 {
   PlayerHarry.ClientMessage("Player dying...");
 }
 
-function OnPlayersDeath ()
+function OnPlayersDeath()
 {
   PlayerHarry.ClientMessage("Player died; restarting game");
   Level.Game.RestartGame();
 }
 
-function OnActionKeyPressed ()
+function OnActionKeyPressed()
 {
   PlayerHarry.ClientMessage("Action key pressed");
 }
@@ -214,7 +211,7 @@ function StartTurbulence (float violence, Vector Direction)
   GotoState('GameWind');
 }
 
-function StartLightning ()
+function StartLightning()
 {
   local ThunderLightning tempObject;
   local name nameOfStorm;
@@ -233,13 +230,13 @@ function StartLightning ()
   fTimeBetweenchanges = lightningZone.fTimeBetweenchanges;
 }
 
-function IncrementSafeCount ()
+function IncrementSafeCount()
 {
   SafeRefCount++;
   Log("Safe Count : " $ string(SafeRefCount));
 }
 
-function DecrementSafeCount ()
+function DecrementSafeCount()
 {
   SafeRefCount--;
   if ( SafeRefCount < 0 )
@@ -249,13 +246,13 @@ function DecrementSafeCount ()
   Log("Safe Count : " $ string(SafeRefCount));
 }
 
-function IncrementTownCount ()
+function IncrementTownCount()
 {
   TownRefCount++;
   Log("Town Count : " $ string(TownRefCount));
 }
 
-function DecrementTownCount ()
+function DecrementTownCount()
 {
   TownRefCount--;
   if ( TownRefCount < 0 )
@@ -265,7 +262,7 @@ function DecrementTownCount ()
   Log("Town Count : " $ string(TownRefCount));
 }
 
-function bool SetCarLocation ()
+function bool SetCarLocation()
 {
   local CarLocations currentLocation;
 
@@ -289,7 +286,7 @@ function bool SetCarLocation ()
   }
 }
 
-function UpdateHud ()
+function UpdateHud()
 {
   switch (CarLocation)
   {
@@ -316,7 +313,7 @@ function UpdateHud ()
 
 state GameIntro
 {
-  function BeginState ()
+  function BeginState()
   {
   }
   
@@ -347,12 +344,12 @@ begin:
 
 state GameAirplane
 {
-  function BeginState ()
+  function BeginState()
   {
     Plane.StartTransPath();
   }
   
-  function MovePoints ()
+  function MovePoints()
   {
     local Vector pos1;
     local Vector pos2;
@@ -375,7 +372,7 @@ state GameAirplane
     Points[1].SetLocation(p2Ahead + p2Side);
   }
   
-  function SetPlaneOnPath ()
+  function SetPlaneOnPath()
   {
     Plane.StartOnPath();
   }
@@ -384,20 +381,20 @@ state GameAirplane
 
 state GameWind
 {
-  function BeginState ()
+  function BeginState()
   {
     fTurbulence = 0.0;
     PlayerHarry.LoopAnim('flyingeratic');
     PlayerHarry.ClientMessage("IN the beginning  :  " $ string(PlayerHarry.vCurrentTetherDistance));
   }
   
-  function EndState ()
+  function EndState()
   {
     PlayerHarry.LoopAnim('Flying');
     PlayerHarry.ClientMessage("IN the end  :  " $ string(PlayerHarry.vCurrentTetherDistance));
   }
   
-  function float windDirectionConst ()
+  function float windDirectionConst()
   {
     local Vector vRight;
     local Vector vGuideDirection;
@@ -414,7 +411,7 @@ state GameWind
     }
   }
   
-  function Vector windDirectionVector ()
+  function Vector windDirectionVector()
   {
     local Vector vRight;
     local Vector vGuideDirection;
@@ -456,7 +453,7 @@ state GameWind
 
 state GameLightning
 {
-  function BeginState ()
+  function BeginState()
   {
     StartLightning();
   }
@@ -487,7 +484,7 @@ state StruckByLightning
     PlayerHarry.vTurbulence = Vec(0.0,0.0,0.0);
   }
   
-  function float sideDirectionConst ()
+  function float sideDirectionConst()
   {
     local Vector vRight;
     local Vector vGuideDirection;
@@ -504,7 +501,7 @@ state StruckByLightning
     }
   }
   
-  function float upDirectionConst ()
+  function float upDirectionConst()
   {
     local Vector vGuideDirection;
   
@@ -517,7 +514,7 @@ state StruckByLightning
     }
   }
   
-  function Vector OutofControl ()
+  function Vector OutofControl()
   {
     local Vector newSideDirection;
     local Vector newUpDirection;

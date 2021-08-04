@@ -41,13 +41,13 @@ begin:
 
 state Green
 {
-  function switchCamera ()
+  function switchCamera()
   {
     local BaseCam C;
   
   }
   
-  function returnCamera ()
+  function returnCamera()
   {
     local BaseCam C;
   
@@ -58,7 +58,7 @@ state Green
     }
   }
   
-  function AnimEnd ()
+  function AnimEnd()
   {
     if ( AnimSequence == 'Green' )
     {

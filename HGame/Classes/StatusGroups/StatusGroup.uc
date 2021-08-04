@@ -61,20 +61,20 @@ function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int
 	nOutY = 0;
 }
 
-function SetEffectTypeToPermanent ()
+function SetEffectTypeToPermanent()
 {
 	CurrEffectType = ET_Permanent;
 	SetTimer(0.0,False);
 	GotoState('Hold');
 }
 
-function SetEffectTypeToNormal ()
+function SetEffectTypeToNormal()
 {
 	CurrEffectType = GameEffectType;
 	GotoState('Idle');
 }
 
-function SetCutSceneRenderModeToNormal ()
+function SetCutSceneRenderModeToNormal()
 {
 	bCurrRenderInCutScene = bNormallyRenderInCutScene;
 }
@@ -295,7 +295,6 @@ function GetItemPosition (Class<StatusItem> classItem, bool bMenuMode, out int n
 		}
 		if ( siLoop.Class == si.Class )
 		{
-			//goto JL01B5;
 			break;
 		}
 		if ( bDisplayHorizontally )
@@ -399,7 +398,7 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	return vectReturn;
 }
 
-function Color GetDrawColor ()
+function Color GetDrawColor()
 {
 	local Color colorReturn;
 	local int nFadeValue;
@@ -421,7 +420,7 @@ function GetGroupCurrXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, i
 	GetGroupFinalXY_2(bMenuMode, nCanvasSizeX, nCanvasSizeY, nIconWidth, nIconHeight, nOutX, nOutY);
 }
 
-function int GetFadeValue ()
+function int GetFadeValue()
 {
 	return 255;
 }
@@ -454,7 +453,7 @@ function bool IncrementCountPotential (Class<StatusItem> classItem, int nNum)
 	return False;
 }
 
-function OnCountIncremented ()
+function OnCountIncremented()
 {
 }
 
@@ -572,14 +571,14 @@ function float GetScaleFactor (int nCanvasSizeX)
 	return fScale;
 }
 
-event PreBeginPlay ()
+event PreBeginPlay()
 {
 	CurrEffectType = GameEffectType;
 }
 
 auto state Idle
 {
-	function OnCountIncremented ()
+	function OnCountIncremented()
 	{
 		if ( (CurrEffectType == ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
@@ -599,7 +598,7 @@ auto state Idle
 		}
 	}
   
-	function BeginState ()
+	function BeginState()
 	{
 		if ( (CurrEffectType == ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
@@ -627,7 +626,7 @@ state EffectIn
 		}
 	}
   
-	function int GetFadeValue ()
+	function int GetFadeValue()
 	{
 		local float fFadeRatio;
 		local int nFadeValue;
@@ -655,7 +654,7 @@ state EffectIn
 		}
 	}
   
-	function BeginState ()
+	function BeginState()
 	{
 		fCurrEffectInTime = fTotalEffectInTime;
 	}
@@ -664,13 +663,13 @@ state EffectIn
 
 state Hold
 {
-	event Timer ()
+	event Timer()
 	{
 		SetTimer(0.0,False);
 		GotoState('EffectOut');
 	}
   
-	function OnCountIncremented ()
+	function OnCountIncremented()
 	{
 		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
@@ -679,7 +678,7 @@ state Hold
 		}
 	}
   
-	function BeginState ()
+	function BeginState()
 	{
 		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
@@ -707,7 +706,7 @@ state EffectOut
 		}
 	}
   
-	function OnCountIncremented ()
+	function OnCountIncremented()
 	{
 		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
@@ -715,7 +714,7 @@ state EffectOut
 		}
 	}
   
-	function int GetFadeValue ()
+	function int GetFadeValue()
 	{
 		local float fFadeRatio;
 		local int nFadeValue;
@@ -743,7 +742,7 @@ state EffectOut
 		}
 	}		
   
-	function BeginState ()
+	function BeginState()
 	{
 		fCurrEffectOutTime = fTotalEffectOutTime;
 	}

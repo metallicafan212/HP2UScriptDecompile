@@ -13,7 +13,7 @@ event Trigger (Actor Other, Pawn EventInstigator)
   ProcessTrigger();
 }
 
-function ProcessTrigger ()
+function ProcessTrigger()
 {
   harry(Level.PlayerHarryActor).ShakeView(fShakeTime,fRollMagnitude,fVertMagnitude);
 }

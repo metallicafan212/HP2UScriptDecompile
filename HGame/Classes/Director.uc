@@ -7,7 +7,7 @@ class Director extends Actor;
 var harry PlayerHarry;
 var baseConsole Console;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
   Super.PreBeginPlay();
   foreach AllActors(Class'harry',PlayerHarry)
@@ -65,12 +65,12 @@ function Trigger (Actor Other, Pawn EventInstigator)
   }
 }
 
-function bool OnCutCapture ()
+function bool OnCutCapture()
 {
   return True;
 }
 
-function bool OnCutRelease ()
+function bool OnCutRelease()
 {
   return True;
 }
@@ -100,28 +100,28 @@ function bool CutQuestion (string question)
   return False;
 }
 
-function OnPlayerPossessed ()
+function OnPlayerPossessed()
 {
   Log("Player possessed");
   Console = baseConsole(PlayerHarry.Player.Console);
 }
 
-function OnPlayerTravelPostAccept ()
+function OnPlayerTravelPostAccept()
 {
   Log("Player processed TravelPostAccept event");
 }
 
-function OnPlayerDying ()
+function OnPlayerDying()
 {
   PlayerHarry.ClientMessage("Player dying...");
 }
 
-function OnPlayersDeath ()
+function OnPlayersDeath()
 {
   PlayerHarry.ClientMessage("Director: Player died");
 }
 
-function OnActionKeyPressed ()
+function OnActionKeyPressed()
 {
   PlayerHarry.ClientMessage("Action key pressed");
 }

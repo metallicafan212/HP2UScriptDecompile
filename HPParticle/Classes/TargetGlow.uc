@@ -35,7 +35,7 @@ function SetTargetLock (float TargetWidth, float TargetHeight, float TargetDepth
   SetColour(RComp,GComp,BComp);
 }
 
-function SetTargetUnlock ()
+function SetTargetUnlock()
 {
   ParticlesPerSec.Base = 20.0;
   SourceWidth.Base = 10.0;
@@ -59,14 +59,14 @@ function SetTargetUnlock ()
   SetColour(RComp,GComp,BComp);
 }
 
-function SetFloatTarget ()
+function SetFloatTarget()
 {
   SourceWidth.Base = 50.0;
   SourceHeight.Base = 50.0;
   SourceDepth.Base = 50.0;
 }
 
-function SetHitTarget ()
+function SetHitTarget()
 {
 }
 

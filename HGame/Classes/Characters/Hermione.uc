@@ -4,7 +4,7 @@
 
 class Hermione extends Characters;
 
-function float GetFootStepVol ()
+function float GetFootStepVol()
 {
   return 1.0;
 }

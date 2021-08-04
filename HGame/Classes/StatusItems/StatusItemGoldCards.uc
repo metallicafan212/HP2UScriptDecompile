@@ -4,7 +4,7 @@
 
 class StatusItemGoldCards extends StatusItemWizardCards;
 
-function MoveHarryCardToEnd ()
+function MoveHarryCardToEnd()
 {
   local int I;
   local int nHarryCardId;
@@ -33,7 +33,7 @@ function MoveHarryCardToEnd ()
 	}
 }
 
-function bool HaveHarryCard ()
+function bool HaveHarryCard()
 {
   local int I;
   local int nHarryCardId;
@@ -64,7 +64,7 @@ function bool HaveHarryCard ()
   return False;
 }
 
-function int GetHarryCardId ()
+function int GetHarryCardId()
 {
   local Class<Actor> classWC;
 

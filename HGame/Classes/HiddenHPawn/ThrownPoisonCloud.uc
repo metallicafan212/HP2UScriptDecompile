@@ -11,13 +11,13 @@ var bool bCanBeThrown;
 var float timeSafe;
 var bool bCanBeTouched;
 
-function PreBeginPlay ()
+function PreBeginPlay()
 {
 	Super.PreBeginPlay();
 	SetCollision(False,False,False);
 }
 
-function PostBeginPlay ()
+function PostBeginPlay()
 {
 	local HPawn Pawn;
 	local Vector vTargetDir;
@@ -56,7 +56,7 @@ function PostBeginPlay ()
 	PlaySound(Sound'spell_hit',SLOT_Interact,1.0,False,2000.0,1.0);
 }
 
-function Timer ()
+function Timer()
 {
 	Destroy();
 }
@@ -71,7 +71,7 @@ defaultproperties
 
     bCanBeTouched=True
 
-    attachedParticleClass=Class'HPParticle.Hork04'
+    attachedParticleClass(0)=Class'HPParticle.Hork04'
 
     DrawType=DT_None
 

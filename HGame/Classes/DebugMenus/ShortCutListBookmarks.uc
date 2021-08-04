@@ -7,7 +7,7 @@ class ShortCutListBookmarks extends ShortCutList;
 var array<name> lableName;
 var array<string> lableDesc;
 
-function Created ()
+function Created()
 {
   Super.Created();
   RowHeight = 12.0;
@@ -18,7 +18,7 @@ function Created ()
   Reset();
 }
 
-function Reset ()
+function Reset()
 {
   local navShortcut sc;
 

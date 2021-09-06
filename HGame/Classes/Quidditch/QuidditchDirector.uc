@@ -780,7 +780,6 @@ state GamePlay
 		  ProgressBar.SetProgress(100 * (Snitch.HoopTrail.HoopsToHit - Snitch.HoopTrail.HoopsToGo) / Snitch.HoopTrail.HoopsToHit);
 		  break;
       case PM_Proximity:
-		  //KW left this empty? -AdamJD
       case PM_ProximityWithHoops:
 		  fProgressPercent = 0.0;
 		  PercentDone = fProgressPercent;
@@ -916,7 +915,8 @@ state GamePlay
         }
       }
       PercentDone = fProgressPercent;
-	  if ( (PercentDone < LastPercentDone) &&  !(PercentDone == 98.0) && (LastPercentDone > 98.0) )
+	  //if ( (PercentDone < LastPercentDone) &&  !(PercentDone == 98.0) && (LastPercentDone > 98.0) )
+	  if ( (PercentDone < LastPercentDone) &&  !(PercentDone == 98.0 && (LastPercentDone > 98.0)) ) //fix for progress bar not flashing white when losing progress (thanks to UnDrew for finding this) -AdamJD
       {
         ProgressBar.SetProgress(PercentDone,True,1.0);
       } else {
@@ -1241,7 +1241,6 @@ state GamePlay
 			//}
 			break;
         case PM_Proximity:
-			//KW left this empty? -AdamJD
         case PM_ProximityWithHoops:
 			if ( Object == Snitch )
 			{

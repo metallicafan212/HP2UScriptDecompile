@@ -28,6 +28,12 @@ function ResolutionChanged(float W, float H)
 	Resized();
 }
 
+function BeforePaint(Canvas C, float X, float Y)
+{
+	// Implemented in a child class
+	Resized();
+}
+
 function Resized()
 {
 	local float HScale;
@@ -43,10 +49,9 @@ function Resized()
 	
 	button1.WY 			= 78.0 * HScale;
 	button2.WY 			= 78.0 * HScale;
-	button2.WinLeft 	= 138.0 * HScale;
-	
 	button1.Resized();
 	button2.Resized();
+	button2.WinLeft 	= (WinWidth - button2.WinWidth) - (24 * HScale);//138.0 * HScale;
 	
 	Message.WinTop		= 27 * HScale;
 }

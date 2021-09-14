@@ -215,6 +215,10 @@ function Created()
 	MouseHiLabel.SetText(MouseHiText);
 	MouseHiLabel.SetFont(0);
 	MouseHiLabel.TextColor = ButtonTextColor;
+	
+	// Metallicafan212:	So we know we need to move 21 to the left from the actual pos
+	MouseHiLabel.ResizeRemoval = 21;
+	
 	MouseLoLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', ctlX, ctlY, ctlW, 1.0));
 	MouseLoLabel.SetText(MouseLoText);
 	MouseLoLabel.SetFont(0);

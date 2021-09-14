@@ -7,6 +7,8 @@ var float WX, WY, WW, WH;
 
 var bool bEnableWidthResize;
 
+var float ResizeRemoval;
+
 function float GetWidthScale()
 {
 	return (3.0 / 4.0) / (Root.RealHeight / Root.RealWidth);
@@ -29,8 +31,15 @@ function Resized()
 	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	// Metallicafan212:	Scale our wanted values
+	//if (bEnableWidthResize)
+	//	WinLeft = WX - ((WX * HScale) / 8.0);
+	
 	if(bEnableWidthResize)
-		WinLeft		= WX * (HScale);
+	{
+		WinLeft = WX + ResizeRemoval;
+		
+		WinLeft = WinLeft - (ResizeRemoval / (HScale * HScale));
+	}
 		
 	WinTop		= WY * HScale;
 	

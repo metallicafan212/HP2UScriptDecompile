@@ -217,6 +217,7 @@ function Created()
 	ObjectDetailHiText.SetFont(0);
 	ObjectDetailHiText.TextColor = GoupLabelTextColor;
 	ObjectDetailHiText.bEnableWidthResize = true;
+	ObjectDetailHiText.ResizeRemoval = 20;
 	ctlY += vertSpacing[I++ ];
   
 	BrightnessLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
@@ -238,6 +239,7 @@ function Created()
 	BrightnessHiText.SetFont(0);
 	BrightnessHiText.TextColor = GoupLabelTextColor;
 	BrightnessHiText.bEnableWidthResize = true;
+	BrightnessHiText.ResizeRemoval = 20;
   
 	ctlY += vertSpacing[I++ ];
 	ctlY = 90 - offsetY;
@@ -274,6 +276,7 @@ function Created()
 	MusicVolumeHiText.SetFont(0);
 	MusicVolumeHiText.TextColor = GoupLabelTextColor;
 	MusicVolumeHiText.bEnableWidthResize = true;
+	MusicVolumeHiText.ResizeRemoval = 20;
 	ctlY += 30;
   
 	Log("Options::SoundVideoPage: MusicVolume " $ string(MusicVolume));
@@ -300,6 +303,7 @@ function Created()
 	SoundVolumeHiText.SetFont(0);
 	SoundVolumeHiText.TextColor = GoupLabelTextColor;
 	SoundVolumeHiText.bEnableWidthResize = true;
+	SoundVolumeHiText.ResizeRemoval = 20;
 	ctlY += 38;
 	
 	Log("Options::SoundVideoPage: MusicVolume " $ string(SoundVolume));

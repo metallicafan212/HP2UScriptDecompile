@@ -267,7 +267,7 @@ function BeforePaint(Canvas C, float X, float Y)
 		VertSB.WinLeft = WinWidth - LookAndFeel.Size_ScrollbarWidth - HBorder;
 		VertSB.WinTop = HBorder;
 		VertSB.WinWidth = LookAndFeel.Size_ScrollbarWidth;
-		VertSB.WinHeight = WinHeight - 2*VBorder;
+		VertSB.WinHeight = WinHeight - 2 * VBorder;
 	}
 	else
 	{

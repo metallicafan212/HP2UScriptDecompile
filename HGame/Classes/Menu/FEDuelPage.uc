@@ -13,6 +13,7 @@ var HGameButton rankingButtons[10];
 var HGameButton lockedButtons[10];
 var Texture lockedTexture;
 var string duelistNames[11];
+var string duelistNamesInEnglish[11];
 
 function RepositionChildControls()
 {
@@ -234,12 +235,13 @@ function string GetLocalDuelName (string strId, int Id)
 	local string dlgString;
 
 	dlgString = Localize("All",strId,"HPDialog");
+	
 	if ( Left(dlgString,1) == "[" )
 	{
 		I = InStr(dlgString,"]");
 		if ( I != -1 )
 		{
-		dlgString = Mid(dlgString,I + 1);
+			dlgString = Mid(dlgString,I + 1);
 		}
 	}
 	

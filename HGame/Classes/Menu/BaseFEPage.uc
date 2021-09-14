@@ -19,6 +19,9 @@ var Texture textureReturnNorm;
 var Texture textureReturnRO;
 var CurrRolloverInfo CurrRollover;
 
+// Metallicafan212:	Custom object for additional layering
+var Class<M212CustBack> ExBackLayering;
+
 function string GetLocalFEString (string strId)
 {
 	return Localize("All",strId,"HPMenu");

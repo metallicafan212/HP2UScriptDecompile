@@ -32,11 +32,7 @@ function BeforePaint (Canvas C, float X, float Y)
 	local float ListX;
 	local float ListY;
 	local float ExtraWidth;
-
-	C.Font = Root.Fonts[0];
-	C.SetPos(0.0,0.0);
-	MaxWidth = 187.0;
-	ExtraWidth = (HBorder + TextBorder) * 2;
+	
 	Count = Items.Count();
 	
 	if ( Count > 3 )
@@ -50,9 +46,31 @@ function BeforePaint (Canvas C, float X, float Y)
 		bgImage = CListSmall; 		//Texture'FEComboListSmall';
 	}
 	
-	ItemHeight = ((WinHeight - 7)) / Count;
+	// Metallicafan212:	It's WAY WAY too small with mult res
+	ItemHeight = ((WinHeight - 7)) / Min(Count, 4.0);//Count;
 	I = UWindowComboListItem(Items.Next);
 	
+	// Metallicafan212:	Super it
+	Super.BeforePaint(C, X, Y);
+
+	C.Font = Root.Fonts[0];
+	C.SetPos(0.0,0.0);
+	MaxWidth = 187.0;
+	/*
+	ExtraWidth = (HBorder + TextBorder) * 2;
+	
+	if(Count > MaxVisible)
+	{
+		ExtraWidth += LookAndFeel.Size_ScrollbarWidth;
+		WinHeight 	= ((ItemHeight * MaxVisible) + (VBorder * 2)) * HScale;
+	}
+	else
+	{
+		VertSB.Pos = 0;
+		WinHeight = ((ItemHeight * Count) + (VBorder * 2) * HScale);
+	}
+	*/
+
 	while (I != None)
 	{
 		TextSize(C,RemoveAmpersand(I.Value),W,H);
@@ -63,10 +81,15 @@ function BeforePaint (Canvas C, float X, float Y)
 		I = UWindowComboListItem(I.Next);
 	}
 	
+	// Metallicafan212:	Hack, I'm too lazy to fix the rest of the code
+	if(Count > MaxVisible)
+	{
+		MaxWidth -= LookAndFeel.Size_ScrollbarWidth;
+	}
+	
 	WinWidth = MaxWidth;
 	ListX = Owner.EditAreaDrawX;
 	ListY = (Owner.Button.WinTop + Owner.Button.WinHeight);
-	VertSB.HideWindow();
 	Owner.WindowToGlobal(ListX, ListY, WinLeft, WinTop);
 }
 
@@ -77,6 +100,10 @@ function DrawMenuBackground (Canvas C)
 
 function ComboList_DrawItem (HGameComboList Combo, Canvas C, float X, float Y, float W, float H, string Text, bool bSelected)
 {
+	local float HScale;
+	
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	
 	C.DrawColor.R = 255;
 	C.DrawColor.G = 255;
 	C.DrawColor.B = 255;
@@ -94,7 +121,10 @@ function ComboList_DrawItem (HGameComboList Combo, Canvas C, float X, float Y, f
 		C.DrawColor.B = 255;
 	}
 	
-	Combo.ClipText(C, X + Combo.TextBorder + 2, (Y + 5), Text);
+	//Y *= HScale;
+	
+	// Metallicafan212:	Scale text placement
+	Combo.ClipText(C, X + Combo.TextBorder + 2, Y + (H / 4.0), Text);
 }
 
 function DrawItem (Canvas C, UWindowList Item, float X, float Y, float W, float H)

@@ -662,7 +662,7 @@ function float GetVendorBarX (Canvas canvas)
 	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 	
 	// Metallicafan212:	This needs to be offset to be in the center again
-	Offset = (128.0 / HScale) - (128.0 * HScale);//(256 - (256 * HScale)) * 2.0;
+	Offset = (256.0 / HScale) - (256.0 * HScale);//(256 - (256 * HScale)) * 2.0;
 	
 	return ((canvas.SizeX / 2.0) - (canvas.GetHudScaleFactor() * (fVENDORBAR_W / 2.0))) + Offset;
 }

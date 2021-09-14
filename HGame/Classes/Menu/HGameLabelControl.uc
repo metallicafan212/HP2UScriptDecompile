@@ -5,6 +5,8 @@ var float WX, WY, WW, WH;
 
 //var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
 
+var bool bEnableWidthResize;
+
 function float GetWidthScale()
 {
 	return (3.0 / 4.0) / (Root.RealHeight / Root.RealWidth);
@@ -27,7 +29,9 @@ function Resized()
 	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	// Metallicafan212:	Scale our wanted values
-	//WinLeft		= WX * (HScale * 2);
+	if(bEnableWidthResize)
+		WinLeft		= WX * (HScale);
+		
 	WinTop		= WY * HScale;
 	
 	//if(Align != TA_Center)

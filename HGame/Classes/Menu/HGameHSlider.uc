@@ -3,11 +3,64 @@ class HGameHSlider based on UWindowHSliderControl;
 
 var float WX, WY, WW, WH;
 
-//var Region		WUpRegion,  WDownRegion,  WDisabledRegion,  WOverRegion;
-
 function float GetWidthScale()
 {
 	return (3.0 / 4.0) / (Root.RealHeight / Root.RealWidth);
+}
+
+function LMouseDown(float X, float Y)
+{
+	local float HScale;
+	
+	Super.LMouseDown(X, Y);
+	
+	// Metallicafan212:	Scale
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	
+	X /= HScale;
+	
+	
+	if((X >= TrackStart) && (X <= TrackStart + TrackWidth)) 
+	{
+		bSliding = True;
+		Root.CaptureMouse();
+	}
+
+	if(X < TrackStart && X > SliderDrawX)
+	{
+		if(Step != 0)
+			SetValue(Value - Step);
+		else
+			SetValue(Value - 1);
+	}
+	
+	if(X > TrackStart + TrackWidth && X < SliderDrawX + SliderWidth)
+	{
+		if(Step != 0)
+			SetValue(Value + Step);
+		else
+			SetValue(Value + 1);
+	}
+	
+}
+
+function MouseMove(float X, float Y)
+{
+	local float HScale;
+	
+	Super.MouseMove(X, Y);
+	
+	// Metallicafan212:	Scale
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	
+	X /= HScale;
+	
+	if(bSliding && bMouseDown)
+	{
+		SetValue((((X - SliderDrawX) / (SliderWidth - TrackWidth)) * (MaxValue - MinValue)) + MinValue, bNoSlidingNotify);
+	}
+	else
+		bSliding = False;
 }
 
 function ResolutionChanged(float W, float H)
@@ -22,33 +75,38 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 									  float tX, float tY, float tW, float tH, texture Tex ) 
 {
 	local float OrgX, OrgY, ClipX, ClipY;
-	
+	local float HScale;
 	local bool bOldNoSmooth;
 	
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	
 	// Metallicafan212:	Disable no smooth
-	bOldNoSmooth = C.bNoSmooth;
-	C.bNoSmooth = false;
+	bOldNoSmooth 	= C.bNoSmooth;
+	C.bNoSmooth 	= false;
 
-	OrgX = C.OrgX;
-	OrgY = C.OrgY;
-	ClipX = C.ClipX;
-	ClipY = C.ClipY;
+	OrgX 			= C.OrgX;
+	OrgY 			= C.OrgY;
+	ClipX 			= C.ClipX;
+	ClipY 			= C.ClipY;
 
 	C.SetOrigin(OrgX + ClippingRegion.X * Root.GUIScale, OrgY + ClippingRegion.Y * Root.GUIScale);
 	C.SetClip(ClippingRegion.W * Root.GUIScale, ClippingRegion.H * Root.GUIScale);
 
 	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
-	C.DrawTileClipped( Tex, W * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), H * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), tX, tY, tW, tH);
+	C.DrawTileClipped( Tex, W * Root.GUIScale * HScale, H * Root.GUIScale * HScale, tX, tY, tW, tH);
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
 	
-	C.bNoSmooth = bOldNoSmooth;
+	C.bNoSmooth 	= bOldNoSmooth;
 }
 
 function BeforePaint(Canvas C, float X, float Y)
 {
 	local float W, H;
+	local float HScale;
+	
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	
 	// Metallicafan212:	Skip
 	Super(UWindowDialogControl).BeforePaint(C, X, Y);
@@ -59,23 +117,23 @@ function BeforePaint(Canvas C, float X, float Y)
 	switch(Align)
 	{
 		case TA_Left:
-			SliderDrawX = (WinWidth - SliderWidth);
+			SliderDrawX = (WinWidth - SliderWidth) * HScale;
 			TextX = 0;
 			break;
 		case TA_Right:
 			SliderDrawX = 0;	
-			TextX = WinWidth - W;
+			TextX 		= (WinWidth - W) * HScale;
 			break;
 		case TA_Center:
-			SliderDrawX = (WinWidth - SliderWidth) / 2;
-			TextX = (WinWidth - W) / 2;
+			SliderDrawX = ((WinWidth - SliderWidth) / 2) * HScale;
+			TextX 		= ((WinWidth - W) / 2) * HScale;
 			break;
 	}
 
-	SliderDrawY = ((WinHeight - 2) * Class'M212HScale'.Static.UWindowGetHeightScale(Root)) / 2;
-	TextY 		= ((WinHeight - H) * Class'M212HScale'.Static.UWindowGetHeightScale(Root)) / 2;
+	SliderDrawY = ((WinHeight - 2) * HScale) / 2;
+	TextY 		= ((WinHeight - H) * HScale) / 2;
 
-	TrackStart = SliderDrawX + (SliderWidth - TrackWidth) * ((Value - MinValue)/(MaxValue - MinValue));
+	TrackStart = SliderDrawX + (SliderWidth - TrackWidth) * ((Value - MinValue) / (MaxValue - MinValue));
 }
 
 function Resized()

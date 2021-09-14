@@ -77,7 +77,7 @@ event bool KeyEvent( EInputKey Key, EInputAction Action, FLOAT Delta )
 
 function ShowConsole()
 {
-return;	//overridden in HPConsole.
+	return;	//overridden in HPConsole.
 
 	if(!Root.bAllowConsole)
 		return;

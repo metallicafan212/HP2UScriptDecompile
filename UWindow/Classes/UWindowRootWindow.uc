@@ -232,11 +232,11 @@ function DrawMouse(Canvas C)
 		//got added after the proto -AdamJD
 		if ( MouseWindow.Cursor.tex2 != None )
 		{
-		  nSaveStyle = C.Style;
-		  C.Style = 3;
-		  C.SetPos(MouseX * GUIScale + MouseWindow.Cursor.Tex2XOffset, MouseY * HGUIScale + MouseWindow.Cursor.Tex2XOffset);
-		  C.DrawIcon(MouseWindow.Cursor.tex2,1.0);
-		  C.Style = nSaveStyle;
+			nSaveStyle = C.Style;
+			C.Style = 3;
+			C.SetPos(MouseX * GUIScale + MouseWindow.Cursor.Tex2XOffset, MouseY * HGUIScale + MouseWindow.Cursor.Tex2XOffset);
+			C.DrawIcon(MouseWindow.Cursor.tex2,1.0);
+			C.Style = nSaveStyle;
 		}
 	}
 

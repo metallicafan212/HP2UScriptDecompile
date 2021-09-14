@@ -4,6 +4,32 @@
 
 class FEInGamePage extends baseFEPage;
 
+/*
+// Metallicafan212:	Textures for the new layout
+#exec Texture Import File=Textures\InGamePage\Bottom.png	GROUP=FEBook	Name=FEBottom 	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\Top.png		GROUP=FEBook	Name=FETop 		COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\LTop.png		GROUP=FEBook	Name=FETLeft	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\LBot.png		GROUP=FEBook	Name=FEBLeft	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\RTop.png		GROUP=FEBook	Name=FETRight	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\RBot.png		GROUP=FEBook	Name=FEBRight	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\Back.png		GROUP=FEBook	Name=FEBack		COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+
+// Metallicafan212:	Test
+#exec Texture Import File=Textures\DeusEx.png				GROUP=FEBook	Name=FEDX		COMPRESSION=1 UPSCALE=1 MIPS=1 FLAGS=0
+
+// Metallicafan212:	Texture vars for these
+var Texture FEBot;
+var Texture FETop;
+var Texture FETL;
+var Texture FEBL;
+var Texture FETR;
+var Texture FEBR;
+var Texture FEBackground;
+
+// Metallicafan212:	Optional middle "flavor" texture
+var Texture FEMid;
+*/
+
 var HPMessageBox ConfirmQuit;
 var bool bSetupAfterPageSwitch;
 var HGameButton BeansButton;
@@ -63,6 +89,10 @@ function Paint (Canvas Canvas, float X, float Y)
 {
 	local float fScaleFactor;
 	local bool bHaveObjectiveText;
+	
+	local float HScale, MidUSize, MidVSize;
+	
+	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 
 	fScaleFactor = Canvas.SizeX / WinWidth;
 	if ( strCurrToolTip != "" )
@@ -74,7 +104,74 @@ function Paint (Canvas Canvas, float X, float Y)
 		PaintObjectiveText(Canvas,fScaleFactor);
 	}
 	
-	Super.Paint(Canvas,X,Y);
+	/*
+	// Metallicafan212:	Height scale
+	fScaleFactor *= HScale;
+	
+	// Metallicafan212:	Paint the background layer
+	Canvas.bNoUVClamp = true;
+	Canvas.SetPos(0, 0);
+	Canvas.SetClip(Canvas.SizeX, Canvas.SizeY);
+	Canvas.DrawTileClipped(FEBackground, Canvas.SizeX, Canvas.SizeY, 0.0, 0.0, Canvas.SizeX * 2.5, Canvas.SizeY * 2.5);
+	
+	// Metallicafan212:	We need to scale the pos to the middle of the screen
+	if(FEMid != none)
+	{
+		if(FEMid.USize > FEMid.VSize)
+		{
+			MidUSize = 137.0 * fScaleFactor * (FEMid.USize / float(FEMid.VSize));
+			MidVSize = 137.0 * fScaleFactor;
+			
+			//Log(MidUSize $ " " $ MidVSize);
+			
+			// Metallicafan212:	Optional middle icon
+			Canvas.SetPos((Canvas.SizeX / 2.0) - MidUSize, (Canvas.SizeY / 2.0) - MidVSize);
+			Canvas.DrawTile(FEMid, fScaleFactor * 274.0 * (FEMid.USize / float(FEMid.VSize)), fScaleFactor * 274.0, 0.0, 0.0, FEMid.USize, FEMid.VSize);
+		}
+		else
+		{
+			MidUSize = 137.0 * fScaleFactor;
+			MidVSize = 137.0 * fScaleFactor * (FEMid.VSize / float(FEMid.USize));
+			
+			//Log(MidUSize $ " " $ MidVSize);
+			
+			// Metallicafan212:	Optional middle icon
+			Canvas.SetPos((Canvas.SizeX / 2.0) - MidUSize, (Canvas.SizeY / 2.0) - MidVSize);
+			Canvas.DrawTile(FEMid, fScaleFactor * 274.0, fScaleFactor * 274.0 * (FEMid.VSize / float(FEMid.USize)), 0.0, 0.0, FEMid.USize, FEMid.VSize);
+		}
+	}
+	
+	// Metallicafan212:	Now draw the top
+	// 					Middle first
+	Canvas.SetPos(0, 0);
+	Canvas.DrawTile(FETop, Canvas.SizeX, 128 * fScaleFactor, 0.0, 0.0, FETop.USize, FETop.VSize);
+	
+	// Metallicafan212:	Left bracket
+	Canvas.SetPos(0, 0);
+	Canvas.DrawIcon(FETL, fScaleFactor * (128.0 / FETL.VSize));
+	
+	// Metallicafan212:	Right bracket
+	Canvas.SetPos(Canvas.SizeX - (128.0 * fScaleFactor), 0);
+	Canvas.DrawIcon(FETR, fScaleFactor * (128.0 / FETL.VSize));
+	
+	// Metallicafan212:	Draw the bottom
+	//					Middle first
+	Canvas.SetPos(0, Canvas.SizeY - (128.0 * fScaleFactor));
+	
+	Canvas.DrawTile(FEBot, Canvas.SizeX, 128 * fScaleFactor, 0.0, 0.0, FETop.USize, FETop.VSize);
+	
+	// Metallicafan212:	Left bracket
+	Canvas.SetPos(0, Canvas.SizeY - (128.0 * fScaleFactor));
+	Canvas.DrawIcon(FEBL, fScaleFactor * (128.0 / FETL.VSize));
+	
+	// Metallicafan212:	Right bracket
+	Canvas.SetPos(Canvas.SizeX - (128.0 * fScaleFactor), Canvas.SizeY - (128.0 * fScaleFactor));
+	Canvas.DrawIcon(FEBR, fScaleFactor * (128.0 / FETL.VSize));
+	
+	Canvas.bNoUVClamp = false;
+	*/
+	
+	Super.Paint(Canvas, X, Y);
 }
 
 function AfterPaint (Canvas Canvas, float X, float Y)
@@ -555,5 +652,6 @@ defaultproperties
     soundFolioRO=Sound'HPSounds.menu_sfx.GUI_Esc_Rollover3'
 
     soundBottomRO=Sound'HPSounds.menu_sfx.GUI_Esc_Rollover4'
-
+	
+	//FEMid=Texture'HGame.LoadingScreen.FELoadingScreen'
 }

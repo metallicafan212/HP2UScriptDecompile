@@ -5,18 +5,43 @@
 class FEBook extends baseFEBook; 
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FEInGameBackTexture1.PNG	GROUP=Icons	Name=FEInGameBackTexture1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEInGameBackTexture2.PNG	GROUP=Icons	Name=FEInGameBackTexture2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEInGameBackTexture3.PNG	GROUP=Icons	Name=FEInGameBackTexture3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEInGameBackTexture4.PNG	GROUP=Icons	Name=FEInGameBackTexture4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEInGameBackTexture5.PNG	GROUP=Icons	Name=FEInGameBackTexture5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEInGameBackTexture6.PNG	GROUP=Icons	Name=FEInGameBackTexture6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEBack1Texture1.PNG	GROUP=Icons	Name=FEBack1Texture1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEBack1Texture2.PNG	GROUP=Icons	Name=FEBack1Texture2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEBack1Texture3.PNG	GROUP=Icons	Name=FEBack1Texture3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEBack1Texture4.PNG	GROUP=Icons	Name=FEBack1Texture4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEBack1Texture5.PNG	GROUP=Icons	Name=FEBack1Texture5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FEBack1Texture6.PNG	GROUP=Icons	Name=FEBack1Texture6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture1.PNG	GROUP=Icons	Name=FEInGameBackTexture1 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture2.PNG	GROUP=Icons	Name=FEInGameBackTexture2 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture3.PNG	GROUP=Icons	Name=FEInGameBackTexture3 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture4.PNG	GROUP=Icons	Name=FEInGameBackTexture4 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture5.PNG	GROUP=Icons	Name=FEInGameBackTexture5 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEInGameBackTexture6.PNG	GROUP=Icons	Name=FEInGameBackTexture6 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture1.PNG	GROUP=Icons	Name=FEBack1Texture1 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture2.PNG	GROUP=Icons	Name=FEBack1Texture2 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture3.PNG	GROUP=Icons	Name=FEBack1Texture3 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture4.PNG	GROUP=Icons	Name=FEBack1Texture4 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture5.PNG	GROUP=Icons	Name=FEBack1Texture5 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FEBack1Texture6.PNG	GROUP=Icons	Name=FEBack1Texture6 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+
+// Metallicafan212:	Textures for the new layout
+#exec Texture Import File=Textures\InGamePage\Bottom.png	GROUP=FEBook	Name=FEBottom 	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\Top.png		GROUP=FEBook	Name=FETop 		COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\LTop.png		GROUP=FEBook	Name=FETLeft	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\LBot.png		GROUP=FEBook	Name=FEBLeft	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\RTop.png		GROUP=FEBook	Name=FETRight	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\RBot.png		GROUP=FEBook	Name=FEBRight	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\Back.png		GROUP=FEBook	Name=FEBack		COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+
+// Metallicafan212:	Test
+//#exec Texture Import File=Textures\DeusEx.png				GROUP=FEBook	Name=FEDX		COMPRESSION=1 UPSCALE=1 MIPS=1 FLAGS=0
+
+// Metallicafan212:	Texture vars for these
+var Texture FEBot;
+var Texture FETop;
+var Texture FETL;
+var Texture FEBL;
+var Texture FETR;
+var Texture FEBR;
+var Texture FEBackground;
+
+// Metallicafan212:	Optional middle "flavor" texture
+var Texture FEMid;
+
 
 struct Background
 {
@@ -57,6 +82,11 @@ var Texture LogoTexture1;
 var Texture LogoTexture2;
 var bool bIsOpen;
 var bool bShowBackground;
+
+// Metallicafan212:	To show the custom main page background
+var bool bShowMainBack;
+var bool bShowNewBack;
+
 var bool bDrawLogo;
 var bool bInEndGame;
 var Background SplashScreens[5];
@@ -161,54 +191,101 @@ function ChangePage (baseFEPage Page)
 			}
 		}
 	}
+	
+	// Metallicafan212:	Default to false
 	bShowBackground = False;
+	
+	bShowMainBack = false;
+	bShowNewBack = false;
+	
 	switch (curPage)
 	{
 		case MainPage:
-			bGamePlaying = False;
+			bGamePlaying = False;			
 			break;
 			
 		case InputPage:
-			bShowBackground = True;
-			curBackground = Back1Background;
+			//bShowBackground = True;
+			//curBackground = Back1Background;
+			
+			// Metallicafan212:	New background stuff
+			bShowMainBack = false;
+			bShowNewBack = true;
+			
 			break;
     
 		case SoundVideoPage:
-			bShowBackground = True;
-			curBackground = Back1Background;
+			//bShowBackground = True;
+			//curBackground = Back1Background;
+			
+			// Metallicafan212:	New background stuff
+			bShowMainBack = false;
+			bShowNewBack = true;
+			
 			break;
     
 		case LangPage:
 			break;
 		
+		// Metallicafan212:	Slowly changing these to manual painting in the page themselves
 		case InGamePage:
-			bShowBackground = True;
-			curBackground = InGameBackground;
+			//bShowBackground = True;
+			//curBackground = InGameBackground;
+			
+			// Metallicafan212:	New background stuff
+			bShowMainBack = true;
+			bShowNewBack = true;
+			
 			break;
     
 		case QuidPage:
-			bShowBackground = True;
-			curBackground = Back1Background;
+			//bShowBackground = True;
+			//curBackground = Back1Background;
+			
+			// Metallicafan212:	New background stuff
+			bShowMainBack = false;
+			bShowNewBack = true;
+			
 			break;
     
 		case DuelPage:
-			bShowBackground = True;
-			curBackground = Back1Background;
+			//bShowBackground = True;
+			//curBackground = Back1Background;
+			
+			// Metallicafan212:	New background stuff
+			bShowMainBack = false;
+			bShowNewBack = true;
+			
 			break;
     
 		case HousepointsPage:
-			bShowBackground = True;
-			curBackground = Back1Background;
+			//bShowBackground = True;
+			//curBackground = Back1Background;
+			
+			// Metallicafan212:	New background stuff
+			bShowMainBack = false;
+			bShowNewBack = true;
+			
 			break;
     
 		case ChallengesPage:
-			bShowBackground = True;
-			curBackground = Back1Background;
+			//bShowBackground = True;
+			//curBackground = Back1Background;
+			
+			// Metallicafan212:	New background stuff
+			bShowMainBack = false;
+			bShowNewBack = true;
+			
 			break;
 		
 		case FolioPage:
-			bShowBackground = True;
-			curBackground = Back1Background;
+			//bShowBackground = True;
+			//curBackground = Back1Background;
+			
+			// Metallicafan212:	New background stuff
+			bShowMainBack = false;
+			bShowNewBack = true;
+			
 			break;
     
 		case CreditsPage:
@@ -475,6 +552,11 @@ function Paint (Canvas Canvas, float X, float Y)
 	local int Ox;
 	local int Oy;
 	local Color saveColor;
+	
+	local float fScaleFactor;
+	local bool bHaveObjectiveText;
+	
+	local float HScale, MidUSize, MidVSize;
 
 	if ( bNeedToStartMusic )
 	{
@@ -492,6 +574,98 @@ function Paint (Canvas Canvas, float X, float Y)
 		
 		// Metallicafan212:	We need to work through all our controls
 	}
+	
+	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
+
+	fScaleFactor = Canvas.SizeX / WinWidth;
+	
+	// Metallicafan212:	Height scale
+	fScaleFactor *= HScale;
+	
+	Canvas.bNoUVClamp = false;
+	
+	// Metallicafan212:	Custom layering functions, for customizing how stuff is drawn
+	if(CurPage.ExBackLayering != None)
+		CurPage.ExBackLayering.static.BeforeBackgroundDraw(Canvas, CurPage);
+		
+	// Metallicafan212:	Moved from FEInGamePage
+	Canvas.bNoUVClamp = true;
+	
+	if(bShowNewBack)
+	{
+		// Metallicafan212:	Paint the background layer
+		Canvas.SetPos(0, 0);
+		Canvas.SetClip(Canvas.SizeX, Canvas.SizeY);
+		Canvas.DrawTileClipped(FEBackground, Canvas.SizeX, Canvas.SizeY, 0.0, 0.0, Canvas.SizeX * 2.5, Canvas.SizeY * 2.5);
+		
+		// Metallicafan212:	We need to scale the pos to the middle of the screen
+		if(FEMid != none)
+		{
+			if(FEMid.USize > FEMid.VSize)
+			{
+				MidUSize = 137.0 * fScaleFactor * (FEMid.USize / float(FEMid.VSize));
+				MidVSize = 137.0 * fScaleFactor;
+				
+				//Log(MidUSize $ " " $ MidVSize);
+				
+				// Metallicafan212:	Optional middle icon
+				Canvas.SetPos((Canvas.SizeX / 2.0) - MidUSize, (Canvas.SizeY / 2.0) - MidVSize);
+				Canvas.DrawTile(FEMid, fScaleFactor * 274.0 * (FEMid.USize / float(FEMid.VSize)), fScaleFactor * 274.0, 0.0, 0.0, FEMid.USize, FEMid.VSize);
+			}
+			else
+			{
+				MidUSize = 137.0 * fScaleFactor;
+				MidVSize = 137.0 * fScaleFactor * (FEMid.VSize / float(FEMid.USize));
+				
+				//Log(MidUSize $ " " $ MidVSize);
+				
+				// Metallicafan212:	Optional middle icon
+				Canvas.SetPos((Canvas.SizeX / 2.0) - MidUSize, (Canvas.SizeY / 2.0) - MidVSize);
+				Canvas.DrawTile(FEMid, fScaleFactor * 274.0, fScaleFactor * 274.0 * (FEMid.VSize / float(FEMid.USize)), 0.0, 0.0, FEMid.USize, FEMid.VSize);
+			}
+		}
+	}
+	
+	// Metallicafan212:	Render on top the background fill layer
+	if(CurPage.ExBackLayering != None)
+		CurPage.ExBackLayering.static.AfterBackgroundLayer(Canvas, CurPage);
+	
+	if(bShowMainBack)
+	{
+		// Metallicafan212:	Now draw the top
+		// 					Middle first
+		Canvas.SetPos(0, 0);
+		Canvas.DrawTile(FETop, Canvas.SizeX, 128 * fScaleFactor, 0.0, 0.0, FETop.USize, FETop.VSize);
+			
+		// Metallicafan212:	Left bracket
+		Canvas.SetPos(0, 0);
+		Canvas.DrawIcon(FETL, fScaleFactor * (128.0 / FETL.VSize));
+			
+		// Metallicafan212:	Right bracket
+		Canvas.SetPos(Canvas.SizeX - (128.0 * fScaleFactor), 0);
+		Canvas.DrawIcon(FETR, fScaleFactor * (128.0 / FETL.VSize));
+			
+		// Metallicafan212:	Draw the bottom
+		//					Middle first
+		Canvas.SetPos(0, Canvas.SizeY - (128.0 * fScaleFactor));
+			
+		Canvas.DrawTile(FEBot, Canvas.SizeX, 128 * fScaleFactor, 0.0, 0.0, FETop.USize, FETop.VSize);
+			
+		// Metallicafan212:	Left bracket
+		Canvas.SetPos(0, Canvas.SizeY - (128.0 * fScaleFactor));
+		Canvas.DrawIcon(FEBL, fScaleFactor * (128.0 / FETL.VSize));
+			
+		// Metallicafan212:	Right bracket
+		Canvas.SetPos(Canvas.SizeX - (128.0 * fScaleFactor), Canvas.SizeY - (128.0 * fScaleFactor));
+		Canvas.DrawIcon(FEBR, fScaleFactor * (128.0 / FETL.VSize));
+	}
+	
+	// Metallicafan212:	After the InGamePage bars, render on top
+	if(CurPage.ExBackLayering != None)
+		CurPage.ExBackLayering.static.AfterLayering(Canvas, CurPage);
+	
+	Canvas.bNoUVClamp = false;
+	
 	if ( bShowBackground )
 	{
 		ScaleAndDraw(Canvas,0.0,0.0,curBackground.p1);
@@ -868,4 +1042,13 @@ defaultproperties
     InGameBackground=(p1=Texture'HGame.Icons.FEInGameBackTexture1',p2=Texture'HGame.Icons.FEInGameBackTexture2',p3=Texture'HGame.Icons.FEInGameBackTexture3',p4=Texture'HGame.Icons.FEInGameBackTexture4',p5=Texture'HGame.Icons.FEInGameBackTexture5',p6=Texture'HGame.Icons.FEInGameBackTexture6',durration=999999.00)
 
     Back1Background=(p1=Texture'HGame.Icons.FEBack1Texture1',p2=Texture'HGame.Icons.FEBack1Texture2',p3=Texture'HGame.Icons.FEBack1Texture3',p4=Texture'HGame.Icons.FEBack1Texture4',p5=Texture'HGame.Icons.FEBack1Texture5',p6=Texture'HGame.Icons.FEBack1Texture6',durration=999999.00)
+	
+	FEBot=Texture'HGame.FEBook.FEBottom'
+	FETop=Texture'HGame.FEBook.FETop'
+	FETL=Texture'HGame.FEBook.FETLeft'
+	FEBL=Texture'HGame.FEBook.FEBLeft'
+	FETR=Texture'HGame.FEBook.FETRight'
+    FEBR=Texture'HGame.FEBook.FEBRight'
+	FEBackground=Texture'HGame.FEBook.FEBack'
+	//FEMid=Texture'HGame.FEBook.FEDX'
 }

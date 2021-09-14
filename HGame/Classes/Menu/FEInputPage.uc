@@ -15,10 +15,12 @@ const InQuidditch_LastBoundKeyIndex= 12;
 const InQuidditch_FirstBoundKeyIndex= 11;
 const InGame_LastBoundKeyIndex= 11;
 const InGame_FirstBoundKeyIndex= 0;
-enum EKeyType {
-  KT_Game,
-  KT_Quidditch,
-  KT_WizardDuel
+
+enum EKeyType 
+{
+	KT_Game,
+	KT_Quidditch,
+	KT_WizardDuel
 };
 
 var bool bInitialized;
@@ -159,195 +161,206 @@ function LocalizeStrings()
 
 function Created()
 {
-  local int ctlX;
-  local int ctlY;
-  local int ctlW;
-  local int ctlH;
-  local int labelWidth;
-  local int labelX;
-  local int offsetX;
-  local int offsetY;
-  local int I;
-  local int MusicVolume;
-  local int SoundVolume;
-  local string sens;
-  local int SliderWidth;
-  local int buttonWidth;
-  local int buttonHeight;
-  local int textHeight;
-  local int textOffsetY;
+	local int ctlX;
+	local int ctlY;
+	local int ctlW;
+	local int ctlH;
+	local int labelWidth;
+	local int labelX;
+	local int offsetX;
+	local int offsetY;
+	local int I;
+	local int MusicVolume;
+	local int SoundVolume;
+	local string sens;
+	local int SliderWidth;
+	local int buttonWidth;
+	local int buttonHeight;
+	local int textHeight;
+	local int textOffsetY;
 
-  LocalizeStrings();
-  LoadExistingKeys();
-  offsetX = 0;
-  offsetY = 0;
-  ctlX = 130 - offsetX;
-  labelX = ctlX - 115;
-  ctlY = 50 - offsetY;
-  ctlH = 17;
-  ctlW = 184;
-  labelWidth = ctlX - labelX;
-  SliderWidth = 133;
-  buttonWidth = 180;
-  buttonHeight = 24;
-  textHeight = 10;
-  textOffsetY = (buttonHeight - textHeight) / 2;
-  MiscLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',labelX,ctlY,ctlW,1.0));
-  MiscLabel.SetText(MiscText);
-  MiscLabel.SetFont(1);
-  MiscLabel.TextColor = GoupLabelTextColor;
-  ctlY += 25;
-  I = 0;
-  MouseSensitivityLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',labelX,ctlY + textOffsetY,ctlW,1.0));
-  MouseSensitivityLabel.SetText(MouseSensitivityText);
-  MouseSensitivityLabel.SetFont(1);
-  MouseSensitivityLabel.TextColor = LabelTextColor;
-  SensitivitySlider = HPMenuOptionHSlider(CreateControl(Class'HPMenuOptionHSlider',ctlX,ctlY,SliderWidth,1.0));
-  SensitivitySlider.bNoSlidingNotify = True;
-  SensitivitySlider.SetRange(0.20, 10.0, 0.20);
-  SensitivitySlider.SliderWidth = SliderWidth;
-  ctlY += 28;
+	LocalizeStrings();
+	LoadExistingKeys();
+	offsetX = 0;
+	offsetY = 0;
+	ctlX = 130 - offsetX;
+	labelX = ctlX - 115;
+	ctlY = 50 - offsetY;
+	ctlH = 17;
+	ctlW = 184;
+	labelWidth = ctlX - labelX;
+	SliderWidth = 133;
+	buttonWidth = 180;
+	buttonHeight = 24;
+	textHeight = 10;
+	textOffsetY = (buttonHeight - textHeight) / 2;
+	MiscLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',labelX,ctlY,ctlW,1.0));
+	MiscLabel.SetText(MiscText);
+	MiscLabel.SetFont(1);
+	MiscLabel.TextColor = GoupLabelTextColor;
+	ctlY += 25;
+	I = 0;
+	MouseSensitivityLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',labelX,ctlY + textOffsetY,ctlW,1.0));
+	MouseSensitivityLabel.SetText(MouseSensitivityText);
+	MouseSensitivityLabel.SetFont(1);
+	MouseSensitivityLabel.TextColor = LabelTextColor;
+	SensitivitySlider = HPMenuOptionHSlider(CreateControl(Class'HPMenuOptionHSlider',ctlX,ctlY,SliderWidth,1.0));
+	SensitivitySlider.bNoSlidingNotify = True;
+	SensitivitySlider.SetRange(0.20, 10.0, 0.20);
+	SensitivitySlider.SliderWidth = SliderWidth;
+	ctlY += 28;
   
-  //UTPT didn't decompile this(added from UEExplorer) -AdamJD
-  MouseHiLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', (ctlX + SliderWidth) - 21, ctlY, ctlW, 1.0));
-  MouseHiLabel.SetText(MouseHiText);
-  MouseHiLabel.SetFont(0);
-  MouseHiLabel.TextColor = ButtonTextColor;
-  MouseLoLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', ctlX, ctlY, ctlW, 1.0));
-  MouseLoLabel.SetText(MouseLoText);
-  MouseLoLabel.SetFont(0);
-  MouseLoLabel.TextColor = ButtonTextColor;
-  ctlY += 24;
-  MouseInvertCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
-  MouseInvertCheck.bChecked = harry(GetPlayerOwner()).bInvertMouse;
-  MouseInvertCheck.SetText(MouseInvertText);
-  MouseInvertCheck.SetFont(0);
-  MouseInvertCheck.TextColor = LabelTextColor;
-  ctlY += 24;
-  Log("ini:Engine.PlayerPawn bInvertMouse -> " $ string(MouseInvertCheck.bChecked));
-  AutoCenterCamCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
-  AutoCenterCamCheck.bChecked = harry(GetPlayerOwner()).bAutoCenterCamera;
-  AutoCenterCamCheck.SetText(AutoCenterCamText);
-  AutoCenterCamCheck.SetFont(0);
-  AutoCenterCamCheck.TextColor = LabelTextColor;
-  ctlY += 24;
-  Log("get ini:HGame.Harry bAutoCenterCamera -> " $ string(AutoCenterCamCheck.bChecked));
-  AutoJumpCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
-  AutoJumpCheck.bChecked = harry(GetPlayerOwner()).bAutoJump;
-  AutoJumpCheck.SetText(AutoJumpText);
-  AutoJumpCheck.SetFont(0);
-  AutoJumpCheck.TextColor = LabelTextColor;
-  ctlY += 24;
-  Log("AutoJumpCheck -> " $ string(AutoJumpCheck.bChecked));
-  AutoDrinkPotionCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
-  AutoDrinkPotionCheck.bChecked = harry(GetPlayerOwner()).bAutoQuaff;
-  AutoDrinkPotionCheck.SetText(AutoDrinkPotionText);
-  AutoDrinkPotionCheck.SetFont(0);
-  AutoDrinkPotionCheck.TextColor = LabelTextColor;
-  ctlY += 25;
-  Log("get ini:HGame.Harry bAutoQuaff -> " $ string(AutoDrinkPotionCheck.bChecked));
-  DifficultyLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, ctlW, 1.0));
-  DifficultyLabel.SetText(DifficultyText);
-  DifficultyLabel.SetFont(1);
-  DifficultyLabel.TextColor = LabelTextColor;
-  DifficultyCombo = HPMenuOptionCombo(CreateControl(class'HPMenuOptionCombo', ctlX, ctlY, buttonWidth, buttonHeight));
-  DifficultyCombo.SetEditable(false);
-  DifficultyCombo.EditBoxWidth = buttonWidth;
-  DifficultyCombo.TextColor = LabelTextColor;
-  DifficultyCombo.SetEditTextColor(ButtonTextColor);
-  DifficultyCombo.AddItem(DifficultyLevel[0], "DifficultyEasy");
-  DifficultyCombo.AddItem(DifficultyLevel[1], "DifficultyMedium");
-  DifficultyCombo.AddItem(DifficultyLevel[2], "DifficultyHard");
-  ctlY += 35;
-  InQuidditch_Label = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY, ctlW, 1.0));
-  InQuidditch_Label.SetText(InQuidditch_Text);
-  InQuidditch_Label.SetFont(1);
-  InQuidditch_Label.TextColor = GoupLabelTextColor;
-  ctlY += 20;
-  InvertBroomCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
-  InvertBroomCheck.bChecked = IsFlyingControlInverted();
-  InvertBroomCheck.SetText(InvertBroomText);
-  InvertBroomCheck.SetFont(0);
-  InvertBroomCheck.TextColor = LabelTextColor;
-  ctlY += InQuidditch_VertSpacing[0];
-
-  for(I = 0; I < 1; I++)
-  {
-      InQuidditch_KeyNames[I] = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, labelWidth + 200, 1.0));
-      InQuidditch_KeyNames[I].SetText(InQuidditch_LabelList[I]);
-      InQuidditch_KeyNames[I].SetFont(1);
-      InQuidditch_KeyNames[I].TextColor = LabelTextColor;
-      InQuidditch_KeyButtons[I] = HPMenuRaisedButton(CreateControl(class'HPMenuRaisedButton', ctlX, ctlY, buttonWidth, ctlH));
-      InQuidditch_KeyButtons[I].UpTexture = HoverImage5;		//texture'FEOverOption5Texture';
-      InQuidditch_KeyButtons[I].DownTexture = HoverImage;		//texture'FEOverOptionTexture';
-      InQuidditch_KeyButtons[I].DisabledTexture = HoverImage;	//texture'FEOverOptionTexture';
-      InQuidditch_KeyButtons[I].OverTexture = HoverImage3;		//texture'FEOverOption3Texture';
-      InQuidditch_KeyButtons[I].SetFont(0);
-      InQuidditch_KeyButtons[I].bAcceptsFocus = false;
-      InQuidditch_KeyButtons[I].bIgnoreLDoubleClick = true;
-      InQuidditch_KeyButtons[I].bIgnoreMDoubleClick = true;
-      InQuidditch_KeyButtons[I].bIgnoreRDoubleClick = true;
-      InQuidditch_KeyButtons[I].TextColor = ButtonTextColor;
-      ctlY += InQuidditch_VertSpacing[I];
-  }
-  ctlY += 13;
-  InWizardDuel_Label = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY, ctlW, 1.0));
-  InWizardDuel_Label.SetText(InWizardDuel_Text);
-  InWizardDuel_Label.SetFont(1);
-  InWizardDuel_Label.TextColor = GoupLabelTextColor;
-  ctlY += 25;
-
-  for(I = 0; I < 1; I++)
-  {
-      InWizardDuel_KeyNames[I] = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
-      InWizardDuel_KeyNames[I].SetText(InWizardDuel_LabelList[I]);
-      InWizardDuel_KeyNames[I].SetFont(1);
-      InWizardDuel_KeyNames[I].TextColor = LabelTextColor;
-      InWizardDuel_KeyButtons[I] = HPMenuRaisedButton(CreateControl(class'HPMenuRaisedButton', ctlX, ctlY, buttonWidth, ctlH));
-      InWizardDuel_KeyButtons[I].UpTexture = HoverImage5;		//texture'FEOverOption5Texture';
-      InWizardDuel_KeyButtons[I].DownTexture = HoverImage;		//texture'FEOverOptionTexture';
-      InWizardDuel_KeyButtons[I].DisabledTexture = HoverImage;	//texture'FEOverOptionTexture';
-      InWizardDuel_KeyButtons[I].OverTexture = HoverImage3;		//texture'FEOverOption3Texture';
-      InWizardDuel_KeyButtons[I].SetFont(0);
-      InWizardDuel_KeyButtons[I].bAcceptsFocus = false;
-      InWizardDuel_KeyButtons[I].bIgnoreLDoubleClick = true;
-      InWizardDuel_KeyButtons[I].bIgnoreMDoubleClick = true;
-      InWizardDuel_KeyButtons[I].bIgnoreRDoubleClick = true;
-      InWizardDuel_KeyButtons[I].TextColor = ButtonTextColor;
-      ctlY += InWizardDuel_VertSpacing[I];
-  }
-  ctlY = 40 - offsetY;
-  ctlX = 430 - offsetX;
-  labelX = 330 - offsetX;
-  InGame_Label = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY, ctlW, 1.0));
-  InGame_Label.SetText(InGame_Text);
-  InGame_Label.SetFont(1);
-  InGame_Label.TextColor = GoupLabelTextColor;
-  ctlY += 25;
-
-  for(I = 0; I < 11; I++)
-  {
-      InGame_KeyNames[I] = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
-      InGame_KeyNames[I].SetText(InGame_LabelList[I]);
-      InGame_KeyNames[I].SetFont(1);
-      InGame_KeyNames[I].TextColor = LabelTextColor;
-      InGame_KeyButtons[I] = HPMenuRaisedButton(CreateControl(class'HPMenuRaisedButton', ctlX, ctlY, buttonWidth, ctlH));
-      InGame_KeyButtons[I].UpTexture = HoverImage5; 		//texture'FEOverOption5Texture';
-      InGame_KeyButtons[I].DownTexture = HoverImage;		//texture'FEOverOptionTexture';
-      InGame_KeyButtons[I].DisabledTexture = HoverImage;	//texture'FEOverOptionTexture';
-      InGame_KeyButtons[I].OverTexture = HoverImage3;		//texture'FEOverOption3Texture';
-      InGame_KeyButtons[I].SetFont(0);
-      InGame_KeyButtons[I].bAcceptsFocus = false;
-      InGame_KeyButtons[I].bIgnoreLDoubleClick = true;
-      InGame_KeyButtons[I].bIgnoreMDoubleClick = true;
-      InGame_KeyButtons[I].bIgnoreRDoubleClick = true;
-      InGame_KeyButtons[I].TextColor = ButtonTextColor;
-      ctlY += InGame_VertSpacing[I];
-  }
+	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
+	MouseHiLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', (ctlX + SliderWidth) - 21, ctlY, ctlW, 1.0));
+	MouseHiLabel.SetText(MouseHiText);
+	MouseHiLabel.SetFont(0);
+	MouseHiLabel.TextColor = ButtonTextColor;
+	MouseLoLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', ctlX, ctlY, ctlW, 1.0));
+	MouseLoLabel.SetText(MouseLoText);
+	MouseLoLabel.SetFont(0);
+	MouseLoLabel.TextColor = ButtonTextColor;
+  
+	// Metallicafan212:	Scale the label
+	MouseHiLabel.bEnableWidthResize = true;
+  
+	ctlY += 24;
+	MouseInvertCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
+	MouseInvertCheck.bChecked = harry(GetPlayerOwner()).bInvertMouse;
+	MouseInvertCheck.SetText(MouseInvertText);
+	MouseInvertCheck.SetFont(0);
+	MouseInvertCheck.TextColor = LabelTextColor;
+	ctlY += 24;
 	
-  LoadAvailableSettings();
-  CreateBackPageButton();
-  return;
+	Log("ini:Engine.PlayerPawn bInvertMouse -> " $ string(MouseInvertCheck.bChecked));
+	AutoCenterCamCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
+	AutoCenterCamCheck.bChecked = harry(GetPlayerOwner()).bAutoCenterCamera;
+	AutoCenterCamCheck.SetText(AutoCenterCamText);
+	AutoCenterCamCheck.SetFont(0);
+	AutoCenterCamCheck.TextColor = LabelTextColor;
+	ctlY += 24;
+	
+	Log("get ini:HGame.Harry bAutoCenterCamera -> " $ string(AutoCenterCamCheck.bChecked));
+	AutoJumpCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
+	AutoJumpCheck.bChecked = harry(GetPlayerOwner()).bAutoJump;
+	AutoJumpCheck.SetText(AutoJumpText);
+	AutoJumpCheck.SetFont(0);
+	AutoJumpCheck.TextColor = LabelTextColor;
+	ctlY += 24;
+  
+	Log("AutoJumpCheck -> " $ string(AutoJumpCheck.bChecked));
+	AutoDrinkPotionCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
+	AutoDrinkPotionCheck.bChecked = harry(GetPlayerOwner()).bAutoQuaff;
+	AutoDrinkPotionCheck.SetText(AutoDrinkPotionText);
+	AutoDrinkPotionCheck.SetFont(0);
+	AutoDrinkPotionCheck.TextColor = LabelTextColor;
+	ctlY += 25;
+  
+	Log("get ini:HGame.Harry bAutoQuaff -> " $ string(AutoDrinkPotionCheck.bChecked));
+	DifficultyLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, ctlW, 1.0));
+	DifficultyLabel.SetText(DifficultyText);
+	DifficultyLabel.SetFont(1);
+	DifficultyLabel.TextColor = LabelTextColor;
+	DifficultyCombo = HPMenuOptionCombo(CreateControl(class'HPMenuOptionCombo', ctlX, ctlY, buttonWidth, buttonHeight));
+	DifficultyCombo.SetEditable(false);
+	DifficultyCombo.EditBoxWidth = buttonWidth;
+	DifficultyCombo.TextColor = LabelTextColor;
+	DifficultyCombo.SetEditTextColor(ButtonTextColor);
+	DifficultyCombo.AddItem(DifficultyLevel[0], "DifficultyEasy");
+	DifficultyCombo.AddItem(DifficultyLevel[1], "DifficultyMedium");
+	DifficultyCombo.AddItem(DifficultyLevel[2], "DifficultyHard");
+	ctlY += 35;
+  
+	InQuidditch_Label = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY, ctlW, 1.0));
+	InQuidditch_Label.SetText(InQuidditch_Text);
+	InQuidditch_Label.SetFont(1);
+	InQuidditch_Label.TextColor = GoupLabelTextColor;
+	ctlY += 20;
+  
+	InvertBroomCheck = HPMenuOptionCheckBox(CreateControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0));
+	InvertBroomCheck.bChecked = IsFlyingControlInverted();
+	InvertBroomCheck.SetText(InvertBroomText);
+	InvertBroomCheck.SetFont(0);
+	InvertBroomCheck.TextColor = LabelTextColor;
+	ctlY += InQuidditch_VertSpacing[0];
+
+	for(I = 0; I < 1; I++)
+	{
+		InQuidditch_KeyNames[I] = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, labelWidth + 200, 1.0));
+		InQuidditch_KeyNames[I].SetText(InQuidditch_LabelList[I]);
+		InQuidditch_KeyNames[I].SetFont(1);
+		InQuidditch_KeyNames[I].TextColor = LabelTextColor;
+		InQuidditch_KeyButtons[I] = HPMenuRaisedButton(CreateControl(class'HPMenuRaisedButton', ctlX, ctlY, buttonWidth, ctlH));
+		InQuidditch_KeyButtons[I].UpTexture = HoverImage5;		//texture'FEOverOption5Texture';
+		InQuidditch_KeyButtons[I].DownTexture = HoverImage;		//texture'FEOverOptionTexture';
+		InQuidditch_KeyButtons[I].DisabledTexture = HoverImage;	//texture'FEOverOptionTexture';
+		InQuidditch_KeyButtons[I].OverTexture = HoverImage3;		//texture'FEOverOption3Texture';
+		InQuidditch_KeyButtons[I].SetFont(0);
+		InQuidditch_KeyButtons[I].bAcceptsFocus = false;
+		InQuidditch_KeyButtons[I].bIgnoreLDoubleClick = true;
+		InQuidditch_KeyButtons[I].bIgnoreMDoubleClick = true;
+		InQuidditch_KeyButtons[I].bIgnoreRDoubleClick = true;
+		InQuidditch_KeyButtons[I].TextColor = ButtonTextColor;
+		ctlY += InQuidditch_VertSpacing[I];
+	}
+	
+	ctlY += 13;
+	InWizardDuel_Label = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY, ctlW, 1.0));
+	InWizardDuel_Label.SetText(InWizardDuel_Text);
+	InWizardDuel_Label.SetFont(1);
+	InWizardDuel_Label.TextColor = GoupLabelTextColor;
+	ctlY += 25;
+
+	for(I = 0; I < 1; I++)
+	{
+		InWizardDuel_KeyNames[I] = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
+		InWizardDuel_KeyNames[I].SetText(InWizardDuel_LabelList[I]);
+		InWizardDuel_KeyNames[I].SetFont(1);
+		InWizardDuel_KeyNames[I].TextColor = LabelTextColor;
+		InWizardDuel_KeyButtons[I] = HPMenuRaisedButton(CreateControl(class'HPMenuRaisedButton', ctlX, ctlY, buttonWidth, ctlH));
+		InWizardDuel_KeyButtons[I].UpTexture = HoverImage5;		//texture'FEOverOption5Texture';
+		InWizardDuel_KeyButtons[I].DownTexture = HoverImage;		//texture'FEOverOptionTexture';
+		InWizardDuel_KeyButtons[I].DisabledTexture = HoverImage;	//texture'FEOverOptionTexture';
+		InWizardDuel_KeyButtons[I].OverTexture = HoverImage3;		//texture'FEOverOption3Texture';
+		InWizardDuel_KeyButtons[I].SetFont(0);
+		InWizardDuel_KeyButtons[I].bAcceptsFocus = false;
+		InWizardDuel_KeyButtons[I].bIgnoreLDoubleClick = true;
+		InWizardDuel_KeyButtons[I].bIgnoreMDoubleClick = true;
+		InWizardDuel_KeyButtons[I].bIgnoreRDoubleClick = true;
+		InWizardDuel_KeyButtons[I].TextColor = ButtonTextColor;
+		ctlY += InWizardDuel_VertSpacing[I];
+	}
+  
+	ctlY = 40 - offsetY;
+	ctlX = 430 - offsetX;
+	labelX = 330 - offsetX;
+	InGame_Label = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY, ctlW, 1.0));
+	InGame_Label.SetText(InGame_Text);
+	InGame_Label.SetFont(1);
+	InGame_Label.TextColor = GoupLabelTextColor;
+	ctlY += 25;
+
+	for(I = 0; I < 11; I++)
+	{
+		InGame_KeyNames[I] = HGameLabelControl(CreateControl(class'HGameLabelControl', labelX, ctlY + textOffsetY, labelWidth, 1.0));
+		InGame_KeyNames[I].SetText(InGame_LabelList[I]);
+		InGame_KeyNames[I].SetFont(1);
+		InGame_KeyNames[I].TextColor = LabelTextColor;
+		InGame_KeyButtons[I] = HPMenuRaisedButton(CreateControl(class'HPMenuRaisedButton', ctlX, ctlY, buttonWidth, ctlH));
+		InGame_KeyButtons[I].UpTexture = HoverImage5; 		//texture'FEOverOption5Texture';
+		InGame_KeyButtons[I].DownTexture = HoverImage;		//texture'FEOverOptionTexture';
+		InGame_KeyButtons[I].DisabledTexture = HoverImage;	//texture'FEOverOptionTexture';
+		InGame_KeyButtons[I].OverTexture = HoverImage3;		//texture'FEOverOption3Texture';
+		InGame_KeyButtons[I].SetFont(0);
+		InGame_KeyButtons[I].bAcceptsFocus = false;
+		InGame_KeyButtons[I].bIgnoreLDoubleClick = true;
+		InGame_KeyButtons[I].bIgnoreMDoubleClick = true;
+		InGame_KeyButtons[I].bIgnoreRDoubleClick = true;
+		InGame_KeyButtons[I].TextColor = ButtonTextColor;
+		ctlY += InGame_VertSpacing[I];
+	}
+	
+	LoadAvailableSettings();
+	CreateBackPageButton();
 }
 
 function ShowWindow()

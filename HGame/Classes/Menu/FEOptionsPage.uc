@@ -27,39 +27,39 @@ var Texture textureLionRO;
 
 function BeforePaint (Canvas C, float X, float Y)
 {
-  Super.BeforePaint(C,X,Y);
+	Super.BeforePaint(C,X,Y);
 }
 
 function Paint (Canvas Canvas, float X, float Y)
 {
-  local float fScaleFactor;
-  local bool bHaveObjectiveText;
+	local float fScaleFactor;
+	local bool bHaveObjectiveText;
 
-  fScaleFactor = Canvas.SizeX / WinWidth;
-  Super.Paint(Canvas,X,Y);
+	fScaleFactor = Canvas.SizeX / WinWidth;
+	Super.Paint(Canvas,X,Y);
 }
 
 function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
 {
-  local float fScaleFactor;
+	local float fScaleFactor;
 
-  fScaleFactor = nCanvasSizeX / WinWidth;
-  /*
-  if ( ObjectiveLabel.WindowIsVisible() )
-  {
-    return ObjectiveLabel.WinTop * fScaleFactor = } else {;
-    return nCanvasSizeY;
-  }
-  */
+	fScaleFactor = nCanvasSizeX / WinWidth;
+	/*
+	if ( ObjectiveLabel.WindowIsVisible() )
+	{
+		return ObjectiveLabel.WinTop * fScaleFactor = } else {;
+		return nCanvasSizeY;
+	}
+	*/
  
-  if ( ObjectiveLabel.WindowIsVisible() )
-  {
-    return ObjectiveLabel.WinTop * fScaleFactor; 
-  }
-  else 
-  {
-    return nCanvasSizeY;
-  }
+	if ( ObjectiveLabel.WindowIsVisible() )
+	{
+		return ObjectiveLabel.WinTop * fScaleFactor; 
+	}
+	else 
+	{
+		return nCanvasSizeY;
+	}
 }
 
 function Created()

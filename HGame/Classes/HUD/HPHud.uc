@@ -16,112 +16,121 @@ var CountdownTimerManager managerCountdownTimer;
 var SpellSelector managerSpellSelector;
 var QuidditchBar managerQuidditchBar;
 var VendorManager CurrVendorManager;
-var HProp propArray[20];
+//var HProp propArray[20];
+var Array<HProp> propArray;
 var bool bHideStatus;
 
 function StartCutScene()
 {
-  if ( harry(Owner).bIsCaptured )
-  {
-    bCutSceneMode = True;
-  } else {
-    bCutPopupMode = True;
-  }
-  managerCutScene.StartCutScene();
+	if ( harry(Owner).bIsCaptured )
+	{
+		bCutSceneMode = True;
+	} 
+	else 
+	{
+		bCutPopupMode = True;
+	}
+	managerCutScene.StartCutScene();
 }
 
 function EndCutScene()
 {
-  managerCutScene.EndCutScene();
-  bCutSceneMode = False;
-  bCutPopupMode = False;
+	managerCutScene.EndCutScene();
+	bCutSceneMode = False;
+	bCutPopupMode = False;
 }
 
 function SetSubtitleText (string Text, float duration)
 {
-  managerCutScene.SetText(Text,duration);
+	managerCutScene.SetText(Text,duration);
 }
 
 function ClearSubtitleText()
 {
-  managerCutScene.ClearText();
+	managerCutScene.ClearText();
 }
 
 function RegisterChallengeManager (ChallengeScoreManager Challenge)
 {
-  managerChallenge = Challenge;
+	managerChallenge = Challenge;
 }
 
 function RegisterQuidScoreManager (QuidScoreManager QuidScore)
 {
-  managerQuidScore = QuidScore;
+	managerQuidScore = QuidScore;
 }
 
 function RegisterMuggleMeter (MuggleMeterManager MuggleMeter)
 {
-  managerMuggleMeter = MuggleMeter;
+	managerMuggleMeter = MuggleMeter;
 }
 
 function RegisterSpellLesson (SpellLessonTrigger SpellLesson)
 {
-  managerSpellLesson = SpellLesson;
+	managerSpellLesson = SpellLesson;
 }
 
 function RegisterMagicStrength (MagicStrengthManager MagicStrength)
 {
-  managerMagicStrength = MagicStrength;
+	managerMagicStrength = MagicStrength;
 }
 
 function RegisterEnemyHealth (EnemyHealthManager EnemyHealth)
 {
-  managerEnemyHealth = EnemyHealth;
+	managerEnemyHealth = EnemyHealth;
 }
 
 function RegisterQuidditchBar (QuidditchBar QBar)
 {
-  managerQuidditchBar = QBar;
+	managerQuidditchBar = QBar;
 }
 
 function RegisterCountdownTimerManager (CountdownTimerManager CountdownTimer)
 {
-  managerCountdownTimer = CountdownTimer;
+	managerCountdownTimer = CountdownTimer;
 }
 
 function RegisterSpellSelector (SpellSelector RegSpellSelector)
 {
-  managerSpellSelector = RegSpellSelector;
+	managerSpellSelector = RegSpellSelector;
 }
 
 function RegisterVendorManager (VendorManager VManager)
 {
-  CurrVendorManager = VManager;
+	CurrVendorManager = VManager;
 }
 
 function RegisterPickupProp (HProp Prop)
 {
-  local int I;
-  local bool bFoundSlot;
+	/*
+	local int I;
+	local bool bFoundSlot;
 
-  bFoundSlot = False;
+	bFoundSlot = False;
 
-  for(I = 0; I < 20; I++)
-  {
-    if ( propArray[I] == None )
-    {
-      bFoundSlot = True;
-      propArray[I] = Prop;
-	  break;
-    }
-  }
-  if ( bFoundSlot == False )
-  {
-    harry(Owner).ClientMessage("WARNING: Not enough prop slots in HPHud");
-    Log("WARNING: Not enough prop slots in HPHud");
-  }
+	for(I = 0; I < 20; I++)
+	{
+		if ( propArray[I] == None )
+		{
+			bFoundSlot = True;
+			propArray[I] = Prop;
+			break;
+		}
+	}
+	if ( bFoundSlot == False )
+	{
+		harry(Owner).ClientMessage("WARNING: Not enough prop slots in HPHud");
+		Log("WARNING: Not enough prop slots in HPHud");
+	}
+	*/
+	
+	// Metallicafan212:	Add on the end
+	propArray[propArray.length] = Prop;
 }
 
 function UnregisterPickupProp (HProp Prop)
 {
+	/*
   local int I;
   local int J;
 
@@ -138,179 +147,215 @@ function UnregisterPickupProp (HProp Prop)
 	  break;
     }
   }
+  */
+  
+	local int i;
+	
+	for(i = 0; i < propArray.Length; i++)
+	{
+		if(PropArray[i] == Prop)
+		{
+			// Metallicafan212:	Remove it
+			PropArray.Remove(i);
+			
+			break;
+		}
+	}
+  
 }
 
 function bool IsCutSceneOrPopupInProgress()
 {
-  return bCutSceneMode || bCutPopupMode || managerCutScene.bPopupBorderActive || managerCutScene.bBothBordersActive;
+	return bCutSceneMode || bCutPopupMode || managerCutScene.bPopupBorderActive || managerCutScene.bBothBordersActive;
 }
 
 event Tick (float DeltaTime)
 {
-  Super.Tick(DeltaTime);
-  if ( bScoreCountup )
-  {
-    fScoreCountTime -= DeltaTime;
-    if ( fScoreCountTime <= 0 )
-    {
-      fScoreCountTime = 0.0;
-      bScoreCountup = False;
-    }
-  }
+	Super.Tick(DeltaTime);
+	if ( bScoreCountup )
+	{
+		fScoreCountTime -= DeltaTime;
+		if ( fScoreCountTime <= 0 )
+		{
+			fScoreCountTime = 0.0;
+			bScoreCountup = False;
+		}
+	}
 }
 
 function DrawSpellIcon (Canvas Canvas)
 {
-  local Texture Icon;
+	local Texture Icon;
 
-  Icon = baseWand(PlayerPawn(Owner).Weapon).GetSpellIcon();
-  if ( Icon != None )
-  {
-    Canvas.SetPos(5.0,(Canvas.SizeY - 64) - 5);
-    Canvas.DrawIcon(Icon,1.0);
-  }
+	Icon = baseWand(PlayerPawn(Owner).Weapon).GetSpellIcon();
+	if ( Icon != None )
+	{
+		Canvas.SetPos(5.0,(Canvas.SizeY - 64) - 5);
+		Canvas.DrawIcon(Icon, 1.0);
+	}
 }
 
 function DrawHoops (Canvas Canvas, int iNumber, int iMaxNumber)
 {
-  local int Ox;
-  local int Oy;
+	local int Ox;
+	local int Oy;
 
-  Ox = 8;
-  Oy = Canvas.SizeY - 156;
-  if ( iNumber < 10 )
-  {
-    Canvas.SetPos(Ox + 94,Oy + 100);
-  } else {
-    Canvas.SetPos(Ox + 85,Oy + 100);
-  }
-  Canvas.DrawText(string(iNumber) $ "/" $ string(iMaxNumber),False);
+	Ox = 8;
+	Oy = Canvas.SizeY - 156;
+	if ( iNumber < 10 )
+	{
+		Canvas.SetPos(Ox + 94,Oy + 100);
+	} 
+	else 
+	{
+		Canvas.SetPos(Ox + 85,Oy + 100);
+	}
+	
+	Canvas.DrawText(string(iNumber) $ "/" $ string(iMaxNumber),False);
 }
 
 simulated function PreBeginPlay()
 {
-  local int I;
+	local int I;
 
-  Super.PreBeginPlay();
-  if ( managerCutScene == None )
-  {
-    managerCutScene = Spawn(Class'CutSceneManager');
-  }
-
-  for(I = 0; I < 20; I++)
-  {
-    propArray[I] = None;
-	break;
-  }
+	Super.PreBeginPlay();
+	if ( managerCutScene == None )
+	{
+		managerCutScene = Spawn(Class'CutSceneManager');
+	}
+	
+	/*
+	for(I = 0; I < 20; I++)
+	{
+		propArray[I] = None;
+		break;
+	}
+	*/
 }
 
 simulated function PostBeginPlay()
 {
-  Super.PostBeginPlay();
+	Super.PostBeginPlay();
 }
 
 simulated function bool DisplayMessages (Canvas Canvas)
 {
-  if ( HPConsole(PlayerPawn(Owner).Player.Console).bDebugMode )
-  {
-    return False;
-  }
-  return True;
+	if ( HPConsole(PlayerPawn(Owner).Player.Console).bDebugMode )
+	{
+		return False;
+	}
+	
+	return True;
 }
 
 simulated function PostRender (Canvas Canvas)
 {
-  local FEBook menuBook;
-  local int I;
-  local bool bInGameMenuUp;
-  local bool bFullCutMode;
-  local bool bHalfCutMode;
+	local FEBook menuBook;
+	local int I;
+	local bool bInGameMenuUp;
+	local bool bFullCutMode;
+	local bool bHalfCutMode;
 
-  HUDSetup(Canvas);
-  bFullCutMode = (bCutSceneMode == True) || managerCutScene.bBothBordersActive;
-  bHalfCutMode = (bCutPopupMode == True) || managerCutScene.bPopupBorderActive;
-  if ( PlayerPawn(Owner) != None )
-  {
-    if ( PlayerPawn(Owner).PlayerReplicationInfo == None )
-    {
-      return;
-    }
-  }
-  menuBook = HPConsole(PlayerPawn(Owner).Player.Console).menuBook;
-  if ( menuBook != None )
-  {
-    if ( menuBook.bIsOpen )
-    {
-      bInGameMenuUp = menuBook.IsInGameMenuShowing();
-      if (  !bInGameMenuUp )
-      {
-        return;
-      }
-    }
-  }
-  if (  !bInGameMenuUp )
-  {
-    if ( bHalfCutMode )
-    {
-      managerCutScene.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    if ( bFullCutMode )
-    {
-      managerCutScene.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    } else {
-      if ( managerEnemyHealth != None )
-      {
-        managerEnemyHealth.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-      if ( managerQuidditchBar != None )
-      {
-        managerQuidditchBar.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-      if ( managerMagicStrength != None )
-      {
-        managerMagicStrength.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-      if ( managerCountdownTimer != None )
-      {
-        managerCountdownTimer.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-      if ( managerSpellSelector != None )
-      {
-        managerSpellSelector.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-    }
-    if ( (managerSpellLesson == None) && (managerMagicStrength == None) &&  !bHideStatus )
-    {
-      harry(Owner).managerStatus.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
+	HUDSetup(Canvas);
+	bFullCutMode = (bCutSceneMode == True) || managerCutScene.bBothBordersActive;
+	bHalfCutMode = (bCutPopupMode == True) || managerCutScene.bPopupBorderActive;
+	if ( PlayerPawn(Owner) != None )
+	{
+		if ( PlayerPawn(Owner).PlayerReplicationInfo == None )
+		{
+			return;
+		}
+	}
+	
+	menuBook = HPConsole(PlayerPawn(Owner).Player.Console).menuBook;
+	
+	if ( menuBook != None )
+	{
+		if ( menuBook.bIsOpen )
+		{
+			bInGameMenuUp = menuBook.IsInGameMenuShowing();
+			if (  !bInGameMenuUp )
+			{
+				return;
+			}
+		}
+	}
+	
+	if (  !bInGameMenuUp )
+	{
+		if ( bHalfCutMode )
+		{
+			managerCutScene.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+		
+		if ( bFullCutMode )
+		{
+			managerCutScene.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		} 
+		else 
+		{
+			if ( managerEnemyHealth != None )
+			{
+				managerEnemyHealth.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+			if ( managerQuidditchBar != None )
+			{
+				managerQuidditchBar.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+			if ( managerMagicStrength != None )
+			{
+				managerMagicStrength.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+			if ( managerCountdownTimer != None )
+			{
+				managerCountdownTimer.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+			if ( managerSpellSelector != None )
+			{
+				managerSpellSelector.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+		}
+    
+		if ( (managerSpellLesson == None) && (managerMagicStrength == None) &&  !bHideStatus )
+		{
+			harry(Owner).managerStatus.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
 
-	for(I = 0; I < 20; I++)
-    {
-      if ( propArray[I] == None )
-      {
-		break;
-      } else {
-        propArray[I].RenderHud(Canvas);
-      }
-    }
-    if ( CurrVendorManager != None )
-    {
-      CurrVendorManager.RenderHud(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    if ( managerChallenge != None )
-    {
-      managerChallenge.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    if ( managerQuidScore != None )
-    {
-      managerQuidScore.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    if ( managerSpellLesson != None )
-    {
-      managerSpellLesson.RenderHudItems(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    DrawPopup(Canvas);
-  }
+		//for(I = 0; I < 20; I++)
+		for(i = 0; i < propArray.Length; i++)
+		{
+			//if ( propArray[I] == None )
+			//{
+			//	break;
+			//} 
+			//else 
+			//{
+			propArray[I].RenderHud(Canvas);
+			//}
+		}
+    
+		if ( CurrVendorManager != None )
+		{
+			CurrVendorManager.RenderHud(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+    
+		if ( managerChallenge != None )
+		{
+			managerChallenge.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+    
+		if ( managerQuidScore != None )
+		{
+			managerQuidScore.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+    
+		if ( managerSpellLesson != None )
+		{
+			managerSpellLesson.RenderHudItems(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+		
+		DrawPopup(Canvas);
+	}
 }
 
 function DrawCutStyleText (Canvas Canvas, string strText, int nXPos, int nYPos, int nHeight, Color colorText, optional Font fontText, optional float fClipX)

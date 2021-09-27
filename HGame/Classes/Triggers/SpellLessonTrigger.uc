@@ -125,31 +125,30 @@ function ForceStasis (bool bOn)
 
 function CheckForMissedArrows()
 {
-  local float fDist;
-  local float fAdjustedMissRange;
+	local float fDist;
+	local float fAdjustedMissRange;
 
-  // I = 0;
-  // if ( I < 3 )
-  for(I = 0; I < 3; I++) //for loop -AdamJD
-  {
-    if ( IPPassedArrow[I] != None )
-    {
-      if ( IPPassedArrow[I].IsActive(nLevel) )
-      {
-        fDist = VSize(IPPassedArrow[I].Location - GameWand.Location);
-        fAdjustedMissRange = 17.0 + VSize(GameWand.Location - vectLastWandLoc) + 0.01;
-        if ( fDist > fAdjustedMissRange )
-        {
-          IPPassedArrow[I].OnPlayerMissed(nLevel);
-          IPPassedArrow[I] = None;
-        }
-      } else {
-        IPPassedArrow[I] = None;
-      }
-    }
-    // I++;
-    // goto JL0007;
-  }
+	for(I = 0; I < 3; I++) 
+	{
+		if ( IPPassedArrow[I] != None )
+		{
+			if ( IPPassedArrow[I].IsActive(nLevel) )
+			{
+				fDist = VSize(IPPassedArrow[I].Location - GameWand.Location);
+				fAdjustedMissRange = 17.0 + VSize(GameWand.Location - vectLastWandLoc) + 0.01;
+				
+				if ( fDist > fAdjustedMissRange )
+				{
+					IPPassedArrow[I].OnPlayerMissed(nLevel);
+					IPPassedArrow[I] = None;
+				}
+			} 
+			else 
+			{
+				IPPassedArrow[I] = None;
+			}
+		}
+	}
 }
 
 event PlayerInput (float DeltaTime)
@@ -628,24 +627,31 @@ function RenderHudItems (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool 
 
 function DrawRoundText (Canvas Canvas)
 {
-  local float fScale;
-  local Font fontSave;
-  local Color colorSave;
-  local Color colorText;
-  local float fTextWidth;
-  local float fTextHeight;
+	local float fScale;
+	local Font fontSave;
+	local Color colorSave;
+	local Color colorText;
+	local float fTextWidth;
+	local float fTextHeight;
+  
+	// Metallicafan212:	Scale it to the height ratio
+	local float HScale;
+	
+	HScale = class'M212HScale'.static.CanvasGetHeightScale(Canvas);
 
-  fontSave = Canvas.Font;
-  colorSave = Canvas.DrawColor;
-  Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
-  Canvas.DrawColor.R = 255;
-  Canvas.DrawColor.G = 255;
-  Canvas.DrawColor.B = 0;
-  Canvas.TextSize(strCurrRound,fTextWidth,fTextHeight);
-  Canvas.SetPos((Canvas.SizeX / 2) - (fTextWidth / 2),(Canvas.SizeY / 2) - (fTextHeight / 2));
-  Canvas.DrawText(strCurrRound,False);
-  Canvas.Font = fontSave;
-  Canvas.DrawColor = colorSave;
+	fontSave 			= Canvas.Font;
+	colorSave 			= Canvas.DrawColor;
+	Canvas.Font 		= baseConsole(PlayerHarry.Player.Console).LocalBigFont;
+	Canvas.DrawColor.R 	= 255;
+	Canvas.DrawColor.G 	= 255;
+	Canvas.DrawColor.B 	= 0;
+	
+	Canvas.TextSize(strCurrRound, fTextWidth, fTextHeight);
+	Canvas.SetPos(((Canvas.SizeX / 2) - (fTextWidth / 2)), ((Canvas.SizeY / 2) - (fTextHeight / 2)) * HScale );
+	
+	Canvas.DrawText(strCurrRound,False);
+	Canvas.Font 		= fontSave;
+	Canvas.DrawColor 	= colorSave;
 }
 
 function StartCutSequence()
@@ -662,30 +668,37 @@ function EndCutSequence()
 
 function float SayLessonDialog (string strDialogID, bool bDisplayText)
 {
-  local string strDialog;
-  local Sound soundDialog;
-  local float fSoundLen;
+	local string strDialog;
+	local Sound soundDialog;
+	local float fSoundLen;
 
-  strDialog = Localize("all",strDialogID,"HPdialog");
-  strDialog = HandleFacialExpression(strDialog,0,True);
-  soundDialog = Sound(DynamicLoadObject("AllDialog." $ strDialogID,Class'Sound'));
-  if ( soundDialog != None )
-  {
-    fSoundLen = GetSoundDuration(soundDialog);
-    fSoundLen += 0.5;
-    if ( Professor != None )
-    {
-      Professor.PlaySound(soundDialog,,,,10000.0,,True);
-    } else {
-      Professor.PlaySound(soundDialog,,,,10000.0,,True);
-    }
-  } else {
-    fSoundLen = Len(strDialog) * 0.01 + 3.0;
-  }
+	strDialog = Localize("all",strDialogID,"HPdialog");
+	strDialog = HandleFacialExpression(strDialog,0,True);
+	soundDialog = Sound(DynamicLoadObject("AllDialog." $ strDialogID,Class'Sound'));
+  
+	if ( soundDialog != None )
+	{
+		fSoundLen = GetSoundDuration(soundDialog);
+		fSoundLen += 0.5;
+		
+		if ( Professor != None )
+		{
+			
+			Professor.PlaySound(soundDialog,,,,10000.0,,True);
+		} 
+		else 
+		{
+			Professor.PlaySound(soundDialog,,,,10000.0,,True);
+		}
+	} 
+	else
+	{
+		fSoundLen = Len(strDialog) * 0.01 + 3.0;
+	}
     
-  //added from the proto because UTPT didn't decompile this -AdamJD
-  // ***************************************************************************
-  // Handle emotions
+	//added from the proto because UTPT didn't decompile this -AdamJD
+	// ***************************************************************************
+	// Handle emotions
     if (Professor != None)
         strDialog = Professor.HandleFacialExpression( strDialog, fSoundLen);
     else
@@ -802,8 +815,8 @@ function ResetForNextLevel()
 
 function ResetForNextLoop()
 {
-  ResetHitPoints();
-  GameWand.SetLocation(GameIPStart.Location);
+	ResetHitPoints();
+	GameWand.SetLocation(GameIPStart.Location);
 }
 
 function EndLesson()

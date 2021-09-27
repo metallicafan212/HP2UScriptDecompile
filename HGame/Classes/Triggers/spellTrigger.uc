@@ -58,8 +58,8 @@ function Touch (Actor Other)
 	{
 		if ( bTriggerOnceOnly )
 		{
-		SetCollision(False);
-		bProjTarget = False;
+			SetCollision(False);
+			bProjTarget = False;
 		}
 	}
 	Super.Touch(Other);

@@ -724,5 +724,9 @@ defaultproperties
     nActualIconH=64
 
     strToolTipId="InGameMenu_0021"
+	
+	// Metallicafan212: Bigger pls
+	XScale=128
+	YScale=128
 
 }

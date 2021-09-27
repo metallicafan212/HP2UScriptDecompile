@@ -912,7 +912,7 @@ state UWindow
 				case IST_Release:
 					switch (k)
 					{
-						case EInputKey.IK_LEFTMOUSE:
+						case 1:
 							if ( Root != None )
 							{
 								Root.WindowEvent(WM_LMouseUp,None,MouseX,MouseY,k);
@@ -923,11 +923,11 @@ state UWindow
 				case IST_Press:
 					switch (k)
 					{
-						case EInputKey.IK_F4:
+						case 115:
 							SCWindow.Close();
 							CloseUWindow();
 							break;
-						case EInputKey.IK_F7:
+						case 118:
 							ToggleDebugMode();
 							break;
 					}

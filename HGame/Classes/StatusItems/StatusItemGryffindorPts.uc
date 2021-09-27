@@ -21,5 +21,9 @@ defaultproperties
     strToolTipId="InGameMenu_0009"
 	
 	CountColor=CountColor_NearWhite
+	
+	// Metallicafan212: Needs to be bigger
+	XScale=128
+	YScale=128
 
 }

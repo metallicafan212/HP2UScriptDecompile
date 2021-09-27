@@ -47,8 +47,9 @@ function Resized()
 	WinWidth	= WW * HScale;
 	WinHeight	= WH * HScale;
 	
-	button1.WY 			= 78.0 * HScale;
-	button2.WY 			= 78.0 * HScale;
+	// Metallicafan212:	Move it down
+	button1.WY 			= 75.0; //* HScale;
+	button2.WY 			= 75.0; //* HScale;
 	button1.Resized();
 	button2.Resized();
 	button2.WinLeft 	= (WinWidth - button2.WinWidth) - (24 * HScale);//138.0 * HScale;
@@ -77,6 +78,11 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	
 	local bool bOldNoSmooth;
 	
+	local float HScale;
+	
+	// Metallicafan212:	Cache it
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	
 	// Metallicafan212:	Disable no smooth
 	bOldNoSmooth = C.bNoSmooth;
 	C.bNoSmooth = false;
@@ -91,7 +97,8 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 
 	C.SetPos((X - ClippingRegion.X) * Root.GUIScale, (Y - ClippingRegion.Y) * Root.GUIScale);
 	
-	C.DrawTileClipped( Tex, W * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), H * Root.GUIScale * Class'M212HScale'.Static.UWindowGetHeightScale(Root), tX, tY, tW, tH);
+	// Metallicafan212:	Make it scale the height up?
+	C.DrawTileClipped( Tex, W * Root.GUIScale * HScale, H * Root.GUIScale * HScale, tX, tY, tW, tH * HScale);
 	
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);

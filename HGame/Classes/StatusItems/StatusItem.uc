@@ -218,9 +218,14 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 	
 	local bool bSavedNoSmooth;
 	
+	local float HScale;
+	
+	// Metallicafan212:	Get the scale
+	HScale = class'M212HScale'.static.CanvasGetHeightScale(Canvas);
+	
 	bSavedNoSmooth = Canvas.bNoSmooth;
 	
-	LocScale = fScaleFactor * GetHScale(Canvas);
+	LocScale = fScaleFactor * HScale;
 	
 	// Metallicafan212:	Allow for scaling icons down to the "draw" coords
 	UScale = XScale / textureHudIcon.USize;
@@ -230,12 +235,12 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 		Canvas.bNoSmooth = false;
 	
 	// Metallicafan212:	Scale it
-	Canvas.SetPos(nCurrX, nCurrY * GetHScale(Canvas));
+	Canvas.SetPos(nCurrX, nCurrY * HScale);
 	Canvas.DrawTile(textureHudIcon, textureHudIcon.USize * LocScale * UScale, textureHudIcon.VSize * LocScale * VScale, 0, 0, textureHudIcon.USize, textureHudIcon.VSize );
 	
 	if ( bDisplayCount )
 	{
-		DrawCount(Canvas, nCurrX, nCurrY * GetHScale(Canvas), fScaleFactor * GetHScale(Canvas));
+		DrawCount(Canvas, nCurrX, nCurrY * HScale, fScaleFactor * HScale);
 	}
 	
 	Canvas.bNoSmooth = bSavedNoSmooth;
@@ -249,6 +254,11 @@ function DrawSpecifiedCount (Canvas Canvas, int nCurrX, int nCurrY, float fScale
 	local float fYTextLen;
 	local float fXPos;
 	local float fYPos;
+	
+	// Metallicafan212:	Scale here, rather than above, to fix certain issues
+	//local float HScale;
+	
+	//HScale = class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 
 	fXTextLen = 0.0;
 	fYTextLen = 0.0;
@@ -259,9 +269,11 @@ function DrawSpecifiedCount (Canvas Canvas, int nCurrX, int nCurrY, float fScale
 		strCountDisplay = strCountDisplay $ "/" $ string(nMaxCount);
 	}
 	Canvas.Font = GetCountFont(Canvas);
-	Canvas.TextSize(strCountDisplay,fXTextLen,fYTextLen);
+	Canvas.TextSize(strCountDisplay, fXTextLen, fYTextLen);
 	fXPos = nCurrX + nCountMiddleX * fScaleFactor - fXTextLen / 2;
-	fYPos = nCurrY + nCountMiddleY * fScaleFactor - fYTextLen / 2;
+	
+	fYPos = (nCurrY + nCountMiddleY * fScaleFactor - fYTextLen / 2); //* HScale;
+	
 	if ( fXPos + fXTextLen > Canvas.SizeX )
 	{
 		fXPos = Canvas.SizeX - fXTextLen - 2;
@@ -270,8 +282,8 @@ function DrawSpecifiedCount (Canvas Canvas, int nCurrX, int nCurrY, float fScale
 	{
 		fYPos = Canvas.SizeY - fYTextLen - 2;
 	}
-	Canvas.SetPos(fXPos,fYPos);
-	Canvas.DrawShadowText(strCountDisplay,GetCountColor(),GetCountColor(True));
+	Canvas.SetPos(fXPos, fYPos);
+	Canvas.DrawShadowText(strCountDisplay, GetCountColor(), GetCountColor(True));
 	Canvas.Font = fontSave;
 }
 

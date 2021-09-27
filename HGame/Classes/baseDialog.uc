@@ -79,9 +79,9 @@ defaultproperties
 {
     NumLines=1
 
-    lineIDs="TUT1_DUMINTRO_1"
+    lineIDs(0)="TUT1_DUMINTRO_1"
 
-    lineText="Welcome to Hogwarts, the school for Witches and Wizards. I am Albus Dumbledore, your Headmaster."
+    lineText(0)="Welcome to Hogwarts, the school for Witches and Wizards. I am Albus Dumbledore, your Headmaster."
 
     LanguageName="base"
 

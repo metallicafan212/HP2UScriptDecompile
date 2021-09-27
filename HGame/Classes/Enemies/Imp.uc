@@ -693,7 +693,7 @@ defaultproperties
 
     timeIdleFidgit=10.00
 
-    soundFalling=Sound'HPSounds.Critters_sfx.imp_scream'
+    soundFalling(0)=Sound'HPSounds.Critters_sfx.imp_scream'
 
     bDespawnable=True
 

@@ -62,7 +62,7 @@ defaultproperties
 
     attachedParticleClass(1)=Class'HPParticle.CrabSmoke'
 
-    attachedParticleOffset=(X=0.00,Y=0.00,Z=-32.00)
+    attachedParticleOffset(0)=(X=0.00,Y=0.00,Z=-32.00)
 
     DrawType=DT_None
 

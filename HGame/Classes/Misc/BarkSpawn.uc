@@ -6,7 +6,7 @@ class BarkSpawn extends GenericSpawner;
 
 defaultproperties
 {
-    GoodieToSpawn=Class'WiggentreeBark'
+    GoodieToSpawn(0)=Class'WiggentreeBark'
 
     Snds=(Opening=None,Closing=None,Spawning=Sound'HPSounds.hub1_sfx.vase_breaking')
 

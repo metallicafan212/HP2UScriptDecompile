@@ -144,11 +144,11 @@ defaultproperties
 
     BooSounds(2)=Sound'HPSounds.Quidditch_sfx.SS_QUID_boo_short_01'
 
-    BooLongSounds=Sound'HPSounds.Quidditch_sfx.SS_QUID_boo_long_01'
+    BooLongSounds(0)=Sound'HPSounds.Quidditch_sfx.SS_QUID_boo_long_01'
 
-    CoaxSounds=Sound'HPSounds.Quidditch_sfx.SS_QUID_Crowd_yeah_lp_01'
+    CoaxSounds(0)=Sound'HPSounds.Quidditch_sfx.SS_QUID_Crowd_yeah_lp_01'
 
-    AwSounds=Sound'HPSounds.Quidditch_sfx.SS_QUID_Crowd_Aah_02'
+    AwSounds(0)=Sound'HPSounds.Quidditch_sfx.SS_QUID_Crowd_Aah_02'
 
     AmbientSound=Sound'HPSounds.Quidditch_sfx.AMB_crowd_loop1'
 

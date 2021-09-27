@@ -355,7 +355,7 @@ defaultproperties
 
     TrailAltColorEndBase=(R=255,G=0,B=0,A=0)
 
-    Path=IPSnitch
+    Path(0)=IPSnitch
 
     fSpeedChangeFirstTime=240.00
 

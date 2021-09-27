@@ -6,7 +6,7 @@ class MucusSpawn extends GenericSpawner;
 
 defaultproperties
 {
-    GoodieToSpawn=Class'FlobberwormMucus'
+    GoodieToSpawn(0)=Class'FlobberwormMucus'
 
     Snds=(Opening=None,Closing=None,Spawning=Sound'HPSounds.hub1_sfx.vase_breaking')
 

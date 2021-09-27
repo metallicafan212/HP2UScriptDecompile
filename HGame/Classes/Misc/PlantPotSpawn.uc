@@ -6,7 +6,7 @@ class PlantPotSpawn extends GenericSpawner;
 
 defaultproperties
 {
-    GoodieToSpawn=Class'Jellybean'
+    GoodieToSpawn(0)=Class'Jellybean'
 
     Snds=(Opening=Sound'HPSounds.General.spawner_plant_pot',Closing=None,Spawning=None)
 

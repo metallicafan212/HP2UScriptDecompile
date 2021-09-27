@@ -31,7 +31,7 @@ defaultproperties
 
     attachedParticleClass(0)=Class'HPParticle.BoomslangFX'
 
-    attachedParticleOffset=(X=0.00,Y=0.00,Z=20.00)
+    attachedParticleOffset(0)=(X=0.00,Y=0.00,Z=20.00)
 
     // Physics=1
 	Physics=PHYS_Walking

@@ -6,7 +6,7 @@ class JewelBoxSpawn extends GenericSpawner;
 
 defaultproperties
 {
-    GoodieToSpawn=Class'Jellybean'
+    GoodieToSpawn(0)=Class'Jellybean'
 
     Snds=(Opening=Sound'HPSounds.General.spawner_jewel_box',Closing=None,Spawning=None)
 

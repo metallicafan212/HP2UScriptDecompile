@@ -6,7 +6,7 @@ class Knightspawn extends GenericSpawner;
 
 defaultproperties
 {
-    GoodieToSpawn=Class'Jellybean'
+    GoodieToSpawn(0)=Class'Jellybean'
 
     Snds=(Opening=Sound'HPSounds.General.knight_hit',Closing=None,Spawning=None)
 

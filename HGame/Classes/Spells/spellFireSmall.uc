@@ -76,7 +76,7 @@ function float SetAngle()
   local Vector vTarget;
 
   BehindHarry = rotator(Location - PlayerHarry.Location);
-  vTarget = PlayerHarry.Location + vector(BehindHarry) * (2 * PlayerHarry.CollisionRadius); //UTPT forgot to add BODMAS which made firecrab fire go above Harry's head instead of hitting him -AdamJD 
+  vTarget = PlayerHarry.Location + (vector(BehindHarry) * (2 * PlayerHarry.CollisionRadius)); //UTPT forgot to add BODMAS which made firecrab fire go above Harry's head instead of hitting him -AdamJD 
   Distance = VSize(Location - vTarget);
   GlobalSpeed = 300.0;
   if ( Distance > 390.0 )
@@ -92,7 +92,7 @@ function float SetAngle()
     }
   //}
   fSpeed = GlobalSpeed;
-  angle = Sin(Distance * Gravity / fSpeed * fSpeed) / 2;
+  angle = Sin(Distance * Gravity / (fSpeed * fSpeed)) / 2;
   return angle;
 }
 
@@ -155,7 +155,6 @@ state StateFlying
       fxFlyParticleEffect.SetLocation(Location);
     }
   }
-  begin:
 }
 
 state StateExplosion
@@ -181,6 +180,7 @@ state StateExplosion
     }
   }
  begin:
+ loop:
   Sleep(1.0);
   goto ('Loop');
 }

@@ -41,7 +41,7 @@ function changeAttachedParticleFX (Class<ParticleFX> newFX)
     fOriginalParticlesPerSec = attachedParticleFX[0].ParticlesPerSec.Base;
     if ( IsInState('HoopVisible') || IsInState('HoopAppearing') )
     {
-      attachedParticleFX[0].ParticlesPerSec.Base = 50.0;
+      attachedParticleFX[0].ParticlesPerSec.Base = fSmallParticlesPerSec;
     }
   }
 }
@@ -67,7 +67,7 @@ state HoopAppearing
     if ( attachedParticleFX[0] != None )
     {
       attachedParticleFX[0].EnableEmission(True);
-      attachedParticleFX[0].ParticlesPerSec.Base = 50.0;
+      attachedParticleFX[0].ParticlesPerSec.Base = fSmallParticlesPerSec;
     }
     DrawScale = PlayScale;
     ScaleGlow = 1.0;
@@ -90,7 +90,7 @@ state HoopVisible
     if ( attachedParticleFX[0] != None )
     {
       attachedParticleFX[0].EnableEmission(True);
-      attachedParticleFX[0].ParticlesPerSec.Base = 50.0;
+      attachedParticleFX[0].ParticlesPerSec.Base = fSmallParticlesPerSec;
     }
     DrawScale = PlayScale;
     ScaleGlow = 1.0;

@@ -41,7 +41,7 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
           siJBeans.IncrementCount(nAddBeans);
           if ( cue != "" )
           {
-            CutCue(cue);
+            Super.CutCue(cue);
           }
         } else {
           strCueAddBeansDone = cue;
@@ -77,7 +77,7 @@ state GiveHarryBeans
     }
     if ( nAddBeans > 0 )
     {
-      if ( fTimeBetweenBeans >= 0.1 )
+      if ( fTimeBetweenBeans >= fSPAWN_BEAN_RATE )
       {
         fTimeBetweenBeans = 0.0;
         if ( nAddBeans < nPointsPerBean )
@@ -117,7 +117,7 @@ state GiveHarryBeans
     siJBeans = sgJBeans.GetStatusItem(Class'StatusItemJellybeans');
     sgJBeans.SetEffectTypeToPermanent();
     sgJBeans.SetCutSceneRenderMode(True);
-    fTimeBetweenBeans = 0.1;
+    fTimeBetweenBeans = fSPAWN_BEAN_RATE;
   }
   
   function EndState()
@@ -130,7 +130,7 @@ state GiveHarryBeans
     sgJBeans.SetCutSceneRenderModeToNormal();
     if ( strCueAddBeansDone != "" )
     {
-      CutCue(strCueAddBeansDone);
+      Super.CutCue(strCueAddBeansDone);
     }
   }
   

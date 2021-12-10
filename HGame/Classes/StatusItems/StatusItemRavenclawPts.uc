@@ -17,7 +17,4 @@ defaultproperties
     nCountMiddleY=86
 
     strToolTipId="InGameMenu_0011"
-	
-	CountColor=CountColor_NearWhite
-
 }

@@ -42,7 +42,7 @@ function PostBeginPlay()
   }
   CurrentStage = 1;
 
-  for(I = 0; I < 5; ++I)
+  for(I = 0; I < MaxHoops; ++I)
   {
     Position.X = (I + 1) * 20;
     Position.Y = 0.0;
@@ -93,6 +93,10 @@ function ChangeHoopAppearance (BroomHoop Hoop, int ParticleStage)
   {
     Hoop.changeAttachedParticleFX(Hoop.attachedParticleClass[0]);
   }
+  else
+  {
+    //KW left this empty? -AdamJD
+  }
 }
 
 function SetTrailEnd (int NewTrailEnd)
@@ -131,7 +135,7 @@ function SetTrailEnd (int NewTrailEnd)
       Hoop.GotoState('HoopNextToHit');
     }
     ++I;
-    if ( I >= 5 )
+    if ( I >= MaxHoops )
     {
       I = 0;
     }
@@ -176,7 +180,7 @@ state TrailOn
     TrailEnd = NextHoopToUse - InitialTrailEnd;
     if ( TrailEnd < 0 )
     {
-      TrailEnd += 5;
+      TrailEnd += MaxHoops;
     }
     SetTrailEnd(TrailEnd);
     HoopsToGo = HoopsToHit;
@@ -201,7 +205,7 @@ state TrailOn
     ++ValidHoops;
     fBirthTimeOfNewestHoop = Level.TimeSeconds;
     ++NextHoopToUse;
-    if ( NextHoopToUse >= 5 )
+    if ( NextHoopToUse >= MaxHoops )
     {
       NextHoopToUse = 0;
     }
@@ -209,14 +213,14 @@ state TrailOn
     EndSetBack = NextHoopToUse - 1 - TrailEnd;
     if ( EndSetBack < 0 )
     {
-      EndSetBack += 5;
+      EndSetBack += MaxHoops;
     }
     if ( EndSetBack > InitialTrailEnd )
     {
       TrailEnd = NextHoopToUse - 1 - InitialTrailEnd;
       if ( TrailEnd < 0 )
       {
-        TrailEnd += 5;
+        TrailEnd += MaxHoops;
       }
       NextHoopToHit = TrailEnd;
       SetTrailEnd(TrailEnd);
@@ -251,7 +255,7 @@ state TrailOn
     local int VisibleLen;
     local int HoopSound;
   
-    if (  !Hoop.IsInState('HoopInvisible') || Hoop.IsInState('HoopDisappearing') )
+    if (  !(Hoop.IsInState('HoopInvisible') || Hoop.IsInState('HoopDisappearing')) )
     {
       OldHoopsToGo = HoopsToGo;
       --HoopsToGo;
@@ -267,7 +271,7 @@ state TrailOn
           HoopsSkipped = Hoop.HoopNumber - NextHoopToHit;
           if ( HoopsSkipped < 0 )
           {
-            HoopsSkipped += 5;
+            HoopsSkipped += MaxHoops;
           }
           HoopsToGo += HoopsSkipped;
           if ( HoopsToGo >= HoopsToHit )
@@ -277,7 +281,7 @@ state TrailOn
         }
       }
       NextHoopToHit = Hoop.HoopNumber + 1;
-      if ( NextHoopToHit >= 5 )
+      if ( NextHoopToHit >= MaxHoops )
       {
         NextHoopToHit = 0;
       }
@@ -285,7 +289,7 @@ state TrailOn
       VisibleLen = NextHoopToUse - TrailEnd;
       if ( VisibleLen < 0 )
       {
-        VisibleLen += 5;
+        VisibleLen += MaxHoops;
       }
       if ( HoopsToGo < VisibleLen )
       {

@@ -31,10 +31,10 @@ var float fFlashCurrSeconds;
 event PostBeginPlay()
 {
     Super.PostBeginPlay();
-    textureBarEmpty = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2_QuidBarEmpty", class'Texture'));
-    textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2_QuidBarFull", class'Texture'));
-    textureBarGold = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2QuidditchBarGold", class'Texture'));
-    textureBarWhite = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2QuidditchBarWhite", class'Texture'));
+    textureBarEmpty = Texture(DynamicLoadObject(strBAR_EMPTY, class'Texture'));
+    textureBarFull = Texture(DynamicLoadObject(strBAR_FULL, class'Texture'));
+    textureBarGold = Texture(DynamicLoadObject(strBAR_GOLD, class'Texture'));
+    textureBarWhite = Texture(DynamicLoadObject(strBAR_WHITE, class'Texture'));
 }
 
 function Show(bool bShow)
@@ -140,8 +140,8 @@ state DisplayQBar
 
         colorSave = Canvas.DrawColor;
         fScaleFactor = GetScaleFactor(Canvas);
-        fIconX = Canvas.SizeX - (fScaleFactor * 132.0);
-        fIconY = Canvas.SizeY - (fScaleFactor * 80.0);
+        fIconX = Canvas.SizeX - (fScaleFactor * fSCREEN_OVER_FROM_RIGHT_X);
+        fIconY = Canvas.SizeY - (fScaleFactor * fSCREEN_UP_FROM_BOTTOM_Y);
         Canvas.SetPos(fIconX, fIconY);
 		
 		empty = !bFlashing || (fFlashCurrSeconds > fFlashTotalSeconds / 2);
@@ -156,8 +156,8 @@ state DisplayQBar
         fFullRatio = float(nPercentFull) / 100.0;
         fFullRatio = FClamp(fFullRatio, 0.0, 1.0);
         Canvas.DrawColor = GetBarDrawColor();
-        fSegmentWidth = fFullRatio * 117.0;
-        Canvas.SetPos(fIconX + (4.0 * fScaleFactor), fIconY + (52.0 * fScaleFactor));
+        fSegmentWidth = fFullRatio * fBAR_W;
+        Canvas.SetPos(fIconX + (fBAR_START_X * fScaleFactor), fIconY + (fBAR_START_Y * fScaleFactor));
         if(empty)
         {
             Canvas.DrawTile(textureBarWhite, fSegmentWidth * fScaleFactor, textureBarWhite.VSize * fScaleFactor, 0.0, 0.0, fSegmentWidth, textureBarWhite.VSize);

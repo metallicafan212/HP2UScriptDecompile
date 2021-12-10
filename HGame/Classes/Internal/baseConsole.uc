@@ -2,15 +2,15 @@
 // baseConsole.
 //================================================================================
 
-class baseConsole extends WindowConsole;
+class baseConsole extends WindowConsole; 
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FELoadingBackground1.PNG	GROUP=Icons	Name=FELoadingBackground1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FELoadingBackground2.PNG	GROUP=Icons	Name=FELoadingBackground2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FELoadingBackground3.PNG	GROUP=Icons	Name=FELoadingBackground3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FELoadingBackground4.PNG	GROUP=Icons	Name=FELoadingBackground4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FELoadingBackground5.PNG	GROUP=Icons	Name=FELoadingBackground5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\FELoadingBackground6.PNG	GROUP=Icons	Name=FELoadingBackground6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground1.PNG	GROUP=Icons	Name=FELoadingBackground1 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground2.PNG	GROUP=Icons	Name=FELoadingBackground2 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground3.PNG	GROUP=Icons	Name=FELoadingBackground3 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground4.PNG	GROUP=Icons	Name=FELoadingBackground4 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground5.PNG	GROUP=Icons	Name=FELoadingBackground5 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\FELoadingBackground6.PNG	GROUP=Icons	Name=FELoadingBackground6 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
 
 struct BackgroundBitmap
 {
@@ -68,8 +68,6 @@ function ChangeLevel (string lev, bool flag)
 
 function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
 {
-//orginal code -AdamJD
-/*
     local float FX;
     local float fy;
 
@@ -84,96 +82,6 @@ function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
     FX = 1.0;
     fy = 1.0;
     Root.DrawStretchedTexture(C, X * FX, Y * fy, Tex.USize * FX, Tex.VSize * fy, Tex);
-*/
- 
-    //Metallicafan212s code -AdamJD
-    //
-    local float FX;
-    local float fy;
-    local float Ratio;
-    local float CRTScale;
-    local float XOffset;
-    local float YOffset;
-    local float ResX;
-    local float ResY;
-
-    if ( Tex == None )
-    {
-	  return;
-    }
-
-  /*
-  FX = C.SizeX / 640.0;
-  fy = C.SizeY / 480.0;
-  FX = C.SizeX / 640.0;
-  fy = C.SizeY / 480.0;
-  FX = 1.0;
-  fy = 1.0;
-  */
-	
-	FX = 1.0;
- 	FY = 1.0;
-	
-	/*
-	// Metallicafan212:	Scale it to 4/3
-	//Ratio 	= C.SizeX / C.SizeY;
-	
-	//FX 		= Ratio; /// 1.3333;
-	
-	// Metallicafan212:	Center the loading screen and draw black behind it
-	//					TODO!
-	
-	// Metallicafan212:	Rewrite this whole fucking system
-	//					We want a perfect middle square
-	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
-	//					Figure out a resolution in the middle of the screen
-	if(C.SizeX > C.SizeY)
-	{
-		Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
-		// Metallicafan212:	Use the height as the basis of the square
-		ResY = C.SizeY;
-		ResX = C.SizeX * Ratio;
-	}
-	else
-	{
-		Ratio 		= (C.Size.X / C.SizeY) / 1.3333333;
-		ResX = C.SizeX;
-		ResY = C.SizeY * Ratio;
-	}
-	*/
-	
-	// Metallicafan212:	Now draw it in the correct place
-	//					We're considering the canvas a perfect 512x512 grid
-	//X = 
-	
-	
-	//FX 		= (C.SizeX / C.SizeY) / 1.33333;
-	
-	//log("X " $ C.SizeX $ " Y " $ C.SizeY);
-	
-	// Metallicafan212:	Check for thinner resolutions
-	//					On these we need to stretch outwards
-	
-	/*
-	if(FX < 1.0)
-	{
-		FX = 1.0;
-		FY = (C.SizeX / C.SizeY);
-		log("FY is " $ FY);
-	}
-	else
-	{
-		FY = 1.0;
-		log("FX is " $ FX);
-	}
-	
-		
-	//FY		= FX;
-	*/
-  
-	//C.DrawTileClipped(Tex, 
-  
-	Root.DrawStretchedTexture(C, (X * FX), (Y * FY), Tex.USize * FX, Tex.VSize * FY, Tex);
 }
 
 function PrintActionMessageInUpperLeft (Canvas C, string BigMessage)
@@ -183,7 +91,7 @@ function PrintActionMessageInUpperLeft (Canvas C, string BigMessage)
 
   C.bCenter = False;
   C.StrLen(BigMessage,XL,YL);
-  C.SetPos(FrameX / 4 - XL / 2, FrameY / 4.5 - YL / 2);
+  C.SetPos(FrameX / 4 - (XL / 2), FrameY / 4.5 - (YL / 2));
   C.DrawText(BigMessage,False);
 }
 
@@ -194,7 +102,7 @@ function PrintActionMessageInLowerLeft (Canvas C, string BigMessage)
 
   C.bCenter = False;
   C.StrLen(BigMessage,XL,YL);
-  C.SetPos(FrameX / 10,FrameY - FrameY / 4 - YL / 2);
+  C.SetPos(FrameX / 10,FrameY - (FrameY / 4 - (YL / 2)));
   C.DrawText(BigMessage,False);
 }
 
@@ -239,8 +147,6 @@ function DrawLevelAction (Canvas C)
 		PrintActionMessageInUpperLeft(C,BigMessage);
 		return;
 	} 
-	//else 
-	//{
 	else if ( Viewport.Actor.Level.LevelAction == LEVACT_Saving )
 	{
 		BigMessage = Localize("all","Options_0057","HPMenu");
@@ -253,7 +159,6 @@ function DrawLevelAction (Canvas C)
 	{
 		BigMessage = PrecachingMessage;
 	}
-	//}
 	if ( BigMessage != "" )
 	{
 		C.Style = 1;

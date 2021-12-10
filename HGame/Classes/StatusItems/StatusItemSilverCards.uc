@@ -27,11 +27,9 @@ function UpdateCount()
       sgParent.smParent.GetStatusGroup(Class'StatusGroupLocks').IncrementCount(Class'StatusItemLock4',1);
       break;
       default:
+	  break;
     }
   } 
-  else 
-  {
-  }
 }
 
 defaultproperties

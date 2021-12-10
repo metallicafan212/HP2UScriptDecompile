@@ -13,25 +13,10 @@ var() bool bRandomBean;
 var() bool bMakeSpawnPersistent;
 var bool bOpened;
 
-//my failed attempt to fix floating cauldrons -AdamJD
-/*
-function PreBeginPlay()
-{ 
-	Super.PreBeginPlay();
-	
-	if( eVulnerableToSpell == SPELL_None ) 
-	{
-		Log("Setting new cauldron collision size and location...");
-		SetCollisionSize(Default.CollisionRadius, Default.CollisionHeight / 2);
-		SetLocation(Default.Location);
-	}
-}
-*/
-
 function int GetMaxEjectedObjects()
 {
   // return 3;
-  return (nMAX_EJECTED_OBJECTS);
+  return nMAX_EJECTED_OBJECTS;
 }
 
 function SetupRandomBeans()
@@ -46,7 +31,7 @@ function SetupRandomBeans()
   // if ( iBean < iNumberOfBeans )
   for(iBean = 0; iBean < iNumberOfBeans; iBean++)
   {
-    if ( Rand(100) < (30 - PlayerHarry.GetHealth() * 30) && iBean == 0 )
+    if ( Rand(100) < (30 - (PlayerHarry.GetHealth() * 30)) && iBean == 0 )
     {
       EjectedObjects[iBean] = Class'ChocolateFrog';
     } else {
@@ -80,8 +65,6 @@ auto state waitforspell
     GotoState('turnover');
     return True;
   }
- 
-  begin:
 }
 
 state turnover
@@ -113,8 +96,8 @@ state turnover
       Dir = Dir >> SpawnDirection;
       Dir = Dir + Location;
       newSpawn = Spawn(Class'Spawn_flash_2',,,Dir,rot(0,0,0));
-      // newSpawn = FancySpawn(EjectedObjects[iBean],,,Dir);
-	  newSpawn = Spawn(EjectedObjects[iBean],,,Dir); //using spawn instead of fancyspawn stops the game lagging -AdamJD
+      //newSpawn = FancySpawn(EjectedObjects[iBean],,,Dir);
+	  newSpawn = Spawn(EjectedObjects[iBean],,,Dir); //using spawn instead of fancyspawn stops the game lagging (to be compatible with the new engine) -AdamJD
       if ( newSpawn == None )
       {
         cm("* ERROR: cauldron spawn failed.");
@@ -153,10 +136,10 @@ state turnover
   bProjTarget = False;
   eVulnerableToSpell =  SPELL_None;
   PlaySound(Sound'cauldron_flip');
-  PlayAnim('tipover'/*, [RootBone] 'move'*/); //commenting out the rootbone stops floating cauldrons (thanks to MaxG for finding this) -AdamJD
+  PlayAnim('tipover'); 
   FinishAnim();
   generateobject();
-  LoopAnim('tipped'/*, [RootBone] 'move'*/); //commenting out the rootbone stops floating cauldrons (thanks to MaxG for finding this) -AdamJD
+  LoopAnim('tipped');
 }
 
 defaultproperties
@@ -169,9 +152,9 @@ defaultproperties
 
     EjectedObjects(2)=Class'Jellybean'
 
-    // ObjectStartPoint(0)=(X=64.00,Y=0.00,Z=-20.00) 
-	ObjectStartPoint(0)=(X=64.00,Y=0.00,Z=20.00) //now that rootbone is no longer used we need to set the Z start point of the first ObjectStartPoint 
-												//to +20 otherwise beans/frogs fall through the floor when being spawned -AdamJD
+    //ObjectStartPoint(0)=(X=64.00,Y=0.00,Z=-20.00) 
+	ObjectStartPoint(0)=(X=64.00,Y=0.00,Z=20.00) //now that spawn is used instead of fancyspawn we need to set the Z start point of the first ObjectStartPoint 
+												//to +20 otherwise beans/frogs fall through the floor when being spawned (to be compatible with the new engine) -AdamJD
 
     ObjectStartPoint(1)=(X=64.00,Y=-20.00,Z=20.00)
 

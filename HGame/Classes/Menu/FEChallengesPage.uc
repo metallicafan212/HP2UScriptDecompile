@@ -20,8 +20,8 @@ function Created()
 
   CreateBackPageButton();
   CreateTitleButton(GetLocalFEString("Report_Card_0008"));
-  NoneWonLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',WinWidth / 2 - 200,100.0,400.0,30.0));
-  NoneWonLabel.SetFont(4);
+  NoneWonLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',(WinWidth / 2) - 200,100.0,400.0,30.0));
+  NoneWonLabel.SetFont(F_HPMenuLarge);
   NoneWonLabel.TextColor.R = 255;
   NoneWonLabel.TextColor.G = 255;
   NoneWonLabel.TextColor.B = 255;
@@ -31,18 +31,18 @@ function Created()
   NoneWonLabel.SetText(GetLocalFEString("Main_Menu_0011"));
   nStartY = 100;
 
-  for(I = 0; I < 4; I++)
+  for(I = 0; I < ArrayCount(harry(Root.Console.Viewport.Actor).ChallengeScores); I++)
   {
-    NameButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',100.0,nStartY + I * 26,200.0,20.0));
-    NameButtons[I].SetFont(4);
+    NameButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',100.0,nStartY + (I * 26),200.0,20.0));
+    NameButtons[I].SetFont(F_HPMenuLarge);
     NameButtons[I].TextColor.R = 255;
     NameButtons[I].TextColor.G = 255;
     NameButtons[I].TextColor.B = 255;
     // NameButtons[I].Align = 0;
 	NameButtons[I].Align = TA_Left; //from UWindowBase.uc in the proto -AdamJD 
     NameButtons[I].bShadowText = True;
-    ScoreButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',440.0,nStartY + I * 26,200.0,20.0));
-    ScoreButtons[I].SetFont(4);
+    ScoreButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',440.0,nStartY + (I * 26),200.0,20.0));
+    ScoreButtons[I].SetFont(F_HPMenuLarge);
     ScoreButtons[I].TextColor.R = 255;
     ScoreButtons[I].TextColor.G = 255;
     ScoreButtons[I].TextColor.B = 255;
@@ -79,30 +79,35 @@ function PreSwitchPage()
   local bool bWonAtLeastOne;
 
   PlayerHarry = harry(Root.Console.Viewport.Actor);
+  
   PlayerHarry.GetRictusempraChallengeScore(nHighScore,nMaxScore);
   if ( nHighScore > 0 )
   {
     bWonAtLeastOne = True;
   }
-  UpdateButtonProps(0,nHighScore,nMaxScore);
+  UpdateButtonProps(nRICTUSEMPRA_CHALLENGE,nHighScore,nMaxScore);
+  
   PlayerHarry.GetSkurgeChallengeScore(nHighScore,nMaxScore);
   if ( nHighScore > 0 )
   {
     bWonAtLeastOne = True;
   }
-  UpdateButtonProps(1,nHighScore,nMaxScore);
+  UpdateButtonProps(nSKURGE_CHALLENGE,nHighScore,nMaxScore);
+  
   PlayerHarry.GetDiffindoChallengeScore(nHighScore,nMaxScore);
   if ( nHighScore > 0 )
   {
     bWonAtLeastOne = True;
   }
-  UpdateButtonProps(2,nHighScore,nMaxScore);
+  UpdateButtonProps(nDIFFINDO_CHALLENGE,nHighScore,nMaxScore);
+  
   PlayerHarry.GetSpongifyChallengeScore(nHighScore,nMaxScore);
   if ( nHighScore > 0 )
   {
     bWonAtLeastOne = True;
   }
-  UpdateButtonProps(3,nHighScore,nMaxScore);
+  UpdateButtonProps(nSPONGIFY_CHALLENGE,nHighScore,nMaxScore);
+  
   if ( bWonAtLeastOne )
   {
     NoneWonLabel.HideWindow();

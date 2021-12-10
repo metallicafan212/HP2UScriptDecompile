@@ -402,7 +402,7 @@ function PlayLungeAnim()
   local int I;
   local int W;
 
-  W = (HeadAttackFarthest - HeadAttackNearest) / (6 - 1);
+  W = (HeadAttackFarthest - HeadAttackNearest) / (HeadAttackCount - 1);
   I = ( VSize2D(PlayerHarry.Location - Location) - HeadAttackNearest + W / 2 ) / W;
   I = Clamp( I, 0, HeadAttackCount - 1 );
   PlayAnim(HeadAttackAnimName[I],1.0,0.2); 

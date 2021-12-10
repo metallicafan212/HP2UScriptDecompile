@@ -60,7 +60,7 @@ loop:
 
 defaultproperties
 {
-    HouseDisplayInfo(0)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skGeorgeWQuidMesh',MultiSkins[0]=None)
+    HouseDisplayInfo(0)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skGeorgeWQuidMesh',MultiSkins[0]=Texture'HPModels.Skins.skGeorgeWQuidTex0',MultiSkins[1]=Texture'HPModels.Skins.skGeorgeWQuidTex1',MultiSkins[2]=Texture'HPModels.Skins.skGeorgeWQuidTex2',MultiSkins[3]=Texture'HPModels.Skins.skGeorgeWQuidTex3',MultiSkins[4]=Texture'HPModels.Skins.skGeorgeWQuidTex4')
 
     HouseDisplayInfo(1)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skBeaterMesh',MultiSkins[0]=Texture'HPModels.Skins.skBeater_RTex0')
 

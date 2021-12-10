@@ -42,7 +42,7 @@ event Tick (float fDelta)
     {
       if ( fTrailDuration - fCountDown >= fShrinkAfter )
       {
-        DrawScale = fCountDown / (fTrailDuration - fShrinkAfter) * fStartDrawScale;
+        DrawScale = (fCountDown / (fTrailDuration - fShrinkAfter)) * fStartDrawScale;
       }
       fCountDown -= fDelta;
     }

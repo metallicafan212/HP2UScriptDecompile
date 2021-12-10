@@ -101,7 +101,7 @@ function PostBeginPlay()
 	break;
   }
   fNextTimeALineCanBeSaid = 0.0;
-  fGapTime = (FRand() * (fMaxGapTimeBetweenLines - fMinGapTimeBetweenLines)) + fMinGapTimeBetweenLines;
+  fGapTime = FRand() * (fMaxGapTimeBetweenLines - fMinGapTimeBetweenLines) + fMinGapTimeBetweenLines;
   bSeekersInRange = False;
   fTimeInRange = -1.0;
   InitTauntArray();
@@ -186,7 +186,7 @@ function bool SayATaunt()
       harry.fTimeLastDrank = -1.0;
     }
   }
-  if (  !bSaid && (Level.TimeSeconds - fNextTimeALineCanBeSaid) > fMinGapTimeBetweenLines )
+  if (  !bSaid && (Level.TimeSeconds - fNextTimeALineCanBeSaid > fMinGapTimeBetweenLines) )
   {
     fHarryTimeSinceKicked = Level.TimeSeconds - harry.fTimeLastKicked;
     fSeekerTimeSinceKicked = Level.TimeSeconds - Seeker.fTimeLastKicked;
@@ -228,7 +228,7 @@ function float TimeLeftUntilSafeToSayALine (optional bool bNoGap)
 {
   local float fTimeLeft;
 
-  fTimeLeft = (fNextTimeALineCanBeSaid - Level.TimeSeconds) + fNoGapTimeBetweenLines;
+  fTimeLeft = fNextTimeALineCanBeSaid - Level.TimeSeconds + fNoGapTimeBetweenLines;
   if ( bNoGap )
   {
     fTimeLeft += fNoGapTimeBetweenLines;
@@ -262,12 +262,12 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
     {
       return False;
     }
-  } else //{
+  } else {
     if ( Level.TimeSeconds < fNextTimeALineCanBeSaid + fGapTime )
     {
       return False;
     }
-  //}
+  }
   switch (eTeam)
   {
     // case 0:
@@ -296,7 +296,7 @@ function bool SayTaunt (QuidTaunt eTaunt, optional TeamAffiliation eTeam, option
     {
       fAge = 300.0;
     } else {
-      fAge = Level.TimeSeconds - Taunts[eTaunt].House[eHouse].Variant[Variant].fTimeLastSaid + 120.0;
+      fAge = Level.TimeSeconds - (Taunts[eTaunt].House[eHouse].Variant[Variant].fTimeLastSaid + fMinTimeBeforeLineRepeat);
       if ( fAge > 300 )
       {
         fAge = 300.0;
@@ -362,7 +362,6 @@ function InitTauntArray()
   {
     Taunts[0].House[H].Variations = 0;
   }
-  C = 1;
   for(C = 1; C < MAX_QUID_TAUNT_NAMES; C++)
   {
 	for(H = 0; H < MAX_QUID_TAUNT_HOUSE_NAMES; H++)

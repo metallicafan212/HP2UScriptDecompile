@@ -197,6 +197,7 @@ function InitSpider()
     if ( (Marker.bCenter == True) && (Marker.GroupName == GroupName) )
     {
       currentMarker = Marker;
+	  break;
     }
   }
   if ( currentMarker == None )
@@ -298,13 +299,13 @@ state moveToMarker
 
 	if ( AttackHarryCheck() == true && forward == 0 && !IsInState('CutIdle') )
 	{
-		gotoState('preAttackCheck');
+		GotoState('preAttackCheck');
 	}
 
 	if ( Velocity == vec(0,0,0) )
 	{
-		loopAnim('idle');
-		gotoState('Wander');
+		LoopAnim('idle');
+		GotoState('Wander');
 	}
   }
   
@@ -339,9 +340,9 @@ state moveToMarker
   vDirectionVector = currentMarker.Location - Location;
   if ( Rand(2) == 0 )
   {
-    vDir = Location + (vDirectionVector * (vDirectionVector Cross Vec(0.0,0.0,1.0) * FRand() * 205));
+    vDir = Location + (vDirectionVector * (vDirectionVector Cross Vec(0.0,0.0,1.0) * (FRand() * 205)));
   } else {
-    vDir = Location - (vDirectionVector * (vDirectionVector Cross Vec(0.0,0.0,1.0) * FRand() * 205));
+    vDir = Location - (vDirectionVector * (vDirectionVector Cross Vec(0.0,0.0,1.0) * (FRand() * 205)));
   }
   MoveTo(vDir);
 }
@@ -360,12 +361,12 @@ state WalkForward
   {
 	Global.Tick(DeltaTime);
 
-	forward -= vSize(velocity) * DeltaTime;
+	forward -= VSize(Velocity) * DeltaTime;
 		
 	if ( forward <= 0 )
 	{
 	  forward = 0;
-	  gotoState('moveToMarker');
+	  GotoState('moveToMarker');
 	}
   }
   
@@ -395,13 +396,13 @@ state Wander
 
 	if ( AttackHarryCheck() == true && !IsInState('CutIdle') )
 	{
-	  gotoState('preAttackCheck');
+	  GotoState('preAttackCheck');
 	}
 
-	if ( vSize(velocity) < groundSpeed / 3 )
+	else if ( VSize(Velocity) < GroundSpeed / 3 )
 	{
 	  SetLocation(OldLocation);
-	  gotoState('ImLost');
+	  GotoState('ImLost');
 	}
   }
   
@@ -420,9 +421,13 @@ state Wander
   {
 	Global.Touch(other);
 		
-	if ( !Other.IsA('SpiderSmall') || !Other.IsA('SpiderLarge') )
+	if ( other.IsA('SpiderSmall') || other.IsA('SpiderLarge') )
 	{
-	  gotoState('wander');
+	  //KW left this empty? -AdamJD
+	}
+	else
+	{
+	  GotoState('wander');
 	}
   }
   
@@ -497,7 +502,7 @@ state Wait
 
 	if ( AttackHarryCheck() == true  && !IsInState('CutIdle') )
 	{
-	  gotoState('preAttackCheck');
+	  GotoState('preAttackCheck');
 	}
   }
   
@@ -518,8 +523,8 @@ state jumpOffWall
 
 	if ( jumpDistance > 0 )
 	{
-	  SetLocation(location + (vDirectionVector*(200 * deltaTime)));
-	  jumpDistance -= (200 * deltaTime);
+	  SetLocation(Location + (vDirectionVector*(200 * deltaTime)));
+	  jumpDistance -= (200 * DeltaTime);
 	}
 	else
 	{

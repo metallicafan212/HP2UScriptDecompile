@@ -15,7 +15,4 @@ defaultproperties
     strToolTipId="InGameMenu_0018"
 
     bTravelStatus=False
-	
-	CountColor=CountColor_NearWhite
-
 }

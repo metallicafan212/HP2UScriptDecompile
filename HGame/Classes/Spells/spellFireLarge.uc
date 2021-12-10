@@ -86,7 +86,7 @@ function ShootFireballs()
   NumFireballs = 5;
   rotate_fireball = rotator(harrys_head - Location);
   rotate_fireball.Roll = 0;
-  rotate_fireball.Pitch += 65536 * 10 / 4;
+  rotate_fireball.Pitch += (65536 * 10) / 4;
   PlayerHarry.ShakeView(0.31,200.0,200.0);
   // I = 0;
   // if ( I < NumFireballs )
@@ -140,7 +140,7 @@ function float SetAngle()
   local Vector vTarget;
 
   BehindHarry = rotator(Location - PlayerHarry.Location);
-  vTarget = PlayerHarry.Location + vector(BehindHarry) * (2 * PlayerHarry.CollisionRadius); //UTPT forgot to add BODMAS which made firecrab fire go above Harry's head instead of hitting him -AdamJD 
+  vTarget = PlayerHarry.Location + (vector(BehindHarry) * (2 * PlayerHarry.CollisionRadius)); //UTPT forgot to add BODMAS which made firecrab fire go above Harry's head instead of hitting him -AdamJD 
   Distance = VSize(Location - vTarget);
   GlobalSpeed = 300.0;
   if ( Distance > 550 )
@@ -155,7 +155,7 @@ function float SetAngle()
     }
   //}
   fSpeed = GlobalSpeed;
-  angle = Sin(Distance * Gravity / fSpeed * fSpeed) / 2;
+  angle = Sin(Distance * Gravity / (fSpeed * fSpeed)) / 2;
   return angle;
 }
 
@@ -220,7 +220,7 @@ state StateFlying
     hitTarget = GetTarget();
     timeToTarget = getTime();
     Velocity = (hitTarget - Location) / timeToTarget;
-    Velocity.Z = (hitTarget.Z - Location.Z - 0.5 * fGravityEffect * timeToTarget * timeToTarget) / timeToTarget;
+    Velocity.Z = ((hitTarget.Z - Location.Z) - (0.5 * fGravityEffect * (timeToTarget * timeToTarget))) / timeToTarget;
     SetTimer(GrenadeBounceInterval,False);
   }
   
@@ -253,9 +253,9 @@ state StateFlying
     Super.Tick(fTimeDelta);
     if ( bBounce == False )
     {
-      Velocity.Z += fGravityEffect * fTimeDelta;
+      Velocity.Z += (fGravityEffect * fTimeDelta);
     } else {
-      Velocity.Z += fGravityEffect * fTimeDelta;
+      Velocity.Z += (fGravityEffect * fTimeDelta);
     }
     if ( fxFlyParticleEffect != None )
     {
@@ -266,7 +266,6 @@ state StateFlying
       fxHeadParticleEffect.SetLocation(Location);
     }
   }
-  begin:
 }
 
 state stateExplode

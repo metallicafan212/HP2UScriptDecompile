@@ -35,7 +35,7 @@ loop:
 
 defaultproperties
 {
-    HouseDisplayInfo(0)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skOliverWoodQuidMesh',MultiSkins[0]=None)
+    HouseDisplayInfo(0)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skOliverWoodQuidMesh',MultiSkins[0]=Texture'HPModels.Skins.skOliverWoodQuidTex0',MultiSkins[1]=Texture'HPModels.Skins.skOliverWoodQuidTex1',MultiSkins[2]=Texture'HPModels.Skins.skOliverWoodQuidTex2',MultiSkins[3]=Texture'HPModels.Skins.skOliverWoodQuidTex3',MultiSkins[4]=Texture'HPModels.Skins.skOliverWoodQuidTex4')
 
     HouseDisplayInfo(1)=(Sex=SX_Female,Mesh=SkeletalMesh'HPModels.skQuidPlayerFMesh',MultiSkins[0]=Texture'HPModels.Skins.skQuidPlayerF_RTex0')
 

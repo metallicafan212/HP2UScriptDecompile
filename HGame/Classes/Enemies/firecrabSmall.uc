@@ -306,7 +306,7 @@ state throwing
       if ( vTemp2.Z > 0 )
       {
         LoopAnim('StrafeLeft');
-        vTemp2 =  -vTemp Cross Vec(0.0,0.0,1.0);
+        vTemp2 =  -(vTemp Cross Vec(0.0,0.0,1.0));
         if ( BOOL_DEBUG_AI )
         {
           PlayerHarry.ClientMessage("strafing left");
@@ -380,7 +380,7 @@ state strafeAround
         PlayerHarry.ClientMessage("strafing left");
       }
       StrafeLeft = False;
-      vTemp2 =  -vTemp Cross Vec(0.0,0.0,1.0);
+      vTemp2 =  -(vTemp Cross Vec(0.0,0.0,1.0));
       rotationChange = rotator(vTemp2);
       rotationChange.Yaw -= 4000;
       vTemp2 = vector(rotationChange);

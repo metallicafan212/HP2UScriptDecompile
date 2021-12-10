@@ -88,7 +88,7 @@ function Tick (float fTimeDelta)
   fLumosTime += fTimeDelta;
   if ( bInfiniteLumos )
   {
-    ScaleParticles(0.75 - 0.5 * Abs(Sin(fLumosTime * 0.25)));
+    ScaleParticles(0.75 - (0.5 * Abs(Sin(fLumosTime * 0.25))));
     return;
   } else //{
     if ( fLumosTime > fLumosTimeToTurnOff )
@@ -131,7 +131,7 @@ function TurnOn()
   {
     Particles.Destroy();
   }
-  Particles = Spawn(Class'LumosLightFX',self,,Location);
+  Particles = Spawn(Class'LumosLightFX',[SpawnOwner]self,,[SpawnLocation]Location);
   if ( Particles == None )
   {
     PlayerHarry.ClientMessage("ERROR!!! Particles could not be spawned!!!!!");

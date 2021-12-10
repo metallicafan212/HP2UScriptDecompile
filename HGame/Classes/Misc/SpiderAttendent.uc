@@ -108,7 +108,7 @@ state stateFlyIn
   {
     if ( bPlayScreamWhenInView )
     {
-      if ( Normal(Location - PlayerHarry.Cam.Location) Dot (vector(PlayerHarry.Cam.Rotation)) > 0.64999998 )
+      if ( (Normal(Location - PlayerHarry.Cam.Location) Dot vector(PlayerHarry.Cam.Rotation)) > 0.64999998 )
       {
         bPlayScreamWhenInView = False;
         PlayScream();
@@ -237,13 +237,20 @@ state AttackHarry
 
 	if ( ReadyPosition() == True && (BaseHud(PlayerHarry.myHud).bCutSceneMode == False)  )
 	{
-		gotoState('stateBiteHarry');
+		GotoState('stateBiteHarry');
 	}
 	
 	moveToHarryTime -= DeltaTime;
 	if ( moveToHarryTime <= 0 )
 	{
-		gotoState('stateBeMenacing');
+		GotoState('stateBeMenacing');
+	}
+	
+	randomAttackSfx -= DeltaTime;
+	if ( randomAttackSfx <= 0 )
+	{
+		randomAttackSfx = FRand() * 4 + 1;
+		playAttackSound();
 	}
   }
   
@@ -276,13 +283,13 @@ state stateBeMenacing
 
 	if ( ReadyPosition() == True  && (BaseHud(Playerharry.myHud).bCutSceneMode == False)  )
 	{
-		gotoState('stateBiteHarry');
+		GotoState('stateBiteHarry');
 	}
 
 	menacingTime -= DeltaTime;
 	if ( menacingTime <= 0 )
 	{
-		gotoState('preAttackCheck');
+		GotoState('preAttackCheck');
 	}
 
 	vDir = Normal(PlayerHarry.Location - Location);
@@ -349,11 +356,10 @@ state HitBySpell
   {
 	Global.Tick(DeltaTime);
 	
-	fStunned += DeltaTime;
-	
-	if(numSpells > 0)
-	{	
-	  if(fStunned > 5)
+	if ( bStunned )
+	{
+	  fStunned -= DeltaTime;
+	  if( fStunned <= 0 )
 	  {
 		GoToState('preAttackCheck'); 
 	  }

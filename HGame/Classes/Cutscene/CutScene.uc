@@ -41,7 +41,7 @@ function CutCue (string cue)
 {
   local int I;
 
-  for(I = 0; I < MAX_THREADS; I++)
+  for(I = 0; I < ArrayCount(aThreads); I++)
   {
     if ( aThreads[I] != None )
     {
@@ -87,7 +87,7 @@ function CreateThreads()
 
   if ( FileName != "" )
   {
-	for(t = 0; t < MAX_THREADS; t++)
+	for(t = 0; t < ArrayCount(aThreads); t++)
     {
       Line = Localize("thread_"$t,"line_0","Cutscenes\\" $FileName);
       if ( InStr(Line,"<?") == -1 )
@@ -100,7 +100,7 @@ function CreateThreads()
       }
     }
   } else {
-	for(I = 0; I < MAX_THREADS; I++)
+	for(I = 0; I < ArrayCount(aThreads); I++)
     {
       if ( Len(aThreadScripts[I]) > 0 )
       {
@@ -118,7 +118,7 @@ function DeleteThreads()
 {
   local int I;
 
-  for(I = 0; I < MAX_THREADS; I++)
+  for(I = 0; I < ArrayCount(aThreads); I++)
   {
     if ( aThreads[I] != None )
     {

@@ -170,10 +170,13 @@ function Trigger (Actor Other, Pawn EventInstigator)
 	if ( Type == Annoyance )
 	{
 		// goto JL0025;
-		return;
+		//KW left this empty? -AdamJD
 	}
-	TriggerEvent('BossPeevesTrigger',self,None);
-	GotoState('MoveToPoint');
+	else
+	{
+		TriggerEvent('BossPeevesTrigger',self,None);
+		GotoState('MoveToPoint');
+	}
 }
 
 function GotoFirstPoint()
@@ -243,7 +246,7 @@ function PlayerCutRelease()
 {
 	if ( Type != Annoyance )
 	{
-		if (!bGameOver)
+		if ( !bGameOver )
 		{
 			GotoState('stateWaitForTrigger');
 		} 

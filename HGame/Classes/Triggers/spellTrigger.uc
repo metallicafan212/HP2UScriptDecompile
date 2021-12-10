@@ -5,7 +5,7 @@
 class spellTrigger extends Trigger;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\spell_trigger.PNG Name=spell_trigger COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\spell_trigger.PNG Name=spell_trigger COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 var() bool bHitJustFromFront;
 
@@ -58,8 +58,8 @@ function Touch (Actor Other)
 	{
 		if ( bTriggerOnceOnly )
 		{
-		SetCollision(False);
-		bProjTarget = False;
+			SetCollision(False);
+			bProjTarget = False;
 		}
 	}
 	Super.Touch(Other);

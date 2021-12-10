@@ -192,6 +192,8 @@ state AttachToHarry
 
 state DeadSpider
 {
+  ignores Touch; //UTPT didn't add this for some reason -AdamJD
+
 begin:
   Velocity = vect(0.00,0.00,0.00);
   Acceleration = vect(0.00,0.00,0.00);

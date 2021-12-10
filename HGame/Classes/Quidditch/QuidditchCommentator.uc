@@ -130,7 +130,7 @@ function PostBeginPlay()
 	break;
   }
   fNextTimeACommentCanBeSaid = 0.0;
-  fGapTime = (FRand() * (fMaxGapTimeBetweenComments - fMinGapTimeBetweenComments)) + fMinGapTimeBetweenComments;
+  fGapTime = FRand() * (fMaxGapTimeBetweenComments - fMinGapTimeBetweenComments) + fMinGapTimeBetweenComments;
   bMute = False;
   fVolume = 1.0;
   fillCommentArray();
@@ -156,7 +156,7 @@ function float TimeLeftUntilSafeToSayAComment (optional bool bNoGap)
 {
   local float fTimeLeft;
 
-  fTimeLeft = (fNextTimeACommentCanBeSaid - Level.TimeSeconds) + fNoGapTimeBetweenComments;
+  fTimeLeft = fNextTimeACommentCanBeSaid - Level.TimeSeconds + fNoGapTimeBetweenComments;
   if ( bNoGap )
   {
     fTimeLeft += fNoGapTimeBetweenComments;
@@ -226,12 +226,11 @@ function bool SayComment (QuidComment eComment, optional TeamAffiliation eTeam, 
   {
 	  while ( Variant < Comments[eComment].House[eHouse].Variations )
 	  {
-	// JL00DA:
 		if (  !Comments[eComment].House[eHouse].Variant[Variant].bHasBeenSaid )
 		{
 		  fAge = 300.0;
 		} else {
-		  fAge = Level.TimeSeconds - Comments[eComment].House[eHouse].Variant[Variant].fTimeLastSaid + fMinTimeBeforeCommentRepeat;
+		  fAge = Level.TimeSeconds - (Comments[eComment].House[eHouse].Variant[Variant].fTimeLastSaid + fMinTimeBeforeCommentRepeat);
 		  if ( fAge > 300 )
 		  {
 			fAge = 300.0;
@@ -347,14 +346,11 @@ function fillCommentArray()
   {
     Comments[0].House[H].Variations = 0;
   }
-  C = 1;
-
   for(C = 1; C < MAX_QUID_COMMENT_NAMES; C++)
   {
 	for(H = 0; H < MAX_QUID_COMMENT_HOUSE_NAMES; H++)
     {
       Comments[C].House[H].Variations = QC_MAX_COMMENT_VARIANTS;
-      V = 0;
 	  for(V = 0; V < QC_MAX_COMMENT_VARIANTS; V++)
       {
         sndId = GetCommentId(C,H,V);

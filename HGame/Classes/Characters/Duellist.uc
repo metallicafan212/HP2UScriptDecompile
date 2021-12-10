@@ -91,7 +91,7 @@ function bool HarrySpellAboutToHitMe()
 	{
 		return False;
 	}
-	for(i = 0; i < baseWand(PlayerHarry.Weapon).NumCastedSpells; i++)
+	for(I = 0; I < baseWand(PlayerHarry.Weapon).NumCastedSpells; I++)
 	{
 		CurrCastedSpell = baseWand(PlayerHarry.Weapon).CastedSpellList[I];
 		if ( VSize(CurrCastedSpell.Location - Location) < CollisionRadius * (2 + 3 * Intellect) )
@@ -120,7 +120,7 @@ function bool HarrySpellGoesInMyDirection()
 		return False;
 	}
 	
-	for(i = 0; i < baseWand(PlayerHarry.Weapon).NumCastedSpells; i++)
+	for(I = 0; I < baseWand(PlayerHarry.Weapon).NumCastedSpells; I++)
 	{
 		CurrCastedSpell = baseWand(PlayerHarry.Weapon).CastedSpellList[I];
 		Loc = CurrCastedSpell.Location;
@@ -494,7 +494,7 @@ function float GetHealth()
 
 function PlayIdle()
 {
-	LoopAnim('duel_idle',0.81,0.25,,DuellistAnimType);
+	LoopAnim('duel_idle',0.81,[TweenTime]0.25,,DuellistAnimType);
 }
 
 function bool HandleSpellDuelExpelliarmus (optional baseSpell spell, optional Vector vHitLocation)
@@ -708,7 +708,7 @@ state stateShot
 	// Metallicafan212:	Again with UTPT not decomping
 	function Tick(float dtime)
 	{
-		super.Tick(dtime);
+		Global.Tick(dtime);
 		//log(DuellistAnimChannel.bCasting);
 		if(DuellistAnimChannel.bCasting)
 			return;
@@ -729,7 +729,6 @@ state stateShot
 			LoopAnim('duel_idle');
 		}
 		DuellistAnimChannel.DoCast();
-		//goto('begin');
 }
 
 state stateDefence
@@ -743,7 +742,7 @@ state stateDefence
 	// Metallicafan212:	AAAAAAA
 	function Tick(float dtime)
 	{
-		super.Tick(dtime);
+		Global.Tick(dtime);
 		if(DuellistAnimChannel.bCasting)
 			return;
 

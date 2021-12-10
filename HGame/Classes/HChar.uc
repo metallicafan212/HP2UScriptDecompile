@@ -2,7 +2,7 @@
 // HChar.
 //================================================================================
 
-class HChar extends HPawn;
+class HChar extends HPawn; 
 
 const WATCH_FOR_HARRY_ARRAY_SIZE= 3;
 enum EEnemyBar 
@@ -64,7 +64,6 @@ var(WatchForHarry) float fNotifyOthersHearDistance;
 var(WatchForHarry) name EventName;
 var Actor aListenToMe;
 var bool bCapturedFromStateIdle;
-var float fDistanceToHarry; //added by me to find the distance between Slytherin students and Harry -AdamJD
 
 
 function bool ShouldStartLookingForHarry()
@@ -240,23 +239,10 @@ state followHarry
 		GroundSpeed = GroundRunSpeed + 175;
 		LoopAnim(RunAnimName,,0.75);
 		vTemp = PlayerHarry.Location - Location;
-		
-		fDistanceToHarry = VSize(vTemp); //get Harrys current location from Slytherin students -AdamJD
-		
-		//chase after Harry if close enough! -AdamJD 
-		if(fDistanceToHarry <= 250)
-		{
-			vTemp = Location + 30 * vTemp / VSize(vTemp);
-		}
-		//otherwise randomly look for Harry if too far away -AdamJD
-		else
-		{
-			vTemp = Location + 2 * vTemp / VSize(vTemp);
-		}
-		
+		vTemp = Location + 2 * vTemp / VSize(vTemp);
 		MoveTo(vTemp);
 		DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
-		if (  CanSeeHarry(True,True) )
+		if (  !CanSeeHarry(True,True) )
 		{
 			iCanSeeHarryCounter++;
 			if ( iCanSeeHarryCounter > 2 )
@@ -264,10 +250,8 @@ state followHarry
 				GotoState('RandomLookForHarry');
 			}
 		}
-		else
-		{
-			GotoState('followHarry');
-		}
+		
+		GotoState('followHarry');
 }
 
 state RandomLookForHarry
@@ -298,33 +282,30 @@ state RandomLookForHarry
 	//UTPT didn't add this for some reason -AdamJD
 	function Tick (float dtime)
 	{ 
+	  Global.Tick(dtime);
 	  if ( (Rand(6) == 0) &&  !bTempDontLookForHarry && CanSeeHarry(True,True) )
 	  {
-		if ( bDoStuckChecking )
-		{
+	      GotoState('followHarry');
+	  }
+	  if ( bDoStuckChecking )
+	  {
 		  if ( VSize2D(Location - vLastPosition) < 1 )
 		  {
-			iStuckCounter++;
-			if ( iStuckCounter > 4 )
-			{
-			  vLastPosition = vect(0.00,0.00,0.00);
-			  iStuckCounter = 0;
-			  FindNewVTempBasedOnNormal(PlayerHarry.Location - Location);
-			  GotoState('RandomLookForHarry');
-			}
+		      iStuckCounter++;
+		      if ( iStuckCounter > 4 )
+		      {
+		          vLastPosition = vect(0.00,0.00,0.00);
+			      iStuckCounter = 0;
+			      FindNewVTempBasedOnNormal(PlayerHarry.Location - Location);
+			      GotoState('RandomLookForHarry');
+		      }
 		  }
-		  vLastPosition = Location;
-		}
+		  else
+		  {
+		      iStuckCounter = 0;
+		  }
 	  }
-	  
-	  fDistanceToHarry = VSize(PlayerHarry.Location - Location); //get Harrys current location from Slytherin students -AdamJD
-	  
-	  //go to the followHarry state if current distance is 250 or less (fWatchForHarryDist is 512) -AdamJD
-	  if(fDistanceToHarry <= 250)
-	  {
-		//Log("Close to Harry!"); 
-		GotoState('followHarry');
-	  }
+	  vLastPosition = Location;
 	}
   
 	function EndState()
@@ -343,11 +324,9 @@ state RandomLookForHarry
 		local Rotator R;
   
 		R.Yaw = rotator(HitNormal).Yaw;
-		R.Yaw = (R.Yaw + RandRange(-15000.0,15000.0)) & 65535;
+		R.Yaw = R.Yaw + RandRange(-15000.0,15000.0) & 65535;
 		
-		//Figured this bit out for the students to move towards Harry when they see him like in the retail game because it wasn't here -AdamJD
-		vTemp = Location + Normal(vector(R) * 75) * 80;
-		DesiredRotation.Yaw = R.Yaw + rotator(vTemp).Yaw & 65535;
+		vTemp = Location + Normal(vector(R)) * 75; //figured this bit out for the students to move towards Harry when they see him like in the retail game because UTPT couldn't decompile it -AdamJD
 	}
   
 	begin:
@@ -369,8 +348,7 @@ state RandomLookForHarry
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);
 		LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.25);
-		// this seems to cause the most problems so I'm commenting it out -AdamJD
-		//Sleep(RandRange(0.75,1.5));
+		Sleep(RandRange(0.75,1.5));
 		FindNewVTempBasedOnNormal((PlayerHarry.Location - Location) * vect(1.00,1.00,0.00));
 		TurnTo(vTemp);
 		bDoStuckChecking = True;
@@ -474,8 +452,7 @@ state SaySomethingFirstTime
 	function Tick(float DeltaTime)
 	{
 		Global.Tick(DeltaTime);
-		DesiredRotation.Yaw = rotator(playerHarry.Location - Location).yaw;
-		//CM(name$" Tick 1");
+		DesiredRotation.Yaw = rotator(playerHarry.Location - Location).Yaw;
 	}
 	
 	begin:
@@ -541,20 +518,21 @@ function PreBeginPlay()
 	local name nm;
 
 	Super.PreBeginPlay();
+	
 	FidgetNums = 0;
-	for(i = 0; i <= 16; i++)
+	for(I = 1; I <= 16; I++)
 	{
 		AnimName = "fidget_" $I;
 		nm = StringToAnimName(AnimName);
-		if ( nm == '' )
+		if ( nm == 'None' )
 		{
 			FidgetNums = I - 1;
 			break;
 		} 
 	}
-	IdleNums = 0;
 	
-	for(i = 0; i <= 16; i++)
+	IdleNums = 0;
+	for(I = 1; I <= 16; I++)
 	{
 		AnimName = "idle_" $I;
 		nm = StringToAnimName(AnimName);
@@ -564,16 +542,18 @@ function PreBeginPlay()
 			break;
 		}
 	}
+	
 	HowManyBaseAnims = 0;
 	HowManyBaseSounds = 0;
 	HowManyAlarmAnims = 0;
 	HowManyAlarmSounds = 0;
+	
 	if (  !bCouldWatchForHarry )
 	{
 		return;
 	}
 	
-	for(i = 0; i < WATCH_FOR_HARRY_ARRAY_SIZE; i++)
+	for(I = 0; I < WATCH_FOR_HARRY_ARRAY_SIZE; I++)
 	{
 		if ( BaseWatchAnim[I] == 'None' )
 		{
@@ -582,7 +562,7 @@ function PreBeginPlay()
 	}
 	HowManyBaseAnims = I;
 	
-	for(i = 0; i < WATCH_FOR_HARRY_ARRAY_SIZE; i++)
+	for(I = 0; I < WATCH_FOR_HARRY_ARRAY_SIZE; I++)
 	{
 		if ( BaseWatchSound[I] == "" )
 		{
@@ -591,7 +571,7 @@ function PreBeginPlay()
 	}
 	HowManyBaseSounds = I;
 	
-	for(i = 0; i < WATCH_FOR_HARRY_ARRAY_SIZE; i++)
+	for(I = 0; I < WATCH_FOR_HARRY_ARRAY_SIZE; I++)
 	{
 		if ( BaseAlarmAnim[I] == 'None' )
 		{
@@ -600,7 +580,7 @@ function PreBeginPlay()
 	}
 	HowManyAlarmAnims = I;
 	
-	for(i = 0; i < WATCH_FOR_HARRY_ARRAY_SIZE; i++)
+	for(I = 0; I < WATCH_FOR_HARRY_ARRAY_SIZE; I++)
 	{
 		if ( BaseAlarmSound[I] == "" )
 		{
@@ -608,6 +588,7 @@ function PreBeginPlay()
 		}
 	}
 	HowManyAlarmSounds = I;
+	
 	if ( PlayerHarry.Difficulty == DifficultyMedium )
 	{
 		GroundRunSpeed = 240.0;
@@ -1006,26 +987,17 @@ state stateIdle
 			CurrIdleAnimName = GetCurrIdleAnimName();
 			if ( FidgetNums != 0 )
 			{
-				//only play the current idle anim if an actor has one otherwise you get T/A posing and things breaking -AdamJD
-				if( HasAnim(CurrIdleAnimName) )
-				{
-					LoopAnim(CurrIdleAnimName,RandRange(0.81,1.25),0.5);
-					Sleep(RandRange(iMinIdleSeconds,iMaxIdleSeconds));
-					FinishAnim();
-				}
-				
-				//only play the current fidget anim if an actor has one otherwise you get T/A posing and things breaking -AdamJD
-				if( HasAnim(CurrFidgetAnimName) )
-				{
-					PlayAnim(CurrFidgetAnimName,RandRange(0.81,1.25),0.2);
-					FinishAnim();
-				}
+				LoopAnim(CurrIdleAnimName,RandRange(0.81,1.25),[TweenTime]0.5);
+				Sleep(RandRange(iMinIdleSeconds,iMaxIdleSeconds));
+				FinishAnim();
+				PlayAnim(CurrFidgetAnimName,RandRange(0.81,1.25),[TweenTime]0.2);
+				FinishAnim();
 			} 
-			else 
+			else
 			{
 				if ( HasAnim(CurrIdleAnimName) )
 				{
-					PlayAnim(CurrIdleAnimName,RandRange(0.81,1.25),0.2);
+					PlayAnim(CurrIdleAnimName,RandRange(0.81,1.25),[TweenTime]0.2);
 					FinishAnim();
 					Sleep(0.01);
 				} 
@@ -1146,7 +1118,7 @@ function Sound GetRandomFallSound()
 {
 	local int nActualSounds;
 
-	for(nActualSounds = 0; nActualSounds < 10; nActualSounds++)
+	for(nActualSounds = 0; nActualSounds < ArrayCount(soundFalling); nActualSounds++)
 	{
 		if ( soundFalling[nActualSounds] == None )
 		{

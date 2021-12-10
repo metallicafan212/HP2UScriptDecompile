@@ -644,8 +644,8 @@ function UpdateBroomSound()
   {
     fTurnFactor = 1.0;
   }
-  fVolume *= 1.0 + (2.0 * fTurnFactor);
-  fPitch *= 1.0 + (1.0 * fTurnFactor);
+  fVolume *= 1.0 + 2.0 * fTurnFactor;
+  fPitch *= 1.0 + 1.0 * fTurnFactor;
   if ( (fTurnFactor > 0.0) && (fTurnFactor < 0.1) )
   {
     if ( fSpeedFactor > 0.69999999 )
@@ -703,6 +703,10 @@ function FlyOnPath (name CutScenePath, optional int StartPoint)
     {
       Log("Harry couldn't find path " $ string(CutScenePath));
     }
+	else
+	{
+	  //KW left this empty? -AdamJD
+	}
   }
 }
 
@@ -880,7 +884,7 @@ function PlayerTrack (float DeltaTime)
     }
   //}
   GetAxes(LookForTarget.Rotation,TargetX,TargetY,TargetZ);
-  TargetTrackPoint = (LookForTarget.Location + (TargetY * fTargetTrackHorzOffset)) + (TargetZ * (fTargetTrackVertOffset - CollisionHeight));
+  TargetTrackPoint = LookForTarget.Location + TargetY * fTargetTrackHorzOffset + TargetZ * (fTargetTrackVertOffset - CollisionHeight);
   TargetDir = TargetTrackPoint - Location;
   DesiredRotation = rotator(TargetDir);
   GetAxes(Rotation,X,Y,Z);
@@ -898,12 +902,12 @@ function PlayerTrack (float DeltaTime)
     vDodgeVel = vect(0.00,0.00,0.00);
   }
   TargetDist = VSize(TargetDir) - fTargetTrackDist;
-  if ( TargetDist > 50 )
+  if ( TargetDist > SlowdownRadius )
   {
     AirSpeed = MaxSpeed;
   } else {
     TargetSpeed = VSize(LookForTarget.Velocity);
-    AirSpeed = TargetDist / 50 * (MaxSpeed - TargetSpeed) + TargetSpeed;
+    AirSpeed = TargetDist / SlowdownRadius * (MaxSpeed - TargetSpeed) + TargetSpeed;
     if ( AirSpeed < 0 )
     {
       AirSpeed = 0.0;
@@ -914,12 +918,12 @@ function PlayerTrack (float DeltaTime)
   {
     bEasingUpToSpeed = False;
   }
-  if ( (Level.TimeSeconds > fNextTimeSafeToWoosh) && (CurrentSpeed > 75) && ((Abs(fTargetTrackHorzOffset - fLastHorzOffset) / DeltaTime > 150) || (Abs(fTargetTrackVertOffset - fLastVertOffset) / DeltaTime > 150)) )
+  if ( (Level.TimeSeconds > fNextTimeSafeToWoosh) && (CurrentSpeed > 75) && (((Abs(fTargetTrackHorzOffset - fLastHorzOffset) / DeltaTime) > 150) || ((Abs(fTargetTrackVertOffset - fLastVertOffset) / DeltaTime) > 150)) )
   {
-    Woosh = SlowWooshSounds[Rand(5)];
+    Woosh = SlowWooshSounds[Rand(NUM_SLOW_WOOSH_SOUNDS)];
     fPitch = RandRange(1.0,1.5);
     PlaySound(Woosh,SLOT_Misc,1.0,,1000.0,fPitch);
-    fNextTimeSafeToWoosh = (Level.TimeSeconds + (GetSoundDuration(Woosh) / fPitch)) + 0.1;
+    fNextTimeSafeToWoosh = Level.TimeSeconds + ((GetSoundDuration(Woosh) / fPitch) + 0.1);
   }
   UpdateBroomSound();
 }
@@ -934,12 +938,9 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
     WatchTarget = None;
     PlayAnim('Bump',,0.2);
     bHit = True;
-	
-	//UTPT didn't seem to decompile this function right, no health used to be taken off BroomHarry when getting kicked the seeker -AdamJD
-	/*
-    if ( !InstigatedBy.IsA('Seeker') && DamageType != 'Kicked' )
+    if ( !(InstigatedBy.IsA('Seeker') && DamageType != 'Kicked') )
     {
-      PlaySound(HurtSound[Rand(15)],SLOT_Talk,,True);
+      PlaySound(HurtSound[Rand(NUM_HURT_SOUNDS)],SLOT_Talk,,True);
       if ( (DamageType == 'Kicked') || (DamageType == 'Bludgered') )
       {
         if ( Director != None )
@@ -963,33 +964,6 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
         {
           KillHarry(True);
         }
-      }
-    }
-	*/
-	
-    if ( (DamageType == 'Kicked') || (DamageType == 'Bludgered') )
-    {
-      if ( Director != None )
-      {
-        Director.OnTakeDamage(self,Damage,InstigatedBy,DamageType);
-      }
-    }
-	if ( !bInvincible && DamageType != 'Collided' ) //Collided is used by the seeker when bumping into BroomHarry but not kicking him -AdamJD  
-    {
-      if ( QuidArmorStatus.GetCount() > 0 )
-      {
-        EffectiveDamage = (Damage * 0.5) * ArmorDamageScale;
-      }
-	  else
-	  {
-		 EffectiveDamage = Damage * 0.5;
-	  }
-	  ClientMessage("BroomHarry Damage=" $ string(Damage) $ ", EffectiveDamage=" $ string(EffectiveDamage));
-	  PlaySound(HurtSound[Rand(15)],SLOT_Talk,,True); //only play the hurt sound if he's actually hitting something or kicked by the seeker -AdamJD
-	  AddHealth(-EffectiveDamage);
-      if ( GetHealthCount() <= 0.0 )
-      {
-        KillHarry(True);
       }
     }
   }
@@ -1080,7 +1054,6 @@ state PlayerWalking
       {
         // Camera.SetCameraMode(4);
 		Camera.SetCameraMode(CM_Quidditch);
-  // JL009D:
         // goto JL009D;
 		break;
       }
@@ -1113,10 +1086,10 @@ state PlayerWalking
       if (  !bLookingForTarget )
       {
         bLookingForTarget = True;
-        SetTimer(FRand() * 3.0 + 1.0,False);
+        SetTimer(FRand() * 3.0 + 1.0,False); 
       }
     } else {
-      if ( bLookingForTarget )
+      if ( bLookingForTarget ) 
       {
         bLookingForTarget = False;
         SetTimer(0.0,False);
@@ -1243,7 +1216,7 @@ state PlayerWalking
 		  fMouseYaw += aBroomYaw * fBroomSensitivity;
 		  if ( Abs(aBroomYaw) > 0.05 )
 		  {
-			//KW left this if statement empty? -AdamJD
+			//KW left this empty? -AdamJD
 		  }
 		  if ( fMouseYaw > 1.5 )
 		  {
@@ -1328,7 +1301,7 @@ state PlayerWalking
   
     NewRotation = Rotation;
     fPitchLimitHi = PitchLimitUp * (16384 / 90.0);
-    fPitchLimitLo = 65536.0 - (PitchLimitDown * 16384 / 90.0);
+    fPitchLimitLo = 65536.0 - (PitchLimitDown * (16384 / 90.0));
     switch (ePitchControlDevice)
     {
       // case 1:
@@ -1503,10 +1476,10 @@ state PlayerWalking
       bHitWall = True;
       fSpeed = VSize(Velocity);
       fVolume = fSpeed / AirSpeedNormal;
-      PlaySound(HitSounds[Rand(3)],SLOT_Interact,fVolume,,,RandRange(0.81,1.25));
+      PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,fVolume,,,RandRange(0.81,1.25));
       if ( WallDamage > 0 )
       {
-        EffectiveDamage = (WallDamage * fSpeed) / AirSpeedNormal;
+        EffectiveDamage = WallDamage * fSpeed / AirSpeedNormal;
 		if ( !bInvincible && (EffectiveDamage > 0) )
         {
           PlaySound(HurtSound[Rand(15)],SLOT_Talk,,True);
@@ -1529,7 +1502,7 @@ state PlayerWalking
     {
       return;
     } else {
-      fWallAvoidanceRate = 1.0 - Abs(HitNormal.Z) / 0.9851;
+      fWallAvoidanceRate = 1.0 - (Abs(HitNormal.Z) / 0.9851); //UTPT forgot to add brackets -AdamJD
     }
     vDodgeVel = GetDodgeVelFromHitwall(self,HitNormal,LookForTarget);
     bHittingWall = True;
@@ -1541,14 +1514,14 @@ state PlayerWalking
 	local Pawn pTarget;
   
     pTarget = Pawn(Other);
-    if ( (!bHit && !pTarget.IsA('QuidditchPlayer')) && !pTarget.IsA('Bludger') )
+    if ( !bHit && (!pTarget.IsA('QuidditchPlayer') && !pTarget.IsA('Bludger')) )
     {
       PlayAnim('React');
       if ( pTarget.IsA('QuidGoal') )
       {
         PlaySound(Sound'Q_BRM_HitPole_01',SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
       } else {
-        PlaySound(HitSounds[Rand(3)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+        PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
       }
       Velocity = vect(0.00,0.00,1.00);
       bHit = True;
@@ -1600,9 +1573,9 @@ function Vector GetDodgeVelFromHitwall (Actor aSelf, Vector vHitNormal, Actor LF
   vVel = (V + vHitNormal * 0.81) / 2;
   if ( vVel.Z > 0 )
   {
-    vVel.Z = Abs(vVel.X) + Abs(vVel.Y) / 2;
+    vVel.Z = Abs(vVel.X) + (Abs(vVel.Y) / 2); //UTPT forgot to add brackets -AdamJD
   } else {
-    vVel.Z =  -Abs(vVel.X) + Abs(vVel.Y) / 2;
+    vVel.Z =  -Abs(vVel.X) + (Abs(vVel.Y) / 2); //UTPT forgot to add brackets -AdamJD
   }
   vVel = Normal(vVel);
   return vVel;
@@ -1706,7 +1679,7 @@ state Pursue
     Super.PlayerTick(DeltaTime);
     if ( (LookForTarget == None) || LookForTarget.bHidden )
     {
-      GotoState('PlayerWalking');
+      GotoState('PlayerWalking'); 
     }
     TargetDir = LookForTarget.Location - Location;
     DesiredRotation = rotator(TargetDir);

@@ -100,7 +100,7 @@ auto state fallOver
     }
     SetLocation(OldLocation);
     vMoveDirRot = rotator(HitNormal);
-    vMoveDirRot.Yaw += 65536.0 * (8.0 / 20.0) / 2.0 * (FRand() * 2.0 - 1.0);
+    vMoveDirRot.Yaw += 65536.0 * (8.0 / 20.0) / 2.0 * ((FRand() * 2.0) - 1.0);
     vMoveDirRot.Pitch = 0;
 	vMoveDirRot.Roll = 0;
     GotoState('TurnToNewDir');
@@ -111,9 +111,9 @@ auto state fallOver
   vMoveDir.Y = 1.0;
   vMoveDir.Z = 1.0;
   vMoveDirRot = Rotation;
-  vMoveDirRot.Yaw += 16384 * (8.0 / 20.0) / 2.0 * (FRand() * 2.0 - 1.0);
-  vMoveDirRot.Pitch += 8191 * (8.0/ 20.0) / 2.0 * (FRand() * 2.0 - 1.0);
-  vMoveDirRot.Roll += 16384 * (8.0/ 20.0) / 2.0 * (FRand() * 2.0 - 1.0);
+  vMoveDirRot.Yaw += 16384 * (8.0 / 20.0) / 2.0 * ((FRand() * 2.0) - 1.0);
+  vMoveDirRot.Pitch += 8191 * (8.0/ 20.0) / 2.0 * ((FRand() * 2.0) - 1.0);
+  vMoveDirRot.Roll += 16384 * (8.0/ 20.0) / 2.0 * ((FRand() * 2.0) - 1.0);
   vMoveDir = vMoveDir >> vMoveDirRot;
   fRotVel = 0.0;
   SetRotation(rotator(vMoveDir));
@@ -123,6 +123,7 @@ state TurnToNewDir
 {
 begin:
   LoopAnim('Idle');
+wait:
   Sleep(0.5);
   TurnTo(Location + vMoveDir);
   GotoState('fallOver');

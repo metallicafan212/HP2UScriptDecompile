@@ -55,18 +55,21 @@ function Touch (Actor Other)
 
 	if ( (Other == PlayerHarry) && (bCanBeTouched) )
 	{
-		return;
+		//KW left this empty? -AdamJD
 	}
-	if ( Other.IsA('HPawn') &&  !Other.IsA('PoisonCloud') &&  !Other.IsA('ThrownPoisonCloud') &&  !Other.IsA('HorklumpsHead') &&  !Other.IsA('HorklumpsStem') && (bCanBeThrown) )
+	else
 	{
-		if ( !baseHUD(PlayerHarry.myHUD).bCutSceneMode )
+		if ( Other.IsA('HPawn') &&  !Other.IsA('PoisonCloud') &&  !Other.IsA('ThrownPoisonCloud') &&  !Other.IsA('HorklumpsHead') &&  !Other.IsA('HorklumpsStem') && (bCanBeThrown) )
 		{
-			HPawnHit = HPawn(Other);
-			if ( BOOL_DEBUG_AI )
+			if ( !baseHUD(PlayerHarry.myHUD).bCutSceneMode )
 			{
-				PlayerHarry.ClientMessage(string(self) $ " Hit something : " $ string(HPawnHit));
+				HPawnHit = HPawn(Other);
+				if ( BOOL_DEBUG_AI )
+				{
+					PlayerHarry.ClientMessage(string(self) $ " Hit something : " $ string(HPawnHit));
+				}
+				HPawnHit.HitByThrownObject(1,HPawnHit,Location,Velocity * 1,'PoisonCloud');
 			}
-			HPawnHit.HitByThrownObject(1,HPawnHit,Location,Velocity * 1,'PoisonCloud');
 		}
 	}
 	PlaySound(Sound'spell_hit',SLOT_Interact,1.0,False,2000.0,1.0);

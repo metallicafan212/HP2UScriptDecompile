@@ -71,7 +71,7 @@ function CreateBackPageButton (optional int nX, optional int nY)
 }
 
 // Metallicafan212:	Don't think this is used, so I'm not going to fix the jump shit
-// This is used lol -AdamJD
+//this is used lol -AdamJD
 function CreateTitleButton (string strTitle, optional int nXPos, optional int nYPos)
 {
 	if ( nXPos == 0 )
@@ -86,10 +86,13 @@ function CreateTitleButton (string strTitle, optional int nXPos, optional int nY
 		
 		//align title to the centre of the page -AdamJD
 		nXPos = (WinWidth / 2) - 200;
-		nYPos = 40;
+	}
+	if( nYPos == 0 )
+	{
+		nYPos = 40; //align title to the centre of the page -AdamJD
 	}
 	TitleButton = UWindowLabelControl(CreateControl(Class'UWindowLabelControl', nXPos, nYPos,400.0,30.0));
-	TitleButton.SetFont(4);
+	TitleButton.SetFont(F_HPMenuLarge);
 	TitleButton.TextColor.R = 215;
 	TitleButton.TextColor.G = 0;
 	TitleButton.TextColor.B = 215;
@@ -127,14 +130,11 @@ function Notify (UWindowDialogControl C, byte E)
 			SetRollover(BackPageButton,textureReturnRO,Sound'GUI_Esc_Rollover4',True);
 		}
 	} 
-	else 
+	else if ( E == DE_MouseLeave )
 	{
-		if ( E == DE_MouseLeave )
+		if ( C == BackPageButton )
 		{
-			if ( C == BackPageButton )
-			{
-				ClearRollover();
-			}
+			ClearRollover();
 		}
 	}
 	Super.Notify(C,E);
@@ -198,7 +198,7 @@ function HPMessageBox doHPMessageBox (string Msg, string textButton1, optional s
 
 function WindowEvent (WinMessage Msg, Canvas C, float X, float Y, int Key)
 {
-	if ( (Msg == 9) ||  !Root.WaitModal() )
+	if ( (Msg == WM_Paint) ||  !Root.WaitModal() )
 	{
 		Super.WindowEvent(Msg,C,X,Y,Key);
 	}

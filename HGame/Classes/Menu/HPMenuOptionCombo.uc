@@ -5,8 +5,8 @@
 class HPMenuOptionCombo extends UWindowComboControl;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FEComboIdleTexture.PNG	GROUP=Icons	Name=FEComboIdleTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEComboOverTexture.PNG	GROUP=Icons	Name=FEComboOverTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboIdleTexture.PNG	GROUP=Icons	Name=FEComboIdleTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboOverTexture.PNG	GROUP=Icons	Name=FEComboOverTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 var Texture IdleTexture;
 var Texture OverTexture;
@@ -63,14 +63,14 @@ function Paint (Canvas C, float X, float Y)
   if ( bListVisible )
   {
     DrawClippedTexture(C,WinWidth - EditBoxWidth,1.0,OverTexture);
-  } else //{
+  } else {
     if ( MouseIsOver() || EditBox.MouseIsOver() || Button.MouseIsOver() )
     {
       DrawClippedTexture(C,WinWidth - EditBoxWidth,1.0,OverTexture);
     } else {
       DrawClippedTexture(C,WinWidth - EditBoxWidth,1.0,IdleTexture);
     }
-  //}
+  }
 }
 
 function CloseUpWithNoSound()

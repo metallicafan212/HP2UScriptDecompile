@@ -30,29 +30,29 @@ function PreBeginPlay()
     DrawScale = 0.0;
     bHidden = True;
   }
-  fShrinkTime *= RandRange(0.81,1.25);
-  fGrowTime *= RandRange(0.81,1.25);
+  fShrinkTime *= RandRange(0.81,1.20);
+  fGrowTime *= RandRange(0.81,1.20);
   if ( FRand() > 0.75 )
   {
     switch (Rand(6))
     {
       case 0:
-      PlaySound(Sound'ss_COS_venomland_01E',,RandRange(0.31,0.62),,,RandRange(0.81,1.25));
+      PlaySound(Sound'ss_COS_venomland_01E',,RandRange(0.31,0.62),,,RandRange(0.81,1.20));
       break;
       case 1:
-      PlaySound(Sound'ss_COS_venomland_05E',,RandRange(0.31,0.62),,,RandRange(0.81,1.25));
+      PlaySound(Sound'ss_COS_venomland_05E',,RandRange(0.31,0.62),,,RandRange(0.81,1.20));
       break;
       case 2:
-      PlaySound(Sound'ss_COS_venomland_04E',,RandRange(0.31,0.62),,,RandRange(0.81,1.25));
+      PlaySound(Sound'ss_COS_venomland_04E',,RandRange(0.31,0.62),,,RandRange(0.81,1.20));
       break;
       case 3:
-      PlaySound(Sound'ss_COS_venomland_03E',,RandRange(0.31,0.62),,,RandRange(0.81,1.25));
+      PlaySound(Sound'ss_COS_venomland_03E',,RandRange(0.31,0.62),,,RandRange(0.81,1.20));
       break;
       case 4:
-      PlaySound(Sound'ss_COS_venomland_02E',,RandRange(0.31,0.62),,,RandRange(0.81,1.25));
+      PlaySound(Sound'ss_COS_venomland_02E',,RandRange(0.31,0.62),,,RandRange(0.81,1.20));
       break;
       case 5:
-      PlaySound(Sound'ss_COS_venomland_06E',,RandRange(0.31,0.62),,,RandRange(0.81,1.25));
+      PlaySound(Sound'ss_COS_venomland_06E',,RandRange(0.31,0.62),,,RandRange(0.81,1.20));
       break;
       default:
     }

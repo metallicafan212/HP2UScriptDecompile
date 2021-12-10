@@ -16,16 +16,16 @@ function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, 
 	local int nCutBorderHeight;
 
 	fScaleFactor 	= GetScaleFactor(nCanvasSizeX);
-	nOutX 			= nCanvasSizeX - nIconWidth * fScaleFactor - fScaleFactor * 4;
+	nOutX 			= nCanvasSizeX - (nIconWidth * fScaleFactor) - (fScaleFactor * 4);
 	if ( bMenuMode && smParent.PlayerHarry.HaveObjectiveText() )
 	{
 		nObjectiveTop 	= HPConsole(smParent.PlayerHarry.Player.Console).menuBook.InGamePage.GetObjectiveAreaTop(nCanvasSizeX, nCanvasSizeY);
-		nOutY 			= nObjectiveTop - nIconHeight * fScaleFactor - 5 * fScaleFactor;
+		nOutY 			= nObjectiveTop - (nIconHeight * fScaleFactor) - (5 * fScaleFactor);
 	}
 	else 
 	{
 		nCutBorderHeight 	= HPHud(smParent.PlayerHarry.myHUD).managerCutScene.GetMaxBorderHeightFromCanvasHeight(nCanvasSizeY);
-		nOutY 				= nCanvasSizeY - nIconHeight * fScaleFactor - nCutBorderHeight;
+		nOutY 				= nCanvasSizeY - (nIconHeight * fScaleFactor) - nCutBorderHeight;
 	}
 }
 
@@ -38,7 +38,7 @@ function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int
 	fScaleFactor 	= GetScaleFactor(Canvas.SizeX);
 	GetGroupFinalXY(bMenuMode,Canvas,nIconWidth,nIconHeight,nFinalX,nFinalY);
 	nOutX 			= nFinalX;
-	nOutY 			= Canvas.SizeY + nIconHeight * fScaleFactor;
+	nOutY 			= Canvas.SizeY + (nIconHeight * fScaleFactor);
 }
 
 defaultproperties

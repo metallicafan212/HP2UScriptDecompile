@@ -43,8 +43,8 @@ auto state isFalling
   {
     local ParticleFX p;
   
-    SetRotation(Rotation + RandSpin * DeltaTime * 3);
-    Velocity.Z -= DeltaTime * 1000;
+    SetRotation(Rotation + (RandSpin * DeltaTime * 3));
+    Velocity.Z -= (DeltaTime * 1000);
     MaxLiveTime -= DeltaTime;
     if ( MaxLiveTime < 0 )
     {

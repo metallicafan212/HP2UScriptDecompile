@@ -173,7 +173,7 @@ state DoneGrowing
   {
     Super.Tick(fTimeDelta);
     DamageTime -= fTimeDelta;
-    DamageTime -= fTimeDelta;
+	DamageTime -= fTimeDelta;
     if ( DamageTime <= 0 )
     {
       if ( (aSlimedHPawn != None) && aSlimedHPawn.IsA('harry') )
@@ -222,7 +222,7 @@ state() stateHiding
       harry(aSlimedHPawn).WebAnimRefCountSub();
     }
     aSlimedHPawn = None;
-    fShrinkTime *= RandRange(0.81,1.25);
+    fShrinkTime *= RandRange(0.81,1.20);
     PlaySound(ShrinkSound,SLOT_None,0.25);
   }
   
@@ -231,7 +231,7 @@ state() stateHiding
     if ( bHidden == False )
     {
       fTimeSpent += fTimeDelta;
-      DrawScale = grownDrawScale - fTimeSpent / fShrinkTime;
+      DrawScale = grownDrawScale - (fTimeSpent / fShrinkTime);
       if ( DrawScale <= 0.0 )
       {
         DrawScale = 0.0;

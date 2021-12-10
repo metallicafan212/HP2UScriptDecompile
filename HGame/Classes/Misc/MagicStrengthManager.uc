@@ -45,9 +45,9 @@ event Tick (float fDelta)
 event PostBeginPlay()
 {
   Super.PostBeginPlay();
-  textureSlider = Texture(DynamicLoadObject("HP_Menu.Hud.MagicStrengthSlider",Class'Texture'));
-  textureBarEmpty = Texture(DynamicLoadObject("HP_Menu.Hud.MagicStrengthEmpty",Class'Texture'));
-  textureBarFull = Texture(DynamicLoadObject("HP_Menu.Hud.MagicStrengthFull",Class'Texture'));
+  textureSlider = Texture(DynamicLoadObject(strSLIDER,Class'Texture'));
+  textureBarEmpty = Texture(DynamicLoadObject(strBAR_EMPTY,Class'Texture'));
+  textureBarFull = Texture(DynamicLoadObject(strBAR_FULL,Class'Texture'));
 }
 
 function StartMagicStrength()
@@ -64,7 +64,7 @@ function EndMagicStrength()
 
 function UseUpStrength (int nPercent)
 {
-  fRemainingStrength -= 120 * (nPercent / 100.0);
+  fRemainingStrength -= (fTOTAL_STRENGTH * (float(nPercent) / 100.0));
   PlayerHarry.ClientMessage("remaining strength " $ string(fRemainingStrength));
   if ( fRemainingStrength < 0 )
   {
@@ -92,13 +92,13 @@ state DisplayStrength
       EndMagicStrength();
     }
     fTimeSinceLastRecover += fDelta;
-    if ( fTimeSinceLastRecover >= 0.1 )
+    if ( fTimeSinceLastRecover >= fRECOVER_RATE )
     {
       fTimeSinceLastRecover = 0.0;
-      fRemainingStrength += 1 + (fTimeSinceLastRecover - 0.1);
-      if ( fRemainingStrength > 120 )
+      fRemainingStrength += (1 + fTimeSinceLastRecover - fRECOVER_RATE);
+      if ( fRemainingStrength > fTOTAL_STRENGTH )
       {
-        fRemainingStrength = 120.0;
+        fRemainingStrength = fTOTAL_STRENGTH;
       }
     }
   }
@@ -113,22 +113,22 @@ state DisplayStrength
     local float fBarEmptyH;
   
     fScaleFactor = GetScaleFactor(Canvas);
-    fBarScaledX = 25.0 * fScaleFactor;
-    fBarScaledY = 25.0 * fScaleFactor;
+    fBarScaledX = fBAR_X * fScaleFactor;
+    fBarScaledY = fBAR_Y * fScaleFactor;
     Canvas.SetPos(fBarScaledX,fBarScaledY);
     Canvas.DrawIcon(textureBarFull,fScaleFactor);
-    fBarEmptyH = 120.0 - fRemainingStrength;
+    fBarEmptyH = fTOTAL_STRENGTH - fRemainingStrength;
     Canvas.SetPos(fBarScaledX,fBarScaledY);
     Canvas.DrawTile(textureBarEmpty,textureBarEmpty.USize * fScaleFactor,fBarEmptyH * fScaleFactor,0.0,0.0,textureBarEmpty.USize,fBarEmptyH);
-    fSliderX = fBarScaledX - (128 - 36.0 / 2) * fScaleFactor;
-    fSliderY = (25.0 + fBarEmptyH - 66) * fScaleFactor;
+    fSliderX = fBarScaledX - (((fSLIDER_W - fBAR_W) / 2) * fScaleFactor);
+    fSliderY = (fBAR_Y + fBarEmptyH - fSLIDER_POINTER_YOFFSET) * fScaleFactor;
     Canvas.SetPos(fSliderX,fSliderY);
     Canvas.DrawIcon(textureSlider,fScaleFactor);
   }
   
   event BeginState()
   {
-    fRemainingStrength = 120.0;
+    fRemainingStrength = fTOTAL_STRENGTH;
   }
   
 }

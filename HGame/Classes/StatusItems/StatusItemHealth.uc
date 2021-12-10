@@ -96,7 +96,7 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 	nY = 5 * fScaleFactor;
 	fSegmentHeight = 0.0;
 	fSegmentStartAt = 0.0;
-	nTotalOffsets = 1 + 11;
+	nTotalOffsets = TOP_OFFSET + BOTTOM_OFFSET;
 	nNumHealthIcons = nCurrCountPotential / nUnitsPerIcon;
 	if ( nCurrCountPotential % nUnitsPerIcon > 0 )
 	{
@@ -107,12 +107,12 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 	colorSave = Canvas.DrawColor;
 	
 	// Metallicafan212:	This is a for loop
-	for(i = 0; i < nNumHealthIcons; i++)
+	for(I = 0; I < nNumHealthIcons; I++)
 	{
 	//I = 0;
 	//if ( I < nNumHealthIcons )
 	//{
-		nY = 4 * fScaleFactor;
+		nY = nHEALTH_Y * fScaleFactor;
 		if ( nRemainingCount >= nUnitsPerIcon )
 		{
 			fFillRatio = 1.0;
@@ -146,12 +146,12 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 		if ( fFillRatio > 0 )
 		{
 			fSegmentHeight = fFillRatio * (textureHudIcon.VSize - nTotalOffsets);
-			fSegmentStartAt = textureHudIcon.VSize - 11 - fSegmentHeight;
-			fSegmentHeight += 11;
+			fSegmentStartAt = textureHudIcon.VSize - BOTTOM_OFFSET - fSegmentHeight;
+			fSegmentHeight += BOTTOM_OFFSET;
 			Canvas.SetPos(nX, nY + fSegmentStartAt * fScaleFactor);
 			Canvas.DrawTile(textureHealthOrangeInside, textureHudIcon.USize * fScaleFactor, fSegmentHeight * fScaleFactor, 0.0, fSegmentStartAt, textureHudIcon.USize, fSegmentHeight);
 		}
-		nX += nActualIconW * fScaleFactor;
+		nX += (nActualIconW * fScaleFactor);
 	}
 	Canvas.DrawColor = colorSave;
 }
@@ -203,7 +203,7 @@ state HoldChange
 	{
 		local float fHoldTime;
   
-		fHoldTime = (Abs(nCurrChange) - 1) * 0.055 + 0.2;
+		fHoldTime = ((Abs(nCurrChange) - 1) * CHANGE_PERPOINT_HOLD) + CHANGE_BASE_HOLD;
 		if ( fHoldTime > 5.0 )
 		{
 			fHoldTime = 5.0;
@@ -220,7 +220,8 @@ state HoldChange
 
 state FadeChangeOut
 {
-	ignores  GetChangeInHealthDrawColor, GetHealthDrawColor;
+	//UTPT added this for some reason -AdamJD
+	// ignores  GetChangeInHealthDrawColor, GetHealthDrawColor;
   
 	event Tick (float fDelta)
 	{
@@ -236,12 +237,47 @@ state FadeChangeOut
 			}
 		}
 	}
+	
+	//UTPT didn't add this for some reason -AdamJD
+	function Color GetHealthDrawColor()
+	{
+		local Color colorReturn;
+		local float fFade;
+
+		fFade = 255 * (fCurrFadeTime / fTotalFadeTime);
+		if ( nCurrChange <= 0 )
+		{
+			colorReturn.R = 255;
+			colorReturn.G = fFade;
+			colorReturn.B = fFade;
+		}
+		else
+		{
+			colorReturn.R = fFade;
+			colorReturn.G = 255;
+			colorReturn.B = fFade;
+		}
+		return colorReturn;
+	}
+	
+	//UTPT didn't add this for some reason -AdamJD
+	function Color GetChangeInHealthDrawColor()
+	{
+		local Color colorReturn;
+		local float fColor;
+
+		fColor = 255 - (255 * (fCurrFadeTime / fTotalFadeTime));
+		colorReturn.R = fColor;
+		colorReturn.G = fColor;
+		colorReturn.B = fColor;
+		return colorReturn;
+	}
   
 	function float GetFadeChangeTime()
 	{
 		local float fChangeTime;
   
-		fChangeTime = (Abs(nCurrChange) - 1) * 0.026 + 0.2;
+		fChangeTime = ((Abs(nCurrChange) - 1) * CHANGE_PERPOINT_FADE) + CHANGE_BASE_FADE;
 		if ( fChangeTime > 5.0 )
 		{
 			fChangeTime = 5.0;

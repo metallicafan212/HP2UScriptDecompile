@@ -5,10 +5,10 @@
 class WCHerpo extends Goldcards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardHerpoBigTexture.PNG	GROUP=Icons	Name=WizCardHerpoBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\WizCardHerpoBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardHerpoBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\WizCardHerpoBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardHerpoBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\WizCardHerpoBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardHerpoBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardHerpoBigTexture.PNG	GROUP=Icons	Name=WizCardHerpoBigTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardHerpoBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardHerpoBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardHerpoBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardHerpoBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardHerpoBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardHerpoBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardHerpoTex0.PNG	GROUP=Skins	Name=WizardCardHerpoTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
 function PostBeginPlay()

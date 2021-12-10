@@ -596,8 +596,8 @@ function PreBeginPlay()
 	// set our home location to be were we started
 	vHome = location;
 	
-	//playerHarry.addJellyBeansPoints(HarryBeans);		// just for testing
-	//playerHarry.addPotionsPoints(HarryPotions);  	 	// just for testing
+	playerHarry.addJellyBeansPoints(HarryBeans);		// just for testing
+	playerHarry.addPotionsPoints(HarryPotions);  	 	// just for testing
 
 	// save collision information
 	savedCollisionRadius = CollisionRadius;

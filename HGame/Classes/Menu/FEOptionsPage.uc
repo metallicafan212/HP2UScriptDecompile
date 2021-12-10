@@ -72,7 +72,7 @@ function Created()
   InputButton.DownTexture = textureLionClick;
   InputButton.OverTexture = textureLionRO;
   InputLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',182.0 - 50,310.0 + 60,200.0,64.0));
-  InputLabel.SetFont(4);
+  InputLabel.SetFont(F_HPMenuLarge);
   InputLabel.TextColor.R = 215;
   InputLabel.TextColor.G = 0;
   InputLabel.TextColor.B = 215;
@@ -85,7 +85,7 @@ function Created()
   SoundVideoButton.DownTexture = textureLionClick;
   SoundVideoButton.OverTexture = textureLionRO;
   SoundVideoLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',252.0 - 50,120.0 + 108,200.0,64.0));
-  SoundVideoLabel.SetFont(4);
+  SoundVideoLabel.SetFont(F_HPMenuLarge);
   SoundVideoLabel.TextColor.R = 215;
   SoundVideoLabel.TextColor.G = 0;
   SoundVideoLabel.TextColor.B = 215;
@@ -98,7 +98,7 @@ function Created()
   QuitButton.DownTexture = textureLionClick;
   QuitButton.OverTexture = textureLionRO;
   QuitLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',394.0 + 30 - 50,310.0 + 62,200.0,64.0));
-  QuitLabel.SetFont(4);
+  QuitLabel.SetFont(F_HPMenuLarge);
   QuitLabel.TextColor.R = 215;
   QuitLabel.TextColor.G = 0;
   QuitLabel.TextColor.B = 215;
@@ -144,6 +144,7 @@ function Notify (UWindowDialogControl C, byte E)
       FEBook(book).ChangePageNamed("SOUNDVIDEO");
       break;
       default:
+	  break;
     }
   }
 }

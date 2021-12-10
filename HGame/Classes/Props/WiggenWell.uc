@@ -32,7 +32,8 @@ auto state wwellbottlo
 		local Rotator NewRotation;
   
 		NewRotation = Rotation;
-		NewRotation.Yaw += 30000 * DeltaTime;
+		NewRotation.Yaw += (30000 * DeltaTime);
+		NewRotation.Yaw = NewRotation.Yaw & 65535;
 		SetRotation(NewRotation);
 		if ( bTiming )
 		{

@@ -54,12 +54,12 @@ event Tick (float fDelta)
 event PostBeginPlay()
 {
   Super.PostBeginPlay();
-  textureEye1 = Texture(DynamicLoadObject("HP_Menu.Hud.MuggleEye1",Class'Texture'));
-  textureEye2 = Texture(DynamicLoadObject("HP_Menu.Hud.MuggleEye2",Class'Texture'));
-  textureEye3 = Texture(DynamicLoadObject("HP_Menu.Hud.MuggleEye3",Class'Texture'));
-  textureEye4 = Texture(DynamicLoadObject("HP_Menu.Hud.MuggleEye4",Class'Texture'));
-  textureBarEmpty = Texture(DynamicLoadObject("HP_Menu.Hud.MuggleBarEmpty",Class'Texture'));
-  textureBarFull = Texture(DynamicLoadObject("HP_Menu.Hud.MuggleBarFull",Class'Texture'));
+  textureEye1 = Texture(DynamicLoadObject(strEYE1,Class'Texture'));
+  textureEye2 = Texture(DynamicLoadObject(strEYE2,Class'Texture'));
+  textureEye3 = Texture(DynamicLoadObject(strEYE3,Class'Texture'));
+  textureEye4 = Texture(DynamicLoadObject(strEYE4,Class'Texture'));
+  textureBarEmpty = Texture(DynamicLoadObject(strBAR_EMPTY,Class'Texture'));
+  textureBarFull = Texture(DynamicLoadObject(strBAR_FULL,Class'Texture'));
 }
 
 function BeginDetection()
@@ -99,7 +99,7 @@ state DetectMuggles
       return;
     }
     fTimeSinceLastUpdate += fDelta;
-    if ( fTimeSinceLastUpdate < 0.1 )
+    if ( fTimeSinceLastUpdate < fUPDATE_RATE )
     {
       return;
     }
@@ -109,12 +109,12 @@ state DetectMuggles
     {
       fBarFullAmount = 0.0;
     }
-    if ( fBarFullAmount >= 128.0 )
+    if ( fBarFullAmount >= fBAR_H )
     {
       TriggerEvent(Event,None,None);
       EndDetection();
     } else {
-      fPercentFull = fBarFullAmount / 128.0;
+      fPercentFull = fBarFullAmount / fBAR_H;
       if ( fPercentFull < 0.25 )
       {
         textureCurrEye = textureEye1;
@@ -147,22 +147,22 @@ state DetectMuggles
     local float fBottomOfBar;
   
     fScaleFactor = GetScaleFactor(Canvas);
-    fBarEmptyX = 25.0 * fScaleFactor;
-    fBarEmptyY = 25.0 * fScaleFactor;
+    fBarEmptyX = fMETER_X * fScaleFactor;
+    fBarEmptyY = fMETER_Y * fScaleFactor;
     Canvas.SetPos(fBarEmptyX,fBarEmptyY);
     Canvas.DrawIcon(textureBarEmpty,fScaleFactor);
-    fBottomOfBar = fBarEmptyY + 128.0 * fScaleFactor;
-    fBarFullH = fBarFullAmount + 14.0;
-    if ( fBarFullH >= 128.0 )
+    fBottomOfBar = fBarEmptyY + (fBAR_H * fScaleFactor);
+    fBarFullH = fBarFullAmount + fBAR_FULL_EXTRA;
+    if ( fBarFullH >= fBAR_H )
     {
       Canvas.SetPos(fBarEmptyX,fBarEmptyY);
       Canvas.DrawIcon(textureBarFull,fScaleFactor);
     } else {
       Canvas.SetPos(fBarEmptyX,fBottomOfBar - fBarFullH * fScaleFactor);
-      Canvas.DrawTile(textureBarFull,textureBarFull.USize * fScaleFactor,fBarFullH * fScaleFactor,0.0,128.0 - fBarFullH,textureBarFull.USize,fBarFullH);
+      Canvas.DrawTile(textureBarFull,textureBarFull.USize * fScaleFactor,fBarFullH * fScaleFactor,0.0,fBAR_H - fBarFullH,textureBarFull.USize,fBarFullH);
     }
-    fEyeX = fBarEmptyX - (64.0 - 31.0) / 2 * fScaleFactor;
-    fEyeY = fBottomOfBar - fBarFullAmount * fScaleFactor - (45.0 * fScaleFactor);
+    fEyeX = fBarEmptyX - (((fEYE_W - fBAR_W) / 2) * fScaleFactor);
+    fEyeY = fBottomOfBar - (fBarFullAmount * fScaleFactor) - (fEYE_POINTER_YOFFSET * fScaleFactor);
     Canvas.SetPos(fEyeX,fEyeY);
     Canvas.DrawIcon(textureCurrEye,fScaleFactor);
   }

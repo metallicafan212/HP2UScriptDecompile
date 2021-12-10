@@ -2,7 +2,7 @@
 // SpellCursor.
 //================================================================================
 
-class SpellCursor extends ParticleFX; 
+class SpellCursor extends ParticleFX;
 
 //texture package import -AdamJD
 #exec OBJ LOAD FILE=..\Textures\SpellShapes.utx PACKAGE=SpellShapes.SpellFX
@@ -114,13 +114,13 @@ function TurnOnSpellGestureFX (ESpellType SpellType, Vector vLocation, float fFX
   {
     return;
   }
-  if ( fFXSize < 50.0 )
+  if ( fFXSize < MIN_GESTURE_SIZE )
   {
-    fFXSize = 50.0;
+    fFXSize = MIN_GESTURE_SIZE;
   } else //{
-    if ( fFXSize > 100.0 )
+    if ( fFXSize > MAX_GESTURE_SIZE )
     {
-      fFXSize = 100.0;
+      fFXSize = MAX_GESTURE_SIZE;
     }
   //}
   SpellGesture.SetLocation(vLocation);
@@ -204,7 +204,7 @@ function UpdateCursor (optional bool bJustStopAtClosestPawnOrWall)
   //}
   vLOS_Dir = Normal(vLOS_End - vLOS_Start);
   aHitActor = Trace(vHitLocation,vHitNormal,vLOS_End,PlayerHarry.Cam.Location);
-  if ( (aHitActor != None) &&  !aHitActor.IsA('harry') )
+  if ( (aHitActor != None) &&  !aHitActor.IsA('BaseHarry') )
   {
     bHitSomething = True;
     vLOS_End = vHitLocation + (vLOS_Dir * 5.0);
@@ -231,14 +231,17 @@ function UpdateCursor (optional bool bJustStopAtClosestPawnOrWall)
     } 
     if ( PlayerHarry.IsInSpellBook(aHitActor.eVulnerableToSpell) || (bJustStopAtClosestPawnOrWall) )
     {
-       if ( aHitActor.IsA('spellTrigger') && !spellTrigger(aHitActor).bInitiallyActive )
+       if ( aHitActor.IsA('spellTrigger') )
        {
-         continue;
-       } 
-       if ( spellTrigger(aHitActor).bHitJustFromFront &&  !IsHarryFacingTarget(HitActor) )
-       {
-         continue;
-       } 
+	     if( !spellTrigger(aHitActor).bInitiallyActive )
+		 {
+		   continue;
+		 }
+         if ( spellTrigger(aHitActor).bHitJustFromFront &&  !IsHarryFacingTarget(HitActor) )
+         {
+           continue;
+         } 
+	   }
        if (  !bJustStopAtClosestPawnOrWall )
        {
           aPossibleTarget = aHitActor;

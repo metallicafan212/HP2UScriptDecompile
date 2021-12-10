@@ -5,9 +5,9 @@
 class HPMenuOptionHSlider extends UWindowHSliderControl;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FESliderTexture.PNG	GROUP=Icons	Name=FESliderTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEOverSliderTexture.PNG	GROUP=Icons	Name=FEOverSliderTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FESliderKnobTexture.PNG	GROUP=Icons	Name=FESliderKnobTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FESliderTexture.PNG	GROUP=Icons	Name=FESliderTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEOverSliderTexture.PNG	GROUP=Icons	Name=FEOverSliderTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FESliderKnobTexture.PNG	GROUP=Icons	Name=FESliderKnobTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 var Texture Image;
 var Texture overImage;
@@ -38,11 +38,11 @@ function BeforePaint (Canvas C, float X, float Y)
   local float H;
 
   TextSize(C,Text,W,H);
-  SliderDrawX = fSliderOffsetX + WinWidth - SliderWidth;
+  SliderDrawX = fSliderOffsetX + (WinWidth - SliderWidth);
   TextX = SliderDrawX - W - 23;
   SliderDrawY = (WinHeight - 2) / 2;
   TextY = (WinHeight - H) / 2;
-  TrackStart = SliderDrawX + (SliderWidth - TrackWidth) * (Value - MinValue) / (MaxValue - MinValue);
+  TrackStart = SliderDrawX + (SliderWidth - TrackWidth) * ((Value - MinValue) / (MaxValue - MinValue));
 }
 
 function Paint (Canvas C, float X, float Y)

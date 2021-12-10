@@ -2,7 +2,7 @@
 // Characters.
 //================================================================================
 
-class Characters extends HChar;
+class Characters extends HChar; 
 
 const strCUE_OUT_OF_STOCK_DONE= "_OutOfStockDone";
 const strCUE_LURING_DONE= "_LuringDone";
@@ -780,7 +780,7 @@ keep_facing_harry:
   if (  !IsAnimating() )
   {
     CurrIdleAnimName = GetCurrIdleAnimName();
-    LoopAnim(CurrIdleAnimName,,0.41);
+    LoopAnim(CurrIdleAnimName,,[TweenTime]0.41);
   }
   TurnToward(Level.PlayerHarryActor);
   if ( WeasleyTwin != None )
@@ -829,7 +829,7 @@ keep_facing_harry:
   if (  !IsAnimating() )
   {
     CurrIdleAnimName = GetCurrIdleAnimName();
-    LoopAnim(CurrIdleAnimName,,0.41);
+    LoopAnim(CurrIdleAnimName,,[TweenTime]0.41);
   }
   TurnToward(Level.PlayerHarryActor);
   if ( WeasleyTwin != None )

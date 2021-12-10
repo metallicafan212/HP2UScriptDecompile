@@ -121,7 +121,8 @@ function Created()
   local float textOffsetY;
 
   LocalizeStrings();
-  
+  MusicVolume = int(float(GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.AudioDevice MusicVolume")) * 100);
+  SoundVolume = int(float(GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.AudioDevice SoundVolume")) * 100);
   offsetX = 0;
   offsetY = 0;
   ctlX = 180 - offsetX;
@@ -148,19 +149,19 @@ function Created()
   labelWidth = 50 + ctlX - labelX;
   labelHeight = 24;
   textHeight = 10.0;
-  textOffsetY = buttonHeight / 2 - textHeight / 2;
+  textOffsetY = (buttonHeight / 2) - (textHeight / 2);
   VideoLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMargin,ctlY,labelWidth,1.0));
   VideoLabel.SetText(videoText);
-  VideoLabel.SetFont(1);
+  VideoLabel.SetFont(F_Bold);
   VideoLabel.TextColor = GoupLabelTextColor;
   ctlY += 40;
   I = 0;
   ResolutionLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
   ResolutionLabel.SetText(ResolutionText);
-  ResolutionLabel.SetFont(1);
+  ResolutionLabel.SetFont(F_Bold);
   ResolutionLabel.TextColor = LabelTextColor;
   ResolutionCombo = HPMenuOptionCombo(CreateControl(Class'HPMenuOptionCombo',fLeftMarginIndent,ctlY,buttonWidth,buttonHeight));
-  ResolutionCombo.SetFont(1);
+  ResolutionCombo.SetFont(F_Bold);
   ResolutionCombo.SetEditable(False);
   ResolutionCombo.EditBoxWidth = buttonWidth;
   ResolutionCombo.TextColor = LabelTextColor;
@@ -168,10 +169,10 @@ function Created()
   ctlY += vertSpacing[I++ ];
   ColorDepthLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
   ColorDepthLabel.SetText(ColorDepthText);
-  ColorDepthLabel.SetFont(1);
+  ColorDepthLabel.SetFont(F_Bold);
   ColorDepthLabel.TextColor = LabelTextColor;
   ColorDepthCombo = HPMenuOptionCombo(CreateControl(Class'HPMenuOptionCombo',fLeftMarginIndent,ctlY,buttonWidth,buttonHeight));
-  ColorDepthCombo.SetFont(1);
+  ColorDepthCombo.SetFont(F_Bold);
   ColorDepthCombo.SetEditable(False);
   ColorDepthCombo.EditBoxWidth = buttonWidth;
   ColorDepthCombo.TextColor = LabelTextColor;
@@ -179,10 +180,10 @@ function Created()
   ctlY += vertSpacing[I++ ];
   TextureDetailLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
   TextureDetailLabel.SetText(TextureDetailText);
-  TextureDetailLabel.SetFont(1);
+  TextureDetailLabel.SetFont(F_Bold);
   TextureDetailLabel.TextColor = LabelTextColor;
   TextureDetailCombo = HPMenuOptionCombo(CreateControl(Class'HPMenuOptionCombo',fLeftMarginIndent,ctlY,buttonWidth,buttonHeight));
-  TextureDetailCombo.SetFont(1);
+  TextureDetailCombo.SetFont(F_Bold);
   TextureDetailCombo.SetEditable(False);
   TextureDetailCombo.EditBoxWidth = buttonWidth;
   TextureDetailCombo.TextColor = LabelTextColor;
@@ -193,7 +194,7 @@ function Created()
   ctlY += 10 + vertSpacing[I++ ];
   ObjectDetailLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
   ObjectDetailLabel.SetText(ObjectDetailText);
-  ObjectDetailLabel.SetFont(1);
+  ObjectDetailLabel.SetFont(F_Bold);
   ObjectDetailLabel.TextColor = LabelTextColor;
   ObjectDetailSlider = HPMenuOptionHSlider(CreateControl(Class'HPMenuOptionHSlider',fLeftMarginIndent,ctlY,SliderWidth,sliderHeight));
   ObjectDetailSlider.bNoSlidingNotify = True;
@@ -202,16 +203,16 @@ function Created()
   ctlY += 32;
   ObjectDetailLoText = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMarginIndent,ctlY,labelWidth,labelHeight));
   ObjectDetailLoText.SetText(VolumeLoText);
-  ObjectDetailLoText.SetFont(0);
+  ObjectDetailLoText.SetFont(F_Normal);
   ObjectDetailLoText.TextColor = GoupLabelTextColor;
-  ObjectDetailHiText = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMarginIndent + SliderWidth - 20,ctlY,labelWidth,labelHeight));
+  ObjectDetailHiText = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',(fLeftMarginIndent + SliderWidth) - 20,ctlY,labelWidth,labelHeight));
   ObjectDetailHiText.SetText(VolumeHiText);
-  ObjectDetailHiText.SetFont(0);
+  ObjectDetailHiText.SetFont(F_Normal);
   ObjectDetailHiText.TextColor = GoupLabelTextColor;
   ctlY += vertSpacing[I++ ];
   BrightnessLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
   BrightnessLabel.SetText(BrightnessText);
-  BrightnessLabel.SetFont(1);
+  BrightnessLabel.SetFont(F_Bold);
   BrightnessLabel.TextColor = LabelTextColor;
   BrightnessSlider = HPMenuOptionHSlider(CreateControl(Class'HPMenuOptionHSlider',fLeftMarginIndent,ctlY,SliderWidth,sliderHeight));
   BrightnessSlider.bNoSlidingNotify = True;
@@ -220,11 +221,11 @@ function Created()
   ctlY += 32;
   BrightnessLoText = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMarginIndent,ctlY,labelWidth,labelHeight));
   BrightnessLoText.SetText(VolumeLoText);
-  BrightnessLoText.SetFont(0);
+  BrightnessLoText.SetFont(F_Normal);
   BrightnessLoText.TextColor = GoupLabelTextColor;
-  BrightnessHiText = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fLeftMarginIndent + SliderWidth - 20,ctlY,labelWidth,labelHeight));
+  BrightnessHiText = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',(fLeftMarginIndent + SliderWidth) - 20,ctlY,labelWidth,labelHeight));
   BrightnessHiText.SetText(VolumeHiText);
-  BrightnessHiText.SetFont(0);
+  BrightnessHiText.SetFont(F_Normal);
   BrightnessHiText.TextColor = GoupLabelTextColor;
   ctlY += vertSpacing[I++ ];
   ctlY = 90 - offsetY;
@@ -232,17 +233,16 @@ function Created()
   labelX = 470 - offsetX;
   AudioLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fRightMargin,ctlY,labelWidth,labelHeight));
   AudioLabel.SetText(audioText);
-  AudioLabel.SetFont(1);
+  AudioLabel.SetFont(F_Bold);
   AudioLabel.TextColor = GoupLabelTextColor;
   ctlY += 30;
   
-  //UTPT didn't decompile this(added from UEExplorer) -AdamJD
+  //UTPT didn't decompile the rest of this function (all this is added from UEExplorer) -AdamJD
   MusicVolumeLabel = UWindowLabelControl(CreateControl(Class'UWindowLabelControl',fRightMargin,ctlY + textOffsetY,labelWidth,labelHeight));
   MusicVolumeLabel.SetText( MusicVolumeText $" - " $int(MusicVolumeSlider.Value) );
-  MusicVolumeLabel.SetFont(1);
+  MusicVolumeLabel.SetFont(F_Bold);
   MusicVolumeLabel.TextColor = LabelTextColor;
   ctlY += 30;
-  MusicVolume = int(float(GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.AudioDevice MusicVolume")) * 100);
   MusicVolumeSlider = HPMenuOptionHSlider(CreateControl(class'HPMenuOptionHSlider', fRightMargin, ctlY, SliderWidth, sliderHeight));
   MusicVolumeSlider.SetRange(0.0, 100.0, 1);
   MusicVolumeSlider.SliderWidth = SliderWidth;
@@ -251,20 +251,19 @@ function Created()
   ctlY += 32;
   MusicVolumeLoText = UWindowLabelControl(CreateControl(class'UWindowLabelControl', fRightMargin, ctlY, labelWidth, labelHeight));
   MusicVolumeLoText.SetText(VolumeLoText);
-  MusicVolumeLoText.SetFont(0);
+  MusicVolumeLoText.SetFont(F_Normal);
   MusicVolumeLoText.TextColor = GoupLabelTextColor;
   MusicVolumeHiText = UWindowLabelControl(CreateControl(class'UWindowLabelControl', (fRightMargin + SliderWidth) - 20, ctlY, labelWidth, labelHeight));
   MusicVolumeHiText.SetText(VolumeHiText);
-  MusicVolumeHiText.SetFont(0);
+  MusicVolumeHiText.SetFont(F_Normal);
   MusicVolumeHiText.TextColor = GoupLabelTextColor;
   ctlY += 30;
   Log("Options::SoundVideoPage: MusicVolume " $ string(MusicVolume));
   SoundVolumeLabel = UWindowLabelControl(CreateControl(class'UWindowLabelControl', fRightMargin, ctlY + textOffsetY, labelWidth, labelHeight));
   SoundVolumeLabel.SetText( SoundVolumeText $ " - " $int(SoundVolumeSlider.Value) );
-  SoundVolumeLabel.SetFont(1);
+  SoundVolumeLabel.SetFont(F_Bold);
   SoundVolumeLabel.TextColor = LabelTextColor;
-  ctlY += 30;
-  SoundVolume = int(float(GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.AudioDevice SoundVolume")) * 100); 
+  ctlY += 30; 
   SoundVolumeSlider = HPMenuOptionHSlider(CreateControl(class'HPMenuOptionHSlider', fRightMargin, ctlY, SliderWidth, sliderHeight));
   SoundVolumeSlider.SetRange(0.0, 100.0, 1);
   SoundVolumeSlider.SliderWidth = SliderWidth;
@@ -273,11 +272,11 @@ function Created()
   ctlY += 32;
   SoundVolumeLoText = UWindowLabelControl(CreateControl(class'UWindowLabelControl', fRightMargin, ctlY, labelWidth, labelHeight));
   SoundVolumeLoText.SetText(VolumeLoText);
-  SoundVolumeLoText.SetFont(0);
+  SoundVolumeLoText.SetFont(F_Normal);
   SoundVolumeLoText.TextColor = GoupLabelTextColor;
   SoundVolumeHiText = UWindowLabelControl(CreateControl(class'UWindowLabelControl', (fRightMargin + SliderWidth) - 20, ctlY, labelWidth, labelHeight));
   SoundVolumeHiText.SetText(VolumeHiText);
-  SoundVolumeHiText.SetFont(0);
+  SoundVolumeHiText.SetFont(F_Normal);
   SoundVolumeHiText.TextColor = GoupLabelTextColor;
   ctlY += 38;
   Log("Options::SoundVideoPage: MusicVolume " $ string(SoundVolume));
@@ -309,12 +308,12 @@ function bool IsSupportedResolution (string TempStr)
       {
         return True;
       }
-    } else {
+    } else //{
       if ( (TempStr ~= "640x480") || (TempStr ~= "800x600") || (TempStr ~= "1024x768") )
       {
         return True;
       }
-    }
+    //}
   }
   return False;
 }
@@ -528,12 +527,12 @@ function ObjectDetailChanged()
     break;
     default:
   }
-  GetPlayerOwner().ConsoleCommand("set ini:HGame.Harry ObjectDetail " $ string(GetPlayerOwner().ObjectDetail));
+  GetPlayerOwner().ConsoleCommand("set ini:HGame.harry ObjectDetail " $ string(GetPlayerOwner().ObjectDetail));
 }
 
 function MusicVolumeChanged()
 {
-	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
+	//UTPT didn't decompile this (added from UEExplorer) -AdamJD
 	MusicVolumeLabel.SetText( MusicVolumeText $" - " $int(MusicVolumeSlider.Value) );
 	GetPlayerOwner().ConsoleCommand("SETVOLUMES MUSIC=" $(MusicVolumeSlider.Value / 100));
 	GetPlayerOwner().ConsoleCommand("set ini:Engine.Engine.AudioDevice MusicVolume "$(MusicVolumeSlider.Value / 100));
@@ -541,7 +540,7 @@ function MusicVolumeChanged()
 
 function SoundVolumeChanged()
 {
-	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
+	//UTPT didn't decompile this (added from UEExplorer) -AdamJD
 	SoundVolumeLabel.SetText( SoundVolumeText $" - " $int(SoundVolumeSlider.Value) );
 	GetPlayerOwner().ConsoleCommand("SETVOLUMES SOUND=" $(SoundVolumeSlider.Value / 100));
 	GetPlayerOwner().ConsoleCommand("set ini:Engine.Engine.AudioDevice SoundVolume "$(SoundVolumeSlider.Value / 100));
@@ -588,7 +587,6 @@ function Notify (UWindowDialogControl C, byte E)
     }
 	break;
 	default:
-    break;
   }
 }
 

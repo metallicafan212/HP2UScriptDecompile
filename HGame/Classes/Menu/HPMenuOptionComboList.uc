@@ -5,9 +5,9 @@
 class HPMenuOptionComboList extends UWindowComboList;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FEComboListBox.PNG	GROUP=Icons	Name=FEComboListBox COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEComboListLarge.PNG	GROUP=Icons	Name=FEComboListLarge COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEComboListSmall.PNG	GROUP=Icons	Name=FEComboListSmall COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboListBox.PNG	GROUP=Icons	Name=FEComboListBox COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboListLarge.PNG	GROUP=Icons	Name=FEComboListLarge COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboListSmall.PNG	GROUP=Icons	Name=FEComboListSmall COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 var Texture bgImage;
 
@@ -33,7 +33,7 @@ function BeforePaint (Canvas C, float X, float Y)
   local float ListY;
   local float ExtraWidth;
 
-  C.Font = Root.Fonts[0];
+  C.Font = Root.Fonts[F_Normal];
   C.SetPos(0.0,0.0);
   MaxWidth = 187.0;
   ExtraWidth = (HBorder + TextBorder) * 2;
@@ -47,16 +47,14 @@ function BeforePaint (Canvas C, float X, float Y)
     bgImage = CListSmall; 		//Texture'FEComboListSmall';
   }
   ItemHeight = (WinHeight - 7) / Count;
-  I = UWindowComboListItem(Items.Next);
-  // if ( I != None )
-  while (I != None)
+  VertSB.Pos = 0;
+  for( I = UWindowComboListItem(Items.Next); I != None; I = UWindowComboListItem(I.Next) )
   {
     TextSize(C,RemoveAmpersand(I.Value),W,H);
     if ( W + ExtraWidth > MaxWidth )
     {
       MaxWidth = W + ExtraWidth;
     }
-    I = UWindowComboListItem(I.Next);
     // goto JL00F0;
   }
   WinWidth = MaxWidth;

@@ -33,8 +33,8 @@ function LoadTimerBarGraphics()
 {
   fFULL_OFFSET_X = 51.0;
   fFULL_OFFSET_Y = 26.0;
-  textureTimerEmpty = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2Timer",Class'Texture'));
-  textureFullBar = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EmptyBar",Class'Texture'));
+  textureTimerEmpty = Texture(DynamicLoadObject(strTIMER_BAR_FULL,Class'Texture'));
+  textureFullBar = Texture(DynamicLoadObject(strTIMER_BAR_EMPTY,Class'Texture'));
 }
 
 function DrawCountdown (Canvas Canvas)
@@ -46,12 +46,12 @@ function DrawCountdown (Canvas Canvas)
   local float fSegmentWidth;
 
   fScaleFactor = Canvas.GetHudScaleFactor();
-  Ox = Canvas.SizeX - 8 * fScaleFactor - 205.0 * fScaleFactor;
-  Oy = Canvas.SizeY - 8 * fScaleFactor - 58.0 * fScaleFactor;
+  Ox = Canvas.SizeX - 8 * fScaleFactor - (fTIMER_EMPTY_W * fScaleFactor);
+  Oy = Canvas.SizeY - 8 * fScaleFactor - (fTIMER_EMPTY_H * fScaleFactor);
   Canvas.SetPos(Ox,Oy);
   Canvas.DrawIcon(textureTimerEmpty,fScaleFactor);
   fFullRatio = fCountdownTime / GetTimerDuration();
-  fSegmentWidth = fFullRatio * 118.0;
+  fSegmentWidth = fFullRatio * fFULL_BAR_W;
   Canvas.SetPos(Ox + fFULL_OFFSET_X * fScaleFactor,Oy + fFULL_OFFSET_Y * fScaleFactor);
   Canvas.DrawTile(textureFullBar,fSegmentWidth * fScaleFactor,textureFullBar.VSize * fScaleFactor,0.0,0.0,fSegmentWidth,textureFullBar.VSize);
   DrawTuningModeData(Canvas);

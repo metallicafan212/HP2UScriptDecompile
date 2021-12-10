@@ -113,7 +113,7 @@ function PostBeginPlay()
 
   PlayerHarry.bVeryAfraid = True;
   Super.PostBeginPlay();
-  changeRotation = 5.0;
+  changeRotation = CHECK_ROTATION;
   numAnchorsAttached = numAnchors;
   randDialog = randDialogInterval;
   vHome = Location;
@@ -184,12 +184,12 @@ function bool HandleSpellRictusempra (optional baseSpell spell, optional Vector 
     if ( Health <= HealthAddSpellThree )
     {
       numberOfSpells = 3;
-    } else {
+    } else //{
       if ( Health <= HealthAddSpellTwo )
       {
         numberOfSpells = 2;
       }
-    }
+    //}
     if ( tempDamage == damageVulnerable )
     {
       GotoState('stateHitByRictusempra');
@@ -403,7 +403,7 @@ function PlayerCutRelease()
   if ( cutSceneCounter == 1 )
   {
     GotoState('PhaseOne');
-  } else {
+  } else //{
     if ( cutSceneCounter == 2 )
     {
       bPhaseOneOver = True;
@@ -415,7 +415,7 @@ function PlayerCutRelease()
       PlayerHarry.GroundSpeed = PlayerHarry.GroundRunSpeed;
       GotoState('stateHarryHunting');
     }
-  }
+  //}
 }
 
 function bool IsAttacking()
@@ -582,7 +582,7 @@ function AnchorHitBySpell (int iLocation)
   if ( numAnchorsAttached <= 0 )
   {
     GotoState('stateFalling');
-  } else {
+  } else //{
     if (numAnchorsAttached % spiderAnchorRatio == 0 )
     {
       TriggerEvent('WebAnchorHit',self,None);
@@ -599,7 +599,7 @@ function AnchorHitBySpell (int iLocation)
     } else {
       TriggerEvent('WebAnchorHit',self,None);
     }
-  }
+  //}
   foreach AllActors(Class'SpiderAttendent',at)
   {
     totalAttendentsInLevel++;
@@ -704,16 +704,17 @@ state CutIdle
     if ( cutSceneCounter == 1 )
     {
       // goto JL0035;
-	  return;
+	  //KW left this empty? -AdamJD
     }
     else if ( cutSceneCounter == 2 )
     {
       MoveAwayFromThePit();
       destroyAllSpiders();
-    } else {
-      if ( cutSceneCounter == 2 ) 
+    } 
+	else if ( cutSceneCounter == 2 ) 
+	{
 	  // goto JL0035;
-	  return;
+	  //KW left this empty? -AdamJD
     }
   }
   
@@ -804,8 +805,8 @@ state stateMovetoAttack
   }
   LoopAnim('rotate',1.5,0.2);
   TurnToward(PlayerHarry);
-  vLocation = PlayerHarry.Location + Normal(Location - PlayerHarry.Location) * distanceFromHarry;
-  vDir = Normal((PlayerHarry.Location + Normal(Location - PlayerHarry.Location) * distanceFromHarry - Location) * Vec(1.0,1.0,0.0));
+  vLocation = PlayerHarry.Location + (Normal(Location - PlayerHarry.Location) * distanceFromHarry);
+  vDir = Normal((PlayerHarry.Location + (Normal(Location - PlayerHarry.Location) * distanceFromHarry) - Location) * Vec(1.0,1.0,0.0));
   LoopAnim('run',1.0,0.2);
   bMove = True;
 }
@@ -933,7 +934,7 @@ function DoStomp (bool bBigStomp, optional bool bDeepStomp)
     PlayerHarry.ShakeView(1.75,200.0,200.0);
     PlaySound(Sound'big_block_fall',Slot_None,,,1000000.0,RandRange(0.31,0.5));
     PlaySound(Sound'Big_whomp4',Slot_None,,,1000000.0,RandRange(0.31,0.5));
-  } else {
+  } else //{
     if ( bBigStomp )
     {
       PlayerHarry.ShakeView(0.69999999,200.0,200.0);
@@ -947,7 +948,7 @@ function DoStomp (bool bBigStomp, optional bool bDeepStomp)
       PlayerHarry.ShakeView(0.41,100.0,100.0);
       PlaySound(Sound'lil_whomper_hit1',Slot_None,0.333,,1000000.0,RandRange(0.5,0.81));
     }
-  }
+  //}
 }
 
 state stateShootSpell
@@ -997,7 +998,7 @@ state stateShootSpell
 		  // Counter++;
 		  // goto JL015C;
 		}
-    break;
+		break;
     // case 2:
 	case SPELL_LINE:
 		// Counter = 0;
@@ -1011,7 +1012,6 @@ state stateShootSpell
 			TempCount2 = 1;
 		  }
 		  // TempCount2 = TempCount2;
-		  //this looks wrong but it is right -AdamJD
 		  for ( TempCount2 = TempCount2; TempCount2 > 0; TempCount2-- )
 		  {
 			DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
@@ -1163,12 +1163,11 @@ begin:
 
 state NipHarry
 {
-//begin, begin, begin... -AdamJD
 begin:
   bBigBite = True;
   PlayAnim('KnockBack',1.0,0.2);
   Sleep(0.31);
-  nipLocation = Location + Normal(PlayerHarry.Location - Location) * 100;
+  nipLocation = Location + (Normal(PlayerHarry.Location - Location) * 100);
   SetLocation(nipLocation);
   GotoState('stateMovetoAttack');
 }

@@ -5,7 +5,7 @@
 class SpongifyPad extends HProp;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\SpongifyTexture.PNG Name=SpongifyTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\SpongifyTexture.PNG Name=SpongifyTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 var Actor Target;
 var Vector vStartPosition;
@@ -69,7 +69,7 @@ function PreBeginPlay()
 
 function Vector ProjectFuturePosition (float AtTime)
 {
-  return Location + (PadDir * PadSpeed * AtTime) + Region.Zone.ZoneGravity * AtTime;
+  return Location + ((PadDir * PadSpeed) * AtTime) + (Region.Zone.ZoneGravity * AtTime);
 }
 
 event Destroyed()

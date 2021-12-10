@@ -17,7 +17,7 @@ function OnSpellInit()
   SeekSpeed += 1.0 - fDistMod;
   CurrentDir.X += (FRand() - 0.41) * fDistMod;
   CurrentDir.Y += (FRand() - 0.41) * fDistMod;
-  CurrentDir.Z += FRand() * 0.5 * fDistMod;
+  CurrentDir.Z += (FRand() * 0.5) * fDistMod;
   PlayerHarry.ClientMessage(" fDistMod = " $ string(fDistMod) $ " curDir = " $ string(CurrentDir));
   SetRotation(rotator(CurrentDir));
 }

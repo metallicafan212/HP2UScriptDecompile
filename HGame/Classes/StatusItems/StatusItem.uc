@@ -3,7 +3,7 @@
 //================================================================================
 
 class StatusItem extends Actor
-  Abstract;
+  Abstract; 
 
 var StatusItem siNext;
 var StatusGroup sgParent;
@@ -56,24 +56,18 @@ function SetCount (int nNum)
 	{
 		nCount = 0;
 	} 
-	else 
+	else if ( nCurrCountPotential != 0 )
 	{
-		if ( nCurrCountPotential != 0 )
+		if ( nCount > nCurrCountPotential )
 		{
-			if ( nCount > nCurrCountPotential )
-			{
-				nCount = nCurrCountPotential;
-			}
-		} 
-		else 
+			nCount = nCurrCountPotential;
+		}
+	} 
+	else if ( nMaxCount != 0 )
+	{
+		if ( nCount > nMaxCount )
 		{
-			if ( nMaxCount != 0 )
-			{
-				if ( nCount > nMaxCount )
-				{
-					nCount = nMaxCount;
-				}
-			}
+			nCount = nMaxCount;
 		}
 	}
 }
@@ -95,12 +89,9 @@ function IncrementCountPotential (int nNum)
 	{
 		nCurrCountPotential = 0;
 	} 
-	else 
+	else if ( (nMaxCount != 0) && (nCurrCountPotential > nMaxCount) )
 	{
-		if ( (nMaxCount != 0) && (nCurrCountPotential > nMaxCount) )
-		{
-			nCurrCountPotential = nMaxCount;
-		}
+		nCurrCountPotential = nMaxCount;
 	}
 }
 
@@ -159,19 +150,19 @@ function Color GetCountColor (optional bool bShadow)
 			colorRet.R = 0;
 			colorRet.G = 0;
 			colorRet.B = 0;
-		break;
+			break;
 		case CountColor_White:
 			colorRet.R = 255;
 			colorRet.G = 255;
 			colorRet.B = 255;
-		break;
+			break;
 		case CountColor_NearWhite:
 			colorRet.R = 206;
 			colorRet.G = 200;
 			colorRet.B = 190;
-		break;
+			break;
 		default:
-		break;
+			break;
 	}
 	return colorRet;
 }
@@ -184,16 +175,13 @@ function Font GetCountFont (Canvas Canvas)
 	{
 		fontRet = baseConsole(sgParent.smParent.PlayerHarry.Player.Console).LocalSmallFont;
 	} 
+	else if ( Canvas.SizeX <= 640 )
+	{
+		fontRet = baseConsole(sgParent.smParent.PlayerHarry.Player.Console).LocalMedFont;
+	} 
 	else 
 	{
-		if ( Canvas.SizeX <= 640 )
-		{
-			fontRet = baseConsole(sgParent.smParent.PlayerHarry.Player.Console).LocalMedFont;
-		} 
-		else 
-		{
-			fontRet = baseConsole(sgParent.smParent.PlayerHarry.Player.Console).LocalBigFont;
-		}
+		fontRet = baseConsole(sgParent.smParent.PlayerHarry.Player.Console).LocalBigFont;
 	}
 	return fontRet;
 }
@@ -227,15 +215,15 @@ function DrawSpecifiedCount (Canvas Canvas, int nCurrX, int nCurrY, float fScale
 	}
 	Canvas.Font = GetCountFont(Canvas);
 	Canvas.TextSize(strCountDisplay,fXTextLen,fYTextLen);
-	fXPos = nCurrX + nCountMiddleX * fScaleFactor - fXTextLen / 2;
-	fYPos = nCurrY + nCountMiddleY * fScaleFactor - fYTextLen / 2;
+	fXPos = nCurrX + (nCountMiddleX * fScaleFactor) - fXTextLen / 2;
+	fYPos = nCurrY + (nCountMiddleY * fScaleFactor) - fYTextLen / 2;
 	if ( fXPos + fXTextLen > Canvas.SizeX )
 	{
-		fXPos = Canvas.SizeX - fXTextLen - 2;
+		fXPos = Canvas.SizeX - (fXTextLen - 2);
 	}
 	if ( fYPos + fYTextLen > Canvas.SizeY )
 	{
-		fYPos = Canvas.SizeY - fYTextLen - 2;
+		fYPos = Canvas.SizeY - (fYTextLen - 2);
 	}
 	Canvas.SetPos(fXPos,fYPos);
 	Canvas.DrawShadowText(strCountDisplay,GetCountColor(),GetCountColor(True));

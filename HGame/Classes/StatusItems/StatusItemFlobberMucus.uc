@@ -11,6 +11,4 @@ defaultproperties
     bDisplayCount=True
 
     strToolTipId="InGameMenu_0008"
-	
-	CountColor=CountColor_NearWhite
 }

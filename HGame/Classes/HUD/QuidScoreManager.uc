@@ -50,7 +50,7 @@ event PostBeginPlay()
   textureRaven = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2RavenclawCrestSm",Class'Texture'));
   textureSlyth = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SlytherinCrestSm",Class'Texture'));
   textureGryff = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrestSm",Class'Texture'));
-  textureTallyPointsIcon = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2BigChallengeScore",Class'Texture'));
+  textureTallyPointsIcon = Texture(DynamicLoadObject(strTALLY_POINTS_ICON,Class'Texture'));
   textureOpponent = textureHuff;
 }
 
@@ -199,11 +199,11 @@ function DrawQuidScore (Canvas Canvas)
 
   fontSave = Canvas.Font;
   fScaleFactor = GetScaleFactor(Canvas);
-  nGryffIconX = 520 * fScaleFactor;
-  nGryffIconY = 4 * fScaleFactor;
+  nGryffIconX = fGRYFF_X * fScaleFactor;
+  nGryffIconY = fGRYFF_Y * fScaleFactor;
   Canvas.SetPos(nGryffIconX,nGryffIconY);
   Canvas.DrawIcon(textureGryff,fScaleFactor);
-  nOpponIconX = 578 * fScaleFactor;
+  nOpponIconX = fOPPONENT_X * fScaleFactor;
   nOpponIconY = 4 * fScaleFactor;
   Canvas.SetPos(nOpponIconX,nOpponIconY);
   Canvas.DrawIcon(textureOpponent,fScaleFactor);
@@ -220,19 +220,19 @@ function DrawQuidScore (Canvas Canvas)
   if ( Canvas.SizeX <= 512 )
   {
     Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
-  } else {
+  } else //{
     if ( Canvas.SizeX <= 640 )
     {
       Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
     } else {
       Canvas.Font = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
     }
-  }
+  //}
   Canvas.TextSize(strGryffScore,nXTextLen,nYTextLen);
-  Canvas.SetPos(nGryffIconX + (45 * fScaleFactor) - nXTextLen / 2,nGryffIconY + (50 * fScaleFactor) - nYTextLen / 2);
+  Canvas.SetPos(nGryffIconX + (nCREST_MIDX * fScaleFactor) - nXTextLen / 2,nGryffIconY + (nCREST_MIDY * fScaleFactor) - nYTextLen / 2);
   Canvas.DrawShadowText(strGryffScore,colorOffWhite,colorBlack);
   Canvas.TextSize(strOpponentScore,nXTextLen,nYTextLen);
-  Canvas.SetPos(nOpponIconX + (45 * fScaleFactor) - nXTextLen / 2,nOpponIconY + (50 * fScaleFactor) - nYTextLen / 2);
+  Canvas.SetPos(nOpponIconX + (nCREST_MIDX * fScaleFactor) - nXTextLen / 2,nOpponIconY + (nCREST_MIDY * fScaleFactor) - nYTextLen / 2);
   Canvas.DrawText(strOpponentScore,False);
   Canvas.Font = fontSave;
 }
@@ -251,8 +251,8 @@ function DrawTallyHousepoints (Canvas Canvas)
   colorSave = Canvas.DrawColor;
   fontSave = Canvas.Font;
   fScaleFactor = GetScaleFactor(Canvas);
-  nPointsIconX = Canvas.SizeX / 2 - (128 / 2) * fScaleFactor;
-  nPointsIconY = 20 * fScaleFactor;
+  nPointsIconX = Canvas.SizeX / 2 - ((nTALLY_POINTS_WIDTH / 2) * fScaleFactor);
+  nPointsIconY = nTALLY_DISPLAY_Y * fScaleFactor;
   Canvas.SetPos(nPointsIconX,nPointsIconY);
   Canvas.DrawIcon(textureTallyPointsIcon,fScaleFactor);
   nXTextLen = 0.0;
@@ -262,7 +262,7 @@ function DrawTallyHousepoints (Canvas Canvas)
   Canvas.DrawColor.G = 0;
   Canvas.DrawColor.B = 0;
   Canvas.TextSize(strPoints,nXTextLen,nYTextLen);
-  Canvas.SetPos(nPointsIconX + 65 * fScaleFactor - (nXTextLen / 2),nPointsIconY + 87 * fScaleFactor - (nYTextLen / 2));
+  Canvas.SetPos(nPointsIconX + (nTALLY_POINTS_MIDX * fScaleFactor) - nXTextLen / 2,nPointsIconY + (nTALLY_POINTS_MIDY * fScaleFactor) - nYTextLen / 2);
   Canvas.DrawText(strPoints,False);
   Canvas.DrawColor = colorSave;
   Canvas.Font = fontSave;

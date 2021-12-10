@@ -5,7 +5,7 @@
 class FEDuelPage extends baseFEPage;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\Icons\FEComboIdleTexture.PNG	GROUP=Icons	Name=FEComboIdleTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboIdleTexture.PNG	GROUP=Icons	Name=FEComboIdleTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 var HPMessageBox ConfirmReplay;
 var harry PlayerHarry;
@@ -35,8 +35,8 @@ function Created()
 
   for(I = 0; I < 10; I++)
   {
-    rankingButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',WinWidth / 2 - 180 / 2,StartY + I * 28,180.0,26.0));
-    rankingButtons[I].SetFont(4);
+    rankingButtons[I] = UWindowButton(CreateControl(Class'UWindowButton',(WinWidth / 2) - (180 / 2),StartY + (I * 28),180.0,26.0));
+    rankingButtons[I].SetFont(F_HPMenuLarge);
     rankingButtons[I].TextColor.R = 255;
     rankingButtons[I].TextColor.G = 255;
     rankingButtons[I].TextColor.B = 255;

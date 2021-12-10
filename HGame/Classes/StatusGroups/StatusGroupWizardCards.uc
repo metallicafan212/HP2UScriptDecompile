@@ -45,7 +45,7 @@ function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int
 	fScaleFactor 	= GetScaleFactor(Canvas.SizeX);
 	GetGroupFinalXY(bMenuMode, Canvas, nIconWidth, nIconHeight, nFinalX, nFinalY);
 	nOutX 			= nFinalX;
-	nOutY 			= -nIconHeight * fScaleFactor;
+	nOutY 			= -(nIconHeight * fScaleFactor);
 }
 
 function AssignAllSilverToVendors()
@@ -57,17 +57,17 @@ function AssignAllSilverToVendors()
 	siWC = StatusItemWizardCards(GetStatusItem(Class'StatusItemSilverCards'));
 	
 	
-	// Metallicafan212:	Obious loop is obious
+	// Metallicafan212:	Obvious loop
 	
-	for(nCardId = 0; nCardId < 101; nCardId++)
+	for(nCardId = 0; nCardId < smParent.nTOTAL_WIZARD_CARDS; nCardId++)
 	{
 		classWC = siWC.GetCardClassFromId(nCardId);
 		if ( (classWC != None) && ClassIsChildOf(classWC,Class'SilverCards') )
 		{
 			smParent.PlayerHarry.ClientMessage("SilverCard " $ string(classWC) $ " " $ string(nCardId));
-			if ( siWC.GetCardOwner(nCardId) != CardOwner_Harry )
+			if ( siWC.GetCardOwner(nCardId) != siWC.ECardOwner.CardOwner_Harry )
 			{
-				siWC.SetCardOwner(nCardId,	CardOwner_Vendor);
+				siWC.SetCardOwner(nCardId,	siWC.ECardOwner.CardOwner_Vendor);
 			}
 		}
 	}
@@ -101,7 +101,7 @@ function AssignVendorCards()
 
 	foreach AllActors(Class'chestbronze',Chest)
 	{
-		for(I = 0; i < 8; i++)
+		for(I = 0; I < ArrayCount(Chest.EjectedObjects); I++)
 		{
 			if ( ClassIsChildOf(Chest.EjectedObjects[I],Class'WizardCardIcon') )
 			{
@@ -123,7 +123,7 @@ function AssignVendorCards()
 	}
 	foreach AllActors(Class'bronzecauldron',Cauldron)
 	{
-		for(I = 0; i < 8; i++)
+		for(I = 0; I < ArrayCount(Cauldron.EjectedObjects); I++)
 		{
 			if ( ClassIsChildOf(Cauldron.EjectedObjects[I],Class'WizardCardIcon') )
 			{
@@ -159,9 +159,9 @@ function AssignVendorCards()
 			{
 				siCards = StatusItemWizardCards(GetStatusItem(Class'StatusItemGoldCards'));
 			}
-			if ( siCards.GetCardOwner(WCard.Id) != CardOwner_Harry )
+			if ( siCards.GetCardOwner(WCard.Id) != siCards.ECardOwner.CardOwner_Harry )
 			{
-				siCards.SetCardOwner(WCard.Id, CardOwner_Vendor);
+				siCards.SetCardOwner(WCard.Id, siCards.ECardOwner.CardOwner_Vendor);
 			}
 		}
 	}
@@ -196,9 +196,9 @@ function AssignVendorCardFromClass (Class classObject)
 				siCards = StatusItemWizardCards(GetStatusItem(Class'StatusItemGoldCards'));
 			}
 			
-			if ( siCards.GetCardOwner(nId) != CardOwner_Harry )
+			if ( siCards.GetCardOwner(nId) != siCards.ECardOwner.CardOwner_Harry )
 			{
-				siCards.SetCardOwner(nId, CardOwner_Vendor);
+				siCards.SetCardOwner(nId, siCards.ECardOwner.CardOwner_Vendor);
 			}
 		}
 	}
@@ -215,7 +215,7 @@ function RemoveHarryOwnedCardsFromLevel (WizardCardIcon wcExceptThisInstance)
 
 	foreach AllActors(Class'chestbronze',Chest)
 	{
-		for(I = 0; i < 8; i++)
+		for(I = 0; I < ArrayCount(Chest.EjectedObjects); I++)
 		{
 			if ( ClassIsChildOf(Chest.EjectedObjects[I],Class'WizardCardIcon') )
 			{
@@ -319,13 +319,20 @@ function bool HasCardGameStatePassed (string strCardGameState)
 	return False;
 	*/
 	
-	if(		GetGameStateTokenIndex(smParent.PlayerHarry.CurrentGameState,nCurrStateTokenIdx)
-		&&	GetGameStateTokenIndex(strCardGameState,nCardStateTokenIdx)
-		&&	nCardStateTokenIdx <= nCurrStateTokenIdx 
-	  )
+	if(	GetGameStateTokenIndex(smParent.PlayerHarry.CurrentGameState,nCurrStateTokenIdx) )
 	{
-		smParent.PlayerHarry.ClientMessage("Game state passed " $ strCardGameState);
-		return True;
+		if( GetGameStateTokenIndex(strCardGameState,nCardStateTokenIdx) )
+		{
+			if( nCardStateTokenIdx <= nCurrStateTokenIdx )
+			{
+				smParent.PlayerHarry.ClientMessage("Game state passed " $strCardGameState);
+				return True;
+			}
+		}
+		else
+		{
+			smParent.PlayerHarry.ClientMessage("ERROR getting wizard card game state token idx " $strCardGameState);
+		}
 	}
 	
 	return false;
@@ -364,13 +371,13 @@ function SetLastObtainedCardTypeAsInt (int nLastCardType)
 {
 	switch (nLastCardType)
 	{
-		case 0:
+		case nCARDTYPE_BRONZE:
 			LastObtainedCardType = CardType_Bronze;
 			break;
-		case 1:
+		case nCARDTYPE_SILVER:
 			LastObtainedCardType = CardType_Silver;
 			break;
-		case 2:
+		case nCARDTYPE_GOLD:
 			LastObtainedCardType = CardType_Gold;
 			break;
 		default:
@@ -384,16 +391,13 @@ function int GetLastObtainedCardTypeAsInt()
 	switch (LastObtainedCardType)
 	{
 		case CardType_Bronze:
-			return 0;
+			return nCARDTYPE_BRONZE;
 		case CardType_Silver:
-			return 1;
+			return nCARDTYPE_SILVER;
 		case CardType_Gold:
-			return 2;
+			return nCARDTYPE_GOLD;
 		case CardType_None:
-			return 3;
-		default:
-			// Metallicafan212:	It's not valid to return nothing, so I made it 4
-			return 4;
+			return nCARDTYPE_NONE;
 	}
 }
 
@@ -410,6 +414,5 @@ defaultproperties
     fTotalEffectOutTime=0.20
 	
 	// Metallicafan212:	Missing for some reason
-	GameEffectType=ET_Fade
-
+	MenuProps=Menu_Never
 }

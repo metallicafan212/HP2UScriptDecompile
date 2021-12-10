@@ -5,7 +5,7 @@
 class WCSummerbee extends SilverCards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardSummerbeeBigTexture.PNG	GROUP=Icons	Name=WizCardSummerbeeBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardSummerbeeBigTexture.PNG	GROUP=Icons	Name=WizCardSummerbeeBigTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardSummerbeeTex0.PNG	GROUP=Skins	Name=WizardCardSummerbeeTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
 function PostBeginPlay()

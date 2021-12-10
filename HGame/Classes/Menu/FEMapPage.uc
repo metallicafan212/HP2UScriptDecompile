@@ -5,46 +5,46 @@
 class FEMapPage extends baseFEPage;
 
 //texture shape imports -AdamJD
-#exec Texture Import File=Textures\Icons\CircleTexture.PNG	GROUP=Icons	Name=CircleTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\DiamondTexture.PNG	GROUP=Icons	Name=DiamondTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\DiffindoTexture.PNG	GROUP=Icons	Name=DiffindoTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\DownArrowTexture.PNG	GROUP=Icons	Name=DownArrowTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\HarryLocationTexture.PNG	GROUP=Icons	Name=HarryLocationTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\HexTexture.PNG	GROUP=Icons	Name=HexTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\LeftArrowTexture.PNG	GROUP=Icons	Name=LeftArrowTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\RectangleTexture.PNG	GROUP=Icons	Name=RectangleTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\RictusempraTexture.PNG	GROUP=Icons	Name=RictusempraTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\RightArrowTexture.PNG	GROUP=Icons	Name=RightArrowTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\SkurgeTexture.PNG	GROUP=Icons	Name=SkurgeTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\SquareGreenTexture.PNG	GROUP=Icons	Name=SquareGreenTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\tSpongifyTexture.PNG	GROUP=Icons	Name=tSpongifyTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\UpArrowTexture.PNG	GROUP=Icons	Name=UpArrowTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\CircleTexture.PNG	GROUP=Icons	Name=CircleTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\DiamondTexture.PNG	GROUP=Icons	Name=DiamondTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\DiffindoTexture.PNG	GROUP=Icons	Name=DiffindoTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\DownArrowTexture.PNG	GROUP=Icons	Name=DownArrowTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\HarryLocationTexture.PNG	GROUP=Icons	Name=HarryLocationTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\HexTexture.PNG	GROUP=Icons	Name=HexTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\LeftArrowTexture.PNG	GROUP=Icons	Name=LeftArrowTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\RectangleTexture.PNG	GROUP=Icons	Name=RectangleTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\RictusempraTexture.PNG	GROUP=Icons	Name=RictusempraTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\RightArrowTexture.PNG	GROUP=Icons	Name=RightArrowTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\SkurgeTexture.PNG	GROUP=Icons	Name=SkurgeTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\SquareGreenTexture.PNG	GROUP=Icons	Name=SquareGreenTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\tSpongifyTexture.PNG	GROUP=Icons	Name=tSpongifyTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\UpArrowTexture.PNG	GROUP=Icons	Name=UpArrowTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 //texture background imports -AdamJD
-#exec Texture Import File=Textures\Icons\Map0Texture1.PNG	GROUP=Icons	Name=Map0Texture1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map0Texture2.PNG	GROUP=Icons	Name=Map0Texture2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map0Texture3.PNG	GROUP=Icons	Name=Map0Texture3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map0Texture4.PNG	GROUP=Icons	Name=Map0Texture4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map0Texture5.PNG	GROUP=Icons	Name=Map0Texture5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map0Texture6.PNG	GROUP=Icons	Name=Map0Texture6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map1Texture1.PNG	GROUP=Icons	Name=Map1Texture1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map1Texture2.PNG	GROUP=Icons	Name=Map1Texture2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map1Texture3.PNG	GROUP=Icons	Name=Map1Texture3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map1Texture4.PNG	GROUP=Icons	Name=Map1Texture4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map1Texture5.PNG	GROUP=Icons	Name=Map1Texture5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map1Texture6.PNG	GROUP=Icons	Name=Map1Texture6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map2Texture1.PNG	GROUP=Icons	Name=Map2Texture1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map2Texture2.PNG	GROUP=Icons	Name=Map2Texture2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map2Texture3.PNG	GROUP=Icons	Name=Map2Texture3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map2Texture4.PNG	GROUP=Icons	Name=Map2Texture4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map2Texture5.PNG	GROUP=Icons	Name=Map2Texture5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map2Texture6.PNG	GROUP=Icons	Name=Map2Texture6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map3Texture1.PNG	GROUP=Icons	Name=Map3Texture1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map3Texture2.PNG	GROUP=Icons	Name=Map3Texture2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map3Texture3.PNG	GROUP=Icons	Name=Map3Texture3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map3Texture4.PNG	GROUP=Icons	Name=Map3Texture4 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map3Texture5.PNG	GROUP=Icons	Name=Map3Texture5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
-#exec Texture Import File=Textures\Icons\Map3Texture6.PNG	GROUP=Icons	Name=Map3Texture6 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\Map0Texture1.PNG	GROUP=Icons	Name=Map0Texture1 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map0Texture2.PNG	GROUP=Icons	Name=Map0Texture2 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map0Texture3.PNG	GROUP=Icons	Name=Map0Texture3 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map0Texture4.PNG	GROUP=Icons	Name=Map0Texture4 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map0Texture5.PNG	GROUP=Icons	Name=Map0Texture5 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map0Texture6.PNG	GROUP=Icons	Name=Map0Texture6 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map1Texture1.PNG	GROUP=Icons	Name=Map1Texture1 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map1Texture2.PNG	GROUP=Icons	Name=Map1Texture2 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map1Texture3.PNG	GROUP=Icons	Name=Map1Texture3 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map1Texture4.PNG	GROUP=Icons	Name=Map1Texture4 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map1Texture5.PNG	GROUP=Icons	Name=Map1Texture5 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map1Texture6.PNG	GROUP=Icons	Name=Map1Texture6 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map2Texture1.PNG	GROUP=Icons	Name=Map2Texture1 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map2Texture2.PNG	GROUP=Icons	Name=Map2Texture2 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map2Texture3.PNG	GROUP=Icons	Name=Map2Texture3 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map2Texture4.PNG	GROUP=Icons	Name=Map2Texture4 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map2Texture5.PNG	GROUP=Icons	Name=Map2Texture5 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map2Texture6.PNG	GROUP=Icons	Name=Map2Texture6 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map3Texture1.PNG	GROUP=Icons	Name=Map3Texture1 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map3Texture2.PNG	GROUP=Icons	Name=Map3Texture2 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map3Texture3.PNG	GROUP=Icons	Name=Map3Texture3 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map3Texture4.PNG	GROUP=Icons	Name=Map3Texture4 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map3Texture5.PNG	GROUP=Icons	Name=Map3Texture5 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
+#exec Texture Import File=Textures\Icons\Map3Texture6.PNG	GROUP=Icons	Name=Map3Texture6 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
 
 const NUM_HARRYLOC_INFO= 43;
 const MAX_MAP_BUTTONS= 40;
@@ -241,15 +241,15 @@ function Created()
   StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea',16.0,WinHeight - 26,500.0,26.0));
   StatusBarTextWindow.Clear();
   StatusBarTextWindow.AddText("");
-  StatusBarTextWindow.Font = 4;
+  StatusBarTextWindow.Font = F_HPMenuLarge;
   StatusBarTextWindow.WinTop = GetStatusY();
 }
 
 function AddMapButton (int X, int Y, int W, int H, Texture t, string ButtonText, optional string MapLink)
 {
-  if ( TotalNumMapButtons >= 40 )
+  if ( TotalNumMapButtons >= MAX_MAP_BUTTONS )
   {
-    TotalNumMapButtons = 40 - 1;
+    TotalNumMapButtons = MAX_MAP_BUTTONS - 1;
   }
   Buttons[TotalNumMapButtons].MapButton = UWindowButton(CreateWindow(Class'UWindowButton',X,Y,W,H));
   Buttons[TotalNumMapButtons].MapButton.DownTexture = t;
@@ -317,7 +317,7 @@ function UpdateDisplayDetails()
   S = GetCurrentUnrFileName();
   N = PlayerHarry.HarryAtMapMarker();
 
-  for(I = 0; I < 43; I++)
+  for(I = 0; I < NUM_HARRYLOC_INFO; I++)
   {
     if ( (nCurrPage == HarryLocInfo[I].MapIdx) && (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag == N) )
     {
@@ -505,7 +505,7 @@ function SetInitialSelection()
   nCurrPage = -1;
   HarryAtMapMarkerName = PlayerHarry.HarryAtMapMarker();
 
-  for(I = 0; I < 43; I++)
+  for(I = 0; I < NUM_HARRYLOC_INFO; I++)
   {
     if ( (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag != 'None') && (HarryLocInfo[I].Tag == HarryAtMapMarkerName) )
     {
@@ -515,7 +515,7 @@ function SetInitialSelection()
   }
   if ( nCurrPage == -1 )
   {
-	for(I = 0; I < 43; I++)
+	for(I = 0; I < NUM_HARRYLOC_INFO; I++)
     {
       if ( (S ~= HarryLocInfo[I].UnrName) && (HarryLocInfo[I].Tag == HarryAtMapMarkerName) )
       {

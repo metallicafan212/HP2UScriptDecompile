@@ -69,7 +69,7 @@ function Created()
   Super.Created();
   LegalText = Localize("all","legal_title_01","Pickup");
   VersionButton = UWindowSmallButton(CreateControl(Class'UWindowSmallButton',WinWidth - 84,WinHeight - 30,84.0,25.0));
-  VersionButton.SetFont(0);
+  VersionButton.SetFont(F_Normal);
   VersionButton.TextColor.R = 250;
   VersionButton.TextColor.G = 250;
   VersionButton.TextColor.B = 250;
@@ -87,7 +87,7 @@ function Created()
       if ( LevelList[I].LevelName != "" )
       {
         LevelList[I].Button = UWindowButton(CreateControl(Class'UWindowButton',X,Y,W,H));
-        LevelList[I].Button.SetFont(4);
+        LevelList[I].Button.SetFont(F_HPMenuLarge);
         LevelList[I].Button.TextColor.R = 250;
         LevelList[I].Button.TextColor.G = 250;
         LevelList[I].Button.TextColor.B = 250;
@@ -104,7 +104,7 @@ function Created()
     }
     Y += H;
     ExitButton = UWindowButton(CreateControl(Class'UWindowButton',X,Y,W,H));
-    ExitButton.SetFont(4);
+    ExitButton.SetFont(F_HPMenuLarge);
     ExitButton.TextColor.R = 250;
     ExitButton.TextColor.G = 250;
     ExitButton.TextColor.B = 250;
@@ -124,7 +124,7 @@ function Created()
       if ( LevelList[I].LevelName != "" )
       {
         LevelList[I].Button = UWindowButton(CreateControl(Class'UWindowButton',X,Y,W,H));
-        LevelList[I].Button.SetFont(4);
+        LevelList[I].Button.SetFont(F_HPMenuLarge);
         LevelList[I].Button.TextColor.R = 96;
         LevelList[I].Button.TextColor.G = 96;
         LevelList[I].Button.TextColor.B = 112;
@@ -141,10 +141,10 @@ function Created()
       }
     }
   } else {
-    E3DemoStartButton = UWindowButton(CreateControl(Class'UWindowButton',WinWidth / 2 - 80,WinHeight - 100,160.0,60.0));
+    E3DemoStartButton = UWindowButton(CreateControl(Class'UWindowButton',(WinWidth / 2) - 80,WinHeight - 100,160.0,60.0));
     E3DemoStartButton.ToolTipString = "Start Demo";
     ExitButton = UWindowButton(CreateControl(Class'UWindowButton',WinWidth - 50,WinHeight - 60,50.0,30.0));
-    ExitButton.SetFont(4);
+    ExitButton.SetFont(F_HPMenuLarge);
     ExitButton.TextColor.R = 250;
     ExitButton.TextColor.G = 250;
     ExitButton.TextColor.B = 250;
@@ -176,12 +176,12 @@ function bool KeyEvent (byte Key, byte Action, float Delta)
   if ( (Action == 1) && (Key == 27) )
   {
     ConfirmExit = doHPMessageBox("Are you sure you want to exit?","Yes","No");
-  } else {
+  } else //{
     if ( (Action == 1) && (Key == 123) )
     {
       FEBook(book).CloseBook();
     }
-  }
+  //}
 }
 
 function Notify (UWindowDialogControl C, byte E)

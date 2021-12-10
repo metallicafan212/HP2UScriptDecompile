@@ -57,7 +57,7 @@ event Bump (Actor Other)
   local int nGameState;
 
   nGameState = PlayerHarry.ConvertGameStateToNumber();
-  if ( nGameState < 40 )
+  if ( nGameState < nPOTIONS_AVAILABLE_STATE )
   {
     GotoState('CauldronsNotAvailableYet');
   } else //{
@@ -110,7 +110,7 @@ function SetCauldronFX (ECauldronFX FX)
   killAttachedParticleFX(0.0);
   vOffset.X = 0.0;
   vOffset.Y = 0.0;
-  vOffset.Z = 25.0;
+  vOffset.Z = TOP_OF_CAULDRON_OFFSET;
   attachedParticleOffset[0] = vOffset;
   switch (FX)
   {
@@ -155,7 +155,7 @@ state CauldronsNotAvailableYet
 ignores Bump;
   function CutCue (string cue)
   {
-    if ( cue ~= "_MixingCauldronsNotAvailableYet" )
+    if ( cue ~= strCUE_CAULDRON_NOT_AVAIL_LINE )
     {
       GotoState('Idle');
     }
@@ -175,10 +175,10 @@ ignores Bump;
       strDialogID = "Shared_Menu_0010";
     }
     strDialog = Localize("All",strDialogID,"HPMenu");
-    fSoundLen = Len(strDialog) * 0.01 + 3.0;
+    fSoundLen = (Len(strDialog) * 0.01) + 3.0;
     tcue = Spawn(Class'TimedCue');
     tcue.CutNotifyActor = self;
-    tcue.SetupTimer(fSoundLen + 0.5,"_MixingCauldronsNotAvailableYet");
+    tcue.SetupTimer(fSoundLen + 0.5,strCUE_CAULDRON_NOT_AVAIL_LINE);
     harry(Level.PlayerHarryActor).myHUD.SetSubtitleText(strDialog,fSoundLen);
   }
   

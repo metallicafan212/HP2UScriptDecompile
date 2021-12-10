@@ -28,15 +28,21 @@ function Tick (float t)
   local int I;
   local Vector Facing;
   local Vector other_facing;
+  local PlayerPawn pp; //added by me for compatibility code -AdamJD
 
   if (  !bEnabled )
   {
     return;
   }
 
-  for(I = 0; I < 4; I++)
+  //updated to make this compatible with the new engine -AdamJD
+  //
+  //for(I = 0; I < ArrayCount(Touching); I++)
+  foreach TouchingActors(class'PlayerPawn', pp)
   {
     Facing = GetFacing(self);
+
+	/*
     if ( PlayerPawn(Touching[I]) != None )
     {
       if ( ((Touching[I].Location - Location) Dot Facing >= 0.0) && ((Touching[I].OldLocation - Location) Dot Facing < 0.0) )
@@ -45,6 +51,19 @@ function Tick (float t)
         if ( other_facing Dot Facing >= MinCosTrigger )
         {
           MakeJump(Touching[I]);
+        }
+      }
+    }
+	*/
+
+	if ( pp != None )
+    {
+      if ( ((pp.Location - Location) Dot Facing >= 0.0) && ((pp.OldLocation - Location) Dot Facing < 0.0) )
+      {
+        other_facing = GetFacing(pp);
+        if ( other_facing Dot Facing >= MinCosTrigger )
+        {
+          MakeJump(pp);
         }
       }
     }

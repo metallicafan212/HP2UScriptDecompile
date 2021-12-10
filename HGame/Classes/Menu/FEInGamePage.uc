@@ -98,21 +98,18 @@ function PaintToolTipText (Canvas Canvas, float fScaleFactor)
   {
     fontText = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
   } 
+  else if ( Canvas.SizeX <= 800 )
+  {
+    fontText = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
+  } 
   else 
   {
-    if ( Canvas.SizeX <= 800 )
-    {
-      fontText = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
-    } 
-	else 
-	{
-      fontText = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
-    }
+    fontText = baseConsole(PlayerHarry.Player.Console).LocalBigFont;
   }
   colorText.R = 255;
   colorText.G = 255;
   colorText.B = 255;
-  HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strCurrToolTip, 6 * fScaleFactor, 424 * fScaleFactor, 46 * fScaleFactor, colorText,fontText);
+  HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strCurrToolTip, nTOOLTIP_TEXT_X * fScaleFactor, nTOOLTIP_TEXT_Y * fScaleFactor, nTOOLTIP_TEXT_H * fScaleFactor, colorText,fontText);
 }
 
 function PaintObjectiveText (Canvas Canvas, float fScaleFactor)
@@ -141,8 +138,8 @@ function PaintObjectiveText (Canvas Canvas, float fScaleFactor)
 		colorText.G = 255;
 		colorText.B = 255;
 	
-		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,GetLocalFEString("InGameMenu_0027"), 14 * fScaleFactor, 400 * fScaleFactor, 16 * fScaleFactor, colorText,fontText);
-		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strObjective, 14 * fScaleFactor, 416 * fScaleFactor, 58 * fScaleFactor, colorText, fontText, 626.0 * fScaleFactor);
+		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,GetLocalFEString("InGameMenu_0027"), nOBJECTIVE_TEXT_X * fScaleFactor, nOBJECTIVE_LABEL_Y * fScaleFactor, nOBJECTIVE_LABEL_H * fScaleFactor, colorText,fontText);
+		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strObjective, nOBJECTIVE_TEXT_X * fScaleFactor, nOBJECTIVE_TEXT_Y * fScaleFactor, nOBJECTIVE_TEXT_H * fScaleFactor, colorText, fontText, nOBJECTIVE_CLIP_X * fScaleFactor);
 	}
 }
 
@@ -179,7 +176,7 @@ function DrawCount (Canvas Canvas, float fScaleFactor, int nButtonLeft, int nBut
   Canvas.DrawColor = si.GetCountColor();
   Canvas.Font = si.GetCountFont(Canvas);
   Canvas.TextSize(strCount,fXTextLen,fYTextLen);
-  Canvas.SetPos((nButtonLeft + 50) * fScaleFactor - fXTextLen / 2, (nButtonTop + 58) * fScaleFactor - fYTextLen / 2);
+  Canvas.SetPos((nButtonLeft + nCOUNT_MID_X) * fScaleFactor - (fXTextLen / 2), (nButtonTop + nCOUNT_MID_Y) * fScaleFactor - (fYTextLen / 2));
   Canvas.DrawShadowText(strCount,si.GetCountColor(),si.GetCountColor(True));
   Canvas.Font = fontSave;
 }
@@ -190,7 +187,7 @@ function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
 
   fScaleFactor = nCanvasSizeX / WinWidth;
   //return nCanvasSizeY - 88 * fScaleFactor = return;
-  return (nCanvasSizeY - 88 * fScaleFactor);
+  return (nCanvasSizeY - nBAR_H * fScaleFactor);
 }
 
 function Created()
@@ -300,7 +297,7 @@ function Created()
     SoundVideoButton.DownSound = soundBottomClick;
   }
   VersionButton = UWindowSmallButton(CreateControl(Class'UWindowSmallButton',550.0,462.0,84.0,25.0));
-  VersionButton.SetFont(0);
+  VersionButton.SetFont(F_Normal);
   VersionButton.TextColor.R = 250;
   VersionButton.TextColor.G = 250;
   VersionButton.TextColor.B = 250;
@@ -335,104 +332,97 @@ function Notify (UWindowDialogControl C, byte E)
     switch (C)
     {
       case InputButton:
-      FEBook(book).ChangePageNamed("INPUT");
-      break;
+		  FEBook(book).ChangePageNamed("INPUT");
+		  break;
       case SoundVideoButton:
-      FEBook(book).ChangePageNamed("SOUNDVIDEO");
-      break;
+		  FEBook(book).ChangePageNamed("SOUNDVIDEO");
+		  break;
       case QuitButton:
-      ConfirmQuit = doHPMessageBox(GetLocalFEString("InGameMenu_0026"),GetLocalFEString("Shared_Menu_0003"),GetLocalFEString("Shared_Menu_0004"));
-      break;
+		  ConfirmQuit = doHPMessageBox(GetLocalFEString("InGameMenu_0026"),GetLocalFEString("Shared_Menu_0003"),GetLocalFEString("Shared_Menu_0004"));
+		  break;
       case BackPageButton:
-      FEBook(book).CloseBook();
-      break;
+		  FEBook(book).CloseBook();
+		  break;
       case FolioButton:
-      FEBook(book).ChangePageNamed("FOLIO");
-      break;
+		  FEBook(book).ChangePageNamed("FOLIO");
+		  break;
       case QuidditchButton:
-      FEBook(book).ChangePageNamed("QUIDDITCH");
-      break;
+		  FEBook(book).ChangePageNamed("QUIDDITCH");
+		  break;
       case DuelButton:
-      FEBook(book).ChangePageNamed("DUEL");
-      break;
+		  FEBook(book).ChangePageNamed("DUEL");
+		  break;
       case ChallengesButton:
-      FEBook(book).ChangePageNamed("CHALLENGES");
-      break;
+		  FEBook(book).ChangePageNamed("CHALLENGES");
+		  break;
       case MapButton:
-      FEBook(book).ChangePageNamed("MAP");
-      break;
+		  FEBook(book).ChangePageNamed("MAP");
+		  break;
       case CreditsButton:
-      FEBook(book).ChangePageNamed("CREDITSPAGE");
-      break;
+		  FEBook(book).ChangePageNamed("CREDITSPAGE");
+		  break;
       case HousepointsButton:
-      FEBook(book).ChangePageNamed("HPOINTS");
-      break;
-      break;
+		  FEBook(book).ChangePageNamed("HPOINTS");
+		  break;
       default:
-      break;
+		  break;
     }
   } 
-  else 
+  else if ( E == DE_MouseEnter )
   {
-    if ( E == DE_MouseEnter )
-    {
       switch (C)
       {
         case DuelButton:
-        SetRollover(DuelButton,textureDuelRO,soundMiddleRO,True);
-        break;
+			SetRollover(DuelButton,textureDuelRO,soundMiddleRO,True);
+			break;
         case ChallengesButton:
-        SetRollover(ChallengesButton,textureChallengesRO,soundMiddleRO,True);
-        break;
+			SetRollover(ChallengesButton,textureChallengesRO,soundMiddleRO,True);
+			break;
         case MapButton:
-        SetRollover(MapButton,textureMapRO,soundMiddleRO,True);
-        break;
+			SetRollover(MapButton,textureMapRO,soundMiddleRO,True);
+			break;
         case QuidditchButton:
-        SetRollover(QuidditchButton,textureQuidRO,soundMiddleRO,True);
-        break;
+			SetRollover(QuidditchButton,textureQuidRO,soundMiddleRO,True);
+			break;
         case QuitButton:
-        SetRollover(QuitButton,textureQuitRO,soundBottomRO,True);
-        break;
+			SetRollover(QuitButton,textureQuitRO,soundBottomRO,True);
+			break;
         case InputButton:
-        SetRollover(InputButton,textureInputRO,soundBottomRO,True);
-        break;
+			SetRollover(InputButton,textureInputRO,soundBottomRO,True);
+			break;
         case SoundVideoButton:
-        SetRollover(SoundVideoButton,textureSoundRO,soundBottomRO,True);
-        break;
+			SetRollover(SoundVideoButton,textureSoundRO,soundBottomRO,True);
+			break;
         case FolioButton:
-        SetRollover(FolioButton,textureFolioRO,soundFolioRO,False);
-        break;
+			SetRollover(FolioButton,textureFolioRO,soundFolioRO,False);
+			break;
         case CreditsButton:
-        SetRollover(CreditsButton,textureCreditsRO,soundBottomRO,True);
-        break;
+			SetRollover(CreditsButton,textureCreditsRO,soundBottomRO,True);
+			break;
         case HousepointsButton:
-        SetRollover(HousepointsButton,textureGryffRO,soundTopRO,True);
-        break;
+			SetRollover(HousepointsButton,textureGryffRO,soundTopRO,True);
+			break;
         default:
       }
-    } 
-	else 
-	{
-      if ( E == DE_MouseLeave )
-      {
-        switch (C)
-        {
-          case DuelButton:
-          case ChallengesButton:
-          case MapButton:
-          case QuidditchButton:
-          case QuitButton:
-          case InputButton:
-          case SoundVideoButton:
-          case FolioButton:
-          case CreditsButton:
-          case HousepointsButton:
-          ClearRollover();
-          break;
-          default:
-        }
-      }
-    }
+  } 
+  else if ( E == DE_MouseLeave )
+  {
+       switch (C)
+       {
+         case DuelButton:
+         case ChallengesButton:
+         case MapButton:
+         case QuidditchButton:
+         case QuitButton:
+         case InputButton:
+         case SoundVideoButton:
+         case FolioButton:
+         case CreditsButton:
+         case HousepointsButton:
+			 ClearRollover();
+			 break;
+         default:
+       }
   }
   Super.Notify(C,E);
 }

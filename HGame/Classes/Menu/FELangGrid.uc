@@ -35,11 +35,11 @@ function PaintColumn (Canvas C, UWindowGridColumn Column, float MouseX, float Mo
     BottomMargin = LookAndFeel.Size_ScrollbarWidth = } else {;
     BottomMargin = 0;
   }
- */
+*/
  
   if ( bShowHorizSB )
   {
-    BottomMargin = LookAndFeel.Size_ScrollbarWidth; 
+	 BottomMargin = LookAndFeel.Size_ScrollbarWidth; 
   }
   else 
   {
@@ -48,8 +48,8 @@ function PaintColumn (Canvas C, UWindowGridColumn Column, float MouseX, float Mo
  
   TopMargin = LookAndFeel.ColumnHeadingHeight;
   Count = browser.MasterCount;
-  C.Font = Root.Fonts[0];
-  Visible = (WinHeight - TopMargin + BottomMargin) / RowHeight;
+  C.Font = Root.Fonts[F_Normal];
+  Visible = int((WinHeight - (TopMargin + BottomMargin)) / RowHeight);
   VertSB.SetRange(0.0,Count + 1,Visible);
   TopRow = VertSB.Pos;
   Skipped = 0;

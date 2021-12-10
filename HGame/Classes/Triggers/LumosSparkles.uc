@@ -84,58 +84,30 @@ function TurnOnEdgeEffects()
       fxEdgeSparkles[I].SourceHeight.Base = fEdgeSparklesThickness;
       // ++I;
       // goto JL0090;
-    }
-	//these are not bytes... -AdamJD
-	/*
-    fxEdgeSparkles[0].SetLocation(Location + Vec(fBoxWidth / byte(2),0.0,fBoxHeight / byte(2)));
-    fxEdgeSparkles[0].SourceWidth.Base = fBoxDepth;
-    fxEdgeSparkles[1].SetLocation(Location + Vec(fBoxWidth / byte(2),0.0, -fBoxHeight / byte(2)));
-    fxEdgeSparkles[1].SourceWidth.Base = fBoxDepth;
-    fxEdgeSparkles[2].SetLocation(Location + Vec( -fBoxWidth / byte(2),0.0,fBoxHeight / byte(2)));
-    fxEdgeSparkles[2].SourceWidth.Base = fBoxDepth;
-    fxEdgeSparkles[3].SetLocation(Location + Vec( -fBoxWidth / byte(2),0.0, -fBoxHeight / byte(2)));
-    fxEdgeSparkles[3].SourceWidth.Base = fBoxDepth;
-    fxEdgeSparkles[4].SetLocation(Location + Vec(0.0,fBoxDepth / byte(2),fBoxHeight / byte(2)));
-    fxEdgeSparkles[4].SourceDepth.Base = fBoxWidth;
-    fxEdgeSparkles[5].SetLocation(Location + Vec(0.0,fBoxDepth / byte(2), -fBoxHeight / byte(2)));
-    fxEdgeSparkles[5].SourceDepth.Base = fBoxWidth;
-    fxEdgeSparkles[6].SetLocation(Location + Vec(0.0, -fBoxDepth / byte(2),fBoxHeight / byte(2)));
-    fxEdgeSparkles[6].SourceDepth.Base = fBoxWidth;
-    fxEdgeSparkles[7].SetLocation(Location + Vec(0.0, -fBoxDepth / byte(2), -fBoxHeight / byte(2)));
-    fxEdgeSparkles[7].SourceDepth.Base = fBoxWidth;
-    fxEdgeSparkles[8].SetLocation(Location + Vec(fBoxWidth / byte(2),fBoxDepth / byte(2),0.0));
-    fxEdgeSparkles[8].SourceHeight.Base = fBoxHeight;
-    fxEdgeSparkles[9].SetLocation(Location + Vec( -fBoxWidth / byte(2),fBoxDepth / byte(2),0.0));
-    fxEdgeSparkles[9].SourceHeight.Base = fBoxHeight;
-    fxEdgeSparkles[10].SetLocation(Location + Vec(fBoxWidth / byte(2), -fBoxDepth / byte(2),0.0));
-    fxEdgeSparkles[10].SourceHeight.Base = fBoxHeight;
-    fxEdgeSparkles[11].SetLocation(Location + Vec( -fBoxWidth / byte(2), -fBoxDepth / byte(2),0.0));
-    fxEdgeSparkles[11].SourceHeight.Base = fBoxHeight;
-	*/
-	
+    }	
 	fxEdgeSparkles[0].SetLocation(Location + Vec(fBoxWidth / 2,0.0,fBoxHeight / 2));
     fxEdgeSparkles[0].SourceWidth.Base = fBoxDepth;
-    fxEdgeSparkles[1].SetLocation(Location + Vec(fBoxWidth / 2,0.0, -fBoxHeight / 2));
+    fxEdgeSparkles[1].SetLocation(Location + Vec(fBoxWidth / 2,0.0, -(fBoxHeight / 2)));
     fxEdgeSparkles[1].SourceWidth.Base = fBoxDepth;
-    fxEdgeSparkles[2].SetLocation(Location + Vec( -fBoxWidth / 2,0.0,fBoxHeight / 2));
+    fxEdgeSparkles[2].SetLocation(Location + Vec( -(fBoxWidth / 2),0.0,fBoxHeight / 2));
     fxEdgeSparkles[2].SourceWidth.Base = fBoxDepth;
-    fxEdgeSparkles[3].SetLocation(Location + Vec( -fBoxWidth / 2,0.0, -fBoxHeight / 2));
+    fxEdgeSparkles[3].SetLocation(Location + Vec( -(fBoxWidth / 2),0.0, -(fBoxHeight / 2)));
     fxEdgeSparkles[3].SourceWidth.Base = fBoxDepth;
     fxEdgeSparkles[4].SetLocation(Location + Vec(0.0,fBoxDepth / 2,fBoxHeight / 2));
     fxEdgeSparkles[4].SourceDepth.Base = fBoxWidth;
-    fxEdgeSparkles[5].SetLocation(Location + Vec(0.0,fBoxDepth / 2, -fBoxHeight / 2));
+    fxEdgeSparkles[5].SetLocation(Location + Vec(0.0,fBoxDepth / 2, -(fBoxHeight / 2)));
     fxEdgeSparkles[5].SourceDepth.Base = fBoxWidth;
-    fxEdgeSparkles[6].SetLocation(Location + Vec(0.0, -fBoxDepth / 2,fBoxHeight / 2));
+    fxEdgeSparkles[6].SetLocation(Location + Vec(0.0, -(fBoxDepth / 2),fBoxHeight / 2));
     fxEdgeSparkles[6].SourceDepth.Base = fBoxWidth;
-    fxEdgeSparkles[7].SetLocation(Location + Vec(0.0, -fBoxDepth / 2, -fBoxHeight / 2));
+    fxEdgeSparkles[7].SetLocation(Location + Vec(0.0, -(fBoxDepth / 2), -(fBoxHeight / 2)));
     fxEdgeSparkles[7].SourceDepth.Base = fBoxWidth;
     fxEdgeSparkles[8].SetLocation(Location + Vec(fBoxWidth / 2,fBoxDepth / 2,0.0));
     fxEdgeSparkles[8].SourceHeight.Base = fBoxHeight;
-    fxEdgeSparkles[9].SetLocation(Location + Vec( -fBoxWidth / 2,fBoxDepth / 2,0.0));
+    fxEdgeSparkles[9].SetLocation(Location + Vec( -(fBoxWidth / 2),fBoxDepth / 2,0.0));
     fxEdgeSparkles[9].SourceHeight.Base = fBoxHeight;
-    fxEdgeSparkles[10].SetLocation(Location + Vec(fBoxWidth / 2, -fBoxDepth / 2,0.0));
+    fxEdgeSparkles[10].SetLocation(Location + Vec(fBoxWidth / 2, -(fBoxDepth / 2),0.0));
     fxEdgeSparkles[10].SourceHeight.Base = fBoxHeight;
-    fxEdgeSparkles[11].SetLocation(Location + Vec( -fBoxWidth / 2, -fBoxDepth / 2,0.0));
+    fxEdgeSparkles[11].SetLocation(Location + Vec( -(fBoxWidth / 2), -(fBoxDepth / 2),0.0));
     fxEdgeSparkles[11].SourceHeight.Base = fBoxHeight;
   }
   PlaySound(Sound'Lumos_glow_loop',SLOT_Interact,0.5,True,,,,True);
@@ -172,7 +144,7 @@ function UpdateSparkles()
   {
     TurnOnAreaEffects();
     fxAreaSparkles.ParticlesPerSec.Base = fArea * fAreaSparklesPerSquareGameUnit;
-    fxAreaSparkles.ParticlesPerSec.Base -= fDistanceToLumosSource * 0.015;
+    fxAreaSparkles.ParticlesPerSec.Base -= (fDistanceToLumosSource * 0.015);
     if ( fxAreaSparkles.ParticlesPerSec.Base < 0.025 )
     {
       fxAreaSparkles.ParticlesPerSec.Base = 0.025;
@@ -195,8 +167,6 @@ auto state StateLumosOff
   {
     GotoState('StateWaitingToTurnOn');
   }
-  
-  begin:
 }
 
 state StateWaitingToTurnOn
@@ -214,8 +184,6 @@ state StateWaitingToTurnOn
   {
     GotoState('StateLumosOff');
   }
-  
-  begin:
 }
 
 state StateLumosOn
@@ -229,8 +197,6 @@ state StateLumosOn
   {
     GotoState('StateLumosOff');
   }
-  
-  begin:
 }
 
 defaultproperties

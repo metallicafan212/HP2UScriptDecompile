@@ -23,31 +23,32 @@ function int GetMaxEjectedObjects()
 function SetupRandomBeans()
 {
   //local int iBean;
+  local int iBeanObject;
 
   // iBean = 0;
   // if ( iBean < iNumberOfBeans )
-  for(iBean = 0; iBean < iNumberOfBeans; iBean++)
+  for(iBeanObject = 0; iBeanObject < iNumberOfBeans; iBeanObject++)
   {
-    if ( Rand(100) < (30 - PlayerHarry.GetHealth() * 30) && iBean == 0 )
+    if ( Rand(100) < (30 - (PlayerHarry.GetHealth() * 30)) && iBeanObject == 0 )
     {
-      EjectedObjects[iBean] = Class'ChocolateFrog';
+      EjectedObjects[iBeanObject] = Class'ChocolateFrog';
     } else {
       switch (Rand(5))
       {
         case 0:
-        EjectedObjects[iBean] = Class'BlueJellyBean';
+        EjectedObjects[iBeanObject] = Class'BlueJellyBean';
         break;
         case 1:
-        EjectedObjects[iBean] = Class'GreenJellyBean';
+        EjectedObjects[iBeanObject] = Class'GreenJellyBean';
         break;
         case 2:
-        EjectedObjects[iBean] = Class'SpottedJellyBean';
+        EjectedObjects[iBeanObject] = Class'SpottedJellyBean';
         break;
         case 3:
-        EjectedObjects[iBean] = Class'GreenPurpleCheckerBean';
+        EjectedObjects[iBeanObject] = Class'GreenPurpleCheckerBean';
         break;
         case 4:
-        EjectedObjects[iBean] = Class'RedBlackStripeBean';
+        EjectedObjects[iBeanObject] = Class'RedBlackStripeBean';
         break;
         default:
       }
@@ -111,7 +112,7 @@ state turnover
     local bool bPlayWCardSound;
   
     Vel = ObjectStartVelocity[iBean];
-    Vel.X +=  -16 + Rand(96);
+    Vel.X += (-16 + Rand(96));
     if ( Vel.X < 0 )
     {
       Vel.X = 0.0;
@@ -267,7 +268,7 @@ defaultproperties
     // eVulnerableToSpell=1
 	eVulnerableToSpell=SPELL_Alohomora
 
-    CentreOffset=(X=0.00,Y=0.00,Z=20.00),
+    CentreOffset=(X=0.00,Y=0.00,Z=20.00)
 
     Mesh=SkeletalMesh'HPModels.skbronzechestMesh'
 

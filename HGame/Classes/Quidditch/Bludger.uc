@@ -32,7 +32,7 @@ function Touch (Actor Other)
   Subject = Pawn(Other);
   if ( (Subject != None) && (Subject != Emitter) )
   {
-    if ( Level.TimeSeconds - fTimeOfLastDamage >= 1.0 )
+    if ( Level.TimeSeconds - fTimeOfLastDamage >= fMinTimeBetweenDamages )
     {
       if ( bMine )
       {
@@ -44,7 +44,7 @@ function Touch (Actor Other)
           FinishMine();
         }
       } else {
-        PlaySound(HitSounds[Rand(2)],SLOT_Interact,,,2000.0);
+        PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,,,2000.0);
         Subject.TakeDamage(Damage,self,Location,100 * Normal(Velocity),'Bludgered');
         fTimeOfLastDamage = Level.TimeSeconds;
         Super.Touch(Other);

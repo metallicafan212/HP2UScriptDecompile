@@ -2,8 +2,6 @@
 // spellWeb.
 //================================================================================
 
-//this is an old leftover file which isn't used anywhere -AdamJD
-
 class spellWeb extends baseSpell;
 
 var(VisualFX) ParticleFX fxHeadParticleEffect;
@@ -71,7 +69,7 @@ function Vector GetTarget()
 
   AroundHarry = rotator(Location - PlayerHarry.Location);
   AroundHarry.Yaw = Rand(65534) + 1;
-  vTarget = PlayerHarry.Location + vector(AroundHarry) * PlayerHarry.CollisionRadius;
+  vTarget = PlayerHarry.Location + (vector(AroundHarry) * PlayerHarry.CollisionRadius);
   return vTarget;
 }
 
@@ -98,7 +96,7 @@ function float SetAngle()
 
   AroundHarry = rotator(Location - PlayerHarry.Location);
   AroundHarry.Yaw = Rand(65534) + 1;
-  vTarget = PlayerHarry.Location + vector(AroundHarry) * PlayerHarry.CollisionRadius;
+  vTarget = PlayerHarry.Location + (vector(AroundHarry) * PlayerHarry.CollisionRadius);
   Distance = VSize(Location - vTarget);
   GlobalSpeed = 300.0;
   if ( Distance > 550 )
@@ -113,7 +111,7 @@ function float SetAngle()
     }
   //}
   fSpeed = GlobalSpeed;
-  angle = Sin(Distance * Gravity / fSpeed * fSpeed) / 2;
+  angle = Sin(Distance * Gravity / (fSpeed * fSpeed)) / 2;
   return angle;
 }
 
@@ -179,7 +177,6 @@ state StateFlying
       fxHeadParticleEffect.SetLocation(Location);
     }
   }
-  begin:
 }
 
 state stateBouncing
@@ -187,7 +184,7 @@ state stateBouncing
   event Tick (float fTimeDelta)
   {
     Super.Tick(fTimeDelta);
-    Velocity.Z +=  -fGravityEffect * fTimeDelta;
+    Velocity.Z +=  (-fGravityEffect) * fTimeDelta;
     if ( fxFlyParticleEffect != None )
     {
       fxFlyParticleEffect.SetLocation(Location);

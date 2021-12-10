@@ -137,7 +137,7 @@ state GameSnitchLesson extends GamePlay
       {
         bSaid = CommentMgr.SayComment(WC_CatchSnitch);
       }
-      if (  !bSaid && (fProgressPercent > 97) &&  !bCanReachForSnitch )
+      if (  !bSaid && fProgressPercent > 97 &&  !bCanReachForSnitch ) 
       {
         bSaid = CommentMgr.SayComment(WC_TooOffCenter);
       }
@@ -205,7 +205,7 @@ state GameSnitchLesson extends GamePlay
     if ( fTimeLeft > 0.0 )
     {
       SetTimer(fTimeLeft,False);
-    } else {
+    } else { 
       if (  !bBlewEndWhistle )
       {
         Wood.PlaySound(EndWhistle,SLOT_Interact,1.0,,20000.0);
@@ -283,7 +283,7 @@ state GameMockGame extends GamePlay
       {
         bSaid = CommentMgr.SayComment(WC_CatchSnitch);
       }
-      if (  !bSaid && (fProgressPercent > 97) &&  !bCanReachForSnitch && SeekerIsOutOfWay() )
+      if (  !bSaid && fProgressPercent > 97 &&  !bCanReachForSnitch && SeekerIsOutOfWay() ) 
       {
         bSaid = CommentMgr.SayComment(WC_TooOffCenter);
       }
@@ -329,7 +329,7 @@ state GameMockGame extends GamePlay
       }
       TriggerEventDelayed(FMax(5.0,CommentMgr.TimeLeftUntilSafeToSayAComment(True)),MatchEvents.End,'GameCutScene');
     } else {
-      Trigger(Other,EventInstigator);
+      Super.Trigger(Other,EventInstigator);
     }
   }
   
@@ -382,7 +382,7 @@ state GameMockGame extends GamePlay
     if ( fTimeLeft > 0.0 )
     {
       SetTimer(fTimeLeft,False);
-    } else {
+    } else { 
       if (  !bBlewEndWhistle )
       {
         Wood.PlaySound(EndWhistle,SLOT_Interact,1.0,,20000.0);

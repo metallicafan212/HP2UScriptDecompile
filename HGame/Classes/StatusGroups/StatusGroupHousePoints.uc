@@ -8,7 +8,7 @@ const strCUT_NAME= "Housepoints";
 
 event PostBeginPlay()
 {
-	CutName = "Housepoints";
+	CutName = strCUT_NAME;
 }
 
 function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
@@ -21,7 +21,7 @@ function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, 
 	local float fScaleFactor;
 
 	fScaleFactor 	= GetScaleFactor(nCanvasSizeX);
-	nOutX 			= nCanvasSizeX - fScaleFactor * nIconWidth - fScaleFactor * 4;
+	nOutX 			= nCanvasSizeX - (fScaleFactor * nIconWidth) - (fScaleFactor * 4);
 	nOutY 			= fScaleFactor * 4;
 }
 
@@ -34,7 +34,7 @@ function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int
 	fScaleFactor 	= GetScaleFactor(Canvas.SizeX);
 	GetGroupFinalXY(bMenuMode, Canvas, nIconWidth, nIconHeight, nFinalX, nFinalY);
 	nOutX 			= nFinalX;
-	nOutY 			=  -nIconHeight * fScaleFactor;
+	nOutY 			=  -(nIconHeight * fScaleFactor);
 }
 
 function TransitionUpdateHousepoints (string strTransitionLetter)

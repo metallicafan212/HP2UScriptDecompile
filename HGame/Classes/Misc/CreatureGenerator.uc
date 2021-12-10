@@ -55,8 +55,7 @@ function PostBeginPlay()
     }
   }
   HowManyBaseCreatures = 0;
-
-  for(I = 0; I < 16; I++)
+  for(I = 0; I < NUM_BASE_CHARS; I++)
   {
     if ( BaseCreatureToSpawn[I] == None )
     {
@@ -221,7 +220,7 @@ function GenerateCreature()
       } 
     }
   }
-  A = Spawn(BaseCreatureToSpawn[I],,,FirstPP.Location,rotator(FirstPP.NextPatrolPoint.Location - FirstPP.Location));
+  A = Spawn(BaseCreatureToSpawn[I],,,[SpawnLocation]FirstPP.Location,[SpawnRotation]rotator(FirstPP.NextPatrolPoint.Location - FirstPP.Location));
   A.DesiredRotation = A.Rotation;
   if ( A == None )
   {

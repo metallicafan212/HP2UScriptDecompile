@@ -48,8 +48,6 @@ auto state stateIdle
   {
     harry(Owner).PlayIdle();
   }
-  
-  begin:
 }
 
 state statePickupItem
@@ -120,7 +118,7 @@ state stateDuelingCast
 begin:
   harry(Owner).Cast();
   harry(Owner).HarryAnimType =  AT_Combine;
-  PlayAnim('duel_cast',,0.31);
+  PlayAnim('duel_cast',,[TweenTime]0.31);
   FinishAnim();
   if ( harry(Owner).bAltFire == 0 )
   {
@@ -143,7 +141,7 @@ begin:
   }
   harry(Owner).Cast();
   harry(Owner).HarryAnimType =  AT_Combine;
-  PlayAnim('cast_Expelliarmus',,0.31);
+  PlayAnim('cast_Expelliarmus',,[TweenTime]0.31);
   FinishAnim();
   harry(Owner).bReboundingSpells = False;
   if ( harry(Owner).bAltFire == 0 )
@@ -279,7 +277,7 @@ state stateDrinkWiggenwell
   propTemp = HProp(FancySpawn(Class'WWellGreenBottle',harry(Owner),,,harry(Owner).Rotation));
   harry(Owner).ActorToCarry = propTemp;
   harry(Owner).AttachCarryActor('bip01 L Forearm');
-  PlayAnim('DrinkPotion',,0.41);
+  PlayAnim('DrinkPotion',,[TweenTime]0.41);
   Sleep(0.5);
   switch (Rand(3))
   {
@@ -397,7 +395,7 @@ state stateReactRictusempra
   }
   
  begin:
-  PlayAnim('react_rictusempra',,0.31);
+  PlayAnim('react_rictusempra',,[TweenTime]0.31);
   FinishAnim();
   harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
@@ -423,7 +421,7 @@ state stateReactMimbleWimble
   }
   
  begin:
-  PlayAnim('mimblewimble',,0.31);
+  PlayAnim('mimblewimble',,[TweenTime]0.31);
   FinishAnim();
   harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )

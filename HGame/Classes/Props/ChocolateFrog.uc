@@ -28,19 +28,19 @@ function Sound GetRibbitOrHopsound()
 function JumpToNewLoc (Vector V, optional bool bJumpOutOfWay)
 {
   //local float JumpTime;
-  local float _JumpTime;
+  local float JumpFrogTime;
 
-  _JumpTime = fJumpTime;
+  JumpFrogTime = fJumpTime;
   if ( bJumpOutOfWay )
   {
     DesiredRotation.Yaw = rotator(V - Location).Yaw;
     PlayAnim('hop2',1.0,0.05);
-    _JumpTime *= 0.5;
+    JumpFrogTime *= 0.5;
     JumpOutOfWayCount++;
   }
   // SetPhysics(2);
   SetPhysics(PHYS_Falling);
-  Velocity = ComputeTrajectoryByTime(Location,V,_JumpTime);
+  Velocity = ComputeTrajectoryByTime(Location,V,JumpFrogTime);
   GotoState('stateJump');
 }
 

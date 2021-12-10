@@ -21,9 +21,9 @@ function float EaseTo (float t)
   {
     return 0.0;
   } else //{
-    if ( t < 1 - 0.29289323 )
+    if ( t < 1 - EaseFromX )
     {
-      return 1.1715734 * t + 0;
+      return EaseFromM * t + 0;
     } else //{
       if ( t < 1.0 )
       {

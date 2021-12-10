@@ -28,12 +28,12 @@ function Created()
   Super.Created();
   bTransient = False;
   ComboBoxListTypes = UWindowComboControl(CreateControl(Class'UWindowComboControl',0.0,0.0,128.0,16.0));
-  ComboBoxListTypes.SetFont(0);
+  ComboBoxListTypes.SetFont(F_Normal);
   ComboBoxListTypes.SetEditable(False);
   ComboBoxListTypes.SetButtons(False);
   ComboBoxListTypes.SetHelpText("ComboBoxListTypes help text");
   ComboBoxGameStates = UWindowComboControl(CreateControl(Class'UWindowComboControl',128.0,0.0,94.0,16.0));
-  ComboBoxGameStates.SetFont(0);
+  ComboBoxGameStates.SetFont(F_Normal);
   ComboBoxGameStates.SetEditable(False);
   ComboBoxGameStates.SetButtons(False);
   ComboBoxGameStates.SetHelpText("ComboBoxGameStates help text");

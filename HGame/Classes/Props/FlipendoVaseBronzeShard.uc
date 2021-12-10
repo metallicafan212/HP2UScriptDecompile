@@ -40,6 +40,7 @@ auto state Fall
   initfall();
   DrawScale = RandRange(1.0,4.0);
   tickOn = True;
+ loop:
   Sleep(RandRange(1.0,2.0));
   tickOn = False;
   Destroy();

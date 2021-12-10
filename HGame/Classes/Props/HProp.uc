@@ -158,7 +158,6 @@ function TickPickupOrDropOff (float Delta)
   {
     // case 2:
 	case FT_HudPosition:
-		//KW left this empty? -AdamJD
     // case 3:
 	case FT_DropOffInWorld:
 		fCurrFlyTime -= Delta;
@@ -184,6 +183,8 @@ function TickPickupOrDropOff (float Delta)
 
 state DropOffProp
 {	
+ignores Touch;
+
   event Tick (float Delta)
   {
     TickPickupOrDropOff(Delta);
@@ -222,6 +223,8 @@ state DropOffProp
 
 state PickupProp
 {  
+ignores Touch;
+
   event Tick (float Delta)
   {
     TickPickupOrDropOff(Delta);
@@ -270,7 +273,7 @@ state PickupProp
     if ( PickupFlyTo == FT_Camera )
     {
       FaceCamera();
-      fCurrCameraZoomDist = 160.0;
+      fCurrCameraZoomDist = START_CAM_ZOOM_DIST;
       bReadyForFlyEffect = True;
       // if ( fCurrCameraZoomDist > 0 )
 	  while ( fCurrCameraZoomDist > 0 )
@@ -305,6 +308,7 @@ state BounceIntoPlace
     Super.Tick(DeltaTime);
     NewRotation = Rotation;
     NewRotation.Yaw += 30000 * DeltaTime;
+	NewRotation.Yaw = NewRotation.Yaw & 65535;
     SetRotation(NewRotation);
     if ( bBounceIntoPlaceTiming )
     {

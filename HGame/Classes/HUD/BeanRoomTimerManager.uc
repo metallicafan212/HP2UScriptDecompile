@@ -155,8 +155,6 @@ function float GetTimerDuration()
                                                           } else {
                                                             fDuration = 10.0;
                                                           }
-														 
-			//WTF UTPT... -AdamJD
                                                         // }
                                                       // }
                                                     // }

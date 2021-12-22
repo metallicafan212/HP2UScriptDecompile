@@ -162,14 +162,16 @@ simulated function MouseEnter()
 	Super.MouseEnter();
 	if(ToolTipString != "") ToolTip(ToolTipString);
 	if (!bDisabled && (OverSound != None))
-		GetPlayerOwner().PlaySound(OverSound, SLOT_Interface);
+		//GetPlayerOwner().PlaySound(OverSound, SLOT_Interface);
+		GetPlayerOwner().PlaySound(OverSound, SLOT_Interface, , , 100000, , true); //this got updated between proto and retail -AdamJD;
 }
 
 simulated function Click(float X, float Y) 
 {
 	Notify(DE_Click);
 	if (!bDisabled && (DownSound != None))
-		GetPlayerOwner().PlaySound(DownSound, SLOT_None);
+		//GetPlayerOwner().PlaySound(DownSound, SLOT_None);
+		GetPlayerOwner().PlaySound(DownSound, SLOT_None, , , 100000, , true); //this got updated between proto and retail -AdamJD
 }
 
 function DoubleClick(float X, float Y) 

@@ -78,114 +78,50 @@ state ThrashingAndSmashing
         }
       }
     }
-	
-	for(I = 0; I < 3; I++)
-    {
-	/*
-      // if ( bool(PlayerHarry.Physics) == bool(2) )
-	  if ( PlayerHarry.Physics == PHYS_Falling )
-      {
-        // goto JL03D7;
-		continue;
-      }
-      if (  !ColObj[I].bBlockPlayers )
-      {
-        // goto JL03D7;
-		continue;
-      }
-      vHLoc = PlayerHarry.Location;
-      if ( VSize(vHLoc - ColObj[I].Location) > 200 )
-      {
-        // goto JL03D7;
-		continue;
-      }
-      GetAxes(ColObj[I].Rotation,vX,vY,vZ);
-      V = vX * (ColObj[I].CollisionRadius / 2);
-      D = ColObj[I].CollisionRadius / 2 + PlayerHarry.CollisionRadius;
-      if ( ((vHLoc - ColObj[I].Location + V) Dot vX) > D )
-      {
-        // goto JL03D7;
-		continue;
-      }
-      if ( ((vHLoc - ColObj[I].Location - V) Dot  -vX) > D )
-      {
-        // goto JL03D7;
-		continue;
-      }
-      V = vY * (ColObj[I].CollisionWidth / 2);
-      D = ColObj[I].CollisionWidth / 2 + PlayerHarry.CollisionRadius;
-      if ( ((vHLoc - ColObj[I].Location + V) Dot vY) > D )
-      {
-        // goto JL03D7;
-		continue;
-      }
-      if ( ((vHLoc - ColObj[I].Location - V) Dot  -vY) > D )
-      {
-        // goto JL03D7;
-		continue;
-      }
-      if (  !PlayerHarry.HarryIsDead() )
-      {
-        PlayerHarry.TakeDamage(Damage,tree,vect(0.00,0.00,0.00),vect(0.00,0.00,0.00),'None');
-        PlayerHarry.DoJump();
-        if ( ((vHLoc - ColObj[I].Location) Dot vX) > 0 )
-        {
-          PlayerHarry.Velocity = (vX + vect(0.00,0.00,1.00)) * 200;
-        } else {
-          PlayerHarry.Velocity = ( -vX + vect(0.00,0.00,1.00)) * 200;
-        }
-      }
-	  
-      // goto JL03E1;
-      // I++;
-      // goto JL00D1;
-	  break;
-    }
-	*/
 		
-		//rewritten this code because the original doesn't work -AdamJD
-		//
+	for(I = 0; I < 3; I++)
+    {	
 		if(PlayerHarry.Physics == PHYS_Falling)
 		{
 			continue;
 		}
 
-		if( !ColObj[i].bBlockPlayers )
+		if( !ColObj[I].bBlockPlayers )
 		{
 			continue;
 		}
 
 		vHLoc = PlayerHarry.Location;
 		
-		if(VSize(vHLoc - ColObj[i].Location) > 200)
+		if(VSize(vHLoc - ColObj[I].Location) > 200)
 		{
 			continue;
 		}
 
-		GetAxes( ColObj[i].Rotation, vX, vY, vZ );
+		GetAxes( ColObj[I].Rotation, vX, vY, vZ );
 		
-		v = vX * (ColObj[i].CollisionRadius / 2);
-		d = ColObj[i].CollisionRadius/2 + PlayerHarry.CollisionRadius;
+		V = vX * (ColObj[I].CollisionRadius / 2);
+		D = ColObj[I].CollisionRadius / 2 + PlayerHarry.CollisionRadius;
 		
-		if( ((vHLoc - (ColObj[i].Location + v)) dot  vX) > d )
+		if( ((vHLoc - (ColObj[I].Location + V)) Dot  vX) > D )
 		{
 			continue;
 		}
 		
-		if( ((vHLoc - (ColObj[i].Location - v)) dot -vX) > d )
+		if( ((vHLoc - (ColObj[I].Location - V)) Dot -vX) > D )
 		{
 			continue;
 		}
 		
-		v = vY * (ColObj[i].CollisionWidth / 2);
-		d = ColObj[i].CollisionWidth/2 + PlayerHarry.CollisionRadius;
+		V = vY * (ColObj[I].CollisionWidth / 2);
+		D = ColObj[I].CollisionWidth / 2 + PlayerHarry.CollisionRadius;
 		
-		if( ((vHLoc - (ColObj[i].Location + v)) dot  vY) > d )
+		if( ((vHLoc - (ColObj[I].Location + V)) Dot  vY) > D )
 		{
 			continue;
 		}
 		
-		if( ((vHLoc - (ColObj[i].Location - v)) dot -vY) > d )
+		if( ((vHLoc - (ColObj[I].Location - V)) Dot -vY) > D )
 		{
 			continue;
 		}
@@ -195,13 +131,13 @@ state ThrashingAndSmashing
 			PlayerHarry.TakeDamage( Damage, tree, vect(0,0,0), Vect(0,0,0), '');
 			PlayerHarry.DoJump();
 			
-			if( ((vHLoc - ColObj[i].Location) dot vX) > 0 )
+			if( ((vHLoc - ColObj[I].Location) Dot vX) > 0 )
 			{
-				PlayerHarry.velocity = ( vX + vect(0,0,1)) * 200;
+				PlayerHarry.Velocity = ( vX + vect(0,0,1)) * 200;
 			}
 			else
 			{
-				PlayerHarry.velocity = (-vX + vect(0,0,1)) * 200;
+				PlayerHarry.Velocity = (-vX + vect(0,0,1)) * 200;
 			}
 		}
 
@@ -216,23 +152,23 @@ state ThrashingAndSmashing
   } else {
     BackGroundRootSound = Sound'willow_base_woodmovement';
   }
-  ColObj[1].PlaySound(BackGroundRootSound,SLOT_Misc,RandRange(0.81,1.0) * 0.5,,,RandRange(0.62,0.81));
-  ColObj[1].PlaySound(Sound'pig_squeal1',SLOT_Pain,RandRange(0.41,0.41),,,RandRange(0.23,0.25999999));
-  switch (Rand(3))
-  {
-    case 0:
-    ColObj[1].PlaySound(Sound'Root_up_creak1',SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
-    break;
-    case 1:
-    ColObj[1].PlaySound(Sound'Root_up_creak2',SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
-    break;
-    case 2:
-    ColObj[1].PlaySound(Sound'Root_up_creak3',SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
-    break;
-    default:
-  }
   do
   {
+    ColObj[1].PlaySound(BackGroundRootSound,SLOT_Misc,RandRange(0.81,1.0) * 0.5,,,RandRange(0.62,0.81));
+    ColObj[1].PlaySound(Sound'pig_squeal1',SLOT_Pain,RandRange(0.41,0.41),,,RandRange(0.23,0.25999999));
+    switch (Rand(3))
+    {
+      case 0:
+      ColObj[1].PlaySound(Sound'Root_up_creak1',SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
+      break;
+      case 1:
+      ColObj[1].PlaySound(Sound'Root_up_creak2',SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
+      break;
+      case 2:
+      ColObj[1].PlaySound(Sound'Root_up_creak3',SLOT_None,RandRange(0.81,1.0) * 0.5,,,RandRange(0.81,1.25));
+      break;
+      default:
+    }
     PlayAnim(RootAnimNameUp,tree.GetUpAnimRate(WhichRoot,TimingStage),0.1);
     FinishAnim();
     PlayAnim(RootAnimNameLoop,1.0,0.1);
@@ -256,7 +192,7 @@ state ThrashingAndSmashing
       TimingStage = 0;
     }
   }
-  until((VSize2D(PlayerHarry.Location - ColObj[1].Location) > 500) || bGoDisabled)
+  until((VSize2D(PlayerHarry.Location - ColObj[1].Location) > 500) || bGoDisabled);
   GotoState('stateIdle');
 }
 
@@ -269,32 +205,30 @@ function DoHitGroundEffects()
   local int NumDustParts;
 
   GetAxes(ColObj[0].Rotation,vX,vY,vZ);
-  if ( (PlayerHarry.Location - ColObj[0].Location) Dot vX < 0 )
+  if ( ((PlayerHarry.Location - ColObj[0].Location) Dot vX) < 0 )
   {
     vX =  -vX;
   }
   vX *= ColObj[0].CollisionRadius / 2;
   vY *= ColObj[0].CollisionWidth;
   vZ *=  -ColObj[0].CollisionHeight;
-  NumDustParts = RandRange(3.0,4.0);
   
+  NumDustParts = RandRange(3.0,4.0);
   for(I = 0; I < NumDustParts; I++)
   {
-    Spawn(PickRandomDustParticle(),None,,ColObj[0].Location + vX + vY * RandRange(-1.0,1.0) + vZ);
+    Spawn(PickRandomDustParticle(),None,,[SpawnLocation]ColObj[0].Location + vX + vY * RandRange(-1.0,1.0) + vZ);
   }
   
   NumDustParts = RandRange(2.0,4.0);
-
   for(I = 0; I < NumDustParts; I++)
   {
-    Spawn(PickRandomDustParticle(),None,,ColObj[1].Location + vX + vY * RandRange(-1.0,1.0) + vZ);
+    Spawn(PickRandomDustParticle(),None,,[SpawnLocation]ColObj[1].Location + vX + vY * RandRange(-1.0,1.0) + vZ);
   }
   
   NumDustParts = RandRange(1.0,2.0);
-
   for(I = 0; I < NumDustParts; I++)
   {
-    Spawn(PickRandomDustParticle(),None,,ColObj[2].Location + vX + vY * RandRange(-1.0,1.0) + vZ);
+    Spawn(PickRandomDustParticle(),None,,[SpawnLocation]ColObj[2].Location + vX + vY * RandRange(-1.0,1.0) + vZ);
   }
   
   switch (Rand(3))

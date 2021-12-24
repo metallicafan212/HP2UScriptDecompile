@@ -5,7 +5,7 @@
 class FEDuelPage extends baseFEPage;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\Icons\FEComboIdleTexture.PNG	GROUP=Icons	Name=FEComboIdleTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboIdleTexture.PNG	GROUP=Icons	Name=FEComboIdleTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 var HPMessageBox ConfirmReplay;
 var harry PlayerHarry;

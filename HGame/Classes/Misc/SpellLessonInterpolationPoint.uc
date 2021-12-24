@@ -29,18 +29,18 @@ var Texture RightTextures[3];
 
 function PostBeginPlay()
 {
-  UpTextures[0] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_up_idle",Class'Texture'));
-  UpTextures[1] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_up_hit",Class'Texture'));
-  UpTextures[2] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_up_miss",Class'Texture'));
-  DownTextures[0] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_dn_idle",Class'Texture'));
-  DownTextures[1] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_dn_hit",Class'Texture'));
-  DownTextures[2] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_dn_miss",Class'Texture'));
-  LeftTextures[0] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_lt_idle",Class'Texture'));
-  LeftTextures[1] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_lt_hit",Class'Texture'));
-  LeftTextures[2] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_lt_miss",Class'Texture'));
-  RightTextures[0] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_rt_idle",Class'Texture'));
-  RightTextures[1] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_rt_hit",Class'Texture'));
-  RightTextures[2] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_rt_miss",Class'Texture'));
+  UpTextures[nIDX_IDLE] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_up_idle",Class'Texture'));
+  UpTextures[nIDX_HIT] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_up_hit",Class'Texture'));
+  UpTextures[nIDX_MISS] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_up_miss",Class'Texture'));
+  DownTextures[nIDX_IDLE] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_dn_idle",Class'Texture'));
+  DownTextures[nIDX_HIT] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_dn_hit",Class'Texture'));
+  DownTextures[nIDX_MISS] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_dn_miss",Class'Texture'));
+  LeftTextures[nIDX_IDLE] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_lt_idle",Class'Texture'));
+  LeftTextures[nIDX_HIT] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_lt_hit",Class'Texture'));
+  LeftTextures[nIDX_MISS] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_lt_miss",Class'Texture'));
+  RightTextures[nIDX_IDLE] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_rt_idle",Class'Texture'));
+  RightTextures[nIDX_HIT] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_rt_hit",Class'Texture'));
+  RightTextures[nIDX_MISS] = Texture(DynamicLoadObject("SpellShapes.Shapes.spar_rt_miss",Class'Texture'));
   // SetArrowTexture(0,0);
   SetArrowTexture(nIDX_IDLE, 0);
 }
@@ -114,7 +114,7 @@ function bool IsInLevel (int nLevel)
 
 function bool VerifyLevel (int nLevel)
 {
-  if ( (nLevel >= 0) && (nLevel < 3) )
+  if ( (nLevel >= 0) && (nLevel < ArrayCount(DirectionArrow)) )
   {
     return True;
   } else {
@@ -184,7 +184,7 @@ function SetArrowTexture (int nIdx, int nLevel)
   {
     return;
   }
-  if ( (nIdx < 0) || (nIdx >= 3) )
+  if ( (nIdx < 0) || (nIdx >= ArrayCount(UpTextures)) )
   {
     Log("ERROR: Invalid SpellLessonInterpolationPoint texture index " $ string(nIdx));
     return;
@@ -218,7 +218,7 @@ function Texture GetArrowTexture (int nIdx, int nLevel)
   {
     return None;
   }
-  if ( (nIdx < 0) || (nIdx >= 3) )
+  if ( (nIdx < 0) || (nIdx >= ArrayCount(UpTextures)) )
   {
     Log("ERROR: Invalid SpellLessonInterpolationPoint texture index " $ string(nIdx));
     return None;

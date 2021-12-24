@@ -232,7 +232,7 @@ function FindNewMoveToLoc()
         // goto JL00C0;
       }
     }
-    if ( (RailEnd2.Location - RailEnd1.Location) Dot (vMoveTo - Location) < 0 )
+    if ( ((RailEnd2.Location - RailEnd1.Location) Dot (vMoveTo - Location)) < 0 )
     {
       bMovingLeft = True;
     } else {
@@ -264,7 +264,7 @@ state PatrolForHarry
   {
     if ( harry(Other) != None )
     {
-      harry(Other).vAdditionalAccel = (RailEnd2.Location - RailEnd1.Location) Cross vect(0.00,0.00,1.00) * 400;
+      harry(Other).vAdditionalAccel = ((RailEnd2.Location - RailEnd1.Location) Cross vect(0.00,0.00,1.00)) * 400;
     }
   }
   
@@ -356,6 +356,7 @@ begin:
     bHaveThrownYet = True;
     TriggerEvent(TriggerToSendOnFirstThrow,self,self);
   }
+wait:
   DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
   FinishAnim();
   DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
@@ -421,10 +422,12 @@ state stateTaunt1
   
   function OnEvent (name EventName)
   {
-    if ( EventName == 'ActionDone' ) //goto JL000F;
+    if ( EventName == 'ActionDone' ) 
 	{
-		GotoState('stateTaunt2');
+	  // goto JL000F;
+	  //KW left this empty? -AdamJD
 	}
+	GotoState('stateTaunt2');
   }
   
 }
@@ -567,12 +570,12 @@ state stateHit3
       if ( PlayerHarry.Difficulty == DifficultyMedium )
       {
         MoveSpeed *= 1.29999995;
-      } else {
+      } else //{
         if ( PlayerHarry.Difficulty == DifficultyHard )
         {
           MoveSpeed *= 1.79999995;
         }
-      }
+      //}
       PlayRunAnim();
       GotoState('PatrolForHarry');
     }
@@ -742,6 +745,4 @@ defaultproperties
 	bProjTarget=True
 
     RotationRate=(Pitch=80000,Yaw=80000,Roll=80000)
-	
-	eVulnerableToSpell=SPELL_Skurge //UTPT forgot to add this which caused the Peeves cutscene to softlock... -AdamJD
 }

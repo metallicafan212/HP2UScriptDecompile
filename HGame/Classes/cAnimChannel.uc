@@ -20,8 +20,6 @@ auto state stateIdle
   {
     Duellist(Owner).PlayIdle();
   }
-  
-  begin:
 }
 
 function DoCast()
@@ -54,7 +52,7 @@ state stateCast
   }
   
  begin:
-  PlayAnim('Cast',,0.31);
+  PlayAnim('Cast',,[TweenTime]0.31);
   FinishAnim();
   Duellist(Owner).DuellistAnimType =  AT_Replace;
   bCasting = False;
@@ -73,7 +71,7 @@ state stateCharging
 {
 begin:
   Duellist(Owner).DuellistAnimType =  AT_Combine;
-  LoopAnim('duel_charge',,0.31);
+  LoopAnim('duel_charge',,[TweenTime]0.31);
   GotoState('stateIdle');
 }
 
@@ -96,7 +94,7 @@ state stateDefence
   
  begin:
   Duellist(Owner).Defence();
-  PlayAnim('cast_Expelliarmus',,0.31);
+  PlayAnim('cast_Expelliarmus',,[TweenTime]0.31);
   FinishAnim();
   Duellist(Owner).DuellistAnimType =  AT_Replace;
   Duellist(Owner).bReboundingSpells = False;
@@ -116,7 +114,7 @@ state stateKnockBack
 {
 begin:
   Duellist(Owner).DuellistAnimType =  AT_Combine;
-  PlayAnim('react_backfire',,0.31);
+  PlayAnim('react_backfire',,[TweenTime]0.31);
   FinishAnim();
   Duellist(Owner).DuellistAnimType =  AT_Replace;
   GotoState('stateIdle');
@@ -159,7 +157,7 @@ state stateReactRictusempra
   
  begin:
   Duellist(Owner).StopCharging();
-  PlayAnim('react_rictusempra',,0.31);
+  PlayAnim('react_rictusempra',,[TweenTime]0.31);
   Sleep(0.1);
   FinishAnim();
   Duellist(Owner).DuellistAnimType =  AT_Replace;
@@ -193,7 +191,7 @@ state stateReactMimbleWimble
   
  begin:
   Duellist(Owner).StopCharging();
-  PlayAnim('mimblewimble',,0.31);
+  PlayAnim('mimblewimble',,[TweenTime]0.31);
   Sleep(0.1);
   FinishAnim();
   Duellist(Owner).DuellistAnimType =  AT_Replace;

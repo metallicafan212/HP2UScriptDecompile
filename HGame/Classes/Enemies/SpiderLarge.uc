@@ -183,7 +183,14 @@ state AttackHarry
 
 	if ( ReadyPosition() ==  true  && (baseHud(playerharry.myHud).bCutSceneMode == false)  )
 	{
-	  gotoState('stateBiteHarry');
+	  GotoState('stateBiteHarry');
+	}
+	
+	randomAttackSfx -= DeltaTime;
+	if ( randomAttackSfx <= 0 )
+	{
+	  randomAttackSfx = FRand() * 5 + 1;
+	  playAttackSound();
 	}
   }
   
@@ -228,7 +235,7 @@ state stateBiteHarry
     PlayerHarry.TakeDamage(fDamageAmount,Instigator,vect(0.00,0.00,0.00),vect(0.00,0.00,0.00),'largeSpider');
   }
   Velocity = Normal(Location - PlayerHarry.Location) * GroundSpeed;
-  Acceleration = Normal((Location - PlayerHarry.Location) * GroundSpeed) * 2;
+  Acceleration = Normal(Location - PlayerHarry.Location) * GroundSpeed * 2;
   PlayAnim('lungeAttackend',1.29999995);
   FinishAnim();
   Sleep(0.151);
@@ -257,14 +264,13 @@ state HitBySpell
   {
 	Global.Tick(DeltaTime);
 	
-	fStunned += DeltaTime;
-	
-	if(numSpells > 0)
-	{	
-	  if(fStunned > 5)
+	if( bStunned )
+	{
+	  fStunned -= DeltaTime;
+	  if( fStunned <= 0 )
 	  {
-		GoToState('preAttackCheck'); 
-	  }
+		GotoState('Wander'); 
+      }
 	}
   }
   

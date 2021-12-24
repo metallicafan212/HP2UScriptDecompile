@@ -18,7 +18,7 @@ function Trigger (Actor Other, Pawn EventInstigator)
 			break;
 		case 2:
 			GroundRunSpeed = FinalGroundSpeed;
-			fPatrolAnimRate *= GroundRunSpeed / GroundSpeed;
+			fPatrolAnimRate *= (GroundRunSpeed / GroundSpeed);
 			GroundSpeed = GroundRunSpeed;
 			break;
     

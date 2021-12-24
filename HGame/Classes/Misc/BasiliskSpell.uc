@@ -74,7 +74,7 @@ function RepositionSpellFXs()
 
   // Count = 0;
   // if ( Count < 12 )
-  for(Count = 0; Count < 12; Count++)
+  for(Count = 0; Count < NUM_SPELL_FX; Count++)
   {
     if ( SpellFX[Count] == None )
     {
@@ -134,7 +134,7 @@ event Destroyed()
   Super.Destroyed();
   // Count = 0;
   // if ( Count < 12 )
-  for(Count = 0; Count < 12; Count++)
+  for(Count = 0; Count < NUM_SPELL_FX; Count++)
   {
     if ( SpellFX[Count] != None )
     {

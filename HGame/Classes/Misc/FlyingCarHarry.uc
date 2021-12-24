@@ -183,7 +183,7 @@ state PlayerWalking
   
     NewRotation = Rotation;
     fPitchLimitHi = PitchLimitUp * (16384 / 90.0);
-    fPitchLimitLo = 65536.0 - (PitchLimitDown * 16384 / 90.0);
+    fPitchLimitLo = 65536.0 - (PitchLimitDown * (16384 / 90.0));
     if ( False )
     {
       if ( fMousePitch > 0.151 )
@@ -330,7 +330,7 @@ state PlayerWalking
     vCurrentTetherDistance.Z = upDistance;
     vCurrentTetherDistance += vTurbulence;
     SetLocation(guide.Location + vCurrentTetherDistance);
-    NewRotation.Pitch += pitchAmount * fPitchControl;
+    NewRotation.Pitch += (pitchAmount * fPitchControl);
     guideRotation = guide.Rotation;
     guideRotation.Yaw += CarYawVal;
     guideRotation.Yaw += fLightningYaw;
@@ -372,7 +372,7 @@ state PlayerWalking
     {
       return;
     } else {
-      fWallAvoidanceRate = 1.0 - Abs(HitNormal.Z) / 0.9851;
+      fWallAvoidanceRate = 1.0 - (Abs(HitNormal.Z) / 0.9851);
     }
     Up.X = 0.0;
     Up.Y = 0.0;
@@ -389,13 +389,13 @@ state PlayerWalking
     }
     if ( bTurnToRight )
     {
-      WallAvoidanceYaw = WallFaceRot.Yaw + 1000 - (Rotation.Yaw & 65535);
+      WallAvoidanceYaw = (WallFaceRot.Yaw + 1000 - Rotation.Yaw) & 65535;
       if ( WallAvoidanceYaw > 24576 )
       {
         WallAvoidanceYaw = 24576;
       }
     } else {
-      WallAvoidanceYaw = WallFaceRot.Yaw + 32768 - (1000 - Rotation.Yaw & 65535);
+      WallAvoidanceYaw = (WallFaceRot.Yaw + 32768 - 1000 - Rotation.Yaw) & 65535;
       if ( WallAvoidanceYaw < 40960 )
       {
         WallAvoidanceYaw = 40960;

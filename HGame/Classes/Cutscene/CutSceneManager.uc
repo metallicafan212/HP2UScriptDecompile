@@ -5,7 +5,7 @@
 class CutSceneManager extends HudItemManager;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\Icons\leftPanel.PNG	GROUP=Icons	Name=leftPanel COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\Icons\leftPanel.PNG	GROUP=Icons	Name=leftPanel COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0
 
 const SLIDE_DIVISOR= 15;
 var Texture textureBorder;
@@ -143,7 +143,7 @@ state SlideIn
     fMaxBorderHeight = GetMaxBorderHeight(Canvas);
     if ( fCurrBorderHeight < fMaxBorderHeight )
     {
-      fCurrBorderHeight += fMaxBorderHeight / 15;
+      fCurrBorderHeight += fMaxBorderHeight / SLIDE_DIVISOR;
     }
     if ( fCurrBorderHeight > fMaxBorderHeight )
     {
@@ -197,7 +197,7 @@ state SlideOut
   {
     if ( fCurrBorderHeight > 0 )
     {
-      fCurrBorderHeight -= GetMaxBorderHeight(Canvas) / 15;
+      fCurrBorderHeight -= GetMaxBorderHeight(Canvas) / SLIDE_DIVISOR;
     }
     if ( fCurrBorderHeight < 0 )
     {

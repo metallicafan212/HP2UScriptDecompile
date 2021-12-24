@@ -56,8 +56,8 @@ var(ChallengeManager) int nWarnTimeAlmostUp;
 event PostBeginPlay()
 {
   Super.PostBeginPlay();
-  textureScoreIcon = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2ChallengeScore",Class'Texture'));
-  textureTallyScoreIcon = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2BigChallengeScore",Class'Texture'));
+  textureScoreIcon = Texture(DynamicLoadObject(strSCORE_ICON,Class'Texture'));
+  textureTallyScoreIcon = Texture(DynamicLoadObject(strTALLY_SCORE_ICON,Class'Texture'));
   bSentWarnTimeEvent = False;
 }
 
@@ -243,7 +243,7 @@ function GetInProgressScorePosition (Canvas Canvas, out int nIconX, out int nIco
 	local float fScaleFactor;
 
 	fScaleFactor = GetScaleFactor(Canvas);
-	nIconX 		= Canvas.SizeX / 2 - (128 / 2 * fScaleFactor);
+	nIconX 		= Canvas.SizeX / 2 - (nSCORE_WIDTH / 2 * fScaleFactor);
 	nIconY 		= 4 * fScaleFactor * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 	return;
 }
@@ -253,8 +253,8 @@ function GetTallyScorePosition (Canvas Canvas, out int nIconX, out int nIconY)
 	local float fScaleFactor;
 
 	fScaleFactor 	= GetScaleFactor(Canvas);
-	nIconX 			= Canvas.SizeX / 2 - (128 / 2 * fScaleFactor);
-	nIconY 			= 2 * fScaleFactor * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
+	nIconX 			= Canvas.SizeX / 2 - (nTALLY_SCORE_WIDTH / 2 * fScaleFactor);
+	nIconY 			= nTALLY_ICONS_Y * fScaleFactor * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 }
 
 function GetCurrScoreTextXY (out int nMidX, out int nMidY)
@@ -369,11 +369,11 @@ function int GetHousePointsFromScore (int nScore)
     } else //{
       if ( nScore < 2 * A / 3 )
       {
-        return (B * nScore / A) - (B / 6);
+        return ((B * nScore) / A) - (B / 6);
       } else //{
         if ( nScore < A )
         {
-          return (3 * B * nScore) / (2 * A) - (B / 2);
+          return ((3 * B * nScore) / (2 * A)) - (B / 2);
         } else {
           return B;
         }
@@ -392,7 +392,7 @@ state ChallengeInProgress
   {
     if ( (nCurrScore > 0) && (baseHUD(PlayerHarry.myHUD).bCutSceneMode == False) &&  !PlayerHarry.IsInState('CelebrateCardSet') )
     {
-      nCurrScore -= 1;
+      nCurrScore -= DECREMENT_VALUE;
     }
     if ( nCurrScore <= 0 )
     {
@@ -417,6 +417,7 @@ state ChallengeInProgress
       }
     //}
   }
+
 	function PickedUpStar ()
 	{
 		nCurrScore += STAR_VALUE;
@@ -434,14 +435,14 @@ state ChallengeInProgress
   
 	function GetCurrScoreTextXY (out int nMidX, out int nMidY)
 	{
-		nMidX = 32;
-		nMidY = 65;
+		nMidX = nCURR_SCORE_MIDX;
+		nMidY = nCURR_SCORE_MIDY;
 	}
   
 	function GetHighScoreTextXY (out int nMidX, out int nMidY)
 	{
-		nMidX = 93;
-		nMidY = 65;
+		nMidX = nHIGH_SCORE_MIDX;
+		nMidY = nHIGH_SCORE_MIDY;
 	}
   
 	function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
@@ -455,7 +456,7 @@ state ChallengeInProgress
   function BeginState()
   {
     nCurrScore = nStartScore;
-    SetTimer(1.0,True);
+    SetTimer(DECREMENT_SECONDS,True);
   }
   
 }
@@ -515,14 +516,14 @@ state Tally
   
   function GetCurrScoreTextXY (out int nMidX, out int nMidY)
   {
-    nMidX = 30;
-    nMidY = 115;
+    nMidX = nTALLY_CURR_SCORE_MIDX;
+    nMidY = nTALLY_CURR_SCORE_MIDY;
   }
   
   function GetHighScoreTextXY (out int nMidX, out int nMidY)
   {
-    nMidX = 93;
-    nMidY = 115;
+    nMidX = nTALLY_HIGH_SCORE_MIDX;
+    nMidY = nTALLY_HIGH_SCORE_MIDY;
   }
   
   function BeginState()
@@ -540,7 +541,7 @@ state Tally
       nAwardGryffPoints -= GetHousePointsFromScore(nHighScore);
       if (  !bMastered && (nCurrScore >= nMaxScore) )
       {
-        nAwardGryffPoints += 50;
+        nAwardGryffPoints += nMASTER_BONUS_HPOINTS;
       }
     }
     if ( bFastForwardTally == True )
@@ -571,7 +572,7 @@ state Tally
     // goto JL0000;
   }
   fTicksPerSec = 1.0 / fTickDelta;
-  nTallyPointsPerTick = (nCurrScore - nHighScore) / 3.0 * fTicksPerSec;
+  nTallyPointsPerTick = (nCurrScore - nHighScore) / (3.0 * fTicksPerSec);
   if ( nTallyPointsPerTick < 1 )
   {
     nTallyPointsPerTick = 1;
@@ -615,14 +616,14 @@ state PostTallyHold
   
   function GetCurrScoreTextXY (out int nMidX, out int nMidY)
   {
-    nMidX = 30;
-    nMidY = 115;
+    nMidX = nTALLY_CURR_SCORE_MIDX;
+    nMidY = nTALLY_CURR_SCORE_MIDY;
   }
   
   function GetHighScoreTextXY (out int nMidX, out int nMidY)
   {
-    nMidX = 93;
-    nMidY = 115;
+    nMidX = nTALLY_HIGH_SCORE_MIDX;
+    nMidY = nTALLY_HIGH_SCORE_MIDY;
   }
   
   function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)

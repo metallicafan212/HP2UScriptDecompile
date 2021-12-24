@@ -2,7 +2,7 @@
 // HPConsole.
 //================================================================================
 
-class HPConsole extends baseConsole;
+class HPConsole extends baseConsole; 
 
 const BUTTONS_Y=193;
 const BUTTONS_X=185;
@@ -49,8 +49,6 @@ exec function ShortCut()
   {
     SCWindow = ShortCutWindow(Root.CreateWindow(Class'ShortCutWindow',64.0,64.0,320.0,320.0));
   } 
-  //else 
-  //{
   else if ( SCWindow.bUWindowActive )
   {
     SCWindow.Close();
@@ -59,7 +57,6 @@ exec function ShortCut()
   {
     SCWindow.ActivateWindow(0,False);
   }
-  //}
 }
 
 function CutConsoleLog (string Msg)
@@ -516,92 +513,6 @@ exec function DuelingMode()
   }
 }
 
-//KW implemented this in baseConsole -AdamJD
-/*
-function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
-{
-	local float FX;
-	local float fy;
-	local float Ratio;
-	local float CRTScale;
-	local float XOffset;
-	local float YOffset;
-	local float ResX;
-	local float ResY;
-
-	if ( Tex == None )
-	{
-		return;
-	}
-
-  //FX = C.SizeX / 640.0;
-  //fy = C.SizeY / 480.0;
-  //FX = C.SizeX / 640.0;
-  //fy = C.SizeY / 480.0;
-  //FX = 1.0;
-  //fy = 1.0;
-	
-	FX = 1.0;
- 	FY = 1.0;
-	
-	// Metallicafan212:	Scale it to 4/3
-	//Ratio 	= C.SizeX / C.SizeY;
-	
-	//FX 		= Ratio; /// 1.3333;
-	
-	// Metallicafan212:	Center the loading screen and draw black behind it
-	//					TODO!
-	
-	// Metallicafan212:	Rewrite this whole fucking system
-	//					We want a perfect middle square
-	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
-	//					Figure out a resolution in the middle of the screen
-	//if(C.SizeX > C.SizeY)
-	//{
-	//	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
-		// Metallicafan212:	Use the height as the basis of the square
-	//	ResY = C.SizeY;
-	//	ResX = C.SizeX * Ratio;
-	//}
-	//else
-	//{
-	//	Ratio 		= (C.Size.X / C.SizeY) / 1.3333333;
-	//	ResX = C.SizeX;
-	//	ResY = C.SizeY * Ratio;
-	//}
-	
-	// Metallicafan212:	Now draw it in the correct place
-	//					We're considering the canvas a perfect 512x512 grid
-	//X = 
-	
-	
-	//FX 		= (C.SizeX / C.SizeY) / 1.33333;
-	
-	//log("X " $ C.SizeX $ " Y " $ C.SizeY);
-	
-	// Metallicafan212:	Check for thinner resolutions
-	//					On these we need to stretch outwards
-	
-	//if(FX < 1.0)
-	//{
-	//	FX = 1.0;
-	//	FY = (C.SizeX / C.SizeY);
-	//	log("FY is " $ FY);
-	//}
-	//else
-	//{
-	//	FY = 1.0;
-	//	log("FX is " $ FX);
-	//}
-			
-	//FY		= FX;
-	
-	//C.DrawTileClipped(Tex, 
-  
-	Root.DrawStretchedTexture(C, (X * FX), (Y * FY), Tex.USize * FX, Tex.VSize * FY, Tex);
-}
-*/
-
 function ToggleDebugMode()
 {
   if (  !Class'Version'.Default.bDebugEnabled )
@@ -645,92 +556,11 @@ function HideConsole()
   }
 }
 
-//KW implemented this in baseConsole -AdamJD
-/*
-function DrawLevelAction (Canvas C)
-{
-	local string BigMessage;
-	local float fTextWidth;
-	local float fTextHeight;
-
-	if ( (Viewport.Actor.Level.Pauser != "") && Viewport.Actor.Level.LevelAction == LEVACT_None)
-	{
-		C.Font = C.MedFont;
-		BigMessage = PausedMessage;
-		PrintActionMessage(C,BigMessage);
-		return;
-	}
-	if ( Viewport.Actor.Level.LevelAction == LEVACT_None )
-	{
-		BigMessage = "";
-		return;
-	} 
-	else if ( Viewport.Actor.Level.LevelAction == LEVACT_Loading || Viewport.Actor.bShowLoadingScreen )
-	{
-		BigMessage = Localize("all","Options_0058","HPMenu");
-		Viewport.Actor.bShowLoadingScreen = True;
-		C.Style = 1;
-		C.TextSize(BigMessage,fTextWidth,fTextHeight);
-		if ( fTextWidth > C.SizeX - 32 )
-		{
-			C.Font = LocalMedFont;
-		} 
-		else 
-		{
-			C.Font = LocalBigFont;
-		}
-		
-		ScaleAndDraw(C,0.0,0.0,LoadingBackground.p1);
-		ScaleAndDraw(C,256.0,0.0,LoadingBackground.p2);
-		ScaleAndDraw(C,512.0,0.0,LoadingBackground.p3);
-		ScaleAndDraw(C,0.0,256.0,LoadingBackground.p4);
-		ScaleAndDraw(C,256.0,256.0,LoadingBackground.p5);
-		ScaleAndDraw(C,512.0,256.0,LoadingBackground.p6);
-		PrintActionMessageInUpperLeft(C,BigMessage);
-		return;
-	} 
-	else 
-	{
-		if ( Viewport.Actor.Level.LevelAction == LEVACT_Saving )
-		{
-			BigMessage = Localize("all","Options_0057","HPMenu");
-		} 
-		else if ( Viewport.Actor.Level.LevelAction == LEVACT_Connecting )
-		{
-			BigMessage = ConnectingMessage;
-		} 
-		else if ( Viewport.Actor.Level.LevelAction == LEVACT_Precaching )
-		{
-			BigMessage = PrecachingMessage;
-		}
-	}
-	if ( BigMessage != "" )
-	{
-		C.Style = 1;
-		C.TextSize(BigMessage,fTextWidth,fTextHeight);
-		if ( fTextWidth > C.SizeX - 32 )
-		{
-			C.Font = LocalMedFont;
-		} 
-		else 
-		{
-			C.Font = LocalBigFont;
-		}
-		PrintActionMessage(C,BigMessage);
-	}
-}
-*/
-
 function ChangeLevel (string lev, bool flag)
 {
 	Log("Changing level to:" $ lev $ "," $ string(flag));
 	Viewport.Actor.Level.ServerTravel(lev,flag);
 	bLoadNewLevel = True;
-  
-	// Metallicafan212:	Fix the loading screen not showing up
-	//Harry(Viewport.Actor).bShowLoadingScreen = true;
-	//Viewport.Actor.bShowLoadingScreen = true;
-	//Viewport.Actor.Level.LevelAction = LEVACT_Loading;
 }
 
 function LaunchUWindow (optional bool bPause)
@@ -769,7 +599,8 @@ function StartFastForward()
 	Log("*****STARING FASTFORWARD****************************");
 	foreach Viewport.Actor.AllActors(Class'CutScene',cut)
 	{
-		if ( cut.bPlaying && cut.bSkipAllowed)
+		if ( cut.bPlaying 
+			 && cut.bSkipAllowed ) //stop the game lagging when trying to skip unskippable cutscenes (to be compatible with the new engine) -AdamJD
 		{
 			cut.FastForward();
 			bFastForwarding = True;
@@ -964,52 +795,16 @@ function WarpHarryToCameraLocation()
 
 event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 {
-	local EInputKey k;
-	//local EInputKey LocalConsoleKey;
+	local byte k;
 	
-	// Metallicafan212:	Force it to be typed
-	//LocalConsoleKey = enum(ConsoleKey);
-	
-	//log("Key event! " $ Key $ " " $ Action);
-	
-	//if(Key == IK_Numpad4)
-	//{
-	//	log(bLeftKeyDown);
-	//}
-	
-
-	if(Action == IST_Press && int(key) == ConsoleKey)
-	{
-		if ( bLocked )
-		{
-			return True;
-		}
-		Root.bAllowConsole = Class'Version'.Default.bDebugEnabled;
-		if (  !bDebugMode )
-		{
-			return True;
-		}
-		if ( bShiftDown )
-		{
-			ShowCutConsole( !bShowCutConsole);
-			return True;
-		}
-		bQuickKeyEnable = True;
-		LaunchUWindow();
-		if (  !bShowConsole )
-		{
-			ShowConsole();
-		}
-		return True;
-	}
-
 	k = Key;
+		
 	switch (Action)
 	{
 		case IST_Release:
 			switch (k)
 			{
-				case IK_Delete:
+				case EInputKey.IK_Delete:
 					if ( bDebugMode )
 					{
 						if ( harry(Viewport.Actor).Cam.CameraMode != harry(Viewport.Actor).Cam.ECamMode.CM_Free )
@@ -1023,21 +818,21 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 						}
 					}
 					break;
-				case IK_LeftMouse:
+				case EInputKey.IK_LeftMouse:
 					bSpaceReleased = True;
 					break;
-				case IK_Space:
+				case EInputKey.IK_Space:
 					bSpacePressed = False;
 					bBoostKeyPressed = False;
 					break;
-				case IK_Pause:
-				case IK_Cancel:
+				case EInputKey.IK_Pause:
+				case EInputKey.IK_Cancel:
 					if ( bDebugMode )
 					{
 						harry(Viewport.Actor).ConsoleCommand("pause");
 					}
 					break;
-				case IK_PageUp:
+				case EInputKey.IK_PageUp:
 					if ( bDebugMode )
 					{
 						if ( fSlomoSpeed >= 1.0 )
@@ -1055,7 +850,7 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 						harry(Viewport.Actor).ClientMessage(" ^^^ Setting GameSpeed to: X" $ string(fSlomoSpeed));
 					}
 					break;
-				case IK_PageDown:
+				case EInputKey.IK_PageDown:
 					if ( bDebugMode )
 					{
 						if ( fSlomoSpeed <= 1.0 )
@@ -1070,53 +865,41 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 						harry(Viewport.Actor).ClientMessage(" ^^^ Setting GameSpeed to: X" $ string(fSlomoSpeed));
 					}
 					break;
-				case IK_Left:
-					//stop free cam zooming off when using arrow keys -AdamJD
+				case EInputKey.IK_Left: //stop free cam zooming off when using arrow keys (UTPT didn't add this) -AdamJD
+				case EInputKey.IK_Numpad4:
 					bLeftKeyDown = False;
 					break;
-				case IK_Numpad4:
-					bLeftKeyDown = False;
-					break;
-				case IK_Down:
-					//stop free cam zooming off when using arrow keys -AdamJD
-					bBackKeyDown = False;
-					break;
-				case IK_Numpad6:
+				case EInputKey.IK_Right: //stop free cam zooming off when using arrow keys (UTPT didn't add this) -AdamJD
+				case EInputKey.IK_Numpad6:
 					bRightKeyDown = False;
 					break;
-				case IK_Up:
-					//stop free cam zooming off when using arrow keys -AdamJD
+				case EInputKey.IK_Up: //stop free cam zooming off when using arrow keys (UTPT didn't add this) -AdamJD
+				case EInputKey.IK_NumPad8:
 					bForwardKeyDown = False;
 					break;
-				case IK_NumPad8:
-					bForwardKeyDown = False;
-					break;
-				case IK_Right:
-					//stop free cam zooming off when using arrow keys -AdamJD
-					bRightKeyDown = False;
-					break;
-				case IK_Numpad2:
+				case EInputKey.IK_Down: //stop free cam zooming off when using arrow keys (UTPT didn't add this) -AdamJD
+				case EInputKey.IK_Numpad2:
 					bBackKeyDown = False;
 					break;
-				case IK_Numpad1:
+				case EInputKey.IK_Numpad1:
 					bRotateLeftKeyDown = False;
 					break;
-				case IK_Numpad3:
+				case EInputKey.IK_Numpad3:
 					bRotateRightKeyDown = False;
 					break;
-				case IK_Numpad0:
+				case EInputKey.IK_Numpad0:
 					bRotateUpKeyDown = False;
 					break;
-				case IK_NumPadPeriod:
+				case EInputKey.IK_NumPadPeriod:
 					bRotateDownKeyDown = False;
 					break;
-				case IK_Numpad7:
+				case EInputKey.IK_Numpad7:
 					bUpKeyDown = False;
 					break;
-				case IK_Numpad9:
+				case EInputKey.IK_Numpad9:
 					bDownKeyDown = False;
 					break;
-				case IK_Shift:
+				case EInputKey.IK_Shift:
 					bShiftDown = False;
 					break;
 			}
@@ -1127,10 +910,10 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 				switch (Key)
 				{
 					case IK_MouseX:
-						MouseX = MouseX + MouseScale * Delta;
+						MouseX = MouseX + (MouseScale * Delta);
 						break;
 					case IK_MouseY:
-						MouseY = MouseY - MouseScale * Delta;
+						MouseY = MouseY - (MouseScale * Delta);
 						break;
 				}
 			}
@@ -1142,77 +925,64 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 			}
 			switch (k)
 			{
-				case IK_Shift:
+				case EInputKey.IK_Shift:
 					bShiftDown = True;
 					break;
-				case IK_Backspace:
+				case EInputKey.IK_Backspace:
 					if ( bDebugMode )
 					{
 						LangBrowser();
 						return True;
 					}
 					break;
-				case IK_Tab:
+				case EInputKey.IK_Tab:
 					break;
-				case IK_Left:
-					//stop free cam zooming off when using arrow keys -AdamJD
+				case EInputKey.IK_Left: //move free cam when pressing arrow keys (UTPT didn't add this) -AdamJD
+				case EInputKey.IK_Numpad4:
 					bLeftKeyDown = True;
 					break;
-				case IK_Numpad4:
-					bLeftKeyDown = True;
-					break;
-				case IK_Right:
-					//stop free cam zooming off when using arrow keys -AdamJD
+				case EInputKey.IK_Right: //move free cam when pressing arrow keys (UTPT didn't add this) -AdamJD
+				case EInputKey.IK_Numpad6:
 					bRightKeyDown = True;
 					break;
-				case IK_Numpad6:
-					bRightKeyDown = True;
-					break;
-				case IK_Up:
-					//stop free cam zooming off when using arrow keys -AdamJD
+				case EInputKey.IK_Up: //move free cam when pressing arrow keys (UTPT didn't add this) -AdamJD
+				case EInputKey.IK_Numpad8:
 					bForwardKeyDown = True;
 					break;
-				case IK_Numpad8:
-					bForwardKeyDown = True;
-					break;
-				case IK_Down:
-					//stop free cam zooming off when using arrow keys -AdamJD
+				case EInputKey.IK_Down: //move free cam when pressing arrow keys (UTPT didn't add this) -AdamJD
+				case EInputKey.IK_Numpad2:
 					bBackKeyDown = True;
 					break;
-				case IK_Numpad2:
-					bBackKeyDown = True;
-					break;
-				case IK_Numpad1:
+				case EInputKey.IK_Numpad1:
 					bRotateLeftKeyDown = True;
 					break;
-				case IK_Numpad3:
+				case EInputKey.IK_Numpad3:
 					bRotateRightKeyDown = True;
 					break;
-				case IK_Numpad0:
+				case EInputKey.IK_Numpad0:
 					bRotateUpKeyDown = True;
 					break;
-				case IK_NumPadPeriod:
+				case EInputKey.IK_NumPadPeriod:
 					bRotateDownKeyDown = True;
 					break;
-				case IK_NumPad7:
+				case EInputKey.IK_NumPad7:
 					bUpKeyDown = True;
 					break;
-				case IK_Numpad9:
+				case EInputKey.IK_Numpad9:
 					bDownKeyDown = True;
 					break;
-				case IK_Insert:
+				case EInputKey.IK_Insert:
 					if ( bDebugMode )
 					{
 						Viewport.Actor.SShot();
 					}
 					break;
-				case IK_RightMouse:
+				case EInputKey.IK_RightMouse:
 					break;
-				case IK_Escape:
+				case EInputKey.IK_Escape:
 					menuBook.EscFromConsole();
 					return True;
-				/*
-				case LocalConsoleKey:
+				case ConsoleKey:
 					if ( bLocked )
 					{
 						return True;
@@ -1234,41 +1004,40 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 						ShowConsole();
 					}
 					return True;
-				*/
-				case IK_LeftMouse:
+				case EInputKey.IK_LeftMouse:
 					bSpaceReleased = False;
 					break;
-				case IK_Space:
+				case EInputKey.IK_Space:
 					bSpacePressed = True;
 					bBoostKeyPressed = True;
 					break;
-				case IK_F4:
+				case EInputKey.IK_F4:
 					if ( bDebugMode )
 					{
 						LaunchUWindow();
 						ShortCut();
 					}
 					break;
-				case IK_F6:
+				case EInputKey.IK_F6:
 					if ( bDebugMode )
 					{
 						harry(Viewport.Actor).GetHealthStatusItem().SetCountToMaxPotential();
 					}
 					break;
-				case IK_F7:
+				case EInputKey.IK_F7:
 					ToggleDebugMode();
 					break;
-				case IK_F8:
+				case EInputKey.IK_F8:
 					break;
-				case IK_F9:
+				case EInputKey.IK_F9:
 					if ( bDebugMode )
 					{
 						harry(Viewport.Actor).AddAllSpellsToSpellBook();
 					}
 					break;
-				case IK_F10:
+				case EInputKey.IK_F10:
 					break;
-				case IK_F12:
+				case EInputKey.IK_F12:
 					break;
 			}
 			break;
@@ -1363,7 +1132,7 @@ function SetupLanguage()
   SaveConfig();
 }
 
-function PostRender (Canvas Canvas)
+event PostRender (Canvas Canvas)
 {
   local LevelInfo lev;
 
@@ -1564,12 +1333,4 @@ defaultproperties
     PausedMessage="PRESS ESC TO EXIT"
 
     PrecachingMessage="ENTERING"
-	
-	//is in baseConsole -AdamJD
-	//bUseSystemFonts=True
-	
-	// Metallicafan212:	Fix this, as baseconsole just doesn't want to be compiled for some strange reason
-	//
-	//fixed the one in baseConsole -AdamJD
-	//LoadingBackground=(p1=Texture'HGame.Icons.FELoadingBackground1',p2=Texture'HGame.Icons.FELoadingBackground2',p3=Texture'HGame.Icons.FELoadingBackground3',p4=Texture'HGame.Icons.FELoadingBackground4',p5=Texture'HGame.Icons.FELoadingBackground5',p6=Texture'HGame.Icons.FELoadingBackground6',durration=999999.00)
 }

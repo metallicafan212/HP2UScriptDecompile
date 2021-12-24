@@ -122,7 +122,7 @@ state StateFlying
     {
       Velocity.Z +=  -fGravityEffect * fTimeDelta;
     } else {
-      Velocity.Z +=  -fGravityEffect / 2 * fTimeDelta;
+      Velocity.Z +=  (-fGravityEffect / 2) * fTimeDelta;
     }
     if ( fxFlyParticleEffect != None )
     {
@@ -130,6 +130,7 @@ state StateFlying
     }
   }
  begin:
+ loop:
   Sleep(1.0);
   goto ('Loop');
 }

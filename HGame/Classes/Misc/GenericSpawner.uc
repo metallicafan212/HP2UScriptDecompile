@@ -103,7 +103,7 @@ begin:
   if ( BaseParticles != None )
   {
     FindBaseParticlePos();
-    Spawn(BaseParticles,,,BaseParticlePos);
+    Spawn(BaseParticles,,,[SpawnLocation]BaseParticlePos);
   }
   if ( Limits.Min >= Limits.Max )
   {
@@ -120,13 +120,11 @@ begin:
         Sleep(GoodieDelay);
         SpawnObject(-1);
         // CurrentNum++;
-        // goto JL00E6;
       }
     } else {
       // CurrentNum = 0;
-// JL00E6:
       // if ( CurrentNum < 8 )
-	  for(CurrentNum = 0; CurrentNum < 8; CurrentNum++)
+	  for(CurrentNum = 0; CurrentNum < MAX_SPAWNED_GOODIES; CurrentNum++)
       {
         // CurrentNum1 = 0;
         // if ( CurrentNum1 < GoodiesNumber[CurrentNum] )
@@ -135,13 +133,10 @@ begin:
           Sleep(GoodieDelay);
           SpawnObject(CurrentNum);
           // CurrentNum1++;
-          // goto JL012F;
         }
         // CurrentNum++;
-        // goto JL011C;
       }
     }
-  // }
   if ( Snds.Spawning != None )
   {
     PlaySound(Snds.Spawning,SLOT_Misc);
@@ -182,7 +177,7 @@ function PostBeginPlay()
   }
   HowManyObjectsToSpawn = 0;
 
-  for(I = 0; I < 8; I++)
+  for(I = 0; I < MAX_SPAWNED_GOODIES; I++)
   {
     if ( GoodieToSpawn[I] == None )
     {
@@ -196,7 +191,7 @@ function PostBeginPlay()
   }
   bSpawnExactNumbers = False;
 
-  for(I = 0; I < 8; I++)
+  for(I = 0; I < MAX_SPAWNED_GOODIES; I++)
   {
     if ( GoodiesNumber[I] != 0 )
     {
@@ -257,7 +252,7 @@ function SpawnObject (int Index)
       // goto JL00CA;
 	  break;
     }
-    if ( V Dot N / VSize2D(N) > 0.69999999 )
+    if ( (V Dot N) / VSize2D(N) > 0.69999999 )
     {
       // goto JL00CA;
 	  break;
@@ -282,9 +277,9 @@ function SpawnObject (int Index)
   Dir = Dir + Location;
   if ( Index < 0 )
   {
-    newSpawn = Spawn(GoodieToSpawn[Rand(HowManyObjectsToSpawn)],,,Dir);
+    newSpawn = Spawn(GoodieToSpawn[Rand(HowManyObjectsToSpawn)],,,[SpawnLocation]Dir);
   } else {
-    newSpawn = Spawn(GoodieToSpawn[Index],,,Dir);
+    newSpawn = Spawn(GoodieToSpawn[Index],,,[SpawnLocation]Dir);
   }
   if ( (StartVel.X == 0) && (StartVel.Y == 0) && (StartVel.Z == 0) )
   {
@@ -296,13 +291,13 @@ function SpawnObject (int Index)
   switch (Rand(3))
   {
     case 0:
-    Spawn(Class'Spawn_flash_1',,,Dir);
+    Spawn(Class'Spawn_flash_1',,,[SpawnLocation]Dir);
     break;
     case 1:
-    Spawn(Class'Spawn_flash_2',,,Dir);
+    Spawn(Class'Spawn_flash_2',,,[SpawnLocation]Dir);
     break;
     case 2:
-    Spawn(Class'Spawn_flash_3',,,Dir);
+    Spawn(Class'Spawn_flash_3',,,[SpawnLocation]Dir);
     break;
     default:
   }

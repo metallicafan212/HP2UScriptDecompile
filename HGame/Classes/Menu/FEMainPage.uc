@@ -176,12 +176,12 @@ function bool KeyEvent (byte Key, byte Action, float Delta)
   if ( (Action == 1) && (Key == 27) )
   {
     ConfirmExit = doHPMessageBox("Are you sure you want to exit?","Yes","No");
-  } else {
+  } else //{
     if ( (Action == 1) && (Key == 123) )
     {
       FEBook(book).CloseBook();
     }
-  }
+  //}
 }
 
 function Notify (UWindowDialogControl C, byte E)

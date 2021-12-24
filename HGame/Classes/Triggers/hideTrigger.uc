@@ -10,7 +10,7 @@ event Trigger (Actor Other, Pawn EventInstigator)
 {
   local Actor A;
 
-  if ( ReTriggerDelay >0 )
+  if ( ReTriggerDelay > 0 )
   {
     if ( Level.TimeSeconds - TriggerTime < ReTriggerDelay )
     {
@@ -37,12 +37,12 @@ event Trigger (Actor Other, Pawn EventInstigator)
   if ( bTriggerOnceOnly )
   {
     SetCollision(False);
-  } else {
+  } else //{
     if ( RepeatTriggerTime > 0 )
     {
       SetTimer(RepeatTriggerTime,False);
     }
-  }
+  //}
 }
 
 function Touch (Actor Other)
@@ -78,12 +78,12 @@ function Touch (Actor Other)
     if ( bTriggerOnceOnly )
     {
       SetCollision(False);
-    } else {
+    } else //{
       if ( RepeatTriggerTime > 0 )
       {
         SetTimer(RepeatTriggerTime,False);
       }
-    }
+    //}
   }
 }
 

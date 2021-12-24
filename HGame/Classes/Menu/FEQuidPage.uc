@@ -5,7 +5,7 @@
 class FEQuidPage extends baseFEPage;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\Icons\QuidMatchBoxTexture.PNG	GROUP=Icons	Name=QuidMatchBoxTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\QuidMatchBoxTexture.PNG	GROUP=Icons	Name=QuidMatchBoxTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 var HPMessageBox ConfirmReplay;
 var harry PlayerHarry;
@@ -257,7 +257,7 @@ function Created()
 	startX = (WinWidth / 2) - ((3 * gameBoxWidth + (2 * 64)) / 2);
 	startY = 100;
 	
-	playerHarry=Harry(HPConsole(root.console).Viewport.Actor);
+	PlayerHarry = harry(HPConsole(Root.Console).Viewport.Actor);
 
     CreateBackPageButton();
 	CreateTitleButton(GetLocalFEString("Quidditch_0007"));
@@ -300,7 +300,7 @@ function Created()
 		// Metallicafan212:	Force it to stretch
 		startGameButtons[i].bStretchTex 	= true;
 		
-		startGameButtons[i].setFont(4);
+		startGameButtons[i].setFont(F_HPMenuLarge);
 		startGameButtons[i].Align			= TA_Center;
 		startGameButtons[i].bShadowText		= true;
 		startGameButtons[i].ToolTipString	= GetLocalFEString("Quidditch_0020") $ " " $ I;  
@@ -318,7 +318,7 @@ function Created()
 		myScores[i].setText("");
 
 		opponentScores[i]					= HGameLabelControl(CreateControl(class'HGameLabelControl', startX + (col * gameSpaceX) + (64 / Class'M212HScale'.Static.UWindowGetHeightScale(Root)), startY + (row * gameSpaceY) + 5 + 64,64,20));
-		opponentScores[i].setFont(4);
+		opponentScores[i].setFont(F_HPMenuLarge);
 		opponentScores[i].TextColor.r		= 255;
 		opponentScores[i].TextColor.g		= 255;
 		opponentScores[i].TextColor.b		= 255;
@@ -327,13 +327,13 @@ function Created()
 		opponentScores[i].setText("");
 
 		myPoints[i]= HGameLabelControl(CreateControl(class'HGameLabelControl', startX + (col * gameSpaceX) + 32, startY + (row * gameSpaceY) + 100, 64, 20));
-		myPoints[i].setFont(4);
+		myPoints[i].setFont(F_HPMenuLarge);
 		myPoints[i].TextColor.r= 255;
 		myPoints[i].TextColor.g= 255;
 		myPoints[i].TextColor.b= 255;
 		myPoints[i].Align= TA_Center;
 		myPoints[i].bShadowText= true;
-		myPoints[i].setText("");
+		myPoints[i].SetText("");
 	}
 	
     matchLabel[0].SetText(GetLocalFEString("Quidditch_0009"));
@@ -388,7 +388,7 @@ function Notify (UWindowDialogControl C, byte E)
       FEBook(book).DoEscapeFromPage();
     }
 
-	for(I = 0; I < 6; I++)
+	for(I = 0; I < ArrayCount(startGameButtons); I++)
     {
       if ( startGameButtons[I] == C )
       {

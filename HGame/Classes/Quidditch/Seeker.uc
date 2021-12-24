@@ -73,13 +73,13 @@ state Fly
 
 defaultproperties
 {
-    HouseDisplayInfo(0)=(Sex=SX_Female,Mesh=SkeletalMesh'HPModels.skQuidPlayerFMesh',MultiSkins[0]=None)
+    HouseDisplayInfo(0)=(Sex=SX_Female,Mesh=SkeletalMesh'HPModels.skQuidPlayerFMesh',MultiSkins[0]=Texture'HPModels.Skins.skQuidPlayerF_GTex0',MultiSkins[1]=Texture'HPModels.Skins.skQuidPlayerF_Tex1')
 
-    HouseDisplayInfo(1)=(Sex=SX_Female,Mesh=SkeletalMesh'HPModels.skQuidPlayerFMesh',MultiSkins[0]=Texture'HPModels.Skins.skQuidPlayerF_RTex0')
+    HouseDisplayInfo(1)=(Sex=SX_Female,Mesh=SkeletalMesh'HPModels.skQuidPlayerFMesh',MultiSkins[0]=Texture'HPModels.Skins.skQuidPlayerF_RTex0',MultiSkins[1]=Texture'HPModels.Skins.skQuidPlayerF_Tex1')
 
-    HouseDisplayInfo(2)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skQuidPlayerMMesh',MultiSkins[0]=Texture'HPModels.Skins.skQuidPlayerM_HTex0')
+    HouseDisplayInfo(2)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skQuidPlayerMMesh',MultiSkins[0]=Texture'HPModels.Skins.skQuidPlayerM_HTex0',MultiSkins[1]=Texture'HPModels.Skins.skQuidPlayerM_Tex1')
 
-    HouseDisplayInfo(3)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skDracoQuidMesh',MultiSkins[0]=None)
+    HouseDisplayInfo(3)=(Sex=SX_Male,Mesh=SkeletalMesh'HPModels.skDracoQuidMesh',MultiSkins[0]=Texture'HPModels.Skins.skDracoQuidTex0',MultiSkins[1]=Texture'HPModels.Skins.skDracoQuidTex1',MultiSkins[2]=Texture'HPModels.Skins.skDracoQuidTex2')
 
     // EnemyHealthBar=4
 	EnemyHealthBar=EnemyBar_Seeker

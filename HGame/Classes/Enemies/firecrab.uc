@@ -163,13 +163,10 @@ function Vector pushDirection()
     // Count++;
     // goto JL0023;
   }
-  // Count = 0;
-  // if ( Count < rotationCount )
-  // {
-    // Count++;
-    // goto JL00AA;
-  // }
-  
+  for (Count = 0; Count < rotationCount; Count++)
+  {
+    //KW left this empty? -AdamJD
+  }
   if ( rotationCount <= 2 )
   {
     return Vec(0.0,0.0,-1.0);

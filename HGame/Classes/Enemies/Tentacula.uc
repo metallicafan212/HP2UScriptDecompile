@@ -169,22 +169,22 @@ function PostBeginPlay()
 		break;
     case 2:
 		bName[1] = GetBoneName(4);
-		rYaw[1] = 8192.0 * 4;
+		rYaw[1] = FORTY_FIVE_DEGREES * 4;
 		break;
     case 3:
 		bName[1] = GetBoneName(3);
 		bName[2] = GetBoneName(5);
-		rYaw[1] = 8192.0 * 5;
-		rYaw[2] = 8192.0 * 3;
+		rYaw[1] = FORTY_FIVE_DEGREES * 5;
+		rYaw[2] = FORTY_FIVE_DEGREES * 3;
 		break;
     case 4:
     default:
 		bName[1] = GetBoneName(2);
 		bName[2] = GetBoneName(4);
 		bName[3] = GetBoneName(6);
-		rYaw[1] = 8192.0 * 6;
-		rYaw[2] = 8192.0 * 4;
-		rYaw[3] = 8192.0 * 2;
+		rYaw[1] = FORTY_FIVE_DEGREES * 6;
+		rYaw[2] = FORTY_FIVE_DEGREES * 4;
+		rYaw[3] = FORTY_FIVE_DEGREES * 2;
 		break;
   }
 
@@ -248,7 +248,7 @@ function int ClosestLimb()
 	  R.Roll = 0;
       R.Pitch = 0;
       V = vector(R);
-      fCos = V Dot v1 / VSize(v1);
+      fCos = (V Dot v1) / VSize(v1);
       if ( fCos > maxcos )
       {
         maxcos = fCos;
@@ -401,7 +401,7 @@ begin:
       DesiredRotation.Yaw = rNewRot.Yaw - limbs[firstLimb].relYaw;
 	  //GotoState('stateIdle');
     }
-	GotoState('stateIdle'); //this should be here -AdamJD 
+	GotoState('stateIdle'); //this should be here, UTPT added it in the wrong place -AdamJD 
   } else //{
     if ( VSize(vTargetDir) < SightRadius )
     {

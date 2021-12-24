@@ -67,6 +67,7 @@ function SpawnRandomSpiders (int ns)
 			spiderRotation 		= Rotation;
 			spiderYaw 			= theSpiders[randNum].iRotation * (16384 / 90.0);
 			spiderRotation.Yaw += spiderYaw;
+			spiderRotation.Yaw  = spiderRotation.Yaw & 65535;
 			
 			smSpider 							= Spawn(Class'SpiderSmall',self,,Location,spiderRotation);
 			smSpider.NormalSpeed 				= theSpiders[randNum].NormalSpeed;
@@ -87,6 +88,7 @@ function SpawnRandomSpiders (int ns)
 			spiderRotation 		= Rotation;
 			spiderYaw 			= theSpiders[randNum].iRotation * (16384 / 90.0);
 			spiderRotation.Yaw += spiderYaw;
+			spiderRotation.Yaw  = spiderRotation.Yaw & 65535;
 			
 			lgSpider 							= Spawn(Class'SpiderLarge',self,,Location,spiderRotation);
 			lgSpider.NormalSpeed 				= theSpiders[randNum].NormalSpeed;
@@ -124,13 +126,16 @@ auto state spiderSpawnerWait
 state SpawnSomeSpiders
 {
 	begin:
-	for(Counter = 0; Counter < numSpiders; Counter++ )
+	
+	Counter = 0;
+	while( Counter < numSpiders )
 	{
 		if ( bSmallSpiders == True )
 		{
 			spiderRotation 		= Rotation;
 			spiderYaw 			= theSpiders[Counter].iRotation * (16384 / 90.0);
 			spiderRotation.Yaw += spiderYaw;
+			spiderRotation.Yaw  = spiderRotation.Yaw & 65535;
 			
 			smallSpider 							= Spawn(Class'SpiderSmall',self,,Location,spiderRotation);
 			smallSpider.NormalSpeed 				= theSpiders[Counter].NormalSpeed;
@@ -150,6 +155,7 @@ state SpawnSomeSpiders
 			spiderRotation 		= Rotation;
 			spiderYaw 			= theSpiders[Counter].iRotation * (16384 / 90.0);
 			spiderRotation.Yaw += spiderYaw;
+			spiderRotation.Yaw  = spiderRotation.Yaw & 65535;
 			
 			largeSpider 							= Spawn(Class'SpiderLarge',self,,Location,spiderRotation);
 			largeSpider.NormalSpeed 				= theSpiders[Counter].NormalSpeed;
@@ -164,6 +170,7 @@ state SpawnSomeSpiders
 			largeSpider.numSpellsDefault 			= theSpiders[Counter].numSpellsLargeSpider;
 			largeSpider.leaveDeadSpider 			= theSpiders[Counter].leaveSmallDeadSpider;
 		}
+		Counter++;
 		Sleep(theSpiders[Counter].nextSpiderDelay);
 	}
 	GotoState('spiderSpawnerWait');

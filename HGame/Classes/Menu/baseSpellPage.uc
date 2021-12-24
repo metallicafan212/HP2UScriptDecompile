@@ -18,12 +18,12 @@ function Draw (Canvas Canvas)
   Canvas.DrawIcon(pagePieces[1],1.0);
   if ( pagePieces[2] != None )
   {
-    Canvas.SetPos(Canvas.SizeX / 2 - (Width / 2),Canvas.SizeY - (yOffset + 256));
+    Canvas.SetPos(Canvas.SizeX / 2 - (Width / 2),(Canvas.SizeY - yOffset) + 256);
     Canvas.DrawIcon(pagePieces[2],1.0);
   }
   if ( pagePieces[3] != None )
   {
-    Canvas.SetPos(Canvas.SizeX / 2 - (Width / 2) + 256,Canvas.SizeY - (yOffset + 256));
+    Canvas.SetPos(Canvas.SizeX / 2 - (Width / 2) + 256,(Canvas.SizeY - yOffset) + 256);
     Canvas.DrawIcon(pagePieces[3],1.0);
   }
 }

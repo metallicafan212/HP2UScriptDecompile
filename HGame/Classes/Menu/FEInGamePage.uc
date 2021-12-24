@@ -295,7 +295,7 @@ function DrawCount (Canvas Canvas, float fScaleFactor, int nButtonLeft, int nBut
 	Canvas.DrawColor = si.GetCountColor();
 	Canvas.Font = si.GetCountFont(Canvas);
 	Canvas.TextSize(strCount,fXTextLen,fYTextLen);
-	Canvas.SetPos(((nButtonLeft + (50 * HScale)) * fScaleFactor - fXTextLen / 2), (nButtonTop + 58) * (fScaleFactor * hScale) - fYTextLen / 2);
+	Canvas.SetPos(((nButtonLeft + (nCOUNT_MID_X * HScale)) * fScaleFactor - fXTextLen / 2), (nButtonTop + nCOUNT_MID_Y) * (fScaleFactor * hScale) - fYTextLen / 2);
 	Canvas.DrawShadowText(strCount, si.GetCountColor(), si.GetCountColor(True));
 	Canvas.Font = fontSave;
 }
@@ -306,7 +306,7 @@ function int GetObjectiveAreaTop (int nCanvasSizeX, int nCanvasSizeY)
 
 	fScaleFactor = nCanvasSizeX / WinWidth;
 	//return nCanvasSizeY - 88 * fScaleFactor = return;
-	return (nCanvasSizeY - 88 * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root));
+	return (nCanvasSizeY - nBAR_H * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root));
 }
 
 function Created()

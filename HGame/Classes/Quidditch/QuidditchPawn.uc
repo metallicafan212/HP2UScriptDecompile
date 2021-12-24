@@ -351,7 +351,7 @@ function UpdateWoosh (float DeltaTime)
   fDistanceFromCamera = VSize(Location - PlayerHarry.Cam.Location);
   if ( bCanWoosh && (Level.TimeSeconds > fNextTimeSafeToWoosh) && (fLastDistanceFromCamera >= 180) && (fDistanceFromCamera < 180) && (VSize(Velocity) > 75) )
   {
-    Woosh = WooshSounds[Rand(4)];
+    Woosh = WooshSounds[Rand(NUM_WOOSH_SOUNDS)];
     PlaySound(Woosh,SLOT_Interface,0.81,,500.0,RandRange(0.81,1.25));
     fNextTimeSafeToWoosh = Level.TimeSeconds + GetSoundDuration(Woosh);
   }
@@ -415,7 +415,7 @@ function SeekTarget (Pawn NewTarget, optional float fNewLaunchProximity)
   {
     GotoState('GetBackOnPath');
   } else //{
-    if (  !IsInState('Seeking') || IsInState('GetBackOnPath') )
+    if (  !(IsInState('Seeking') || IsInState('GetBackOnPath')) ) //UTPT forgot to add brackets -AdamJD
     {
       GotoState('Seeking');
     }
@@ -449,7 +449,7 @@ function ConvertIntoProjectile (Actor NewEmitter, Vector NewVelocity, optional f
   Velocity = NewVelocity;
   Acceleration = vect(0.00,0.00,0.00);
   bProjectile = True;
-  SetCollision(,False,False);
+  SetCollision(,[NewBlockActors]False,[NewBlockPlayers]False);
   if ( fLife == 0 )
   {
     fLifeSpanAsProjectile = fDefaultLifeSpanAsProjectile;
@@ -514,7 +514,7 @@ function DeployAsMine (Pawn NewTarget, optional Actor NewEmitter, optional float
   Acceleration = vect(0.00,0.00,0.00);
   DeployedLocation = Location;
   bMine = True;
-  SetCollision(,False,False);
+  SetCollision(,[NewBlockActors]False,[NewBlockPlayers]False);
   if ( fLife == 0 )
   {
     fLifeSpanAsMine = fDefaultLifeSpanAsMine;
@@ -677,7 +677,7 @@ state Pursue
     }
     if ( Commentator != None )
     {
-      Commentator.SayComment(/*21*/QC_BludgerPursuit,,True);
+      Commentator.SayComment(QC_BludgerPursuit,,True);
     }
     if ( fPursuitTimeLimit != 0 )
     {
@@ -709,9 +709,7 @@ state Pursue
 	local vector	TargetDir;
 	local vector	X,Y,Z;
 
-	Super.Tick( DeltaTime );
-
-	CheckIfTimeForSpeedChange();
+	Global.Tick( DeltaTime );
 
 	if ( Target == None || Target.bHidden )
 	{
@@ -745,12 +743,12 @@ state Pursue
     {
       if ( Commentator != None )
       {
-        Commentator.SayComment(/*24*/QC_BludgerHit,,True);
+        Commentator.SayComment(QC_BludgerHit,,True);
       }
     } else {
       if ( Commentator != None )
       {
-        Commentator.SayComment(/*23*/QC_BludgerMiss,,True);
+        Commentator.SayComment(QC_BludgerMiss,,True);
       }
     }
     GotoState('GetBackOnPath');
@@ -760,7 +758,7 @@ state Pursue
   {
     if ( Commentator != None )
     {
-      Commentator.SayComment(/*23*/QC_BludgerMiss,,True);
+      Commentator.SayComment(QC_BludgerMiss,,True);
     }
     GotoState('GetBackOnPath');
   }
@@ -897,8 +895,7 @@ state GetBackOnPath
   //UTPT didn't add this for some reason -AdamJD
   event Tick( float DeltaTime )
   {
-	Super.Tick( DeltaTime );
-	CheckIfTimeForSpeedChange();
+	Global.Tick( DeltaTime );
   }
   
   event FinishedInterpolation (InterpolationPoint Other)

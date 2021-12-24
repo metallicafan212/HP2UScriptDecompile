@@ -5,9 +5,9 @@
 class FEInputPage extends baseFEPage;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FEOverOption5Texture.PNG	GROUP=Icons	Name=FEOverOption5Texture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEOverOptionTexture.PNG	GROUP=Icons	Name=FEOverOptionTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEOverOption3Texture.PNG	GROUP=Icons	Name=FEOverOption3Texture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEOverOption5Texture.PNG	GROUP=Icons	Name=FEOverOption5Texture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEOverOptionTexture.PNG	GROUP=Icons	Name=FEOverOptionTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEOverOption3Texture.PNG	GROUP=Icons	Name=FEOverOption3Texture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 const InWizardDuel_LastBoundKeyIndex= 13;
 const InWizardDuel_FirstBoundKeyIndex= 12;
@@ -400,7 +400,7 @@ function BeforePaint (Canvas C, float X, float Y)
   local int I;
   local int J;
 
-  for(I = 0; I < 11; I++)
+  for(I = 0; I < ArrayCount(InGame_KeyButtons); I++)
   {
     if ( BoundKey1[I] == 0 )
     {
@@ -415,9 +415,9 @@ function BeforePaint (Canvas C, float X, float Y)
     //}
   }
 
-  for(I = 0; I < 2; I++)
+  for(I = 0; I < ArrayCount(InQuidditch_KeyButtons); I++)
   {
-    J = 11 + I;
+    J = InQuidditch_FirstBoundKeyIndex + I;
     if ( BoundKey1[J] == 0 )
     {
       InQuidditch_KeyButtons[I].SetText("");
@@ -432,7 +432,7 @@ function BeforePaint (Canvas C, float X, float Y)
   }
   for(I = 0; I < 1; I++)
   {
-    J = 12 + I;
+    J = InWizardDuel_FirstBoundKeyIndex + I;
     if ( BoundKey1[J] == 0 )
     {
       InWizardDuel_KeyButtons[I].SetText("");
@@ -495,9 +495,8 @@ function LoadExistingKeys()
   }
   // I = 0;
   // if ( I < 13 )
-  for(I = 0; I < 13; I++)
+  for(I = 0; I < ArrayCount(BoundKey1); I++)
   {
-// JL006F:
     BoundKey1[I] = 0;
     BoundKey2[I] = 0;
     // I++;
@@ -578,21 +577,21 @@ function MouseInvertChanged()
 function AutoCenterCamChanged()
 {
   harry(GetPlayerOwner()).bAutoCenterCamera = AutoCenterCamCheck.bChecked;
-  GetPlayerOwner().ConsoleCommand("set ini:HGame.Harry bAutoCenterCamera " $ AutoCenterCamCheck.bChecked);
+  GetPlayerOwner().ConsoleCommand("set ini:HGame.harry bAutoCenterCamera " $ AutoCenterCamCheck.bChecked);
   Log("AutoCenterCam changed to " $ string(AutoCenterCamCheck.bChecked));
 }
 
 function AutoDrinkPotionChanged()
 {
   harry(GetPlayerOwner()).bAutoQuaff = AutoDrinkPotionCheck.bChecked;
-  GetPlayerOwner().ConsoleCommand("set ini:HGame.Harry bAutoQuaff " $ AutoDrinkPotionCheck.bChecked);
+  GetPlayerOwner().ConsoleCommand("set ini:HGame.harry bAutoQuaff " $ AutoDrinkPotionCheck.bChecked);
   Log("bAutoQuaff changed to " $ string(AutoDrinkPotionCheck.bChecked));
 }
 
 function MoveWhileCastingChanged()
 {
   harry(GetPlayerOwner()).bMoveWhileCasting = MoveWhileCastingCheck.bChecked;
-  GetPlayerOwner().ConsoleCommand("set ini:HGame.Harry bMoveWhileCasting " $ MoveWhileCastingCheck.bChecked);
+  GetPlayerOwner().ConsoleCommand("set ini:HGame.harry bMoveWhileCasting " $ MoveWhileCastingCheck.bChecked);
   Log("MoveWhileCasting changed to " $ string(MoveWhileCastingCheck.bChecked));
 }
 
@@ -630,254 +629,15 @@ function DifficultyChanged()
     Str = "DifficultyMedium";
     break;
   }
-  GetPlayerOwner().ConsoleCommand("set ini:HGame.Harry Difficulty " $ Str);
+  GetPlayerOwner().ConsoleCommand("set ini:HGame.harry Difficulty " $ Str);
   Log("Difficulty changed to " $ string(GetPlayerOwner().Difficulty));
 }
 
-/*
-function RemoveExistingKey (int KeyNo, string KeyName)
-{
-  local int I;
-
-  // I = RemoveExistingBoundKeyMinIndex;
-  // if ( (I < 13) && (I < RemoveExistingBoundKeyMaxIndex) )
-  for(I = RemoveExistingBoundKeyMinIndex; I < ArrayCount(Boundkey1) && I < RemoveExistingBoundKeyMaxIndex; I++)
-  {
-    if ( I != Selection )
-    {
-      if ( BoundKey2[I] == KeyNo )
-      {
-        BoundKey2[I] = 0;
-        Log(" Removing Key -" $ RealKeyName[KeyNo] $ "- with AliasNames1[I] -" $ AliasNames1[I] $ " 2 -" $ AliasNames2[I] $ " 3 -" $ AliasNames3[I]);
-        GetPlayerOwner().ConsoleCommand("SET Input "@RealKeyName[KeyNo]@RemoveActionFromKey(RealKeyName[KeyNo],AliasNames1[I]));
-        if ( AliasNames2[I] != "" )
-        {
-          GetPlayerOwner().ConsoleCommand("SET Input "@RealKeyName[KeyNo]@RemoveActionFromKey(RealKeyName[KeyNo],AliasNames2[I]));
-        }
-        if ( AliasNames3[I] != "" )
-        {
-          GetPlayerOwner().ConsoleCommand("SET Input "@RealKeyName[KeyNo]@RemoveActionFromKey(RealKeyName[KeyNo],AliasNames3[I]));
-        }
-      }
-      if ( BoundKey1[I] == KeyNo )
-      {
-        BoundKey1[I] = BoundKey2[I];
-        BoundKey2[I] = 0;
-        Log(" Removing Key -" $ RealKeyName[KeyNo] $ "- with AliasNames1[I] -" $ AliasNames1[I] $ " 2 -" $ AliasNames2[I] $ " 3 -" $ AliasNames3[I]);
-        GetPlayerOwner().ConsoleCommand("SET Input "@RealKeyName[KeyNo]@RemoveActionFromKey(RealKeyName[KeyNo],AliasNames1[I]));
-        if ( AliasNames2[I] != "" )
-        {
-          GetPlayerOwner().ConsoleCommand("SET Input "@RealKeyName[KeyNo]@RemoveActionFromKey(RealKeyName[KeyNo],AliasNames2[I]));
-        }
-        if ( AliasNames3[I] != "" )
-        {
-          GetPlayerOwner().ConsoleCommand("SET Input "@RealKeyName[KeyNo]@RemoveActionFromKey(RealKeyName[KeyNo],AliasNames3[I]));
-        }
-      }
-    }
-    // I++;
-    // goto JL000B;
-  }
-}
-
-function string AddTokenToString (string InString, string InToken)
-{
-  local int J;
-
-  InString = Caps(InString);
-  InToken = Caps(InToken);
-  if ( InToken == "" )
-  {
-    return InString;
-  }
-  if ( InStr(InString,InToken) != -1 )
-  {
-    return InString;
-  }
-  J = Len(InString);
-  if ( J > 0 )
-  {
-    J--;
-    // if ( (J > 0) && ((Mid(InString,J,1) == "|") || (Mid(InString,J,1) == " ")) )
-	while ( J > 0 && (Mid(InString,J,1) == "|" || Mid(InString,J,1) == " ") )
-    {
-      if ( Mid(InString,J,1) == "=" )
-      {
-        Log(" InString[" $ string(J) $ "] == '=' so we will return -" $ InString @ InToken);
-        return InString @ InToken;
-      }
-      J--;
-      // goto JL0067;
-    }
-    Log(" InString[" $ string(J) $ "] != '=' so we will return -" $ InString @ "|" @ InToken);
-    return InString @ "|" @ InToken;
-  } else {
-    return InToken;
-  }
-}
-
-function string RemoveTokenFromString (string InString, string InToken)
-{
-  local string L;
-  local string R;
-  local int I;
-  local int J;
-
-  if ( (InString == "") || (InToken == "") )
-  {
-    return InString;
-  }
-  InString = Caps(InString);
-  InToken = Caps(InToken);
-  I = InStr(InString,InToken);
-  if ( I != -1 )
-  {
-    Log("Removing Token:" $ InToken $ " from string:" $ InString $ "!");
-    L = Left(InString,I);
-    R = Right(InString,Len(InString) - (I + Len(InToken)));
-    Log("InStr returned:" $ string(I) $ " Len(leftPart):" $ string(Len(L)) $ " Len(InToken):" $ string(Len(InToken)));
-    J = Len(L);
-    J--;
-    // if ( (J > 0) && ((Mid(L,J,1) == "|") || (Mid(L,J,1) == " ")) )
-	while ( J > 0 && (Mid(L,J,1) == "|" || Mid(L,J,1) == " ") )
-    {
-      Log("j=" $ string(J) $ "! Mid(l, j, 1)=" $ Mid(L,J,1) $ "!l=" $ L $ "!");
-      L = Left(L,J-- );
-      // goto JL0130;
-    }
-    Log("After cleanup left:" $ L);
-    Log("right:" $ R);
-    Log("final:" $ L $ R);
-    L = L $ R;
-    // if ( (Len(L) > 0) && ((Mid(L,0,1) == "|") || (Mid(L,0,1) == " ")) )
-	while ( Len(L) > 0 && (Mid(L,0,1) == "|" || Mid(L,0,1) == " ") )
-    {
-      Log("j=" $ string(J) $ "! Mid(l, 0, 1)=" $ Mid(L,0,1) $ "!l=" $ L $ "!");
-      L = Right(L,Len(L) - 1);
-      // goto JL021C;
-    }
-    Log("After cleanup final:" $ L);
-    return L;
-  }
-  return InString;
-}
-
-function string RemoveActionFromKey (string KeyName, string ActionName)
-{
-  local string keybinding;
-
-  keybinding = GetPlayerOwner().ConsoleCommand("KEYBINDING " $KeyName);
-  Log("Calling RemoveActionFromKey(" $ keybinding $ "," $ ActionName $ ");");
-  return RemoveTokenFromString(keybinding,ActionName);
-}
-
-function string AddActionToKey (string KeyName, string ActionName)
-{
-  local string keybinding;
-
-  keybinding = GetPlayerOwner().ConsoleCommand("KEYBINDING " $KeyName);
-  Log("Calling AddActionToKey(" $ keybinding $ "," $ ActionName $ ");");
-  return AddTokenToString(keybinding,ActionName);
-}
-
-function SetKey (int KeyNo, string KeyName)
-{
-  local string RemoveKeyName;
-
-  Log("options Setkey" @ KeyName $ " KeyNo" @ string(KeyNo));
-  if ( BoundKey1[Selection] != 0 )
-  {
-    if ( KeyNo == BoundKey1[Selection] )
-    {
-      if ( BoundKey2[Selection] != 0 )
-      {
-        RemoveKeyName = RealKeyName[BoundKey2[Selection]];
-        GetPlayerOwner().ConsoleCommand("SET Input "@RemoveKeyName@RemoveActionFromKey(RemoveKeyName,AliasNames1[Selection]));
-        if ( AliasNames2[Selection] != "" )
-        {
-          GetPlayerOwner().ConsoleCommand("SET Input "@RemoveKeyName@RemoveActionFromKey(RemoveKeyName,AliasNames2[Selection]));
-        }
-        if ( AliasNames3[Selection] != "" )
-        {
-          GetPlayerOwner().ConsoleCommand("SET Input "@RemoveKeyName@RemoveActionFromKey(RemoveKeyName,AliasNames3[Selection]));
-        }
-        BoundKey2[Selection] = 0;
-      }
-    } else //{
-      if ( KeyNo == BoundKey2[Selection] )
-      {
-        RemoveKeyName = RealKeyName[BoundKey1[Selection]];
-        GetPlayerOwner().ConsoleCommand("SET Input "@RemoveKeyName@RemoveActionFromKey(RemoveKeyName,AliasNames1[Selection]));
-        if ( AliasNames2[Selection] != "" )
-        {
-          GetPlayerOwner().ConsoleCommand("SET Input "@RemoveKeyName@RemoveActionFromKey(RemoveKeyName,AliasNames2[Selection]));
-        }
-        if ( AliasNames3[Selection] != "" )
-        {
-          GetPlayerOwner().ConsoleCommand("SET Input "@RemoveKeyName@RemoveActionFromKey(RemoveKeyName,AliasNames3[Selection]));
-        }
-        BoundKey1[Selection] = BoundKey2[Selection];
-        BoundKey2[Selection] = 0;
-      } else {
-        if ( BoundKey2[Selection] != 0 )
-        {
-          RemoveKeyName = RealKeyName[BoundKey2[Selection]];
-          GetPlayerOwner().ConsoleCommand("SET Input "@RemoveKeyName@RemoveActionFromKey(RemoveKeyName,AliasNames1[Selection]));
-          if ( AliasNames2[Selection] != "" )
-          {
-            GetPlayerOwner().ConsoleCommand("SET Input "@RemoveKeyName@RemoveActionFromKey(RemoveKeyName,AliasNames2[Selection]));
-          }
-          if ( AliasNames3[Selection] != "" )
-          {
-            GetPlayerOwner().ConsoleCommand("SET Input "@RemoveKeyName@RemoveActionFromKey(RemoveKeyName,AliasNames3[Selection]));
-          }
-          BoundKey2[Selection] = 0;
-        }
-        BoundKey2[Selection] = BoundKey1[Selection];
-        BoundKey1[Selection] = KeyNo;
-        if ( AliasNames2[Selection] == "" )
-        {
-          GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames1[Selection]));
-        } else {
-          if ( AliasNames3[Selection] == "" )
-          {
-            GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames1[Selection]));
-            GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames2[Selection]));
-          } else {
-            GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames1[Selection]));
-            GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames2[Selection]));
-            GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames3[Selection]));
-          }
-        }
-      }
-    //}
-  } else {
-    BoundKey1[Selection] = KeyNo;
-    if ( AliasNames2[Selection] == "" )
-    {
-      GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames1[Selection]));
-    } else {
-      if ( AliasNames3[Selection] == "" )
-      {
-        GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames1[Selection]));
-        GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames2[Selection]));
-      } else {
-        GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames1[Selection]));
-        GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames2[Selection]));
-        GetPlayerOwner().ConsoleCommand("SET Input" @KeyName@AddActionToKey(KeyName,AliasNames3[Selection]));
-      }
-    }
-  }
-}
-*/
-
-//all these functions are rewritten by me because the originals are broken -AdamJD
-// start ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function RemoveExistingKey(int KeyNo, string KeyName)
 {
 	local int I;
 
-	for(I=RemoveExistingBoundKeyMinIndex; I<ArrayCount(Boundkey1) && I<RemoveExistingBoundKeyMaxIndex; I++)
+	for(I = RemoveExistingBoundKeyMinIndex; I < ArrayCount(Boundkey1) && I < RemoveExistingBoundKeyMaxIndex; I++)
 	{
 		if (I != Selection)
 		{
@@ -885,7 +645,7 @@ function RemoveExistingKey(int KeyNo, string KeyName)
 			{			
 				BoundKey2[I] = 0;
 
-				log(" Removing Key -" $RealKeyName[KeyNo] $"- with AliasNames1[I] -" $AliasNames1[I] $" 2 -" $AliasNames2[I] $" 3 -" $AliasNames3[I] );
+				Log(" Removing Key -" $RealKeyName[KeyNo] $"- with AliasNames1[I] -" $AliasNames1[I] $" 2 -" $AliasNames2[I] $" 3 -" $AliasNames3[I] );
 				
 				GetPlayerOwner().ConsoleCommand("SET Input "@RealKeyName[KeyNo]@RemoveActionFromKey( RealKeyName[KeyNo], AliasNames1[I] ) );
 				
@@ -904,7 +664,7 @@ function RemoveExistingKey(int KeyNo, string KeyName)
 				BoundKey1[I] = BoundKey2[I];
 				BoundKey2[I] = 0;
 
-				log(" Removing Key -" $RealKeyName[KeyNo] $"- with AliasNames1[I] -" $AliasNames1[I] $" 2 -" $AliasNames2[I] $" 3 -" $AliasNames3[I] );
+				Log(" Removing Key -" $RealKeyName[KeyNo] $"- with AliasNames1[I] -" $AliasNames1[I] $" 2 -" $AliasNames2[I] $" 3 -" $AliasNames3[I] );
 
 				GetPlayerOwner().ConsoleCommand("SET Input "@RealKeyName[KeyNo]@RemoveActionFromKey( RealKeyName[KeyNo], AliasNames1[I] ) );
 				
@@ -948,12 +708,12 @@ function string AddTokenToString(string InString, string InToken)
 		{
 			if ( Mid(InString, j, 1) == "=" )
 			{
-				log(" InString["$j$"] == '=' so we will return -" $InString@InToken );
+				Log(" InString["$j$"] == '=' so we will return -" $InString@InToken );
 				return (InString@InToken);
 			}
 			j--;
 		}
-		log(" InString["$j$"] != '=' so we will return -" $(InString@"|"@InToken) );
+		Log(" InString["$j$"] != '=' so we will return -" $(InString@"|"@InToken) );
 		
 		return (InString@"|"@InToken);
 	}
@@ -979,26 +739,26 @@ function string RemoveTokenFromString(string InString, string InToken)
 	i = InStr(InString, InToken );
 	if ( i != -1 )
 	{
-		log( "Removing Token:" $InToken $" from string:" $InString $"!" );
+		Log( "Removing Token:" $InToken $" from string:" $InString $"!" );
 		
 		l = Left( InString, i );
 		
 		r = Right( InString, Len(InString) - (i+Len(InToken)) );
-		log( "InStr returned:" $i $" Len(leftPart):" $Len(l) $" Len(InToken):" $Len(InToken) );
+		Log( "InStr returned:" $i $" Len(leftPart):" $Len(l) $" Len(InToken):" $Len(InToken) );
 		
 		j = Len( l );
 		j--;
 		
 		while ( j > 0 && (Mid(l, j, 1) == "|" || Mid(l, j, 1) == " ") )
 		{
-			log( "j=" $j $"! Mid(l, j, 1)=" $Mid(l, j, 1) $"!l=" $l $"!" );
+			Log( "j=" $j $"! Mid(l, j, 1)=" $Mid(l, j, 1) $"!l=" $l $"!" );
 
 			l = Left( l, j--);
 		}
 		
-		log("After cleanup left:" $l );
-		log("right:" $r );
-		log("final:" $l$r );
+		Log("After cleanup left:" $l );
+		Log("right:" $r );
+		Log("final:" $l$r );
 		
 		l = l$r;
 		
@@ -1009,7 +769,7 @@ function string RemoveTokenFromString(string InString, string InToken)
 			l = Right( l, Len( l )-1);
 		}
 
-		log("After cleanup final:" $l );
+		Log("After cleanup final:" $l );
 
 		return (l);
 	}
@@ -1038,7 +798,7 @@ function SetKey(int KeyNo, string KeyName)
 {
 	local string RemoveKeyName;
 
-	log( "options Setkey"@KeyName $" KeyNo"@KeyNo );
+	Log( "options Setkey"@KeyName $" KeyNo"@KeyNo );
 
 	if ( BoundKey1[Selection] != 0 )
 	{
@@ -1145,7 +905,6 @@ function SetKey(int KeyNo, string KeyName)
 		}
 	}
 }
-// end ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function ProcessKey (int KeyNo)
 {
@@ -1154,7 +913,7 @@ function ProcessKey (int KeyNo)
   KeyName = RealKeyName[KeyNo];
   Log("InputPage selection:" $ string(Selection) $ " has AliasNames1:'" $ AliasNames1[Selection] $ "' attempt to set as " $ string(KeyNo) $ ":" $ KeyName);
   PlayClick();
-  if ( (KeyName == "") || (KeyName == "Escape") || (KeyNo >= 112) && (KeyNo <= 121) || (KeyNo >= 48) && (KeyNo <= 57) || (KeyNo == 91) || (KeyNo == 92) || (KeyNo == 93) || (KeyNo == 236) || (KeyNo == 237) )
+  if ( (KeyName == "") || (KeyName == "Escape") || ((KeyNo >= 112) && (KeyNo <= 121)) || ((KeyNo >= 48) && (KeyNo <= 57)) || (KeyNo == 91) || (KeyNo == 92) || (KeyNo == 93) || (KeyNo == 236) || (KeyNo == 237) )
   {
     return;
   }
@@ -1189,32 +948,32 @@ function Notify (UWindowDialogControl C, byte E)
     switch (C)
     {
       case DifficultyCombo:
-      DifficultyChanged();
-      break;
+		  DifficultyChanged();
+		  break;
       case SensitivitySlider:
-      SensitivityChanged();
-      break;
+		  SensitivityChanged();
+		  break;
       case MouseSmoothCheck:
-      MouseSmoothChanged();
-      break;
+		  MouseSmoothChanged();
+		  break;
       case InvertBroomCheck:
-      InvertBroomChanged();
-      break;
+		  InvertBroomChanged();
+		  break;
       case AutoJumpCheck:
-      AutoJumpChanged();
-      break;
+		  AutoJumpChanged();
+		  break;
       case MouseInvertCheck:
-      MouseInvertChanged();
-      break;
+		  MouseInvertChanged();
+		  break;
       case AutoCenterCamCheck:
-      AutoCenterCamChanged();
-      break;
+		  AutoCenterCamChanged();
+		  break;
       case AutoDrinkPotionCheck:
-      AutoDrinkPotionChanged();
-      break;
+		  AutoDrinkPotionChanged();
+		  break;
       case MoveWhileCastingCheck:
-      MoveWhileCastingChanged();
-      break;
+		  MoveWhileCastingChanged();
+		  break;
       default:
     }
     case DE_Click:
@@ -1232,7 +991,7 @@ function Notify (UWindowDialogControl C, byte E)
     {
       PlayClick();
 
-	  for(I = 0; I < 11; I++)
+	  for(I = 0; I < ArrayCount(InGame_KeyButtons); I++)
       {
         if ( InGame_KeyButtons[I] == C )
         {
@@ -1249,7 +1008,7 @@ function Notify (UWindowDialogControl C, byte E)
         }
       }
 
-	  for(I = 0; I < 2; I++)
+	  for(I = 0; I < ArrayCount(InQuidditch_KeyButtons); I++)
       {
         if ( InQuidditch_KeyButtons[I] == C )
         {
@@ -1266,7 +1025,7 @@ function Notify (UWindowDialogControl C, byte E)
         }
       }
 
-	  for(I = 0; I < 1; I++)
+	  for(I = 0; I < ArrayCount(InWizardDuel_KeyButtons); I++)
       {
         if ( InWizardDuel_KeyButtons[I] == C )
         {
@@ -1291,29 +1050,29 @@ function Notify (UWindowDialogControl C, byte E)
     }
     break;
     case DE_RClick:
-    if ( bPolling )
-    {
-      bPolling = False;
-      SelectedButton.bDisabled = False;
-      if ( C == SelectedButton )
-      {
-        ProcessKey(2);
-        return;
-      }
-    }
-    break;
+		if ( bPolling )
+		{
+		  bPolling = False;
+		  SelectedButton.bDisabled = False;
+		  if ( C == SelectedButton )
+		  {
+			ProcessKey(2);
+			return;
+		  }
+		}
+		break;
     case DE_MClick:
-    if ( bPolling )
-    {
-      bPolling = False;
-      SelectedButton.bDisabled = False;
-      if ( C == SelectedButton )
-      {
-        ProcessKey(4);
-        return;
-      }
-    }
-    break;
+		if ( bPolling )
+		{
+		  bPolling = False;
+		  SelectedButton.bDisabled = False;
+		  if ( C == SelectedButton )
+		  {
+			ProcessKey(4);
+			return;
+		  }
+		}
+		break;
     default:
   }
 }

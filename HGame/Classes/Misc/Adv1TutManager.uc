@@ -62,14 +62,12 @@ begin:
 	
   do
   {
-	  if ( Normal(Ron.Location - PlayerHarry.Cam.Location) Dot vector(PlayerHarry.Cam.Rotation) > Cos(LookAtRonConeAngle * 2 * 3.14159989 / 360) )
+	  if ( (Normal(Ron.Location - PlayerHarry.Cam.Location) Dot vector(PlayerHarry.Cam.Rotation)) > Cos(LookAtRonConeAngle * 2 * 3.14159989 / 360) )
 	  {
 		PlayerHarry.ClientMessage("**** See Ron");
 		break;
-	  } //else {
-		Sleep(0.1);
-		//if (! False ) goto JL0000;
-	  //}
+	  } 
+	  Sleep(0.1);
   }
   until(false);
   

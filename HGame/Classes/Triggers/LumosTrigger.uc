@@ -44,7 +44,6 @@ auto state StateLumosOff
       GotoState('StateWaitingToTurnOn');
     }
   }
-  begin:
 }
 
 state StateWaitingToTurnOn
@@ -74,8 +73,6 @@ state StateWaitingToTurnOn
   {
     GotoState('StateLumosOff');
   }
-  
-  begin:
 }
 
 state StateLumosOn
@@ -109,7 +106,6 @@ state StateLumosOn
     }
     GotoState('StateLumosOff');
   }
-  begin:
 }
 
 defaultproperties

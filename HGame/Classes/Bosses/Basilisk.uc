@@ -156,6 +156,7 @@ function PostBeginPlay()
     if ( VSize2D(A.Location - Location) < 70 )
     {
       BasilStartPoint = A;
+	  break;
     }
   }
   AttackTimer = b1_TimeBetweenAttackStart;
@@ -402,25 +403,25 @@ function RotateTo (float Yaw, optional float Time, optional float Rate)
   if ( DesiredYaw <  -MaxHeadYaw )
   {
     DesiredYaw =  -MaxHeadYaw;
-  } else {
+  } else //{
     if ( DesiredYaw > MaxHeadYaw )
     {
       DesiredYaw = MaxHeadYaw;
     }
-  }
+  //}
   startYaw = ActualYaw;
   YawTime = 0.0;
   if ( Time != 0 )
   {
     YawTimeDest = Time;
-  } else {
+  } else //{
     if ( Rate != 0 )
     {
       YawTimeDest = Abs(DesiredYaw - startYaw) / Rate;
     } else {
       YawTimeDest = Abs(DesiredYaw - startYaw) / HeadYawRate;
     }
-  }
+  //}
 }
 
 function RotateToHarry (optional float Time, optional float Rate)
@@ -504,7 +505,7 @@ function Tick (float dtime)
         if ( D < 350 )
         {
           theta = Atan(SpellToHeadProximity / D);
-          v2 = Normal(baseWand(PlayerHarry.Weapon).LastCastedSpell.Velocity) Cross V / D;
+          v2 = Normal(baseWand(PlayerHarry.Weapon).LastCastedSpell.Velocity) Cross (V / D);
           if ( VSize(v2) < Sin(theta) )
           {
             LastDodgedSpell = A;
@@ -570,7 +571,7 @@ state stateWait1
     SetTimer(0.0,False);
   }
   
-  //UTPT didn't add this -AdamJD
+  //UTPT didn't add this... -AdamJD
   function BasilHitBySpell( baseSpell spell, vector HitLocation )
   {
 	Global.BasilHitBySpell( spell, HitLocation );
@@ -974,9 +975,9 @@ state stateAttack_2_
       DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
     } else {
       DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw - DegRotAwayFromHarry() * 65536.0 / 360.0; 
-	  bGotHitDuringWarmUp = False;
 	}
   }
+  bGotHitDuringWarmUp = False;
   PlayLungeAnim_2_();
   PlayerHarry.ShakeView(0.5,100.0,100.0);
   PlayLungeSound();
@@ -993,7 +994,7 @@ function PlayLungeAnim_2_()
   local int I;
   local int W;
 
-  W = (HeadAttackFarthest_2 - HeadAttackNearest_2) /*UTPT didn't add this bit... -AdamJD*/ / (HeadAttackCount_2 - 1);
+  W = (HeadAttackFarthest_2 - HeadAttackNearest_2) / (HeadAttackCount_2 - 1); //UTPT didn't add the divide bit... -AdamJD
   I = ( VSize2D(playerHarry.Location - Location) - HeadAttackNearest_2 + w/2 + w/4) / w;  //UTPT didn't add this... -AdamJD
   I = Clamp( I, 0, HeadAttackCount_2 - 1 ); //UTPT didn't add this... -AdamJD
   PlayAnim(name("snap" $ string(I + 1)),HeadAttackAnimRate,0.2);
@@ -1076,20 +1077,20 @@ function CastSpitSpell (bool bAimAtHarry, optional bool bUseHeadYaw)
     if ( PlayerHarry.Difficulty == DifficultyMedium )
     {
       fTimeToHit = 0.5;
-    } else {
+    } else //{
       if ( PlayerHarry.Difficulty == DifficultyHard )
       {
         fTimeToHit = 0.181;
       }
-    }
+    //}
     V = ComputeTrajectoryByTime(_BasiliskHeadColObj.Location,PlayerHarry.Location,fTimeToHit,-200.0);
     R = rotator(V);
-    A = Spawn(Class'spellAcidSpit',,,_BasiliskHeadColObj.Location,R);
+    A = Spawn(Class'spellAcidSpit',,,[SpawnLocation]_BasiliskHeadColObj.Location,R);
     V.Z += 40 * Cos(8.0 * Level.TimeSeconds);
     A.Velocity = V;
   } else {
     R = _BasiliskHeadColObj.Rotation;
-    A = Spawn(Class'spellAcidSpit',,,_BasiliskHeadColObj.Location,R);
+    A = Spawn(Class'spellAcidSpit',,,[SpawnLocation]_BasiliskHeadColObj.Location,R);
   }
   Log("*********** spawned spit:" $ string(A.Name) $ " v:" $ string(V) $ " grav:" $ string(Region.Zone.ZoneGravity.Z));
   A.FloorZ = FloorZ;
@@ -1413,20 +1414,17 @@ state stateEyeSpell
     default:
   }
   AttackTimer = TempFloat / 2;
-  RotateTo(DegreeRotToActor(aEyeTarget),,40.0);
-  // Sleep(0.01);
   
   //do and until -AdamJD
   do
   {
-	Sleep(0.01);
-  }
-  until (ActualYaw == DesiredYaw);
-    
-  //do and until -AdamJD
-  do
-  {
-	Sleep(0.01);
+	RotateTo(DegreeRotToActor(aEyeTarget),,40.0);
+	//do and until -AdamJD
+	do
+	{
+	  Sleep(0.01);
+	}
+	until (ActualYaw == DesiredYaw);
   }
   until (AttackTimer <= 0);
 
@@ -1548,19 +1546,12 @@ state stateEyeSpellFire
 		}
 
 		EyeBeam1.DrawScale = 2.0 * BeamGrowTime / BeamGrowTimeSpan;
-		EyeBeam1.Wideness = FMin( 255.0, 128.0/EyeBeam1.DrawScale );
 		EyeBeam2.DrawScale = EyeBeam1.DrawScale;
-		EyeBeam2.Wideness = EyeBeam1.Wideness;
 	}
 
 	EyeBeam1.SetLocation( BonePos( 'Bone144' ) );
 	EyeBeam2.SetLocation( BonePos( 'Bone118' ) );
-
-	r.Yaw =   ActualYaw * 65536.0 / 360.0  +  Rotation.Yaw; 
-	v = Location + vector(r) * TempHarryDist;
-	v.Z = playerHarry.Location.Z;
-	r.Pitch = rotator(v - EyeBeam1.Location).Pitch;
-		
+	
 	r = rotator( aEyeTarget.Location - EyeBeam1.Location );
 
 	EyeBeam1.SetRotation( r );
@@ -1615,9 +1606,9 @@ state stateEyeSpellFire
   
  begin:
   RotateTo(DegreeRotToActor(aEyeTarget),,40.0);
-  EyeBeam1 = Spawn(Class'SnakeBeam',self,,BonePos('Bone144'));
+  EyeBeam1 = Spawn(Class'SnakeBeam',self,,[SpawnLocation]BonePos('Bone144'));
   EyeBeam1.DrawScale = 0.0;
-  EyeBeam2 = Spawn(Class'SnakeBeam',self,,BonePos('Bone118'));
+  EyeBeam2 = Spawn(Class'SnakeBeam',self,,[SpawnLocation]BonePos('Bone118'));
   EyeBeam2.DrawScale = 0.0;
   BeamGrowTime = 0.01;
   BeamGrowTimeSpan = 0.5;
@@ -1647,8 +1638,9 @@ JL00D9:
 		{
 			Sleep(0.01);
 		}	
-		until (AttackTimer <= 0);
+		until( ActualYaw == DesiredYaw );
 	 }
+	 until (AttackTimer <= 0);
 	 
 	  if ( VSize2D(PlayerHarry.Location - Location) < HeadAttackFarthest + 20 )
 	  {
@@ -1660,39 +1652,6 @@ JL00D9:
 	  }
   }
   until (False);
-  
-  //UTPT didn't add these... -AdamJD
-  //------------------------------------------------------------------------------------------------
-  TempFloat = 0.25;
-
-  TempFloat2 = DegreeRotToHarry();
-  TempBool = TempFloat2 < 0;
-  TempHarryDist = VSize2d( playerHarry.Location - Location );
-	
-  if( TempBool )
-  {
-	RotateTo( TempFloat2 + BeamYawStartOffset_Degrees * 0.5, TempFloat, 0 );
-  }
-  else
-  {
-	RotateTo( TempFloat2 - BeamYawStartOffset_Degrees * 0.5, TempFloat, 0 );
-  }
-	
-  Sleep( TempFloat );
-	
-  if( TempBool )
-  {
-	RotateTo( TempFloat2 - BeamYawStartOffset_Degrees*1.5, 0, BeamYawRate_DegreesPerSec );
-  }
-  else
-  {
-	RotateTo( TempFloat2 + BeamYawStartOffset_Degrees*1.5, 0, BeamYawRate_DegreesPerSec );
-  }
-	
-  Sleep( BeamLifeSpan );
-
-  GotoState('stateEyeSpellFire');
-  //------------------------------------------------------------------------------------------------
 	
   SetAttackTimer();
   GotoState(WaitingState);
@@ -1849,30 +1808,31 @@ function PlayRoarSound()
 function PlayLungeSound()
 {
   //local Sound tempSound;
+  local Sound tempLungeSound;
 
   switch (Rand(6))
   {
     case 0:
-    tempSound = Sound'Basilisk_attack1';
+    tempLungeSound = Sound'Basilisk_attack1';
     break;
     case 1:
-    tempSound = Sound'Basilisk_attack2';
+    tempLungeSound = Sound'Basilisk_attack2';
     break;
     case 2:
-    tempSound = Sound'Basilisk_attack3';
+    tempLungeSound = Sound'Basilisk_attack3';
     break;
     case 3:
-    tempSound = Sound'Basilisk_attack4';
+    tempLungeSound = Sound'Basilisk_attack4';
     break;
     case 4:
-    tempSound = Sound'Basilisk_attack5';
+    tempLungeSound = Sound'Basilisk_attack5';
     break;
     case 5:
-    tempSound = Sound'Basilisk_attack6';
+    tempLungeSound = Sound'Basilisk_attack6';
     break;
     default:
   }
-  _BasiliskHeadColObj.PlaySound(tempSound,Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.81,1.25));
+  _BasiliskHeadColObj.PlaySound(tempLungeSound,Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.81,1.25));
 }
 
 function PlayLungeAnim()
@@ -1881,7 +1841,7 @@ function PlayLungeAnim()
   local int W;
   local name N;
 
-  W = (HeadAttackFarthest - HeadAttackNearest) /*UTPT didn't add this bit... -AdamJD*/ / (HeadAttackCount - 1);
+  W = (HeadAttackFarthest - HeadAttackNearest) / (HeadAttackCount - 1); //UTPT didn't add the divide bit... -AdamJD
   I = ( VSize2D(playerHarry.Location - Location) - HeadAttackNearest + w/2 + w* 0.3) / w; //UTPT didn't add this... -AdamJD
   I = Clamp( I, 0, HeadAttackCount - 1 ); //UTPT didn't add this... -AdamJD
   N = name("lunge_" $ string(I + 1));
@@ -1895,7 +1855,9 @@ function PlayLungeFromHoleAnim (int part)
   local int W;
   local string S;
 
-  W = (HeadAttackFarthest - HeadAttackNearest);
+  W = (HeadAttackFarthest - HeadAttackNearest) / (HeadAttackCount - 1); //UTPT didn't add the divide bit... -AdamJD
+  I = ( VSize2D(playerHarry.Location - Location) - HeadAttackNearest + w/2 + w/4) / w;  //UTPT didn't add this... -AdamJD
+  I = Clamp( I, 0, HeadAttackCount - 1 ); //UTPT didn't add this... -AdamJD
   if ( part < 4 )
   {
     S = "snap_" $ string(I + 1) $ "_" $ string(part);
@@ -2002,7 +1964,7 @@ state stateHit_2_
   //UTPT didn't add this... -AdamJD
   function Tick(float dtime)
   {
-	global.tick( dtime );
+	Global.Tick( dtime );
 
 	if( Rand(12)==0 )
 	{
@@ -2074,7 +2036,15 @@ function CastEyeSpell (bool bMissHarry)
   }
   D = VSize(PlayerHarry.Location - _BasiliskHeadColObj.Location);
   V = Normal(PlayerHarry.Location + Vec(0.0,0.0,PlayerHarry.BaseEyeHeight / 3) - BonePos('Bone144'));
-  spell = Spawn(Class'BasiliskSpell',,,BonePos('Bone144'));
+  spell = Spawn(Class'BasiliskSpell',,,[SpawnLocation]BonePos('Bone144'));
+  //UTPT didn't add this... -AdamJD
+  spell.Init(V,SpellDamageAmount,SpellInitialDrawScale,SpellEndDrawScale,D + 200,SpellStartSpeed,SpellEndSpeed,angleOffset * 65536 / 360);
+  spell.bActive = True;
+  v = Normal(playerHarry.Location + vec(0,0,playerHarry.BaseEyeHeight / 3) - BonePos('Bone118'));
+  spell = Spawn(Class'BasiliskSpell', [SpawnLocation]BonePos('Bone118') );
+  spell.Init(V,SpellDamageAmount,SpellInitialDrawScale,SpellEndDrawScale,D + 200,SpellStartSpeed,SpellEndSpeed,(angleOffset + angleSpread) * 65536 / 360);
+  spell.bActive = True;
+  spell.PlaySound(Sound'Basilisk_eyes_shoot',SLOT_None,[Radius]BasilSoundRadius);
 }
 
 state stateRetreat
@@ -2144,12 +2114,12 @@ function BasilHitBySpell (baseSpell spell, Vector HitLocation)
   if ( PlayerHarry.Difficulty == DifficultyMedium )
   {
     DamageAmount *= 0.75;
-  } else {
+  } else //{
     if ( PlayerHarry.Difficulty == DifficultyHard )
     {
       DamageAmount *= 0.5;
     }
-  }
+  //}
   Health -= DamageAmount;
   if ( Health <= 0 )
   {
@@ -2314,6 +2284,7 @@ function MoveToRandomVisibleHole()
 {
   local int NumVisibleHoles;
   //local int NumHoles;
+  local int iNumHoles;
   local Actor Holes[20];
   local Actor VisibleHoles[20];
   local Vector vDir;
@@ -2325,21 +2296,21 @@ function MoveToRandomVisibleHole()
   vDir = Normal(vector(PlayerHarry.Rotation) * vect(1.00,1.00,0.00));
   foreach AllActors(Class'Actor',A,HoleMarkerCommonTag)
   {
-    if ( vDir Dot Normal((A.Location - PlayerHarry.Location) * vect(1.00,1.00,0.00)) > 0.5 )
+    if ( (vDir Dot Normal((A.Location - PlayerHarry.Location) * vect(1.00,1.00,0.00))) > 0.5 )
     {
       VisibleHoles[NumVisibleHoles++ ] = A;
     } else {
       if ( VSize2D(A.Location - PlayerHarry.Location) < ClosestNonVisibleHoleDist )
       {
         ClosestNonVisibleHoleDist = VSize2D(A.Location - PlayerHarry.Location);
-        ClosestNonVisibleHoleIdx = NumHoles;
+        ClosestNonVisibleHoleIdx = iNumHoles;
       }
     }
-    Holes[NumHoles++ ] = A;
+    Holes[iNumHoles++ ] = A;
   }
   if ( FRand() < 0.2 )
   {
-    A = Holes[Rand(NumHoles)];
+    A = Holes[Rand(iNumHoles)];
   } else //{
     if ( (NumVisibleHoles == 0) || (NumVisibleHoles == 1) && (FRand() < 0.5) )
     {
@@ -2484,7 +2455,7 @@ defaultproperties
 
     MinDamageToBotherBasil=3.00
 
-    CentreOffset=(X=30.00,Y=0.00,Z=130.00),
+    CentreOffset=(X=30.00,Y=0.00,Z=130.00)
 
     bGestureFaceHorizOnly=True
 

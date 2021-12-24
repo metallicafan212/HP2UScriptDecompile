@@ -5,9 +5,9 @@
 class HPMenuOptionComboList extends HGameComboList;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FEComboListBox.PNG	GROUP=Icons	Name=FEComboListBox COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEComboListLarge.PNG	GROUP=Icons	Name=FEComboListLarge COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEComboListSmall.PNG	GROUP=Icons	Name=FEComboListSmall COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboListBox.PNG	GROUP=Icons	Name=FEComboListBox COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboListLarge.PNG	GROUP=Icons	Name=FEComboListLarge COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboListSmall.PNG	GROUP=Icons	Name=FEComboListSmall COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 var Texture bgImage;
 
@@ -70,7 +70,6 @@ function BeforePaint (Canvas C, float X, float Y)
 		WinHeight = ((ItemHeight * Count) + (VBorder * 2) * HScale);
 	}
 	*/
-
 	while (I != None)
 	{
 		TextSize(C,RemoveAmpersand(I.Value),W,H);

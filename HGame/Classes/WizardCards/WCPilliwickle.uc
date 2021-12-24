@@ -5,7 +5,7 @@
 class WCPilliwickle extends BronzeCards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardPilliwickleBigTexture.PNG	GROUP=Icons	Name=WizCardPilliwickleBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardPilliwickleBigTexture.PNG	GROUP=Icons	Name=WizCardPilliwickleBigTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardPilliwickleTex0.PNG	GROUP=Skins	Name=WizardCardPilliwickleTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
 function PostBeginPlay()

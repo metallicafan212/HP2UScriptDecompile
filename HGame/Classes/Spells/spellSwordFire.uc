@@ -127,7 +127,6 @@ auto state StateFlying
       }
     }
   }
-  begin:
 }
 
 defaultproperties

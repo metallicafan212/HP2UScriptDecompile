@@ -5,10 +5,10 @@
 class HPMenuOptionCheckBox extends HGameCheckbox;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FEOptionTickCheckedTex.PNG	GROUP=Icons	Name=FEOptionTickCheckedTex COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEOptionTickCheckedOverTex.PNG	GROUP=Icons	Name=FEOptionTickCheckedOverTex COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEOptionTickUncheckedTex.PNG	GROUP=Icons	Name=FEOptionTickUncheckedTex COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
-#exec Texture Import File=Textures\Icons\FEOptionTickUncheckedOverTex.PNG	GROUP=Icons	Name=FEOptionTickUncheckedOverTex COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\FEOptionTickCheckedTex.PNG	GROUP=Icons	Name=FEOptionTickCheckedTex COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEOptionTickCheckedOverTex.PNG	GROUP=Icons	Name=FEOptionTickCheckedOverTex COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEOptionTickUncheckedTex.PNG	GROUP=Icons	Name=FEOptionTickUncheckedTex COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEOptionTickUncheckedOverTex.PNG	GROUP=Icons	Name=FEOptionTickUncheckedOverTex COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 
 //texture vars for importing -AdamJD
 var Texture TBoxChecked;

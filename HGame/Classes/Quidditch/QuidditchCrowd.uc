@@ -55,27 +55,27 @@ function Cheer (CheerType eCheerType)
   {
     // case 0:
 	case CT_Cheer:
-    CheerSound = CheerSounds[Rand(4)];
+    CheerSound = CheerSounds[Rand(NUM_CHEER_SOUNDS)];
     break;
     // case 1:
 	case CT_CheerLong:
-    CheerSound = CheerLongSounds[Rand(2)];
+    CheerSound = CheerLongSounds[Rand(NUM_CHEER_LONG_SOUNDS)];
     break;
     // case 2:
 	case CT_Boo:
-    CheerSound = BooSounds[Rand(5)];
+    CheerSound = BooSounds[Rand(NUM_BOO_SOUNDS)];
     break;
     // case 3:
 	case CT_BooLong:
-    CheerSound = BooLongSounds[Rand(1)];
+    CheerSound = BooLongSounds[Rand(NUM_BOO_LONG_SOUNDS)];
     break;
     // case 4:
 	case CT_Coax:
-    CheerSound = CoaxSounds[Rand(1)];
+    CheerSound = CoaxSounds[Rand(NUM_COAX_SOUNDS)];
     break;
     // case 5:
 	case CT_Aw:
-    CheerSound = AwSounds[Rand(1)];
+    CheerSound = AwSounds[Rand(NUM_AW_SOUNDS)];
     break;
     default:
   }
@@ -106,7 +106,6 @@ function Cheer (CheerType eCheerType)
 		fRadius = CheerRadius * 7.0;
 		break;
 	default:
-		break;
   }
   PlaySound(CheerSound,SLOT_Misc,CheerVolume / 255.0,,fRadius,fPitch);
   if ( NextCrowd != None )

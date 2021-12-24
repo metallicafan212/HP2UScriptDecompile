@@ -420,7 +420,7 @@ function bool WandAtInterpolationPoint (InterpolationPoint IPoint, Interpolation
       ++nHitPointsPassed;
       // I = 0;
       // if ( I < 3 )
-	  for(I = 0; I < 3; I++) //for loop -AdamJD
+	  for(I = 0; I < ArrayCount(IPPassedArrow); I++) //for loop -AdamJD
       {
         if ( IPPassedArrow[I] != None )
         {
@@ -437,11 +437,12 @@ function bool WandAtInterpolationPoint (InterpolationPoint IPoint, Interpolation
       {
         // I = 0;
         // if ( I < 3 )
-		for(I = 0; I < 3; I++) //for loop -AdamJD
+		for(I = 0; I < ArrayCount(IPPassedArrow); I++) //for loop -AdamJD
         {
           if ( IPPassedArrow[I] == None )
           {
             IPPassedArrow[I] = SpellLessonInterpolationPoint(IPoint);
+			break;
           }
         }
       }
@@ -514,7 +515,7 @@ function DoArrowKeyPressed (ELessonKey LessonKey)
   local float fAdjustedHitRange;
   local float fAdjustedMissRange;
 
-  fAdjustedHitRange = 14.0 + VSize(GameWand.Location - vectLastWandLoc) + 0.01;
+  fAdjustedHitRange = (fHITPOINT_RANGE + VSize(GameWand.Location - vectLastWandLoc)) + 0.01;
   IPTemp = SpellLessonInterpolationPoint(GameWand.SplineManager.Dest.Prev);
   nLastPosition = IPTemp.Position;
   // if ( IPTemp != None )
@@ -579,9 +580,9 @@ function DoArrowKeyPressed (ELessonKey LessonKey)
   {
     if ( IPClosest == IPNext )
     {
-      fAdjustedMissRange = fAdjustedHitRange + (26 - 14);
+      fAdjustedMissRange = fAdjustedHitRange + (fHITPOINT_NEXT_MISS_RANGE - fHITPOINT_RANGE);
     } else {
-      fAdjustedMissRange = fAdjustedHitRange + (17 - 14);
+      fAdjustedMissRange = fAdjustedHitRange + (fHITPOINT_PREV_MISS_RANGE - fHITPOINT_RANGE);
     }
     if ( KeyMatchesIPArrow(LessonKey,IPClosest) && (fIPClosestDistance <= fAdjustedHitRange) )
     {
@@ -618,8 +619,8 @@ function bool KeyMatchesIPArrow (ELessonKey LessonKey, SpellLessonInterpolationP
 	case(LessonKey_Right):
 		return IP.IsDirectionArrowRight(nLevel);
     default:
+		return False;
   }
-	return False;
 }
 
 function RenderHudItems (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
@@ -727,12 +728,16 @@ function SayTryAgain (bool bLastTimeAround)
   {
     // I = 0;
     // if ( I < 2 )
-	for(iSayTryAgain = 0; iSayTryAgain < 2; iSayTryAgain++) //for loop -AdamJD
+	for(iSayTryAgain = 0; iSayTryAgain < ArrayCount(strTryOneLastTime); iSayTryAgain++) //for loop -AdamJD
     {
       if ( strTryOneLastTime[iSayTryAgain] != "" )
       {
         ++nTryLastTimeEntries;
       }
+	  else
+	  {
+		break;
+	  }
     }
   }
   if ( bLastTimeAround && (nTryLastTimeEntries > 0) )
@@ -742,12 +747,16 @@ function SayTryAgain (bool bLastTimeAround)
   } else {
     // I = 0;
     // if ( I < 3 )
-	for(iSayTryAgain = 0; iSayTryAgain < 3; iSayTryAgain++) //for loop -AdamJD
+	for(iSayTryAgain = 0; iSayTryAgain < ArrayCount(strTryAgain); iSayTryAgain++) //for loop -AdamJD
     {
       if ( strTryAgain[iSayTryAgain] != "" )
       {
         ++nTryAgainEntries;
       }
+	  else
+	  {
+		break;
+	  }
     }
     if ( nTryAgainEntries > 0 )
     {
@@ -776,12 +785,16 @@ function SayEncouragement()
   {
     // I = 0;
     // if ( I < 2 )
-	for(iSayEncouragement = 0; iSayEncouragement < 2; iSayEncouragement++) //for loop -AdamJD
+	for(iSayEncouragement = 0; iSayEncouragement < ArrayCount(strEncourageDoingGood); iSayEncouragement++) //for loop -AdamJD
     {
       if ( strEncourageDoingGood[iSayEncouragement] != "" )
       {
         ++nDoingGoodEntries;
       }
+	  else
+	  {
+		break;
+	  }
     }
   }
   if ( bDoingGood && (nDoingGoodEntries > 0) )
@@ -791,12 +804,16 @@ function SayEncouragement()
   } else {
     // I = 0;
     // if ( I < 2 )
-	for(iSayEncouragement = 0; iSayEncouragement < 2; iSayEncouragement++) //for loop -AdamJD
+	for(iSayEncouragement = 0; iSayEncouragement < ArrayCount(strEncourageAny); iSayEncouragement++) //for loop -AdamJD
     {
       if ( strEncourageAny[iSayEncouragement] != "" )
       {
         ++nEncourageAnyEntries;
       }
+	  else
+	  {
+		break;
+	  }
     }
     if ( nEncourageAnyEntries > 0 )
     {
@@ -906,8 +923,6 @@ auto state Idle
     PlayerHarry.ClientMessage("Activate spelllesson trigger");
     Activate(Other,EventInstigator);
   }
-  
-  begin:
 }
 
 state GameIntro
@@ -1038,13 +1053,13 @@ state PlayGame
 	case(LessonShape_Rictusempra):
 	// case 2:
 	case(LessonShape_Diffindo):
-		PlayerHarry.PlayMusic("sm_bur_playful_01_loopedit",0.5);
+		PlayerHarry.PlayMusic(strRICTU_DIFF_GAME_MUSIC,0.5);
 		break;
 	// case 1:
 	case(LessonShape_Skurge):
 	// case 3:
 	case(LessonShape_Spongify):
-		PlayerHarry.PlayMusic("sm_bur_playful_01V2",0.5);
+		PlayerHarry.PlayMusic(strSKURGE_SPONG_GAME_MUSIC,0.5);
 		break;
 	default:
 		break;
@@ -1077,22 +1092,22 @@ state LevelOver
   StartCutSequence();
   if ( nHitPointHits >= nHitPointsInLevel )
   {
-    if ( nLevel < 3 - 1 )
+    if ( nLevel < nNUM_LEVELS - 1 )
     {
       Sleep(SayLessonDialog(strLevelCompleteId,True));
     } else {
-      PlayerHarry.PlayMusic("sm_bur_PlayfulReward_01",0.5);
-      fMusicSleep = 7.5;
+      PlayerHarry.PlayMusic(strWON_MUSIC,0.5);
+      fMusicSleep = fWON_MUSIC_LEN;
       fDialogSleep = SayLessonDialog(strAllLevelsCompleteId,True);
-      if ( fMusicSleep + 0.5 < fDialogSleep )
+      if ( fMusicSleep + fEND_MUSIC_FADE_OUT < fDialogSleep )
       {
-        Sleep(fMusicSleep - 0.5);
-        PlayerHarry.StopAllMusic(0.5);
-        Sleep(fDialogSleep - fMusicSleep - 0.5);
+        Sleep(fMusicSleep - fEND_MUSIC_FADE_OUT);
+        PlayerHarry.StopAllMusic(fEND_MUSIC_FADE_OUT);
+        Sleep(fDialogSleep - (fMusicSleep - fEND_MUSIC_FADE_OUT));
       } else {
         Sleep(fDialogSleep);
-        PlayerHarry.StopAllMusic(0.5);
-        Sleep(0.5);
+        PlayerHarry.StopAllMusic(fEND_MUSIC_FADE_OUT);
+        Sleep(fEND_MUSIC_FADE_OUT);
       }
     }
     sgHousePts.SetEffectTypeToPermanent();
@@ -1129,7 +1144,7 @@ state LevelOver
     Sleep(fDialogSleep);
     EndCutSequence();
     ++nLevel;
-    if ( nLevel < 3 )
+    if ( nLevel < nNUM_LEVELS )
     {
 // JL01C8:
       ResetForNextLevel();
@@ -1138,18 +1153,18 @@ state LevelOver
       EndLesson();
     }
   } else {
-    PlayerHarry.PlayMusic("sm_bur_PlayfulFail_01",0.5);
-    fMusicSleep = 9.0;
+    PlayerHarry.PlayMusic(strFAIL_MUSIC,0.5);
+    fMusicSleep = fFAIL_MUSIC_LEN;
     fDialogSleep = SayLessonDialog(strMoveOnAnywayId,True);
-    if ( fMusicSleep + 0.5 < fDialogSleep )
+    if ( fMusicSleep + fEND_MUSIC_FADE_OUT < fDialogSleep )
     {
-      Sleep(fMusicSleep - 0.5);
-      PlayerHarry.StopAllMusic(0.5);
-      Sleep(fDialogSleep - fMusicSleep - 0.5);
+      Sleep(fMusicSleep - fEND_MUSIC_FADE_OUT);
+      PlayerHarry.StopAllMusic(fEND_MUSIC_FADE_OUT);
+      Sleep(fDialogSleep - (fMusicSleep - fEND_MUSIC_FADE_OUT));
     } else {
       Sleep(fDialogSleep);
-      PlayerHarry.StopAllMusic(0.5);
-      Sleep(0.5);
+      PlayerHarry.StopAllMusic(fEND_MUSIC_FADE_OUT);
+      Sleep(fEND_MUSIC_FADE_OUT);
     }
     EndCutSequence();
     EndLesson();

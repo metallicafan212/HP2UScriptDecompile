@@ -433,8 +433,8 @@ function SetHouses()
 		  Commentator.SetOpponent(HA_Slytherin);
 		  break;
       default:
+		  Log("QuidditchDirector: Warning: Opponent property not set properly");
     }
-    Log("QuidditchDirector: Warning: Opponent property not set properly");
   }
   switch (Opponent)
   {
@@ -849,7 +849,7 @@ state GamePlay
       }
       CameraTarget.SetTargetTrackDist(SnitchTrackDistMax);
       fTrackingOffset = (1.0 - (fProgressPercent / 100.0)) * fSnitchTrackingOffset;
-      fCompression = 1.0 - (fProgressPercent / 100.0) * (fSnitchNeutralRadiusAt0 - fSnitchNeutralRadiusAt100) / fSnitchNeutralRadiusAt0;
+      fCompression = 1.0 - (fProgressPercent / 100.0) * ((fSnitchNeutralRadiusAt0 - fSnitchNeutralRadiusAt100) / fSnitchNeutralRadiusAt0);
       fMaxGainRadius = fCompression * fSnitchMaxGainRadiusAt0;
       fNeutralRadius = fCompression * fSnitchNeutralRadiusAt0;
       fMaxLossRadius = fCompression * fSnitchMaxLossRadiusAt0;
@@ -891,7 +891,7 @@ state GamePlay
       HarryHeading = vector(harry.Rotation);
       SnitchFromHarry = Snitch.Location - harry.Location;
       bSnitchInFront = (SnitchFromHarry Dot HarryHeading) > 0.0;
-      if (  !Snitch.bHidden && bSnitchInFront && (fProximity < 300) && SeekerIsOutOfWay() )
+      if (  !Snitch.bHidden && bSnitchInFront && fProximity < 300 && SeekerIsOutOfWay() )
       {
         if (  !bCanReachForSnitch )
         {
@@ -915,8 +915,7 @@ state GamePlay
         }
       }
       PercentDone = fProgressPercent;
-	  //if ( (PercentDone < LastPercentDone) &&  !(PercentDone == 98.0) && (LastPercentDone > 98.0) )
-	  if ( (PercentDone < LastPercentDone) &&  !(PercentDone == 98.0 && (LastPercentDone > 98.0)) ) //fix for progress bar not flashing white when losing progress (thanks to UnDrew for finding this) -AdamJD
+	  if ( (PercentDone < LastPercentDone) &&  !(PercentDone == 98.0 && (LastPercentDone > 98.0)) ) //UTPT forgot to add brackets -AdamJD
       {
         ProgressBar.SetProgress(PercentDone,True,1.0);
       } else {
@@ -928,7 +927,7 @@ state GamePlay
 		//KW left this empty? -AdamJD
 		// goto JL055E;
 	  }
-      if ( bCanReachForSnitch && (fProgressPercent > 98.0) /*&&  !bFinalMatch &&  !bInTrench*/ ) //UTPT decompiled this wrong -AdamJD
+      if ( bCanReachForSnitch && fProgressPercent > 98.0 &&  !(bFinalMatch &&  !bInTrench) ) //UTPT forgot to add brackets -AdamJD 
       {
         Snitch.SetAltTrail(True);
         ProgressBar.SetFlashing(True);
@@ -960,7 +959,7 @@ state GamePlay
       {
         bSnitchVisible = False;
       } else {
-        if (  !bSnitchVisible && ((Commentator == None) || Commentator.SayComment(QC_TheresTheSnitch)) )
+        if (  !bSnitchVisible && (Commentator == None || Commentator.SayComment(QC_TheresTheSnitch)) )
         {
           bSnitchVisible = True;
         }
@@ -1015,12 +1014,12 @@ state GamePlay
               }
             }
           //}
-        } else //{
+        } else {
           if ( (Commentator != None) && ((fProgressPercent < 98.0) || bSeekerJoinedPursuit) )
           {
             Commentator.SayComment(QC_InTrenchRun);
           }
-        //}
+        }
       }
     }
     if ( Level.TimeSeconds > fTimeToCheer )
@@ -1256,7 +1255,6 @@ state GamePlay
         default:
       }
     } else {
-  // JL0117:
       Super.OnTouchEvent(Subject,Object);
     }
   }
@@ -1362,7 +1360,7 @@ state GamePlay
         }
         GotoState('GameLost');
       } else {
-        Trigger(Other,EventInstigator);
+        Super.Trigger(Other,EventInstigator);
       }
     //}
   }
@@ -1415,7 +1413,7 @@ state GamePlay
     if ( bCanReachForSnitch )
     {
       fProximity = VSize(harry.Location - Snitch.Location);
-      if ( (fProgressPercent > 98.0) /*&&  !bFinalMatch &&  !bInTrench*/ ) //UTPT decompiled this wrong -AdamJD
+      if ( (fProgressPercent > 98.0) &&  !(bFinalMatch &&  !bInTrench) ) //UTPT forgot to add brackets -AdamJD
       {
         bCanReachForSnitch = False;
         harry.SetReaching(False);
@@ -1796,7 +1794,7 @@ state GameLost
         Log(string(Name) $ " triggering event '" $ string(MatchEvents.Died) $ "'");
         TriggerEvent(MatchEvents.Died,self,None);
       }
-    } else //{
+    } else {
       if ( bInTrench )
       {
         PlayerHarry.ClientMessage(string(Name) $ " triggering event '" $ string(MatchEvents_Final.Lost) $ "'");
@@ -1809,7 +1807,7 @@ state GameLost
         Log(string(Name) $ " triggering event '" $ string(MatchEvents.Lost) $ "'");
         TriggerEvent(MatchEvents.Lost,self,None);
       }
-    //}
+    }
   }
   
 begin:
@@ -1865,7 +1863,7 @@ begin:
     {
       Commentator.SayComment(QC_Dead,,True);
       Sleep(Commentator.TimeLeftUntilSafeToSayAComment(True));
-    } else //{
+    } else { 
       if (  !bInTrench )
       {
         Commentator.SayComment(QC_CaughtSnitch,TA_Opponent,True);
@@ -1880,7 +1878,7 @@ begin:
         Commentator.SayComment(QC_SigningOff);
         Sleep(Commentator.TimeLeftUntilSafeToSayAComment(True));
       }
-    //}
+    }
   } else {
     Sleep(0.2);
   }
@@ -1954,7 +1952,7 @@ defaultproperties
 
     // Tuning_HarryProgress=(PursuitTime=25.00,PursuitTime_Nimbus2001=12.00,Penalties=12.00(Bludgered=25.00,Bumped=12.00,Hit=5.00,Kicked=10.00),),
 	//
-	//All these are taken from the editor using a retail HGame because KW set up all the correct values in the editor -AdamJD
+	//all these are taken from the editor using a retail HGame because KW set up all the correct values in the editor -AdamJD
 	Tuning_Seeker(0)=(PursuitTime=20.00,RecoveryTime=5.00,Penalties=(Bumped=10.00,Kicked=10.00),PositionChangeInterval=(Min=2.00,Max=4.00),KickInterval=(Min=2.00,Max=3.00),KickDamage=5)
 
     Tuning_Seeker(1)=(PursuitTime=18.20,RecoveryTime=5.00,Penalties=(Bumped=10.00,Kicked=10.00),PositionChangeInterval=(Min=1.50,Max=2.50),KickInterval=(Min=1.50,Max=3.00),KickDamage=5)
@@ -1995,7 +1993,7 @@ defaultproperties
 
     CameraTrailDist=175.00
 
-    RandSeed=(SeedA=1.14223976923713221E33,SeedB=14991598592.00,SeedC=4.56959290224864296E33,SeedD=1.71810775472789258E19)
+    RandSeed=(SeedA=1.1422397692371322E33,SeedB=14991598592E10,SeedC=4.569592902248643E33,SeedD=1.7181077547278926E19)
 
     bNeedsCommentator=True
 

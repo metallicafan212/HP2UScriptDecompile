@@ -3,7 +3,7 @@
 //================================================================================
 
 class baseHUD extends HUD
-  Config(User); 
+  Config(User);
 
 // Metallicafan212:	Add in the font imports
 #exec new TrueTypeFontFactory Name=HugeInkFont FontName="Times New Roman" Xpad=2 Height=24 AntiAlias=0 CharactersPerPage=32 

@@ -2,7 +2,7 @@
 // baseWand.
 //================================================================================
 
-class baseWand extends HWeapon;
+class baseWand extends HWeapon; 
 
 const MAX_NUM_CASTED_SPELLS= 8;
 var bool bAutoSelectSpell;
@@ -369,9 +369,9 @@ function ShowCastedSpellList (optional int iNumSpells)
 {
   local int I;
 
-  if ( (iNumSpells == 0) || (iNumSpells > 8) )
+  if ( (iNumSpells == 0) || (iNumSpells > MAX_NUM_CASTED_SPELLS) )
   {
-    iNumSpells = 8;
+    iNumSpells = MAX_NUM_CASTED_SPELLS;
   }
   PlayerHarry.ClientMessage("***Number of Casted Spells: " $ string(NumCastedSpells));
 
@@ -390,9 +390,9 @@ function AddToCastedSpellList (baseSpell spell)
   CastedSpellList[NumCastedSpells] = spell;
   LastCastedSpell = spell;
   NumCastedSpells++;
-  if ( NumCastedSpells > 8 - 1 )
+  if ( NumCastedSpells > MAX_NUM_CASTED_SPELLS - 1 )
   {
-    NumCastedSpells = 8 - 1;
+    NumCastedSpells = MAX_NUM_CASTED_SPELLS - 1;
     PlayerHarry.ClientMessage("!!!MAX NUMBER OF CASTED SPELLS REACHED for " $ string(self.Owner) $ " !!!!!!");
   }
 }
@@ -417,7 +417,7 @@ function SubtractFromCastedSpellList (baseSpell spell)
   }
   if ( bFound )
   {
-    for ( I=iIndex; I < 8 - 1; ++I )
+    for ( I=iIndex; I < MAX_NUM_CASTED_SPELLS - 1; ++I )
     {
       CastedSpellList[I] = CastedSpellList[I + 1];
     }
@@ -474,7 +474,7 @@ function CastSpell (optional Actor aTarget, optional Vector aTargetOffset, optio
   {
     LastCastedSpell.ProcessTouch(aTarget,aTarget.Location);
     PlayerHarry.cm("Spell AutoHit Target " $ string(aTarget) $ " because TargetDist " $ string(VSize(Location - aTarget.Location)) $ " < " $ string(fAutoHitDistance));
-  } else {
+  } else //{
     if ( aTarget.IsA('harry') )
     {
       if ( PlayerHarry.Difficulty == DifficultyMedium )
@@ -487,7 +487,7 @@ function CastSpell (optional Actor aTarget, optional Vector aTargetOffset, optio
         }
       }
     //}
-  }
+  //}
 }
 
 function bool SwordChargedUpEnough()

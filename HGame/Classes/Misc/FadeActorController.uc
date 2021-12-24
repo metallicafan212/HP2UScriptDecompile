@@ -48,7 +48,7 @@ event Tick (float fTimeDelta)
   TimeCur += fTimeDelta;
   if ( TimeCur < TimeEnd )
   {
-    FadingActor.Opacity += (FadeEnd - FadeStart) * fTimeDelta / TimeEnd;
+    FadingActor.Opacity += (FadeEnd - FadeStart) * (fTimeDelta / TimeEnd);
   } else {
     Finish();
   }

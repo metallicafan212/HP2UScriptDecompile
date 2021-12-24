@@ -377,36 +377,36 @@ function TransitionToCameraMode (ECamMode eMode)
 	GotoState('StateTransition');
 }
 
-/*
 function ShowSettings()
 {
-  PlayerHarry.ClientMessage("The current camera settings are:");
-  PlayerHarry.ClientMessage("-------------------------------------------");
-  PlayerHarry.ClientMessage("LookAtOffset:        " $ string(CurrentSet.vLookAtOffset));
-  PlayerHarry.ClientMessage("LookAtDistance:    " $ string(CurrentSet.fLookAtDistance));
-  PlayerHarry.ClientMessage("RotTightness:        " $ string(CurrentSet.fRotTightness));
-  PlayerHarry.ClientMessage("RotSpeed:             " $ string(CurrentSet.fRotSpeed));
-  PlayerHarry.ClientMessage("MoveTightness:     " $ string(CurrentSet.fMoveTightness));
-  PlayerHarry.ClientMessage("MoveSpeed:          " $ string(CurrentSet.fMoveSpeed));
-  PlayerHarry.ClientMessage("-------------------------------------------");
-  PlayerHarry.ClientMessage("Current mode:       " $ string(CameraMode));
-  PlayerHarry.ClientMessage("Current pos:          " $ string(vCurrPosition));
-  PlayerHarry.ClientMessage("Destination pos:      " $ string(vDestPosition));
-  PlayerHarry.ClientMessage("Current rot:           " $ string(rCurrRotation.Yaw) $ " , " $ string(rCurrRotation.Pitch) $ " , " $ string(rCurrRotation.Roll) $ " ");
-  PlayerHarry.ClientMessage("Destination rot:      " $ string(rDestRotation.Yaw) $ " , " $ string(rDestRotation.Pitch) $ " , " $ string(rDestRotation.Roll) $ " ");
-  PlayerHarry.ClientMessage("fCurrLookAtDistance: " $ string(fCurrLookAtDistance));
-  PlayerHarry.ClientMessage("fDestLookAtDistance: " $ string(fDestLookAtDistance));
-  PlayerHarry.ClientMessage("SyncRotationWithTarget: " $ string(bSyncRotationWithTarget));
-  PlayerHarry.ClientMessage("SyncPositionWithTarget: " $ string(bSyncPositionWithTarget));
-  PlayerHarry.ClientMessage("-------------------------------------------");
-  PlayerHarry.ClientMessage("CamTarget loc:                   " $ string(CamTarget.Location));
-  PlayerHarry.ClientMessage("CamTarget rot:                   " $ string(CamTarget.Rotation));
-  PlayerHarry.ClientMessage("CamTarget AttachedTo:       " $ string(CamTarget.aAttachedTo));
-  PlayerHarry.ClientMessage("CamTarget Attached loc:     " $ string(CamTarget.aAttachedTo.Location));
-  PlayerHarry.ClientMessage("CamTarget attached offset:  " $ string(CamTarget.vOffset));
-  PlayerHarry.ClientMessage("CamTarget relative:            " $ string(CamTarget.bRelative));
+    PlayerHarry.ClientMessage("The current camera settings are:");
+    PlayerHarry.ClientMessage("-------------------------------------------");
+    PlayerHarry.ClientMessage("LookAtOffset:        " $ string(CurrentSet.vLookAtOffset));
+    PlayerHarry.ClientMessage("LookAtDistance:    " $ string(CurrentSet.fLookAtDistance));
+    PlayerHarry.ClientMessage("RotTightness:        " $ string(CurrentSet.fRotTightness));
+    PlayerHarry.ClientMessage("RotSpeed:             " $ string(CurrentSet.fRotSpeed));
+    PlayerHarry.ClientMessage("MoveTightness:     " $ string(CurrentSet.fMoveTightness));
+    PlayerHarry.ClientMessage("MoveSpeed:          " $ string(CurrentSet.fMoveSpeed));
+    PlayerHarry.ClientMessage("-------------------------------------------");
+    PlayerHarry.ClientMessage("Current mode:       " $ string(CameraMode));
+    PlayerHarry.ClientMessage("Current pos:          " $ string(vCurrPosition));
+    PlayerHarry.ClientMessage("Destination pos:      " $ string(vDestPosition));
+    PlayerHarry.ClientMessage("Current rot:           " $ string(rCurrRotation.Yaw) $ " , " $ string(rCurrRotation.Pitch) $ " , " $ string(rCurrRotation.Roll) $ " ");
+    PlayerHarry.ClientMessage("Destination rot:      " $ string(rDestRotation.Yaw) $ " , " $ string(rDestRotation.Pitch) $ " , " $ string(rDestRotation.Roll) $ " ");
+    PlayerHarry.ClientMessage("fCurrLookAtDistance: " $ string(fCurrLookAtDistance));
+    PlayerHarry.ClientMessage("fDestLookAtDistance: " $ string(fDestLookAtDistance));
+    PlayerHarry.ClientMessage("SyncRotationWithTarget: " $ string(bSyncRotationWithTarget));
+    PlayerHarry.ClientMessage("SyncPositionWithTarget: " $ string(bSyncPositionWithTarget));
+    PlayerHarry.ClientMessage("-------------------------------------------");
+    PlayerHarry.ClientMessage("CamTarget loc:                   " $ string(CamTarget.Location));
+    PlayerHarry.ClientMessage("CamTarget rot:                   " $ string(CamTarget.Rotation));
+    PlayerHarry.ClientMessage("CamTarget AttachedTo:       " $ string(CamTarget.aAttachedTo));
+    PlayerHarry.ClientMessage("CamTarget Attached loc:     " $ string(CamTarget.aAttachedTo.Location));
+    PlayerHarry.ClientMessage("CamTarget attached offset:  " $ string(CamTarget.vOffset));
+    PlayerHarry.ClientMessage("CamTarget relative:            " $ string(CamTarget.bRelative));
 }
 
+/*
 function LoadUserSettings (int I)
 {
   if ( I > 4 - 1 )
@@ -441,42 +441,6 @@ function SaveUserSettings (int I)
   }
 }
 */
-
-// console command helper function that shows the camera's current settings
-function ShowSettings()
-{
-	playerHarry.ClientMessage("The current camera settings are:");
-	playerHarry.ClientMessage("-------------------------------------------");	
-	playerHarry.ClientMessage("LookAtOffset:        "	$CurrentSet.vLookAtOffset	);
-	playerHarry.ClientMessage("LookAtDistance:    "		$CurrentSet.fLookAtDistance	);
-	playerHarry.ClientMessage("RotTightness:        "	$CurrentSet.fRotTightness	);
-	playerHarry.ClientMessage("RotSpeed:             "	$CurrentSet.fRotSpeed		);
-	playerHarry.ClientMessage("MoveTightness:     "		$CurrentSet.fMoveTightness	);
-	playerHarry.ClientMessage("MoveSpeed:          "	$CurrentSet.fMoveSpeed		);
-	playerHarry.ClientMessage("-------------------------------------------");
-	playerHarry.ClientMessage("Current mode:       "	$CameraMode		);
-	playerHarry.ClientMessage("Current pos:          "	$vCurrPosition			);
-	playerHarry.ClientMessage("Destination pos:      "	$vDestPosition			);
-	playerHarry.ClientMessage("Current rot:           "	
-		$(rCurrRotation.Yaw)   $" , "
-		$(rCurrRotation.Pitch) $" , "
-		$(rCurrRotation.Roll)  $" ");
-	playerHarry.ClientMessage("Destination rot:      "	
-		$(rDestRotation.Yaw)   $" , "
-		$(rDestRotation.Pitch) $" , "
-		$(rDestRotation.Roll)  $" ");
-
-	playerHarry.ClientMessage("SyncRotationWithTarget: "	$bSyncRotationWithTarget );
-	playerHarry.ClientMessage("SyncPositionWithTarget: "	$bSyncPositionWithTarget );
-	
-	playerHarry.ClientMessage("-------------------------------------------");
-	playerHarry.ClientMessage("CamTarget loc:                   " $CamTarget.location );
-	playerHarry.ClientMessage("CamTarget rot:                   " $CamTarget.rotation );
-	playerHarry.ClientMessage("CamTarget AttachedTo:       " $CamTarget.aAttachedTo );
-	playerHarry.ClientMessage("CamTarget Attached loc:     " $CamTarget.aAttachedTo.location );
-	playerHarry.ClientMessage("CamTarget attached offset:  " $CamTarget.vOffset );
-	playerHarry.ClientMessage("CamTarget relative:            " $CamTarget.bRelative );
-}
 
 function LoadUserSettings( int i )
 {
@@ -538,11 +502,10 @@ function PostBeginPlay()
 
 function InitRotation (Rotator Rot)
 {
-	rDestRotation.Yaw = Rot.Yaw; //& 65535;
-	rDestRotation.Pitch = Rot.Pitch;// & 65535;
-	rDestRotation.Roll = Rot.Roll;// & 65535;
-	// vForward = Normal(DesiredRotation);
-	vForward = normal(vector(DesiredRotation));
+	rDestRotation.Yaw = Rot.Yaw & 65535;			
+	rDestRotation.Pitch = Rot.Pitch & 65535; 	
+	rDestRotation.Roll = Rot.Roll & 65535;		
+	vForward = Normal(Vector(DesiredRotation));
 	rCurrRotation = rDestRotation;
 	DesiredRotation = rDestRotation;
 	SetRotation(DesiredRotation);
@@ -593,12 +556,8 @@ function InitPositionAndRotation (bool bSnapToNewPosAndRot)
 
 function UpdateDistance (float fTimeDelta)
 {
-	/*if ( byte(rCurrRotation.Pitch) > fPitchMovingInThreshold )
-	{
-		fDistanceScalar = 1.0 - byte(rCurrRotation.Pitch) / fPitchMovingInSpread;*/
 	if( rCurrRotation.Pitch > fPitchMovingInThreshold )
 	{
-		// Calculate our DistanceScalar
 		fDistanceScalar = 1.0 - ( rCurrRotation.Pitch / fPitchMovingInSpread );
 		if ( fDistanceScalar < fDistanceScalarMin )
 		{
@@ -622,8 +581,7 @@ function UpdateRotationUsingVectors (float fTimeDelta)
 	local Vector vDestRotation;
 	local Vector vCurrRotation;
 
-	// vDestRotation = Normal(rDestRotation);
-	vDestRotation = normal(vector(rDestRotation));
+	vDestRotation = Normal(vector(rDestRotation));
 	vCurrRotation = vForward;
 	if ( bSyncRotationWithTarget )
 	{
@@ -663,7 +621,6 @@ function ApplyMouseXToDestYaw (float fTimeDelta, optional bool bApplyToBossOffse
 	if (  !bApplyToBossOffset )
 	{
 		rDestRotation.Yaw  += fMouseDeltaX * CurrentSet.fRotSpeed;
-		//rDestRotation.Yaw 	= rDestRotation.Yaw & 65535;
 	}
 	else
 	{
@@ -695,20 +652,20 @@ function ApplyMouseYToDestPitch (float fTimeDelta, optional bool bApplyToBossOff
 		fMouseDeltaY = MIN_MOUSE_DELTA_Y;
     }
   
-  /*
-  if (  !bApplyToBossOffset )
-  {
-    rDestRotation.Pitch += fMouseDeltaY * CurrentSet.fRotSpeed = );
+    /*
+    if (  !bApplyToBossOffset )
     {
-      rDestRotation.Pitch = fCurrentMaxPitch = } else {;
-      if ( byte(rDestRotation.Pitch) < fCurrentMinPitch )
+      rDestRotation.Pitch += fMouseDeltaY * CurrentSet.fRotSpeed = );
       {
-        rDestRotation.Pitch = fCurrentMinPitch = goto JL0159;
-        // There are 2 jump destination(s) inside the last statement!
+        rDestRotation.Pitch = fCurrentMaxPitch = } else {;
+        if ( byte(rDestRotation.Pitch) < fCurrentMinPitch )
+        {
+          rDestRotation.Pitch = fCurrentMinPitch = goto JL0159;
+          // There are 2 jump destination(s) inside the last statement!
+        }
       }
     }
-  }
-  */
+    */
   
 	//all this is added by me because the original commented out decompiled code above is broken -AdamJD
 	if (  !bApplyToBossOffset )
@@ -749,16 +706,7 @@ function UpdateRotation (float fTimeDelta)
 	local float fTravelScalar;
 
 	rDestRotation += rRotationStep * fTimeDelta;
-	
-	// Metallicafan212:	Force to USHORT bounds
-	//rDestRotation.Yaw 	= ClampRotVal(rDestRotation.Yaw);
-	//rDestRotation.Pitch = ClampRotVal(rDestRotation.Pitch);
-	//rDestRotation.Roll 	= ClampRotVal(rDestRotation.Roll);
-	
-	//rCurrRotation.Yaw 	= ClampRotVal(rCurrRotation.Yaw);
-	//rCurrRotation.Pitch = ClampRotVal(rCurrRotation.Pitch);
-	//rCurrRotation.Roll 	= ClampRotVal(rCurrRotation.Roll);
-	
+		
 	if ( bSyncRotationWithTarget )
 	{
 		rCurrRotation = rotator(CamTarget.Location - Location);
@@ -775,21 +723,14 @@ function UpdateRotation (float fTimeDelta)
 		}
 		rCurrRotation += (rDestRotation - rCurrRotation) * fTravelScalar;
 	}
-	// vForward = Normal(rCurrRotation);
-	vForward = normal(vector(rCurrRotation));
+	vForward = Normal(vector(rCurrRotation));
 	SetFinalRotation(rCurrRotation);
 }
 
 function SetFinalRotation (Rotator R)
 {
 	R += rExtraRotation;
-	rExtraRotation = rot(0,0,0);
-  
-	// Metallicafan212: Test?
-	R.Pitch 	= R.Pitch & 65535;
-	R.Roll 		= R.Roll & 65535;
-	R.Yaw 		= R.Yaw & 65535;
-  
+	rExtraRotation = rot(0,0,0);  
 	DesiredRotation = R;
 	SetRotation(R);
 }
@@ -883,7 +824,7 @@ state StateTransition
 	{
 		CamTarget.SetAttachedTo(None);
 		// CamTarget.DoFlyTo(PlayerHarry.Location + CamSetStandard.vLookAtOffset,3,1.0);
-		CamTarget.DoFlyTo( playerHarry.location + CamSetStandard.vLookAtOffset, MOVE_TYPE_EASE_TO, 1.0);
+		CamTarget.DoFlyTo( PlayerHarry.location + CamSetStandard.vLookAtOffset, MOVE_TYPE_EASE_TO, 1.0);
 		InitSettings(CamSetStandard,False,True);
 		InitRotation(PlayerHarry.Rotation);
 		CurrentSet.fMoveTightness = 0.1;
@@ -920,7 +861,7 @@ state StateStandardCam
   
 	function BeginState()
 	{
-		if ( /*True*/USE_DEBUG_MODE )
+		if ( USE_DEBUG_MODE )
 		{
 			PlayerHarry.ClientMessage("Camera: BeginState -> StandardCam");
 		}
@@ -948,7 +889,7 @@ state StateQuidditchCam
 {
 	function BeginState()
 	{
-		if ( /*True*/USE_DEBUG_MODE )
+		if ( USE_DEBUG_MODE )
 		{
 			PlayerHarry.ClientMessage("Camera: BeginState -> QuidditchCam");
 		}
@@ -971,21 +912,13 @@ state StateQuidditchCam
 		rDestRotation = rotator(lookDir);
 		UpdateRotationUsingVectors(fTimeDelta);
 	}
-	
-	//force camera to focus on Harry before going to the cutscene cam -AdamJD
-	function EndState()
-	{
-		//Log("AdamJD:	Ended quidditch cam");
-		InitTarget(PlayerHarry);
-		InitPositionAndRotation(True);
-	}
 }
 
 state StateFlyingCarCam
 {
 	function BeginState()
 	{
-		if ( /*True*/USE_DEBUG_MODE )
+		if ( USE_DEBUG_MODE )
 		{
 			PlayerHarry.ClientMessage("Camera: BeginState -> FlyingCarCam");
 		}
@@ -1015,7 +948,7 @@ state StateDuelingCam
 	{
 		local Rotator Rot;
   
-		if ( /*True*/USE_DEBUG_MODE )
+		if ( USE_DEBUG_MODE )
 		{
 			PlayerHarry.ClientMessage("Camera: BeginState -> StandardCam");
 		}
@@ -1036,7 +969,7 @@ state StateCutSceneCam
 {
 	function BeginState()
 	{
-		if ( /*True*/USE_DEBUG_MODE )
+		if ( USE_DEBUG_MODE )
 		{
 			PlayerHarry.ClientMessage("Camera: BeginState -> StateCutSceneCam");
 		}
@@ -1067,7 +1000,7 @@ state StateBossCam
 {
 	function BeginState()
 	{
-		if ( /*True*/USE_DEBUG_MODE )
+		if ( USE_DEBUG_MODE )
 		{
 			PlayerHarry.ClientMessage("Camera: BeginState -> BossCam");
 		}
@@ -1132,8 +1065,7 @@ state StateFreeCam
 		{
 			fMouseDeltaY = MAX_MOUSE_DELTA_Y;
 		} 
-		else
-		if ( fMouseDeltaY < MIN_MOUSE_DELTA_Y )
+		else if ( fMouseDeltaY < MIN_MOUSE_DELTA_Y )
 		{
 			fMouseDeltaY = MIN_MOUSE_DELTA_Y;
 		}
@@ -1458,8 +1390,7 @@ function DoSimpleFade (bool bFadeIn)
 {
 	local FadeViewController FadeController;
 	
-	//IDK how I didn't notice this... -AdamJD
-	// return;
+	return;
 	FadeController = Spawn(Class'FadeViewController');
 	if ( bFadeIn )
 	{
@@ -1568,19 +1499,19 @@ function bool CutCommand_ProcessLocked (string Command, optional string cue, opt
 		else if ( Left(sString,8) ~= "yawStep=" )
 		{
 			// rRotationStep.Yaw = ConvertDegToRot(float(Mid(sString,8))) = bSyncRotationWithTarget = False;
-			rRotationStep.yaw = ConvertDegToRot( float(Mid(sString,8))); 
+			rRotationStep.Yaw = ConvertDegToRot( float(Mid(sString,8))); 
 			bSyncRotationWithTarget = false;
 		} 
 		else if ( Left(sString,10) ~= "pitchStep=" )
 		{
 			// rRotationStep.Pitch = ConvertDegToRot(float(Mid(sString,10))) = bSyncRotationWithTarget = False;
-			rRotationStep.pitch = ConvertDegToRot( float(Mid(sString,10))); 
+			rRotationStep.Pitch = ConvertDegToRot( float(Mid(sString,10))); 
 			bSyncRotationWithTarget = false;
 		} 
 		else if ( Left(sString,9) ~= "rollStep=" )
 		{
 			// rRotationStep.Roll = ConvertDegToRot(float(Mid(sString,9))) = bSyncRotationWithTarget = False;
-			rRotationStep.roll = ConvertDegToRot( float(Mid(sString,9))); 
+			rRotationStep.Roll = ConvertDegToRot( float(Mid(sString,9))); 
 			bSyncRotationWithTarget = false;
 		} 
 		else if ( Left(sString,13) ~= "rotTightness=" )
@@ -1697,25 +1628,9 @@ function GlobalCutBypass()
 	CamTarget.GlobalCutBypass();
 }
 
-/*
-function bool CameraCanSeeYou (Vector Pos)
-{
-  local Vector Normal;
-  local float dotpr;
-
-  Normal = Rotation;
-  dotpr = Normal.X * (Pos.X - Location.X) + Normal.Y * (Pos.Y - Location.Y) + Normal.Z * (Pos.Z - Location.Z);
-  if ( dotpr > byte(0) )
-  {
-    return True;
-  }
-  return False;
-}
-*/
-
 function bool CameraCanSeeYou(Vector Pos)
 {
-	//local vector normal;
+	//local vector Normal;
 	local Vector vNormal;
 	local Float dotpr;
 

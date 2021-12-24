@@ -3,7 +3,7 @@
 //================================================================================
 
 class StatusGroup extends Actor
-	Abstract;
+	Abstract; 
 
 enum EMenuProps 
 {
@@ -355,8 +355,8 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	if (  !bUpperLeft )
 	{
 		si = GetStatusItem(classItem);
-		nHudX += si.GetHudIconUSize() / 4.0;
-		nHudY += si.GetHudIconVSize() / 4.0;
+		nHudX += (si.GetHudIconUSize() / 4.0);
+		nHudY += (si.GetHudIconVSize() / 4.0);
 	}
 	nCanvasHalfX = smParent.nCanvasSizeX / 2.0;
 	nCanvasHalfY = smParent.nCanvasSizeY / 2.0;
@@ -393,7 +393,7 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	}
 	vectReturn.X = fXVal;
 	vectReturn.Y = fYVal;
-	vectReturn.Z = 150.0;
+	vectReturn.Z = FLY_TO_HUD_CAM_DIST;
 	vectReturn = smParent.PlayerHarry.CameraToWorld(vectReturn);
 	return vectReturn;
 }
@@ -567,7 +567,7 @@ function float GetScaleFactor (int nCanvasSizeX)
 {
 	local float fScale;
 
-	fScale = nCanvasSizeX / 640.0;
+	fScale = nCanvasSizeX / BASE_RESOLUTION_X;
 	return fScale;
 }
 

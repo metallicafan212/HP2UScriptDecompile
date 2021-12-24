@@ -39,11 +39,11 @@ var(Snail) float fStunDuration;
 
 function PostBeginPlay()
 {
-  if ( nMaxTrailSegments > 50 )
+  if ( nMaxTrailSegments > TRAIL_ARRAY_SIZE )
   {
     PlayerHarry.ClientMessage("Warning: Need to increase TRAIL_ARRAY_SIZE");
     Log("Warning: Need to increase TRAIL_ARRAY_SIZE");
-    nMaxTrailSegments = 50;
+    nMaxTrailSegments = TRAIL_ARRAY_SIZE;
   }
 }
 
@@ -253,7 +253,7 @@ function PlayerCutCapture()
 
 function PlayerCutRelease()
 {
-  fCountdownAfterCut = 3.0;
+  fCountdownAfterCut = fDONT_ATTACK_AFTER_CUT_TIME;
 }
 
 event Bump (Actor Other)

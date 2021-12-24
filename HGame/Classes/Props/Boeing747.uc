@@ -47,6 +47,7 @@ function bool StartTransPath()
       TransPoint = I;
       fTransDistance = fDistance;
       iTransPoint = I.Position;
+	  break;
     }
   }
   if ( TransPoint == None )

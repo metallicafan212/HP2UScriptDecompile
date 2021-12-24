@@ -104,7 +104,7 @@ function RegisterPickupProp (HProp Prop)
 
   bFoundSlot = False;
 
-  for(I = 0; I < 20; I++)
+  for(I = 0; I < ArrayCount(propArray); I++)
   {
     if ( propArray[I] == None )
     {
@@ -125,12 +125,12 @@ function UnregisterPickupProp (HProp Prop)
   local int I;
   local int J;
 
-  for(I = 0; I < 20; I++)
+  for(I = 0; I < ArrayCount(propArray); I++)
   {
     if ( propArray[I] == Prop )
     {
       propArray[I] = None;
-	  for(J = I + 1; J < 20; J++)
+	  for(J = I + 1; J < ArrayCount(propArray); J++)
       {
         propArray[J - 1] = propArray[J];
         propArray[J] = None;
@@ -197,10 +197,9 @@ simulated function PreBeginPlay()
     managerCutScene = Spawn(Class'CutSceneManager');
   }
 
-  for(I = 0; I < 20; I++)
+  for(I = 0; I < ArrayCount(propArray); I++)
   {
     propArray[I] = None;
-	break;
   }
 }
 
@@ -284,7 +283,7 @@ simulated function PostRender (Canvas Canvas)
       harry(Owner).managerStatus.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
     }
 
-	for(I = 0; I < 20; I++)
+	for(I = 0; I < ArrayCount(propArray); I++)
     {
       if ( propArray[I] == None )
       {

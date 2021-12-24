@@ -2,7 +2,7 @@
 // baseConsole.
 //================================================================================
 
-class baseConsole extends WindowConsole;
+class baseConsole extends WindowConsole; 
 
 //texture imports -AdamJD
 /*

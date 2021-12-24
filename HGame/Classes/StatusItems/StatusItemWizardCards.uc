@@ -5,8 +5,6 @@
 class StatusItemWizardCards extends StatusItem
   Abstract;
 
-const MAX_CARDS = 50;
-
 enum ECardOwner 
 {
 	CardOwner_None,
@@ -21,7 +19,7 @@ struct TCardData
 	var ECardOwner Owner;
 };
 
-var TCardData WizardCards[MAX_CARDS];
+var TCardData WizardCards[50];
 
 
 
@@ -50,11 +48,11 @@ function ECardOwner GetCardOwner (int nId)
   }
   */
   
-	for(i = 0; i < MAX_CARDS; i++)
+	for(I = 0; I < ArrayCount(WizardCards); I++)
 	{
-		if(WizardCards[i].nID == nID)
+		if(WizardCards[I].nId == nId)
 		{
-			return WizardCards[i].Owner;
+			return WizardCards[I].Owner;
 		}
 	}
   
@@ -116,21 +114,21 @@ function SetCardOwner (int nId, ECardOwner Owner)
   UpdateCount();
   */
   
-	for(i = 0; i < MAX_CARDS; i++)
+	for(I = 0; I < ArrayCount(WizardCards); I++)
 	{
-		if(WizardCards[i].nId == nID)
+		if(WizardCards[I].nId == nId)
 		{
-			WizardCards[i].Owner = Owner;
+			WizardCards[I].Owner = Owner;
 			if(Owner == CardOwner_Harry)
 			{
-				MoveCardToEnd(i);
+				MoveCardToEnd(I);
 			}
 			break;
 		}
-		else if(WizardCards[i].nID == 0)
+		else if(WizardCards[I].nId == 0)
 		{
-			WizardCards[i].nID 		= nId;
-			WizardCards[i].Owner	= Owner;
+			WizardCards[I].nId 		= nId;
+			WizardCards[I].Owner	= Owner;
 			break;
 		}
 	}
@@ -141,7 +139,6 @@ function SetCardOwner (int nId, ECardOwner Owner)
 	}
 	
 	UpdateCount();
-	
 }
 
 function MoveCardToEnd (int nStartIdx)
@@ -172,12 +169,12 @@ function MoveCardToEnd (int nStartIdx)
   WizardCards[I].Owner = MovedCardOwner;
   */
   
-	for(i = nStartIdx + 1; i < MAX_CARDS; i++)
+	for(I = nStartIdx + 1; I < ArrayCount(WizardCards); I++)
 	{
-		if(WizardCards[i].nID > 0)
+		if(WizardCards[I].nId > 0)
 		{
-			WizardCards[i - 1].nID 		= WizardCards[i].nID;
-			WizardCards[i - 1].Owner	= WizardCards[i].Owner;
+			WizardCards[I - 1].nId 		= WizardCards[I].nId;
+			WizardCards[I - 1].Owner	= WizardCards[I].Owner;
 		}
 		else
 		{
@@ -185,10 +182,9 @@ function MoveCardToEnd (int nStartIdx)
 		}
 	}
 	
-	i--;
-	WizardCards[i].nID 		= nMovedCardId;
-	WizardCards[i].Owner	= MovedCardOwner;
-  
+	--I;
+	WizardCards[I].nId 		= nMovedCardId;
+	WizardCards[I].Owner	= MovedCardOwner;
 }
 
 function UpdateCount()
@@ -215,18 +211,17 @@ function UpdateCount()
   }
   */
   
-	for(i = 0; i < MAX_CARDS; i++)
+	for(I = 0; I < ArrayCount(WizardCards); I++)
 	{
-		if(WizardCards[i].nID == 0)
+		if(WizardCards[I].nId == 0)
 		{
 			return;
 		}
-		else if(WizardCards[i].Owner == CardOwner_Harry)
+		else if(WizardCards[I].Owner == CardOwner_Harry)
 		{
 			++nCount;
 		}
 	}
-  
 }
 
 function bool GetFirstVendorCardId (out int nCardId)
@@ -253,17 +248,17 @@ function bool GetFirstVendorCardId (out int nCardId)
   }
   */
   
-	for(i = 0; i < MAX_CARDS; i++)
+	for(I = 0; I < ArrayCount(WizardCards); I++)
 	{
-		if(WizardCards[i].Owner == CardOwner_None)
+		if(WizardCards[I].nId == 0)
 		{
-			nCardID = 0;
+			nCardId = 0;
 			return false;
 		}
 		
-		if(WizardCards[i].Owner == CardOwner_Vendor)
+		if(WizardCards[I].Owner == CardOwner_Vendor)
 		{
-			nCardID = WizardCards[i].nID;
+			nCardId = WizardCards[I].nId;
 			return true;
 		}
 	}
@@ -274,7 +269,7 @@ function bool GetFirstVendorCardId (out int nCardId)
 
 function bool GetFirstVendorCardIdAndClass (out int nCardId, out Class<Actor> classWC)
 {
-	if (!GetFirstVendorCardId(nCardId) )
+	if ( !GetFirstVendorCardId(nCardId) )
 	{
 		return False;
 	}
@@ -627,7 +622,7 @@ function bool VerifyCardClass (int nCardId, Class<Actor> classWC)
 
 function GetCardData (int nIdx, out int nId, out int nOwner)
 {
-	  if ( (nIdx >= 0) && (nIdx < 50) )
+	  if ( (nIdx >= 0) && (nIdx < ArrayCount(WizardCards)) )
 	  {
 			nId 	= WizardCards[nIdx].nId;
 			nOwner 	= WizardCards[nIdx].Owner;
@@ -651,30 +646,24 @@ function int GetCardId (int nIdx)
 
 function SetCardData (int nIdx, int nId, int nOwner)
 {
-	  if ( (nIdx >= 0) && (nIdx < 50) )
+	  if ( (nIdx >= 0) && (nIdx < ArrayCount(WizardCards)) )
 	  {
 			WizardCards[nIdx].nId = nId;
 			if ( nOwner == 0 )
 			{
 				WizardCards[nIdx].Owner = CardOwner_None;
 			} 
+			else if ( nOwner == 1 )
+			{
+				WizardCards[nIdx].Owner = CardOwner_Harry;
+			} 
+			else if ( nOwner == 2 )
+			{
+				WizardCards[nIdx].Owner = CardOwner_Vendor;
+			} 
 			else 
 			{
-				  if ( nOwner == 1 )
-				  {
-						WizardCards[nIdx].Owner = CardOwner_Harry;
-				  } 
-				  else 
-				  {
-						if ( nOwner == 2 )
-						{
-							WizardCards[nIdx].Owner = CardOwner_Vendor;
-						} 
-						else 
-						{
-							sgParent.smParent.PlayerHarry.ClientMessage("ERROR: Invalid owner in SetCardData");
-						}
-				  }
+				sgParent.smParent.PlayerHarry.ClientMessage("ERROR: Invalid owner in SetCardData");
 			}
 	  } 
 	  else 
@@ -703,16 +692,15 @@ function ShowCardData()
 	}
 	*/
 	
-	for(i = 0; i < MAX_CARDS; i++)
+	for(I = 0; I < ArrayCount(WizardCards); I++)
 	{
-		if(WizardCards[i].nID == 0)
+		if(WizardCards[I].nID == 0)
 		{
 			break;
 		}
 		
 		sgParent.smParent.PlayerHarry.ClientMessage("ID: " $ string(WizardCards[I].nId) $ " Owner: " $ string(WizardCards[I].Owner));
 	}
-	
 }
 
 defaultproperties

@@ -27,7 +27,7 @@ function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int
 	fScaleFactor 	= GetScaleFactor(Canvas.SizeX);
 	GetGroupFinalXY(bMenuMode, Canvas, nIconWidth, nIconHeight, nFinalX, nFinalY);
 	nOutX 			= nFinalX;
-	nOutY 			=  -nIconHeight * fScaleFactor;
+	nOutY 			=  -(nIconHeight * fScaleFactor);
 }
 
 defaultproperties

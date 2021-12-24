@@ -37,8 +37,8 @@ function Spawned()
   // SetPhysics(2);
   SetPhysics(PHYS_Falling);
   bBouncingState = True;
-  explosion = Spawn(Class'WizCard_Explo',,,Location);
-  explosion = Spawn(Class'Spawn_flash_1',,,Location);
+  explosion = Spawn(Class'WizCard_Explo',,,[SpawnLocation]Location);
+  explosion = Spawn(Class'Spawn_flash_1',,,[SpawnLocation]Location);
   GotoState('bouncing');
 }
 
@@ -52,6 +52,7 @@ function Touch (Actor Other)
   local harry harry;
   local StatusGroupWizardCards sgCards;
   //local Class<StatusItem> classStatusItem;
+  local Class<StatusItem> classStatusItemWizCard;
   local StatusItemWizardCards siCard;
   local int nNewCardCount;
   local int nOldCardCount;
@@ -75,22 +76,22 @@ function Touch (Actor Other)
   }
   if ( IsA('BronzeCards') )
   {
-    classStatusItem = Class'StatusItemBronzeCards';
+    classStatusItemWizCard = Class'StatusItemBronzeCards';
   } else //{
     if ( IsA('SilverCards') )
     {
-      classStatusItem = Class'StatusItemSilverCards';
+      classStatusItemWizCard = Class'StatusItemSilverCards';
     } else //{
       if ( IsA('Goldcards') )
       {
-        classStatusItem = Class'StatusItemGoldCards';
+        classStatusItemWizCard = Class'StatusItemGoldCards';
       } else {
         harry.ClientMessage("Error WizardCard class " $ string(Class) $ " not recognized");
       }
     //}
   //}
   sgCards = StatusGroupWizardCards(harry.managerStatus.GetStatusGroup(Class'StatusGroupWizardCards'));
-  siCard = StatusItemWizardCards(sgCards.GetStatusItem(classStatusItem));
+  siCard = StatusItemWizardCards(sgCards.GetStatusItem(classStatusItemWizCard));
   nOldCardCount = siCard.nCount;
   //siCard.SetCardOwner(Id,siCard.1);
   siCard.SetCardOwner(Id,siCard.ECardOwner.CardOwner_Harry);
@@ -149,7 +150,7 @@ state bouncing
   function Tick (float Delta)
   {
     NewRot = Rotation;
-    NewRot.Yaw = NewRot.Yaw + 50000 * Delta;
+    NewRot.Yaw = NewRot.Yaw + (50000 * Delta);
 	SetRotation(NewRot);
   }
   
@@ -169,7 +170,7 @@ auto state Wait
       GotoState('bouncing');
     }
     NewRot = Rotation;
-    NewRot.Yaw = NewRot.Yaw + 50000 * Delta;
+    NewRot.Yaw = NewRot.Yaw + (50000 * Delta);
 	SetRotation(NewRot);
   }
   

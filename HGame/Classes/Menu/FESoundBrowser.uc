@@ -30,7 +30,7 @@ function Paint (Canvas Canvas, float X, float Y)
 
   Super.Paint(Canvas,X,Y);
   TextSize(Canvas,"Language Browser",W,H);
-  Root.SetPosScaled(Canvas,320.0 - W / 2,0.0);
+  Root.SetPosScaled(Canvas,320.0 - (W / 2),0.0);
   Canvas.DrawText("Language Browser");
   HPHud(Root.Console.Viewport.Actor.myHUD).managerCutScene.RenderHudItemManager(Canvas,False,True,False);
 }

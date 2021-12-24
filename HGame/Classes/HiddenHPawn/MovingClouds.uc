@@ -49,7 +49,7 @@ function bool PassedClouds()
 	local Vector vStraightDir;
 	local Vector vCarDir;
 
-	vStraightDir 	=  -Vector(Rotation);
+	vStraightDir 	=  -(Vector(Rotation));
 	vCarDir 		= Vector(PlayerHarry.Rotation);
 	if ( vStraightDir Dot vCarDir < 0 )
 	{

@@ -109,6 +109,10 @@ function Tick (float DeltaTime)
       vLastLocation = Location;
       GotoState('stateGotoHarry');
     }
+	else
+	{
+	  //KW left this empty? -AdamJD
+	}
   }
 }
 

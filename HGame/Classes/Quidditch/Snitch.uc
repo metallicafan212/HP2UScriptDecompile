@@ -260,6 +260,7 @@ event Tick (float DeltaTime)
   local Vector Dir;
   local Vector RelJerkOffset;
   //local float Dist;
+  local float fDist;
 
   if ( bJerking && (Level.TimeSeconds > fTimeForNextJerk) )
   {
@@ -271,14 +272,13 @@ event Tick (float DeltaTime)
   if ( bJerking )
   {
     Dir = DestJerkOffset - JerkOffset;
-    Dist = VSize(Dir);
-    if ( Dist > 0.0 )
+    fDist = VSize(Dir);
+    if ( fDist > 0.0 )
     {
-      if ( Dist > 0.01 )
+      if ( fDist > 0.01 )
       {
-        JerkOffset += Normal(Dir) * Min(Dist,JerkSpeed * DeltaTime);
+        JerkOffset += Normal(Dir) * Min(fDist,JerkSpeed * DeltaTime);
       }
-	  //UTPT added this in the if statement above, the snitch used to be too snappy/unnatural looking -AdamJD
 	  else
 	  {
 		JerkOffset = DestJerkOffset;
@@ -301,7 +301,7 @@ event Tick (float DeltaTime)
     {
       Halo.bHidden =  !Halo.bHidden;
     }
-    fTimeForNextFlash += 0.05;
+    fTimeForNextFlash += FlashPeriod;
     if ( fTimeForNextFlash < Level.TimeSeconds )
     {
       fTimeForNextFlash = Level.TimeSeconds;
@@ -313,7 +313,7 @@ event Tick (float DeltaTime)
     HistoryTimer = 0.0;
     vPositionHistory[iNextHistorySlot] = Location;
     iNextHistorySlot++;
-    if ( iNextHistorySlot >= 4 )
+    if ( iNextHistorySlot >= NUM_POSITION_HISTORY )
     {
       iNextHistorySlot = 0;
     }

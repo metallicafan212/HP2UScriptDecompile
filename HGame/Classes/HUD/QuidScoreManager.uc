@@ -50,7 +50,7 @@ event PostBeginPlay()
   textureRaven = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2RavenclawCrestSm",Class'Texture'));
   textureSlyth = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SlytherinCrestSm",Class'Texture'));
   textureGryff = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrestSm",Class'Texture'));
-  textureTallyPointsIcon = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2BigChallengeScore",Class'Texture'));
+  textureTallyPointsIcon = Texture(DynamicLoadObject(strTALLY_POINTS_ICON,Class'Texture'));
   textureOpponent = textureHuff;
 }
 

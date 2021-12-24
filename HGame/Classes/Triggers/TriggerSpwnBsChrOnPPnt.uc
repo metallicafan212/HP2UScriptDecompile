@@ -52,7 +52,7 @@ function ProcessTrigger()
   }
   // N = 0;
   // if ( N < 8 )
-  for(N = 0; N < 8; N++)
+  for(N = 0; N < NUM_BASE_CHARS; N++)
   {
     if ( BaseCharToSpawn[N] == None )
     {
@@ -68,7 +68,7 @@ function ProcessTrigger()
     return;
   }
   I = Rand(N);
-  A = Spawn(BaseCharToSpawn[I],,,sp.Location,rotator(sp.NextPatrolPoint.Location - sp.Location));
+  A = Spawn(BaseCharToSpawn[I],,,[SpawnLocation]sp.Location,[SpawnRotation]rotator(sp.NextPatrolPoint.Location - sp.Location));
   if ( A == None )
   {
     Log("TriggerSpwnBsChrOnPPnt: couldn't spawn the baseChar:" $ string(BaseCharToSpawn[I]));

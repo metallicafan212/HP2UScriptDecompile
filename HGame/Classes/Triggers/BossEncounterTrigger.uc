@@ -29,7 +29,7 @@ function DoTrigger (Actor Other, Pawn EventInstigator)
   if (  !bDisabled )
   {
     ProcessTrigger();
-    Touch(Other);
+    Super.Touch(Other);
     if ( bSendTriggerToBoss )
     {
       foreach AllActors(Class'baseBoss',Boss,Event)

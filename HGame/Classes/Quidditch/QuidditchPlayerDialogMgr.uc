@@ -103,7 +103,7 @@ function PostBeginPlay()
   CurrentSpeakingPlayer = SpeakingPlayers;
   PickNextSpeakingPlayer();
   fNextTimeALineCanBeSaid = 0.0;
-  fGapTime = (FRand() * (fMaxGapTimeBetweenLines - fMinGapTimeBetweenLines)) + fMinGapTimeBetweenLines;
+  fGapTime = FRand() * (fMaxGapTimeBetweenLines - fMinGapTimeBetweenLines) + fMinGapTimeBetweenLines;
   fillDialogArray();
 }
 
@@ -115,7 +115,7 @@ function SetOpponent (HouseAffiliation eNewOpponent)
 
 function StartDialog()
 {
-  fNextTimeALineCanBeSaid = (Level.TimeSeconds + (FRand() * 1.0)) + 1.0;
+  fNextTimeALineCanBeSaid = Level.TimeSeconds + (FRand() * 1.0) + 1.0;
   SetTimer((fNextTimeALineCanBeSaid + fGapTime) - Level.TimeSeconds,False);
 }
 
@@ -205,12 +205,12 @@ function bool SayDialogLine (optional bool bNoGap)
     {
       return False;
     }
-  } else //{
+  } else {
     if ( Level.TimeSeconds < fNextTimeALineCanBeSaid + fGapTime )
     {
       return False;
     }
-  //}
+  }
   switch (CurrentSpeakingPlayer.eSex)
   {
     case SX_Male:

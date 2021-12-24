@@ -27,7 +27,7 @@ function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int
 	fScaleFactor 	= GetScaleFactor(Canvas.SizeX);
 	GetGroupFinalXY(bMenuMode, Canvas, nIconWidth, nIconHeight, nFinalX, nFinalY);
 	nX 				= nFinalX;
-	nY 				=  -fScaleFactor * nIconHeight;
+	nY 				=  -(fScaleFactor * nIconHeight);
 }
 
 defaultproperties
@@ -37,7 +37,4 @@ defaultproperties
     fTotalHoldTime=3.00
 
     fTotalEffectOutTime=0.30
-
-	// Metallicafan212:	Missing for some reason
-	GameEffectType=ET_Fade
 }

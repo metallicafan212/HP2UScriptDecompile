@@ -144,6 +144,7 @@ function Notify (UWindowDialogControl C, byte E)
       FEBook(book).ChangePageNamed("SOUNDVIDEO");
       break;
       default:
+	  break;
     }
   }
 }

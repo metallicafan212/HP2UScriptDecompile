@@ -107,30 +107,35 @@ function PreSwitchPage()
   local bool bWonAtLeastOne;
 
   PlayerHarry = harry(Root.Console.Viewport.Actor);
+  
   PlayerHarry.GetRictusempraChallengeScore(nHighScore,nMaxScore);
   if ( nHighScore > 0 )
   {
     bWonAtLeastOne = True;
   }
-  UpdateButtonProps(0,nHighScore,nMaxScore);
+  UpdateButtonProps(nRICTUSEMPRA_CHALLENGE,nHighScore,nMaxScore);
+  
   PlayerHarry.GetSkurgeChallengeScore(nHighScore,nMaxScore);
   if ( nHighScore > 0 )
   {
     bWonAtLeastOne = True;
   }
-  UpdateButtonProps(1,nHighScore,nMaxScore);
+  UpdateButtonProps(nSKURGE_CHALLENGE,nHighScore,nMaxScore);
+  
   PlayerHarry.GetDiffindoChallengeScore(nHighScore,nMaxScore);
   if ( nHighScore > 0 )
   {
     bWonAtLeastOne = True;
   }
-  UpdateButtonProps(2,nHighScore,nMaxScore);
+  UpdateButtonProps(nDIFFINDO_CHALLENGE,nHighScore,nMaxScore);
+  
   PlayerHarry.GetSpongifyChallengeScore(nHighScore,nMaxScore);
   if ( nHighScore > 0 )
   {
     bWonAtLeastOne = True;
   }
-  UpdateButtonProps(3,nHighScore,nMaxScore);
+  UpdateButtonProps(nSPONGIFY_CHALLENGE,nHighScore,nMaxScore);
+  
   if ( bWonAtLeastOne )
   {
     NoneWonLabel.HideWindow();

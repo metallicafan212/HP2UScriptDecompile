@@ -66,7 +66,7 @@ function PostBeginPlay()
 	break;
   }
   fNextTimeACommentCanBeSaid = 0.0;
-  fGapTime = (FRand() * (fMaxGapTimeBetweenComments - fMinGapTimeBetweenComments)) + fMinGapTimeBetweenComments;
+  fGapTime = FRand() * (fMaxGapTimeBetweenComments - fMinGapTimeBetweenComments) + fMinGapTimeBetweenComments;
   bMute = False;
   fVolume = 0.69999999;
   
@@ -92,7 +92,7 @@ function float TimeLeftUntilSafeToSayAComment (optional bool bNoGap)
 {
   local float fTimeLeft;
 
-  fTimeLeft = (fNextTimeACommentCanBeSaid - Level.TimeSeconds) + fNoGapTimeBetweenComments;
+  fTimeLeft = fNextTimeACommentCanBeSaid - Level.TimeSeconds + fNoGapTimeBetweenComments;
   if ( bNoGap )
   {
     fTimeLeft += fNoGapTimeBetweenComments;
@@ -129,12 +129,12 @@ function bool SayComment (WoodComment eComment, optional bool bNoGap)
     {
       return False;
     }
-  } else //{
+  } else {
     if ( Level.TimeSeconds < fNextTimeACommentCanBeSaid + fGapTime )
     {
       return False;
     }
-  //}
+  }
   iCandidate = 0;
   fTotalWeight = 0.0;
   bDone = False;
@@ -144,18 +144,18 @@ function bool SayComment (WoodComment eComment, optional bool bNoGap)
     if (  !Comments[eComment].Variant[Variant].bHasBeenSaid )
     {
       fAge = 300.0;
-    } else //{
+    } else {
       if ( eComment == WC_QuidAdvice )
       {
         fAge = -1.0;
       } else {
-        fAge = Level.TimeSeconds - Comments[eComment].Variant[Variant].fTimeLastSaid + fMinTimeBeforeCommentRepeat;
+        fAge = Level.TimeSeconds - (Comments[eComment].Variant[Variant].fTimeLastSaid + fMinTimeBeforeCommentRepeat);
         if ( fAge > 300 )
         {
           fAge = 300.0;
         }
       }
-    //}
+    }
     if ( fAge > 0.0 )
     {
       Candidates[iCandidate].Variant = Variant;
@@ -212,7 +212,6 @@ function InitCommentArray()
 
   Comments[0].Variations = 0;
   
-  C = 1;
   for(C = 1; C < MAX_WOOD_COMMENT_NAMES; C++)
   {
     Comments[C].Variations = MAX_WOOD_COMMENT_NAMES;
@@ -255,7 +254,7 @@ defaultproperties
 
     Comments(2)=(Variant[0]=(DlgName="PC_OWd_QuidIntro_22",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[1]=(DlgName="PC_OWd_QuidTut1_28",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[2]=(DlgName="PC_OWd_QuidTut1_29",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[3]=(DlgName="PC_OWd_QuidTut1_31",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[4]=(DlgName="PC_OWd_QuidTut1_32",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[5]=(DlgName="PC_OWd_QuidTut1_33",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variations=0,bHasBeenSaid=False,fTimeLastSaid=0.00)
 
-    Comments(3)=(Variant[0]=(DlgName="PC_OWd_QuidIntro_21",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[1]=(DlgName="PC_OWd_QuidIntro_25",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[2]=(DlgName="PC_OWd_QuidIntro_24",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variations=0,bHasBeenSaid=False,fTimeLastSaid=0.00)
+    Comments(3)=(Variant[0]=(DlgName="PC_OWd_QuidIntro_21",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[1]=(DlgName="PC_OWd_QuidIntro_24",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[2]=(DlgName="PC_OWd_QuidIntro_25",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variations=0,bHasBeenSaid=False,fTimeLastSaid=0.00)
 
     Comments(4)=(Variant[0]=(DlgName="PC_OWd_QuidIntro_13",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[1]=(DlgName="PC_OWd_QuidIntro_14",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variations=0,bHasBeenSaid=False,fTimeLastSaid=0.00)
 
@@ -263,7 +262,7 @@ defaultproperties
 
     Comments(6)=(Variant[0]=(DlgName="PC_OWd_QuidTut1_34",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variations=0,bHasBeenSaid=False,fTimeLastSaid=0.00)
 
-    Comments(7)=(Variant[0]=(DlgName="PC_OWd_QuidIntro_11",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variations=0,bHasBeenSaid=False,fTimeLastSaid=0.00)
+    Comments(7)=(Variant[0]=(DlgName="PC_OWd_QuidIntro_11",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variant[1]=(DlgName="PC_OWd_QuidIntro_12",dlgSound=None,DlgText="",bHasBeenSaid=False,fTimeLastSaid=0.00),Variations=0,bHasBeenSaid=False,fTimeLastSaid=0.00)
 	
 	bHidden=True
 

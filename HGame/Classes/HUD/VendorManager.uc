@@ -65,7 +65,7 @@ var Texture textureVendorButtonOver;
 var Texture textureItemToSell;
 var Characters Vendor;
 
-// Metallicafan212:	Prevent a stutter by caching the Weasly twin
+// Metallicafan212:	Prevent a stutter by caching the Weasley twin (to be compatible with the new engine)
 var Characters WeasTwin;
 
 var name nameVendorSavedState;
@@ -91,7 +91,7 @@ var float HScale;
 function SetVendor (Characters V)
 {
 	Vendor 		= V;
-	// Metallicafan212:	Added to prevent against stutter with Fred and George
+	// Metallicafan212:	Added to prevent against stutter with Fred and George (to be compatible with the new engine)
 	WeasTwin 	= Vendor.GetWeasleyTwin();
 }
 
@@ -168,7 +168,6 @@ function DoEngageVendor (name nameSaveState)
 	
 	nItemsBoughtInCurrTransaction = 0;
 	nCurrPrice = Vendor.GetSellingPrice();
-	//log(textureVendorBarRight.name);
 	GotoState('EngageVendor');
 }
 
@@ -203,28 +202,31 @@ function DoCutTalk (Actor actorTalk, string strDialogID, string strTalkAnimName,
 	{
 		CutCue(strCue);
 	} 
-	else if (  !Vendor.IsDuelVendor() )
-    {
-		actorTalk.CutCommand(strTALK_COMMAND $strDialogID $strTalkAnimName $strLoopAnimName $strIndefiniteParam,strCue);
-    }
 	else 
-	{
-		strDialog = (Localize("All",strDialogID,"HPMenu"));
-		fSoundLen = (Len(strDialog) * 0.01) + 3.0;
-		if ( strIndefiniteParam == "" )
+    {
+		if (  !Vendor.IsDuelVendor() )
 		{
-			tcue = Spawn(Class'TimedCue');
-			tcue.CutNotifyActor = self;
-			tcue.SetupTimer(fSoundLen + 0.5,strCue);
-			harry(Level.PlayerHarryActor).ClientMessage("Indefinite");
-			harry(Level.PlayerHarryActor).myHUD.SetSubtitleText(strDialog,fSoundLen);
-		} 
+			actorTalk.CutCommand(strTALK_COMMAND $strDialogID $strTalkAnimName $strLoopAnimName $strIndefiniteParam,strCue);
+		}
 		else 
 		{
-			harry(Level.PlayerHarryActor).myHUD.SetSubtitleText(strDialog,0.0);
-			CutCue(strCue);
+			strDialog = (Localize("All",strDialogID,"HPMenu"));
+			fSoundLen = (Len(strDialog) * 0.01) + 3.0;
+			if ( strIndefiniteParam == "" )
+			{
+				tcue = Spawn(Class'TimedCue');
+				tcue.CutNotifyActor = self;
+				tcue.SetupTimer(fSoundLen + 0.5,strCue);
+				harry(Level.PlayerHarryActor).ClientMessage("Indefinite");
+				harry(Level.PlayerHarryActor).myHUD.SetSubtitleText(strDialog,fSoundLen);
+			} 
+			else 
+			{
+				harry(Level.PlayerHarryActor).myHUD.SetSubtitleText(strDialog,0.0);
+				CutCue(strCue);
+			}
 		}
-    }
+	}
 }
 
 function DoNarratorInstructions()
@@ -233,14 +235,17 @@ function DoNarratorInstructions()
 	{
 		CutCue(strCUE_INSTRUCTIONS);
 	} 
-	else if ( Vendor.IsDuelVendor() )
-    {
-		DoCutTalk(Level.PlayerHarryActor,Vendor.GetVendorInstructionId(),"","",strINDEFINITE_TEXT_PARAM,strCUE_INSTRUCTIONS);
-    } 
 	else 
-	{
-		CutCommand(strSAY_COMMAND $Vendor.GetVendorInstructionId() $strINDEFINITE_TEXT_PARAM,strCUE_INSTRUCTIONS);
-    }
+    {
+		if ( Vendor.IsDuelVendor() )
+		{
+			DoCutTalk(Level.PlayerHarryActor,Vendor.GetVendorInstructionId(),"","",strINDEFINITE_TEXT_PARAM,strCUE_INSTRUCTIONS);
+		} 
+		else 
+		{
+			CutCommand(strSAY_COMMAND $Vendor.GetVendorInstructionId() $strINDEFINITE_TEXT_PARAM,strCUE_INSTRUCTIONS);
+		}
+	}
 }
 
 function bool WantInstructions()
@@ -263,7 +268,8 @@ state EngageVendor
 		{
 			harry(Level.PlayerHarryActor).Cam.CutCommand(strFLYTO_COMMAND $Vendor.CutName $" x=80 y=80");
 			harry(Level.PlayerHarryActor).Cam.CutCommand(strTARGET_FLYTO_COMMAND $Vendor.CutName $" x=10 z=10",strCUE_CAMERA_IN_POSITION);
-			WeasleyTwin = WeasTwin;//Vendor.GetWeasleyTwin();
+			//Vendor.GetWeasleyTwin();
+			WeasleyTwin = WeasTwin; // Metallicafan212: To be compatible with the new engine
 			if ( WeasleyTwin != None )
 			{
 				WeasleyTwin.GotoState('stateIdle');
@@ -319,7 +325,7 @@ state EngageVendor
 		harry(Level.PlayerHarryActor).TurnTo(Level.PlayerHarryActor.Location + (Vendor.Location - Level.PlayerHarryActor.Location) * vect(1.00,1.00,0.00));
 		Vendor.CutCommand(strFACE_HARRY_COMMAND,strCUE_VENDOR_TURN_DONE);
 		//WeasleyTwin = Vendor.GetWeasleyTwin();
-		WeasleyTwin = WeasTwin;
+		WeasleyTwin = WeasTwin; // Metallicafan212: To be compatible with the new engine
 		if ( WeasleyTwin != None )
 		{
 			WeasleyTwin.GotoState('stateIdle');
@@ -342,7 +348,7 @@ state VendorTransaction
 	{
 		if ( cue ~= strCUE_TRANSACTION_DONE || cue ~= strCUE_DECLINE_SALE || cue ~= strCUE_OUT_OF_STOCK )
 		{
-		DoDisengageVendor();
+			DoDisengageVendor();
 		}
 	}
   
@@ -529,6 +535,7 @@ function DoDisengageVendor()
 {
 	local StatusGroup sgJellyBeans;
 	//local Characters WeasleyTwin;
+	local Characters WeasleyTwinFredOrGeorge;
 
 	harry(Level.PlayerHarryActor).Cam.CutCommand(strRELEASE_COMMAND);
 	harry(Level.PlayerHarryActor).Cam.CutNotifyActor = None;
@@ -543,11 +550,12 @@ function DoDisengageVendor()
 	Vendor.DesiredRotation = Vendor.rSave;
 	Vendor.GotoState('VendorIdle');
 	Vendor.CutName = strVendorSavedCutName;
-	WeasleyTwin = WeasTwin;//Vendor.GetWeasleyTwin();
-	if ( WeasleyTwin != None )
+	//Vendor.GetWeasleyTwin();
+	WeasleyTwinFredOrGeorge = WeasTwin; // Metallicafan212: To be compatible with the new engine
+	if ( WeasleyTwinFredOrGeorge != None )
 	{
-		WeasleyTwin.DesiredRotation = WeasleyTwin.rSave;
-		WeasleyTwin.GotoState('VendorIdle');
+		WeasleyTwinFredOrGeorge.DesiredRotation = WeasleyTwinFredOrGeorge.rSave;
+		WeasleyTwinFredOrGeorge.GotoState('VendorIdle');
 	}
 	GotoState('Idle');
 }

@@ -974,8 +974,6 @@ function bool DoEscapeFromPage()
     CloseBook();
     return True;
   } 
-  //else 
-  //{
   else if ( curPage != MainPage )
   {
     if ( prevPage == None )
@@ -993,7 +991,6 @@ function bool DoEscapeFromPage()
   {
     return True;
   }
-  //}
 }
 
 function RunURL (string levURL, bool bTravelItems)

@@ -266,7 +266,7 @@ function FlyOnPath (name Path, optional int StartPoint)
     if ( I != None )
     {
       SetLocation(I.Location);
-      SetCollision(True,False,True);
+      SetCollision([NewColActors]True,[NewBlockActors]False,[NewBlockPlayers]True);
       bCollideWorld = False;
       bInterpolating = True;
       // SetPhysics(0);
@@ -463,7 +463,7 @@ function DoKick (Pawn KickTarget)
       PlayAnim('PushRight',1.0,0.2);
     }
   }
-  PlaySound(Emotes[eSex].KickEmotes[Rand(8)],SLOT_Talk,,True);
+  PlaySound(Emotes[eSex].KickEmotes[Rand(NUM_KICK_EMOTES)],SLOT_Talk,,True);
   if ( TargetDist < CollisionRadius * 3.0 )
   {
     KickTarget.TakeDamage(KickDamage,self,Location,100 * Normal(TargetDir),'Kicked');
@@ -514,7 +514,7 @@ function UpdateWoosh (float DeltaTime)
   fDistanceFromCamera = VSize(Location - harry.Cam.Location);
   if ( bCanWoosh && (Level.TimeSeconds > fNextTimeSafeToWoosh) && (fLastDistanceFromCamera >= 180) && (fDistanceFromCamera < 180) && (VSize(Velocity) > 200) )
   {
-    Woosh = WooshSounds[Rand(4)];
+    Woosh = WooshSounds[Rand(NUM_WOOSH_SOUNDS)];
     PlaySound(Woosh,SLOT_Misc,0.69999999,,500.0,RandRange(0.81,1.25));
     fNextTimeSafeToWoosh = Level.TimeSeconds + GetSoundDuration(Woosh);
   }
@@ -575,7 +575,7 @@ function Bump (Actor Other)
     } else {
       PlayAnim('Bump');
     }
-    PlaySound(HitSounds[Rand(3)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+    PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
     pTarget.TakeDamage(Damage,self,Location,100 * Normal(Velocity),'Collided');
     Velocity = vect(0.00,0.00,1.00);
     bHit = True;
@@ -603,7 +603,7 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
           fHealth -= fBumpedPenalty;
         }
       //}
-      PlaySound(Emotes[eSex].OuchEmotes[Rand(8)],SLOT_Talk,,True);
+      PlaySound(Emotes[eSex].OuchEmotes[Rand(NUM_OUCH_EMOTES)],SLOT_Talk,,True);
     } else {
       Damage = 0;
     }
@@ -774,6 +774,8 @@ state Pursue
 	local vector	TargetDir;
 	local float		TargetDist;
 	local float		TargetSpeed;
+	local float		CurrentSpeed;
+	local float 	fLastHorzOffset, fLastVertOffset;
 	local float		fPitch;
 	local sound		Woosh;
 
@@ -792,17 +794,28 @@ state Pursue
 		GotoState( 'GetBackOnPath' );
 	}
 
-	if ( LookForTarget == None || LookForTarget.bHidden )
+	if ( LookForTarget == None )
 	{
 		PathToFly = Path_Recovery;
 		GotoState( 'GetBackOnPath' );
 	}
+	
+	fLastHorzOffset = fTargetTrackHorzOffset;
+	fLastVertOffset = fTargetTrackVertOffset;
 
 	if ( Level.TimeSeconds > fTimeForNextOffset )
 	{
-		fTargetTrackHorzOffset = RandRange( -TrackingOffsetRange_Horz, TrackingOffsetRange_Horz );
-		fTargetTrackVertOffset = RandRange( -TrackingOffsetRange_Vert, TrackingOffsetRange_Vert );
-		fTimeForNextOffset = Level.TimeSeconds + RandRange( 2.0, 4.0 );
+		if ( fHealth < 95.0 )
+		{
+			fTargetTrackHorzOffset = RandRange( -TrackingOffsetRange_Horz, TrackingOffsetRange_Horz );
+			fTargetTrackVertOffset = RandRange( -TrackingOffsetRange_Vert, TrackingOffsetRange_Vert );
+		}
+		else
+		{
+			fTargetTrackHorzOffset = 0.0;
+			fTargetTrackVertOffset = 0.0;
+		}
+		fTimeForNextOffset = Level.TimeSeconds + RandRange( fPositionChangeIntervalMin, fPositionChangeIntervalMax );
 	}
 	
 	GetAxes( LookForTarget.Rotation, TargetX, TargetY, TargetZ );	
@@ -817,7 +830,7 @@ state Pursue
 	{
 		AccelRate = 500.0;
 	}
-	if ( bStunned )
+	else if ( bStunned )
 	{
 		AccelRate = 1100.0;
 	}
@@ -842,16 +855,23 @@ state Pursue
 			AirSpeed = 0;
 		}
 	}
-
-	if ( !bStunned )
+	
+	CurrentSpeed = VSize( Velocity );
+	if ( CurrentSpeed >= 150 || Abs(CurrentSpeed - AirSpeed) < 75 )
 	{
-		if ( (Level.TimeSeconds > fNextTimeSafeToWoosh) )
-		{
-			Woosh = SlowWooshSounds[Rand(5)];
-			fPitch = RandRange(1.0,1.5);
-			PlaySound(Woosh,SLOT_Misc,1.0,,1000.0,fPitch);
-			fNextTimeSafeToWoosh = Level.TimeSeconds + (GetSoundDuration(Woosh) / fPitch) + 0.1;
-		}
+		bEasingUpToSpeed = False;
+	}
+	
+	if ( (Level.TimeSeconds > fNextTimeSafeToWoosh && CurrentSpeed > 75) && (Abs(fTargetTrackHorzOffset - fLastHorzOffset) > SlowdownRadius || Abs(fTargetTrackVertOffset - fLastVertOffset) > SlowdownRadius) )
+	{
+		Woosh = SlowWooshSounds[Rand(NUM_SLOW_WOOSH_SOUNDS)];
+		fPitch = RandRange(1.0,1.5);
+		PlaySound(Woosh,SLOT_Misc,1.0,,1000.0,fPitch);
+		fNextTimeSafeToWoosh = Level.TimeSeconds + (GetSoundDuration(Woosh) / fPitch) + 0.1;
+	}
+
+	if ( !bStunned && !bCatchingTarget )
+	{
 		if ( Level.TimeSeconds > fTimeForNextKickUpdate || Level.TimeSeconds > fTimeForNextKick )
 		{
 			UpdateKickTarget();
@@ -859,11 +879,11 @@ state Pursue
 		}
 		if ( Level.TimeSeconds > fTimeForNextKick )
 		{
-			if ( KickTarget != None && KickTargetDist <= CollisionRadius * 3.0 )
+			if ( fHealth < 95.0 && (KickTarget != None && KickTargetDist <= CollisionRadius * 3.0) )
 			{
 				DoKick( KickTarget );
 			}
-			fTimeForNextKick = Level.TimeSeconds + RandRange( 1.5, 3.0 );
+			fTimeForNextKick = Level.TimeSeconds + RandRange( fKickIntervalMin, fKickIntervalMax );
 		}
 		if ( Level.TimeSeconds > fTimeForNextWatchUpdate )
 		{
@@ -931,7 +951,7 @@ Begin:
 
 state GetBackOnPath extends Fly
 {
-  //UTPT added this for some reason -AdamJD
+  //UTPT added these for some reason -AdamJD
   // ignores  HitWall, Tick;
   
   function BeginState()
@@ -1024,7 +1044,7 @@ state GetBackOnPath extends Fly
         GetAxes(Rotation,X,Y,Z);
         ReturnPath[0].StartControlPoint = 1000.0 * X;
         ReturnPath[0].EndControlPoint = -1000.0 * X;
-        SetCollision(True,False,True);
+        SetCollision([NewColActors]True,[NewBlockActors]False,[NewBlockPlayers]True);
         bCollideWorld = False;
         bInterpolating = True;
         // SetPhysics(0);
@@ -1038,13 +1058,13 @@ state GetBackOnPath extends Fly
   //UTPT didn't add this for some reason -AdamJD
   event Tick( float DeltaTime )
   {
-	Super.Tick( DeltaTime );
+	Global.Tick( DeltaTime );
   }
   
   //UTPT didn't add this for some reason -AdamJD
   function HitWall(Vector HitNormal, Actor Wall)
   {
-	Super.HitWall(HitNormal, Wall);
+	Global.HitWall(HitNormal, Wall);
   }
   
   function EndState()
@@ -1130,7 +1150,7 @@ defaultproperties
 	//UTPT didn't decompile the emote arrays correctly -AdamJD
     Emotes(0)=(KickEmotes[0]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_kick01',KickEmotes[1]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_kick02',KickEmotes[2]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_kick03',KickEmotes[3]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_kick04',KickEmotes[4]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_kick05',KickEmotes[5]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_kick06',KickEmotes[6]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_kick07',KickEmotes[7]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_kick08',OuchEmotes[0]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_ouch01',OuchEmotes[1]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_ouch02',OuchEmotes[2]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_ouch03',OuchEmotes[3]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_ouch04',OuchEmotes[4]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_ouch05',OuchEmotes[5]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_ouch06',OuchEmotes[6]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_ouch07',OuchEmotes[7]=Sound'HPSounds.Quidditch_sfx.Q_mseeker_ouch08')
 
-    Emotes(1)=(KickEmotes[0]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick01',KickEmotes[1]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick02',KickEmotes[2]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick03',KickEmotes[3]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick04',KickEmotes[4]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick05',KickEmotes[5]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick06',KickEmotes[6]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick07',KickEmotes[7]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick08'),OuchEmotes[0]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch01',OuchEmotes[1]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch02',OuchEmotes[2]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch03',OuchEmotes[3]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch04',OuchEmotes[4]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch05',OuchEmotes[5]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch06',OuchEmotes[6]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch07',OuchEmotes[7]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch08')
+    Emotes(1)=(KickEmotes[0]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick01',KickEmotes[1]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick02',KickEmotes[2]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick03',KickEmotes[3]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick04',KickEmotes[4]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick05',KickEmotes[5]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick06',KickEmotes[6]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick07',KickEmotes[7]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_kick08',OuchEmotes[0]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch01',OuchEmotes[1]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch02',OuchEmotes[2]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch03',OuchEmotes[3]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch04',OuchEmotes[4]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch05',OuchEmotes[5]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch06',OuchEmotes[6]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch07',OuchEmotes[7]=Sound'HPSounds.Quidditch_sfx.Q_fseeker_ouch08')
 
     // eSex=2
 	eSex=SX_Neutral

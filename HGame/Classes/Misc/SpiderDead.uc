@@ -15,7 +15,7 @@ function PlayerCutRelease()
 state StartPatrolling
 {
 begin:
-  LoopAnim('Walk',1.25);
+  LoopAnim('Walk',1.20);
   GotoState('patrol');
 }
 

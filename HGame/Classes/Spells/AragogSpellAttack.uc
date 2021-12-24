@@ -126,6 +126,7 @@ state StateFlying
     }
   }
  begin:
+ loop:
   Sleep(1.0);
   goto ('Loop');
 }

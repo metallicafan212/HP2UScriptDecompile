@@ -36,7 +36,7 @@ function PostBeginPlay()
   ScaleDown = 1.0;
   NumMeshs = 0;
 
-  for(I = 0; I < 8; I++)
+  for(I = 0; I < NUM_ENTRIES; I++)
   {
     if ( BaseDebris[I].aMesh == None )
     {
@@ -45,15 +45,15 @@ function PostBeginPlay()
     } 
   }
 
-  for(I = 0; I < 8; I++)
+  for(I = 0; I < NUM_ENTRIES; I++)
   {
     if ( BaseDebris[I].Velocity == 0 )
     {
-      BaseDebris[I].Velocity = 250;
+      BaseDebris[I].Velocity = DEFAULT_VELOCITY;
     }
   }
   
-  for(I = 0; I < 8; I++)
+  for(I = 0; I < NUM_ENTRIES; I++)
   {
     if ( BaseDebris[I].DrawScale == 0 )
     {

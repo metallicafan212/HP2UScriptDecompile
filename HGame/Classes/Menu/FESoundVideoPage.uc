@@ -96,6 +96,67 @@ function LocalizeStrings()
 
 function Created()
 {  
+	local int ctlX;
+	local int ctlY;
+	local int ctlW;
+	local int ctlH;
+	local int labelWidth;
+	local int labelHeight;
+	local int labelX;
+	local int offsetX;
+	local int offsetY;
+	local int I;
+	local int MusicVolume;
+	local int SoundVolume;
+	local string sens;
+	local float fHalfX;
+	local float fFourthX;
+	local float fEighthX;
+	local float fSixteenthX;
+	local int buttonWidth;
+	local int buttonHeight;
+	local int SliderWidth;
+	local int sliderHeight;
+	local float textHeight;
+	local float textOffsetY;
+
+	LocalizeStrings();
+  
+	offsetX = 0;
+	offsetY = 0;
+	ctlX = 180 - offsetX;
+	labelX = ctlX - 80;
+	ctlY = 90 - offsetY;
+	ctlH = 17;
+	ctlW = 144;
+	fHalfX = 640.0 / 2;
+	fFourthX = 640.0 / 4;
+	fEighthX = 640.0 / 8;
+	fSixteenthX = 640.0 / 16;
+	fLeftMargin = fEighthX;
+	fLeftMarginIndent = fLeftMargin + fEighthX;
+	fRightMargin = fHalfX + fEighthX;
+	fRightMarginIndent = fRightMargin + fSixteenthX;
+	fLeftMargin += offsetX;
+	fLeftMarginIndent += offsetX;
+	fRightMargin += offsetX;
+  
+	fRightMarginIndent += offsetX;
+	buttonWidth = 180;
+	buttonHeight = 24;
+	SliderWidth = 133;
+	sliderHeight = 24;
+	labelWidth = 50 + ctlX - labelX;
+	labelHeight = 24;
+	textHeight = 10.0;
+	textOffsetY = buttonHeight / 2 - textHeight / 2;
+	VideoLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMargin,ctlY,labelWidth,1.0));
+	VideoLabel.SetText(videoText);
+	VideoLabel.SetFont(1);
+	VideoLabel.TextColor = GoupLabelTextColor;
+	ctlY += 40;
+	I = 0;
+
 	ResolutionLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
 	ResolutionLabel.SetText(ResolutionText);
 	ResolutionLabel.SetFont(1);
@@ -550,7 +611,7 @@ function ObjectDetailChanged()
 
 function MusicVolumeChanged()
 {
-	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
+	//UTPT didn't decompile this (added from UEExplorer) -AdamJD
 	MusicVolumeLabel.SetText( MusicVolumeText $" - " $int(MusicVolumeSlider.Value) );
 	GetPlayerOwner().ConsoleCommand("SETVOLUMES MUSIC=" $(MusicVolumeSlider.Value / 100));
 	GetPlayerOwner().ConsoleCommand("set ini:Engine.Engine.AudioDevice MusicVolume "$(MusicVolumeSlider.Value / 100));
@@ -558,7 +619,7 @@ function MusicVolumeChanged()
 
 function SoundVolumeChanged()
 {
-	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
+	//UTPT didn't decompile this (added from UEExplorer) -AdamJD
 	SoundVolumeLabel.SetText( SoundVolumeText $" - " $int(SoundVolumeSlider.Value) );
 	GetPlayerOwner().ConsoleCommand("SETVOLUMES SOUND=" $(SoundVolumeSlider.Value / 100));
 	GetPlayerOwner().ConsoleCommand("set ini:Engine.Engine.AudioDevice SoundVolume "$(SoundVolumeSlider.Value / 100));

@@ -5,7 +5,7 @@
 class WCWaffling extends BronzeCards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardWafflingBigTexture.PNG	GROUP=Icons	Name=WizCardWafflingBigTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardWafflingBigTexture.PNG	GROUP=Icons	Name=WizCardWafflingBigTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardWafflingTex0.PNG	GROUP=Skins	Name=WizardCardWafflingTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
 function PostBeginPlay()

@@ -105,7 +105,7 @@ var Texture textureSmallEmptyCard;
 function Created()
 {
 	local int I;
-
+	
 	textureDescBkgrd 		= Texture(DynamicLoadObject("HGame.Icons.leftPanel",Class'Texture'));
 	textureBronzeNormal 	= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeNormal",Class'Texture'));
 	textureBronzeHilite 	= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeHilite",Class'Texture'));
@@ -516,6 +516,7 @@ function Notify (UWindowDialogControl C, byte E)
         {
           nCurrItemOnPage = I;
           UpdateDisplayDetails();
+		  break;
         } 
       }
       break;
@@ -931,7 +932,7 @@ function SetInitialSelection()
 	local StatusItemWizardCards siCards;
 	local int nNumSmallPerPage;
 	local int nCardCount;
-
+	
 	sgCards = StatusGroupWizardCards(PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupWizardCards'));
 	
 	switch (sgCards.GetLastObtainedCardType())

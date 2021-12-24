@@ -69,7 +69,7 @@ function Created()
   Super.Created();
   LegalText = Localize("all","legal_title_01","Pickup");
   VersionButton = HGameSmallButton(CreateControl(Class'HGameSmallButton',WinWidth - 84,WinHeight - 30,84.0,25.0));
-  VersionButton.SetFont(0);
+  VersionButton.SetFont(F_Normal);
   VersionButton.TextColor.R = 250;
   VersionButton.TextColor.G = 250;
   VersionButton.TextColor.B = 250;
@@ -87,7 +87,7 @@ function Created()
       if ( LevelList[I].LevelName != "" )
       {
         LevelList[I].Button = HGameButton(CreateControl(Class'HGameButton',X,Y,W,H));
-        LevelList[I].Button.SetFont(4);
+        LevelList[I].Button.SetFont(F_HPMenuLarge);
         LevelList[I].Button.TextColor.R = 250;
         LevelList[I].Button.TextColor.G = 250;
         LevelList[I].Button.TextColor.B = 250;
@@ -104,7 +104,7 @@ function Created()
     }
     Y += H;
     ExitButton = HGameButton(CreateControl(Class'HGameButton',X,Y,W,H));
-    ExitButton.SetFont(4);
+    ExitButton.SetFont(F_HPMenuLarge);
     ExitButton.TextColor.R = 250;
     ExitButton.TextColor.G = 250;
     ExitButton.TextColor.B = 250;
@@ -124,7 +124,7 @@ function Created()
       if ( LevelList[I].LevelName != "" )
       {
         LevelList[I].Button = HGameButton(CreateControl(Class'HGameButton',X,Y,W,H));
-        LevelList[I].Button.SetFont(4);
+        LevelList[I].Button.SetFont(F_HPMenuLarge);
         LevelList[I].Button.TextColor.R = 96;
         LevelList[I].Button.TextColor.G = 96;
         LevelList[I].Button.TextColor.B = 112;
@@ -144,7 +144,7 @@ function Created()
     E3DemoStartButton = HGameButton(CreateControl(Class'HGameButton',WinWidth / 2 - 80,WinHeight - 100,160.0,60.0));
     E3DemoStartButton.ToolTipString = "Start Demo";
     ExitButton = HGameButton(CreateControl(Class'HGameButton',WinWidth - 50,WinHeight - 60,50.0,30.0));
-    ExitButton.SetFont(4);
+    ExitButton.SetFont(F_HPMenuLarge);
     ExitButton.TextColor.R = 250;
     ExitButton.TextColor.G = 250;
     ExitButton.TextColor.B = 250;

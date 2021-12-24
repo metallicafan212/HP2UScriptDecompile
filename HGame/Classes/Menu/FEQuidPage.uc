@@ -85,15 +85,15 @@ function PreSwitchPage()
 				{
 					playedCount++;
 				}
-		}
-		if ( playedCount >= 5 )
-		{
-			PlayerHarry.quidGameResults[5].bLocked= False;
-		}
-		if ( (PlayerHarry.quidGameResults[5].myScore > 0) || (PlayerHarry.quidGameResults[5].OpponentScore > 0) )
-		{
-			PlayerHarry.quidGameResults[5].bLocked= False;
-		}
+			}
+			if ( playedCount >= 5 )
+			{
+				PlayerHarry.quidGameResults[5].bLocked= False;
+			}
+			if ( (PlayerHarry.quidGameResults[5].myScore > 0) || (PlayerHarry.quidGameResults[5].OpponentScore > 0) )
+			{
+				PlayerHarry.quidGameResults[5].bLocked= False;
+			}
 		}
 	}
   

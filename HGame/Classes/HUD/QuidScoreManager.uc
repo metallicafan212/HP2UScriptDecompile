@@ -201,8 +201,6 @@ function DrawQuidScore (Canvas Canvas)
 	
 	// Metallicafan212:	Do scaling
 	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
-
-
 	fontSave = Canvas.Font;
 	fScaleFactor = GetScaleFactor(Canvas);
 	

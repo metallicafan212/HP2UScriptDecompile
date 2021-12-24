@@ -23,16 +23,16 @@ function float EaseTo (float t)
 	} 
 	else if ( t < 1 - 0.29289323 )
     {
-		return 1.1715734 * t + 0;
+      return EaseFromM * t + 0;
     } 
 	else if ( t < 1.0 )
+    {
+        return 1.0 - 2.0 * (1.0 - t) * (1.0 - t);
+    } 
+	else 
 	{
-		return 1.0 - 2.0 * (1.0 - t) * (1.0 - t);
-	} 
-	else
-	{
-		return 1.0;
-	}
+        return 1.0;
+    }
 }
 
 event BeginPlay()

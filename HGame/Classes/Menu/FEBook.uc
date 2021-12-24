@@ -42,7 +42,6 @@ var Texture FEBackground;
 // Metallicafan212:	Optional middle "flavor" texture
 var Texture FEMid;
 
-
 struct Background
 {
   var Texture p1;

@@ -217,7 +217,7 @@ function PaintToolTipText (Canvas Canvas, float fScaleFactor)
 	colorText.R = 255;
 	colorText.G = 255;
 	colorText.B = 255;
-	HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas, strCurrToolTip, 6 * fScaleFactor, 424 * fScaleFactor * HScale, 46 * fScaleFactor, colorText, fontText);
+	HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas, strCurrToolTip, nTOOLTIP_TEXT_X * fScaleFactor, nTOOLTIP_TEXT_Y * fScaleFactor * HScale, nTOOLTIP_TEXT_H * fScaleFactor, colorText, fontText);
 }
 
 function PaintObjectiveText (Canvas Canvas, float fScaleFactor)
@@ -247,8 +247,8 @@ function PaintObjectiveText (Canvas Canvas, float fScaleFactor)
 		colorText.G = 255;
 		colorText.B = 255;
 	
-		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,GetLocalFEString("InGameMenu_0027"), 14 * fScaleFactor, 400 * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root), 16 * fScaleFactor, colorText, fontText);
-		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strObjective, 14 * fScaleFactor, 416 * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root), 58 * fScaleFactor, colorText, fontText, 626.0 * fScaleFactor);
+		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,GetLocalFEString("InGameMenu_0027"), nOBJECTIVE_TEXT_X * fScaleFactor, nOBJECTIVE_LABEL_Y * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root), nOBJECTIVE_LABEL_H * fScaleFactor, colorText, fontText);
+		HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strObjective, nOBJECTIVE_TEXT_X * fScaleFactor, nOBJECTIVE_TEXT_Y * fScaleFactor * Class'M212HScale'.Static.UWindowGetHeightScale(Root), nOBJECTIVE_TEXT_H * fScaleFactor, colorText, fontText, nOBJECTIVE_CLIP_X * fScaleFactor);
 	}
 }
 

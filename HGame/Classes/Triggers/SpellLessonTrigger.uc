@@ -128,27 +128,28 @@ function CheckForMissedArrows()
 	local float fDist;
 	local float fAdjustedMissRange;
 
-	for(I = 0; I < 3; I++) 
-	{
-		if ( IPPassedArrow[I] != None )
-		{
-			if ( IPPassedArrow[I].IsActive(nLevel) )
-			{
-				fDist = VSize(IPPassedArrow[I].Location - GameWand.Location);
-				fAdjustedMissRange = 17.0 + VSize(GameWand.Location - vectLastWandLoc) + 0.01;
-				
-				if ( fDist > fAdjustedMissRange )
-				{
-					IPPassedArrow[I].OnPlayerMissed(nLevel);
-					IPPassedArrow[I] = None;
-				}
-			} 
-			else 
-			{
-				IPPassedArrow[I] = None;
-			}
-		}
-	}
+  // I = 0;
+  // if ( I < 3 )
+  for(I = 0; I < ArrayCount(IPPassedArrow); I++) //for loop -AdamJD
+  {
+    if ( IPPassedArrow[I] != None )
+    {
+      if ( IPPassedArrow[I].IsActive(nLevel) )
+      {
+        fDist = VSize(IPPassedArrow[I].Location - GameWand.Location);
+        fAdjustedMissRange = (fHITPOINT_PREV_MISS_RANGE + VSize(GameWand.Location - vectLastWandLoc)) + 0.01;
+        if ( fDist > fAdjustedMissRange )
+        {
+          IPPassedArrow[I].OnPlayerMissed(nLevel);
+          IPPassedArrow[I] = None;
+        }
+      } else {
+        IPPassedArrow[I] = None;
+      }
+    }
+    // I++;
+    // goto JL0007;
+  }
 }
 
 event PlayerInput (float DeltaTime)

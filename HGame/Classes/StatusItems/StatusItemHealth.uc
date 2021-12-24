@@ -125,7 +125,8 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 	// Metallicafan212:	This is a for loop
 	for(i = 0; i < nNumHealthIcons; i++)
 	{
-		nY = 4 * fScaleFactor;
+		nY = nHEALTH_Y * fScaleFactor;
+
 		if ( nRemainingCount >= nUnitsPerIcon )
 		{
 			fFillRatio = 1.0;

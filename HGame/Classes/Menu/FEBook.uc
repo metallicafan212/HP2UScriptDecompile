@@ -42,6 +42,7 @@ var Texture FEBackground;
 // Metallicafan212:	Optional middle "flavor" texture
 var Texture FEMid;
 
+
 struct Background
 {
   var Texture p1;
@@ -836,10 +837,10 @@ function TurnMapOn()
 
 function TurnMapOff()
 {
-  if ( curPage == MapPage )
-  {
-    CloseBook();
-  }
+	if ( curPage == MapPage )
+	{
+		CloseBook();
+	}
 }
 
 function ToggleMap()
@@ -906,65 +907,145 @@ function WindowEvent (WinMessage Msg, Canvas C, float X, float Y, int Key)
   }
 }
 
+// Metallicafan212:	To allow the menu to be toggled on and off
+//					Jesus christ KW, you suck
+function TogglePauseMenu()
+{
+	if(bIsOpen)
+	{
+		log("Book is open");
+		
+		if ( !bInEndGame )
+		{
+			DoEscapeFromPage();
+		} 
+		else 
+		{
+			if ( curPage == CreditsPage )
+			{
+				ChangePagePrevious();
+			} 
+			else 
+			{
+				ShowCredits();
+			}
+		}
+	}
+	else
+	{
+		log("Book is closed");
+		if ( HPConsole(Root.Console).bLocked )
+		{
+			log("Console is locked");
+			return;
+		}
+		HPConsole(Root.Console).bQuickKeyEnable = False;
+		HPConsole(Root.Console).LaunchUWindow(True);
+		OpenBook("INGAME");
+		ChangePage(InGamePage);
+	}
+}
+
+// Metallicafan212:	This is the WORST fucking function here
+//					Imagine fucking hard binding the controls, it actually takes MORE effort
 function bool KeyEvent (byte Key, byte Action, float Delta)
 {
-  if ( (Action == 1) && (Key == 118) )
-  {
-    if ( HPConsole(Root.Console).bShiftDown )
-    {
-      HPConsole(Root.Console).bDebugMode =  !HPConsole(Root.Console).bDebugMode;
-    }
-    return True;
-  }
-  if ( Root.ModalWindow != None )
-  {
-    return False;
-  }
-  if ( bShowSplash && HPConsole(Root.Console).bDebugMode )
-  {
-    if ( Action == 1 )
-    {
-      fShowSplashTime = -1.0;
-      return True;
-    }
-  }
-  if ( curPage != None )
-  {
-    if ( curPage.KeyEvent(Key,Action,Delta) )
-    {
-      return True;
-    }
-  }
-  if ( (Action == 1) && (Key == 27) )
-  {
-    Log("febook escape");
-    if ( bInEndGame == False )
-    {
-      return DoEscapeFromPage();
-    } 
-	else 
+/*
+	if ( (Action == IST_Press) && (Key == IK_F7) )
 	{
-      if ( curPage == CreditsPage )
-      {
-        ChangePagePrevious();
-      } 
-	  else 
-	  {
-        ShowCredits();
-      }
-      return True;
-    }
-  }
-  if ( (Action == 3) && (Key == 9) )
-  {
-    Log("febook backspace");
-    if ( curPage == MapPage )
-    {
-      TurnMapOff();
-      return True;
-    }
-  }
-  return False;
+		if ( HPConsole(Root.Console).bShiftDown )
+		{
+			HPConsole(Root.Console).bDebugMode =  !HPConsole(Root.Console).bDebugMode;
+		}
+		return True;
+	}
+	if ( Root.ModalWindow != None )
+	{
+		return False;
+	}
+	
+	if ( bShowSplash && HPConsole(Root.Console).bDebugMode )
+	{
+		if ( Action == IST_Press )
+		{
+			fShowSplashTime = -1.0;
+			return True;
+		}
+	}
+	
+	if ( curPage != None )
+	{
+		if ( curPage.KeyEvent(Key,Action,Delta) )
+		{
+			return True;
+		}
+	}
+	
+	if ( (Action == IST_Press) && (Key == IK_Esc) )
+	{
+		Log("febook escape");
+		if ( !bInEndGame )
+		{
+			return DoEscapeFromPage();
+		} 
+		else 
+		{
+			if ( curPage == CreditsPage )
+			{
+				ChangePagePrevious();
+			} 
+			else 
+			{
+				ShowCredits();
+			}
+			return True;
+		}
+	}
+  
+	if ( (Action == IST_Release) && (Key == IK_Tab) )
+	{
+		Log("febook backspace");
+		if ( curPage == MapPage )
+		{
+			TurnMapOff();
+			return True;
+		}
+	}
+*/
+	/*
+	if ( (Action == 1) && (Key == 0x0009) )
+	{
+		ToggleMap();
+		return true;
+	}
+	
+	if ( (Action == 1) && (Key == 0x001B) )
+	{
+		//Log("febook escape");
+		
+		//if ( !bInEndGame )
+		//{
+		//	return DoEscapeFromPage();
+		//} 
+		//else 
+		//{
+		//	if ( curPage == CreditsPage )
+		//	{
+		//		ChangePagePrevious();
+		//	} 
+		//	else 
+		//	{
+		//		ShowCredits();
+		//	}
+		//	return True;
+		//}
+		
+		TogglePauseMenu();
+		return true;
+	}
+	*/
+
+	return False;
 }
 
 function bool DoEscapeFromPage()
@@ -974,6 +1055,8 @@ function bool DoEscapeFromPage()
     CloseBook();
     return True;
   } 
+  //else 
+  //{
   else if ( curPage != MainPage )
   {
     if ( prevPage == None )
@@ -991,6 +1074,7 @@ function bool DoEscapeFromPage()
   {
     return True;
   }
+  //}
 }
 
 function RunURL (string levURL, bool bTravelItems)

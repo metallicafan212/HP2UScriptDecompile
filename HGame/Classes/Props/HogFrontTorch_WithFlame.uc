@@ -16,4 +16,6 @@ defaultproperties
 
     SoundVolume=96
 
+	// Metallicafan212:	Drawing hack to draw children actors first (ones that are "owned" by this actor)
+	bDrawChildrenFirst=true
 }

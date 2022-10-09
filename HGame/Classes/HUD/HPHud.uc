@@ -16,18 +16,36 @@ var CountdownTimerManager managerCountdownTimer;
 var SpellSelector managerSpellSelector;
 var QuidditchBar managerQuidditchBar;
 var VendorManager CurrVendorManager;
-var HProp propArray[20];
+//var HProp propArray[20];
+var Array<HProp> propArray;
 var bool bHideStatus;
+var bool bHideHud;
+
+// Metallicafan212:	Hide the hud items in game, better than using the glitch all the time
+exec function HideHud()
+{
+	//bHideStatus = !bHideStatus;
+	
+	bHideHud = !bHideHud;
+	
+	HPConsole(PlayerPawn(Owner).Player.Console).ShowCutConsole(bHideHud);
+}
 
 function StartCutScene()
 {
-  if ( harry(Owner).bIsCaptured )
-  {
-    bCutSceneMode = True;
-  } else {
-    bCutPopupMode = True;
-  }
-  managerCutScene.StartCutScene();
+	// Metallicafan212:	Don't allow this to show
+	if(bHideHud)
+		return;
+		
+	if ( harry(Owner).bIsCaptured)
+	{
+		bCutSceneMode = True;
+	} 
+	else 
+	{
+		bCutPopupMode = True;
+	}
+	managerCutScene.StartCutScene();
 }
 
 function EndCutScene()
@@ -99,38 +117,44 @@ function RegisterVendorManager (VendorManager VManager)
 
 function RegisterPickupProp (HProp Prop)
 {
-  local int I;
-  local bool bFoundSlot;
+	/*
+	local int I;
+	local bool bFoundSlot;
 
-  bFoundSlot = False;
+	bFoundSlot = False;
 
-  for(I = 0; I < ArrayCount(propArray); I++)
-  {
-    if ( propArray[I] == None )
-    {
-      bFoundSlot = True;
-      propArray[I] = Prop;
-	  break;
-    }
-  }
-  if ( bFoundSlot == False )
-  {
-    harry(Owner).ClientMessage("WARNING: Not enough prop slots in HPHud");
-    Log("WARNING: Not enough prop slots in HPHud");
-  }
+	for(I = 0; I < 20; I++)
+	{
+		if ( propArray[I] == None )
+		{
+			bFoundSlot = True;
+			propArray[I] = Prop;
+			break;
+		}
+	}
+	if ( bFoundSlot == False )
+	{
+		harry(Owner).ClientMessage("WARNING: Not enough prop slots in HPHud");
+		Log("WARNING: Not enough prop slots in HPHud");
+	}
+	*/
+	
+	// Metallicafan212:	Add on the end
+	propArray[propArray.length] = Prop;
 }
 
 function UnregisterPickupProp (HProp Prop)
 {
+	/*
   local int I;
   local int J;
 
-  for(I = 0; I < ArrayCount(propArray); I++)
+  for(I = 0; I < 20; I++)
   {
     if ( propArray[I] == Prop )
     {
       propArray[I] = None;
-	  for(J = I + 1; J < ArrayCount(propArray); J++)
+	  for(J = I + 1; J < 20; J++)
       {
         propArray[J - 1] = propArray[J];
         propArray[J] = None;
@@ -138,6 +162,21 @@ function UnregisterPickupProp (HProp Prop)
 	  break;
     }
   }
+  */
+  
+	local int i;
+	
+	for(i = 0; i < propArray.Length; i++)
+	{
+		if(PropArray[i] == Prop)
+		{
+			// Metallicafan212:	Remove it
+			PropArray.Remove(i);
+			
+			break;
+		}
+	}
+  
 }
 
 function bool IsCutSceneOrPopupInProgress()
@@ -189,18 +228,13 @@ function DrawHoops (Canvas Canvas, int iNumber, int iMaxNumber)
 
 simulated function PreBeginPlay()
 {
-  local int I;
+	local int I;
 
-  Super.PreBeginPlay();
-  if ( managerCutScene == None )
-  {
-    managerCutScene = Spawn(Class'CutSceneManager');
-  }
-
-  for(I = 0; I < ArrayCount(propArray); I++)
-  {
-    propArray[I] = None;
-  }
+	Super.PreBeginPlay();
+	if ( managerCutScene == None )
+	{
+		managerCutScene = Spawn(Class'CutSceneManager');
+	}
 }
 
 simulated function PostBeginPlay()
@@ -210,106 +244,115 @@ simulated function PostBeginPlay()
 
 simulated function bool DisplayMessages (Canvas Canvas)
 {
-  if ( HPConsole(PlayerPawn(Owner).Player.Console).bDebugMode )
-  {
-    return False;
-  }
-  return True;
+	if ( HPConsole(PlayerPawn(Owner).Player.Console).bDebugMode && !bHideHud )
+	{
+		return False;
+	}
+	
+	return True;
 }
 
 simulated function PostRender (Canvas Canvas)
 {
-  local FEBook menuBook;
-  local int I;
-  local bool bInGameMenuUp;
-  local bool bFullCutMode;
-  local bool bHalfCutMode;
+	local FEBook menuBook;
+	local int I;
+	local bool bInGameMenuUp;
+	local bool bFullCutMode;
+	local bool bHalfCutMode;
 
-  HUDSetup(Canvas);
-  bFullCutMode = (bCutSceneMode == True) || managerCutScene.bBothBordersActive;
-  bHalfCutMode = (bCutPopupMode == True) || managerCutScene.bPopupBorderActive;
-  if ( PlayerPawn(Owner) != None )
-  {
-    if ( PlayerPawn(Owner).PlayerReplicationInfo == None )
-    {
-      return;
-    }
-  }
-  menuBook = HPConsole(PlayerPawn(Owner).Player.Console).menuBook;
-  if ( menuBook != None )
-  {
-    if ( menuBook.bIsOpen )
-    {
-      bInGameMenuUp = menuBook.IsInGameMenuShowing();
-      if (  !bInGameMenuUp )
-      {
-        return;
-      }
-    }
-  }
-  if (  !bInGameMenuUp )
-  {
-    if ( bHalfCutMode )
-    {
-      managerCutScene.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    if ( bFullCutMode )
-    {
-      managerCutScene.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    } else {
-      if ( managerEnemyHealth != None )
-      {
-        managerEnemyHealth.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-      if ( managerQuidditchBar != None )
-      {
-        managerQuidditchBar.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-      if ( managerMagicStrength != None )
-      {
-        managerMagicStrength.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-      if ( managerCountdownTimer != None )
-      {
-        managerCountdownTimer.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-      if ( managerSpellSelector != None )
-      {
-        managerSpellSelector.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-      }
-    }
-    if ( (managerSpellLesson == None) && (managerMagicStrength == None) &&  !bHideStatus )
-    {
-      harry(Owner).managerStatus.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
+	HUDSetup(Canvas);
+	bFullCutMode = !bHideHud && ((bCutSceneMode) || managerCutScene.bBothBordersActive);
+	bHalfCutMode = !bHideHud && ((bCutPopupMode) || managerCutScene.bPopupBorderActive);
+	
+	if ( PlayerPawn(Owner) != None )
+	{
+		if ( PlayerPawn(Owner).PlayerReplicationInfo == None )
+		{
+			return;
+		}
+	}
+	
+	menuBook = HPConsole(PlayerPawn(Owner).Player.Console).menuBook;
+	
+	if ( menuBook != None )
+	{
+		if ( menuBook.bIsOpen )
+		{
+			bInGameMenuUp = menuBook.IsInGameMenuShowing();
+			if (  !bInGameMenuUp )
+			{
+				return;
+			}
+		}
+	}
+	
+	if (  !bInGameMenuUp )
+	{
+		if ( bHalfCutMode )
+		{
+			managerCutScene.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+		
+		if ( bFullCutMode )
+		{
+			managerCutScene.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		} 
+		else 
+		{
+			if ( managerEnemyHealth != None )
+			{
+				managerEnemyHealth.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+			if ( managerQuidditchBar != None )
+			{
+				managerQuidditchBar.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+			if ( managerMagicStrength != None )
+			{
+				managerMagicStrength.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+			if ( managerCountdownTimer != None )
+			{
+				managerCountdownTimer.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+			if ( managerSpellSelector != None )
+			{
+				managerSpellSelector.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+		}
+    
+		if ( (managerSpellLesson == None) && (managerMagicStrength == None) &&  !bHideStatus && !bHideHud )
+		{
+			harry(Owner).managerStatus.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
 
-	for(I = 0; I < ArrayCount(propArray); I++)
-    {
-      if ( propArray[I] == None )
-      {
-		break;
-      } else {
-        propArray[I].RenderHud(Canvas);
-      }
-    }
-    if ( CurrVendorManager != None )
-    {
-      CurrVendorManager.RenderHud(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    if ( managerChallenge != None )
-    {
-      managerChallenge.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    if ( managerQuidScore != None )
-    {
-      managerQuidScore.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    if ( managerSpellLesson != None )
-    {
-      managerSpellLesson.RenderHudItems(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-    }
-    DrawPopup(Canvas);
-  }
+		for(i = 0; i < propArray.Length; i++)
+		{
+			propArray[I].RenderHud(Canvas);
+		}
+    
+		if ( CurrVendorManager != None )
+		{
+			CurrVendorManager.RenderHud(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+    
+		if ( managerChallenge != None )
+		{
+			managerChallenge.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+    
+		if ( managerQuidScore != None )
+		{
+			managerQuidScore.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+    
+		if ( managerSpellLesson != None )
+		{
+			managerSpellLesson.RenderHudItems(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+		}
+		
+		DrawPopup(Canvas);
+	}
 }
 
 function DrawCutStyleText (Canvas Canvas, string strText, int nXPos, int nYPos, int nHeight, Color colorText, optional Font fontText, optional float fClipX)

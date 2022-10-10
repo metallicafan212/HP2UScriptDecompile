@@ -11,5 +11,7 @@ defaultproperties
     attachedParticleOffset(0)=(X=-18.00,Y=-4.00,Z=14.00)
 
     Mesh=SkeletalMesh'HProps.skArmTorchSepiaMesh'
-
+	
+	//fix the torch and fire draw order issue (to be compatible with the new engine) -AdamJD  
+	bDrawChildrenFirst=True
 }

@@ -539,92 +539,6 @@ exec function DuelingMode()
   }
 }
 
-//KW implemented this in baseConsole -AdamJD
-/*
-function ScaleAndDraw (Canvas C, float X, float Y, Texture Tex)
-{
-	local float FX;
-	local float fy;
-	local float Ratio;
-	local float CRTScale;
-	local float XOffset;
-	local float YOffset;
-	local float ResX;
-	local float ResY;
-
-	if ( Tex == None )
-	{
-		return;
-	}
-
-  //FX = C.SizeX / 640.0;
-  //fy = C.SizeY / 480.0;
-  //FX = C.SizeX / 640.0;
-  //fy = C.SizeY / 480.0;
-  //FX = 1.0;
-  //fy = 1.0;
-	
-	FX = 1.0;
- 	FY = 1.0;
-	
-	// Metallicafan212:	Scale it to 4/3
-	//Ratio 	= C.SizeX / C.SizeY;
-	
-	//FX 		= Ratio; /// 1.3333;
-	
-	// Metallicafan212:	Center the loading screen and draw black behind it
-	//					TODO!
-	
-	// Metallicafan212:	Rewrite this whole fucking system
-	//					We want a perfect middle square
-	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
-	//					Figure out a resolution in the middle of the screen
-	//if(C.SizeX > C.SizeY)
-	//{
-	//	Ratio 		= (1.3333333) / (C.Size.X / C.SizeY);
-		// Metallicafan212:	Use the height as the basis of the square
-	//	ResY = C.SizeY;
-	//	ResX = C.SizeX * Ratio;
-	//}
-	//else
-	//{
-	//	Ratio 		= (C.Size.X / C.SizeY) / 1.3333333;
-	//	ResX = C.SizeX;
-	//	ResY = C.SizeY * Ratio;
-	//}
-	
-	// Metallicafan212:	Now draw it in the correct place
-	//					We're considering the canvas a perfect 512x512 grid
-	//X = 
-	
-	
-	//FX 		= (C.SizeX / C.SizeY) / 1.33333;
-	
-	//log("X " $ C.SizeX $ " Y " $ C.SizeY);
-	
-	// Metallicafan212:	Check for thinner resolutions
-	//					On these we need to stretch outwards
-	
-	//if(FX < 1.0)
-	//{
-	//	FX = 1.0;
-	//	FY = (C.SizeX / C.SizeY);
-	//	log("FY is " $ FY);
-	//}
-	//else
-	//{
-	//	FY = 1.0;
-	//	log("FX is " $ FX);
-	//}
-			
-	//FY		= FX;
-	
-	//C.DrawTileClipped(Tex, 
-  
-	Root.DrawStretchedTexture(C, (X * FX), (Y * FY), Tex.USize * FX, Tex.VSize * FY, Tex);
-}
-*/
-
 function ToggleDebugMode()
 {
   if (  !Class'Version'.Default.bDebugEnabled )
@@ -669,92 +583,11 @@ function HideConsole()
   }
 }
 
-//KW implemented this in baseConsole -AdamJD
-/*
-function DrawLevelAction (Canvas C)
-{
-	local string BigMessage;
-	local float fTextWidth;
-	local float fTextHeight;
-
-	if ( (Viewport.Actor.Level.Pauser != "") && Viewport.Actor.Level.LevelAction == LEVACT_None)
-	{
-		C.Font = C.MedFont;
-		BigMessage = PausedMessage;
-		PrintActionMessage(C,BigMessage);
-		return;
-	}
-	if ( Viewport.Actor.Level.LevelAction == LEVACT_None )
-	{
-		BigMessage = "";
-		return;
-	} 
-	else if ( Viewport.Actor.Level.LevelAction == LEVACT_Loading || Viewport.Actor.bShowLoadingScreen )
-	{
-		BigMessage = Localize("all","Options_0058","HPMenu");
-		Viewport.Actor.bShowLoadingScreen = True;
-		C.Style = 1;
-		C.TextSize(BigMessage,fTextWidth,fTextHeight);
-		if ( fTextWidth > C.SizeX - 32 )
-		{
-			C.Font = LocalMedFont;
-		} 
-		else 
-		{
-			C.Font = LocalBigFont;
-		}
-		
-		ScaleAndDraw(C,0.0,0.0,LoadingBackground.p1);
-		ScaleAndDraw(C,256.0,0.0,LoadingBackground.p2);
-		ScaleAndDraw(C,512.0,0.0,LoadingBackground.p3);
-		ScaleAndDraw(C,0.0,256.0,LoadingBackground.p4);
-		ScaleAndDraw(C,256.0,256.0,LoadingBackground.p5);
-		ScaleAndDraw(C,512.0,256.0,LoadingBackground.p6);
-		PrintActionMessageInUpperLeft(C,BigMessage);
-		return;
-	} 
-	else 
-	{
-		if ( Viewport.Actor.Level.LevelAction == LEVACT_Saving )
-		{
-			BigMessage = Localize("all","Options_0057","HPMenu");
-		} 
-		else if ( Viewport.Actor.Level.LevelAction == LEVACT_Connecting )
-		{
-			BigMessage = ConnectingMessage;
-		} 
-		else if ( Viewport.Actor.Level.LevelAction == LEVACT_Precaching )
-		{
-			BigMessage = PrecachingMessage;
-		}
-	}
-	if ( BigMessage != "" )
-	{
-		C.Style = 1;
-		C.TextSize(BigMessage,fTextWidth,fTextHeight);
-		if ( fTextWidth > C.SizeX - 32 )
-		{
-			C.Font = LocalMedFont;
-		} 
-		else 
-		{
-			C.Font = LocalBigFont;
-		}
-		PrintActionMessage(C,BigMessage);
-	}
-}
-*/
-
 function ChangeLevel (string lev, bool flag)
 {
 	Log("Changing level to:" $ lev $ "," $ string(flag));
 	Viewport.Actor.Level.ServerTravel(lev,flag);
 	bLoadNewLevel = True;
-  
-	// Metallicafan212:	Fix the loading screen not showing up
-	//Harry(Viewport.Actor).bShowLoadingScreen = true;
-	//Viewport.Actor.bShowLoadingScreen = true;
-	//Viewport.Actor.Level.LevelAction = LEVACT_Loading;
 }
 
 function LaunchUWindow (optional bool bPause)
@@ -941,7 +774,7 @@ state UWindow
 				case IST_Release:
 					switch (k)
 					{
-						case 1:
+						case EInputKey.IK_LEFTMOUSE:
 							if ( Root != None )
 							{
 								Root.WindowEvent(WM_LMouseUp,None,MouseX,MouseY,k);
@@ -952,12 +785,12 @@ state UWindow
 				case IST_Press:
 					switch (k)
 					{
-						case 115:
+						case EInputKey.IK_F4:
 							SCWindow.Close();
 							CloseUWindow();
-							log("115 hit");
+							//log("115 hit");
 							break;
-						case 118:
+						case EInputKey.IK_F7:
 							ToggleDebugMode();
 							break;
 					}
@@ -1185,11 +1018,11 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 				switch (Key)
 				{
 					case IK_MouseX:
-						MouseX = MouseX + MouseScale * Delta;
+						MouseX = MouseX + (MouseScale * Delta);
 						Root.bForceFakeMouse = false;
 						break;
 					case IK_MouseY:
-						MouseY = MouseY - MouseScale * Delta;
+						MouseY = MouseY - (MouseScale * Delta);
 						Root.bForceFakeMouse = false;
 						break;
 						
@@ -1220,7 +1053,6 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 						break;	
 				}
 			}
-			break;
 		case IST_Press:	
 			if ( harry(Viewport.Actor) != None )
 			{
@@ -1435,7 +1267,7 @@ function SetupLanguage()
   SaveConfig();
 }
 
-function PostRender (Canvas Canvas)
+event PostRender (Canvas Canvas)
 {
   local LevelInfo lev;
 
@@ -1650,12 +1482,4 @@ defaultproperties
     PausedMessage="PRESS ESC TO EXIT"
 
     PrecachingMessage="ENTERING"
-	
-	//is in baseConsole -AdamJD
-	//bUseSystemFonts=True
-	
-	// Metallicafan212:	Fix this, as baseconsole just doesn't want to be compiled for some strange reason
-	//
-	//fixed the one in baseConsole -AdamJD
-	//LoadingBackground=(p1=Texture'HGame.Icons.FELoadingBackground1',p2=Texture'HGame.Icons.FELoadingBackground2',p3=Texture'HGame.Icons.FELoadingBackground3',p4=Texture'HGame.Icons.FELoadingBackground4',p5=Texture'HGame.Icons.FELoadingBackground5',p6=Texture'HGame.Icons.FELoadingBackground6',durration=999999.00)
 }

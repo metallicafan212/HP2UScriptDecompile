@@ -950,6 +950,15 @@ function TogglePauseMenu()
 //					Imagine fucking hard binding the controls, it actually takes MORE effort
 function bool KeyEvent (byte Key, byte Action, float Delta)
 {
+	// Metallicafan212: Fix the input page lmao
+	if ( curPage != None )
+	{
+		if ( curPage.KeyEvent(Key,Action,Delta) )
+		{
+			return True;
+		}
+	}
+
 /*
 	if ( (Action == IST_Press) && (Key == IK_F7) )
 	{

@@ -748,7 +748,7 @@ state UWindow
   
 	event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 	{
-		local byte k;
+		local EInputKey k;
   
 		if ( ResTimeOutSettings != "" )
 		{
@@ -774,7 +774,7 @@ state UWindow
 				case IST_Release:
 					switch (k)
 					{
-						case EInputKey.IK_LEFTMOUSE:
+						case IK_LEFTMOUSE:
 							if ( Root != None )
 							{
 								Root.WindowEvent(WM_LMouseUp,None,MouseX,MouseY,k);
@@ -785,12 +785,11 @@ state UWindow
 				case IST_Press:
 					switch (k)
 					{
-						case EInputKey.IK_F4:
+						case IK_F4:
 							SCWindow.Close();
 							CloseUWindow();
-							//log("115 hit");
 							break;
-						case EInputKey.IK_F7:
+						case IK_F7:
 							ToggleDebugMode();
 							break;
 					}

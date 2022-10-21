@@ -5,8 +5,8 @@
 class ShortCutButton extends UWindowButton;//HGameButton;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\ButtonUpTexture.PNG	GROUP=Icons	Name=ButtonUpTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\Icons\ButtonDownTexture.PNG	GROUP=Icons	Name=ButtonDownTexture COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
+#exec Texture Import File=Textures\Icons\ButtonUpTexture.PNG	GROUP=Icons	Name=ButtonUpTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=536870914
+#exec Texture Import File=Textures\Icons\ButtonDownTexture.PNG	GROUP=Icons	Name=ButtonDownTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=536870914
 
 var string strText;
 

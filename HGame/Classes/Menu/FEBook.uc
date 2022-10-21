@@ -19,13 +19,13 @@ class FEBook extends baseFEBook;
 #exec Texture Import File=Textures\Icons\FEBack1Texture6.PNG	GROUP=Icons	Name=FEBack1Texture6 COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
 
 // Metallicafan212:	Textures for the new layout
-#exec Texture Import File=Textures\InGamePage\Bottom.png	GROUP=FEBook	Name=FEBottom 	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\InGamePage\Top.png		GROUP=FEBook	Name=FETop 		COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\InGamePage\LTop.png		GROUP=FEBook	Name=FETLeft	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\InGamePage\LBot.png		GROUP=FEBook	Name=FEBLeft	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\InGamePage\RTop.png		GROUP=FEBook	Name=FETRight	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\InGamePage\RBot.png		GROUP=FEBook	Name=FEBRight	COMPRESSION=3 UPSCALE=1 Mips=1 Flags=536870914
-#exec Texture Import File=Textures\InGamePage\Back.png		GROUP=FEBook	Name=FEBack		COMPRESSION=1 UPSCALE=1 Mips=1 Flags=0
+#exec Texture Import File=Textures\InGamePage\Bottom.png	GROUP=FEBook	Name=FEBottom 	COMPRESSION=3 UPSCALE=1 Mips=0 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\Top.png		GROUP=FEBook	Name=FETop 		COMPRESSION=3 UPSCALE=1 Mips=0 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\LTop.png		GROUP=FEBook	Name=FETLeft	COMPRESSION=3 UPSCALE=1 Mips=0 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\LBot.png		GROUP=FEBook	Name=FEBLeft	COMPRESSION=3 UPSCALE=1 Mips=0 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\RTop.png		GROUP=FEBook	Name=FETRight	COMPRESSION=3 UPSCALE=1 Mips=0 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\RBot.png		GROUP=FEBook	Name=FEBRight	COMPRESSION=3 UPSCALE=1 Mips=0 Flags=536870914
+#exec Texture Import File=Textures\InGamePage\Back.png		GROUP=FEBook	Name=FEBack		COMPRESSION=1 UPSCALE=1 Mips=0 Flags=0
 
 // Metallicafan212:	Test
 //#exec Texture Import File=Textures\DeusEx.png				GROUP=FEBook	Name=FEDX		COMPRESSION=1 UPSCALE=1 MIPS=1 FLAGS=0

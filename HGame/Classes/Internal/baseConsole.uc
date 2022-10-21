@@ -15,7 +15,7 @@ class baseConsole extends WindowConsole;
 */
 
 // Metallicafan212:	One texture
-#exec Texture Import File=Textures\LoadingScreen\LoadingScreen.png	GROUP=LoadingScreen NAME=FELoadingScreen COMPRESSION=3 UPSCALE=1 MIPS=1 FLAGS=0
+#exec Texture Import File=Textures\LoadingScreen\LoadingScreen.png	GROUP=LoadingScreen NAME=FELoadingScreen COMPRESSION=3 UPSCALE=1 MIPS=0 FLAGS=0
 
 /*
 struct BackgroundBitmap

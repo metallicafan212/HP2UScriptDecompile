@@ -180,13 +180,17 @@ state disabled
 
 defaultproperties
 {
-    GroupName="'"
+    //GroupName="'"
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    GroupName="None"
 
     checkSpiderTime=15.00
 
     bHidden=True
 
-    Tag="'"
+    //Tag="'"
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    Tag="SpiderMarker"
 
     Texture=Texture'HGame.HiddenPawn'
 

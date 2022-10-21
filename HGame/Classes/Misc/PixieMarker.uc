@@ -39,16 +39,19 @@ function Bump (Actor Other)
 
 defaultproperties
 {
-    GroupName="'"
+    //GroupName="'"
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    GroupName="None"
 
     bHidden=True
 
-    Tag="'"
+    //Tag="'"
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    Tag="PixieMarker"
 
     Texture=Texture'HGame.HiddenPawn'
 
     CollisionRadius=50.00
 
     CollisionHeight=5.00
-
 }

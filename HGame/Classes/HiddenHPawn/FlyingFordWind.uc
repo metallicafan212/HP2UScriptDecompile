@@ -91,7 +91,9 @@ defaultproperties
 
     fxWindParticleEffectClass=Class'HPParticle.CloudWind'
 
-    Tag=''
+    //Tag=''
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    Tag="FlyingFordWind"
 
     CollisionRadius=200.00
 
@@ -102,5 +104,4 @@ defaultproperties
     bCollideActors=True
 
     bCollideWorld=True
-
 }

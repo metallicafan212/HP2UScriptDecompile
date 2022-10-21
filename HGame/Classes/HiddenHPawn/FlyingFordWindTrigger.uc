@@ -71,7 +71,9 @@ defaultproperties
 {
     bHidden=False
 
-    Tag=''
+    //Tag=''
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    Tag="FlyingFordWindTrigger"
 
     CollisionRadius=0.00
 
@@ -80,5 +82,4 @@ defaultproperties
     bCollideActors=True
 
     bCollideWorld=True
-
 }

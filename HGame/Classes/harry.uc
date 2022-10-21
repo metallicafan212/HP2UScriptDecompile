@@ -6248,7 +6248,9 @@ defaultproperties
 
     SpongifyFallAnim=spongify
 
-    AnimFalling=""
+	//AnimFalling=''
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    AnimFalling="fall"
 
     HarryAnims(0)=(Idle=Idle,Walk=Walk,run=run,WalkBack=runback,StrafeRight=StrafeRight,StrafeLeft=StrafeLeft,Jump=Jump,Jump2=Jump2,Fall=Fall,Land=Land)
 

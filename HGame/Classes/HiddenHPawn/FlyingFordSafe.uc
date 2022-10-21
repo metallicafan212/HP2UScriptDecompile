@@ -42,7 +42,9 @@ function Bump (Actor Other)
 
 defaultproperties
 {
-    Tag=''
+    //Tag=''
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    Tag="FlyingFordSafe"
 
     bCollideWhenPlacing=True
 
@@ -53,5 +55,4 @@ defaultproperties
     bCollideActors=True
 
     bCollideWorld=True
-
 }

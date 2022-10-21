@@ -437,7 +437,9 @@ defaultproperties
 
     WallDamage=1
 
-    IdleAnimName=''
+    //IdleAnimName=''
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    IdleAnimName="Flying"
 
     Mesh=SkeletalMesh'HPModels.skFordFlyingMesh'
 

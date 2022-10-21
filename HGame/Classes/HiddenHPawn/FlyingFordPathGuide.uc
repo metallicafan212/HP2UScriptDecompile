@@ -45,7 +45,9 @@ auto state startFlying
 
 defaultproperties
 {
-    Tag=''
+    //Tag=''
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    Tag="FlyingFordPathGuide"
 
     DrawType=DT_Mesh
 
@@ -54,5 +56,4 @@ defaultproperties
     CollisionRadius=200.00
 
     CollisionHeight=50.00
-
 }

@@ -15,7 +15,7 @@ class skChandalierSingleTier extends HPMeshActor;
 #exec Anim Digest Anim=skChandalierSingleTierAnims VERBOSE 
 
 //texture import (skChandalierSingleTierTex0) -AdamJD 
-#exec Texture Import File=Textures\skChandalierSingleTierTex0.png Name=skChandalierSingleTierTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skChandalierSingleTierTex0.png Name=skChandalierSingleTierTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChandalierSingleTierMesh Num=0 Texture=skChandalierSingleTierTex0
 
 defaultproperties

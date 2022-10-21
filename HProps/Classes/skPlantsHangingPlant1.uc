@@ -15,7 +15,7 @@ class skPlantsHangingPlant1 extends HPMeshActor;
 #exec Anim Digest Anim=skPlantsHangingPlant1Anims VERBOSE 
 
 //texture import (skPlantsHangingPlant1Tex0) -AdamJD 
-#exec Texture Import File=Textures\skPlantsHangingPlant1Tex0.png Name=skPlantsHangingPlant1Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skPlantsHangingPlant1Tex0.png Name=skPlantsHangingPlant1Tex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skPlantsHangingPlant1Mesh Num=0 Texture=skPlantsHangingPlant1Tex0
 
 defaultproperties

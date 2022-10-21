@@ -15,7 +15,7 @@ class skhanginglampGS extends HPMeshActor;
 #exec Anim Digest Anim=skhanginglampGSAnims VERBOSE 
 
 //texture import (skhanginglampGSTex0) -AdamJD 
-#exec Texture Import File=Textures\skhanginglampGSTex0.png Name=skhanginglampGSTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skhanginglampGSTex0.png Name=skhanginglampGSTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skhanginglampGSMesh Num=0 Texture=skhanginglampGSTex0
 
 defaultproperties

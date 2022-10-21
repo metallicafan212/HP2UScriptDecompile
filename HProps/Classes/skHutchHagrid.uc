@@ -15,11 +15,11 @@ class skHutchHagrid extends HPMeshActor;
 #exec Anim Digest Anim=skHutchHagridAnims VERBOSE 
 
 //texture import (skHutchHagridTex0) -AdamJD 
-#exec Texture Import File=Textures\skHutchHagridTex0.png Name=skHutchHagridTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skHutchHagridTex0.png Name=skHutchHagridTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skHutchHagridMesh Num=0 Texture=skHutchHagridTex0
 
 //texture import (skHutchHagridTex1) -AdamJD 
-#exec Texture Import File=Textures\skHutchHagridTex1.png Name=skHutchHagridTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skHutchHagridTex1.png Name=skHutchHagridTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skHutchHagridMesh Num=1 Texture=skHutchHagridTex1
 
 defaultproperties

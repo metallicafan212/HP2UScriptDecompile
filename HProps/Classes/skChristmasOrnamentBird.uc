@@ -15,7 +15,7 @@ class skChristmasOrnamentBird extends HPMeshActor;
 #exec Anim Digest Anim=skChristmasOrnamentBirdAnims VERBOSE 
 
 //texture import (skChristmasOrnamentBirdTex0) -AdamJD 
-#exec Texture Import File=Textures\skChristmasOrnamentBirdTex0.png Name=skChristmasOrnamentBirdTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skChristmasOrnamentBirdTex0.png Name=skChristmasOrnamentBirdTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChristmasOrnamentBirdMesh Num=0 Texture=skChristmasOrnamentBirdTex0
 
 defaultproperties

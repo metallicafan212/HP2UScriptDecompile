@@ -19,11 +19,11 @@ class skMapleTreeFull extends HPMeshActor;
 #exec MeshMap SetTexture MeshMap=skMapleTreeFullMesh Num=0 Texture=skMapleTreeFullTex0
 
 //texture import (skMapleTreeFullTex1) -AdamJD 
-#exec Texture Import File=Textures\skMapleTreeFullTex1.png Name=skMapleTreeFullTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skMapleTreeFullTex1.png Name=skMapleTreeFullTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skMapleTreeFullMesh Num=1 Texture=skMapleTreeFullTex1
 
 //texture import (skMapleTreeFullTex2) -AdamJD 
-#exec Texture Import File=Textures\skMapleTreeFullTex2.png Name=skMapleTreeFullTex2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skMapleTreeFullTex2.png Name=skMapleTreeFullTex2 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skMapleTreeFullMesh Num=2 Texture=skMapleTreeFullTex2
 
 defaultproperties

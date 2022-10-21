@@ -19,7 +19,7 @@ class skFirTreeThin extends HPMeshActor;
 #exec MeshMap SetTexture MeshMap=skFirTreeThinMesh Num=0 Texture=skFirTreeThinTex0
 
 //texture import (skFirTreeThinTex1) -AdamJD 
-#exec Texture Import File=Textures\skFirTreeThinTex1.png Name=skFirTreeThinTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skFirTreeThinTex1.png Name=skFirTreeThinTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skFirTreeThinMesh Num=1 Texture=skFirTreeThinTex1
 
 defaultproperties

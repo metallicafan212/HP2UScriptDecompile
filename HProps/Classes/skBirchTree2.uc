@@ -19,7 +19,7 @@ class skBirchTree2 extends HPMeshActor;
 #exec MeshMap SetTexture MeshMap=skBirchTree2Mesh Num=0 Texture=skBirchTree2Tex0
 
 //texture import (skBirchTree2Tex1) -AdamJD 
-#exec Texture Import File=Textures\skBirchTree2Tex1.png Name=skBirchTree2Tex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skBirchTree2Tex1.png Name=skBirchTree2Tex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBirchTree2Mesh Num=1 Texture=skBirchTree2Tex1
 
 defaultproperties

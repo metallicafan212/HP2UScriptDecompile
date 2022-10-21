@@ -15,7 +15,7 @@ class skChandalierThreeTier extends HPMeshActor;
 #exec Anim Digest Anim=skChandalierThreeTierAnims VERBOSE 
 
 //texture import (skChandalierThreeTierTex0) -AdamJD 
-#exec Texture Import File=Textures\skChandalierThreeTierTex0.png Name=skChandalierThreeTierTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skChandalierThreeTierTex0.png Name=skChandalierThreeTierTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChandalierThreeTierMesh Num=0 Texture=skChandalierThreeTierTex0
 
 defaultproperties

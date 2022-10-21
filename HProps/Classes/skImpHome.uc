@@ -15,15 +15,15 @@ class skImpHome extends HPMeshActor;
 #exec Anim Digest Anim=skImpHomeAnims VERBOSE 
 
 //texture import (skImpHomeTex0) -AdamJD 
-#exec Texture Import File=Textures\skImpHomeTex0.png Name=skImpHomeTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skImpHomeTex0.png Name=skImpHomeTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skImpHomeMesh Num=0 Texture=skImpHomeTex0
 
 //texture import (skImpHomeTex1) -AdamJD 
-#exec Texture Import File=Textures\skImpHomeTex1.png Name=skImpHomeTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skImpHomeTex1.png Name=skImpHomeTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skImpHomeMesh Num=1 Texture=skImpHomeTex1
 
 //texture import (skImpHomeTex2) -AdamJD 
-#exec Texture Import File=Textures\skImpHomeTex2.png Name=skImpHomeTex2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skImpHomeTex2.png Name=skImpHomeTex2 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skImpHomeMesh Num=2 Texture=skImpHomeTex2
 
 defaultproperties

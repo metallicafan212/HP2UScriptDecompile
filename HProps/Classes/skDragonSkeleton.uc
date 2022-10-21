@@ -15,11 +15,11 @@ class skDragonSkeleton extends HPMeshActor;
 #exec Anim Digest Anim=skDragonSkeletonAnims VERBOSE 
 
 //texture import (skDragonSkeletonTex0) -AdamJD 
-#exec Texture Import File=Textures\skDragonSkeletonTex0.png Name=skDragonSkeletonTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skDragonSkeletonTex0.png Name=skDragonSkeletonTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skDragonSkeletonMesh Num=0 Texture=skDragonSkeletonTex0
 
 //texture import (skDragonSkeletonTex1) -AdamJD 
-#exec Texture Import File=Textures\skDragonSkeletonTex1.png Name=skDragonSkeletonTex1 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skDragonSkeletonTex1.png Name=skDragonSkeletonTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skDragonSkeletonMesh Num=1 Texture=skDragonSkeletonTex1
 
 //texture import (skDragonSkeletonTex2) -AdamJD 
@@ -27,7 +27,7 @@ class skDragonSkeleton extends HPMeshActor;
 #exec MeshMap SetTexture MeshMap=skDragonSkeletonMesh Num=2 Texture=skDragonSkeletonTex2
 
 //texture import (skDragonSkeletonTex3) -AdamJD 
-#exec Texture Import File=Textures\skDragonSkeletonTex3.png Name=skDragonSkeletonTex3 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skDragonSkeletonTex3.png Name=skDragonSkeletonTex3 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skDragonSkeletonMesh Num=3 Texture=skDragonSkeletonTex3
 
 defaultproperties

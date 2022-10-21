@@ -26,7 +26,7 @@ class skHarry extends HPMesh
 #exec MeshMap SetTexture MeshMap=skharryMesh Num=2 Texture=skharryTex2
 
 //texture import (skharryTex3) -AdamJD 
-#exec Texture Import File=Textures\skharryTex3.png Name=skharryTex3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skharryTex3.png Name=skharryTex3 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skharryMesh Num=3 Texture=skharryTex3
 
 //weapon import -AdamJD

@@ -20,6 +20,6 @@ class skNorrisPetrified extends HPMesh
 #exec MeshMap SetTexture MeshMap=skNorrisPetrifiedMesh Num=0 Texture=skNorrisPetrifiedTex0
 
 //texture import (skNorrisPetrifiedTex1) -AdamJD 
-#exec Texture Import File=Textures\skNorrisPetrifiedTex1.png Name=skNorrisPetrifiedTex1 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skNorrisPetrifiedTex1.png Name=skNorrisPetrifiedTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins
 #exec MeshMap SetTexture MeshMap=skNorrisPetrifiedMesh Num=1 Texture=skNorrisPetrifiedTex1
 

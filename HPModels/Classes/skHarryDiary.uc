@@ -27,7 +27,7 @@ class skHarryDiary extends HPMeshActor;
 #exec MeshMap SetTexture MeshMap=skHarryDiaryMesh Num=2 Texture=skHarryDiaryTex2
 
 //texture import (skHarryDiaryTex3) -AdamJD 
-#exec Texture Import File=Textures\skHarryDiaryTex3.png Name=skHarryDiaryTex3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skHarryDiaryTex3.png Name=skHarryDiaryTex3 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skHarryDiaryMesh Num=3 Texture=skHarryDiaryTex3
 
 //texture import (skHarryDiaryTex4) -AdamJD 

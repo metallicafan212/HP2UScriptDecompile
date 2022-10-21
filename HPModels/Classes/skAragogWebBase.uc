@@ -16,6 +16,6 @@ class skAragogWebBase extends HPMesh
 #exec Anim Digest Anim=skAragogWebBaseAnims VERBOSE 
 
 //texture import (skAragogWebBaseTex0) -AdamJD 
-#exec Texture Import File=Textures\skAragogWebBaseTex0.png Name=skAragogWebBaseTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skAragogWebBaseTex0.png Name=skAragogWebBaseTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=4 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skAragogWebBaseMesh Num=0 Texture=skAragogWebBaseTex0
 

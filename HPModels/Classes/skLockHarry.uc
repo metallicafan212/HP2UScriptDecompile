@@ -36,6 +36,6 @@ class skLockHarry extends HPMesh
 #exec MeshMap SetTexture MeshMap=skLockHarryMesh Num=4 Texture=skLockHarryTex4
 
 //texture import (skLockHarryTex5) -AdamJD 
-#exec Texture Import File=Textures\skLockHarryTex5.png Name=skLockHarryTex5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skLockHarryTex5.png Name=skLockHarryTex5 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skLockHarryMesh Num=5 Texture=skLockHarryTex5
 

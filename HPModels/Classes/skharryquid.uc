@@ -26,7 +26,7 @@ class skharryquid extends HPMesh
 #exec MeshMap SetTexture MeshMap=skharryquidMesh Num=2 Texture=skharryquidTex2
 
 //texture import (skharryquidTex3) -AdamJD 
-#exec Texture Import File=Textures\skharryquidTex3.png Name=skharryquidTex3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skharryquidTex3.png Name=skharryquidTex3 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skharryquidMesh Num=3 Texture=skharryquidTex3
 
 //texture import (skharryquidTex4) -AdamJD 

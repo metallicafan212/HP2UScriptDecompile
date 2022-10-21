@@ -24,6 +24,6 @@ class skHarryAsGoyle extends HPMesh
 #exec MeshMap SetTexture MeshMap=skHarryAsGoyleMesh Num=1 Texture=skHarryAsGoyleTex1
 
 //texture import (skHarryAsGoyleTex2) -AdamJD 
-#exec Texture Import File=Textures\skHarryAsGoyleTex2.png Name=skHarryAsGoyleTex2 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skHarryAsGoyleTex2.png Name=skHarryAsGoyleTex2 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skHarryAsGoyleMesh Num=2 Texture=skHarryAsGoyleTex2
 

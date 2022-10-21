@@ -16,4 +16,6 @@ defaultproperties
 
     SoundVolume=96
 
+	//fix the torch and fire draw order issue (to be compatible with the new engine) -AdamJD  
+	bDrawChildrenFirst=True
 }

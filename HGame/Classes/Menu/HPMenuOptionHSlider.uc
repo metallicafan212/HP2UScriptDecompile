@@ -5,9 +5,9 @@
 class HPMenuOptionHSlider extends UWindowHSliderControl;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FESliderTexture.PNG	GROUP=Icons	Name=FESliderTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\FEOverSliderTexture.PNG	GROUP=Icons	Name=FEOverSliderTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\FESliderKnobTexture.PNG	GROUP=Icons	Name=FESliderKnobTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FESliderTexture.PNG	GROUP=Icons	Name=FESliderTexture COMPRESSION=P8 UPSCALE=1 Mips=0 MaskedOverride=(R=0,G=0,B=0,A=255) Flags=2
+#exec Texture Import File=Textures\Icons\FEOverSliderTexture.PNG	GROUP=Icons	Name=FEOverSliderTexture COMPRESSION=P8 UPSCALE=1 Mips=0 MaskedOverride=(R=0,G=0,B=0,A=255) Flags=2
+#exec Texture Import File=Textures\Icons\FESliderKnobTexture.PNG	GROUP=Icons	Name=FESliderKnobTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
 
 var Texture Image;
 var Texture overImage;

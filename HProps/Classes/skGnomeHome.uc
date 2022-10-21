@@ -15,11 +15,11 @@ class skGnomeHome extends HPMeshActor;
 #exec Anim Digest Anim=skGnomeHomeAnims VERBOSE 
 
 //texture import (skGnomeHomeTex0) -AdamJD 
-#exec Texture Import File=Textures\skGnomeHomeTex0.png Name=skGnomeHomeTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skGnomeHomeTex0.png Name=skGnomeHomeTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skGnomeHomeMesh Num=0 Texture=skGnomeHomeTex0
 
 //texture import (skGnomeHomeTex1) -AdamJD 
-#exec Texture Import File=Textures\skGnomeHomeTex1.png Name=skGnomeHomeTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skGnomeHomeTex1.png Name=skGnomeHomeTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skGnomeHomeMesh Num=1 Texture=skGnomeHomeTex1
 
 defaultproperties

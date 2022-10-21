@@ -24,7 +24,7 @@ class skgnome extends HPMesh
 #exec MeshMap SetTexture MeshMap=skgnomeMesh Num=1 Texture=skgnomeTex1
 
 //texture import (skgnomeTex2) -AdamJD 
-#exec Texture Import File=Textures\skgnomeTex2.png Name=skgnomeTex2 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skgnomeTex2.png Name=skgnomeTex2 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skgnomeMesh Num=2 Texture=skgnomeTex2
 
 //anim notify imports -AdamJD

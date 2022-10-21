@@ -157,12 +157,13 @@ defaultproperties
 
     bHidden=False
 
-    Tag=''
+    //Tag=''
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    Tag="MovingClouds"
 
     DrawScale=5.00
 
     CollisionRadius=35.00
 
     CollisionHeight=32.00
-
 }

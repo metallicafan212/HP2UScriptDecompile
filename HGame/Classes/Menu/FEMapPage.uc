@@ -5,20 +5,20 @@
 class FEMapPage extends baseFEPage;
 
 //texture shape imports -AdamJD
-#exec Texture Import File=Textures\Icons\CircleTexture.PNG	GROUP=Icons	Name=CircleTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\DiamondTexture.PNG	GROUP=Icons	Name=DiamondTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\DiffindoTexture.PNG	GROUP=Icons	Name=DiffindoTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\DownArrowTexture.PNG	GROUP=Icons	Name=DownArrowTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\HarryLocationTexture.PNG	GROUP=Icons	Name=HarryLocationTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\HexTexture.PNG	GROUP=Icons	Name=HexTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\LeftArrowTexture.PNG	GROUP=Icons	Name=LeftArrowTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\RectangleTexture.PNG	GROUP=Icons	Name=RectangleTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\RictusempraTexture.PNG	GROUP=Icons	Name=RictusempraTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\RightArrowTexture.PNG	GROUP=Icons	Name=RightArrowTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\SkurgeTexture.PNG	GROUP=Icons	Name=SkurgeTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\SquareGreenTexture.PNG	GROUP=Icons	Name=SquareGreenTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\tSpongifyTexture.PNG	GROUP=Icons	Name=tSpongifyTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\UpArrowTexture.PNG	GROUP=Icons	Name=UpArrowTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\CircleTexture.PNG	GROUP=Icons	Name=CircleTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\DiamondTexture.PNG	GROUP=Icons	Name=DiamondTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\DiffindoTexture.PNG	GROUP=Icons	Name=DiffindoTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\DownArrowTexture.PNG	GROUP=Icons	Name=DownArrowTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\HarryLocationTexture.PNG	GROUP=Icons	Name=HarryLocationTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\HexTexture.PNG	GROUP=Icons	Name=HexTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\LeftArrowTexture.PNG	GROUP=Icons	Name=LeftArrowTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\RectangleTexture.PNG	GROUP=Icons	Name=RectangleTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\RictusempraTexture.PNG	GROUP=Icons	Name=RictusempraTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\RightArrowTexture.PNG	GROUP=Icons	Name=RightArrowTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\SkurgeTexture.PNG	GROUP=Icons	Name=SkurgeTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\SquareGreenTexture.PNG	GROUP=Icons	Name=SquareGreenTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\tSpongifyTexture.PNG	GROUP=Icons	Name=tSpongifyTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\UpArrowTexture.PNG	GROUP=Icons	Name=UpArrowTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
 
 //texture background imports -AdamJD
 #exec Texture Import File=Textures\Icons\Map0Texture1.PNG	GROUP=Icons	Name=Map0Texture1 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=0

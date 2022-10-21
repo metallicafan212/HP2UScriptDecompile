@@ -594,5 +594,7 @@ defaultproperties
 
     HedwigPrepivotDistanceUp=100.00
 
-    Tag=''
+    //Tag=''
+	//fix for KW using '' instead of "" and added the name (to be compatible with the new engine) -AdamJD
+    Tag="Director"
 }

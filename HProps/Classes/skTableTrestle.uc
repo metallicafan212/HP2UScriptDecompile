@@ -15,7 +15,7 @@ class skTableTrestle extends HPMeshActor;
 #exec Anim Digest Anim=skTableTrestleAnims VERBOSE 
 
 //texture import (skTableTrestleTex0) -AdamJD 
-#exec Texture Import File=Textures\skTableTrestleTex0.png Name=skTableTrestleTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skTableTrestleTex0.png Name=skTableTrestleTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=255,G=0,B=255,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTableTrestleMesh Num=0 Texture=skTableTrestleTex0
 
 defaultproperties

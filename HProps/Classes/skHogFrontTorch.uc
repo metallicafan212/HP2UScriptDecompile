@@ -15,7 +15,7 @@ class skHogFrontTorch extends HPMeshActor;
 #exec Anim Digest Anim=skHogFrontTorchAnims VERBOSE 
 
 //texture import (skHogFrontTorchTex0) -AdamJD 
-#exec Texture Import File=Textures\skHogFrontTorchTex0.png Name=skHogFrontTorchTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skHogFrontTorchTex0.png Name=skHogFrontTorchTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skHogFrontTorchMesh Num=0 Texture=skHogFrontTorchTex0
 
 defaultproperties

@@ -15,11 +15,11 @@ class skWizCardTest extends HPMeshActor;
 #exec Anim Digest Anim=skWizCardTestAnims VERBOSE 
 
 //texture import (skWizCardTestTex0) -AdamJD 
-#exec Texture Import File=Textures\skWizCardTestTex0.png Name=skWizCardTestTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skWizCardTestTex0.png Name=skWizCardTestTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=255,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skWizCardTestMesh Num=0 Texture=skWizCardTestTex0
 
 //texture import (skWizCardTestTex1) -AdamJD 
-#exec Texture Import File=Textures\skWizCardTestTex1.png Name=skWizCardTestTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skWizCardTestTex1.png Name=skWizCardTestTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skWizCardTestMesh Num=1 Texture=skWizCardTestTex1
 
 //texture import (skWizCardTestTex2) -AdamJD 

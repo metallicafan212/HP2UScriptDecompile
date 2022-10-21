@@ -15,7 +15,7 @@ class skChandalierTwoTier extends HPMeshActor;
 #exec Anim Digest Anim=skChandalierTwoTierAnims VERBOSE 
 
 //texture import (skChandalierTwoTierTex0) -AdamJD 
-#exec Texture Import File=Textures\skChandalierTwoTierTex0.png Name=skChandalierTwoTierTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skChandalierTwoTierTex0.png Name=skChandalierTwoTierTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChandalierTwoTierMesh Num=0 Texture=skChandalierTwoTierTex0
 
 defaultproperties

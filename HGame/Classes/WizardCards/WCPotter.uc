@@ -5,10 +5,10 @@
 class WCPotter extends Goldcards;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\WizCardPotterBigTexture.PNG	GROUP=Icons	Name=WizCardPotterBigTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\WizCardHarryBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardHarryBigTextureLayer0 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\WizCardHarryBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardHarryBigTextureLayer1 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\WizCardHarryBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardHarryBigTextureLayer2 COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardPotterBigTexture.PNG	GROUP=Icons	Name=WizCardPotterBigTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardHarryBigTextureLayer0.PNG	GROUP=Icons	Name=WizCardHarryBigTextureLayer0 COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardHarryBigTextureLayer1.PNG	GROUP=Icons	Name=WizCardHarryBigTextureLayer1 COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardHarryBigTextureLayer2.PNG	GROUP=Icons	Name=WizCardHarryBigTextureLayer2 COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
 #exec Texture Import File=Textures\Skins\WizardCardPotterTex0.PNG	GROUP=Skins	Name=WizardCardPotterTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=0
 
 function PostBeginPlay()

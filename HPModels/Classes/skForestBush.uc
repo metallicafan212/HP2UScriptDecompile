@@ -16,6 +16,6 @@ class skForestBush extends HPMesh
 #exec Anim Digest Anim=skForestBushAnims VERBOSE
 
 //texture import (skForestBushTex0) -AdamJD 
-#exec Texture Import File=Textures\skForestBushTex0.png Name=skForestBushTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skForestBushTex0.png Name=skForestBushTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skForestBushMesh Num=0 Texture=skForestBushTex0
 

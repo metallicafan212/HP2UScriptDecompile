@@ -15,7 +15,7 @@ class skVaseUrn extends HPMeshActor;
 #exec Anim Digest Anim=skVaseUrnAnims VERBOSE 
 
 //texture import (skVaseUrnTex0) -AdamJD 
-#exec Texture Import File=Textures\skVaseUrnTex0.png Name=skVaseUrnTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skVaseUrnTex0.png Name=skVaseUrnTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skVaseUrnMesh Num=0 Texture=skVaseUrnTex0
 
 defaultproperties

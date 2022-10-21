@@ -15,7 +15,7 @@ class skTreeSprite02 extends HPMeshActor;
 #exec Anim Digest Anim=skTreeSprite02Anims VERBOSE 
 
 //texture import (skTreeSprite02Tex0) -AdamJD 
-#exec Texture Import File=Textures\skTreeSprite02Tex0.png Name=skTreeSprite02Tex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skTreeSprite02Tex0.png Name=skTreeSprite02Tex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTreeSprite02Mesh Num=0 Texture=skTreeSprite02Tex0
 
 defaultproperties

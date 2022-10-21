@@ -5,8 +5,8 @@
 class HPMenuOptionCombo extends HGameComboControl;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\FEComboIdleTexture.PNG	GROUP=Icons	Name=FEComboIdleTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\FEComboOverTexture.PNG	GROUP=Icons	Name=FEComboOverTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\FEComboIdleTexture.PNG	GROUP=Icons	Name=FEComboIdleTexture COMPRESSION=P8 UPSCALE=1 Mips=0 MaskedOverride=(R=0,G=0,B=0,A=255) Flags=2
+#exec Texture Import File=Textures\Icons\FEComboOverTexture.PNG	GROUP=Icons	Name=FEComboOverTexture COMPRESSION=P8 UPSCALE=1 Mips=0 MaskedOverride=(R=0,G=0,B=0,A=255) Flags=2
 
 var Texture IdleTexture;
 var Texture OverTexture;

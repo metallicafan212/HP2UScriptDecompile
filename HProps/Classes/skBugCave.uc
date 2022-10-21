@@ -15,7 +15,7 @@ class skBugCave extends HPMeshActor;
 #exec Anim Digest Anim=skBugCaveAnims VERBOSE 
 
 //texture import (skBugCaveTex0) -AdamJD 
-#exec Texture Import File=Textures\skBugCaveTex0.png Name=skBugCaveTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skBugCaveTex0.png Name=skBugCaveTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skBugCaveMesh Num=0 Texture=skBugCaveTex0
 
 defaultproperties

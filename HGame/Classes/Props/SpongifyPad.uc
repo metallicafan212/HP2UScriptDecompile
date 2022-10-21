@@ -5,7 +5,7 @@
 class SpongifyPad extends HProp;
 
 //texture import -AdamJD
-#exec Texture Import File=Textures\SpongifyTexture.PNG Name=SpongifyTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\SpongifyTexture.PNG Name=SpongifyTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
 
 var Actor Target;
 var Vector vStartPosition;

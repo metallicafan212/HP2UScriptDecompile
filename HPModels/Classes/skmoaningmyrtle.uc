@@ -28,6 +28,6 @@ class skmoaningmyrtle extends HPMesh
 #exec MeshMap SetTexture MeshMap=skmoaningmyrtleMesh Num=2 Texture=skmoaningmyrtleTex2
 
 //texture import (skmoaningmyrtleTex3) -AdamJD 
-#exec Texture Import File=Textures\skmoaningmyrtleTex3.png Name=skmoaningmyrtleTex3 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skmoaningmyrtleTex3.png Name=skmoaningmyrtleTex3 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skmoaningmyrtleMesh Num=3 Texture=skmoaningmyrtleTex3
 

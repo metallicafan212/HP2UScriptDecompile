@@ -36,6 +36,6 @@ class skHarGin extends HPMesh
 #exec MeshMap SetTexture MeshMap=skHarGinMesh Num=4 Texture=skHarGinTex4
 
 //texture import (skHarGinTex5) -AdamJD 
-#exec Texture Import File=Textures\skHarGinTex5.png Name=skHarGinTex5 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skHarGinTex5.png Name=skHarGinTex5 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skHarGinMesh Num=5 Texture=skHarGinTex5
 

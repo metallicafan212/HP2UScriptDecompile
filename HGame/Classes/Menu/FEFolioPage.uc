@@ -5,12 +5,12 @@
 class FEFolioPage extends baseFEPage;
 
 //texture imports -AdamJD
-#exec Texture Import File=Textures\Icons\CardGlowBronze.PNG	GROUP=Icons	Name=CardGlowBronze COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\CardGlowGold.PNG	GROUP=Icons	Name=CardGlowGold COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\CardGlowGoldBig.PNG	GROUP=Icons	Name=CardGlowGoldBig COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\CardGlowSilver.PNG	GROUP=Icons	Name=CardGlowSilver COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\WizCardMissingBigTexture.PNG	GROUP=Icons	Name=WizCardMissingBigTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
-#exec Texture Import File=Textures\Icons\WizCardMissingSmallTexture.PNG	GROUP=Icons	Name=WizCardMissingSmallTexture COMPRESSION=3 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\CardGlowBronze.PNG	GROUP=Icons	Name=CardGlowBronze COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\CardGlowGold.PNG	GROUP=Icons	Name=CardGlowGold COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\CardGlowGoldBig.PNG	GROUP=Icons	Name=CardGlowGoldBig COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\CardGlowSilver.PNG	GROUP=Icons	Name=CardGlowSilver COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardMissingBigTexture.PNG	GROUP=Icons	Name=WizCardMissingBigTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
+#exec Texture Import File=Textures\Icons\WizCardMissingSmallTexture.PNG	GROUP=Icons	Name=WizCardMissingSmallTexture COMPRESSION=P8 UPSCALE=1 Mips=0 Flags=2
 
 const nCARDGLOW_BIG_OFFSET_Y= -64;
 const nCARDGLOW_BIG_OFFSET_X= -64;

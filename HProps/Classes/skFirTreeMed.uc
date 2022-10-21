@@ -19,7 +19,7 @@ class skFirTreeMed extends HPMeshActor;
 #exec MeshMap SetTexture MeshMap=skFirTreeMedMesh Num=0 Texture=skFirTreeMedTex0
 
 //texture import (skFirTreeMedTex1) -AdamJD 
-#exec Texture Import File=Textures\skFirTreeMedTex1.png Name=skFirTreeMedTex1 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skFirTreeMedTex1.png Name=skFirTreeMedTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skFirTreeMedMesh Num=1 Texture=skFirTreeMedTex1
 
 defaultproperties

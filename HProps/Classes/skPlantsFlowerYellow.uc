@@ -15,7 +15,7 @@ class skPlantsFlowerYellow extends HPMeshActor;
 #exec Anim Digest Anim=skPlantsFlowerYellowAnims VERBOSE 
 
 //texture import (skPlantsFlowerYellowTex0) -AdamJD 
-#exec Texture Import File=Textures\skPlantsFlowerYellowTex0.png Name=skPlantsFlowerYellowTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skPlantsFlowerYellowTex0.png Name=skPlantsFlowerYellowTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skPlantsFlowerYellowMesh Num=0 Texture=skPlantsFlowerYellowTex0
 
 defaultproperties

@@ -15,11 +15,11 @@ class skCoatRack1 extends HPMeshActor;
 #exec Anim Digest Anim=skCoatRack1Anims VERBOSE 
 
 //texture import (skCoatRack1Tex0) -AdamJD 
-#exec Texture Import File=Textures\skCoatRack1Tex0.png Name=skCoatRack1Tex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skCoatRack1Tex0.png Name=skCoatRack1Tex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=255,G=0,B=255,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skCoatRack1Mesh Num=0 Texture=skCoatRack1Tex0
 
 //texture import (skCoatRack1Tex1) -AdamJD 
-#exec Texture Import File=Textures\skCoatRack1Tex1.png Name=skCoatRack1Tex1 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skCoatRack1Tex1.png Name=skCoatRack1Tex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=255,G=0,B=255,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skCoatRack1Mesh Num=1 Texture=skCoatRack1Tex1
 
 defaultproperties

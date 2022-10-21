@@ -15,11 +15,11 @@ class skDishesHagridTeaPot extends HPMeshActor;
 #exec Anim Digest Anim=skDishesHagridTeaPotAnims VERBOSE 
 
 //texture import (skDishesHagridTeaPotTex0) -AdamJD 
-#exec Texture Import File=Textures\skDishesHagridTeaPotTex0.png Name=skDishesHagridTeaPotTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skDishesHagridTeaPotTex0.png Name=skDishesHagridTeaPotTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skDishesHagridTeaPotMesh Num=0 Texture=skDishesHagridTeaPotTex0
 
 //texture import (skDishesHagridTeaPotTex1) -AdamJD 
-#exec Texture Import File=Textures\skDishesHagridTeaPotTex1.png Name=skDishesHagridTeaPotTex1 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skDishesHagridTeaPotTex1.png Name=skDishesHagridTeaPotTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=0,G=0,B=0,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skDishesHagridTeaPotMesh Num=1 Texture=skDishesHagridTeaPotTex1
 
 defaultproperties

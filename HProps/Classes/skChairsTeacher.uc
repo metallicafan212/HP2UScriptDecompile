@@ -15,7 +15,7 @@ class skChairsTeacher extends HPMeshActor;
 #exec Anim Digest Anim=skChairsTeacherAnims VERBOSE 
 
 //texture import (skChairsTeacherTex0) -AdamJD 
-#exec Texture Import File=Textures\skChairsTeacherTex0.png Name=skChairsTeacherTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skChairsTeacherTex0.png Name=skChairsTeacherTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=255,G=0,B=255,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skChairsTeacherMesh Num=0 Texture=skChairsTeacherTex0
 
 defaultproperties

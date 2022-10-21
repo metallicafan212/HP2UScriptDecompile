@@ -16,6 +16,6 @@ class skForestFern3b extends HPMesh
 #exec Anim Digest Anim=skForestFern3bAnims VERBOSE 
 
 //texture import (skForestFern3bTex0) -AdamJD 
-#exec Texture Import File=Textures\skForestFern3bTex0.png Name=skForestFern3bTex0 COMPRESSION=3 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skForestFern3bTex0.png Name=skForestFern3bTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skForestFern3bMesh Num=0 Texture=skForestFern3bTex0
 

@@ -16,10 +16,10 @@ class skTableVaseKO extends HPMesh
 #exec Anim Digest Anim=skTableVaseKOAnims VERBOSE 
 
 //texture import (skTableVaseKOTex0) -AdamJD 
-#exec Texture Import File=Textures\skTableVaseKOTex0.png Name=skTableVaseKOTex0 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skTableVaseKOTex0.png Name=skTableVaseKOTex0 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 MaskedOverride=(R=255,G=0,B=255,A=255) Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTableVaseKOMesh Num=0 Texture=skTableVaseKOTex0
 
 //texture import (skTableVaseKOTex1) -AdamJD 
-#exec Texture Import File=Textures\skTableVaseKOTex1.png Name=skTableVaseKOTex1 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skTableVaseKOTex1.png Name=skTableVaseKOTex1 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skTableVaseKOMesh Num=1 Texture=skTableVaseKOTex1
 

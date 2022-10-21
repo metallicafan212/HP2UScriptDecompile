@@ -28,7 +28,7 @@ class skdumbledore extends HPMesh
 #exec MeshMap SetTexture MeshMap=skdumbledoreMesh Num=2 Texture=skdumbledoreTex2
 
 //texture import (skdumbledoreTex3) -AdamJD 
-#exec Texture Import File=Textures\skdumbledoreTex3.png Name=skdumbledoreTex3 COMPRESSION=0 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
+#exec Texture Import File=Textures\skdumbledoreTex3.png Name=skdumbledoreTex3 COMPRESSION=P8 UPSCALE=1 Mips=1 Flags=2 Group=Skins 
 #exec MeshMap SetTexture MeshMap=skdumbledoreMesh Num=3 Texture=skdumbledoreTex3
 
 //anim notify imports -AdamJD

@@ -6248,7 +6248,7 @@ defaultproperties
 
     SpongifyFallAnim=spongify
 
-    AnimFalling=''
+    AnimFalling=""
 
     HarryAnims(0)=(Idle=Idle,Walk=Walk,run=run,WalkBack=runback,StrafeRight=StrafeRight,StrafeLeft=StrafeLeft,Jump=Jump,Jump2=Jump2,Fall=Fall,Land=Land)
 

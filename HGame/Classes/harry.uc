@@ -5389,121 +5389,175 @@ function bool CutQuestion(string question)
 
 function bool CutCommand (string Command, optional string cue, optional bool bFastFlag)
 {
-  local string sActualCommand;
-  local string sCutName;
-  local Actor A;
-  local string sSayText;
-  local string sSayTextID;
-  local Characters CurrCharacter;
+	local string sActualCommand;
+	local string sCutName;
+	local Actor A;
+	local string sSayText;
+	local string sSayTextID;
+	local Characters CurrCharacter;
   
-  //ClientMessage(self$" CutCommand:" $command $" Cue:" $cue);
+	//ClientMessage(self$" CutCommand:" $command $" Cue:" $cue);
 
-  sActualCommand = ParseDelimitedString(Command," ",1,False);
-  if ( sActualCommand ~= "Capture" )
-  {
-	if ( HarryIsDead() )
+	sActualCommand = ParseDelimitedString(Command," ",1,False);
+  
+	if ( sActualCommand ~= "Capture" )
 	{
-	  return False;
-	}
-	foreach AllActors(Class'Characters',CurrCharacter)
-	{
-	  CurrCharacter.OnHarryCaptured();
-	}
-	bIsCaptured = True;
-	myHUD.StartCutScene();
-	SendPlayerCaptureMessages(True);
-	GotoState('stateCutIdle');
-	return True;
-  } 
-  else if ( sActualCommand ~= "Release" )
-  {
-	myHUD.EndCutScene();
-	DestroyControllers();
-	SendPlayerCaptureMessages(False);
-	bIsCaptured = False;
-	GotoState('PlayerWalking');
-	RotationRate = Default.RotationRate;
+		if ( HarryIsDead() )
+		{
+			return False;
+		}
+		foreach AllActors(Class'Characters',CurrCharacter)
+		{
+			CurrCharacter.OnHarryCaptured();
+		}	
 		
-	//CM("M212:	Harry release!");
-		
-	return True;
-  } 
-  else if ( sActualCommand ~= "ToggleUseSword" )
-  {
-	ToggleUseSword();
-    CutCue(cue);
-    return True;
-  } 
-  else if ( sActualCommand ~= "ChangeGameState" )
-  {
-	sActualCommand = ParseDelimitedString(Command," ",2,False);
-	if (  !SetGameState(sActualCommand) )
+		bIsCaptured = True;
+		myHUD.StartCutScene();
+		SendPlayerCaptureMessages(True);
+		GotoState('stateCutIdle');
+		return True;
+	} 
+	else if ( sActualCommand ~= "Release" )
 	{
-		CutErrorString = "!E!R!R!O!R! GameState " $ sActualCommand $ " is not a valid GameState in the *GameStateMasterList*!!!";
+		myHUD.EndCutScene();
+		DestroyControllers();
+		SendPlayerCaptureMessages(False);
+		bIsCaptured = False;
+		GotoState('PlayerWalking');
+		RotationRate = Default.RotationRate;
+		
+		return True;
+	} 
+	
+	// Metallicafan212:	Lumos control
+	else if (sActualCommand ~= "ToggleLumos")
+	{
+		// Metallicafan212:	Toggle it on or off
+		if(baseWand(Weapon).TheLumosLight.bLumosOn)
+		{
+			baseWand(Weapon).TheLumosLight.TurnOff();
+		}
+		else
+		{
+			baseWand(Weapon).TheLumosLight.TurnOn();
+		}
+		
+		// Metallicafan212:	Check if we want infinite lumos
+		sActualCommand = ParseDelimitedString(Command," ",2,False);
+		
+		if (sActualCommand ~= "Infinite")
+		{
+			baseWand(Weapon).TheLumosLight.bInfiniteLumos = true;
+		}
+		
 		CutCue(cue);
-		return False;
+		
+		return true;
 	}
-	CutCue(cue);
-	return True;
-  } 
-  else if ( sActualCommand ~= "HideWeapon" )
-  {
-	Weapon.bHidden = True;
-    CutCue(cue);
-    return True;
-  } 
-  else if ( sActualCommand ~= "ShowWeapon" )
-  {
-	Weapon.bHidden = False;
-    CutCue(cue);
-    return True;
-  } 
-  else if ( sActualCommand ~= "SetHub9CeremonyFlag" )
-  {
-	bHub9CeremonyFlag = True;
-	CutCue(cue);
-    return True;
-  } 
-  else if ( sActualCommand ~= "GiveHermioneBicorn" )
-  {
-	managerStatus.AddBicorn(-1);
-    CutCue(cue);
-    return True;
-  } 
-  else if ( sActualCommand ~= "GiveHermioneBoomslang" )
-  {
-	managerStatus.AddBoomslang(-1);
-    CutCue(cue);
-    return True;
-  } 
-  else if ( sActualCommand ~= "RunCredits" )
-  {
-	menuBook = HPConsole(Player.Console).menuBook;
-    if ( menuBook != None )
-    {
-		menuBook.RunTheCredits();
-        CutCue(cue);
-        return True;
-    }
-  } 
-  else if ( sActualCommand ~= "ResetLevel" )
-  {
-	return CutCommand_ResetLevel(Command,cue);
-  } 
-  else if ( sActualCommand ~= "PutGryffInLead" )
-  {
-	StatusGroupHousePoints(managerStatus.GetStatusGroup(Class'StatusGroupHousePoints')).PutGryffInLead();
-    CutCue(cue);
-    return True;
-  } 
-  else if ( sActualCommand ~= "AddHPointsG" )
-  {
-	sActualCommand = ParseDelimitedString(Command," ",2,False);
-    managerStatus.AddHPointsG(int(sActualCommand));
-    CutCue(cue);
-    return True;
-  }
-  return Super.CutCommand(Command,cue,bFastFlag);
+	else if (sActualCommand ~= "LumosOn")
+	{
+		// Metallicafan212:	On
+		baseWand(Weapon).TheLumosLight.TurnOn();
+		
+		// Metallicafan212:	Check if we want infinite lumos
+		sActualCommand = ParseDelimitedString(Command," ",2,False);
+		
+		if (sActualCommand ~= "Infinite")
+		{
+			baseWand(Weapon).TheLumosLight.bInfiniteLumos = true;
+		}
+		
+		CutCue(cue);
+		
+		return true;
+	}
+	else if (sActualCommand ~= "LumosOff")
+	{
+		// Metallicafan212:	Off
+		baseWand(Weapon).TheLumosLight.TurnOff();
+		
+		CutCue(cue);
+		
+		return true;
+	}
+	
+	else if ( sActualCommand ~= "ToggleUseSword" )
+	{
+		ToggleUseSword();
+		CutCue(cue);
+		return True;
+	} 
+	else if ( sActualCommand ~= "ChangeGameState" )
+	{
+		sActualCommand = ParseDelimitedString(Command," ",2,False);
+		if (  !SetGameState(sActualCommand) )
+		{
+			CutErrorString = "!E!R!R!O!R! GameState " $ sActualCommand $ " is not a valid GameState in the *GameStateMasterList*!!!";
+			CutCue(cue);
+			return False;
+		}
+		
+		CutCue(cue);
+		return True;
+	} 
+	else if ( sActualCommand ~= "HideWeapon" )
+	{
+		Weapon.bHidden = True;
+		CutCue(cue);
+		return True;
+	} 
+	else if ( sActualCommand ~= "ShowWeapon" )
+	{
+		Weapon.bHidden = False;
+		CutCue(cue);
+		return True;
+	} 
+	else if ( sActualCommand ~= "SetHub9CeremonyFlag" )
+	{
+		bHub9CeremonyFlag = True;
+		CutCue(cue);
+		return True;
+	} 
+	else if ( sActualCommand ~= "GiveHermioneBicorn" )
+	{
+		managerStatus.AddBicorn(-1);
+		CutCue(cue);
+		return True;
+	} 
+	else if ( sActualCommand ~= "GiveHermioneBoomslang" )
+	{
+		managerStatus.AddBoomslang(-1);
+		CutCue(cue);
+		return True;
+	} 
+	else if ( sActualCommand ~= "RunCredits" )
+	{
+		menuBook = HPConsole(Player.Console).menuBook;
+		if ( menuBook != None )
+		{
+			menuBook.RunTheCredits();
+			CutCue(cue);
+			return True;
+		}
+	} 
+	else if ( sActualCommand ~= "ResetLevel" )
+	{
+		return CutCommand_ResetLevel(Command,cue);
+	} 
+	else if ( sActualCommand ~= "PutGryffInLead" )
+	{
+		StatusGroupHousePoints(managerStatus.GetStatusGroup(Class'StatusGroupHousePoints')).PutGryffInLead();
+		CutCue(cue);
+		return True;
+	} 
+	else if ( sActualCommand ~= "AddHPointsG" )
+	{
+		sActualCommand = ParseDelimitedString(Command," ",2,False);
+		managerStatus.AddHPointsG(int(sActualCommand));
+		CutCue(cue);
+		return True;
+	}
+	return Super.CutCommand(Command,cue,bFastFlag);
 }
 
 function bool SetGameState (string strNewGameState)

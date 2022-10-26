@@ -323,15 +323,15 @@ function KeyDown(int Key, float X, float Y)
 
 	switch (Key)
 	{
-	case P.EInputKey.IK_Ctrl:
+	case EInputKey.IK_Ctrl:
 		bControlDown = True;
 		break;
-	case P.EInputKey.IK_Shift:
+	case EInputKey.IK_Shift:
 		bShiftDown = True;
 		break;
-	case P.EInputKey.IK_Escape:
+	case EInputKey.IK_Escape:
 		break;
-	case P.EInputKey.IK_Enter:
+	case EInputKey.IK_Enter:
 		if(bCanEdit)
 		{
 			if(bHistory)
@@ -346,16 +346,16 @@ function KeyDown(int Key, float X, float Y)
 			Notify(DE_EnterPressed);
 		}
 		break;
-	case P.EInputKey.IK_MouseWheelUp:
+	case EInputKey.IK_MouseWheelUp:
 		if(bCanEdit)
 			Notify(DE_WheelUpPressed);
 		break;
-	case P.EInputKey.IK_MouseWheelDown:
+	case EInputKey.IK_MouseWheelDown:
 		if(bCanEdit)
 			Notify(DE_WheelDownPressed);
 		break;
 
-	case P.EInputKey.IK_Right:
+	case EInputKey.IK_Right:
 		if(bCanEdit) 
 		{
 			if(bControlDown)
@@ -365,7 +365,7 @@ function KeyDown(int Key, float X, float Y)
 		}
 		bAllSelected = False;
 		break;
-	case P.EInputKey.IK_Left:
+	case EInputKey.IK_Left:
 		if(bCanEdit)
 		{
 			if(bControlDown)
@@ -375,7 +375,7 @@ function KeyDown(int Key, float X, float Y)
 		}
 		bAllSelected = False;
 		break;
-	case P.EInputKey.IK_Up:
+	case EInputKey.IK_Up:
 		if(bCanEdit && bHistory)
 		{
 			bAllSelected = False;
@@ -387,7 +387,7 @@ function KeyDown(int Key, float X, float Y)
 			}
 		}
 		break;
-	case P.EInputKey.IK_Down:
+	case EInputKey.IK_Down:
 		if(bCanEdit && bHistory)
 		{
 			bAllSelected = False;
@@ -399,17 +399,17 @@ function KeyDown(int Key, float X, float Y)
 			}
 		}
 		break;
-	case P.EInputKey.IK_Home:
+	case EInputKey.IK_Home:
 		if(bCanEdit)
 			MoveHome();
 		bAllSelected = False;
 		break;
-	case P.EInputKey.IK_End:
+	case EInputKey.IK_End:
 		if(bCanEdit)
 			MoveEnd();
 		bAllSelected = False;
 		break;
-	case P.EInputKey.IK_Backspace:
+	case EInputKey.IK_Backspace:
 		if(bCanEdit)
 		{
 			if(bAllSelected)
@@ -419,7 +419,7 @@ function KeyDown(int Key, float X, float Y)
 		}
 		bAllSelected = False;
 		break;
-	case P.EInputKey.IK_Delete:
+	case EInputKey.IK_Delete:
 		if(bCanEdit)
 		{
 			if(bAllSelected)
@@ -429,8 +429,8 @@ function KeyDown(int Key, float X, float Y)
 		}
 		bAllSelected = False;
 		break;
-	case P.EInputKey.IK_Period:
-	case P.EInputKey.IK_NumPadPeriod:
+	case EInputKey.IK_Period:
+	case EInputKey.IK_NumPadPeriod:
 		if (bNumericFloat)
 			Insert(Asc("."));
 		break;

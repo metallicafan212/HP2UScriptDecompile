@@ -46,6 +46,9 @@ var bool				bAllowConsole;
 
 var bool				bHideMouse;
 
+// Metallicafan212:	If to force the fake mouse cursor (controller moved!)
+var bool				bForceFakeMouse;
+
 //texture import vars -AdamJD
 var Texture				MouseCursorTexture;
 var Texture				MouseMoveTexture;
@@ -65,9 +68,9 @@ var Font				HPMenuLargeFont;
 
 function BeginPlay() 
 {
-	Root = Self;
-	MouseWindow = Self;
-	KeyFocusWindow = Self;
+	Root 			= Self;
+	MouseWindow 	= Self;
+	KeyFocusWindow 	= Self;
 }
 
 function UWindowLookAndFeel GetLookAndFeel(String LFClassName)
@@ -211,10 +214,10 @@ function DrawMouse(Canvas C)
 	local float X, Y;
 	local int nSaveStyle; //got added after the proto -AdamJD
 
-	if(bHideMouse)
+	if(!bForceFakeMouse && bHideMouse)
 		return;
 
-	if(Console.Viewport.bWindowsMouseAvailable)
+	if(!bForceFakeMouse && Console.Viewport.bWindowsMouseAvailable)
 	{
 		// Set the windows cursor...
 		Console.Viewport.SelectedCursor = MouseWindow.Cursor.WindowsCursor;
@@ -266,7 +269,8 @@ function bool CheckCaptureMouseUp()
 {
 	local float X, Y;
 
-	if(bMouseCapture) {
+	if(bMouseCapture) 
+	{
 		MouseWindow.GetMouseXY(X, Y);
 		MouseWindow.LMouseUp(X, Y);
 		bMouseCapture = False;
@@ -279,7 +283,8 @@ function bool CheckCaptureMouseDown()
 {
 	local float X, Y;
 
-	if(bMouseCapture) {
+	if(bMouseCapture) 
+	{
 		MouseWindow.GetMouseXY(X, Y);
 		MouseWindow.LMouseDown(X, Y);
 		bMouseCapture = False;
@@ -333,15 +338,44 @@ function RemoveHotkeyWindow(UWindowWindow W)
 
 function WindowEvent(WinMessage Msg, Canvas C, float X, float Y, int Key) 
 {
-	switch(Msg) {
-	case WM_KeyDown:
-		if(HotKeyDown(Key, X, Y))
-			return;
-		break;
-	case WM_KeyUp:
-		if(HotKeyUp(Key, X, Y))
-			return;
-		break;
+	// Metallicafan212:	Userp the xinput keys
+	switch(Key)
+	{
+		// Metallicafan212:	A to go forwards, B to right mouse?
+		//					TODO! Don't hardcode these, fucker!
+		//					Move the EInputKey def into Object?
+		//case IK_XBA:
+		case 0xD2:
+			//Key = 1;
+			//log("XB A");
+			if(Msg == WM_KeyUp)
+			{
+				Msg = WM_LMouseUp;
+			}
+			Super.WindowEvent(Msg, C, X, Y, 1);
+			break;
+		//case IK_XBB:
+		case 0xD3:
+			//Key = 2;
+			//log("XB B");
+			if(Msg == WM_KeyUp)
+			{
+				Msg = WM_RMouseUp;
+			}
+			Super.WindowEvent(Msg, C, X, Y, 2);
+			break;
+	}
+
+	switch(Msg) 
+	{
+		case WM_KeyDown:
+			if(HotKeyDown(Key, X, Y))
+				return;
+			break;
+		case WM_KeyUp:
+			if(HotKeyUp(Key, X, Y))
+				return;
+			break;
 	}
 
 	Super.WindowEvent(Msg, C, X, Y, Key);

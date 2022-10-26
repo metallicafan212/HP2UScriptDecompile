@@ -12,6 +12,10 @@ var bool				bCreatedRoot;
 var float				MouseX;
 var float				MouseY;
 
+// Metallicafan212:	Last mouse pos
+var float				LastMouseX;
+var float				LoastMouseY;
+
 var class<UWindowConsoleWindow> ConsoleClass;
 var config float		MouseScale;
 var config bool			ShowDesktop;
@@ -29,6 +33,17 @@ var globalconfig byte	ConsoleKey;
 var config EInputKey	UWindowKey;
 
 var UWindowConsoleWindow ConsoleWindow;
+
+// Metallicafan212: Save the last deltatime
+var float				LastDeltaT;
+
+// Metallicafan212:	Controller menu scale
+var globalconfig float	ControllerMouseScale;
+
+// Metallicafan212:	So we can call the KW bullshit from UWindow
+exec function TogglePauseMenu() {}
+
+exec function ToggleMapMenu() {}
 
 function ResetUWindow()
 {
@@ -51,9 +66,12 @@ event bool KeyEvent( EInputKey Key, EInputAction Action, FLOAT Delta )
 		switch(k)
 		{
 		case EInputKey.IK_Escape:
+			log("Fucking UWindow: " $ bLocked);
 			if (bLocked)
 				return true;
-
+				
+			
+			
 			bQuickKeyEnable = False;
 			LaunchUWindow();
 			return true;
@@ -107,6 +125,8 @@ event Tick( float Delta )
 			bLevelChange = False;
 		Root.NotifyAfterLevelChange();
 	}
+	
+	LastDeltaT = Delta;
 }
 
 state UWindow
@@ -160,6 +180,9 @@ state UWindow
 				if(Root != None)
 					Root.WindowEvent(WM_MMouseUp, None, MouseX, MouseY, k);
 				break;
+			case EInputKey.IK_XBB:
+				TogglePauseMenu();
+				break;
 			default:
 				if(Root != None)
 					Root.WindowEvent(WM_KeyUp, None, MouseX, MouseY, k);
@@ -189,23 +212,56 @@ state UWindow
 				}
 				break;
 			case EInputKey.IK_Escape:
+				log("Escape");
 				if (bShowConsole)
 				{
 					HideConsole();
 					if(bQuickKeyEnable)
 						CloseUWindow();
 				}				
-				else if(Root != None)
-					Root.CloseActiveWindow();
+				//else if(Root != None)
+				//	Root.CloseActiveWindow();
 				break;
+				
 			case EInputKey.IK_LeftMouse:
 				if(Root != None)
+				{
 					Root.WindowEvent(WM_LMouseDown, None, MouseX, MouseY, k);
+					return true;
+				}
 				break;
 			case EInputKey.IK_RightMouse:
 				if(Root != None)
+				{
 					Root.WindowEvent(WM_RMouseDown, None, MouseX, MouseY, k);
+					return true;
+				}
 				break;
+			// Metallicafan212:	A to go forwards, B to right mouse?
+			case EInputKey.IK_XBA:
+				if(Root != None)
+				{
+					Root.WindowEvent(WM_LMouseDown, None, MouseX, MouseY, EInputKey.IK_LeftMouse);
+					return true;
+				}
+				break;
+			case EInputKey.IK_XBB:
+				//if(Root != None)
+				//{
+				//	Root.WindowEvent(WM_KeyDown, None, MouseX, MouseY, EInputKey.IK_Escape);
+				//	return true;
+				//}
+				//KeyEvent(IK_Escape, IST_Press, 
+				/*
+				if(Root != None)
+				{
+					Root.WindowEvent(WM_RMouseDown, None, MouseX, MouseY, EInputKey.IK_RightMouse);
+					return true;
+				}
+				*/
+				//TogglePauseMenu();
+				break;
+				
 			case EInputKey.IK_MiddleMouse:
 				if(Root != None)
 					Root.WindowEvent(WM_MMouseDown, None, MouseX, MouseY, k);
@@ -219,21 +275,51 @@ state UWindow
 		case IST_Axis:
 			switch (Key)
 			{
-			case IK_MouseX:
-				MouseX = MouseX + (MouseScale * Delta);
-				break;
-			case IK_MouseY:
-				MouseY = MouseY - (MouseScale * Delta);
-				break;					
+				case IK_MouseX:
+					MouseX = MouseX + (MouseScale * Delta);
+					Root.bForceFakeMouse = false;
+					break;
+				case IK_MouseY:
+					MouseY = MouseY - (MouseScale * Delta);
+					Root.bForceFakeMouse = false;
+					break;			
+				
+				// Metallicafan212:	Controller support
+				//					Allow both sticks to do this
+				case IK_XBRightStickX:
+				case IK_XBLeftStickX:
+					if(Delta != 0.0)
+					{
+						MouseX = MouseX + (Delta * LastDeltaT * ControllerMouseScale);
+						Root.bForceFakeMouse = true;
+						
+						return true;
+					}
+					break;
+				
+				case IK_XBRightStickY:
+				case IK_XBLeftStickY:
+					if(Delta != 0.0)
+					{
+						MouseY = MouseY - (Delta * LastDeltaT * ControllerMouseScale);
+						Root.bForceFakeMouse = true;
+						
+						return true;
+					}
+					break;	
+			
 			}
 		default:
 			break;
 		}
 
-		return true;
+		//return true;
+		// Metallicafan212:	Default to false so that we can run exec functions in menu
+		if(bShowConsole)
+			return true;
+		else
+			return false;
 	}
-
-Begin:
 }
 
 function ToggleUWindow()
@@ -346,11 +432,25 @@ function RenderUWindow( canvas Canvas )
 	Canvas.DrawColor.r = 255;
 	Canvas.DrawColor.g = 255;
 	Canvas.DrawColor.b = 255;
-
-	if(Viewport.bWindowsMouseAvailable && Root != None)
+	
+	// Metallicafan212:	Force the fake mouse cursor to work
+	if(Root != None && !Root.bForceFakeMouse && Viewport.bWindowsMouseAvailable)
 	{
 		MouseX = Viewport.WindowsMouseX / Root.GUIScale;
 		MouseY = Viewport.WindowsMouseY / Root.HGUIScale;//Root.GUIScale;
+	}
+	// Metallicafan212:	Track the windows mouse and hide this mouse cursor if we move it
+	else if(Root != None && Root.bForceFakeMouse && Viewport.bWindowsMouseAvailable)
+	{
+		if(Viewport.WindowsMouseX  != LastMouseX || Viewport.WindowsMouseY != LoastMouseY)
+		{
+			MouseX = Viewport.WindowsMouseX / Root.GUIScale;
+			MouseY = Viewport.WindowsMouseY / Root.HGUIScale;//Root.GUIScale;
+			Root.bForceFakeMouse = false;
+		}
+		
+		LastMouseX 	= Viewport.WindowsMouseX;
+		LoastMouseY = Viewport.WindowsMouseY;
 	}
 
 	if(!bCreatedRoot) 
@@ -474,6 +574,7 @@ function NotifyLevelChange()
 defaultproperties
 {
 	MouseScale=0.6
+	ControllerMouseScale=300.0
 	RootWindow="UWindow.UWindowRootWindow"
 	UWindowKey=IK_Esc
 	ConsoleKey=192

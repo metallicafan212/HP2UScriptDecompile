@@ -202,21 +202,22 @@ function MouseLeaveColumn(UWindowGridColumn Column)
 
 function KeyDown(int Key, float X, float Y)
 {
-	switch(Key) {
-	case 0x26: // IK_Up
-	case 0xEC: // IK_MouseWheelUp
-		VertSB.Scroll(-1);
-		break;
-	case 0x28: // IK_Down
-	case 0xED: // IK_MouseWheelDown
-		VertSB.Scroll(1);
-		break;
-	case 0x21: // IK_PageUp
-		VertSB.Scroll(-(VertSB.MaxVisible-1));
-		break;
-	case 0x22: // IK_PageDown
-		VertSB.Scroll(VertSB.MaxVisible-1);
-		break;
+	switch(Key) 
+	{
+		case 0x26: // IK_Up
+		case 0xEC: // IK_MouseWheelUp
+			VertSB.Scroll(-1);
+			break;
+		case 0x28: // IK_Down
+		case 0xED: // IK_MouseWheelDown
+			VertSB.Scroll(1);
+			break;
+		case 0x21: // IK_PageUp
+			VertSB.Scroll(-(VertSB.MaxVisible-1));
+			break;
+		case 0x22: // IK_PageDown
+			VertSB.Scroll(VertSB.MaxVisible-1);
+			break;
 	}
 }
 

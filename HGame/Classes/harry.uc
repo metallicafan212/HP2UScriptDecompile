@@ -866,9 +866,16 @@ function LoadLevel (string LevelName)
 	{
 		if ( A.bPersistent )
 		{
+			// Metallicafan212:	Add some debug checks to prevent crashing
+			//					I'll look into fixing the actual issue with the binaries later (reading null memory!)
 			A.PersistentState = A.GetStateName();
-			A.PersistentLeadingActor = A.LeadingActor.Name;
-			A.PersistentNavPName = A.navP.Name;
+			
+			if(A.LeadingActor != None)
+				A.PersistentLeadingActor = A.LeadingActor.Name;
+			
+			if(A.navP != None)
+				A.PersistentNavPName = A.navP.Name;
+				
 			Log("*!* " $ string(A) $ " P_SAVING: PersistentState: " $ string(A.PersistentState) $ " for " $ string(A));
 			Log("*!* " $ string(A) $ " P_SAVING: LeadingActor: " $ string(A.PersistentLeadingActor) $ " AnimSequence: " $ string(A.AnimSequence) $ " navP:" $ string(A.navP));
 		}

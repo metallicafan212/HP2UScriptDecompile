@@ -203,13 +203,13 @@ begin:
     vFlobberHudLoc = sgPotionIngr.GetItemLocation(Class'StatusItemFlobberMucus',False);
     propTemp = HProp(FancySpawn(Class'FlobberwormMucus',,,vFlobberHudLoc));
     propTemp.fMinFlyToHudScale = 0.1;
-    propTemp.fMaxFlyToHudScale = 0.41;
+    propTemp.fMaxFlyToHudScale = 0.4;
     propTemp.DoDropOffProp(vTopOfCauldron,True);
     Sleep(0.1);
     vWiggenHudLoc = sgPotionIngr.GetItemLocation(Class'StatusItemWiggenBark',False);
     propTemp = HProp(FancySpawn(Class'WiggentreeBark',,,vFlobberHudLoc));
     propTemp.fMinFlyToHudScale = 0.1;
-    propTemp.fMaxFlyToHudScale = 0.41;
+    propTemp.fMaxFlyToHudScale = 0.4;
     propTemp.DoDropOffProp(vTopOfCauldron,True);
     Sleep(0.1);
   }
@@ -222,12 +222,12 @@ begin:
     propTemp = HProp(FancySpawn(Class'WWellCauldronBottle',,,vTopOfCauldron));
     Sleep(0.25);
     propTemp.fTotalFlyTime = 0.5;
-    propTemp.fMinFlyToHudScale = 0.81;
+    propTemp.fMinFlyToHudScale = 0.8;
     propTemp.DoPickupProp();
     Sleep(0.25);
   }
   SetCauldronFX(CauldronFX_Mixed);
-  Sleep(0.31);
+  Sleep(0.3);
   PlayerHarry.DoPotionMixingIdle();
   PlaySound(Sound'Potion_complete');
   PlayerHarry.DoPotionMixingEnd();

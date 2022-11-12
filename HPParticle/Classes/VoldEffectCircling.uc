@@ -20,7 +20,7 @@ event PostBeginPlay()
   vStartLoc = Location;
   Z = Location.Z + FRand() * 40 - 20;
   YawFromOwner = FRand() * 65536;
-  YawSpeed *= 0.81 + FRand() * 0.41;
+  YawSpeed *= 0.8 + FRand() * 0.4;
   if ( Rand(2) == 0 )
   {
     YawSpeed =  -YawSpeed;

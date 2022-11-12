@@ -402,7 +402,7 @@ state VendorTransaction
 	}
   
 	begin:
-		Vendor.LoopAnim('vendor_idle2',RandRange(0.81,1.25),0.2);
+		Vendor.LoopAnim('vendor_idle2',RandRange(0.80,1.20),0.2);
 }
 
 state MakePurchase

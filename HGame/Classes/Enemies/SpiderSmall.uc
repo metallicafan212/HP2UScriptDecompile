@@ -149,7 +149,7 @@ state AttachToHarry
         PrePivot = vect(0.00,0.00,0.00);
         GotoState('moveToMarker');
       } else {
-        PlaySound(spiderBiteSound,SLOT_None,RandRange(0.62,1.0),,200.0,RandRange(0.81,1.25),,False);
+        PlaySound(spiderBiteSound,SLOT_None,RandRange(0.6,1.0),,200.0,RandRange(0.80,1.20),,False);
       }
     }
   }

@@ -515,7 +515,7 @@ function UpdateWoosh (float DeltaTime)
   if ( bCanWoosh && (Level.TimeSeconds > fNextTimeSafeToWoosh) && (fLastDistanceFromCamera >= 180) && (fDistanceFromCamera < 180) && (VSize(Velocity) > 200) )
   {
     Woosh = WooshSounds[Rand(NUM_WOOSH_SOUNDS)];
-    PlaySound(Woosh,SLOT_Misc,0.69999999,,500.0,RandRange(0.81,1.25));
+    PlaySound(Woosh,SLOT_Misc,0.69999999,,500.0,RandRange(0.80,1.20));
     fNextTimeSafeToWoosh = Level.TimeSeconds + GetSoundDuration(Woosh);
   }
   fLastDistanceFromCamera = fDistanceFromCamera;
@@ -569,13 +569,13 @@ function Bump (Actor Other)
   pTarget = Pawn(Other);
   if (  !bHit &&  !bCatchingTarget && (Other != LookForTarget) && (pTarget != None) &&  !pTarget.bHidden )
   {
-    if ( FRand() < 0.81 )
+    if ( FRand() < 0.8 )
     {
       PlayAnim('React');
     } else {
       PlayAnim('Bump');
     }
-    PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+    PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.80,1.20));
     pTarget.TakeDamage(Damage,self,Location,100 * Normal(Velocity),'Collided');
     Velocity = vect(0.00,0.00,1.00);
     bHit = True;
@@ -615,7 +615,7 @@ function TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector M
     }
     if ( DamageType != 'Collided' )
     {
-      PlaySound(HitSounds[Rand(3)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+      PlaySound(HitSounds[Rand(3)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.80,1.20));
     }
     Super.TakeDamage(Damage,InstigatedBy,HitLocation,Momentum,DamageType);
   }
@@ -627,7 +627,7 @@ function HitWall (Vector HitNormal, Actor Wall)
 
   if (  !bHit &&  !bCatchingTarget )
   {
-    if ( FRand() < 0.81 )
+    if ( FRand() < 0.8 )
     {
       PlayAnim('React');
     } else {
@@ -647,7 +647,7 @@ auto state() WaitForIntro
 {
   function BeginState()
   {
-    LoopAnim('hover',RandRange(0.922,1.084));
+    LoopAnim('hover',RandRange(0.92,1.08));
     PlayerHarry.ClientMessage(string(Name) $ string(' Waiting for Intro'));
     Log(string(Name) $ string(' Waiting for Intro'));
   }
@@ -670,13 +670,13 @@ loop:
   FinishAnim();
   if ( VSize(Velocity) < 50.0 )
   {
-    LoopAnim('hover',RandRange(0.922,1.084),0.5);
+    LoopAnim('hover',RandRange(0.92,1.08),0.5);
   } else {
     if ( FRand() < 0.12 )
     {
-      LoopAnim('Look',RandRange(0.922,1.084),0.5);
+      LoopAnim('Look',RandRange(0.92,1.08),0.5);
     } else {
-      LoopAnim('Fly_forward',RandRange(0.922,1.084),0.5);
+      LoopAnim('Fly_forward',RandRange(0.92,1.08),0.5);
     }
   }
   goto ('Loop');
@@ -686,7 +686,7 @@ state() Fly
 {
   function BeginState()
   {
-    LoopAnim('Fly_forward',RandRange(0.922,1.084));
+    LoopAnim('Fly_forward',RandRange(0.92,1.08));
     if (  !bCapturedByCutScene )
     {
       FlyOnPath(PathToFly);
@@ -698,7 +698,7 @@ state() Fly
   function EndState()
   {
     StopFlyingOnPath();
-    LoopAnim('hover',RandRange(0.922,1.084),0.5);
+    LoopAnim('hover',RandRange(0.92,1.08),0.5);
     PlayerHarry.ClientMessage(string(Name) $ string(' End Flying'));
     Log(string(Name) $ string(' End Flying'));
   }
@@ -714,9 +714,9 @@ loop:
     } else {
       if ( VSize(Velocity) < 50.0 )
       {
-        LoopAnim('hover',RandRange(0.922,1.084),0.5);
+        LoopAnim('hover',RandRange(0.92,1.08),0.5);
       } else {
-        LoopAnim('Fly_forward',RandRange(0.922,1.084),0.5);
+        LoopAnim('Fly_forward',RandRange(0.92,1.08),0.5);
       }
     }
   } else {
@@ -728,15 +728,15 @@ loop:
       {
         LoopAnim('Stunned',,0.5);
       } else //{
-        if ( FRand() < 0.41 )
+        if ( FRand() < 0.4 )
         {
-          LoopAnim('Fly_forward',RandRange(0.922,1.084),0.5);
+          LoopAnim('Fly_forward',RandRange(0.92,1.08),0.5);
         } else //{
-          if ( FRand() < 0.81 )
+          if ( FRand() < 0.8 )
           {
-            LoopAnim('Look',RandRange(0.922,1.084),0.5);
+            LoopAnim('Look',RandRange(0.92,1.08),0.5);
           } else {
-            LoopAnim('hover',RandRange(0.922,1.084),0.5);
+            LoopAnim('hover',RandRange(0.92,1.08),0.5);
           }
         //}
       //}
@@ -754,7 +754,7 @@ state Pursue
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' Begin Pursue'));
     Log(string(Name) $ string(' Begin Pursue'));
-    LoopAnim('Fly_forward',RandRange(0.922,1.084),0.5);
+    LoopAnim('Fly_forward',RandRange(0.92,1.08),0.5);
     // SetPhysics(4);
 	SetPhysics(PHYS_Flying);
     fTargetTrackHorzOffset = RandRange( -TrackingOffsetRange_Horz,TrackingOffsetRange_Horz);
@@ -898,7 +898,7 @@ state Pursue
     bHit = False;
     if ( bStunned && (Level.TimeSeconds > fTimeToFallAway - (3.0 + 0.1)) )
     {
-      LoopAnim('Stunned',,0.41);
+      LoopAnim('Stunned',,0.4);
     }
   }
   

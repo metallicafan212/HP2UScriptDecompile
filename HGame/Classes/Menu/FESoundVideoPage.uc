@@ -589,19 +589,19 @@ function ObjectDetailChanged()
 	
 	switch (GetPlayerOwner().ObjectDetail)
 	{
-		case ObjectDetailVeryLow:
+		case ObjectDetailVeryHigh:
 			GetPlayerOwner().ConsoleCommand("MLOD 0.1");
 			break;
-		case ObjectDetailLow:
+		case ObjectDetailHigh:
 			GetPlayerOwner().ConsoleCommand("MLOD 0.2");
 			break;
 		case ObjectDetailMedium:
 			GetPlayerOwner().ConsoleCommand("MLOD 0.5");
 			break;
-		case ObjectDetailHigh:
+		case ObjectDetailLow:
 			GetPlayerOwner().ConsoleCommand("MLOD 0.8");
 			break;
-		case ObjectDetailVeryHigh:
+		case ObjectDetailVeryLow:
 			GetPlayerOwner().ConsoleCommand("MLOD 1.0");
 			break;
 	}

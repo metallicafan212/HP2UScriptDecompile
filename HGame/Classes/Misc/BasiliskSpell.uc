@@ -43,7 +43,7 @@ function Init (Vector Dir, float DamageAmount, float InitialDrawScale, float End
   LifeSpan = 2.0 * TravelDistance / (StartSpeed + EndSpeed);
   MakeSpellFX(Class'avifors_wand',RandRange(0.75,1.5));
   MakeSpellFX(Class'DeathTorch');
-  MakeSpellFX(Class'Aloh_Fly',RandRange(0.151,0.34999999));
+  MakeSpellFX(Class'Aloh_Fly',RandRange(0.15,0.34999999));
   RepositionSpellFXs();
 }
 

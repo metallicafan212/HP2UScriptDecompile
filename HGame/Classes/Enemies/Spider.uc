@@ -123,7 +123,7 @@ function playSquishSound()
     squishSound = Sound'spider_small_squish';
     break;
   }
-  PlaySound(squishSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(squishSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 function playAttackSound()
@@ -145,7 +145,7 @@ function playAttackSound()
     break;
     default:
   }
-  PlaySound(AttackSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(AttackSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 function bool AttackHarryCheck()
@@ -399,7 +399,7 @@ state Wander
 	  GotoState('preAttackCheck');
 	}
 
-	else if ( VSize(Velocity) < GroundSpeed / 3 )
+	else if ( VSize(Velocity) < GroundSpeed / 3.0 )
 	{
 	  SetLocation(OldLocation);
 	  GotoState('ImLost');
@@ -462,7 +462,7 @@ state Wander
       vDir = getNewDirection();
       MoveTo(vDir);
     }
-    LoopAnim('Walk',0.852);
+    LoopAnim('Walk',0.85);
   }
 }
 
@@ -487,7 +487,7 @@ state walkAway
   
  begin:
   atTheEdge = False;
-  LoopAnim('Walk',0.852);
+  LoopAnim('Walk',0.85);
   MoveToward(currentMarker);
 }
 

@@ -67,7 +67,7 @@ function float DeliverEmote (string dialogID)
     {
       duration = GetSoundDuration(dlgSound);
       duration += 0.5;
-      PlayerHarry.PlaySound(dlgSound,SLOT_Interact,3.25,False,20000.0,1.0);
+      PlayerHarry.PlaySound(dlgSound,SLOT_Interact,3.2,False,20000.0,1.0);
     }
   } else {
     PlayerHarry.ClientMessage("*****DeliverEmote cant find emote:" $ dialogID);

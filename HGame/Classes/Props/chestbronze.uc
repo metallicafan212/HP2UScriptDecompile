@@ -199,7 +199,7 @@ state turnover
   for(iBean = 0; iBean < iNumberOfBeans; iBean++)
   {
     generateobject();
-    Sleep(RandRange(0.31,0.62));
+    Sleep(RandRange(0.3,0.6));
     // iBean++;
     // goto JL0039;
   }

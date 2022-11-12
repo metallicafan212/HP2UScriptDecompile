@@ -494,7 +494,7 @@ function float GetHealth()
 
 function PlayIdle()
 {
-	LoopAnim('duel_idle',0.81,[TweenTime]0.25,,DuellistAnimType);
+	LoopAnim('duel_idle',0.8,[TweenTime]0.25,,DuellistAnimType);
 }
 
 function bool HandleSpellDuelExpelliarmus (optional baseSpell spell, optional Vector vHitLocation)
@@ -693,7 +693,7 @@ state stateIdle
 		}
 		PlayAnim('Idle');
 		FinishAnim();
-		Sleep(0.01);
+		Sleep(0.001);
 		goto ('Begin');
 }
 
@@ -724,7 +724,7 @@ state stateShot
 		Velocity = vect(0.00,0.00,0.00);
 		if ( AnimSequence != 'duel_idle' )
 		{
-			Sleep(0.01);
+			Sleep(0.001);
 			AnimRate = 0.0;
 			LoopAnim('duel_idle');
 		}
@@ -755,7 +755,7 @@ state stateDefence
 		Velocity = vect(0.00,0.00,0.00);
 		if ( AnimSequence != 'duel_idle' )
 		{
-			Sleep(0.01);
+			Sleep(0.001);
 			AnimRate = 0.0;
 			LoopAnim('duel_idle');
 		}
@@ -785,7 +785,7 @@ state stateGoRight
 	begin:
 		if ( AnimSequence != 'strafe_right' )
 		{
-			Sleep(0.01);
+			Sleep(0.001);
 			AnimRate = 0.0;
 			LoopAnim('strafe_right');
 		}
@@ -806,7 +806,7 @@ state stateGoLeft
 	begin:
 		if ( AnimSequence != 'strafe_left' )
 		{
-			Sleep(0.01);
+			Sleep(0.001);
 			AnimRate = 0.0;
 			LoopAnim('strafe_left');
 		}
@@ -817,7 +817,7 @@ state stateGoLeft
 state stateGoForward
 {
 	begin:
-		Sleep(0.01);
+		Sleep(0.001);
 		AnimRate = 0.0;
 		LoopAnim('duel_run');
 		MoveTo(vNewLoc);
@@ -829,7 +829,7 @@ state stateGoForward
 state stateGoBackward
 {
 	begin:
-		Sleep(0.01);
+		Sleep(0.001);
 		AnimRate = 0.0;
 		LoopAnim('duel_runback');
 		MoveTo(vNewLoc);
@@ -949,7 +949,7 @@ state stateTaunt
 		Acceleration = vect(0.00,0.00,0.00);
 		Velocity = vect(0.00,0.00,0.00);
 		TurnOffSpellCursor();
-		Sleep(0.01);
+		Sleep(0.001);
 		AnimRate = 0.0;
 		if ( Rand(2) == 0 )
 		{

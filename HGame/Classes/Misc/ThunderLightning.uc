@@ -36,7 +36,7 @@ function Timer()
 	LightType = LT_Flicker;
     bLightningActive = True;
     PlaySound(Sound'firecrab_hit',SLOT_NOne);
-    SetTimer(0.81 + FRand() * 0.5,False);
+    SetTimer(0.8 + FRand() * 0.5,False);
   }
 }
 

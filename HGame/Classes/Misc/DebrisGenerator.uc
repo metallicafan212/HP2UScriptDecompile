@@ -134,7 +134,7 @@ function Disintegrate (Vector start_locn, Rotator dirn)
       }
       if ( HitDebris.cSound != None )
       {
-        PlaySound(HitDebris.cSound,,,,100000.0,RandRange(0.89999998,1.12));
+        PlaySound(HitDebris.cSound,,,,100000.0,RandRange(0.89999998,1.10));
       }
     }
   }

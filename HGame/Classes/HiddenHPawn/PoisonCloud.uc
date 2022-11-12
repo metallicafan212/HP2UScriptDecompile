@@ -114,7 +114,7 @@ function playCloudSound()
 			cloudSound = Sound'ss_COS_venomland_01E';
 			break;
 	}
-	PlaySound(cloudSound,SLOT_None,RandRange(0.62,1.0),,3000.0,RandRange(0.5,1.62),,False);
+	PlaySound(cloudSound,SLOT_None,RandRange(0.6,1.0),,3000.0,RandRange(0.5,1.6),,False);
 }
 
 auto state StartHere

@@ -22,7 +22,7 @@ loop:
     {
       LoopAnim('Fly_forward',,0.5);
     } else //{
-      if ( FRand() < 0.922 )
+      if ( FRand() < 0.92 )
       {
         LoopAnim('catch_right',,0.5);
         goto ('Catch');

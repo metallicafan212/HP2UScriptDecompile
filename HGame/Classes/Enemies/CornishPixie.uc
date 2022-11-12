@@ -158,7 +158,7 @@ function playTalkSound()
     talkSound = Sound'PIX_talk_06';
     break;
   }
-  PlaySound(talkSound,SLOT_None,RandRange(0.81,1.0),,1000.0,RandRange(0.81,1.25),,False);
+  PlaySound(talkSound,SLOT_None,RandRange(0.8,1.0),,1000.0,RandRange(0.80,1.20),,False);
 }
 
 function playAttackSound()
@@ -188,7 +188,7 @@ function playAttackSound()
     AttackSound = Sound'PIX_attack_05';
     break;
   }
-  PlaySound(AttackSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(AttackSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 function playHitSound()
@@ -221,7 +221,7 @@ function playHitSound()
     HitSound = Sound'pixie_ouch1';
     break;
   }
-  PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(HitSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 function playBiteSound()
@@ -251,7 +251,7 @@ function playBiteSound()
     HitSound = Sound'PIX_bite1';
     break;
   }
-  PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(HitSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 auto state stateIdle
@@ -382,7 +382,7 @@ begin:
   Velocity = vect(0.00,0.00,0.00);
   Acceleration = vect(0.00,0.00,0.00);
   PlayAnim('Attack',3.0);
-  Sleep(0.31);
+  Sleep(0.3);
   playBiteSound();
   Sleep(0.1);
   PlayerHarry.TakeDamage(fDamageAmount,Pawn(Owner),Location,Velocity * 1,'Pixie');
@@ -422,7 +422,7 @@ state stateHitByRictusempra
 {
 begin:
   DestroyControllers();
-  PlaySound(Sound'SPI_hit',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(1.62,2.25),,False);
+  PlaySound(Sound'SPI_hit',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(1.60,2.20),,False);
   if ( BOOL_DEBUG_AI )
   {
     PlayerHarry.ClientMessage("" $ string(Name) $ ": stateHitByRictusempra");
@@ -445,7 +445,7 @@ begin:
     playHitSound();
     fxHit = Spawn(Class'PixieHit',self,,Location,Rotation);
     LoopAnim('stunspin');
-    Sleep(0.151);
+    Sleep(0.15);
     bCollideWorld = True;
     fxHit.Shutdown();
     playAttackSound();
@@ -527,7 +527,7 @@ begin:
 state BlowUpAndDie
 {
 begin:
-  PlaySound(Sound'horklump_mushroom_head_explode',SLOT_None,RandRange(0.62,1.0),,70000.0,RandRange(0.81,1.25),,False);
+  PlaySound(Sound'horklump_mushroom_head_explode',SLOT_None,RandRange(0.6,1.0),,70000.0,RandRange(0.80,1.20),,False);
   fxBlowUp = Spawn(Class'PixieExplode',self,,Location,Rotation);
   Sleep(0.1);
   if ( fxBlowUp != None )

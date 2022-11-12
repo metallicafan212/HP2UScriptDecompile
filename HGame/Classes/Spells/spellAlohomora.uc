@@ -7,7 +7,7 @@ class spellAlohomora extends baseSpell;
 function PostBeginPlay()
 {
   Super.PostBeginPlay();
-  CurrentDir = Normal(vector(Rotation) + Vec(0.0,0.0,0.31));
+  CurrentDir = Normal(vector(Rotation) + Vec(0.0,0.0,0.3));
 }
 
 function OnSpellShutdown()

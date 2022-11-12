@@ -89,7 +89,7 @@ function PlaySoundSnort()
 
 function PlaySoundSqueal()
 {
-  PlaySound(Sound'pig_squeal1',SLOT_None,,,,RandRange(0.81,1.12));
+  PlaySound(Sound'pig_squeal1',SLOT_None,,,,RandRange(0.80,1.10));
 }
 
 function bool HandleSpellRictusempra (optional baseSpell spell, optional Vector vHitLocation)

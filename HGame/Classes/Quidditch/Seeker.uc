@@ -10,7 +10,7 @@ state Fly
   {
     PlayerHarry.ClientMessage(string(Name) $ string(' Begin Seeking'));
     Log(string(Name) $ string(' Begin Seeking'));
-    LoopAnim('Fly_forward',RandRange(0.922,1.084));
+    LoopAnim('Fly_forward',RandRange(0.92,1.08));
     if (  !bCapturedByCutScene )
     {
       FlyOnPath(PathToFly,iReturnPoint);
@@ -35,9 +35,9 @@ state Fly
     } else {
       if ( VSize(Velocity) < 50.0 )
       {
-        LoopAnim('hover',RandRange(0.922,1.084),0.5);
+        LoopAnim('hover',RandRange(0.92,1.08),0.5);
       } else {
-        LoopAnim('Fly_forward',RandRange(0.922,1.084),0.5);
+        LoopAnim('Fly_forward',RandRange(0.92,1.08),0.5);
       }
     }
   } else {
@@ -54,15 +54,15 @@ state Fly
       {
         LoopAnim('Stunned',,0.5);
       } else //{
-        if ( FRand() < 0.41 )
+        if ( FRand() < 0.4 )
         {
-          LoopAnim('Fly_forward',RandRange(0.922,1.084),0.5);
+          LoopAnim('Fly_forward',RandRange(0.92,1.08),0.5);
         } else //{
-          if ( FRand() < 0.81 )
+          if ( FRand() < 0.8 )
           {
-            LoopAnim('Look',RandRange(0.922,1.084),0.5);
+            LoopAnim('Look',RandRange(0.92,1.08),0.5);
           } else {
-            LoopAnim('hover',RandRange(0.922,1.084),0.5);
+            LoopAnim('hover',RandRange(0.92,1.08),0.5);
           }
         //}
       //}

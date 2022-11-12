@@ -493,7 +493,7 @@ function Tick (float dtime)
     } else {
       ActualYaw = DesiredYaw;
     }
-    AnimFrame = FClamp((ActualYaw + 90.0) / 180.0 * 0.9671,0.0,0.9671);
+    AnimFrame = FClamp((ActualYaw + 90.0) / 180.0 * 0.967,0.0,0.967);
   } else {
     if ( ShouldDodgeSpell() )
     {
@@ -611,7 +611,7 @@ state stateWait1
 	  RotateToHarry(,40.0);
 	  do 
 	  {
-		Sleep(0.01);
+		Sleep(0.001);
 	  }
 	  until (ActualYaw == DesiredYaw);
   }
@@ -624,7 +624,7 @@ state stateWait1
   //do and until -AdamJD
   do
   {
-	Sleep(0.01);
+	Sleep(0.001);
   }
   until (ActualYaw == DesiredYaw);
 
@@ -688,7 +688,7 @@ state stateAcidSpit1
   // if (  !_AnimChannel.bAnimDone )
   while (  !_AnimChannel.bAnimDone ) //while loop -AdamJD
   {
-    Sleep(0.01);
+    Sleep(0.00001);
     // goto JL0015;
   }
   SetAttackTimer();
@@ -722,11 +722,11 @@ begin:
   bListenToHarry = True;
   NumSpellsDodged = 0;
   PlayerHarry.PlaySound(Sound'BasilAttackWarning00',Slot_None,BasilSoundVolume,,BasilSoundRadius,0.75);
-  TempFloat = GetSoundDuration(Sound'BOW_taunt9') / 0.31;
-  PlayerHarry.PlaySound(Sound'BOW_taunt9',Slot_None,BasilSoundVolume,,BasilSoundRadius,0.31);
+  TempFloat = GetSoundDuration(Sound'BOW_taunt9') / 0.30;
+  PlayerHarry.PlaySound(Sound'BOW_taunt9',Slot_None,BasilSoundVolume,,BasilSoundRadius,0.30);
   Sleep(TempFloat - 0.5);
-  TempFloat = GetSoundDuration(Sound'BOW_taunt1') / 0.62;
-  PlayerHarry.PlaySound(Sound'BOW_taunt1',Slot_None,BasilSoundVolume,,BasilSoundRadius,0.62);
+  TempFloat = GetSoundDuration(Sound'BOW_taunt1') / 0.60;
+  PlayerHarry.PlaySound(Sound'BOW_taunt1',Slot_None,BasilSoundVolume,,BasilSoundRadius,0.60);
   Sleep(TempFloat - 0.75);
   MoveToNewHole();
   if ( FindClosestGrate() != None )
@@ -769,8 +769,8 @@ state stateComeOutAndSniff1
   } else {
     PlayerHarry.ShakeView(0.75,50.0,50.0);
   }
-  PlayAnim('OutHole',0.81);
-  _BasiliskHeadColObj.PlaySound(Sound'BAS_OutHole',Slot_None,BasilSoundVolume,False,BasilSoundRadius,RandRange(0.81,1.0));
+  PlayAnim('OutHole',0.8);
+  _BasiliskHeadColObj.PlaySound(Sound'BAS_OutHole',Slot_None,BasilSoundVolume,False,BasilSoundRadius,RandRange(0.8,1.0));
   FinishAnim();
   GotoState('ComeOutAndSniff1a');
 }
@@ -825,13 +825,13 @@ state stateComeOutAndSniff2
   switch (Rand(3))
   {
     case 0:
-    _BasiliskHeadColObj.PlaySound(Sound'Basilisk_sniff1',Slot_None,,False,BasilSoundRadius,RandRange(0.81,1.0));
+    _BasiliskHeadColObj.PlaySound(Sound'Basilisk_sniff1',Slot_None,,False,BasilSoundRadius,RandRange(0.8,1.0));
     break;
     case 1:
-    _BasiliskHeadColObj.PlaySound(Sound'Basilisk_sniff2',Slot_None,,False,BasilSoundRadius,RandRange(0.81,1.0));
+    _BasiliskHeadColObj.PlaySound(Sound'Basilisk_sniff2',Slot_None,,False,BasilSoundRadius,RandRange(0.8,1.0));
     break;
     case 2:
-    _BasiliskHeadColObj.PlaySound(Sound'Basilisk_sniff3',Slot_None,,False,BasilSoundRadius,RandRange(0.81,1.0));
+    _BasiliskHeadColObj.PlaySound(Sound'Basilisk_sniff3',Slot_None,,False,BasilSoundRadius,RandRange(0.8,1.0));
     break;
     default:
   }
@@ -894,7 +894,7 @@ state stateAttackFromHole
  begin:
   PlayAnim('Hiss',1.0,0.2);
   PlayerHarry.ShakeView(1.5,50.0,50.0);
-  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_blinded',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.12));
+  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_blinded',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.10));
   FinishAnim();
   DoAttack2();
 }
@@ -1069,18 +1069,18 @@ function CastSpitSpell (bool bAimAtHarry, optional bool bUseHeadYaw)
   if ( bAimAtHarry )
   {
     Dist2D = VSize2D(_BasiliskHeadColObj.Location - PlayerHarry.Location);
-    Dist2D = FMax(0.01,Dist2D);
+    Dist2D = FMax(0.0001,Dist2D);
     R.Yaw = AcidSpitChaseHarryYawStart + AcidSpitChaseHarryYawSpread * (AnimFrame - AcidSpitStartFrame) / (AcidSpitEndFrame - AcidSpitStartFrame);
 	V = _BasiliskHeadColObj.Location + vector(R) * Dist2D;
     V.Z = FloorZ;
     fTimeToHit = 1.29999995;
     if ( PlayerHarry.Difficulty == DifficultyMedium )
     {
-      fTimeToHit = 0.5;
+      fTimeToHit = 0.50;
     } else //{
       if ( PlayerHarry.Difficulty == DifficultyHard )
       {
-        fTimeToHit = 0.181;
+        fTimeToHit = 0.18;
       }
     //}
     V = ComputeTrajectoryByTime(_BasiliskHeadColObj.Location,PlayerHarry.Location,fTimeToHit,-200.0);
@@ -1094,8 +1094,8 @@ function CastSpitSpell (bool bAimAtHarry, optional bool bUseHeadYaw)
   }
   Log("*********** spawned spit:" $ string(A.Name) $ " v:" $ string(V) $ " grav:" $ string(Region.Zone.ZoneGravity.Z));
   A.FloorZ = FloorZ;
-  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_spit_acid',,BasilSoundVolume,,BasilSoundRadius,RandRange(0.81,1.25));
-  A.PlaySound(Sound'Basilisk_spit_acid2',,BasilSoundVolume,,BasilSoundRadius,RandRange(0.81,1.25));
+  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_spit_acid',,BasilSoundVolume,,BasilSoundRadius,RandRange(0.80,1.20));
+  A.PlaySound(Sound'Basilisk_spit_acid2',,BasilSoundVolume,,BasilSoundRadius,RandRange(0.80,1.20));
   if (  !bDidFirstBattle )
   {
     A.fPoolShrinkTimeMult = 0.2;
@@ -1173,7 +1173,7 @@ function bool BustOffTheGrate()
   A = FindClosestGrate();
   if ( A != None )
   {
-    A.PlaySound(Sound'floor_grate_explode_open',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.12));
+    A.PlaySound(Sound'floor_grate_explode_open',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.10));
     A.Trigger(self,self);
     return True;
   }
@@ -1224,9 +1224,9 @@ function float PlayMovingThroughWallSound (optional float Volume, optional bool 
   }
   if ( Volume == 0 )
   {
-    Volume = RandRange(0.81,1.0);
+    Volume = RandRange(0.8,1.0);
   }
-  Pitch = RandRange(0.81,1.0);
+  Pitch = RandRange(0.8,1.0);
   A.PlaySound(snd,Slot_None,Volume * BasilSoundVolume,False,BasilSoundRadius,Pitch);
   return GetSoundDuration(snd) / Pitch - 0.5;
 }
@@ -1237,8 +1237,8 @@ function float PlayAboutToAttackSound()
   local Sound snd;
 
   snd = Sound'BasilAttackWarning00';
-  Pitch = RandRange(0.81,1.0);
-  PlaySound(snd,Slot_None,RandRange(0.62,1.0) * BasilSoundVolume,False,BasilSoundRadius,Pitch);
+  Pitch = RandRange(0.8,1.0);
+  PlaySound(snd,Slot_None,RandRange(0.6,1.0) * BasilSoundVolume,False,BasilSoundRadius,Pitch);
   return GetSoundDuration(snd) / Pitch;
 }
 
@@ -1295,7 +1295,7 @@ begin:
 	//do and until -AdamJD
 	do
 	{
-		Sleep(0.01);
+		Sleep(0.001);
 	}
 	until (ActualYaw == DesiredYaw);
 	
@@ -1306,7 +1306,7 @@ begin:
 	//do and until -AdamJD
 	do
 	{
-		Sleep(0.01);
+		Sleep(0.001);
 	}
 	until (ActualYaw == DesiredYaw);
   } else {
@@ -1317,7 +1317,7 @@ begin:
 	//do and until -AdamJD
 	do
 	{
-		Sleep(0.01);
+		Sleep(0.001);
 	}
 	until (ActualYaw == DesiredYaw);
 	
@@ -1328,7 +1328,7 @@ begin:
 	//do and until -AdamJD
 	do
 	{
-		Sleep(0.01);
+		Sleep(0.001);
 	}
 	until (ActualYaw == DesiredYaw);
   }
@@ -1339,7 +1339,7 @@ begin:
   //do and until -AdamJD
   do
   {
-	Sleep(0.01);
+	Sleep(0.001);
   }
   until (ActualYaw == DesiredYaw);
 	
@@ -1366,7 +1366,7 @@ function PlayHissSound()
     break;
     default:
   }
-  _BasiliskHeadColObj.PlaySound(snd,Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.81,1.25));
+  _BasiliskHeadColObj.PlaySound(snd,Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.80,1.20));
 }
 
 state stateEyeSpell
@@ -1422,7 +1422,7 @@ state stateEyeSpell
 	//do and until -AdamJD
 	do
 	{
-	  Sleep(0.01);
+	  Sleep(0.001);
 	}
 	until (ActualYaw == DesiredYaw);
   }
@@ -1488,13 +1488,13 @@ state stateHitThenEyeSpell
   EyeGlowR.Glow(0.0);
   SnakePlayAnim('InPain',0.75,1.0);
   PlayerHarry.ShakeView(1.5,100.0,100.0);
-  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_death',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.12));
+  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_death',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.10));
   // Sleep(0.01);
   
   //do and until -AdamJD
   do
   {
-	Sleep(0.01);
+	Sleep(0.00001);
   }
   until (_AnimChannel.bAnimDone);
   
@@ -1636,7 +1636,7 @@ JL00D9:
 		
 		do
 		{
-			Sleep(0.01);
+			Sleep(0.001);
 		}	
 		until( ActualYaw == DesiredYaw );
 	 }
@@ -1703,14 +1703,14 @@ state stateAttack
   TempFloat = b1_HeadRoarAnimRate_Start + (b1_HeadRoarAnimRate_End - b1_HeadRoarAnimRate_Start) * (1.0 - Health / 100.0);
   SnakePlayAnim('Taunt',TempFloat,2.0);
   Sleep(0.2);
-  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_roar',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.12));
+  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_roar',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.10));
   PlayerHarry.ShakeView(1.5,50.0,50.0);
   // Sleep(0.01);
   
   //do and until -AdamJD
   do
   {
-	Sleep(0.01);
+	Sleep(0.00001);
   }
   until	(_AnimChannel.bAnimDone);
   
@@ -1727,13 +1727,13 @@ state stateHitThenAttack
  begin:
   SnakePlayAnim('InPain',0.75,1.0);
   PlayerHarry.ShakeView(1.5,75.0,75.0);
-  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_death',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.12));
+  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_death',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.10));
   // Sleep(0.01);
   
   //do and until -AdamJD
   do
   {
-	Sleep(0.01);
+	Sleep(0.00001);
   }
   until	(_AnimChannel.bAnimDone);
   
@@ -1769,7 +1769,7 @@ state stateAttackLunge
   //do and until -AdamJD
   do
   {
-	Sleep(0.01);
+	Sleep(0.00001);
   }
   until	(_AnimChannel.bAnimDone);
   
@@ -1832,7 +1832,7 @@ function PlayLungeSound()
     break;
     default:
   }
-  _BasiliskHeadColObj.PlaySound(tempLungeSound,Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.81,1.25));
+  _BasiliskHeadColObj.PlaySound(tempLungeSound,Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.80,1.20));
 }
 
 function PlayLungeAnim()
@@ -1906,7 +1906,7 @@ state stateHit
  begin:
   AnimFrame = 0.0;
   SnakePlayAnim('InPain',0.75,1.0);
-  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_death',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.12));
+  _BasiliskHeadColObj.PlaySound(Sound'Basilisk_scream_death',Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.89999998,1.10));
   PlayerHarry.ShakeView(1.5,50.0,50.0);
   RotateTo(ActualYaw - 20,,160.0);
 /*
@@ -1929,7 +1929,7 @@ JL007F:
   //do and until -AdamJD
   do
   {
-	Sleep(0.01);
+	Sleep(0.001);
   }
   until (ActualYaw == DesiredYaw);
   
@@ -1941,7 +1941,7 @@ JL007F:
 	 //do and until -AdamJD
 	 do
 	 {
-		Sleep(0.01);
+		Sleep(0.001);
 	 }
 	 until (ActualYaw == DesiredYaw);
   }
@@ -1949,7 +1949,7 @@ JL007F:
   //do and until -AdamJD
   do
   {
-	Sleep(0.01);
+	Sleep(0.00001);
   }
   until	(_AnimChannel.bAnimDone);
 
@@ -2060,7 +2060,7 @@ state stateRetreat
   }
   
  begin:
-  PlayAnim('GoBack',1.0,0.31);
+  PlayAnim('GoBack',1.0,0.3);
   FinishAnim();
   HideBasil();
   GotoState(WaitingState);
@@ -2257,7 +2257,7 @@ function ColObjTouch (Actor Other, GenericColObj ColObj)
           break;
           default:
         }
-        PlaySound(snd,Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.62,0.81));
+        PlaySound(snd,Slot_None,BasilSoundVolume,,BasilSoundRadius,RandRange(0.60,0.80));
         harry(Other).TakeDamage(HeadDamage, self,ColObj.Location,vect(0.00,0.00,0.00),'None');
         BasilMunchesHarry();
       } else {

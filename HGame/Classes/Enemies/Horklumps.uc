@@ -82,7 +82,7 @@ auto state ReadyAndWaiting
       replaceStem.SetCollisionSize(replaceRadius,replaceHeight);
       replaceStem.DrawScale = replaceScale;
     }
-    PlaySound(Sound'horklump_mushroom_head_popoff',SLOT_Misc,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'horklump_mushroom_head_popoff',SLOT_Misc,RandRange(0.6,1.0),,95000.0,RandRange(0.80,1.20),,False);
   }
   
   function bool HandleSpellDiffindo (optional baseSpell spell, optional Vector vHitLocation)

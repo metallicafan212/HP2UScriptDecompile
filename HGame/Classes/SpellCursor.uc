@@ -305,9 +305,9 @@ function LockOn (Actor TargetActor)
   } else {
     dwh = Vec(TargetActor.CollisionRadius,TargetActor.CollisionWidth,TargetActor.CollisionHeight);
   }
-  fTargetDepth = dwh.X * 2.25 * TargetActor.SizeModifier;
-  fTargetWidth = dwh.Y * 2.25 * TargetActor.SizeModifier;
-  fTargetHeight = dwh.Z * 2.25 * TargetActor.SizeModifier;
+  fTargetDepth = dwh.X * 2.2 * TargetActor.SizeModifier;
+  fTargetWidth = dwh.Y * 2.2 * TargetActor.SizeModifier;
+  fTargetHeight = dwh.Z * 2.2 * TargetActor.SizeModifier;
   if ( (TargetActor == None) || (PlayerHarry == None) || (PlayerHarry.Weapon == None) )
   {
     Log("SpellCursor::LockOn() -> ERROR TargetActor or playerHarry or playerHarry.Weapon is invalid!!!");
@@ -360,7 +360,7 @@ function SetSparklesIdle()
   SourceHeight.Base = 3.0;
   SourceDepth.Base = 3.0;
   Speed.Base = 0.0;
-  Lifetime.Base = 0.31;
+  Lifetime.Base = 0.30;
   SizeWidth.Base = 4.0;
   SizeLength.Base = 4.0;
   SizeEndScale.Base = 0.75;

@@ -85,7 +85,7 @@ auto state holdstill
   {
     PlaySound(soundRibbit);
   }
-  LoopAnim('breath',0.62,0.2);
+  LoopAnim('breath',0.6,0.2);
   Sleep(FRand() * 3);
   FinishAnim();
   if ( vStartLoc == vect(0.00,0.00,0.00) )

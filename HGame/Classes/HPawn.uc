@@ -519,7 +519,7 @@ moveLoop:
     // if (  !MoveTo_FraySpline() )
 	while (  !MoveTo_FraySpline() )
     {
-      Sleep(0.05);
+      Sleep(0.005);
       // goto JL00C7;
     }
   } else {
@@ -533,7 +533,7 @@ moveLoop:
       // if (  !MoveTo_Fray() )
 	  while (  !MoveTo_Fray() )
       {
-        Sleep(0.05);
+        Sleep(0.005);
         // goto JL0125;
       }
     } else {
@@ -1212,9 +1212,9 @@ function OnEvent (name EventName)
 state stateDestroy
 {
 begin:
-  Sleep(0.01);
-  Sleep(0.01);
-  Sleep(0.01);
+  Sleep(0.0001);
+  Sleep(0.0001);
+  Sleep(0.0001);
   Destroy();
 }
 
@@ -1231,7 +1231,7 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
     Velocity = vect(0.00,0.00,0.00);
     if ( HasAnim(IdleAnimName) )
     {
-      LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.75);
+      LoopAnim(IdleAnimName,RandRange(0.80,1.20),0.75);
       AnimFrame = RandRange(0.0,0.69999999);
     }
     return True;

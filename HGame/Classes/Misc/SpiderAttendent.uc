@@ -121,10 +121,10 @@ state stateFlyIn
 
 function PlayScream()
 {
-  PlaySound(Sound'snail_falling',SLOT_None,,,,RandRange(0.81,1.25));
-  PlaySound(Sound'imp_ouch_03',SLOT_None,,,,RandRange(0.81,1.25));
+  PlaySound(Sound'snail_falling',SLOT_None,,,,RandRange(0.80,1.20));
+  PlaySound(Sound'imp_ouch_03',SLOT_None,,,,RandRange(0.80,1.20));
   PlaySound(Sound'imp_scream',SLOT_None,,,,RandRange(1.29999995,1.5));
-  PlaySound(Sound'PIX_attack_04',SLOT_None,,,,RandRange(0.81,1.25));
+  PlaySound(Sound'PIX_attack_04',SLOT_None,,,,RandRange(0.80,1.20));
 }
 
 state stateCrawlIn extends patrol
@@ -191,9 +191,9 @@ begin:
 	case ATTACK_JUMP:
 		PlayAnim('walk2jump');
 		FinishAnim();
-		PlaySound(Sound'SPI_large_preattack',SLOT_None,RandRange(0.62,1.0),,200000.0,RandRange(3.5,4.41),,False);
+		PlaySound(Sound'SPI_large_preattack',SLOT_None,RandRange(0.6,1.0),,200000.0,RandRange(3.5,4.4),,False);
 		LoopAnim('Jump');
-		Sleep(0.31);
+		Sleep(0.3);
 		PlayAnim('jump2walk');
 		FinishAnim();
 		break;
@@ -201,13 +201,13 @@ begin:
 	case ATTACK_REAR:
 		if ( Rand(2) == 0 )
 		{
-		  PlaySound(Sound'SPI_large_Hiss1',SLOT_None,RandRange(0.62,1.0),,200000.0,RandRange(0.81,1.25),,False);
+		  PlaySound(Sound'SPI_large_Hiss1',SLOT_None,RandRange(0.6,1.0),,200000.0,RandRange(0.80,1.20),,False);
 		} else {
-		  PlaySound(Sound'SPI_large_Hiss2',SLOT_None,RandRange(0.62,1.0),,200000.0,RandRange(0.81,1.25),,False);
+		  PlaySound(Sound'SPI_large_Hiss2',SLOT_None,RandRange(0.6,1.0),,200000.0,RandRange(0.80,1.20),,False);
 		}
 		PlayAnim('webattack');
 		FinishAnim();
-		Sleep(0.41);
+		Sleep(0.4);
 		break;
 		default:
   }
@@ -316,14 +316,14 @@ state stateBiteHarry
  begin:
   Velocity = vect(0.00,0.00,0.00);
   Acceleration = vect(0.00,0.00,0.00);
-  PlaySound(Sound'SPI_large_jump',SLOT_None,RandRange(0.89999998,1.0),,20000.0,RandRange(0.81,1.25),,False);
+  PlaySound(Sound'SPI_large_jump',SLOT_None,RandRange(0.89999998,1.0),,20000.0,RandRange(0.80,1.20),,False);
   PlayAnim('Attack',2.0);
-  Sleep(0.31);
+  Sleep(0.3);
   if ( Rand(2) == 0 )
   {
-    PlaySound(Sound'SPI_large_bite1',SLOT_None,RandRange(0.89999998,1.0),,250.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_bite1',SLOT_None,RandRange(0.89999998,1.0),,250.0,RandRange(0.80,1.20),,False);
   } else {
-    PlaySound(Sound'SPI_large_bite2',SLOT_None,RandRange(0.89999998,1.0),,250.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_bite2',SLOT_None,RandRange(0.89999998,1.0),,250.0,RandRange(0.80,1.20),,False);
   }
   Sleep(0.04);
   if ( VSize(PlayerHarry.Location - Location) < savedCollision + PlayerHarry.CollisionRadius )
@@ -334,7 +334,7 @@ state stateBiteHarry
   Acceleration = Normal(Location - PlayerHarry.Location) * GroundSpeed * 2;
   PlayAnim('lungeAttackend',1.29999995);
   FinishAnim();
-  Sleep(0.151);
+  Sleep(0.15);
   GotoState('preAttackCheck');
 }
 
@@ -372,12 +372,12 @@ state HitBySpell
   }
   
  begin:
-  PlaySound(Sound'SPI_hit',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.81,1.25),,False);
+  PlaySound(Sound'SPI_hit',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.80,1.20),,False);
   if ( Rand(2) == 0 )
   {
-    PlaySound(Sound'SPI_large_ouch1',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_ouch1',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.80,1.20),,False);
   } else {
-    PlaySound(Sound'SPI_large_ouch2',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_ouch2',SLOT_None,RandRange(0.89999998,1.0),,2000.0,RandRange(0.80,1.20),,False);
   }
   if ( numSpells > 0 )
   {
@@ -401,8 +401,8 @@ begin:
   Velocity = vect(0.00,0.00,0.00);
   Acceleration = vect(0.00,0.00,0.00);
   PlayAnim('flippedOver',1.39999998);
-  Sleep(0.723);
-  PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
+  Sleep(0.72);
+  PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.80,1.20),,False);
   Sleep(0.5);
   LoopAnim('idleOnBack');
   SetCollisionSize(PlayerHarry.CollisionRadius,Default.CollisionHeight);

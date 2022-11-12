@@ -86,12 +86,12 @@ function UpdateBroomSound()
     if ( fSpeed <= AirSpeedNormal )
     {
       fSpeedFactor = (fSpeed - 50) / (AirSpeedNormal - 50);
-      fVolume = 0.62 * fSpeedFactor;
+      fVolume = 0.6 * fSpeedFactor;
       fPitch = 0.2 * (fSpeedFactor + 1.5);
     } else {
       fSpeedFactor = (fSpeed - AirSpeedNormal) / (AirSpeedBoost - AirSpeedNormal);
-      fVolume = 0.41 * (fSpeedFactor + 0.62);
-      fPitch = 0.151 * (fSpeedFactor + 1.75);
+      fVolume = 0.4 * (fSpeedFactor + 0.6);
+      fPitch = 0.15 * (fSpeedFactor + 1.7);
     }
   //}
   if ( Rotation.Roll <= 32768 )
@@ -186,17 +186,17 @@ state PlayerWalking
     fPitchLimitLo = 65536.0 - (PitchLimitDown * (16384 / 90.0));
     if ( False )
     {
-      if ( fMousePitch > 0.151 )
+      if ( fMousePitch > 0.15 )
       {
-        fEffectiveMousePitch = fMousePitch - 0.151;
+        fEffectiveMousePitch = fMousePitch - 0.15;
         if ( fEffectiveMousePitch > 1.0 )
         {
           fEffectiveMousePitch = 1.0;
         }
       } else //{
-        if ( fMousePitch < -0.151 )
+        if ( fMousePitch < -0.15 )
         {
-          fEffectiveMousePitch = fMousePitch + 0.151;
+          fEffectiveMousePitch = fMousePitch + 0.15;
           if ( fEffectiveMousePitch < -1.0 )
           {
             fEffectiveMousePitch = -1.0;
@@ -230,7 +230,7 @@ state PlayerWalking
           bLastPitchNeg = False;
         }
       //}
-      if ( Abs(fPitchControl) < 0.05 )
+      if ( Abs(fPitchControl) < 0.0005 )
       {
         if ( Rotation.Pitch >= 32768 )
         {
@@ -270,7 +270,7 @@ state PlayerWalking
            bLastYawNeg = False;
         }
     //}
-    if ( Abs(fYawControl) < 0.05 )
+    if ( Abs(fYawControl) < 0.0005 )
     {
       if ( bHittingWall )
       {
@@ -331,9 +331,14 @@ state PlayerWalking
     vCurrentTetherDistance += vTurbulence;
     SetLocation(guide.Location + vCurrentTetherDistance);
     NewRotation.Pitch += (pitchAmount * fPitchControl);
+	NewRotation.Pitch = NewRotation.Pitch & 65535;
     guideRotation = guide.Rotation;
     guideRotation.Yaw += CarYawVal;
+	guideRotation.Roll += CarYawVal;
+	guideRotation.Pitch += NewRotation.Pitch;
     guideRotation.Yaw += fLightningYaw;
+	guideRotation.Pitch += fLightningPitch;
+	DesiredRotation = guideRotation;
     if ( AirSpeed == AirSpeedNormal )
     {
       guide.IPSpeed = 0.0;
@@ -368,11 +373,11 @@ state PlayerWalking
 	  }
       Director.OnHitEvent(self);
     }
-    if ( Abs(HitNormal.Z) >= 0.9851 )
+    if ( Abs(HitNormal.Z) >= 0.985 )
     {
       return;
     } else {
-      fWallAvoidanceRate = 1.0 - (Abs(HitNormal.Z) / 0.9851);
+      fWallAvoidanceRate = 1.0 - (Abs(HitNormal.Z) / 0.985);
     }
     Up.X = 0.0;
     Up.Y = 0.0;

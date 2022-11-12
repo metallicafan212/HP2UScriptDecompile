@@ -41,7 +41,7 @@ function ShootFireballs()
 	rotate_fireball.Pitch  += (65536 * 10) / 4;
 	if ( VSize(PlayerHarry.Location - Location) < GrenadeRadius )
 	{
-		PlayerHarry.ShakeView(0.31,200.0,200.0);
+		PlayerHarry.ShakeView(0.3,200.0,200.0);
 		ratio 			= VSize(PlayerHarry.Location - Location) / GrenadeRadius;
 		grenadeDamage 	= iDamage - (iDamage * ratio);
 		PlayerHarry.TakeDamage(grenadeDamage,None,vect(0.00,0.00,0.00),vect(0.00,0.00,0.00),'None');

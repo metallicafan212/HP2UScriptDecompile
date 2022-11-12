@@ -267,7 +267,7 @@ event Tick (float DeltaTime)
     DestJerkOffset.X = RandRange(-40.0,40.0);
     DestJerkOffset.Y = RandRange(-40.0,40.0);
     DestJerkOffset.Z = RandRange(-40.0,40.0);
-    fTimeForNextJerk = Level.TimeSeconds + RandRange(0.41,1.25);
+    fTimeForNextJerk = Level.TimeSeconds + RandRange(0.40,1.20);
   }
   if ( bJerking )
   {
@@ -308,7 +308,7 @@ event Tick (float DeltaTime)
     }
   }
   HistoryTimer += DeltaTime;
-  if ( HistoryTimer > 0.151 )
+  if ( HistoryTimer > 0.15 )
   {
     HistoryTimer = 0.0;
     vPositionHistory[iNextHistorySlot] = Location;

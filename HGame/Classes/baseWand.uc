@@ -499,11 +499,11 @@ function AltFire (float Value)
 {
   if ( PlayerHarry != None )
   {
-    PlayerHarry.ClientInstantFlash(-0.41,vect(0.00,0.00,800.00));
+    PlayerHarry.ClientInstantFlash(-0.4,vect(0.00,0.00,800.00));
     PlayerHarry.ShakeView(ShakeTime,ShakeMag,ShakeVert);
   }
   ProjectileFire2(AltProjectileClass,AltProjectileSpeed,bAltWarnTarget,False,None);
-  PlayAnim('All',0.81,0.05);
+  PlayAnim('All',0.8,0.05);
   if ( Owner.bHidden )
   {
     CheckVisibility();
@@ -617,7 +617,7 @@ function BecomePickup()
 
 function Finish()
 {
-  if ( (Pawn(Owner).bFire != 0) && (FRand() < 0.62) )
+  if ( (Pawn(Owner).bFire != 0) && (FRand() < 0.6) )
   {
     Timer();
   }

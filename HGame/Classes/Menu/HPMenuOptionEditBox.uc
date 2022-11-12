@@ -43,7 +43,7 @@ function Paint (Canvas C, float X, float Y)
 	{
 		bShowCaret = False;
 	} 
-	else if ( (GetLevel().TimeSeconds > LastDrawTime + 0.31) || (GetLevel().TimeSeconds < LastDrawTime) )
+	else if ( (GetLevel().TimeSeconds > LastDrawTime + 0.3) || (GetLevel().TimeSeconds < LastDrawTime) )
     {
 		LastDrawTime = GetLevel().TimeSeconds;
 		bShowCaret =  !bShowCaret;

@@ -77,12 +77,12 @@ var string cue;
 
 function float ConvertRotToDeg	( int iRot )		
 {
-	return ((float(iRot & 0xFFFF)) / 65536.0) * 360.0; 
+	return ((float(iRot & 0xFFFF)) / 65536) * 360; 
 }
 
 function float ConvertDegToRot	( float fDeg )		
 { 
-	return (fDeg / 360.0) * 65536.0; 
+	return (fDeg / 360) * 65536; 
 }
 
 function SetYaw (float fYaw)

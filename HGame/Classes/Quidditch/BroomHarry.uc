@@ -147,7 +147,7 @@ function PostBeginPlay()
   // if ( iStat < 20 )
   for(iStat = 0; iStat < MAX_REVERSAL_STATS; ++iStat)
   {
-    fTimesOfLastReversals[iStat] = -9999.93963;
+    fTimesOfLastReversals[iStat] = -9999.900391;
     // ++iStat;
     // goto JL016E;
   }
@@ -389,7 +389,7 @@ function DeterminePrimaryAnim()
               } else //{
                 if ( Speed < 50 )
                 {
-                  SetPrimaryAnimation('hover',,0.41);
+                  SetPrimaryAnimation('hover',,0.4);
                 } else {
                   SetPrimaryAnimation('Fly_forward',,1.0);
                 }
@@ -613,12 +613,12 @@ function UpdateBroomSound()
     if ( fSpeed <= AirSpeedNormal )
     {
       fSpeedFactor = (fSpeed - 50) / (AirSpeedNormal - 50);
-      fVolume = 0.62 * fSpeedFactor;
+      fVolume = 0.6 * fSpeedFactor;
       fPitch = 0.2 * fSpeedFactor + 1.5;
     } else {
       fSpeedFactor = (fSpeed - AirSpeedNormal) / (AirSpeedBoost - AirSpeedNormal);
-      fVolume = 0.41 * fSpeedFactor + 0.62;
-      fPitch = 0.151 * fSpeedFactor + 1.75;
+      fVolume = 0.4 * fSpeedFactor + 0.6;
+      fPitch = 0.15 * fSpeedFactor + 1.7;
     }
   //}
   if ( Rotation.Roll <= 32768 )
@@ -1103,7 +1103,7 @@ state PlayerWalking
     if ( Level.TimeSeconds > fTimeForNextWatchUpdate )
     {
       UpdateWatchTarget();
-      fTimeForNextWatchUpdate = Level.TimeSeconds + RandRange(1.0,1.25);
+      fTimeForNextWatchUpdate = Level.TimeSeconds + RandRange(1.0,1.20);
     }
   }
   
@@ -1118,7 +1118,7 @@ state PlayerWalking
   
     HiDecelRate = 0.2;
     DecelRate = 2.5;
-    if ( (Abs(bBroomPitchUp) > 0.05) || (Abs(bBroomPitchDown) > 0.05) )
+    if ( (Abs(bBroomPitchUp) > 0.0005) || (Abs(bBroomPitchDown) > 0.0005) )
     {
       if ( ePitchControlDevice == DEVICE_Mouse )
       {
@@ -1127,7 +1127,7 @@ state PlayerWalking
       // ePitchControlDevice = 0;
 	  ePitchControlDevice = DEVICE_Button;
     } else //{
-      if ( Abs(aJoyBroomPitch) > 0.05 )
+      if ( Abs(aJoyBroomPitch) > 0.0005 )
       {
         if ( ePitchControlDevice == DEVICE_Mouse )
         {
@@ -1136,14 +1136,14 @@ state PlayerWalking
         // ePitchControlDevice = 2;
 		ePitchControlDevice = DEVICE_Joystick;
       } else //{
-        if ( bAllowBroomMouse && (Abs(aBroomPitch) > 0.05) )
+        if ( bAllowBroomMouse && (Abs(aBroomPitch) > 0.0005) )
         {
           // ePitchControlDevice = 1;
 		  ePitchControlDevice = DEVICE_Mouse;
         }
       //}
     //}
-    if ( (Abs(bBroomYawLeft) > 0.05) || (Abs(bBroomYawRight) > 0.05) )
+    if ( (Abs(bBroomYawLeft) > 0.0005) || (Abs(bBroomYawRight) > 0.0005) )
     {
       if ( eYawControlDevice == DEVICE_Mouse )
       {
@@ -1152,7 +1152,7 @@ state PlayerWalking
       // eYawControlDevice = 0;
 	  eYawControlDevice = DEVICE_Button;
     } else //{
-      if ( Abs(aJoyBroomYaw) > 0.05 )
+      if ( Abs(aJoyBroomYaw) > 0.0005 )
       {
         if ( eYawControlDevice == DEVICE_Mouse )
         {
@@ -1161,7 +1161,7 @@ state PlayerWalking
         // eYawControlDevice = 2;
 		eYawControlDevice = DEVICE_Joystick;
       } else //{
-        if ( bAllowBroomMouse && (Abs(aBroomYaw) > 0.05) )
+        if ( bAllowBroomMouse && (Abs(aBroomYaw) > 0.0005) )
         {
           // eYawControlDevice = 1;
 		  eYawControlDevice = DEVICE_Mouse;
@@ -1214,7 +1214,7 @@ state PlayerWalking
       // case 1:
 	  case DEVICE_Mouse:
 		  fMouseYaw += aBroomYaw * fBroomSensitivity;
-		  if ( Abs(aBroomYaw) > 0.05 )
+		  if ( Abs(aBroomYaw) > 0.0005 )
 		  {
 			//KW left this empty? -AdamJD
 		  }
@@ -1229,11 +1229,11 @@ state PlayerWalking
 		  //}
 		  if ( fMouseYaw > 0.5 )
 		  {
-			fYawControl = fMouseYaw - 0.31;
+			fYawControl = fMouseYaw - 0.3;
 		  } else //{
 			if ( fMouseYaw < -0.5 )
 			{
-			  fYawControl = fMouseYaw + 0.31;
+			  fYawControl = fMouseYaw + 0.3;
 			} else {
 			  fYawControl = 0.0;
 			}
@@ -1269,7 +1269,7 @@ state PlayerWalking
 	  {
 		  if ( Deceleration > 0 )
 		  {
-			if ( Deceleration > 0.41 * AirSpeedNormal )
+			if ( Deceleration > 0.4 * AirSpeedNormal )
 			{
 			  Deceleration -= ((AirSpeedNormal / 2) / HiDecelRate) * DeltaTime;
 			}
@@ -1306,17 +1306,17 @@ state PlayerWalking
     {
       // case 1:
 	  case DEVICE_Mouse:
-		  if ( fMousePitch > 0.151 )
+		  if ( fMousePitch > 0.15 )
 		  {
-			fEffectiveMousePitch = fMousePitch - 0.151;
+			fEffectiveMousePitch = fMousePitch - 0.15;
 			if ( fEffectiveMousePitch > 1.0 )
 			{
 			  fEffectiveMousePitch = 1.0;
 			}
 		  } else //{
-			if ( fMousePitch < -0.151 )
+			if ( fMousePitch < -0.15 )
 			{
-			  fEffectiveMousePitch = fMousePitch + 0.151;
+			  fEffectiveMousePitch = fMousePitch + 0.15;
 			  if ( fEffectiveMousePitch < -1.0 )
 			  {
 				fEffectiveMousePitch = -1.0;
@@ -1424,7 +1424,7 @@ state PlayerWalking
         bLastYawNeg = False;
       }
     //}
-    if ( Abs(fYawControl) < 0.05 )
+    if ( Abs(fYawControl) < 0.0005 )
     {
       if ( bHittingWall )
       {
@@ -1476,7 +1476,7 @@ state PlayerWalking
       bHitWall = True;
       fSpeed = VSize(Velocity);
       fVolume = fSpeed / AirSpeedNormal;
-      PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,fVolume,,,RandRange(0.81,1.25));
+      PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,fVolume,,,RandRange(0.80,1.20));
       if ( WallDamage > 0 )
       {
         EffectiveDamage = WallDamage * fSpeed / AirSpeedNormal;
@@ -1498,11 +1498,11 @@ state PlayerWalking
         Director.OnHitEvent(self);
       }
     }
-    if ( Abs(HitNormal.Z) >= 0.9851 )
+    if ( Abs(HitNormal.Z) >= 0.985 )
     {
       return;
     } else {
-      fWallAvoidanceRate = 1.0 - (Abs(HitNormal.Z) / 0.9851); //UTPT forgot to add brackets -AdamJD
+      fWallAvoidanceRate = 1.0 - (Abs(HitNormal.Z) / 0.985); //UTPT forgot to add brackets -AdamJD
     }
     vDodgeVel = GetDodgeVelFromHitwall(self,HitNormal,LookForTarget);
     bHittingWall = True;
@@ -1519,9 +1519,9 @@ state PlayerWalking
       PlayAnim('React');
       if ( pTarget.IsA('QuidGoal') )
       {
-        PlaySound(Sound'Q_BRM_HitPole_01',SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+        PlaySound(Sound'Q_BRM_HitPole_01',SLOT_Interact,0.69999999,,1000.0,RandRange(0.80,1.20));
       } else {
-        PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.81,1.25));
+        PlaySound(HitSounds[Rand(NUM_HIT_SOUNDS)],SLOT_Interact,0.69999999,,1000.0,RandRange(0.80,1.20));
       }
       Velocity = vect(0.00,0.00,1.00);
       bHit = True;
@@ -1570,7 +1570,7 @@ function Vector GetDodgeVelFromHitwall (Actor aSelf, Vector vHitNormal, Actor LF
     V = LFT.Location;
   }
   V = Normal(V - aSelf.Location);
-  vVel = (V + vHitNormal * 0.81) / 2;
+  vVel = (V + vHitNormal * 0.8) / 2;
   if ( vVel.Z > 0 )
   {
     vVel.Z = Abs(vVel.X) + (Abs(vVel.Y) / 2); //UTPT forgot to add brackets -AdamJD

@@ -712,7 +712,7 @@ state VendorGive
 ignores Bump;
 
 begin:
-  PlayAnim('vendor_give',1.39999998,0.41);
+  PlayAnim('vendor_give',1.39999998,0.4);
   Sleep(0.75);
   MakePurchase();
   FinishAnim();
@@ -780,7 +780,7 @@ keep_facing_harry:
   if (  !IsAnimating() )
   {
     CurrIdleAnimName = GetCurrIdleAnimName();
-    LoopAnim(CurrIdleAnimName,,[TweenTime]0.41);
+    LoopAnim(CurrIdleAnimName,,[TweenTime]0.4);
   }
   TurnToward(Level.PlayerHarryActor);
   if ( WeasleyTwin != None )
@@ -829,7 +829,7 @@ keep_facing_harry:
   if (  !IsAnimating() )
   {
     CurrIdleAnimName = GetCurrIdleAnimName();
-    LoopAnim(CurrIdleAnimName,,[TweenTime]0.41);
+    LoopAnim(CurrIdleAnimName,,[TweenTime]0.4);
   }
   TurnToward(Level.PlayerHarryActor);
   if ( WeasleyTwin != None )

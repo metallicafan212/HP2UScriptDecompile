@@ -139,7 +139,7 @@ function DoSnailDamage (name nameDamage, Vector vDamageLoc, bool bCuttingHarryOf
         default:
       }
     } else {
-      PlaySound(Sound'snail_ouch2',SLOT_None,RandRange(0.81,1.0),,,RandRange(0.81,1.12));
+      PlaySound(Sound'snail_ouch2',SLOT_None,RandRange(0.8,1.0),,,RandRange(0.80,1.10));
     }
     bAllowSnailDamage = False;
   }
@@ -154,7 +154,7 @@ function DoTrailUpdates (float fDeltaTime)
 
   nTrailRadius = Class'SnailTrail'.Default.CollisionRadius;
   // if ( (bLeaveTrail == True) && (bool(Physics) != bool(2)) && (VSize(Location - vLastTrailSpawnLoc) > byte(nTrailRadius) * 0.81) );
-  if ( (bLeaveTrail == True && Physics != PHYS_Falling) && (VSize(Location - vLastTrailSpawnLoc) > (nTrailRadius * 0.81)) )
+  if ( (bLeaveTrail == True && Physics != PHYS_Falling) && (VSize(Location - vLastTrailSpawnLoc) > (nTrailRadius * 0.8)) )
   {
     rTrailRotation = Class'SnailTrail'.Default.Rotation;
     vTrailLocation = Location;
@@ -309,9 +309,9 @@ auto state patrol
     SetTimer(RandRange(3.0,8.0),False);
     if ( Rand(2) == 0 )
     {
-      PlaySound(Sound'snail_slither1',SLOT_None,,,1000.0,RandRange(0.81,1.12));
+      PlaySound(Sound'snail_slither1',SLOT_None,,,1000.0,RandRange(0.80,1.10));
     } else {
-      PlaySound(Sound'snail_slither2',SLOT_None,,,1000.0,RandRange(0.81,1.12));
+      PlaySound(Sound'snail_slither2',SLOT_None,,,1000.0,RandRange(0.80,1.10));
     }
   }
   
@@ -415,9 +415,9 @@ state RamHarry
   SetGroundSpeed();
   if ( Rand(2) == 0 )
   {
-    PlaySound(soundAttackCry,SLOT_None,RandRange(0.81,1.0),,,RandRange(0.81,1.12));
+    PlaySound(soundAttackCry,SLOT_None,RandRange(0.8,1.0),,,RandRange(0.80,1.10));
   } else {
-    PlaySound(soundWarningCry,SLOT_None,RandRange(0.81,1.0),,,RandRange(0.81,1.12));
+    PlaySound(soundWarningCry,SLOT_None,RandRange(0.8,1.0),,,RandRange(0.80,1.10));
   }
   MoveTo(PlayerHarry.Location);
   PlayAnim('Idle');

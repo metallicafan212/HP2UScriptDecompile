@@ -1417,7 +1417,7 @@ event DrawLevelInfo (Canvas C, string URL)
   }
   Log("NextURL = " $ URL);
   C.bCenter = True;
-  C.OrgX = FrameX * 0.151;
+  C.OrgX = FrameX * 0.15;
   C.ClipX = FrameX * 0.69999999;
   C.DrawColor.R = 0;
   C.DrawColor.G = 0;

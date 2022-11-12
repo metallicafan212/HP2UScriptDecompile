@@ -111,7 +111,7 @@ function PlayRoarSound()
     break;
     default:
   }
-  PlaySound(RoarSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(RoarSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 state stateHitBySpell
@@ -189,7 +189,7 @@ state DoFlip
   // if ( bool(Physics) != bool(2) )
   if(Physics != PHYS_Falling)
   {
-    PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.80,1.20),,False);
   }
   Sleep(1.0);
   LoopAnim('onback');
@@ -199,11 +199,11 @@ state DoFlip
   playFlipSound();
   // eVulnerableToSpell = 22;
   eVulnerableToSpell = SPELL_Rictusempra;
-  Sleep(1.12);
+  Sleep(1.1);
   // if ( bool(Physics) != bool(2) )
   if(Physics != PHYS_Falling)
   {
-    PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.80,1.20),,False);
   }
   Sleep(0.5);
   LoopAnim('Look');
@@ -340,7 +340,7 @@ state throwing
   {
     GotoState('strafeAround');
   } else {
-    Sleep(0.81);
+    Sleep(0.8);
     TurnTo(Location + vMoveDir);
     vMoveDirRot = Rotation;
     vMoveDir = vector(vMoveDirRot);
@@ -414,7 +414,7 @@ state strafeAround
     TurnTo(Location + Location - PlayerHarry.Location);
     GotoState('throwing');
   } else {
-    Sleep(0.31);
+    Sleep(0.3);
     TurnTo(Location + vMoveDir);
     vMoveDirRot = Rotation;
     vMoveDir = vector(vMoveDirRot);

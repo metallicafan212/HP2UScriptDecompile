@@ -34,7 +34,7 @@ auto state stateIdle
 {
   function Timer()
   {
-    SetTimer(RandRange(0.62,0.89999998),True);
+    SetTimer(RandRange(0.60,0.89999998),True);
     if ( VSize2D(PlayerHarry.Location - Location) < fGetAngryDistance )
     {
       GotoState('stateAngry');
@@ -42,12 +42,12 @@ auto state stateIdle
   }
   
  begin:
-  LoopAnim('Idle',RandRange(0.41,1.12),1.0);
+  LoopAnim('Idle',RandRange(0.40,1.10),1.0);
   AnimFrame = RandRange(0.0,0.69999999);
   do
   {
     Sleep(fAvgSoundPeriod + RandRange( -fAvgSoundPeriod * 0.5,fAvgSoundPeriod * 0.5));
-    AnimRate = RandRange(0.41,1.12);
+    AnimRate = RandRange(0.40,1.10);
   } 
   until(false);
   //if (! False ) goto JL002D;
@@ -57,7 +57,7 @@ state stateAngry
 {
   function Timer()
   {
-    SetTimer(RandRange(0.62,0.89999998),True);
+    SetTimer(RandRange(0.60,0.89999998),True);
     if ( VSize2D(PlayerHarry.Location - Location) > fGetAngryDistance + 50 )
     {
       GotoState('stateIdle');
@@ -104,14 +104,14 @@ state stateAngry
     }
     if ( snd != None )
     {
-      PlaySound(snd,SLOT_None,RandRange(0.69999999,1.0),False,WillowSoundRadius,RandRange(0.81,1.25));
+      PlaySound(snd,SLOT_None,RandRange(0.69999999,1.0),False,WillowSoundRadius,RandRange(0.80,1.20));
     }
     if ( (Frame >= 28) && (LastAnimFrame < 28) || (Frame >= 73) && (LastAnimFrame < 73) || (Frame >= 127) && (LastAnimFrame < 127) || (Frame >= 169) && (LastAnimFrame < 169) )
     {
       snd = Sound'Big_whomp2';
       fScale = -2.0 / fGetAngryDistance * VSize2D(PlayerHarry.Location - Location) + 2.5;
       fScale = Clamp(fScale, 0,1);
-      PlaySound(snd,SLOT_None,RandRange(0.41,1.0),False,WillowSoundRadius,RandRange(0.2,0.89999998));
+      PlaySound(snd,SLOT_None,RandRange(0.4,1.0),False,WillowSoundRadius,RandRange(0.2,0.89999998));
       PlayerHarry.ShakeView(0.5,50.0 * fScale,50.0 * fScale);
     }
     LastAnimFrame = Frame;
@@ -119,11 +119,11 @@ state stateAngry
   
  begin:
   LastAnimFrame = 0;
-  LoopAnim('Attack',RandRange(0.1,0.31),1.0);
+  LoopAnim('Attack',RandRange(0.1,0.3),1.0);
   do
   {
     Sleep(fAvgSoundPeriod + RandRange( -fAvgSoundPeriod * 0.5,fAvgSoundPeriod * 0.5));
-    AnimRate = RandRange(0.1,0.31);
+    AnimRate = RandRange(0.1,0.3);
   }
   until(false);
   //if (! False ) goto JL0021;

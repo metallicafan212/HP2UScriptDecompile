@@ -6,7 +6,7 @@ class Fawkes extends Characters;
 
 function PlayWingFlap()
 {
-  PlaySound(Sound'Fawkes_wing_flap',,,,,RandRange(0.81,1.0));
+  PlaySound(Sound'Fawkes_wing_flap',,,,,RandRange(0.8,1.0));
 }
 
 defaultproperties

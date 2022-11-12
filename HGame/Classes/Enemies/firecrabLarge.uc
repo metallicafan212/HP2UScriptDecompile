@@ -89,7 +89,7 @@ function PlayRoarSound()
     break;
     default:
   }
-  PlaySound(RoarSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(RoarSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 state stateHitBySpell
@@ -121,7 +121,7 @@ begin:
   // if ( bool(Physics) != bool(2) )
   if(Physics != PHYS_Falling)
   {
-    PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.81,1.25),,False);
+    PlaySound(Sound'SPI_large_LandOnBack',SLOT_None,RandRange(0.89999998,1.0),,200000.0,RandRange(0.80,1.20),,False);
   }
   Sleep(1.0);
   GotoState('stayFlipped');
@@ -203,7 +203,7 @@ state throwing
   largeSpell.GrenadeBounceInterval = GrenadeBounceInterval;
   largeSpell.GrenadeGravity = GrenadeGravity;
   largeSpell.GrenadeExplosionGravity = GrenadeExplosionGravity;
-  Sleep(0.81);
+  Sleep(0.8);
   TurnTo(Location + vMoveDir);
   vMoveDirRot = Rotation;
   vMoveDir = vector(vMoveDirRot);

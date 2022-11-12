@@ -60,7 +60,7 @@ function ShootPoison()
   HeadLocation = Location;
   HeadRotation = Rotation;
   Destroy();
-  PlaySound(Sound'horklump_mushroom_head_explode',SLOT_Misc,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(Sound'horklump_mushroom_head_explode',SLOT_Misc,RandRange(0.6,1.0),,95000.0,RandRange(0.80,1.20),,False);
   Spawn(Class'ThrownPoisonCloud',self,,HeadLocation,HeadRotation);
 }
 

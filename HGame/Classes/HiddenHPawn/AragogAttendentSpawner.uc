@@ -79,6 +79,7 @@ state SpawnSomeSpiders
 				spiderRotation 		= Rotation;
 				spiderYaw 			= theAnchors[numberOfAnchors].theSpiders[Spidercounter].iRotation * (16384 / 90.0);
 				spiderRotation.Yaw += spiderYaw;
+				spiderRotation.Yaw  = spiderRotation.Yaw & 65535;
 				vTempOffset 		= theAnchors[numberOfAnchors].theSpiders[Spidercounter].offsetFromSpawner;
 				vOffsetSide 		= vRight * vTempOffset.X;
 				vOffsetFront 		= Vector(Rotation) * vTempOffset.Y;

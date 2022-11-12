@@ -79,9 +79,9 @@ auto state isFalling
   {
     local ParticleFX p;
   
-    Velocity.Z *= 0.2 + FRand() * 0.31;
+    Velocity.Z *= 0.2 + FRand() * 0.3;
     Velocity = MirrorVectorByNormal(Velocity,HitNormal);
-    PlaySound(MySound,SLOT_None,0.75,,100000.0,RandRange(0.89999998,1.12));
+    PlaySound(MySound,SLOT_None,0.75,,100000.0,RandRange(0.89999998,1.10));
     if ( hasParticles )
     {
       p = Spawn(Particles,,,Location,rot(0,0,0));

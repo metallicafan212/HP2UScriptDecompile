@@ -188,7 +188,7 @@ state StartFollowingHarry
 		//Log("In state " $GetStateName()); 
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);
-		LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.2);
+		LoopAnim(IdleAnimName,RandRange(0.80,1.20),0.2);
 		Sleep(RandRange(1.5,3.0));
 		fDuration = PlayRandomSoundAndAnimFirstTime();
 		fDuration -= 1.5;
@@ -347,7 +347,7 @@ state RandomLookForHarry
 		DesiredRotation.Yaw = Rotation.Yaw + Rand(65536);
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);
-		LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.25);
+		LoopAnim(IdleAnimName,RandRange(0.80,1.20),0.25);
 		Sleep(RandRange(0.75,1.5));
 		FindNewVTempBasedOnNormal((PlayerHarry.Location - Location) * vect(1.00,1.00,0.00));
 		TurnTo(vTemp);
@@ -383,7 +383,7 @@ state LookForHarryIdle
 		//Log("In state " $GetStateName()); 
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);
-		LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.2);
+		LoopAnim(IdleAnimName,RandRange(0.80,1.20),0.2);
 }
 
 state CaughtHarry
@@ -414,7 +414,7 @@ state CaughtHarry
 		//Log("In state " $GetStateName());
 		Velocity = vect(0.00,0.00,0.00);
 		Acceleration = vect(0.00,0.00,0.00);
-		LoopAnim(IdleAnimName,RandRange(0.81,1.25),0.2);
+		LoopAnim(IdleAnimName,RandRange(0.80,1.20),0.2);
 		TurnTo(PlayerHarry.Location);
 		PlayerHarry.ClientMessage("Start to say something second time................" $ string(self));
 		fDuration = PlayRandomSoundAndAnimSecondTime();
@@ -462,7 +462,7 @@ state SaySomethingFirstTime
 		fDuration -= 1.5;
 		Sleep(fDuration * 0.2);
 		NotifyOthersOfHarry();
-		Sleep(fDuration * 0.81);
+		Sleep(fDuration * 0.8);
 		PlayerHarry.ClientMessage("End   to say something first time................." $ string(self));
 		GotoState('followHarry');
 }
@@ -987,17 +987,17 @@ state stateIdle
 			CurrIdleAnimName = GetCurrIdleAnimName();
 			if ( FidgetNums != 0 )
 			{
-				LoopAnim(CurrIdleAnimName,RandRange(0.81,1.25),[TweenTime]0.5);
+				LoopAnim(CurrIdleAnimName,RandRange(0.80,1.20),[TweenTime]0.5);
 				Sleep(RandRange(iMinIdleSeconds,iMaxIdleSeconds));
 				FinishAnim();
-				PlayAnim(CurrFidgetAnimName,RandRange(0.81,1.25),[TweenTime]0.2);
+				PlayAnim(CurrFidgetAnimName,RandRange(0.80,1.20),[TweenTime]0.2);
 				FinishAnim();
 			} 
 			else
 			{
 				if ( HasAnim(CurrIdleAnimName) )
 				{
-					PlayAnim(CurrIdleAnimName,RandRange(0.81,1.25),[TweenTime]0.2);
+					PlayAnim(CurrIdleAnimName,RandRange(0.80,1.20),[TweenTime]0.2);
 					FinishAnim();
 					Sleep(0.01);
 				} 
@@ -1007,7 +1007,7 @@ state stateIdle
 				}
 			}
 		}
-		Sleep(0.01);
+		Sleep(0.0001);
 		goto ('Begin');
 }
 
@@ -1093,7 +1093,7 @@ simulated function PlayFootStep()
 	{
 		Step = Footstep1;
 	} 
-	else if ( decision < 0.672 )
+	else if ( decision < 0.67 )
 	{
 		Step = Footstep2;
 	}

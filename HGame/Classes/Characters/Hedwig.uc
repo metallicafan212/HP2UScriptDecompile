@@ -45,7 +45,7 @@ function SetMyTimer (optional float Time)
 
 function StopOnSpline()
 {
-  IPSpeed = 0.01;
+  IPSpeed = 0.000001;
 }
 
 function ContinueOnSpline()

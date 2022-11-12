@@ -48,9 +48,9 @@ function bool OnSpellHitHPawn (Actor aHit, Vector vHitLocation)
     aHit.Spawn(Class'DobbyBurst');
     aHit.Spawn(Class'DustCloud04_med');
     aHit.Spawn(Class'Verd_hit');
-    aHit.PlaySound(Sound'Dueling_EXP_smack',SLOT_None,,,,RandRange(0.69999999,1.25));
-    aHit.PlaySound(Sound'health_boost1',SLOT_None,,,,RandRange(0.69999999,1.25));
-    aHit.PlaySound(Sound'pickup_wig_bark',SLOT_None,,,,RandRange(0.69999999,1.25));
+    aHit.PlaySound(Sound'Dueling_EXP_smack',SLOT_None,,,,RandRange(0.69999999,1.20));
+    aHit.PlaySound(Sound'health_boost1',SLOT_None,,,,RandRange(0.69999999,1.20));
+    aHit.PlaySound(Sound'pickup_wig_bark',SLOT_None,,,,RandRange(0.69999999,1.20));
     aHit.Destroy();
     CreateHitEffects(aHit,vHitLocation);
     return False;

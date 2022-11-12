@@ -35,7 +35,7 @@ state HitBySpell
 {
 	begin:
 		HitSound = Sound'ss_ara_incendiohit_0005';
-		PlaySound(HitSound,SLOT_None,RandRange(0.69999999,1.0),,150000.0,RandRange(0.81,1.0),,False);
+		PlaySound(HitSound,SLOT_None,RandRange(0.69999999,1.0),,150000.0,RandRange(0.8,1.0),,False);
 		fxHitParticleEffect = Spawn(fxHitParticleEffectClass,,,Location);
 		fxReactParticleEffect = Spawn(fxReactParticleEffectClass,,,Location);
 		Sleep(0.1);

@@ -491,41 +491,39 @@ function ObjectDetailChanged()
 {
   switch (ObjectDetailSlider.GetValue())
   {
-    case 0.0:
-    GetPlayerOwner().ObjectDetail = ObjectDetailVeryLow;
-    break;
-    case 1.0:
-    GetPlayerOwner().ObjectDetail = ObjectDetailLow;
-    break;
-    case 2.0:
-    GetPlayerOwner().ObjectDetail = ObjectDetailMedium;
-    break;
-    case 3.0:
-    GetPlayerOwner().ObjectDetail = ObjectDetailHigh;
-    break;
-    case 4.0:
-    GetPlayerOwner().ObjectDetail = ObjectDetailVeryHigh;
-    break;
-    default:
+		case 0.0:
+			GetPlayerOwner().ObjectDetail = ObjectDetailVeryLow;
+			break;
+		case 1.0:
+			GetPlayerOwner().ObjectDetail = ObjectDetailLow;
+			break;
+		case 2.0:
+			GetPlayerOwner().ObjectDetail = ObjectDetailMedium;
+			break;
+		case 3.0:
+			GetPlayerOwner().ObjectDetail = ObjectDetailHigh;
+			break;
+		case 4.0:
+			GetPlayerOwner().ObjectDetail = ObjectDetailVeryHigh;
+			break;
   }
   switch (GetPlayerOwner().ObjectDetail)
   {
-    case ObjectDetailVeryLow:
-    GetPlayerOwner().ConsoleCommand("MLOD 0.1");
-    break;
-    case ObjectDetailLow:
-    GetPlayerOwner().ConsoleCommand("MLOD 0.2");
-    break;
-    case ObjectDetailMedium:
-    GetPlayerOwner().ConsoleCommand("MLOD 0.5");
-    break;
-    case ObjectDetailHigh:
-    GetPlayerOwner().ConsoleCommand("MLOD 0.8");
-    break;
-    case ObjectDetailVeryHigh:
-    GetPlayerOwner().ConsoleCommand("MLOD 1.0");
-    break;
-    default:
+		case ObjectDetailVeryHigh:
+			GetPlayerOwner().ConsoleCommand("MLOD 0.1");
+			break;
+		case ObjectDetailHigh:
+			GetPlayerOwner().ConsoleCommand("MLOD 0.2");
+			break;
+		case ObjectDetailMedium:
+			GetPlayerOwner().ConsoleCommand("MLOD 0.5");
+			break;
+		case ObjectDetailLow:
+			GetPlayerOwner().ConsoleCommand("MLOD 0.8");
+			break;
+		case ObjectDetailVeryLow:
+			GetPlayerOwner().ConsoleCommand("MLOD 1.0");
+			break;
   }
   GetPlayerOwner().ConsoleCommand("set ini:HGame.harry ObjectDetail " $ string(GetPlayerOwner().ObjectDetail));
 }

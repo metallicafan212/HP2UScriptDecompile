@@ -27,7 +27,7 @@ state OpenUp
   AlterRotation();
   PlayAnim('PopOut');
   Sleep(25.0 / 30.0);
-  PlaySound(Sound'floor_grate_landing',SLOT_None,,False,1000000.0,RandRange(0.81,1.25));
+  PlaySound(Sound'floor_grate_landing',SLOT_None,,False,1000000.0,RandRange(0.80,1.20));
 }
 
 state Idle
@@ -39,7 +39,7 @@ state rattle
 begin:
   PlayAnim('rattle');
   FinishAnim();
-  PlayAnim('Idle',,0.41);
+  PlayAnim('Idle',,0.4);
   GotoState('Idle');
 }
 

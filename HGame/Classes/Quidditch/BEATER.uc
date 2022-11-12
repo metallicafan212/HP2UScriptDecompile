@@ -22,11 +22,11 @@ loop:
     {
       LoopAnim('Hold',,0.1);
     } else //{
-      if ( FRand() < 0.41 )
+      if ( FRand() < 0.4 )
       {
         LoopAnim('Fly_forward',,0.5);
       } else //{
-        if ( FRand() < 0.62 )
+        if ( FRand() < 0.6 )
         {
           LoopAnim('Look',,0.5);
         } else //{
@@ -34,7 +34,7 @@ loop:
           {
             LoopAnim('hover',,0.5);
           } else //{
-            if ( FRand() < 0.81 )
+            if ( FRand() < 0.8 )
             {
               if ( eHouse == HA_Gryffindor )
               {

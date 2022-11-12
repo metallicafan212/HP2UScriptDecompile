@@ -754,8 +754,8 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
   for(I = 0; I < nSilverKeys; I++)
   {
     Canvas.SetPos(nXPos,nYPos);
-    Canvas.DrawIcon(textureSilverKey,fWindowScaleFactor - 0.31);
-    nXPos += (28 * (fWindowScaleFactor - 0.31));
+    Canvas.DrawIcon(textureSilverKey,fWindowScaleFactor - 0.3);
+    nXPos += (28 * (fWindowScaleFactor - 0.3));
   }
   Canvas.Font = fontSave;
 }

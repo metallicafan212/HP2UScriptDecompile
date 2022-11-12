@@ -23,7 +23,7 @@ function PostBeginPlay()
   fxFlyParticleEffect = Spawn(fxFlyParticleEffectClass);
   fxFlyParticleEffect.SetLocation(Location);
   fxFlyParticleEffect.SetRotation(fxFlyParticleEffect.Default.Rotation);
-  CurrentDir = Normal(vector(Rotation) + Vec(0.0,0.0,0.41));
+  CurrentDir = Normal(vector(Rotation) + Vec(0.0,0.0,0.4));
   SetRotation(rotator(CurrentDir));
 }
 

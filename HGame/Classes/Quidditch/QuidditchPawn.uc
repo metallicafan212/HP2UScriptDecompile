@@ -352,7 +352,7 @@ function UpdateWoosh (float DeltaTime)
   if ( bCanWoosh && (Level.TimeSeconds > fNextTimeSafeToWoosh) && (fLastDistanceFromCamera >= 180) && (fDistanceFromCamera < 180) && (VSize(Velocity) > 75) )
   {
     Woosh = WooshSounds[Rand(NUM_WOOSH_SOUNDS)];
-    PlaySound(Woosh,SLOT_Interface,0.81,,500.0,RandRange(0.81,1.25));
+    PlaySound(Woosh,SLOT_Interface,0.8,,500.0,RandRange(0.80,1.20));
     fNextTimeSafeToWoosh = Level.TimeSeconds + GetSoundDuration(Woosh);
   }
   fLastDistanceFromCamera = fDistanceFromCamera;

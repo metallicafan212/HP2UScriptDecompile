@@ -68,9 +68,9 @@ function playHitSound()
     break;
     default:
   }
-  PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(HitSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
   hardHitSound = Sound'firecrab_hit';
-  PlaySound(hardHitSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(hardHitSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 function playFlipSound()
@@ -89,7 +89,7 @@ function playFlipSound()
     break;
     default:
   }
-  PlaySound(flipSound,SLOT_None,RandRange(0.81,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(flipSound,SLOT_None,RandRange(0.8,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 event TakeDamage (int Damage, Pawn EventInstigator, Vector HitLocation, Vector Momentum, name DamageType)
@@ -280,7 +280,7 @@ begin:
   if ( self.IsA('firecrabSmall') )
   {
     fFlipPushForceXY = 0.5 * Default.fFlipPushForceXY;
-    fFlipPushForceZ = 0.41 * Default.fFlipPushForceZ;
+    fFlipPushForceZ = 0.4 * Default.fFlipPushForceZ;
   }
   if ( BOOL_DEBUG_AI )
   {

@@ -87,7 +87,7 @@ function ShootFireballs()
   rotate_fireball = rotator(harrys_head - Location);
   rotate_fireball.Roll = 0;
   rotate_fireball.Pitch += (65536 * 10) / 4;
-  PlayerHarry.ShakeView(0.31,200.0,200.0);
+  PlayerHarry.ShakeView(0.3,200.0,200.0);
   // I = 0;
   // if ( I < NumFireballs )
   for(I = 0; I< NumFireballs; ++I) //for loop -AdamJD
@@ -104,7 +104,7 @@ function bounce (Vector HitNormal)
 {
   PlayerHarry.ClientMessage("In bounce.  Velocity :  " $ string(Velocity));
   SetLocation(OldLocation);
-  Velocity *= 0.41;
+  Velocity *= 0.4;
   Velocity = MirrorVectorByNormal(Velocity,HitNormal);
   fxFlyParticleEffect.SetRotation(rotator(Velocity));
   CurrentDir = vector(Rotation);

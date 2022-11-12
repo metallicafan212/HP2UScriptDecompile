@@ -398,7 +398,7 @@ state VendorTransaction
 	}
   
 	begin:
-		Vendor.LoopAnim('vendor_idle2',RandRange(0.81,1.25),0.2);
+		Vendor.LoopAnim('vendor_idle2',RandRange(0.80,1.20),0.2);
 }
 
 state MakePurchase
@@ -634,7 +634,7 @@ function DrawVendorBar (Canvas canvas)
 
 function float GetVendorBarX (Canvas canvas)
 {
-	return (canvas.SizeX / 2.0) - (canvas.GetHudScaleFactor() * (fVENDORBAR_W / 2.0));
+	return (canvas.SizeX / 2) - (canvas.GetHudScaleFactor() * (fVENDORBAR_W / 2));
 }
 
 function float GetVendorBarY (Canvas canvas)

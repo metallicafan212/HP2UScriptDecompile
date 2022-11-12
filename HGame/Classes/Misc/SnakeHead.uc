@@ -34,7 +34,7 @@ function PostBeginPlay()
   aClosest.Destroy();
   if ( TimeToNextShot[0] == 0 )
   {
-    TimeToNextShot[0] = RandRange(1.25,1.5);
+    TimeToNextShot[0] = RandRange(1.20,1.50);
   }
 }
 
@@ -80,13 +80,13 @@ function SpawnFireBall()
     switch (Rand(3))
     {
       case 0:
-      A.PlaySound(Sound'flame_shoot1',,0.6661);
+      A.PlaySound(Sound'flame_shoot1',,0.666);
       break;
       case 1:
-      A.PlaySound(Sound'flame_shoot2',,0.6661);
+      A.PlaySound(Sound'flame_shoot2',,0.666);
       break;
       case 2:
-      A.PlaySound(Sound'flame_shoot3',,0.6661);
+      A.PlaySound(Sound'flame_shoot3',,0.666);
       break;
       default:
     }

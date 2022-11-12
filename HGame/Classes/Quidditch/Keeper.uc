@@ -18,11 +18,11 @@ loop:
       LoopAnim('Fly_forward',,0.5);
     }
   } else {
-    if ( FRand() < 0.31 )
+    if ( FRand() < 0.3 )
     {
       LoopAnim('Fly_forward',,0.5);
     } else //{
-      if ( FRand() < 0.62 )
+      if ( FRand() < 0.6 )
       {
         LoopAnim('Look',,0.5);
       } else {

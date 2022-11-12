@@ -59,7 +59,7 @@ state statePickupItem
   
   function BeginState()
   {
-    PlayAnim('Pickup',1.0,0.151);
+    PlayAnim('Pickup',1.0,0.15);
   }
   
  begin:
@@ -79,7 +79,7 @@ state stateThrow
   
  begin:
   PlayAnim('throw',1.5);
-  Sleep(0.33751 / 1.5);
+  Sleep(0.3375 / 1.5);
   harry(Owner).ThrowCarryingActor();
   FinishAnim();
   harry(Owner).HarryAnimType =  AT_Replace;
@@ -118,7 +118,7 @@ state stateDuelingCast
 begin:
   harry(Owner).Cast();
   harry(Owner).HarryAnimType =  AT_Combine;
-  PlayAnim('duel_cast',,[TweenTime]0.31);
+  PlayAnim('duel_cast',,[TweenTime]0.3);
   FinishAnim();
   if ( harry(Owner).bAltFire == 0 )
   {
@@ -141,7 +141,7 @@ begin:
   }
   harry(Owner).Cast();
   harry(Owner).HarryAnimType =  AT_Combine;
-  PlayAnim('cast_Expelliarmus',,[TweenTime]0.31);
+  PlayAnim('cast_Expelliarmus',,[TweenTime]0.3);
   FinishAnim();
   harry(Owner).bReboundingSpells = False;
   if ( harry(Owner).bAltFire == 0 )
@@ -197,7 +197,7 @@ state stateKnockBack
     baseWand(harry(Owner).Weapon).CastSpell(harry(Owner).Weapon,,Class'spellSwordFire');
     harry(Owner).StopAiming();
   }
-  PlayAnim('KnockBack',,0.31);
+  PlayAnim('KnockBack',,0.3);
   FinishAnim();
   harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
@@ -277,7 +277,7 @@ state stateDrinkWiggenwell
   propTemp = HProp(FancySpawn(Class'WWellGreenBottle',harry(Owner),,,harry(Owner).Rotation));
   harry(Owner).ActorToCarry = propTemp;
   harry(Owner).AttachCarryActor('bip01 L Forearm');
-  PlayAnim('DrinkPotion',,[TweenTime]0.41);
+  PlayAnim('DrinkPotion',,[TweenTime]0.4);
   Sleep(0.5);
   switch (Rand(3))
   {
@@ -395,7 +395,7 @@ state stateReactRictusempra
   }
   
  begin:
-  PlayAnim('react_rictusempra',,[TweenTime]0.31);
+  PlayAnim('react_rictusempra',,[TweenTime]0.3);
   FinishAnim();
   harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )
@@ -421,7 +421,7 @@ state stateReactMimbleWimble
   }
   
  begin:
-  PlayAnim('mimblewimble',,[TweenTime]0.31);
+  PlayAnim('mimblewimble',,[TweenTime]0.3);
   FinishAnim();
   harry(Owner).HarryAnimType =  AT_Replace;
   if ( harry(Owner).PlayerIsAiming() )

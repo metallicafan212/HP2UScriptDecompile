@@ -784,7 +784,7 @@ begin:
   PlayAnim('UpToRun',1.0,0.2);
   DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
   Sleep(10.0 / 30.0);
-  PlaySound(Sound'whomp01',Slot_None,RandRange(0.81,1.0),,1000000.0,RandRange(0.81,1.25));
+  PlaySound(Sound'whomp01',Slot_None,RandRange(0.8,1.0),,1000000.0,RandRange(0.80,1.20));
   Sleep(5.0 / 30.0);
   DoStomp(True);
   FinishAnim();
@@ -822,7 +822,7 @@ begin:
   PlayAnim('Bite',1.0,0.2);
   PlaySound(Sound'Arragog_attack01',Slot_None,,,1000000.0,1.0);
   Sleep(8.0 / 30.0);
-  PlaySound(Sound'whomp01',Slot_None,RandRange(0.81,1.0),,1000000.0,RandRange(0.81,1.25));
+  PlaySound(Sound'whomp01',Slot_None,RandRange(0.8,1.0),,1000000.0,RandRange(0.80,1.20));
   FinishAnim();
   if ( GetHealth() < 0.5 )
   {
@@ -844,7 +844,7 @@ begin:
     }
   }
   PlayAnim('RearsUp',1.0,0.2);
-  PlaySound(Sound'Arragog_attack04',Slot_None,0.41,,1000000.0,0.5);
+  PlaySound(Sound'Arragog_attack04',Slot_None,0.4,,1000000.0,0.5);
   FinishAnim();
   LoopAnim('RearsUpLoop',1.0,0.2);
   PlaySound(Sound'Arragog_attack04',Slot_None,1.0,,1000000.0,0.5);
@@ -904,7 +904,7 @@ begin:
 		PlayAnim('PreAttack2',TempFloat,0.2);
 		PlaySound(Sound'Arragog_attack04',Slot_None,,,1000000.0,1.5 * TempFloat);
 		Sleep(31.0 / 30.0 / TempFloat);
-		PlaySound(Sound'whomp01',Slot_None,RandRange(0.81,1.0),,1000000.0,RandRange(0.81,1.25) * TempFloat);
+		PlaySound(Sound'whomp01',Slot_None,RandRange(0.8,1.0),,1000000.0,RandRange(0.80,1.20) * TempFloat);
 		Sleep(4.0 / 30.0 / TempFloat);
 		DoStomp(True);
 		PlaySound(Sound'Arragog_attack04',Slot_None,,,1000000.0,TempFloat);
@@ -915,7 +915,7 @@ begin:
 		PlayAnim('PreAttack3',TempFloat,0.2);
 		PlaySound(Sound'Arragog_attack06',Slot_None,,,1000000.0,0.75 * TempFloat);
 		Sleep(21.0 / 30.0 / TempFloat);
-		PlaySound(Sound'whomp01',Slot_None,RandRange(0.81,1.0),,1000000.0,RandRange(0.81,1.25) * TempFloat);
+		PlaySound(Sound'whomp01',Slot_None,RandRange(0.8,1.0),,1000000.0,RandRange(0.80,1.20) * TempFloat);
 		Sleep(4.0 / 30.0 / TempFloat);
 		DoStomp(True);
 		Sleep(12.0 / 30.0 / TempFloat);
@@ -931,22 +931,22 @@ function DoStomp (bool bBigStomp, optional bool bDeepStomp)
 {
   if ( bDeepStomp )
   {
-    PlayerHarry.ShakeView(1.75,200.0,200.0);
-    PlaySound(Sound'big_block_fall',Slot_None,,,1000000.0,RandRange(0.31,0.5));
-    PlaySound(Sound'Big_whomp4',Slot_None,,,1000000.0,RandRange(0.31,0.5));
+    PlayerHarry.ShakeView(1.70,200.0,200.0);
+    PlaySound(Sound'big_block_fall',Slot_None,,,1000000.0,RandRange(0.3,0.5));
+    PlaySound(Sound'Big_whomp4',Slot_None,,,1000000.0,RandRange(0.3,0.5));
   } else //{
     if ( bBigStomp )
     {
       PlayerHarry.ShakeView(0.69999999,200.0,200.0);
       if ( FRand() < 0.5 )
       {
-        PlaySound(Sound'Big_whomp4',Slot_None,,,1000000.0,RandRange(0.5,0.81));
+        PlaySound(Sound'Big_whomp4',Slot_None,,,1000000.0,RandRange(0.5,0.8));
       } else {
-        PlaySound(Sound'big_block_fall',Slot_None,,,1000000.0,RandRange(0.5,0.81));
+        PlaySound(Sound'big_block_fall',Slot_None,,,1000000.0,RandRange(0.5,0.8));
       }
     } else {
-      PlayerHarry.ShakeView(0.41,100.0,100.0);
-      PlaySound(Sound'lil_whomper_hit1',Slot_None,0.333,,1000000.0,RandRange(0.5,0.81));
+      PlayerHarry.ShakeView(0.4,100.0,100.0);
+      PlaySound(Sound'lil_whomper_hit1',Slot_None,0.333,,1000000.0,RandRange(0.5,0.8));
     }
   //}
 }
@@ -964,10 +964,10 @@ state stateShootSpell
   PlayAnim('UpToSpit',TempFloat,0.2);
   DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
   Sleep(11.0 / 30.0 / TempFloat);
-  PlaySound(Sound'whomp01',Slot_None,RandRange(0.81,1.0),,1000000.0,RandRange(0.81,1.25) * TempFloat);
+  PlaySound(Sound'whomp01',Slot_None,RandRange(0.8,1.0),,1000000.0,RandRange(0.80,1.20) * TempFloat);
   Sleep(4.0 / 30.0 / TempFloat);
   DoStomp(True);
-  Sleep(0.31 / TempFloat);
+  Sleep(0.3 / TempFloat);
   switch (SpellType)
   {
     // case 0:
@@ -1053,7 +1053,7 @@ state stateShootSpell
 			attackSpell.hitTarget = spellLocation;
 			if ( TempCount2 > 1 )
 			{
-			  Sleep(0.151);
+			  Sleep(0.15);
 			} else {
 			  Sleep(TimeBetweenSPELL_LINEShotsStart + (TimeBetweenSPELL_LINEShotsEnd - TimeBetweenSPELL_LINEShotsStart) * (1 - GetHealth()));
 			}
@@ -1073,7 +1073,7 @@ state stateShootSpell
     goto ('Begin');
   }
   PlayAnim('RearsUp',1.0,1.0);
-  PlaySound(Sound'Arragog_attack04',Slot_None,0.41,,1000000.0,0.5);
+  PlaySound(Sound'Arragog_attack04',Slot_None,0.4,,1000000.0,0.5);
   DesiredRotation.Yaw = rotator(PlayerHarry.Location - Location).Yaw;
   FinishAnim();
   LoopAnim('RearsUpLoop',1.0,0.2);
@@ -1094,37 +1094,37 @@ state stateHitByRictusempra
  begin:
   TempFloat = 0.44999999;
   PlayAnim('KnockBack',TempFloat,0.2);
-  PlaySound(Sound'pig_squeal1',Slot_None,1.0,,1000000.0,0.81);
+  PlaySound(Sound'pig_squeal1',Slot_None,1.0,,1000000.0,0.8);
   PlaySound(Sound'Basilisk_attack3',Slot_None,1.0,,1000000.0,0.89999998);
-  PlaySound(Sound'BasilAttackWarning00',Slot_None,1.0,,1000000.0,0.81);
+  PlaySound(Sound'BasilAttackWarning00',Slot_None,1.0,,1000000.0,0.8);
   SetTimer(0.5,False);
   Sleep(12.0 / 30.0 / TempFloat);
-  PlaySound(Sound'Basilisk_attack3',Slot_None,1.0,,1000000.0,0.81);
+  PlaySound(Sound'Basilisk_attack3',Slot_None,1.0,,1000000.0,0.8);
   DoStomp(True);
   // Sleep(0.01);
   
   //do and until -AdamJD
   do 
   { 
-	sleep(0.01); 
+	sleep(0.00001); 
   }
   until(AnimFrame >= 17.0 / 46.0);
   
   AnimRate = 0.75;
-  PlaySound(Sound'Arragog_attack05',Slot_None,1.0,,1000000.0,RandRange(0.81,1.25));
+  PlaySound(Sound'Arragog_attack05',Slot_None,1.0,,1000000.0,RandRange(0.80,1.20));
   // Sleep(0.01);
   
   //do and until -AdamJD
   do 
   { 
-	sleep(0.01); 
+	sleep(0.00001); 
   }
   until(AnimFrame >= 24.0 / 46.0);
   
   AnimRate = 1.0;
   FinishAnim();
   PlayAnim('React',1.0,0.2);
-  PlaySound(Sound'Arragog_attack02',Slot_None,1.0,,1000000.0,RandRange(0.81,1.0));
+  PlaySound(Sound'Arragog_attack02',Slot_None,1.0,,1000000.0,RandRange(0.80,1.00));
   Sleep(7.0 / 30.0);
   PlaySound(Sound'Arragog_attack02',Slot_None,RandRange(0.5,0.69999999),,1000000.0,RandRange(0.5,0.69999999));
   FinishAnim();
@@ -1139,13 +1139,13 @@ begin:
   PlaySound(Sound'pig_squeal1',Slot_None,1.0,,1000000.0,0.69999999);
   PlaySound(Sound'SS_ARA_Growl_0001b',Slot_None,1.0,,1000000.0);
   Sleep(1.0);
-  LoopAnim('RearsUpLoop',1.0,0.81);
+  LoopAnim('RearsUpLoop',1.0,0.8);
   PlaySound(Sound'pig_squeal1',Slot_None,1.0,,1000000.0,1.0);
   PlaySound(Sound'ss_ARG_BigDeathScream_05b',Slot_None,1.0,,1000000.0,1.29999995);
   Sleep(0.5);
   PlaySound(Sound'SS_ARA_Growl_0001b',Slot_None,0.5,,1000000.0);
-  PlaySound(Sound'pig_squeal1',Slot_None,0.5,,1000000.0,0.41);
-  TempFloat = 0.62;
+  PlaySound(Sound'pig_squeal1',Slot_None,0.5,,1000000.0,0.4);
+  TempFloat = 0.6;
   TempTime = 43.0 / 30.0 / TempFloat;
   PlayAnim('slump',TempFloat,0.2);
   Sleep(30.0 / 30.0);
@@ -1166,7 +1166,7 @@ state NipHarry
 begin:
   bBigBite = True;
   PlayAnim('KnockBack',1.0,0.2);
-  Sleep(0.31);
+  Sleep(0.3);
   nipLocation = Location + (Normal(PlayerHarry.Location - Location) * 100);
   SetLocation(nipLocation);
   GotoState('stateMovetoAttack');

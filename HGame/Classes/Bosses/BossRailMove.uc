@@ -181,7 +181,7 @@ event TakeDamage (int Damage, Pawn InstigatedBy, Vector HitLocation, Vector Mome
   } else {
     if ( RespondToDamage() )
     {
-      PlayAnim('prefly',1.0,0.31);
+      PlayAnim('prefly',1.0,0.3);
       if ( bFlyBackToVPosSave )
       {
         GotoState('stateHit2');
@@ -340,7 +340,7 @@ state ShortWait
 {
 begin:
   PlayAnim('prefly',2.0,0.25);
-  PlayDialogLoud("PC_PVS_happy01fx",,,,,RandRange(0.81,1.25));
+  PlayDialogLoud("PC_PVS_happy01fx",,,,,RandRange(0.80,1.20));
   DesiredRotation = Rotation;
   FinishAnim();
   PlayRunAnim();
@@ -391,25 +391,25 @@ state stateTaunt1
     switch (Rand(7))
     {
       case 0:
-      PlayDialogLoud("PC_PVS_happy02fx",,,,,RandRange(0.81,1.25));
+      PlayDialogLoud("PC_PVS_happy02fx",,,,,RandRange(0.80,1.20));
       break;
       case 1:
-      PlayDialogLoud("PC_PVS_happy03fx",,,,,RandRange(0.81,1.25));
+      PlayDialogLoud("PC_PVS_happy03fx",,,,,RandRange(0.80,1.20));
       break;
       case 2:
-      PlayDialogLoud("PC_PVS_happy04fx",,,,,RandRange(0.81,1.25));
+      PlayDialogLoud("PC_PVS_happy04fx",,,,,RandRange(0.80,1.20));
       break;
       case 3:
-      PlayDialogLoud("PC_PVS_happy05fx",,,,,RandRange(0.81,1.25));
+      PlayDialogLoud("PC_PVS_happy05fx",,,,,RandRange(0.80,1.20));
       break;
       case 4:
-      PlayDialogLoud("PC_PVS_happy06fx",,,,,RandRange(0.81,1.25));
+      PlayDialogLoud("PC_PVS_happy06fx",,,,,RandRange(0.80,1.20));
       break;
       case 5:
-      PlayDialogLoud("PC_PVS_Chal2Skurge_51",,,,,RandRange(0.81,1.25));
+      PlayDialogLoud("PC_PVS_Chal2Skurge_51",,,,,RandRange(0.80,1.20));
       break;
       case 6:
-      PlayDialogLoud("PC_PVS_Chal2Skurge_53",,,,,RandRange(0.81,1.25));
+      PlayDialogLoud("PC_PVS_Chal2Skurge_53",,,,,RandRange(0.80,1.20));
       break;
       default:
     }
@@ -473,7 +473,7 @@ begin:
     tempSound = Sound'peeves_throw2';
   }
   // PlaySound(tempSound,0,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
-  PlaySound( TempSound, SLOT_None, [Volume]RandRange(0.62, 1.0),, [Radius]95000, [Pitch]RandRange(0.8, 1.25),, false );
+  PlaySound( TempSound, SLOT_None, [Volume]RandRange(0.6, 1.0),, [Radius]95000, [Pitch]RandRange(0.8, 1.2),, false );
   ProjectileCount++;
   if ( ProjectileCount >= 3 )
   {
@@ -483,7 +483,7 @@ begin:
   {
     ThrowNInARow--;
     DesiredRotation.Yaw = rotator((PlayerHarry.Location - Location) * vect(1.00,1.00,0.00)).Yaw;
-    Sleep(0.31);
+    Sleep(0.3);
     goto ('Begin');
   }
   FinishAnim();
@@ -610,7 +610,7 @@ function PlayOuchSfx (bool bPlayTalkingOuches)
   }
   PlayDialogLoud(Str);
   // PlayDialogLoud("peeves_ow_long",0,,,,RandRange(0.81,1.25));
-  PlayDialogLoud( "peeves_ow_long", SLOT_None,,,, [Pitch]RandRange(0.81, 1.25) );
+  PlayDialogLoud( "peeves_ow_long", SLOT_None,,,, [Pitch]RandRange(0.80, 1.20) );
   iCurrentOuchSfx++;
   if ( iCurrentOuchSfx > 2 )
   {

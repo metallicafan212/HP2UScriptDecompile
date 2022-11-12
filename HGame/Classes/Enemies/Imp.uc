@@ -157,7 +157,7 @@ function playHitSound()
     HitSound = Sound'imp_ouch_01';
     break;
   }
-  PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(HitSound,SLOT_None,RandRange(0.6,1.0),,95000.0,RandRange(0.80,1.20),,False);
 }
 
 function playDieSound()
@@ -181,7 +181,7 @@ function playDieSound()
     HitSound = Sound'imp_die_01';
     break;
   }
-  PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(HitSound,SLOT_None,RandRange(0.6,1.0),,95000.0,RandRange(0.80,1.20),,False);
 }
 
 function playAttackSound()
@@ -211,13 +211,13 @@ function playAttackSound()
     HitSound = Sound'imp_attack_01';
     break;
   }
-  PlaySound(HitSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(HitSound,SLOT_None,RandRange(0.6,1.0),,95000.0,RandRange(0.80,1.20),,False);
 }
 
 function playThrownSound()
 {
   impThrownSound = Sound'imp_scream';
-  PlaySound(impThrownSound,SLOT_None,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
+  PlaySound(impThrownSound,SLOT_None,RandRange(0.6,1.0),,95000.0,RandRange(0.80,1.20),,False);
 }
 
 function playBiteSound()
@@ -238,7 +238,7 @@ function playBiteSound()
     biteSound = Sound'imp_bite_01';
     break;
   }
-  PlaySound(biteSound,SLOT_None,RandRange(0.62,1.0),,10000.0,RandRange(0.81,1.25),,False);
+  PlaySound(biteSound,SLOT_None,RandRange(0.6,1.0),,10000.0,RandRange(0.80,1.20),,False);
 }
 
 function bool HandleSpellFlipendo (optional baseSpell spell, optional Vector vHitLocation)
@@ -328,7 +328,7 @@ function Tick (float DeltaTime)
       {
         bPlayedWarning = True;
         impStruggleSound = Sound'imp_attack_01';
-        PlaySound(impStruggleSound,SLOT_Misc,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,True);
+        PlaySound(impStruggleSound,SLOT_Misc,RandRange(0.6,1.0),,95000.0,RandRange(0.80,1.20),,True);
         LoopAnim('struggle');
       }
       if ( timeStunned <= 0 )
@@ -464,7 +464,7 @@ begin:
   if ( VSize(PlayerHarry.Location - Location) < attackDistance + 12 )
   {
     PlayAnim('Attack',2.0);
-    Sleep(0.41);
+    Sleep(0.4);
     playBiteSound();
     if ( VSize(PlayerHarry.Location - Location) < attackDistance + 12 )
     {
@@ -616,7 +616,7 @@ state stateGetAwayFromHarry
 {
 begin:
   PlayAnim('Attack',2.0);
-  Sleep(0.41);
+  Sleep(0.4);
   PlayerHarry.TakeDamage(fDamageAmount,Pawn(Owner),Location,Velocity * 1,'Imp');
 }
 
@@ -667,7 +667,7 @@ state stateDied
 {
 begin:
   StopSound(impThrownSound,SLOT_None);
-  PlaySound(Sound'horklump_mushroom_head_explode',SLOT_None,RandRange(0.62,1.0),,70000.0,RandRange(0.81,1.25),,False);
+  PlaySound(Sound'horklump_mushroom_head_explode',SLOT_None,RandRange(0.6,1.0),,70000.0,RandRange(0.80,1.20),,False);
   if ( Rand(2) == 0 )
   {
     Spawn(Class'DustCloud01_tiny',self,,Location,Rotation);

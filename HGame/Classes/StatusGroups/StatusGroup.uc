@@ -355,11 +355,11 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	if (  !bUpperLeft )
 	{
 		si = GetStatusItem(classItem);
-		nHudX += (si.GetHudIconUSize() / 4.0);
-		nHudY += (si.GetHudIconVSize() / 4.0);
+		nHudX += (si.GetHudIconUSize() / 4);
+		nHudY += (si.GetHudIconVSize() / 4);
 	}
-	nCanvasHalfX = smParent.nCanvasSizeX / 2.0;
-	nCanvasHalfY = smParent.nCanvasSizeY / 2.0;
+	nCanvasHalfX = smParent.nCanvasSizeX / 2;
+	nCanvasHalfY = smParent.nCanvasSizeY / 2;
 	if ( nHudX >= nCanvasHalfX )
 	{
 		// fXVal = float(nHudX - nCanvasHalfX) / float(nCanvasHalfX);
@@ -368,12 +368,12 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	else 
 	{
 		// fXVal =  -1.0 - float(nHudX) / float(nCanvasHalfX);
-		fXVal =  -(1.0 - (nHudX / float(nCanvasHalfX))); //removed wrong float casts -AdamJD
+		fXVal =  -(1 - (nHudX / float(nCanvasHalfX))); //removed wrong float casts -AdamJD
 	}
 	if ( nHudY <= nCanvasHalfY )
 	{
 		// fYVal = 1.0 - float(nHudY) / float(nCanvasHalfY);
-		fYVal = 1.0 - (nHudY / float(nCanvasHalfY)); //removed wrong float casts -AdamJD
+		fYVal = 1 - (nHudY / float(nCanvasHalfY)); //removed wrong float casts -AdamJD
 	} 
 	else 
 	{
@@ -384,7 +384,7 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	if ( fCameraPitch > 32768 )
 	{
 		// fYVal = fYVal - 1.0 - fCameraPitch / 65536;
-		fYVal = fYVal - (1.0 - (fCameraPitch / 65536)); //added BODMAS -AdamJD
+		fYVal = fYVal - (1 - (fCameraPitch / 65536)); //added BODMAS -AdamJD
 	} 
 	else 
 	{

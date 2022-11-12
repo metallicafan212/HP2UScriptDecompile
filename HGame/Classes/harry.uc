@@ -731,7 +731,7 @@ function EctoRefAdd()
   {
     GroundSpeed = GroundEctoSpeed;
     HarryAnimSet = HARRY_ANIM_SET_ECTO;
-    PlaySound(Sound'HPSounds.Ch2Skurge.ecto_damage',SLOT_Interact,0.75f,,,,,True);
+    PlaySound(Sound'HPSounds.Ch2Skurge.ecto_damage',SLOT_Interact,,,,,,True);
   }
   iEctoRefCount++;
 }
@@ -1342,7 +1342,7 @@ state statePickupItem
   }
   HarryAnimType = AT_Combine;
   HarryAnimChannel.GotoState('statePickupItem');
-  PlayAnim('Pickup',1.0,0.151,[Type]HarryAnimType);
+  PlayAnim('Pickup',1.0,0.15,[Type]HarryAnimType);
   FinishAnim();
   Sleep(0.5);
   GotoState('PlayerWalking');
@@ -1410,7 +1410,7 @@ state statePotionMixingBegin
   
   begin:
   CurrIdleAnimName = GetCurrIdleAnimName();
-  LoopAnim(CurrIdleAnimName,,[TweenTime]0.41,,[Type]HarryAnimType);
+  LoopAnim(CurrIdleAnimName,,[TweenTime]0.4,,[Type]HarryAnimType);
 }
 
 state statePotionMixingStir
@@ -1450,7 +1450,7 @@ state statePotionMixingIdle
 {
 begin:
   CurrIdleAnimName = GetCurrIdleAnimName();
-  LoopAnim(CurrIdleAnimName,,[TweenTime]0.41,, [Type]HarryAnimType);
+  LoopAnim(CurrIdleAnimName,,[TweenTime]0.4,, [Type]HarryAnimType);
 }
 
 function GotoLocation (Vector newLoc)
@@ -1682,7 +1682,7 @@ state stateDead
   if (  !bInstantDeath )
   {
     PlayDeathEmoteSound();
-    Sleep(0.6661);
+    Sleep(0.666);
     MoveTo(FindFaintLocation());
   }
   Velocity = vect(0.00,0.00,0.00);
@@ -1914,7 +1914,7 @@ state wingspell
     HProp(focusActor).bStopLevitating = True;
   }
   PlayAnim('Cast');
-  Sleep(0.31);
+  Sleep(0.3);
   goto 'Loop';
 }
 
@@ -2436,12 +2436,12 @@ simulated function PlayFootStep()
   Volume = 1000.0;
   if ( FootRegion.Zone.bWaterZone )
   {
-    PlaySound(WaterStep,SLOT_Pain,1.0,False,Volume,1.0);
+    PlaySound(WaterStep,SLOT_Interact,1.0,False,Volume,1.0);
     return;
   } else //{
     if ( Fatness > 200 )
     {
-      PlaySound(Sound'Big_whomp2',SLOT_None,RandRange(0.41,0.69999999),False,500.0,RandRange(0.5,1.0));
+      PlaySound(Sound'Big_whomp2',SLOT_None,RandRange(0.4,0.69999999),False,500.0,RandRange(0.5,1.0));
       ShakeView(0.22,50.0,50.0);
       return;
     }
@@ -2521,7 +2521,7 @@ simulated function PlayFootStep()
   {
     Step = Footstep1;
   } else //{
-    if ( decision < 0.672 )
+    if ( decision < 0.67 )
     {
       Step = Footstep2;
     } else {
@@ -3349,7 +3349,7 @@ function PlayRunning()
 
 function PlayInAir()
 {
-  LoopAnim(AnimFalling,,[TweenTime]0.41,,[Type]HarryAnimType);
+  LoopAnim(AnimFalling,,[TweenTime]0.4,,[Type]HarryAnimType);
   ClientMessage(" animFalling = " $ string(AnimFalling));
 }
 
@@ -3372,7 +3372,7 @@ function PlayIdle()
     return;
   }
   CurrIdleAnimName = GetCurrIdleAnimName();
-  LoopAnim(CurrIdleAnimName,0.81,0.25,,HarryAnimType);
+  LoopAnim(CurrIdleAnimName,0.8,0.25,,HarryAnimType);
 }
 
 function PlayWaiting()
@@ -3385,13 +3385,13 @@ function PlayWaiting()
   if ( WaitingCount < 3 )
   {
     CurrIdleAnimName = GetCurrIdleAnimName();
-    LoopAnim(CurrIdleAnimName,0.41 + 0.41 * FRand(),0.25,,HarryAnimType);
+    LoopAnim(CurrIdleAnimName,0.40 + 0.40 * FRand(),0.25,,HarryAnimType);
     return;
   }
   if ( FRand() < 0.5 )
   {
     CurrIdleAnimName = GetCurrIdleAnimName();
-    LoopAnim(CurrIdleAnimName,0.41 + 0.41 * FRand(),0.25,,HarryAnimType);
+    LoopAnim(CurrIdleAnimName,0.40 + 0.40 * FRand(),0.25,,HarryAnimType);
   } else {
     WaitingCount = 0;
     CurrFidgetAnimName = GetCurrFidgetAnimName();
@@ -3399,7 +3399,7 @@ function PlayWaiting()
     {
       PlayAnim('look_frantic',1.0,0.2,HarryAnimType);
     } else {
-      PlayAnim(CurrFidgetAnimName,0.5 + 0.5 * FRand(),0.31,HarryAnimType);
+      PlayAnim(CurrFidgetAnimName,0.5 + 0.5 * FRand(),0.3,HarryAnimType);
     }
   }
 }
@@ -4276,14 +4276,14 @@ state PlayerWalking
 		else 
 		{
           bAnimTransition = True;
-          TweenToWaiting(0.41);
+          TweenToWaiting(0.40);
         }
       } 
 	  else if (bIsWalking)
       {
         if ( (MyAnimGroup == 'Waiting') || (MyAnimGroup == 'Landing') )
         {
-          TweenToWalking(0.41);
+          TweenToWalking(0.40);
           bAnimTransition = True;
         } 
 		else 
@@ -4296,7 +4296,7 @@ state PlayerWalking
         if ( (MyAnimGroup == 'Waiting') || (MyAnimGroup == 'Landing') )
         {
           bAnimTransition = True;
-          TweenToRunning(0.41);
+          TweenToRunning(0.40);
         } 
 		else 
 		{
@@ -4850,7 +4850,7 @@ state PlayerWalking
     Acceleration = vect(0.00,0.00,0.00);
     Velocity = vect(0.00,0.00,0.00);
     CurrIdleAnimName = GetCurrIdleAnimName();
-    LoopAnim(CurrIdleAnimName,,[TweenTime]0.41,,[Type]HarryAnimType);
+    LoopAnim(CurrIdleAnimName,,[TweenTime]0.40,,[Type]HarryAnimType);
   }
 }
 

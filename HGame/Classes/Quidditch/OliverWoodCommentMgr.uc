@@ -214,7 +214,7 @@ function InitCommentArray()
   
   for(C = 1; C < MAX_WOOD_COMMENT_NAMES; C++)
   {
-    Comments[C].Variations = MAX_WOOD_COMMENT_NAMES;
+    Comments[C].Variations = WC_MAX_COMMENT_VARIANTS;
 	for(V = 0; V < WC_MAX_COMMENT_VARIANTS; V++)
     {
       if ( Comments[C].Variant[V].DlgName != "" )

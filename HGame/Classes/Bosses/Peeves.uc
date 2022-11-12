@@ -368,8 +368,8 @@ begin:
 	{
 		vTargetDir = Normal(PlayerHarry.Location - Location);
 		DesiredRotation = rotator(vTargetDir);
-		PlayAnim('throw',1.25);
-		Sleep(0.681);
+		PlayAnim('throw',1.2);
+		Sleep(0.68);
 		if ( Rand(2) == 0 )
 		{
 			throwSound = Sound'peeves_throw';
@@ -379,9 +379,9 @@ begin:
 			throwSound = Sound'peeves_throw2';
 		}
 		// PlaySound(throwSound,0,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
-		PlaySound( throwSound, SLOT_None, [Volume]RandRange(0.62, 1.0),, [Radius]95000, [Pitch]RandRange(0.81, 1.25),, false );
+		PlaySound( throwSound, SLOT_None, [Volume]RandRange(0.6, 1.0),, [Radius]95000, [Pitch]RandRange(0.80, 1.20),, false );
 		SpawnSpell(Class'spellEcto',PlayerHarry);
-		Sleep(0.31);
+		Sleep(0.3);
 		// spellCount++;
 		// goto JL0014;
 	}
@@ -471,8 +471,8 @@ begin:
 		{
 			vTargetDir = Normal(PlayerHarry.Location - Location);
 			DesiredRotation = rotator(vTargetDir);
-			PlayAnim('throw',1.25);
-			Sleep(0.681);
+			PlayAnim('throw',1.2);
+			Sleep(0.68);
 			if ( Rand(2) == 0 )
 			{
 				throwSound = Sound'peeves_throw';
@@ -482,9 +482,9 @@ begin:
 				throwSound = Sound'peeves_throw2';
 		}
 		// PlaySound(throwSound,0,RandRange(0.62,1.0),,95000.0,RandRange(0.81,1.25),,False);
-		PlaySound( throwSound, SLOT_None, [Volume]RandRange(0.62, 1.0),, [Radius]95000, [Pitch]RandRange(0.81, 1.25),, false );
+		PlaySound( throwSound, SLOT_None, [Volume]RandRange(0.6, 1.0),, [Radius]95000, [Pitch]RandRange(0.80, 1.20),, false );
 		SpawnSpell(Class'spellEcto',PlayerHarry);
-		Sleep(0.31);
+		Sleep(0.3);
 		// spellCount++;
 		// goto JL00A8;
 		}

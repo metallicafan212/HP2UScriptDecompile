@@ -72,7 +72,7 @@ state stateShowing
       // SetPhysics(2);
 	  SetPhysics(PHYS_Falling);
     }
-    fGrowTime *= RandRange(0.2,0.31);
+    fGrowTime *= RandRange(0.20,0.30);
   }
   
   function Tick (float fTimeDelta)
@@ -222,7 +222,7 @@ state() stateHiding
       harry(aSlimedHPawn).WebAnimRefCountSub();
     }
     aSlimedHPawn = None;
-    fShrinkTime *= RandRange(0.81,1.20);
+    fShrinkTime *= RandRange(0.80,1.20);
     PlaySound(ShrinkSound,SLOT_None,0.25);
   }
   

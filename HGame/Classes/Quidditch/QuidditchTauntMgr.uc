@@ -124,7 +124,7 @@ function StartTaunts()
 function StopTaunts()
 {
   SetTimer(0.0,False);
-  if ( (Commentator != None) && (Commentator.fVolume > 0.62) )
+  if ( (Commentator != None) && (Commentator.fVolume > 0.6) )
   {
     Commentator.SetVolume(1.0);
   }
@@ -151,7 +151,7 @@ function bool SayATaunt()
     {
       bSeekersInRange = True;
       fTimeInRange = Level.TimeSeconds;
-      if ( (Commentator != None) && (Commentator.fVolume > 0.62) )
+      if ( (Commentator != None) && (Commentator.fVolume > 0.6) )
       {
         Commentator.SetVolume(0.64999998);
       }
@@ -160,7 +160,7 @@ function bool SayATaunt()
     if ( bSeekersInRange )
     {
       bSeekersInRange = False;
-      if ( (Commentator != None) && (Commentator.fVolume > 0.62) )
+      if ( (Commentator != None) && (Commentator.fVolume > 0.6) )
       {
         Commentator.SetVolume(1.0);
       }

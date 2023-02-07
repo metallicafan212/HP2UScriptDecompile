@@ -6,11 +6,20 @@ class baseHUD extends HUD
   Config(User);
 
 // Metallicafan212:	Add in the font imports
+/*
 #exec new TrueTypeFontFactory Name=HugeInkFont FontName="Times New Roman" Xpad=2 Height=24 AntiAlias=0 CharactersPerPage=32 
 #exec new TrueTypeFontFactory Name=BigInkFont FontName="Times New Roman" Height=18 AntiAlias=0 CharactersPerPage=32 
 #exec new TrueTypeFontFactory Name=MedInkFont FontName="Times New Roman" Height=14 AntiAlias=0 CharactersPerPage=32 
 #exec new TrueTypeFontFactory Name=SmallInkFont FontName="Times New Roman" Height=12 AntiAlias=0 CharactersPerPage=32 
 #exec new TrueTypeFontFactory Name=TinyInkFont FontName="Times New Roman" Height=10 AntiAlias=0 CharactersPerPage=32 
+*/
+
+// Metallicafan212:	Make the fonts native
+#exec new TrueTypeFontFactory Name=HugeInkFont 	FontName="Times New Roman" Height=24 AntiAlias=1 CharactersPerPage=32 RenderNative=1
+#exec new TrueTypeFontFactory Name=BigInkFont 	FontName="Times New Roman" Height=18 AntiAlias=1 CharactersPerPage=32 RenderNative=1
+#exec new TrueTypeFontFactory Name=MedInkFont 	FontName="Times New Roman" Height=14 AntiAlias=1 CharactersPerPage=32 RenderNative=1
+#exec new TrueTypeFontFactory Name=SmallInkFont FontName="Times New Roman" Height=12 AntiAlias=1 CharactersPerPage=32 RenderNative=1
+#exec new TrueTypeFontFactory Name=TinyInkFont 	FontName="Times New Roman" Height=10 AntiAlias=1 CharactersPerPage=32 RenderNative=1
 
 #exec new TrueTypeFontFactory Name=AsianFontHuge FontName="Gulim" Height=24 AntiAlias=0 RenderNative=1 
 #exec new TrueTypeFontFactory Name=AsianFontBig FontName="Gulim" Height=18 AntiAlias=0 RenderNative=1  

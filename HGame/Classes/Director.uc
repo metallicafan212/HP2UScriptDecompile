@@ -94,11 +94,13 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
   //}
 }
 
+/*
 function bool CutQuestion (string question)
 {
   CutErrorString = "Unanswered";
   return False;
 }
+*/
 
 function OnPlayerPossessed()
 {

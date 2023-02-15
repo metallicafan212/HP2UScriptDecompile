@@ -5701,6 +5701,7 @@ event PlayerInput (float DeltaTime)
 		  //log("No move while casting!");
 	  }
 	}
+	/*
 	if ( bOpenMap == 1 &&  !bMapQuickLook )
     {
 	  bMapQuickLook = True;
@@ -5711,6 +5712,7 @@ event PlayerInput (float DeltaTime)
       HPConsole(Player.Console).menuBook.ToggleMap();
       bMapQuickLook = False;
     }
+	*/
     if ( (bDrinkWiggenwell == 1 && IsInState('PlayerWalking') && Physics == PHYS_Walking &&  !IsA('BroomHarry')) || (bDrinkWiggenwell == 1 && IsInState('PlayerWalking') && IsA('BroomHarry')) )
     {
 	  DoDrinkWiggenwell();

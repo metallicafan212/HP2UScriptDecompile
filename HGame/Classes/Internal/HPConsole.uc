@@ -1197,73 +1197,106 @@ function drawBack (Canvas Canvas)
 
 function SetupLanguage()
 {
-  local string f1;
-  local string f2;
-  local string f3;
-  local string f4;
-  local int f1s;
-  local int f2s;
-  local int f3s;
-  local int f4s;
+	local string f1;
+	local string f2;
+	local string f3;
+	local string f4;
+	local int f1s;
+	local int f2s;
+	local int f3s;
+	local int f4s;
 
-  LanguageCode = GetLanguage();
-  Log("LanguageCode=" $ LanguageCode);
-  switch (Caps(LanguageCode))
-  {
-    case "SIM":
-    case "CHI":
-    case "TRA":
-    case "KOR":
-    case "THA":
-    case "JAP":
-    case "GRE":
-    case "RUS":
-    case "CHE":
-    case "CZE":
-    case "POL":
-    bUseAsianFont = True;
-    f1 = Localize("all","Font1Name","SAPFont");
-    f1s = int(Localize("all","Font1Size","SAPFont"));
-    f2 = Localize("all","Font2Name","SAPFont");
-    f2s = int(Localize("all","Font2Size","SAPFont"));
-    f3 = Localize("all","Font3Name","SAPFont");
-    f3s = int(Localize("all","Font3Size","SAPFont"));
-    f4 = Localize("all","Font4Name","SAPFont");
-    f4s = int(Localize("all","Font4Size","SAPFont"));
-    Log("Font1:" $ f1 $ ":" $ string(f1s));
-    Log("Font2:" $ f2 $ ":" $ string(f2s));
-    Log("Font3:" $ f3 $ ":" $ string(f3s));
-    Log("Font4:" $ f4 $ ":" $ string(f4s));
-    LocalBigFont = CreateNativeFont(f1,f1s);
-    LocalMedFont = CreateNativeFont(f2,f2s);
-    LocalSmallFont = CreateNativeFont(f3,f3s);
-    LocalTinyFont = CreateNativeFont(f4,f4s);
-    LocalIconMessageFont = LocalBigFont;
-    Root.Fonts[0] = LocalSmallFont;
-    Root.Fonts[1] = LocalSmallFont;
-    Root.Fonts[2] = LocalMedFont;
-    Root.Fonts[3] = LocalMedFont;
-    Root.Fonts[4] = LocalMedFont;
-    break;
-    case "ENG":
-    case "INT":
-    LocalBigFont = Font'HugeInkFont';
-    LocalMedFont = Font'BigInkFont';
-    LocalSmallFont = Font'MedInkFont';
-    LocalTinyFont = Font'SmallInkFont';
-    LocalIconMessageFont = LocalSmallFont;
-    break;
-    case "GER":
-    default:
-    LocalBigFont = Font'BigInkFont';
-    LocalMedFont = Font'MedInkFont';
-    LocalSmallFont = Font'SmallInkFont';
-    LocalTinyFont = Font'TinyInkFont';
-    LocalIconMessageFont = Font'SmallInkFont';
-    break;
-  }
-  IntMedFont = Font'BigInkFont';
-  SaveConfig();
+	LanguageCode = GetLanguage();
+	Log("LanguageCode=" $ LanguageCode);
+	
+	// Metallicafan212:	This is cursed as shit! Why they hard-coded everything, I'll never know
+	switch (Caps(LanguageCode))
+	{
+		/*
+		case "SIM":
+		case "CHI":
+		case "TRA":
+		case "KOR":
+		case "THA":
+		case "JAP":
+		case "GRE":
+		case "RUS":
+		case "CHE":
+		case "CZE":
+		case "POL":
+			bUseAsianFont = True;
+			f1 = Localize("all","Font1Name","SAPFont");
+			f1s = int(Localize("all","Font1Size","SAPFont"));
+			f2 = Localize("all","Font2Name","SAPFont");
+			f2s = int(Localize("all","Font2Size","SAPFont"));
+			f3 = Localize("all","Font3Name","SAPFont");
+			f3s = int(Localize("all","Font3Size","SAPFont"));
+			f4 = Localize("all","Font4Name","SAPFont");
+			f4s = int(Localize("all","Font4Size","SAPFont"));
+			Log("Font1:" $ f1 $ ":" $ string(f1s));
+			Log("Font2:" $ f2 $ ":" $ string(f2s));
+			Log("Font3:" $ f3 $ ":" $ string(f3s));
+			Log("Font4:" $ f4 $ ":" $ string(f4s));
+			LocalBigFont = CreateNativeFont(f1,f1s);
+			LocalMedFont = CreateNativeFont(f2,f2s);
+			LocalSmallFont = CreateNativeFont(f3,f3s);
+			LocalTinyFont = CreateNativeFont(f4,f4s);
+			LocalIconMessageFont = LocalBigFont;
+			Root.Fonts[0] = LocalSmallFont;
+			Root.Fonts[1] = LocalSmallFont;
+			Root.Fonts[2] = LocalMedFont;
+			Root.Fonts[3] = LocalMedFont;
+			Root.Fonts[4] = LocalMedFont;
+		break;
+		*/
+		case "ENG":
+		case "INT":
+			LocalBigFont = Font'HugeInkFont';
+			LocalMedFont = Font'BigInkFont';
+			LocalSmallFont = Font'MedInkFont';
+			LocalTinyFont = Font'SmallInkFont';
+			LocalIconMessageFont = LocalSmallFont;
+			break;
+	
+		case "GER":
+		case "USA":
+			LocalBigFont = Font'BigInkFont';
+			LocalMedFont = Font'MedInkFont';
+			LocalSmallFont = Font'SmallInkFont';
+			LocalTinyFont = Font'TinyInkFont';
+			LocalIconMessageFont = Font'SmallInkFont';
+			break;
+   
+		// Metallicafan212:	Treat all "unknown" extensions as localized
+		default:
+			bUseAsianFont = True;
+			f1 = Localize("all","Font1Name","SAPFont");
+			f1s = int(Localize("all","Font1Size","SAPFont"));
+			f2 = Localize("all","Font2Name","SAPFont");
+			f2s = int(Localize("all","Font2Size","SAPFont"));
+			f3 = Localize("all","Font3Name","SAPFont");
+			f3s = int(Localize("all","Font3Size","SAPFont"));
+			f4 = Localize("all","Font4Name","SAPFont");
+			f4s = int(Localize("all","Font4Size","SAPFont"));
+			Log("Font1:" $ f1 $ ":" $ string(f1s));
+			Log("Font2:" $ f2 $ ":" $ string(f2s));
+			Log("Font3:" $ f3 $ ":" $ string(f3s));
+			Log("Font4:" $ f4 $ ":" $ string(f4s));
+			LocalBigFont = CreateNativeFont(f1,f1s);
+			LocalMedFont = CreateNativeFont(f2,f2s);
+			LocalSmallFont = CreateNativeFont(f3,f3s);
+			LocalTinyFont = CreateNativeFont(f4,f4s);
+			LocalIconMessageFont = LocalBigFont;
+			Root.Fonts[0] = LocalSmallFont;
+			Root.Fonts[1] = LocalSmallFont;
+			Root.Fonts[2] = LocalMedFont;
+			Root.Fonts[3] = LocalMedFont;
+			Root.Fonts[4] = LocalMedFont;
+			break;
+	}
+	
+	IntMedFont = Font'BigInkFont';
+	SaveConfig();
 }
 
 event PostRender (Canvas Canvas)

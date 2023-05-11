@@ -1258,8 +1258,19 @@ function SetupLanguage()
 			LocalIconMessageFont = LocalSmallFont;
 			break;
 	
-		case "GER":
-		case "USA":
+		// Metallicafan212:	Missing non-localized languages
+		case "BRA":
+        case "DAN":
+        case "DUT":
+        case "FIN":
+        case "FRE":
+        case "GER":
+        case "ITA":
+        case "NOR":
+        case "POR":
+        case "SPA":
+        case "SWE":
+        case "USA":
 			LocalBigFont = Font'BigInkFont';
 			LocalMedFont = Font'MedInkFont';
 			LocalSmallFont = Font'SmallInkFont';
@@ -1278,10 +1289,25 @@ function SetupLanguage()
 			f3s = int(Localize("all","Font3Size","SAPFont"));
 			f4 = Localize("all","Font4Name","SAPFont");
 			f4s = int(Localize("all","Font4Size","SAPFont"));
+			
 			Log("Font1:" $ f1 $ ":" $ string(f1s));
 			Log("Font2:" $ f2 $ ":" $ string(f2s));
 			Log("Font3:" $ f3 $ ":" $ string(f3s));
 			Log("Font4:" $ f4 $ ":" $ string(f4s));
+			
+			// Metallicafan212:	Test if the localization failed
+			if(InStr(F1, "<?") != -1 || InStr(F2, "<?") != -1 || InStr(F3, "<?") != -1 || InStr(F4, "<?") != -1)
+			{
+				Log("Localization failed for language " $ LanguageCode $ ", switching to USA mode");
+				
+				LocalBigFont = Font'BigInkFont';
+				LocalMedFont = Font'MedInkFont';
+				LocalSmallFont = Font'SmallInkFont';
+				LocalTinyFont = Font'TinyInkFont';
+				LocalIconMessageFont = Font'SmallInkFont';
+				break;
+			}
+			
 			LocalBigFont = CreateNativeFont(f1,f1s);
 			LocalMedFont = CreateNativeFont(f2,f2s);
 			LocalSmallFont = CreateNativeFont(f3,f3s);

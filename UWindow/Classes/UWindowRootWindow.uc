@@ -459,6 +459,7 @@ function SetScale(float NewScale)
 		case "GER":
 		*/
 	
+		/*
 		//got updated between proto and retail -AdamJD
 		case "SIM":
 		case "CHI":
@@ -472,12 +473,17 @@ function SetScale(float NewScale)
 		case "CHE":
 		case "CZE":
 		break;
+		*/
+		
 		case "ENG":
 		case "INT":
+		case "USA":
 		case "GER":
-		
-		default:	
 			SetupFonts();
+			break;
+			
+		default:	
+			//SetupFonts();
 			break;
 	}
 

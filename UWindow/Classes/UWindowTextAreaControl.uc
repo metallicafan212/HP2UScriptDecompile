@@ -137,7 +137,7 @@ function AddText(string NewLine)
 	local int i;
 
 	TextArea[Head] = NewLine;
-	Head = (Head + 1)%BufSize;
+	Head = (Head + 1) % BufSize;
 
 	if(Head == Tail)
 		Tail = (Tail + 1)%BufSize;

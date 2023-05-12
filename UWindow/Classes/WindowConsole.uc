@@ -27,6 +27,10 @@ var bool				bUWindowActive;
 var bool				bQuickKeyEnable;
 var bool				bLocked;
 var bool				bLevelChange;
+
+// Metallicafan212:	Allow the menu to run exec functions
+var bool				bEnableExec;
+
 var string				OldLevel;
 var globalconfig byte	ConsoleKey;
 
@@ -317,8 +321,10 @@ state UWindow
 		// Metallicafan212:	Default to false so that we can run exec functions in menu
 		if(bShowConsole)
 			return true;
-		else
+		else if(bEnableExec)
 			return false;
+		else
+			return true;
 	}
 }
 
@@ -581,4 +587,5 @@ defaultproperties
 	ConsoleClass=class'UWindowConsoleWindow'
 	bShowConsole=False
 	bLevelChange=False
+	bEnableExec=true
 }

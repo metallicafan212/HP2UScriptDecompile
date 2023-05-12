@@ -56,8 +56,8 @@ function Paint( Canvas C, float X, float Y )
 		if( bLog )
 			Log( "*********NumLines:" $ j );
 			
-//ft this'll need work...  I've basically wrecked this class as far us multiple lines is concerned.  If anyone else needs this to support
-// more than one line in TextArea[], have me make a new class derived from this one.
+		//ft this'll need work...  I've basically wrecked this class as far us multiple lines is concerned.  If anyone else needs this to support
+		// more than one line in TextArea[], have me make a new class derived from this one.
 		Line--;
 		if (TempTail == Line)
 			break;

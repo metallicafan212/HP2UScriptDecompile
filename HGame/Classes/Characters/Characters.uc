@@ -729,10 +729,13 @@ function SayPopupLine (string strDialogID, string strCue, name nameAnim)
   soundCurrVendorPopup = Sound(DynamicLoadObject("AllDialog." $ strDialogID,Class'Sound'));
   if ( soundCurrVendorPopup != None )
   {
-    fSoundLen = GetSoundDuration(soundCurrVendorPopup);
-    PlaySound(soundCurrVendorPopup,,,,10000.0,,True);
-  } else {
-    fSoundLen = (Len(strDialog) * 0.01) + 3.0;
+      fSoundLen = GetSoundDuration(soundCurrVendorPopup);
+      // Omega: Slot_Talk plsssss
+      PlaySound(soundCurrVendorPopup,Slot_Talk,,,10000.0,,True);
+  } 
+  else 
+  {
+      fSoundLen = (Len(strDialog) * 0.01) + 3.0;
   }
   //UTPT didn't decompile this for some reason -AdamJD
   strDialog = HandleFacialExpression(strDialog, fSoundLen);

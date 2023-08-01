@@ -9,6 +9,7 @@ var bool bDebugEnabled;
 
 defaultproperties
 {
-    Version="021009_1205"
+	//AdamJD:	Got updated between retail and the demo/s
+    Version="021107_1452" //"021009_1205"
 
 }

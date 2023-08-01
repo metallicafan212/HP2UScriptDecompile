@@ -25,7 +25,8 @@ struct QuidGameResult
   var bool bWon;
 }; 
 
-const FALL_DAMAGE_DISTANCE= 512;
+//AdamJD:	Got updated between retail and the demo/s
+const FALL_DAMAGE_DISTANCE= 400; //512;
 const NUM_HARRY_ANIM_SETS= 6;
 enum enumHarryAnimSet {
   HARRY_ANIM_SET_MAIN,
@@ -321,6 +322,7 @@ event PreBeginPlay()
   AddToSpellBook(Class'spellFlipendo');
   AddToSpellBook(Class'spellLumos');
   AddToSpellBook(Class'spellAlohomora');
+  AddAllSpellsToSpellBook(); //AdamJD:	Got added after retail for the demo/s
   bNoSpellBookCheck = False;
   menuBook = HPConsole(Player.Console).menuBook;
 }
@@ -1701,7 +1703,9 @@ state stateDead
   loop:
   if ( bAllowHarryToDie )
   {
-    ConsoleCommand("LoadGame 0");
+    //ConsoleCommand("LoadGame 0");
+	//AdamJD:	Got updated between retail and the demo/s
+	Level.Game.RestartGame(); 
   }
   Sleep(0.1);
   goto ('Loop');
@@ -6182,7 +6186,8 @@ defaultproperties
 
     ShadowClass=Class'HarryShadow'
 
-    eaid="xa37dd45ffe10EU-0000029655-SD-00807cb3fa231144fe2e33ae4783feead2b8a73ff021fac326df0ef9753ab9cdf6573ddff0312fab0b0ff39779eaff312x"
+	//AdamJD:	Got updated between retail and the demo/s
+    eaid="xa37dd45ffe100bfffcc9753aabac325f07cb3fa231144fe2e33ae4783feead2b8a73ff021fac326df0ef9753ab9cdf6573ddff0312fab0b0ff39779eaff312x" //"xa37dd45ffe10EU-0000029655-SD-00807cb3fa231144fe2e33ae4783feead2b8a73ff021fac326df0ef9753ab9cdf6573ddff0312fab0b0ff39779eaff312x"
 
     HurtSound(0)=Sound'HPSounds.Har_Emotes.ouch1'
 

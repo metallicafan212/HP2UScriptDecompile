@@ -227,19 +227,22 @@ function Created()
   HousepointsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrest",Class'Texture'));
   HousepointsButton.OverTexture = HousepointsButton.UpTexture;
   HousepointsButton.DownTexture = HousepointsButton.OverTexture;
-  HousepointsButton.DownSound = soundTopClick;
+  //AdamJD:	Got updated after retail for the demo/s
+  HousepointsButton.DownSound = None; //soundTopClick;
   ChallengesButton = UWindowButton(CreateControl(Class'UWindowButton',146.0,114.0,64.0,64.0));
   ChallengesButton.ToolTipString = GetLocalFEString("InGameMenu_0044");
   ChallengesButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuChallenges",Class'Texture'));
   ChallengesButton.OverTexture = ChallengesButton.UpTexture;
   ChallengesButton.DownTexture = ChallengesButton.OverTexture;
-  ChallengesButton.DownSound = soundMiddleClick;
+  //AdamJD:	Got updated after retail for the demo/s
+  ChallengesButton.DownSound = None; //soundMiddleClick;
   DuelButton = UWindowButton(CreateControl(Class'UWindowButton',146.0,248.0,64.0,64.0));
   DuelButton.ToolTipString = GetLocalFEString("InGameMenu_0043");
   DuelButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWizardDuel",Class'Texture'));
   DuelButton.OverTexture = DuelButton.UpTexture;
   DuelButton.DownTexture = DuelButton.OverTexture;
-  DuelButton.DownSound = soundMiddleClick;
+  //AdamJD:	Got updated after retail for the demo/s
+  DuelButton.DownSound = None; //soundMiddleClick;
   FolioButton = UWindowButton(CreateControl(Class'UWindowButton',252.0,134.0,136.0,168.0));
   FolioButton.ToolTipString = GetLocalFEString("InGameMenu_0004");
   FolioButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuFolioButtonIdle",Class'Texture'));
@@ -251,13 +254,15 @@ function Created()
   MapButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2Maps",Class'Texture'));
   MapButton.OverTexture = MapButton.UpTexture;
   MapButton.DownTexture = MapButton.OverTexture;
-  MapButton.DownSound = soundMiddleClick;
+  //AdamJD:	Got updated after retail for the demo/s
+  MapButton.DownSound = None; //soundMiddleClick;
   QuidditchButton = UWindowButton(CreateControl(Class'UWindowButton',438.0,248.0,64.0,64.0));
   QuidditchButton.ToolTipString = GetLocalFEString("InGameMenu_0042");
   QuidditchButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuidditch",Class'Texture'));
   QuidditchButton.OverTexture = QuidditchButton.UpTexture;
   QuidditchButton.DownTexture = QuidditchButton.OverTexture;
-  QuidditchButton.DownSound = soundMiddleClick;
+  //AdamJD:	Got updated after retail for the demo/s
+  QuidditchButton.DownSound = None; //soundMiddleClick;
   QuitButton = UWindowButton(CreateControl(Class'UWindowButton',12.0,338.0,48.0,48.0));
   QuitButton.ToolTipString = GetLocalFEString("InGameMenu_0002");
   QuitButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuit",Class'Texture'));
@@ -312,7 +317,9 @@ function WindowDone (UWindowWindow W)
   {
     if ( ConfirmQuit.Result == ConfirmQuit.button1.Text )
     {
-      Root.DoQuitGame();
+      //Root.DoQuitGame();
+	  //AdamJD:	Got updated after retail for the demo/s
+	  FEBook(book).ShowDemoAds(20.0);
     }
     ConfirmQuit = None;
   }

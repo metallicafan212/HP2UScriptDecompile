@@ -102,7 +102,8 @@ event TakeDamage (int Damage, Pawn EventInstigator, Vector HitLocation, Vector M
 
 function PlayerCutCapture()
 {
-  if (  !IsInState('stayFlipped') )
+  //if (  !IsInState('stayFlipped') )
+  if (  !IsInState('stayFlipped') &&  !IsInState('DoFlip') ) //AdamJD:	Got updated after retail for the demo/s
   {
     GotoState('CutIdle');
   }

@@ -31,6 +31,10 @@ struct Background
 
 var UWindowSmallButton DismissButton;
 var HPMessageBox ConfirmQuitGame;
+
+//AdamJD:	Got added after retail for the demo/s
+var DemoAdDialog DemoAd;
+
 var baseFEPage MainPage;
 var baseFEPage ReportPage;
 var baseFEPage FolioPage;
@@ -455,6 +459,31 @@ function ExitFromGame()
   ChangePage(MainPage);
 }
 
+//AdamJD:	Got added after retail for the demo/s
+function DemoAdDialog CreateDemoAdDialog (float fWaitTime)
+{
+  local DemoAdDialog D;
+
+  D = DemoAdDialog(Root.CreateWindow(Class'DemoAdDialog',0.0,0.0,640.0,480.0,self));
+  D.Setup(fWaitTime);
+  D.OwnerWindow = self;
+  Root.ShowModal(D);
+  return D;
+}
+
+//AdamJD:	Got added after retail for the demo/s
+function ShowDemoAds (float fWaitTime)
+{
+  if ( HPConsole(Root.Console).bLocked )
+  {
+    return;
+  }
+  HPConsole(Root.Console).bQuickKeyEnable = False;
+  HPConsole(Root.Console).LaunchUWindow();
+  bShowBackground = False;
+  DemoAd = CreateDemoAdDialog(fWaitTime);
+}
+
 function WindowDone (UWindowWindow W)
 {
   bShowBackground = True;
@@ -471,6 +500,13 @@ function WindowDone (UWindowWindow W)
       CloseBook();
     }
     ConfirmQuitGame = None;
+  }
+  
+  //AdamJD:	Got added after retail for the demo/s
+  else if ( W == DemoAd )
+  {
+	DemoAd = None;
+	Root.DoQuitGame();
   }
 }
 
@@ -579,6 +615,12 @@ function WindowEvent (WinMessage Msg, Canvas C, float X, float Y, int Key)
 
 function bool KeyEvent (byte Key, byte Action, float Delta)
 {
+  //AdamJD:	Got added after retail for the demo/s
+  if ( DemoAd != None )
+  {
+    return DemoAd.KeyEvent(Key,Action,Delta);
+  }
+  
   if ( (Action == 1) && (Key == 118) )
   {
     if ( HPConsole(Root.Console).bShiftDown )

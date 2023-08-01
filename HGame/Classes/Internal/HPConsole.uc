@@ -24,6 +24,7 @@ var bool bBoostKeyPressed;
 var ParticleFX MouseParticle;
 var bool bShiftDown;
 var UWindowMessageBoxCW TestConfirm;
+var globalconfig bool bScreenShotsAllowed; //AdamJD:	Got added after retail for the demo/s
 var bool bInHubFlow;
 var string ResTimeOutSettings;
 var ShortCutWindow SCWindow;
@@ -520,6 +521,12 @@ function ToggleDebugMode()
     return;
   }
   bDebugMode =  !bDebugMode;
+  
+  //AdamJD:	Got added after retail for the demo/s
+  if ( bDebugMode )
+  {
+    bScreenShotsAllowed = True;
+  }
 }
 
 function SaveSelectedSlot()
@@ -972,7 +979,8 @@ event bool KeyEvent (EInputKey Key, EInputAction Action, float Delta)
 					bDownKeyDown = True;
 					break;
 				case EInputKey.IK_Insert:
-					if ( bDebugMode )
+					//if ( bDebugMode )
+					if ( bDebugMode || bScreenShotsAllowed ) //AdamJD:	Got updated between retail and the demo/s
 					{
 						Viewport.Actor.SShot();
 					}

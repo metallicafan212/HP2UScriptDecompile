@@ -739,6 +739,7 @@ function UpdatePosition (float fTimeDelta, optional bool bSkipWorldCheck)
 {
 	local float fTravelScalar;
 
+/*
 	if ( bSyncPositionWithTarget )
 	{
 		vDestPosition = CamTarget.Location + ((Vec( -fCurrLookAtDistance,0.0,0.0)) >> rCurrRotation);
@@ -747,6 +748,23 @@ function UpdatePosition (float fTimeDelta, optional bool bSkipWorldCheck)
 	{
 		CheckCollisionWithWorld();
 	}
+*/
+	//AdamJD:	Got updated after retail for the demo/s
+	if (  !bSkipWorldCheck )
+    {
+		if (  !CheckCollisionWithWorld() )
+		{
+			vDestPosition = CamTarget.Location + (Vec( -fCurrLookAtDistance,0.0,0.0) >> rCurrRotation);
+		}
+	} 
+	else 
+	{
+		if ( bSyncPositionWithTarget )
+		{
+			vDestPosition = CamTarget.Location + (Vec( -fCurrLookAtDistance,0.0,0.0) >> rCurrRotation);
+		}
+    }
+
 	if ( CurrentSet.fMoveTightness > 0.0 )
 	{
 		fTravelScalar = FMin(1.0,CurrentSet.fMoveTightness * fTimeDelta);
@@ -769,6 +787,9 @@ function bool CheckCollisionWithWorld()
 	local Vector LookFromPoint;
 	local Vector vCusionFromWorld;
 
+	//AdamJD:	Got added here after retail for the demo/s
+	vDestPosition = CamTarget.Location + (Vec( -CurrentSet.fLookAtDistance,0.0,0.0) >> rCurrRotation);
+
 	LookAtPoint = CamTarget.Location;
 	// if ( (CamTarget.aAttachedTo != None) && ((CamTarget.vOffset.X != byte(0)) || (CamTarget.vOffset.Y != byte(0)) || (CamTarget.vOffset.Z != byte(0))) )
 	if( CamTarget.aAttachedTo != None && (CamTarget.vOffset.x != 0 || CamTarget.vOffset.y != 0 || CamTarget.vOffset.z != 0) )
@@ -777,7 +798,8 @@ function bool CheckCollisionWithWorld()
 		if ( (aHitActor != None) && aHitActor.IsA('LevelInfo') )
 		{
 			LookAtPoint = HitLocation + (Normal(CamTarget.aAttachedTo.Location - HitLocation) * 5.0) + HitNormal;
-			PlayerHarry.ClientMessage("CamTarget HitLoc:" $ string(HitLocation) $ " HitNorm: " $ string(HitNormal));
+			//AdamJD:	Got commented out after retail for the demo/s
+			//PlayerHarry.ClientMessage("CamTarget HitLoc:" $ string(HitLocation) $ " HitNorm: " $ string(HitNormal));
 		}
 	}
 	vCusionFromWorld = Normal(LookAtPoint - vDestPosition) * 10.0;

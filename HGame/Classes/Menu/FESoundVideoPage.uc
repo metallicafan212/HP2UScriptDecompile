@@ -113,6 +113,7 @@ function Created()
   local float fFourthX;
   local float fEighthX;
   local float fSixteenthX;
+  local float fThirtySecondX; //AdamJD:	Got added after retail for the demo/s
   local int buttonWidth;
   local int buttonHeight;
   local int SliderWidth;
@@ -134,8 +135,13 @@ function Created()
   fFourthX = 640.0 / 4;
   fEighthX = 640.0 / 8;
   fSixteenthX = 640.0 / 16;
-  fLeftMargin = fEighthX;
-  fLeftMarginIndent = fLeftMargin + fEighthX;
+  fThirtySecondX = 640.0 / 32; //AdamJD:	Got added after retail for the demo/s
+  //fLeftMargin = fEighthX;
+  //fLeftMarginIndent = fLeftMargin + fEighthX;
+  //AdamJD:	Got updated between retail and the demo/s
+  fLeftMargin = fEighthX - fThirtySecondX;
+  fLeftMarginIndent = fLeftMargin + fEighthX + fThirtySecondX;
+  
   fRightMargin = fHalfX + fEighthX;
   fRightMarginIndent = fRightMargin + fSixteenthX;
   fLeftMargin += offsetX;

@@ -106,6 +106,9 @@ var bool bMapQuickLook;
 var transient int nMusicHandle;
 var transient bool bNeedToStartMusic;
 
+//AdamJD:	From the demo/s
+var DemoAdDialog DemoAd;
+
 function SaveSelectedSlot()
 {
 }
@@ -785,9 +788,35 @@ function ExitFromGame()
   ChangePage(MainPage);
 }
 
+//AdamJD:	From the demo/s
+function DemoAdDialog CreateDemoAdDialog (float fWaitTime)
+{
+  local DemoAdDialog D;
+
+  D = DemoAdDialog(Root.CreateWindow(Class'DemoAdDialog',0.0,0.0,640.0,480.0,self));
+  D.Setup(fWaitTime);
+  D.OwnerWindow = self;
+  Root.ShowModal(D);
+  return D;
+}
+
+//AdamJD:	From the demo/s
+function ShowDemoAds (float fWaitTime)
+{
+  if ( HPConsole(Root.Console).bLocked )
+  {
+    return;
+  }
+  HPConsole(Root.Console).bQuickKeyEnable = False;
+  HPConsole(Root.Console).LaunchUWindow();
+  bShowBackground = False;
+  DemoAd = CreateDemoAdDialog(fWaitTime);
+}
+
 function WindowDone (UWindowWindow W)
 {
   bShowBackground = True;
+  
   if ( W == ConfirmQuitGame )
   {
     if ( ConfirmQuitGame.Result == ConfirmQuitGame.button1.Text )
@@ -801,6 +830,13 @@ function WindowDone (UWindowWindow W)
       CloseBook();
     }
     ConfirmQuitGame = None;
+  }
+  
+  //AdamJD:	From the demo/s
+  else if ( W == DemoAd )
+  {
+    DemoAd = None;
+    Root.DoQuitGame();
   }
 }
 
@@ -950,6 +986,12 @@ function TogglePauseMenu()
 //					Imagine fucking hard binding the controls, it actually takes MORE effort
 function bool KeyEvent (byte Key, byte Action, float Delta)
 {
+	//AdamJD:	From the demo/s
+	if ( DemoAd != None )
+	{
+		return DemoAd.KeyEvent(Key,Action,Delta);
+	}
+
 	// Metallicafan212: Fix the input page lmao
 	if ( curPage != None )
 	{

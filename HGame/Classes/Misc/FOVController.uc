@@ -1,6 +1,7 @@
 //================================================================================
 // FOVController.
 //================================================================================
+// Omega: Fix the desired fov issue
 
 class FOVController extends Actor;
 
@@ -15,44 +16,62 @@ var float CurTime;
 var harry PlayerHarry;
 var bool bEaseTo;
 
+// Omega: So we can cache it
+var float OGDesiredFOV;
+
 function float EaseTo (float t)
 {
 	if ( t <= 0 )
 	{
 		return 0.0;
-	} 
-	else if ( t < 1 - 0.29289323 )
-    {
-      return EaseFromM * t + 0;
-    } 
-	else if ( t < 1.0 )
-    {
-        return 1.0 - 2.0 * (1.0 - t) * (1.0 - t);
-    } 
-	else 
+	}
+	else
+	if ( t < 1 - 0.29289323 )
 	{
-        return 1.0;
-    }
+		return 1.1715734 * t + 0;
+	}
+	else
+	if ( t < 1.0 )
+	{
+		return 1.0 - 2.0 * (1.0 - t) * (1.0 - t);
+	}
+	else
+	{
+		return 1.0;
+	}
 }
 
-event BeginPlay()
+event BeginPlay ()
 {
 	Super.BeginPlay();
 	PlayerHarry = harry(Level.PlayerHarryActor);
+	// Omega: Grab it so we can reset it later
+	OGDesiredFOV = PlayerHarry.DesiredFOV;
 	DestroyAllFOVControllers();
 	FOVStart = PlayerHarry.FovAngle;
 }
 
 function Init (float SetFOVEnd, float SetTime, optional bool bInEaseTo)
 {
-	FOVTime 	= SetTime;
-	FOVEnd 		= SetFOVEnd;
+	FOVTime = SetTime;
+
+	// Omega: Dumbass hack. Treat 90 (unless the default here has been changed) as a code word to pull our configured value
+	if(SetFOVEnd == Default.FOVEnd)
+	{
+		//FOVEnd = SetFOVEnd;
+		FOVEnd = PlayerHarry.DefaultFOV;
+	}
+	else
+	{
+		FOVEnd = SetFOVEnd;
+	}
+
 	FOVStart 	= PlayerHarry.FovAngle;
 	bEaseTo 	= bInEaseTo;
 	PlayerHarry.ClientMessage("FOVController -> FOVStart: " $ string(FOVStart) $ " FOVEnd: " $ string(FOVEnd) $ " FOVTime: " $ string(FOVTime));
 }
 
-function DestroyAllFOVControllers()
+function DestroyAllFOVControllers ()
 {
 	local FOVController A;
 
@@ -65,16 +84,20 @@ function DestroyAllFOVControllers()
 	}
 }
 
-function CutBypass()
+function CutBypass ()
 {
-  Finish();
-  Super.CutBypass();
+	Finish();
+	Super.CutBypass();
 }
 
-function Finish()
+function Finish ()
 {
-	PlayerHarry.DesiredFOV 		= FOVEnd;
-	PlayerHarry.FovAngle 		= FOVEnd;
+	PlayerHarry.DesiredFOV = FOVEnd;
+	PlayerHarry.FovAngle = FOVEnd;
+
+	//PlayerHarry.DesiredFOV = OGDesiredFOV;
+	//PlayerHarry.FovAngle = PlayerHarry.DesiredFOV;
+
 	PlayerHarry.ClientMessage("FOVController -> Finish Called, Start: " $ string(FOVStart) $ " FOVEnd: " $ string(FOVEnd) $ " FOVTime: " $ string(FOVTime));
 	Destroy();
 }
@@ -89,19 +112,23 @@ auto state stateUpdateFOV
 			if ( bEaseTo )
 			{
 				PlayerHarry.DesiredFOV = FOVStart + (FOVEnd - FOVStart) * EaseTo(FMin(CurTime / FOVTime,1.0));
-			} 
+
+				//PlayerHarry.FovAngle = FOVStart + (FOVEnd - FOVStart) * EaseTo(FMin(CurTime / FOVTime,1.0));
+			}
 			else 
 			{
 				PlayerHarry.DesiredFOV += (FOVEnd - FOVStart) * FMin(fTimeDelta / FOVTime,1.0);
+
+				//PlayerHarry.FovAngle += (FOVEnd - FOVStart) * FMin(fTimeDelta / FOVTime,1.0); 
 			}
+
 			PlayerHarry.FovAngle = PlayerHarry.DesiredFOV;
-		} 
+		}
 		else 
 		{
 			Finish();
 		}
 	}
-  
 }
 
 defaultproperties
@@ -111,5 +138,4 @@ defaultproperties
     FOVEnd=90.00
 
     bHidden=True
-
 }

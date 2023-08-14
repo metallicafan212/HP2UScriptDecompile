@@ -12,43 +12,54 @@ var transient bool Triggered;
 var transient int SongHandle;
 var harry PlayerHarry;
 
-function PostBeginPlay()
+// Omega: Behavior restoration bool: Allow only one track at a time similar to stock
+var() bool bAllowOnlyOneTrack;
+
+function PostBeginPlay ()
 {
-// JL0014:
-  foreach AllActors(Class'harry',PlayerHarry)
-  {
-    // goto JL0014;
-	break;
-  }
+	foreach AllActors(Class'harry',PlayerHarry)
+	{
+		break;
+	}
 }
 
 function Activate (Actor Other, Pawn Instigator)
 {
-  ProcessTrigger();
+	ProcessTrigger();
 }
 
-function ProcessTrigger()
+function ProcessTrigger ()
 {
-  local NewMusicTrigger nmt;
-
-  if ( FadeOutAllSongs )
-  {
-    foreach AllActors(Class'NewMusicTrigger',nmt)
-    {
-      nmt.Triggered = False;
-    }
-    StopAllMusic(FadeOutTime);
-  } else {
-    if (  !Triggered )
-    {
-      Triggered = True;
-      SongHandle = PlayMusic(Song,FadeInTime);
-    }
-  }
+	local NewMusicTrigger nmt;
+	
+	// Metallicafan212:	This is ASSS
+	if ( FadeOutAllSongs && !Triggered)
+	{
+		foreach AllActors(Class'NewMusicTrigger',nmt)
+		{
+			nmt.Triggered = False;
+		}
+		StopAllMusic(FadeOutTime);
+	} 
+	//else 
+	//{
+	if (!Triggered && Song != "")
+	{
+		Triggered = True;
+		// Omega: Fade out all other tracks if we're using the old stock behavior
+		if(bAllowOnlyOneTrack)
+		{
+			StopAllMusic(FadeOutTime);
+		}
+		SongHandle = PlayMusic(Song,FadeInTime);
+	}
+	//}
 }
 
 defaultproperties
 {
     Texture=Texture'Engine.mu_icon'
-
+	
+	// Omega: added to match stock behavior
+	bAllowOnlyOneTrack=True
 }

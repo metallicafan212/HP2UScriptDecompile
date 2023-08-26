@@ -127,6 +127,10 @@ function Created()
 	HarryCardBmp.Register(self);
 	HarryCardBmp.bDisabled = True;
 	HarryCardBmp.bStretched = True;
+	
+	//AdamJD(2023):	Correct the Harry card image in widescreen
+	HarryCardBmp.WW = 128.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	HarryCardBmp.WH = 128.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
   
   
 	SmallCardBmp[0] = HGameButton(CreateWindow(Class'HGameButton',5.0,254,60.0,60.0));
@@ -584,6 +588,9 @@ function RepositionChildControls()
 		SmallCardBmp[i].WH = 60.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	}
 	
+	//AdamJD(2023):	Correct the Harry card image in widescreen
+	HarryCardBmp.WW = 128.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+	HarryCardBmp.WH = 128.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 }
 
 function HiliteCurrCard()
@@ -817,7 +824,10 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
 	Canvas.DrawShadowText(strCardCountBronze,colorOffWhite,colorBlack);
 	
 	nXPos = (BronzeButton.WinLeft + BronzeButton.WinWidth + 24) * fHWindowScaleFactor; 
-	nYPos = BronzeButton.WinTop * fWindowScaleFactor * HScale;
+	//nYPos = BronzeButton.WinTop * fWindowScaleFactor * HScale;
+	
+	//AdamJD(2023):	Scale the health bars near the bronze card button in widescreen
+	nYPos = (BronzeButton.WinTop / HScale) * fHWindowScaleFactor;
 	
 	for(I = 0; I < nBronzeHealthBars; i++)
 	{
@@ -827,7 +837,10 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
 	}
 	
 	nXPos = (SilverButton.WinLeft + SilverButton.WinWidth + 24) * fHWindowScaleFactor;
-	nYPos = SilverButton.WinTop * fWindowScaleFactor * HScale;
+	//nYPos = SilverButton.WinTop * fWindowScaleFactor * HScale;
+	
+	//AdamJD(2023):	Scale the keys near the silver card button in widescreen
+	nYPos = (SilverButton.WinTop / HScale) * fHWindowScaleFactor;
 	
 	for(I = 0; I < nSilverKeys; I++)
 	{

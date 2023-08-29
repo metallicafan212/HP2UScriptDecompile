@@ -63,7 +63,8 @@ var BaseHud HUD;
 //var bool bAlignToLeft;
 
 const FLY_TO_HUD_CAM_DIST= 150;
-const BASE_RESOLUTION_X= 640.0;
+const BASE_RESOLUTION_X = 640.0;
+const BASE_RESOLUTION_Y = 480.0;
 
 // Omega: Set up the 4:3 height transform on Y, and the X transform for our user configured HUD 4:3-ness
 // Note that this is defined in many of KW's classes unnecessarily, and removed in the widescreen mod from those files
@@ -539,7 +540,7 @@ function float GetScaleFactor (int nCanvasSizeX)
 {
 	local float fScale;
 
-	fScale = nCanvasSizeX / 640.0;
+	fScale = nCanvasSizeX / BASE_RESOLUTION_X;
 	return fScale;
 }
 
@@ -548,7 +549,7 @@ function float GetScaleFactorY (int nCanvasSizeY)
 {
 	local float fScale;
 
-	fScale = nCanvasSizeY / 480.0;
+	fScale = nCanvasSizeY / BASE_RESOLUTION_Y;
 	return fScale;
 }
 

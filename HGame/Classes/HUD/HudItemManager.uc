@@ -4,7 +4,8 @@
 
 class HudItemManager extends Actor;
 
-const BASE_RESOLUTION_X= 640.0;
+const BASE_RESOLUTION_X = 640.0;
+const BASE_RESOLUTION_Y = 480.0;
 
 // Omega: Alignment type
 // Holdover from StatusGroup's new code but can be used for new HUD items anyway, so I'll leave it coded in
@@ -43,7 +44,7 @@ function CheckHUDReferences()
 // Omega: Math functions start here:
 function float GetScaleFactor (Canvas Canvas)
 {
-	return Canvas.SizeX / 640.0;
+	return Canvas.SizeX / BASE_RESOLUTION_X;
 }
 
 // Omega: Y Scale:
@@ -51,7 +52,7 @@ function float GetScaleFactorY (int nCanvasSizeY)
 {
 	local float fScale;
 
-	fScale = nCanvasSizeY / 480.0;
+	fScale = nCanvasSizeY / BASE_RESOLUTION_Y;
 	return fScale;
 }
 

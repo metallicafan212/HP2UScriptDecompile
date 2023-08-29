@@ -28,7 +28,7 @@ var bool bRegisteredWithHud;
 event PostBeginPlay()
 {
 	Super.PostBeginPlay();
-	textureBarEmpty = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EnemyHealthEmpty",Class'Texture'));
+	textureBarEmpty = Texture(DynamicLoadObject(strBAR_EMPTY, Class'Texture'));
 }
 
 function Start (HChar EnemyIn)
@@ -39,19 +39,19 @@ function Start (HChar EnemyIn)
 	switch (EnemyIn.EnemyHealthBar)
 	{
 		case EnemyIn.EEnemyBar.EnemyBar_Aragog:
-			textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EnemyHealthAragog",Class'Texture'));
+			textureBarFull = Texture(DynamicLoadObject(strBAR_ARAGOG, Class'Texture'));
 			break;
 
 		case EnemyIn.EEnemyBar.EnemyBar_Basilisk:
-			textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EnemyHealthBasilisk",Class'Texture'));
+			textureBarFull = Texture(DynamicLoadObject(strBAR_BASILISK, Class'Texture'));
 			break;
   
 		case EnemyIn.EEnemyBar.EnemyBar_Duellist:
-			textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EnemyHealthWizard",Class'Texture'));
+			textureBarFull = Texture(DynamicLoadObject(strBAR_DUELLIST, Class'Texture'));
 			break;
 
 		case EnemyIn.EEnemyBar.EnemyBar_Peeves:
-			textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EnemyHealthPeeves",Class'Texture'));
+			textureBarFull = Texture(DynamicLoadObject(strBAR_PEEVES, Class'Texture'));
 			break;
    
 		case EnemyIn.EEnemyBar.EnemyBar_Seeker:
@@ -59,26 +59,26 @@ function Start (HChar EnemyIn)
 			{
 		  
 				case Seeker(EnemyIn).HouseAffiliation.HA_Gryffindor:
-					textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2_QuidBarGryf",Class'Texture'));
+					textureBarFull = Texture(DynamicLoadObject(strBAR_SEEKER_GRY, Class'Texture'));
 					break;
 		  
 				case Seeker(EnemyIn).HouseAffiliation.HA_Ravenclaw:
-					textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2_QuidBarRave",Class'Texture'));
+					textureBarFull = Texture(DynamicLoadObject(strBAR_SEEKER_RAV, Class'Texture'));
 					break;
 		
 				case Seeker(EnemyIn).HouseAffiliation.HA_Hufflepuff:
-					textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2_QuidBarHuff",Class'Texture'));
+					textureBarFull = Texture(DynamicLoadObject(strBAR_SEEKER_HUF, Class'Texture'));
 					break;
 		  
 				case Seeker(EnemyIn).HouseAffiliation.HA_Slytherin:
-					textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2_QuidBarSlyth",Class'Texture'));
+					textureBarFull = Texture(DynamicLoadObject(strBAR_SEEKER_SLY, Class'Texture'));
 					break;
 			}
 		break;
 		
 		default:
 			Log("ERROR: Missing enemy health enum");
-			textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EnemyHealthWizard",Class'Texture'));
+			textureBarFull = Texture(DynamicLoadObject(strBAR_DUELLIST, Class'Texture'));
 			break;
 	}
 	GotoState('DisplayEnemyHealth');
@@ -130,8 +130,8 @@ state DisplayEnemyHealth
   
 		fScaleFactor = GetScaleFactor(Canvas) * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 
-		fIconX = 4.0 * fScaleFactor;
-		fIconY = Canvas.SizeY - fScaleFactor * 110.0;
+		fIconX = fSCREEN_X  * fScaleFactor;
+		fIconY = Canvas.SizeY - fScaleFactor * fSCREEN_UP_FROM_BOTTOM_Y;
 
 		// Omega: Apply alignment and then the HUD scale
 		AlignXToLeft(Canvas, fIconX);
@@ -144,10 +144,10 @@ state DisplayEnemyHealth
 		fEnemyHealth = FClamp(fEnemyHealth,0.0,1.0);
 		fEmptyHealth = 1.0 - fEnemyHealth;
 
-		fSegmentWidth = fEnemyHealth * 116.0;
+		fSegmentWidth = fEnemyHealth * fBAR_W;
 
-		Canvas.SetPos(fIconX + 5 * fScaleFactor,fIconY + 83 * fScaleFactor);
-		Canvas.DrawTile(textureBarEmpty,fSegmentWidth * fScaleFactor,textureBarEmpty.VSize * fScaleFactor,0.0,0.0,fSegmentWidth,textureBarEmpty.VSize);
+		Canvas.SetPos(fIconX + fBAR_START_X * fScaleFactor,fIconY + fBAR_START_Y * fScaleFactor);
+		Canvas.DrawTile(textureBarEmpty, fSegmentWidth * fScaleFactor, textureBarEmpty.VSize * fScaleFactor, 0.0, 0.0, fSegmentWidth, textureBarEmpty.VSize);
 
 		if ( fEnemyHealth <= 0.0 )
 		{

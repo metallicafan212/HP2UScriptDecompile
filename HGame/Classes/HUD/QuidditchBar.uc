@@ -31,10 +31,10 @@ var float fFlashCurrSeconds;
 event PostBeginPlay()
 {
     Super.PostBeginPlay();
-    textureBarEmpty = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2_QuidBarEmpty", class'Texture'));
-    textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2_QuidBarFull", class'Texture'));
-    textureBarGold = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2QuidditchBarGold", class'Texture'));
-    textureBarWhite = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2QuidditchBarWhite", class'Texture'));
+    textureBarEmpty = Texture(DynamicLoadObject(strBAR_EMPTY, class'Texture'));
+    textureBarFull = Texture(DynamicLoadObject(strBAR_FULL, class'Texture'));
+    textureBarGold = Texture(DynamicLoadObject(strBAR_GOLD, class'Texture'));
+    textureBarWhite = Texture(DynamicLoadObject(strBAR_WHITE, class'Texture'));
 
     CheckHUDReferences();
 }
@@ -156,8 +156,8 @@ state DisplayQBar
 
         //fIconX = Canvas.SizeX - (fScaleFactor * 132.0);
         // Omega: Fix the X size being dependent on height a bit
-        fIconX = Canvas.SizeX - (fScaleWithoutH * 132.0);
-        fIconY = Canvas.SizeY - (fScaleFactor * 80.0);
+        fIconX = Canvas.SizeX - (fScaleWithoutH * fSCREEN_OVER_FROM_RIGHT_X);
+        fIconY = Canvas.SizeY - (fScaleFactor * fSCREEN_UP_FROM_BOTTOM_Y);
 
 		// Omega: Apply alignment and then the HUD scale
 		AlignXToRight(Canvas, fIconX);
@@ -179,7 +179,7 @@ state DisplayQBar
         fFullRatio = FClamp(fFullRatio, 0.0, 1.0);
 
         Canvas.DrawColor = GetBarDrawColor();
-        fSegmentWidth = fFullRatio * 117.0;
+        fSegmentWidth = fFullRatio * fBAR_W;
 
         Canvas.SetPos(fIconX + (4.0 * fScaleFactor), fIconY + (52.0 * fScaleFactor));
 

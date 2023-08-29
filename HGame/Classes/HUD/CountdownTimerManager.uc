@@ -5,9 +5,9 @@
 
 class CountdownTimerManager extends HudItemManager;
 
-//const fFULL_BAR_W= 118.0;
-//const fTIMER_EMPTY_H= 58.0;
-//const fTIMER_EMPTY_W= 205.0;
+const fFULL_BAR_W= 118.0;
+const fTIMER_EMPTY_H= 58.0;
+const fTIMER_EMPTY_W= 205.0;
 //const strTIMER_BAR_EMPTY= "HP2_Menu.Icon.HP2EmptyBar";
 //const strTIMER_BAR_FULL= "HP2_Menu.Icon.HP2Timer";
 var(TimerVisual) Texture textureTimerEmpty;
@@ -57,8 +57,8 @@ function DrawCountdown (Canvas Canvas)
 
 	// Omega: Height shouldn't be part of this
 	//Ox = Canvas.SizeX - 8 * fScaleFactor - 205.0 * fScaleFactor;
-	Ox = Canvas.SizeX - 8 * fScaleFactor - 205.0 * fScaleFactorNoH;
-	Oy = Canvas.SizeY - 8 * fScaleFactor - 58.0 * fScaleFactor;
+	Ox = Canvas.SizeX - 8 * fScaleFactor - fFULL_BAR_W * fScaleFactorNoH;
+	Oy = Canvas.SizeY - 8 * fScaleFactor - fTIMER_EMPTY_H * fScaleFactor;
 	
 	// Omega: Apply alignment and then the HUD scale
 	AlignXToRight(Canvas, Ox);
@@ -68,7 +68,7 @@ function DrawCountdown (Canvas Canvas)
 	Canvas.DrawIcon(textureTimerEmpty,fScaleFactor);
 
 	fFullRatio = fCountdownTime / GetTimerDuration();
-	fSegmentWidth = fFullRatio * 118.0;
+	fSegmentWidth = fFullRatio * fFULL_BAR_W;
 
 	Canvas.SetPos(Ox + fFULL_OFFSET_X * fScaleFactor,Oy + fFULL_OFFSET_Y * fScaleFactor);
 	Canvas.DrawTile(textureFullBar,fSegmentWidth * fScaleFactor,textureFullBar.VSize * fScaleFactor,0.0,0.0,fSegmentWidth,textureFullBar.VSize);

@@ -1,7 +1,8 @@
 # HP2UScriptDecompile
 Working decompiles of the obfuscated UScript in HP2
-
 Requires Metallicafan212's engine to recompile these.
+
+The demo version can be found [here](https://github.com/metallicafan212/HP2UScriptDecompile/tree/Demo-Version).  
 
 ## Compiling yourself
 To compile yourself, download the repo and add these folders to your game directiory (above System).

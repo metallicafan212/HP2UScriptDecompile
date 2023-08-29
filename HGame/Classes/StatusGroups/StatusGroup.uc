@@ -3,7 +3,7 @@
 //================================================================================
 
 class StatusGroup extends Actor
-	Abstract; 
+	Abstract;
 
 enum EMenuProps 
 {
@@ -20,6 +20,19 @@ enum EEffectType
 	ET_Permanent,
 	ET_Menu
 };
+
+// Omega: Alignment type
+var enum EAlignmentType
+{
+	AT_None,
+	AT_Left,
+	AT_Right,
+	AT_Center,
+	AT_Arbitrary
+} AlignmentType;
+
+// Omega: Used for AT_Arbitrary, intended 0-1 percentage to multiply against Canvas.SizeX
+var float ScreenPctToAlignTo;
 
 var StatusGroup sgNext;
 var StatusItem siList;
@@ -39,12 +52,26 @@ var EMenuProps MenuProps;
 var bool bNormallyRenderInCutScene;
 var bool bCurrRenderInCutScene;
 
+// Omega: Our Harry and HUD vars
+var harry PlayerHarry;
+var BaseHud HUD;
+
+// Omega: New var for right-side alignment. There is no place this can be except in RenderHUDItemManager
+// It is not designed to be an overridable function
+//var bool bAlignToRight;
+// Omega: And left side
+//var bool bAlignToLeft;
+
 const FLY_TO_HUD_CAM_DIST= 150;
 const BASE_RESOLUTION_X= 640.0;
 
+// Omega: Set up the 4:3 height transform on Y, and the X transform for our user configured HUD 4:3-ness
+// Note that this is defined in many of KW's classes unnecessarily, and removed in the widescreen mod from those files
+// IF YOU MADE YOUR OWN GROUPS, MAKE SURE YOU FORWARD THESE CHANGES!!!
 function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
-	GetGroupFinalXY_2(bMenuMode,Canvas.SizeX,Canvas.SizeY,nIconWidth,nIconHeight,nOutX,nOutY);
+	// Omega: Pass in transformed Y scale (4:3 ratio)
+	GetGroupFinalXY_2(bMenuMode,Canvas.SizeX,(Canvas.SizeY / GetHScale(Canvas)),nIconWidth,nIconHeight,nOutX,nOutY);
 }
 
 function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
@@ -109,25 +136,7 @@ function StatusItem GetStatusItem (Class<StatusItem> classItem)
 			return siLoop.siNext;
 		}
 	}
-	
-	/*
-	//siLoop = siList;
-	if ( siLoop != None )
-	{
-		if ( siLoop.Class == classItem )
-		{
-			return siLoop;
-		}
-		if ( siLoop.siNext == None )
-		{
-			siLoop.siNext = Spawn(classItem);
-			siLoop.siNext.sgParent = self;
-			return siLoop.siNext;
-		}
-		siLoop = siLoop.siNext;
-		goto JL003A;
-	}
-	*/
+
 	Log("Error: StatusGroup::GetStatusItem- should not get to here");
 	return None;
 }
@@ -140,12 +149,26 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 	local bool bFirstIconInList;
 	local Color colorSave;
 	local float fScaleFactor;
+
+	local float fScaledScreen;
+	local float fCanvasX;
+
 	local bool bIncrementPosition;
+
+	// Omega: Check the validitiitieaiwidoawdhy of the hud 
+	if(HUD == None)
+	{
+		HUD = BaseHud(PlayerHarry.MyHud);
+	}
+
+	fScaledScreen = lerp(HUD.HUD4By3ScalePercent, Canvas.SizeX, Canvas.SizeX * GetHScale(Canvas));
+	fCanvasX = Canvas.SizeX;
 
 	nCurrX = 0;
 	nCurrY = 0;
 	bFirstIconInList = True;
 	fScaleFactor = GetScaleFactor(Canvas.SizeX);
+
 	if ( bMenuMode )
 	{
 		return;
@@ -166,6 +189,11 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 			if ( bFirstIconInList == True )
 			{
 				GetGroupCurrXY(bMenuMode, Canvas,siLoop.GetHudIconUSize(), siLoop.GetHudIconVSize(), nCurrX, nCurrY);
+				// Omega: Align the element based on our settings (Default no alignment)
+				AlignElement(Canvas, nCurrX);
+
+				nCurrX = (nCurrX * fScaledScreen/fCanvasX) + (0.5 * (fCanvasX - fScaledScreen));
+
 				bFirstIconInList = False;
 			}
 			if ( (siLoop.nCount > 0) || (siLoop.nCount == 0) && (siLoop.bDisplayWhenCountZero == True) )
@@ -181,7 +209,8 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 			{
 				if ( bDisplayHorizontally )
 				{
-					nCurrX += fScaleFactor * (siLoop.GetHudIconUSize() + nSpaceBetweenIcons);
+					//nCurrX += fScaleFactor * (siLoop.GetHudIconUSize() + nSpaceBetweenIcons);
+					nCurrX += (fScaleFactor * (siLoop.GetHudIconUSize() + nSpaceBetweenIcons)) * GetHScale(Canvas);
 				}
 				else
 				{
@@ -199,44 +228,7 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 			
 		}
 	}
-	
-	/*
-	siLoop = siList;
-	if ( siLoop != None )
-	{
-		if ( bMenuMode ||  !bMenuMode && (siLoop.bMenuModeOnly == False) )
-		{
-			if ( bFirstIconInList == True )
-			{
-				GetGroupCurrXY(bMenuMode,Canvas,siLoop.GetHudIconUSize(),siLoop.GetHudIconVSize(),nCurrX,nCurrY);
-				bFirstIconInList = False;
-			}
-			if ( (siLoop.nCount > 0) || (siLoop.nCount == 0) && (siLoop.bDisplayWhenCountZero == True) )
-			{
-				siLoop.DrawItem(Canvas,nCurrX,nCurrY,fScaleFactor);
-				bIncrementPosition = True;
-			} 
-			else 
-			{
-				bIncrementPosition = siLoop.bIncrementPosWhenCountZero;
-			}
-			if ( bIncrementPosition )
-			{
-				if ( bDisplayHorizontally )
-				{
-					nCurrX += fScaleFactor * byte((siLoop.GetHudIconUSize() + nSpaceBetweenIcons)) = );
-					nCurrY += fScaleFactor * byte((siLoop.GetHudIconVSize() + nSpaceBetweenIcons)) = );
-					// There are 2 jump destination(s) inside the last statement!
-					{
-						goto JL022E;
-					}
-				}
-			}
-		}
-		siLoop = siLoop.siNext;
-		goto JL00A0;
-	}
-	*/
+
 	Canvas.DrawColor = colorSave;
 }
 
@@ -279,6 +271,8 @@ function GetItemPosition (Class<StatusItem> classItem, bool bMenuMode, out int n
 	}
 	bFirstInList = True;
 	fScaleFactor = GetScaleFactor(nCanvasSizeX);
+
+
 	si = GetStatusItem(classItem);
 	if ( si == None )
 	{
@@ -310,33 +304,6 @@ function GetItemPosition (Class<StatusItem> classItem, bool bMenuMode, out int n
 		if (bDisplayJustFirstItem)
 		    break;
 	}
-	
-	/*
-	siLoop = siList;
-	if ( siLoop != None )
-	{
-		if ( bFirstInList == True )
-		{
-			GetGroupCurrXY_2(bMenuMode,nCanvasSizeX,nCanvasSizeY,siLoop.GetHudIconUSize(),siLoop.GetHudIconVSize(),nOutX,nOutY);
-			bFirstInList = False;
-		}
-		if ( siLoop.Class == si.Class )
-		{
-			goto JL01B5;
-		}
-		if ( bDisplayHorizontally )
-		{
-			nOutX += fScaleFactor * byte((siLoop.GetHudIconUSize() + nSpaceBetweenIcons)) = );
-			nOutY += fScaleFactor * byte((siLoop.GetHudIconVSize() + nSpaceBetweenIcons)) = );
-			// There are 1 jump destination(s) inside the last statement!
-			{
-			goto JL01B5;
-			}
-		}
-		siLoop = siLoop.siNext;
-		goto JL00B9;
-	}
-	*/
 }
 
 function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, optional bool bUpperLeft)
@@ -355,11 +322,11 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	if (  !bUpperLeft )
 	{
 		si = GetStatusItem(classItem);
-		nHudX += (si.GetHudIconUSize() / 4);
-		nHudY += (si.GetHudIconVSize() / 4);
+		nHudX += si.GetHudIconUSize() / 4.0;
+		nHudY += si.GetHudIconVSize() / 4.0;
 	}
-	nCanvasHalfX = smParent.nCanvasSizeX / 2;
-	nCanvasHalfY = smParent.nCanvasSizeY / 2;
+	nCanvasHalfX = smParent.nCanvasSizeX / 2.0;
+	nCanvasHalfY = smParent.nCanvasSizeY / 2.0;
 	if ( nHudX >= nCanvasHalfX )
 	{
 		// fXVal = float(nHudX - nCanvasHalfX) / float(nCanvasHalfX);
@@ -368,12 +335,12 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	else 
 	{
 		// fXVal =  -1.0 - float(nHudX) / float(nCanvasHalfX);
-		fXVal =  -(1 - (nHudX / float(nCanvasHalfX))); //removed wrong float casts -AdamJD
+		fXVal =  -(1.0 - (nHudX / float(nCanvasHalfX))); //removed wrong float casts -AdamJD
 	}
 	if ( nHudY <= nCanvasHalfY )
 	{
 		// fYVal = 1.0 - float(nHudY) / float(nCanvasHalfY);
-		fYVal = 1 - (nHudY / float(nCanvasHalfY)); //removed wrong float casts -AdamJD
+		fYVal = 1.0 - (nHudY / float(nCanvasHalfY)); //removed wrong float casts -AdamJD
 	} 
 	else 
 	{
@@ -384,17 +351,20 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	if ( fCameraPitch > 32768 )
 	{
 		// fYVal = fYVal - 1.0 - fCameraPitch / 65536;
-		fYVal = fYVal - (1 - (fCameraPitch / 65536)); //added BODMAS -AdamJD
+		fYVal = fYVal - (1.0 - (fCameraPitch / 65536)); //added BODMAS -AdamJD
 	} 
 	else 
 	{
 		// fYVal = fYVal + fCameraPitch / 65536;
 		fYVal = fYVal + (fCameraPitch / 65536); //added BODMAS -AdamJD
 	}
+	//cm("Status Manager: nHudX: " $nHudX$ " nCanvasHalfX: " $nCanvasHalfX);
 	vectReturn.X = fXVal;
 	vectReturn.Y = fYVal;
-	vectReturn.Z = FLY_TO_HUD_CAM_DIST;
+	vectReturn.Z = 150.0;
+	//cm("Status Manager: vectReturn before CameraToWorld: " $vectReturn);
 	vectReturn = smParent.PlayerHarry.CameraToWorld(vectReturn);
+	//cm("Status Manager: vectReturn after CameraToWorld: " $vectReturn);
 	return vectReturn;
 }
 
@@ -433,7 +403,7 @@ function bool IncrementCount (Class<StatusItem> classItem, int nNum)
 	if ( siUpdate != None )
 	{
 		siUpdate.IncrementCount(nNum);
-		OnCountIncremented();
+		OnCountIncremented(siUpdate);
 		return True;
 	}
 	return False;
@@ -447,14 +417,15 @@ function bool IncrementCountPotential (Class<StatusItem> classItem, int nNum)
 	if ( siUpdate != None )
 	{
 		siUpdate.IncrementCountPotential(nNum);
-		OnCountIncremented();
+		OnCountIncremented(siUpdate);
 		return True;
 	}
 	return False;
 }
 
-function OnCountIncremented()
+function OnCountIncremented(StatusItem Item)
 {
+
 }
 
 function float GetTimeRatio (float fCurrTime, float fTotalTime)
@@ -563,22 +534,156 @@ function CalcFlyXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeig
   }
 }
 
+// Omega: MATH FUNCTIONS. WOOO!
 function float GetScaleFactor (int nCanvasSizeX)
 {
 	local float fScale;
 
-	fScale = nCanvasSizeX / BASE_RESOLUTION_X;
+	fScale = nCanvasSizeX / 640.0;
 	return fScale;
 }
 
+// Omega: Y Scale:
+function float GetScaleFactorY (int nCanvasSizeY)
+{
+	local float fScale;
+
+	fScale = nCanvasSizeY / 480.0;
+	return fScale;
+}
+
+// Omega: Ratio of widths
+function float GetHScale(Canvas Canvas)
+{
+	return (4.0 / 3.0) / (float(Canvas.SizeX) / float(Canvas.SizeY));
+}
+
+// Omega: Canvas-less version. Casts to float immediately due to the parameters being floats
+function float floatGetHScale(float x, float y)
+{
+	return (4.0 / 3.0) / (x / y);
+}
+
+// Omega: Adjusted scale depending on your HUD4By3ScalePercent value, to help provide correct locations
+// On scaled element groups
+function float GetHAdjustedScale(Canvas Canvas)
+{
+	local float hScale;
+	hScale = GetHScale(Canvas);
+	// Omega: Return a corrected ratio for the hScale depending on our 4:3-ness
+	return lerp(HUD.HUD4By3ScalePercent, hScale, 1.0);
+}
+
+// Omega: Main alignment functionality, passes off to other functions
+function AlignElement(Canvas Canvas, out int nOutX)
+{
+	Switch(AlignmentType)
+	{
+		Case AT_None:
+			return;
+		Case AT_Left:
+			AlignXToLeft(Canvas, nOutX);
+			return;
+		Case AT_Right:
+			AlignXToRight(Canvas, nOutX);
+			return;
+		Case AT_Center:
+			AlignXToCenter(Canvas, nOutX);
+			return;
+		Case AT_Arbitrary:
+			AlignXArbitrary(Canvas, nOutX);
+			return;
+		default:
+			return;
+	}
+}
+
+// Omega: Align ourselves to the right side of the screen
+function AlignXToRight(Canvas Canvas, out int nOutX)
+{
+	nOutX = Canvas.SizeX - ((Canvas.SizeX - nOutX) * GetHAdjustedScale(Canvas));
+}
+
+// Omega: Much simpler for the left:
+function AlignXToLeft(Canvas Canvas, out int nOutX)
+{
+	nOutX = nOutX * GetHAdjustedScale(Canvas);
+}
+
+function AlignXToCenter(Canvas Canvas, out int nOutX)
+{
+	//nOutX = (Canvas.SizeX * 0.5) - (((Canvas.SizeX * 0.5) - nOutX) * GetHAdjustedScale(Canvas));
+	nOutX = (Canvas.SizeX * 0.5) - (((Canvas.SizeX * 0.5) - nOutX) * GetHScale(Canvas));
+}
+
+function AlignXArbitrary(Canvas Canvas, out int nOutX)
+{
+	nOutX = (Canvas.SizeX * ScreenPctToAlignTo) - (((Canvas.SizeX * ScreenPctToAlignTo) - nOutX) * GetHAdjustedScale(Canvas));
+}
+
+// Omega: Canvas-less versions. I don't think much use can come of these since the functions intentionally get lied to...
+function float NoCanvasGetHAdjustedScale(int nCanvasSizeX, int nCanvasSizeY)
+{
+	local float hScale;
+	hScale = floatGetHScale(nCanvasSizeX, nCanvasSizeY);
+	// Omega: Return a corrected ratio for the hScale depending on our 4:3-ness
+	return lerp(HUD.HUD4By3ScalePercent, hScale, 1.0);
+}
+
+function NoCanvasAlignXToRight(int nCanvasSizeX, int nCanvasSizeY, out int nOutX)
+{
+	nOutX = nCanvasSizeX - ((nCanvasSizeX - nOutX) * NoCanvasGetHAdjustedScale(nCanvasSizeX, nCanvasSizeY));
+}
+
+function NoCanvasAlignXToLeft(int nCanvasSizeX, int nCanvasSizeY, out int nOutX)
+{
+	nOutX = nOutX * NoCanvasGetHAdjustedScale(nCanvasSizeX, nCanvasSizeY);
+}
+
+// Omega: Used to determine horizontal offsets so they match their relative 4:3 offset
+function float GetCanvasHHudScale(Canvas Canvas)
+{
+	local float fScaledWidth;
+	// Omega: Safety first!
+	if(HUD == None)
+	{
+		HUD = BaseHud(PlayerHarry.MyHud);
+	}
+
+	fScaledWidth = lerp(HUD.HUD4By3ScalePercent, Canvas.SizeX, Canvas.SizeX * GetHScale(Canvas));
+	return (4.0 / 3.0) / (fScaledWidth / float(Canvas.SizeY));
+}
+
+function float floatGetHHUDScale(float x, float y)
+{
+	local float fScaledWidth;
+	// Omega: Safety first!
+	if(HUD == None)
+	{
+		HUD = BaseHud(PlayerHarry.MyHud);
+	}
+
+	fScaledWidth = lerp(HUD.HUD4By3ScalePercent, x, x * floatGetHScale(x,y));
+	return (4.0 / 3.0) / (fScaledWidth / y);
+}
+
+// Omega: Set up the HUD reference
 event PreBeginPlay()
 {
 	CurrEffectType = GameEffectType;
+	PlayerHarry = Harry(Level.playerHarryActor);
+}
+
+event PostBeginPlay()
+{
+	Super.PostBeginPlay();
+	// Omega: This fails on immediately spawned groups
+	HUD = BaseHud(PlayerHarry.MyHud);
 }
 
 auto state Idle
 {
-	function OnCountIncremented()
+	function OnCountIncremented(StatusItem SI)
 	{
 		if ( (CurrEffectType == ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
@@ -640,7 +745,7 @@ state EffectIn
 		{
 			return 255;
 		}
-  }
+  	}
   
 	function GetGroupCurrXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nX, out int nY)
 	{
@@ -669,7 +774,7 @@ state Hold
 		GotoState('EffectOut');
 	}
   
-	function OnCountIncremented()
+	function OnCountIncremented(StatusItem SI)
 	{
 		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
@@ -706,7 +811,7 @@ state EffectOut
 		}
 	}
   
-	function OnCountIncremented()
+	function OnCountIncremented(StatusItem SI)
 	{
 		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
 		{
@@ -759,4 +864,8 @@ defaultproperties
 
     // DrawType=0
 	DrawType=DT_None 
+
+	// Omega: Vars to change for specific groups
+	ScreenPctToAlignTo=0
+	AlignmentType=AT_None
 }

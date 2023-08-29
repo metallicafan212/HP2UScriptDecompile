@@ -4,11 +4,11 @@
 
 class StatusGroupHealth extends StatusGroup;
 
-function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
+/*function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
 	nOutX = 0;
 	nOutY = 0;
-}
+}*/
 
 function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
@@ -29,5 +29,6 @@ defaultproperties
     fTotalEffectOutTime=0.20
 
     GameEffectType=ET_Permanent
-
+	
+	AlignmentType=AT_Left
 }

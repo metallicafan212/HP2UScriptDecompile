@@ -31,10 +31,12 @@ var float fFlashCurrSeconds;
 event PostBeginPlay()
 {
     Super.PostBeginPlay();
-    textureBarEmpty = Texture(DynamicLoadObject(strBAR_EMPTY, class'Texture'));
-    textureBarFull = Texture(DynamicLoadObject(strBAR_FULL, class'Texture'));
-    textureBarGold = Texture(DynamicLoadObject(strBAR_GOLD, class'Texture'));
-    textureBarWhite = Texture(DynamicLoadObject(strBAR_WHITE, class'Texture'));
+    textureBarEmpty = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2_QuidBarEmpty", class'Texture'));
+    textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2_QuidBarFull", class'Texture'));
+    textureBarGold = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2QuidditchBarGold", class'Texture'));
+    textureBarWhite = Texture(DynamicLoadObject("HP2_Menu.Hud.HP2QuidditchBarWhite", class'Texture'));
+
+    CheckHUDReferences();
 }
 
 function Show(bool bShow)
@@ -68,6 +70,7 @@ function SetProgress(int nPercentFullIn, optional bool bShowWhite, optional floa
 event Destroyed()
 {
     HPHud(harry(Level.PlayerHarryActor).myHUD).RegisterQuidditchBar(None);
+	HPHud(HUD).RegisterQuidditchBar(None);
     Super.Destroyed();
 }
 
@@ -104,10 +107,13 @@ state DisplayQBar
         {
             if(Level.PlayerHarryActor.myHUD != None)
             {
-                HPHud(harry(Level.PlayerHarryActor).myHUD).RegisterQuidditchBar(self);
+				//HPHud(harry(Level.PlayerHarryActor).myHUD).RegisterQuidditchBar(self);
+				CheckHUDReferences();
+				HPHud(HUD).RegisterQuidditchBar(self);
                 bRegisteredWithHud = true;
             }
         }
+
 		if(fFlashCurrSeconds > 0)
         {
             fFlashCurrSeconds -= fDelta;
@@ -116,6 +122,7 @@ state DisplayQBar
         {
             fFlashCurrSeconds = fFlashTotalSeconds;
         }
+
         if(fFadeRedTotalSecs > 0)
         {
             if(fFadeRedCurrSecs >= fFadeRedTotalSecs)
@@ -133,15 +140,29 @@ state DisplayQBar
 	
     function RenderHudItemManager(Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
     {
-        local float fScaleFactor, fIconX, fIconY, fFullRatio, fSegmentWidth;
+        local float fScaleFactor, fFullRatio, fSegmentWidth, fScaleWithoutH;
+
+        // Omega: Define as ints, not floats
+        local int fIconX, fIconY;
 
         local Color colorSave;
         local bool empty;
 
+		CheckHUDReferences();
+
         colorSave = Canvas.DrawColor;
+        fScaleWithoutH = GetScaleFactor(Canvas);
         fScaleFactor = GetScaleFactor(Canvas) * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
-        fIconX = Canvas.SizeX - (fScaleFactor * fSCREEN_OVER_FROM_RIGHT_X);
-        fIconY = Canvas.SizeY - (fScaleFactor * fSCREEN_UP_FROM_BOTTOM_Y);
+
+        //fIconX = Canvas.SizeX - (fScaleFactor * 132.0);
+        // Omega: Fix the X size being dependent on height a bit
+        fIconX = Canvas.SizeX - (fScaleWithoutH * 132.0);
+        fIconY = Canvas.SizeY - (fScaleFactor * 80.0);
+
+		// Omega: Apply alignment and then the HUD scale
+		AlignXToRight(Canvas, fIconX);
+		fIconX = ApplyHUDScale(Canvas, fIconX);
+
         Canvas.SetPos(fIconX, fIconY);
 		
 		empty = !bFlashing || (fFlashCurrSeconds > fFlashTotalSeconds / 2);
@@ -153,15 +174,20 @@ state DisplayQBar
         {
             Canvas.DrawIcon(textureBarFull, fScaleFactor);
         }
+
         fFullRatio = float(nPercentFull) / 100.0;
         fFullRatio = FClamp(fFullRatio, 0.0, 1.0);
+
         Canvas.DrawColor = GetBarDrawColor();
-        fSegmentWidth = fFullRatio * fBAR_W;
-        Canvas.SetPos(fIconX + (fBAR_START_X * fScaleFactor), fIconY + (fBAR_START_Y * fScaleFactor));
+        fSegmentWidth = fFullRatio * 117.0;
+
+        Canvas.SetPos(fIconX + (4.0 * fScaleFactor), fIconY + (52.0 * fScaleFactor));
+
         if(empty)
         {
             Canvas.DrawTile(textureBarWhite, fSegmentWidth * fScaleFactor, textureBarWhite.VSize * fScaleFactor, 0.0, 0.0, fSegmentWidth, textureBarWhite.VSize);
         }
+
         Canvas.DrawColor = colorSave;
     }
 

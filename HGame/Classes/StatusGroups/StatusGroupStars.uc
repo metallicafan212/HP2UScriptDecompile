@@ -4,10 +4,10 @@
 
 class StatusGroupStars extends StatusGroup;
 
-function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
+/*function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
 	GetGroupFinalXY_2(bMenuMode, Canvas.SizeX, Canvas.SizeY, nIconWidth, nIconHeight, nOutX, nOutY);
-}
+}*/
 
 function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
@@ -39,4 +39,6 @@ defaultproperties
     fTotalEffectOutTime=0.20
 
     MenuProps=Menu_IfCurrentlyHaveAny
+	
+	AlignmentType=AT_Right
 }

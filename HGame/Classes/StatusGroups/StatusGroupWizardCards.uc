@@ -22,10 +22,10 @@ const nCARDTYPE_GOLD= 2;
 const nCARDTYPE_SILVER= 1;
 const nCARDTYPE_BRONZE= 0;
 
-function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
+/*function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
 	GetGroupFinalXY_2(bMenuMode, Canvas.SizeX, Canvas.SizeY, nIconWidth, nIconHeight, nOutX, nOutY);
-}
+}*/
 
 function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
@@ -415,4 +415,6 @@ defaultproperties
 	
 	// Metallicafan212:	Missing for some reason
 	MenuProps=Menu_Never
+	
+	AlignmentType=AT_Right
 }

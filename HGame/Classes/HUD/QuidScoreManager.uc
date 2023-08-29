@@ -24,7 +24,8 @@ enum OpponentHouse {
   Opponent_Slytherin
 };
 
-var harry PlayerHarry;
+// Omega: don't. We have the parent's data for it
+//var harry PlayerHarry;
 var int nGryffindorScore;
 var int nOpponentScore;
 var Texture textureOpponent;
@@ -45,139 +46,142 @@ var float fTicksPerSec;
 
 event PostBeginPlay()
 {
-  Super.PostBeginPlay();
-  textureHuff = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2HufflepuffCrestSm",Class'Texture'));
-  textureRaven = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2RavenclawCrestSm",Class'Texture'));
-  textureSlyth = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SlytherinCrestSm",Class'Texture'));
-  textureGryff = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrestSm",Class'Texture'));
-  textureTallyPointsIcon = Texture(DynamicLoadObject(strTALLY_POINTS_ICON,Class'Texture'));
-  textureOpponent = textureHuff;
+	Super.PostBeginPlay();
+	textureHuff = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2HufflepuffCrestSm",Class'Texture'));
+	textureRaven = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2RavenclawCrestSm",Class'Texture'));
+	textureSlyth = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SlytherinCrestSm",Class'Texture'));
+	textureGryff = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrestSm",Class'Texture'));
+	textureTallyPointsIcon = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2BigChallengeScore",Class'Texture'));
+	textureOpponent = textureHuff;
 }
 
 function Timer()
 {
-  foreach AllActors(Class'harry',PlayerHarry)
-  {
-    // goto JL0014;
-	break;
-  }
-  if ( PlayerHarry.myHUD != None )
-  {
-    HPHud(PlayerHarry.myHUD).RegisterQuidScoreManager(self);
-    SetTimer(0.0,False);
-  }
+	foreach AllActors(Class'harry',PlayerHarry)
+	{
+		// goto JL0014;
+		break;
+	}
+	if ( PlayerHarry.myHUD != None )
+	{
+		CheckHUDReferences();
+		HPHud(PlayerHarry.myHUD).RegisterQuidScoreManager(self);
+		SetTimer(0.0,False);
+	}
 }
 
 function StartQuidScore()
 {
-  SetTimer(0.2,True);
-  nGryffindorScore = 0;
-  nOpponentScore = 0;
-  GotoState('QuidScoreDisplay');
+	SetTimer(0.2,True);
+	nGryffindorScore = 0;
+	nOpponentScore = 0;
+	GotoState('QuidScoreDisplay');
 }
 
 function PauseQuidScore()
 {
-  GotoState('Idle');
+  	GotoState('Idle');
 }
 
 function ResumeQuidScore()
 {
-  GotoState('QuidScoreDisplay');
+  	GotoState('QuidScoreDisplay');
 }
 
 function TallyQuidScore()
 {
-  GotoState('Tally');
+  	GotoState('Tally');
 }
 
 function SetOpponent (OpponentHouse Opponent)
 {
-  switch (Opponent)
-  {
-    // case 0:
-	case Opponent_Gryffindor:
-		textureOpponent = textureGryff;
-		break;
-    // case 1:
-	case Opponent_Ravenclaw:
-		textureOpponent = textureRaven;
-		break;
-    // case 2:
-	case Opponent_Hufflepuff:
-		textureOpponent = textureHuff;
-		break;
-    // case 3:
-	case Opponent_Slytherin:
-		textureOpponent = textureSlyth;
-		break;
-    default:
-		Log("ERROR: Invalid opponent in QuidScoreManager");
-		textureOpponent = textureHuff;
-		break;
-  }
+	switch (Opponent)
+	{
+		// case 0:
+		case Opponent_Gryffindor:
+			textureOpponent = textureGryff;
+			break;
+		// case 1:
+		case Opponent_Ravenclaw:
+			textureOpponent = textureRaven;
+			break;
+		// case 2:
+		case Opponent_Hufflepuff:
+			textureOpponent = textureHuff;
+			break;
+		// case 3:
+		case Opponent_Slytherin:
+			textureOpponent = textureSlyth;
+			break;
+		default:
+			Log("ERROR: Invalid opponent in QuidScoreManager");
+			textureOpponent = textureHuff;
+			break;
+	}
 }
 
 function SetGryffindorScore (int nScore)
 {
-  nGryffindorScore = nScore;
-  if ( nGryffindorScore < 0 )
-  {
-    nGryffindorScore = 0;
-  }
+	nGryffindorScore = nScore;
+	if ( nGryffindorScore < 0 )
+	{
+		nGryffindorScore = 0;
+	}
 }
 
 function SetOpponentScore (int nScore)
 {
-  nOpponentScore = nScore;
-  if ( nOpponentScore < 0 )
-  {
-    nOpponentScore = 0;
-  }
+	nOpponentScore = nScore;
+	if ( nOpponentScore < 0 )
+	{
+		nOpponentScore = 0;
+	}
 }
 
 function IncrementGryffindorScore (int nScore)
 {
-  SetGryffindorScore(nGryffindorScore + nScore);
+  	SetGryffindorScore(nGryffindorScore + nScore);
 }
 
 function IncrementOpponentScore (int nScore)
 {
-  SetOpponentScore(nOpponentScore + nScore);
+  	SetOpponentScore(nOpponentScore + nScore);
 }
 
 function bool CutCommand (string Command, optional string cue, optional bool bFastFlag)
 {
-  local string sActualCommand;
-  local string sCutName;
-  local Actor A;
+	local string sActualCommand;
+	local string sCutName;
+	local Actor A;
 
-  sActualCommand = ParseDelimitedString(Command," ",1,False);
-  if ( sActualCommand ~= "Capture" )
-  {
-    return True;
-  } else //{
-    if ( sActualCommand ~= "Release" )
-    {
-      return True;
-    } else //{
-      if ( sActualCommand ~= "StartQuidScore" )
-      {
-        StartQuidScore();
-        CutNotifyActor.CutCue(cue);
-        return True;
-      } else //{
-        if ( sActualCommand ~= "TallyQuidScore" )
-        {
-          strTallyCue = cue;
-          TallyQuidScore();
-          return True;
-        } else {
-          return False;
-        }
-      //}
-    //}
-  //}
+	sActualCommand = ParseDelimitedString(Command," ",1,False);
+	if ( sActualCommand ~= "Capture" )
+	{
+		return True;
+	}
+	else
+	if ( sActualCommand ~= "Release" )
+	{
+		return True;
+	}
+	else
+	if ( sActualCommand ~= "StartQuidScore" )
+	{
+		StartQuidScore();
+		CutNotifyActor.CutCue(cue);
+		return True;
+	}
+	else
+	if ( sActualCommand ~= "TallyQuidScore" )
+	{
+		strTallyCue = cue;
+		TallyQuidScore();
+		return True;
+	}
+	else 
+	{
+		return False;
+	}
 }
 
 function DrawQuidScore (Canvas Canvas)
@@ -198,20 +202,35 @@ function DrawQuidScore (Canvas Canvas)
 	local float nYTextLen;
 	
 	local float HScale;
+
+	CheckHUDReferences();
 	
 	// Metallicafan212:	Do scaling
 	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
+
+
 	fontSave = Canvas.Font;
 	fScaleFactor = GetScaleFactor(Canvas);
 	
-	nGryffIconX = 520 * fScaleFactor;
-	nGryffIconY = 4 * fScaleFactor * HScale;
+	nGryffIconX = 520.0 * fScaleFactor;
+	nGryffIconY = 4.0 * fScaleFactor * HScale;
+
+	//cm("nGrffIconX Pre: " $nGryffIconX);
+	// Omega: Align and scale it
+	AlignXToRight(Canvas, nGryffIconX);
+	//cm("nGrffIconX Aligned: " $nGryffIconX);
+	nGryffIconX = ApplyHUDScale(Canvas, nGryffIconX);
+
+	//cm("nGrffIconX Scaled: " $nGryffIconX);
 	
-	nOpponIconX = 578 * fScaleFactor;
-	nOpponIconY = 4 * fScaleFactor * HScale;
+	nOpponIconX = 578.0 * fScaleFactor;
+	nOpponIconY = 4.0 * fScaleFactor * HScale;
 	
 	Canvas.SetPos(nGryffIconX, nGryffIconY);
 	Canvas.DrawIcon(textureGryff, fScaleFactor * HScale);
+
+	AlignXToRight(Canvas, nOpponIconX);
+	nOpponIconX = ApplyHUDScale(Canvas, nOpponIconX);
 	
 	Canvas.SetPos(nOpponIconX, nOpponIconY);
 	Canvas.DrawIcon(textureOpponent, fScaleFactor * HScale);
@@ -261,25 +280,37 @@ function DrawTallyHousepoints (Canvas Canvas)
 	local float nYTextLen;
 	
 	local float HScale;
+
+	CheckHUDReferences();
 	
 	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 
 	colorSave = Canvas.DrawColor;
 	fontSave = Canvas.Font;
 	fScaleFactor = GetScaleFactor(Canvas);
+
 	nPointsIconX = Canvas.SizeX / 2 - (128 / 2) * fScaleFactor;
 	nPointsIconY = 20 * fScaleFactor * HScale;
+
+	// Omega: Align to center
+	AlignXToCenter(Canvas, nPointsIconX);
+
 	Canvas.SetPos(nPointsIconX, nPointsIconY);
 	Canvas.DrawIcon(textureTallyPointsIcon, fScaleFactor * HScale);
+
 	nXTextLen = 0.0;
 	nYTextLen = 0.0;
+
 	strPoints = string(siGryffHousePoints.nCount);
+
 	Canvas.DrawColor.R = 0;
 	Canvas.DrawColor.G = 0;
 	Canvas.DrawColor.B = 0;
+
 	Canvas.TextSize(strPoints,nXTextLen,nYTextLen);
 	Canvas.SetPos(nPointsIconX + 65 * fScaleFactor * HScale - (nXTextLen / 2), (nPointsIconY + 87 * fScaleFactor - (nYTextLen / 2)) * HScale);
 	Canvas.DrawText(strPoints,False);
+
 	Canvas.DrawColor = colorSave;
 	Canvas.Font = fontSave;
 }
@@ -290,131 +321,127 @@ auto state Idle
 
 state QuidScoreDisplay
 {
-  function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
-  {
-    if (  !bFullCutMode &&  !bMenuMode )
-    {
-      DrawQuidScore(Canvas);
-    }
-  }
-  
+	function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
+	{
+		if (  !bFullCutMode &&  !bMenuMode )
+		{
+			DrawQuidScore(Canvas);
+		}
+	}
 }
 
 state Tally
 {
-  function Tick (float fDeltaTime)
-  {
-    if ( fTickDelta > 0.0 )
-    {
-      if ( nAwardGryffPoints > 0 )
-      {
-        if ( nTallyPointsPerTick <= nAwardGryffPoints )
-        {
-          siGryffHousePoints.IncrementCount(nTallyPointsPerTick);
-          nAwardGryffPoints -= nTallyPointsPerTick;
-        } else {
-          siGryffHousePoints.IncrementCount(nAwardGryffPoints);
-          nAwardGryffPoints = 0;
-        }
-      } else {
-        GotoState('PostTallyHold');
-      }
-    } else {
-      fTickDelta = fDeltaTime;
-    }
-  }
-  
-  function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
-  {
-    if (  !bMenuMode )
-    {
-      DrawQuidScore(Canvas);
-      DrawTallyHousepoints(Canvas);
-    }
-  }
-  
-  function BeginState()
-  {
-    local StatusGroup sgHousePoints;
-    local float fTallyPointsPerSec;
-  
-    fTickDelta = 0.0;
-    if ( nGryffindorScore < nOpponentScore )
-    {
-      nAwardGryffPoints = 0;
-      GotoState('PostTallyHold');
-    } else {
-      nAwardGryffPoints = nGryffindorScore - nOpponentScore;
-    }
-    siGryffHousePoints = PlayerHarry.managerStatus.GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts');
-  }
-  
-  function EndState()
-  {
-    StopSound(soundTally,SLOT_Interact);
-  }
-  
-begin:
-  // if ( fTickDelta <= 0.0 )
-  while ( fTickDelta <= 0.0 )
-  {
-    Sleep(0.1);
-    // goto JL0000;
-  }
-  fTicksPerSec = 1.0 / fTickDelta;
-  
-  /*
-  if ( byte(nAwardGryffPoints) / 3.0 * fTicksPerSec > byte(1) )
-  {
-    nTallyPointsPerTick = byte(nAwardGryffPoints) / 3.0 * fTicksPerSec = } else {;
-    nTallyPointsPerTick = 1;
-  }
-  */
-  
-  if ( nAwardGryffPoints / (3.0 * fTicksPerSec) > 1 )
-  {
-    nTallyPointsPerTick = nAwardGryffPoints / (3.0 * fTicksPerSec);
-  }
-  else
-  {
-	nTallyPointsPerTick = 1;
-  }
-  
-  PlayerHarry.ClientMessage("start tally " $ string(nAwardGryffPoints) $ " " $ string(nTallyPointsPerTick) $ " " $ string(fTickDelta) $ " " $ string(fTicksPerSec));
-  fTallySoundDuration = GetSoundDuration(soundTally);
-loop:
-  PlayerHarry.PlaySound(soundTally,SLOT_Interact);
-  Sleep(fTallySoundDuration);
-  goto ('Loop');
+	function Tick (float fDeltaTime)
+	{
+		if ( fTickDelta > 0.0 )
+		{
+			if ( nAwardGryffPoints > 0 )
+			{
+				if ( nTallyPointsPerTick <= nAwardGryffPoints )
+				{
+					siGryffHousePoints.IncrementCount(nTallyPointsPerTick);
+					nAwardGryffPoints -= nTallyPointsPerTick;
+				} 
+				else 
+				{
+					siGryffHousePoints.IncrementCount(nAwardGryffPoints);
+					nAwardGryffPoints = 0;
+				}
+			} 
+			else 
+			{
+				GotoState('PostTallyHold');
+			}
+		} 
+		else 
+		{
+			fTickDelta = fDeltaTime;
+		}
+	}
+	
+	function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
+	{
+		if (  !bMenuMode )
+		{
+			DrawQuidScore(Canvas);
+			DrawTallyHousepoints(Canvas);
+		}
+	}
+	
+	function BeginState()
+	{
+		local StatusGroup sgHousePoints;
+		local float fTallyPointsPerSec;
+	
+		fTickDelta = 0.0;
+		if ( nGryffindorScore < nOpponentScore )
+		{
+			nAwardGryffPoints = 0;
+			GotoState('PostTallyHold');
+		} 
+		else 
+		{
+			nAwardGryffPoints = nGryffindorScore - nOpponentScore;
+		}
+		siGryffHousePoints = PlayerHarry.managerStatus.GetStatusItem(Class'StatusGroupHousePoints',Class'StatusItemGryffindorPts');
+	}
+	
+	function EndState()
+	{
+		StopSound(soundTally,SLOT_Interact);
+	}
+	
+	begin:
+		while ( fTickDelta <= 0.0 )
+		{
+			Sleep(0.1);
+		}
+		fTicksPerSec = 1.0 / fTickDelta;
+		
+		if ( nAwardGryffPoints / (3.0 * fTicksPerSec) > 1 )
+		{
+			nTallyPointsPerTick = nAwardGryffPoints / (3.0 * fTicksPerSec);
+		}
+		else
+		{
+			nTallyPointsPerTick = 1;
+		}
+		
+		PlayerHarry.ClientMessage("start tally " $ string(nAwardGryffPoints) $ " " $ string(nTallyPointsPerTick) $ " " $ string(fTickDelta) $ " " $ string(fTicksPerSec));
+		fTallySoundDuration = GetSoundDuration(soundTally);
+	loop:
+		PlayerHarry.PlaySound(soundTally,SLOT_Interact);
+		Sleep(fTallySoundDuration);
+		goto ('Loop');
 }
 
 state PostTallyHold
 {
-  function Timer()
-  {
-    GotoState('Idle');
-  }
-  
-  function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
-  {
-    if (  !bMenuMode )
-    {
-      DrawQuidScore(Canvas);
-      DrawTallyHousepoints(Canvas);
-    }
-  }
-  
-  function BeginState()
-  {
-    SetTimer(4.0,False);
-  }
-  
-  function EndState()
-  {
-    CutNotifyActor.CutCue(strTallyCue);
-    HPHud(PlayerHarry.myHUD).RegisterQuidScoreManager(None);
-  }
-  
+	function Timer()
+	{
+		GotoState('Idle');
+	}
+	
+	function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
+	{
+		if (  !bMenuMode )
+		{
+			DrawQuidScore(Canvas);
+			DrawTallyHousepoints(Canvas);
+		}
+	}
+	
+	function BeginState()
+	{
+		SetTimer(4.0,False);
+	}
+	
+	function EndState()
+	{
+		CutNotifyActor.CutCue(strTallyCue);
+		HPHud(PlayerHarry.myHUD).RegisterQuidScoreManager(None);
+	}
 }
 
 defaultproperties

@@ -39,12 +39,12 @@ event PostBeginPlay()
 {
 	Super.PostBeginPlay();
 	
-	textureSpellRictusempra 		= Texture(DynamicLoadObject(strSPELL_RICTUSEMPRA,Class'Texture'));
-	textureSpellRictusempraSel 		= Texture(DynamicLoadObject(strSPELL_RICTUSEMPRA_SEL,Class'Texture'));
-	textureSpellMimblewimble 		= Texture(DynamicLoadObject(strSPELL_MIMBLEWIMBLE,Class'Texture'));
-	textureSpellMimblewimbleSel 	= Texture(DynamicLoadObject(strSPELL_MIMBLEWIMBLE_SEL,Class'Texture'));
-	textureSpellExpelliarmus 		= Texture(DynamicLoadObject(strSPELL_EXPELLIARMUS,Class'Texture'));
-	textureSpellExpelliarmusSel 	= Texture(DynamicLoadObject(strSPELL_EXPELLIARMUS_SEL,Class'Texture'));
+	textureSpellRictusempra = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SpellRictusempra",Class'Texture'));
+	textureSpellRictusempraSel = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SpellRictusempraSelect",Class'Texture'));
+	textureSpellMimblewimble = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SpellMimblewimble",Class'Texture'));
+	textureSpellMimblewimbleSel = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SpellMimblewimbleSelect",Class'Texture'));
+	textureSpellExpelliarmus = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SpellExpelliarmus",Class'Texture'));
+	textureSpellExpelliarmusSel = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SpellExpelliarmusSelect",Class'Texture'));
 	
 	SetTimer(0.2,True);
 }
@@ -67,7 +67,7 @@ event Timer()
 
 function SetSelection (ESpellSelection SSelection)
 {
-  CurrSelection = SSelection;
+  	CurrSelection = SSelection;
 }
 
 function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode, bool bHalfCutMode)
@@ -79,12 +79,18 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 	
 	// Metallicafan212:	Scaling by height
 	local float HScale;
+
+	CheckHUDReferences();
 	
 	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
 
 	fScaleFactor = GetScaleFactor(Canvas);
-	nIconX = nSTART_X * fScaleFactor;
-	nIconY = nSTART_Y * fScaleFactor * HScale;
+	nIconX = 2 * fScaleFactor;
+	nIconY = 175 * fScaleFactor * HScale;
+
+	// Omega: Align and scale
+	AlignXToLeft(Canvas, nIconX);
+	nIconX = ApplyHUDScale(Canvas, nIconX);
   
 	if ( CurrSelection == SSelection_Rictusempra )
 	{
@@ -96,7 +102,7 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 	}
 	
 	DrawSpellIcon(Canvas, fScaleFactor * HScale, textureSpellIcon, nIconX, nIconY, "1");
-	nIconY += (textureSpellRictusempra.VSize + nSPACE_BETWEEN_ICONS) * fScaleFactor * HScale;
+	nIconY += (textureSpellRictusempra.VSize + 4) * fScaleFactor * HScale;
   
 	if ( CurrSelection == SSelection_Mimblewimble )
 	{
@@ -108,7 +114,7 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 	}
   
 	DrawSpellIcon(Canvas, fScaleFactor * HScale, textureSpellIcon, nIconX, nIconY, "2");
-	nIconY += (textureSpellMimblewimble.VSize + nSPACE_BETWEEN_ICONS) * fScaleFactor * HScale;
+	nIconY += (textureSpellMimblewimble.VSize + 4) * fScaleFactor * HScale;
   
 	if ( CurrSelection == SSelection_Expelliarmus )
 	{
@@ -164,8 +170,8 @@ function DrawHotKeyText (Canvas Canvas, int nIconX, int nIconY, string strHotKey
 	}
 	
 	Canvas.TextSize(strHotKey,fXTextLen,fYTextLen);
-	nXOffset = ((nTEXT_OFFSET_X * fScaleFactor) - fXTextLen / 2) * HScale; 
-	nYOffset = ((nTEXT_OFFSET_Y * fScaleFactor) - fXTextLen / 2) * HScale;
+	nXOffset = ((20 * fScaleFactor) - fXTextLen / 2) * HScale; 
+	nYOffset = ((50 * fScaleFactor) - fXTextLen / 2) * HScale;
 	Canvas.SetPos(nIconX + nXOffset, nIconY + nYOffset);
 	Canvas.DrawText(strHotKey, false);
 	Canvas.DrawColor = colorSave;

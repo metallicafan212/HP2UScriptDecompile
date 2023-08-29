@@ -107,8 +107,11 @@ function DrawItem (Canvas Canvas, int nCurrX, int nCurrY, float fScaleFactor)
 	// Metallicafan212:	Scale by the height as well
 	fScaleFactor *= GetHScale(Canvas);
 
-	nX = 5 * fScaleFactor;
-	nY = 5 * fScaleFactor;
+	// Omega: Add the nCurrX and nCurrY vars
+	nX = 5 * fScaleFactor + nCurrX;
+	nY = 5 * fScaleFactor + nCurrY;
+
+	sgParent.AlignElement(Canvas, nX);
 	
 	fSegmentHeight = 0.0;
 	fSegmentStartAt = 0.0;

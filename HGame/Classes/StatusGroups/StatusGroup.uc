@@ -77,14 +77,14 @@ function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIc
 
 function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
-	Log("Error:  Derived StatusGroup objects should override GetGroupFinalXY_2");
+	Log("Error:  Derived StatusGroup objects should override GetGroupFinalXY_2 " $ name);
 	nOutX = 0;
 	nOutY = 0;
 }
 
 function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
-	Log("Error:  Derived StatusGroup objects should override GetGroupFlyOriginXY");
+	Log("Error:  Derived StatusGroup objects should override GetGroupFlyOriginXY " $ name);
 	nOutX = 0;
 	nOutY = 0;
 }

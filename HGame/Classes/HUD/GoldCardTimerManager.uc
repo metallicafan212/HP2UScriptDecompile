@@ -4,9 +4,11 @@
 
 class GoldCardTimerManager extends CountdownTimerManager;
 
-const strFULL_BAR= "HP2_Menu.Icon.HP2GoldCardTimerFull";
-const strTIMER_EMPTY= "HP2_Menu.Icon.HP2GoldCardTimerEmpty";
+// Omega: Obsolete
+//const strFULL_BAR= "HP2_Menu.Icon.HP2GoldCardTimerFull";
+//const strTIMER_EMPTY= "HP2_Menu.Icon.HP2GoldCardTimerEmpty";
 
+// Omega: Use from parent instead, this will load hardcoded values
 /*function LoadTimerBarGraphics()
 {
   fFULL_OFFSET_X = 55.0;
@@ -19,9 +21,9 @@ defaultproperties
 {
     CutName="GoldCardTimerManager"
 	
-	textureTimerEmpty=Texture'HP2_Menu.Icons.HP2GoldCardTimerEmpty'
-
-	textureFullBar=Texture'HP2_Menu.Icons.HP2GoldCardTimerFull'
+	// Omega: New properties
+	strTextureTimerEmpty="HP2_Menu.Icon.HP2GoldCardTimerEmpty"
+	strTextureFullBar="HP2_Menu.Icon.HP2GoldCardTimerFull"
 
 	fFULL_OFFSET_X=55.0
 	fFULL_OFFSET_Y=22.0

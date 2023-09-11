@@ -203,11 +203,11 @@ function DrawQuidScore (Canvas Canvas)
 	
 	local float HScale;
 
+	// Omega: Ensure the HUD is referenced
 	CheckHUDReferences();
 	
 	// Metallicafan212:	Do scaling
 	HScale = Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
-
 
 	fontSave = Canvas.Font;
 	fScaleFactor = GetScaleFactor(Canvas);
@@ -260,10 +260,10 @@ function DrawQuidScore (Canvas Canvas)
 		}
 	}
 	Canvas.TextSize(strGryffScore,nXTextLen,nYTextLen);
-	Canvas.SetPos(nGryffIconX + (45 * fScaleFactor * HScale) - nXTextLen / 2, (nGryffIconY + (50 * fScaleFactor) - nYTextLen / 2) * HScale);
+	Canvas.SetPos(nGryffIconX + (nCREST_MIDX * fScaleFactor * HScale) - nXTextLen / 2, (nGryffIconY + (nCREST_MIDY * fScaleFactor) - nYTextLen / 2) * HScale);
 	Canvas.DrawShadowText(strGryffScore,colorOffWhite,colorBlack);
 	Canvas.TextSize(strOpponentScore,nXTextLen,nYTextLen);
-	Canvas.SetPos(nOpponIconX + (45 * fScaleFactor * HScale) - nXTextLen / 2, (nOpponIconY + (50 * fScaleFactor) - nYTextLen / 2) * HScale);
+	Canvas.SetPos(nOpponIconX + (nCREST_MIDX * fScaleFactor * HScale) - nXTextLen / 2, (nOpponIconY + (nCREST_MIDY * fScaleFactor) - nYTextLen / 2) * HScale);
 	Canvas.DrawText(strOpponentScore,False);
 	Canvas.Font = fontSave;
 }
@@ -289,7 +289,7 @@ function DrawTallyHousepoints (Canvas Canvas)
 	fontSave = Canvas.Font;
 	fScaleFactor = GetScaleFactor(Canvas);
 
-	nPointsIconX = Canvas.SizeX / 2 - (128 / 2) * fScaleFactor;
+	nPointsIconX = Canvas.SizeX / 2 - (nTALLY_POINTS_WIDTH / 2) * fScaleFactor;
 	nPointsIconY = 20 * fScaleFactor * HScale;
 
 	// Omega: Align to center
@@ -308,7 +308,7 @@ function DrawTallyHousepoints (Canvas Canvas)
 	Canvas.DrawColor.B = 0;
 
 	Canvas.TextSize(strPoints,nXTextLen,nYTextLen);
-	Canvas.SetPos(nPointsIconX + 65 * fScaleFactor * HScale - (nXTextLen / 2), (nPointsIconY + 87 * fScaleFactor - (nYTextLen / 2)) * HScale);
+	Canvas.SetPos(nPointsIconX + nTALLY_POINTS_MIDX * fScaleFactor * HScale - (nXTextLen / 2), (nPointsIconY + nTALLY_POINTS_MIDY * fScaleFactor - (nYTextLen / 2)) * HScale);
 	Canvas.DrawText(strPoints,False);
 
 	Canvas.DrawColor = colorSave;
@@ -450,7 +450,6 @@ defaultproperties
 
     bHidden=True
 
-    // DrawType=1
 	DrawType=DT_Sprite
 
     CutName="QuidScoreManager"

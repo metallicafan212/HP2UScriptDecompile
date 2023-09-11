@@ -4,6 +4,7 @@
 
 class StatusGroupStars extends StatusGroup;
 
+// DivingDeep39: Omega:
 /*function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
 	GetGroupFinalXY_2(bMenuMode, Canvas.SizeX, Canvas.SizeY, nIconWidth, nIconHeight, nOutX, nOutY);
@@ -40,5 +41,6 @@ defaultproperties
 
     MenuProps=Menu_IfCurrentlyHaveAny
 	
+	// DivingDeep39: Omega:
 	AlignmentType=AT_Right
 }

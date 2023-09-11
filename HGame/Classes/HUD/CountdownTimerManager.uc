@@ -10,10 +10,20 @@ const fTIMER_EMPTY_H= 58.0;
 const fTIMER_EMPTY_W= 205.0;
 //const strTIMER_BAR_EMPTY= "HP2_Menu.Icon.HP2EmptyBar";
 //const strTIMER_BAR_FULL= "HP2_Menu.Icon.HP2Timer";
-var(TimerVisual) Texture textureTimerEmpty;
-var(TimerVisual) Texture textureFullBar;
+
+// Omega: Moved to (TimerVisual):
+//var float fFULL_OFFSET_X;
+//var float fFULL_OFFSET_Y;
+
+// Omega: Parameters to change for custom timer graphics
 var(TimerVisual) float fFULL_OFFSET_X;
 var(TimerVisual) float fFULL_OFFSET_Y;
+var(TimerVisual) string strTextureTimerEmpty;
+var(TimerVisual) string strTextureFullBar;
+
+var Texture textureTimerEmpty;
+var Texture textureFullBar;
+
 var() bool bStartOnLevelLoad;
 var() float fDuration;
 var float fCountdownTime;
@@ -27,52 +37,61 @@ event PostBeginPlay()
 	{
 		SetTimer(0.2,False);
 	}
-	//LoadTimerBarGraphics();
+	LoadTimerBarGraphics();
 }
 
-/*function LoadTimerBarGraphics()
+// Omega: Swapped out for parameterized strings
+function LoadTimerBarGraphics()
 {
 	//fFULL_OFFSET_X 		= 51.0;
 	//fFULL_OFFSET_Y 		= 26.0;
 	//textureTimerEmpty 	= Texture(DynamicLoadObject("HP2_Menu.Icon.HP2Timer",Class'Texture'));
 	//textureFullBar 		= Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EmptyBar",Class'Texture'));
-}*/
+	
+	// Omega: Load from our variables instead of the consts
+	textureTimerEmpty 		= Texture(DynamicLoadObject(strTextureTimerEmpty, Class'Texture'));
+	textureFullBar 			= Texture(DynamicLoadObject(strTextureFullBar, Class'Texture'));
+}
 
 function DrawCountdown (Canvas Canvas)
 {
 	local int Ox;
 	local int Oy;
 	local float fScaleFactor;
+	
+	// Omega: No vertical scale in here
 	local float fScaleFactorNoH;
+	
 	local float fFullRatio;
 	local float fSegmentWidth;
-
+	
+	// DivingDeep39: Omega
 	CheckHUDReferences();
 	
 	// Omega: Filter it
 	Canvas.bNoSmooth = False;
 
 	fScaleFactor = Canvas.GetHudScaleFactor() * Class'M212HScale'.Static.CanvasGetHeightScale(Canvas);
+	
+	// DivingDeep39: Omega
 	fScaleFactorNoH = Canvas.GetHudScaleFactor();
-
-	// Omega: Height shouldn't be part of this
-	//Ox = Canvas.SizeX - 8 * fScaleFactor - 205.0 * fScaleFactor;
-	Ox = Canvas.SizeX - 8 * fScaleFactor - fFULL_BAR_W * fScaleFactorNoH;
+	
+	// Omega: Height shouldn't be part of this equation: 
+	//Ox = Canvas.SizeX - 8 * fScaleFactor - fTIMER_EMPTY_W * fScaleFactor;
+	// Omega: Corrected
+	Ox = Canvas.SizeX - (8 * fScaleFactorNoH) - (fTIMER_EMPTY_W * fScaleFactorNoH);
 	Oy = Canvas.SizeY - 8 * fScaleFactor - fTIMER_EMPTY_H * fScaleFactor;
 	
 	// Omega: Apply alignment and then the HUD scale
 	AlignXToRight(Canvas, Ox);
 	Ox = ApplyHUDScale(Canvas, Ox);
-
+	
 	Canvas.SetPos(Ox,Oy);
 	Canvas.DrawIcon(textureTimerEmpty,fScaleFactor);
-
 	fFullRatio = fCountdownTime / GetTimerDuration();
 	fSegmentWidth = fFullRatio * fFULL_BAR_W;
-
 	Canvas.SetPos(Ox + fFULL_OFFSET_X * fScaleFactor,Oy + fFULL_OFFSET_Y * fScaleFactor);
 	Canvas.DrawTile(textureFullBar,fSegmentWidth * fScaleFactor,textureFullBar.VSize * fScaleFactor,0.0,0.0,fSegmentWidth,textureFullBar.VSize);
-
 	DrawTuningModeData(Canvas);
 }
 
@@ -198,7 +217,6 @@ auto state Idle
 		Level.PlayerHarryActor.ClientMessage("countdown ON");
 		StartCountDown();
 	}
-  
 }
 
 state CountingDown
@@ -237,24 +255,19 @@ state CountingDown
 		fCountdownTime = GetTimerDuration();
 		fLastTickTime = 0.0;
 	}
-  
 }
 
 defaultproperties
 {
     bHidden=True
 
-    // DrawType=1
 	DrawType=DT_Sprite
 
     CutName="CountdownTimerManager"
-
-	// Omega: These are now loaded instead, because KW's optimizations are... questionable
-	// Also these are reversed for some reason
-	// AND ALSO ICONS. WITH AN S
-	textureTimerEmpty=Texture'HP2_Menu.Icons.HP2Timer'
-
-	textureFullBar=Texture'HP2_Menu.Icons.HP2EmptyBar'
+	
+	// Omega: New properties
+	strTextureTimerEmpty="HP2_Menu.Icons.HP2Timer"
+	strTextureFullBar="HP2_Menu.Icons.HP2EmptyBar"
 
 	fFULL_OFFSET_X=51.0
 	fFULL_OFFSET_Y=26.0

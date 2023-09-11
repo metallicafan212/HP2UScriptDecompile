@@ -9,7 +9,10 @@ const BASE_RESOLUTION_Y = 480.0;
 
 // Omega: Alignment type
 // Holdover from StatusGroup's new code but can be used for new HUD items anyway, so I'll leave it coded in
-// And maintain it
+// And maintain it. However, the existing implementations with the hardcoded offsets won't be using this new
+// system. This is for future coders of a HudItemManager subclass
+// This also means that this class now holds a lot of math functions for scaling your rendered items on the 
+// Canvas without having it move about when it's in other ratios than 4:3
 var enum EAlignmentType
 {
 	AT_None,

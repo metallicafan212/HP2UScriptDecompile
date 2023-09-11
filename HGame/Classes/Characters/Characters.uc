@@ -382,7 +382,9 @@ event Bump (Actor Other)
     InterruptOtherVendorPopup();
     if ( IsInVendorPopupState() )
     {
-      StopSound(soundCurrVendorPopup);
+      // DivingDeep39: Added SLOT_Talk to keep stock behaviour
+      // StopSound(soundCurrVendorPopup);
+	  StopSound(soundCurrVendorPopup,SLOT_Talk);
     } else {
       nameVendorSavedState = GetStateName();
     }
@@ -413,7 +415,10 @@ function InterruptOtherVendorPopup()
 
 function OtherVendorInterruptedPopup()
 {
-  StopSound(soundCurrVendorPopup);
+  // DivingDeep39: Added SLOT_Talk to keep stock behaviour
+  // StopSound(soundCurrVendorPopup);
+  StopSound(soundCurrVendorPopup,SLOT_Talk);
+  
   if ( IsInVendorPopupState() )
   {
     DesiredRotation = rSave;
@@ -546,7 +551,11 @@ function OnHarryCaptured()
   if ( IsInVendorPopupState() )
   {
     DesiredRotation = rSave;
-    StopSound(soundCurrVendorPopup);
+	
+    // DivingDeep39: Added SLOT_Talk to keep stock behaviour
+    // StopSound(soundCurrVendorPopup);
+	StopSound(soundCurrVendorPopup,SLOT_Talk);
+	
     GotoState('VendorIdle');
   }
 }

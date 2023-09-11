@@ -65,7 +65,7 @@ var Texture textureVendorButtonOver;
 var Texture textureItemToSell;
 var Characters Vendor;
 
-// Metallicafan212:	Prevent a stutter by caching the Weasly twin
+// Metallicafan212:	Prevent a stutter by caching the Weasley twin (to be compatible with the new engine)
 var Characters WeasTwin;
 
 var name nameVendorSavedState;
@@ -91,7 +91,7 @@ var float HScale;
 function SetVendor (Characters V)
 {
 	Vendor 		= V;
-	// Metallicafan212:	Added to prevent against stutter with Fred and George
+	// Metallicafan212:	Added to prevent against stutter with Fred and George (to be compatible with the new engine)
 	WeasTwin 	= Vendor.GetWeasleyTwin();
 }
 
@@ -168,7 +168,6 @@ function DoEngageVendor (name nameSaveState)
 	
 	nItemsBoughtInCurrTransaction = 0;
 	nCurrPrice = Vendor.GetSellingPrice();
-	//log(textureVendorBarRight.name);
 	GotoState('EngageVendor');
 }
 
@@ -203,28 +202,31 @@ function DoCutTalk (Actor actorTalk, string strDialogID, string strTalkAnimName,
 	{
 		CutCue(strCue);
 	} 
-	else if (  !Vendor.IsDuelVendor() )
-    {
-		actorTalk.CutCommand(strTALK_COMMAND $strDialogID $strTalkAnimName $strLoopAnimName $strIndefiniteParam,strCue);
-    }
 	else 
-	{
-		strDialog = (Localize("All",strDialogID,"HPMenu"));
-		fSoundLen = (Len(strDialog) * 0.01) + 3.0;
-		if ( strIndefiniteParam == "" )
+    {
+		if (  !Vendor.IsDuelVendor() )
 		{
-			tcue = Spawn(Class'TimedCue');
-			tcue.CutNotifyActor = self;
-			tcue.SetupTimer(fSoundLen + 0.5,strCue);
-			harry(Level.PlayerHarryActor).ClientMessage("Indefinite");
-			harry(Level.PlayerHarryActor).myHUD.SetSubtitleText(strDialog,fSoundLen);
-		} 
+			actorTalk.CutCommand(strTALK_COMMAND $strDialogID $strTalkAnimName $strLoopAnimName $strIndefiniteParam,strCue);
+		}
 		else 
 		{
-			harry(Level.PlayerHarryActor).myHUD.SetSubtitleText(strDialog,0.0);
-			CutCue(strCue);
+			strDialog = (Localize("All",strDialogID,"HPMenu"));
+			fSoundLen = (Len(strDialog) * 0.01) + 3.0;
+			if ( strIndefiniteParam == "" )
+			{
+				tcue = Spawn(Class'TimedCue');
+				tcue.CutNotifyActor = self;
+				tcue.SetupTimer(fSoundLen + 0.5,strCue);
+				harry(Level.PlayerHarryActor).ClientMessage("Indefinite");
+				harry(Level.PlayerHarryActor).myHUD.SetSubtitleText(strDialog,fSoundLen);
+			} 
+			else 
+			{
+				harry(Level.PlayerHarryActor).myHUD.SetSubtitleText(strDialog,0.0);
+				CutCue(strCue);
+			}
 		}
-    }
+	}
 }
 
 function DoNarratorInstructions()
@@ -233,14 +235,17 @@ function DoNarratorInstructions()
 	{
 		CutCue(strCUE_INSTRUCTIONS);
 	} 
-	else if ( Vendor.IsDuelVendor() )
-    {
-		DoCutTalk(Level.PlayerHarryActor,Vendor.GetVendorInstructionId(),"","",strINDEFINITE_TEXT_PARAM,strCUE_INSTRUCTIONS);
-    } 
 	else 
-	{
-		CutCommand(strSAY_COMMAND $Vendor.GetVendorInstructionId() $strINDEFINITE_TEXT_PARAM,strCUE_INSTRUCTIONS);
-    }
+    {
+		if ( Vendor.IsDuelVendor() )
+		{
+			DoCutTalk(Level.PlayerHarryActor,Vendor.GetVendorInstructionId(),"","",strINDEFINITE_TEXT_PARAM,strCUE_INSTRUCTIONS);
+		} 
+		else 
+		{
+			CutCommand(strSAY_COMMAND $Vendor.GetVendorInstructionId() $strINDEFINITE_TEXT_PARAM,strCUE_INSTRUCTIONS);
+		}
+	}
 }
 
 function bool WantInstructions()
@@ -263,7 +268,8 @@ state EngageVendor
 		{
 			harry(Level.PlayerHarryActor).Cam.CutCommand(strFLYTO_COMMAND $Vendor.CutName $" x=80 y=80");
 			harry(Level.PlayerHarryActor).Cam.CutCommand(strTARGET_FLYTO_COMMAND $Vendor.CutName $" x=10 z=10",strCUE_CAMERA_IN_POSITION);
-			WeasleyTwin = WeasTwin;//Vendor.GetWeasleyTwin();
+			//Vendor.GetWeasleyTwin();
+			WeasleyTwin = WeasTwin; // Metallicafan212: To be compatible with the new engine
 			if ( WeasleyTwin != None )
 			{
 				WeasleyTwin.GotoState('stateIdle');
@@ -319,6 +325,7 @@ state EngageVendor
 		harry(Level.PlayerHarryActor).TurnTo(Level.PlayerHarryActor.Location + (Vendor.Location - Level.PlayerHarryActor.Location) * vect(1.00,1.00,0.00));
 		Vendor.CutCommand(strFACE_HARRY_COMMAND,strCUE_VENDOR_TURN_DONE);
 		//WeasleyTwin = Vendor.GetWeasleyTwin();
+		// Metallicafan212: Cached previously
 		WeasleyTwin = WeasTwin;
 		if ( WeasleyTwin != None )
 		{
@@ -396,7 +403,7 @@ state VendorTransaction
 	}
   
 	begin:
-		Vendor.LoopAnim('vendor_idle2',RandRange(0.8,1.2),0.2);
+		Vendor.LoopAnim('vendor_idle2',RandRange(0.80,1.20),0.2);
 }
 
 state MakePurchase
@@ -529,6 +536,7 @@ function DoDisengageVendor()
 {
 	local StatusGroup sgJellyBeans;
 	//local Characters WeasleyTwin;
+	local Characters WeasleyTwinFredOrGeorge;
 
 	harry(Level.PlayerHarryActor).Cam.CutCommand(strRELEASE_COMMAND);
 	harry(Level.PlayerHarryActor).Cam.CutNotifyActor = None;
@@ -543,11 +551,13 @@ function DoDisengageVendor()
 	Vendor.DesiredRotation = Vendor.rSave;
 	Vendor.GotoState('VendorIdle');
 	Vendor.CutName = strVendorSavedCutName;
-	WeasleyTwin = WeasTwin;//Vendor.GetWeasleyTwin();
-	if ( WeasleyTwin != None )
+	//Vendor.GetWeasleyTwin();
+	// Metallicafan212: Cached previously
+	WeasleyTwinFredOrGeorge = WeasTwin;
+	if ( WeasleyTwinFredOrGeorge != None )
 	{
-		WeasleyTwin.DesiredRotation = WeasleyTwin.rSave;
-		WeasleyTwin.GotoState('VendorIdle');
+		WeasleyTwinFredOrGeorge.DesiredRotation = WeasleyTwinFredOrGeorge.rSave;
+		WeasleyTwinFredOrGeorge.GotoState('VendorIdle');
 	}
 	GotoState('Idle');
 }
@@ -606,7 +616,6 @@ function DrawVendorBar (Canvas canvas)
 		textureNoButton = textureVendorButtonNormal;
     }
 	
-	// Omega: Alignment calculated from within the GetVendorBarX function
 	fBarX = GetVendorBarX(Canvas); //+ Offset;
 	fBarY = GetVendorBarY(Canvas) * HScale;
 	
@@ -655,10 +664,10 @@ function DrawVendorBar (Canvas canvas)
 	Canvas.Font = fontSave;
 }
 
-// Omega: Auto-casting to int not supported by out variables in unrealscript so we're really babying it here
-//function float GetVendorBarX (Canvas canvas)
-function int GetVendorBarX (Canvas canvas)
+function float GetVendorBarX (Canvas canvas)
 {
+	// Omega: The below commented out math is obsolete (And wasn't correct either)
+	// Kept only for posterity and an example of how we can do some better math with the new functions
 	// Metallicafan212:	Add the offset
 	//local float offset;
 	local int PreTransform;
@@ -667,11 +676,12 @@ function int GetVendorBarX (Canvas canvas)
 	
 	// Metallicafan212:	This needs to be offset to be in the center again
 	//Offset = (256.0 / HScale) - (256.0 * HScale);//(256 - (256 * HScale)) * 2.0;
+	
 	//return ((canvas.SizeX / 2.0) - (canvas.GetHudScaleFactor() * (fVENDORBAR_W / 2.0))) + Offset;
-
-	// Omega: No offset, use the alignment math instead:
+	
+	// Omega: No offset, use the alignment math instead: Same equation as stock, we just use our function to
+	// align and correct it based on our current ratio. Center elements do not require the alignment function
 	PreTransform = ((canvas.SizeX / 2.0) - (canvas.GetHudScaleFactor() * (fVENDORBAR_W / 2.0)));
-
 	AlignXToCenter(Canvas, PreTransform);
 	return PreTransform;
 }

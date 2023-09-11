@@ -368,6 +368,7 @@ function Font GetScoreFont (Canvas Canvas)
 	return fontRet;
 }
 
+// Omega: Re-tab this
 function int GetHousePointsFromScore (int nScore)
 {
 	local int A;
@@ -387,12 +388,12 @@ function int GetHousePointsFromScore (int nScore)
 	else
 	if ( nScore < 2 * A / 3 )
 	{
-		return (B * nScore / A) - (B / 6);
+		return ((B * nScore) / A) - (B / 6);
 	} 
 	else
 	if ( nScore < A )
 	{
-		return (3 * B * nScore) / (2 * A) - (B / 2);
+		return ((3 * B * nScore) / (2 * A)) - (B / 2);
 	} 
 	else
 	{
@@ -595,7 +596,7 @@ state Tally
 			Sleep(0.1);
 		}
 		fTicksPerSec = 1.0 / fTickDelta;
-		nTallyPointsPerTick = (nCurrScore - nHighScore) / 3.0 * fTicksPerSec;
+		nTallyPointsPerTick = (nCurrScore - nHighScore) / (3.0 * fTicksPerSec);
 		if ( nTallyPointsPerTick < 1 )
 		{
 			nTallyPointsPerTick = 1;
@@ -676,7 +677,7 @@ state PostTallyHoldPoints
 		if ( bFastForwardTally == True )
 		{
 			GotoState('Idle');
-		} 
+		}
 		else
 		{
 			SetTimer(5.0,False);
@@ -771,7 +772,6 @@ state PostTallyHoldPoints
 		PlayerHarry.UpdateChallengeScores(string(nameChallengeLevel),nHighScore,nMaxScore);
 		CutNotifyActor.CutCue(strTallyCue);
 	}
-  
 }
 
 defaultproperties
@@ -786,7 +786,7 @@ defaultproperties
 
     nMaxScore=1260
 
-	// Omega: added here
+	// Omega: added star value here
 	STAR_VALUE=200
 
     EventTimeUp=ChallengeTimeUp
@@ -801,9 +801,7 @@ defaultproperties
 
     bPersistent=True
 
-    // DrawType=1
 	DrawType=DT_Sprite
 
     CutName="ChallengeScoreManager"
-
 }

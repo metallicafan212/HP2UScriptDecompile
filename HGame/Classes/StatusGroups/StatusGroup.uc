@@ -3,7 +3,7 @@
 //================================================================================
 
 class StatusGroup extends Actor
-	Abstract;
+	Abstract; 
 
 enum EMenuProps 
 {
@@ -56,14 +56,12 @@ var bool bCurrRenderInCutScene;
 var harry PlayerHarry;
 var BaseHud HUD;
 
-// Omega: New var for right-side alignment. There is no place this can be except in RenderHUDItemManager
-// It is not designed to be an overridable function
-//var bool bAlignToRight;
-// Omega: And left side
-//var bool bAlignToLeft;
-
 const FLY_TO_HUD_CAM_DIST= 150;
-const BASE_RESOLUTION_X = 640.0;
+const BASE_RESOLUTION_X= 640.0;
+
+// Omega: Our 4:3 const height for our coords
+// Internal grid is *kind of* 640x480, but using float math we can get more 
+// accurate results for higher resolutions before casting back down to an int
 const BASE_RESOLUTION_Y = 480.0;
 
 // Omega: Set up the 4:3 height transform on Y, and the X transform for our user configured HUD 4:3-ness
@@ -71,20 +69,22 @@ const BASE_RESOLUTION_Y = 480.0;
 // IF YOU MADE YOUR OWN GROUPS, MAKE SURE YOU FORWARD THESE CHANGES!!!
 function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
+	// DivingDeep39: GetGroupFinalXY_2(bMenuMode,Canvas.SizeX,Canvas.SizeY,nIconWidth,nIconHeight,nOutX,nOutY);
+	
 	// Omega: Pass in transformed Y scale (4:3 ratio)
 	GetGroupFinalXY_2(bMenuMode,Canvas.SizeX,(Canvas.SizeY / GetHScale(Canvas)),nIconWidth,nIconHeight,nOutX,nOutY);
 }
 
 function GetGroupFinalXY_2 (bool bMenuMode, int nCanvasSizeX, int nCanvasSizeY, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
-	Log("Error:  Derived StatusGroup objects should override GetGroupFinalXY_2 " $ name);
+	Log("Error:  Derived StatusGroup objects should override GetGroupFinalXY_2");
 	nOutX = 0;
 	nOutY = 0;
 }
 
 function GetGroupFlyOriginXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
-	Log("Error:  Derived StatusGroup objects should override GetGroupFlyOriginXY " $ name);
+	Log("Error:  Derived StatusGroup objects should override GetGroupFlyOriginXY");
 	nOutX = 0;
 	nOutY = 0;
 }
@@ -150,18 +150,19 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 	local bool bFirstIconInList;
 	local Color colorSave;
 	local float fScaleFactor;
-
+	local bool bIncrementPosition;
+	
+	// DivingDeep39: Omega:
 	local float fScaledScreen;
 	local float fCanvasX;
-
-	local bool bIncrementPosition;
-
+	
 	// Omega: Check the validitiitieaiwidoawdhy of the hud 
 	if(HUD == None)
 	{
 		HUD = BaseHud(PlayerHarry.MyHud);
 	}
-
+	
+	// Omega: Scale the screen by our 4:3-ness ratio using a lerp
 	fScaledScreen = lerp(HUD.HUD4By3ScalePercent, Canvas.SizeX, Canvas.SizeX * GetHScale(Canvas));
 	fCanvasX = Canvas.SizeX;
 
@@ -169,7 +170,6 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 	nCurrY = 0;
 	bFirstIconInList = True;
 	fScaleFactor = GetScaleFactor(Canvas.SizeX);
-
 	if ( bMenuMode )
 	{
 		return;
@@ -190,11 +190,11 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 			if ( bFirstIconInList == True )
 			{
 				GetGroupCurrXY(bMenuMode, Canvas,siLoop.GetHudIconUSize(), siLoop.GetHudIconVSize(), nCurrX, nCurrY);
+				
 				// Omega: Align the element based on our settings (Default no alignment)
 				AlignElement(Canvas, nCurrX);
-
 				nCurrX = (nCurrX * fScaledScreen/fCanvasX) + (0.5 * (fCanvasX - fScaledScreen));
-
+				
 				bFirstIconInList = False;
 			}
 			if ( (siLoop.nCount > 0) || (siLoop.nCount == 0) && (siLoop.bDisplayWhenCountZero == True) )
@@ -210,6 +210,7 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 			{
 				if ( bDisplayHorizontally )
 				{
+					// Omega: Take vertical scale into account to correct the horizontal offset to our aspect ratio. Check silver keys as example
 					//nCurrX += fScaleFactor * (siLoop.GetHudIconUSize() + nSpaceBetweenIcons);
 					nCurrX += (fScaleFactor * (siLoop.GetHudIconUSize() + nSpaceBetweenIcons)) * GetHScale(Canvas);
 				}
@@ -229,7 +230,7 @@ function RenderHudItemManager (Canvas Canvas, bool bMenuMode, bool bFullCutMode,
 			
 		}
 	}
-
+	
 	Canvas.DrawColor = colorSave;
 }
 
@@ -270,11 +271,11 @@ function GetItemPosition (Class<StatusItem> classItem, bool bMenuMode, out int n
 	{
 		nCanvasSizeY = smParent.nCanvasSizeY;
 	}
+	
 	bFirstInList = True;
 	fScaleFactor = GetScaleFactor(nCanvasSizeX);
-
-
 	si = GetStatusItem(classItem);
+	
 	if ( si == None )
 	{
 		Log("Error:  Could not get StatusItem " $ string(classItem));
@@ -323,11 +324,11 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	if (  !bUpperLeft )
 	{
 		si = GetStatusItem(classItem);
-		nHudX += si.GetHudIconUSize() / 4.0;
-		nHudY += si.GetHudIconVSize() / 4.0;
+		nHudX += (si.GetHudIconUSize() / 4);
+		nHudY += (si.GetHudIconVSize() / 4);
 	}
-	nCanvasHalfX = smParent.nCanvasSizeX / 2.0;
-	nCanvasHalfY = smParent.nCanvasSizeY / 2.0;
+	nCanvasHalfX = smParent.nCanvasSizeX / 2;
+	nCanvasHalfY = smParent.nCanvasSizeY / 2;
 	if ( nHudX >= nCanvasHalfX )
 	{
 		// fXVal = float(nHudX - nCanvasHalfX) / float(nCanvasHalfX);
@@ -336,12 +337,12 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	else 
 	{
 		// fXVal =  -1.0 - float(nHudX) / float(nCanvasHalfX);
-		fXVal =  -(1.0 - (nHudX / float(nCanvasHalfX))); //removed wrong float casts -AdamJD
+		fXVal =  -(1 - (nHudX / float(nCanvasHalfX))); //removed wrong float casts -AdamJD
 	}
 	if ( nHudY <= nCanvasHalfY )
 	{
 		// fYVal = 1.0 - float(nHudY) / float(nCanvasHalfY);
-		fYVal = 1.0 - (nHudY / float(nCanvasHalfY)); //removed wrong float casts -AdamJD
+		fYVal = 1 - (nHudY / float(nCanvasHalfY)); //removed wrong float casts -AdamJD
 	} 
 	else 
 	{
@@ -352,20 +353,17 @@ function Vector GetItemLocation (Class<StatusItem> classItem, bool bMenuMode, op
 	if ( fCameraPitch > 32768 )
 	{
 		// fYVal = fYVal - 1.0 - fCameraPitch / 65536;
-		fYVal = fYVal - (1.0 - (fCameraPitch / 65536)); //added BODMAS -AdamJD
+		fYVal = fYVal - (1 - (fCameraPitch / 65536)); //added BODMAS -AdamJD
 	} 
 	else 
 	{
 		// fYVal = fYVal + fCameraPitch / 65536;
 		fYVal = fYVal + (fCameraPitch / 65536); //added BODMAS -AdamJD
 	}
-	//cm("Status Manager: nHudX: " $nHudX$ " nCanvasHalfX: " $nCanvasHalfX);
 	vectReturn.X = fXVal;
 	vectReturn.Y = fYVal;
-	vectReturn.Z = 150.0;
-	//cm("Status Manager: vectReturn before CameraToWorld: " $vectReturn);
+	vectReturn.Z = FLY_TO_HUD_CAM_DIST;
 	vectReturn = smParent.PlayerHarry.CameraToWorld(vectReturn);
-	//cm("Status Manager: vectReturn after CameraToWorld: " $vectReturn);
 	return vectReturn;
 }
 
@@ -404,7 +402,11 @@ function bool IncrementCount (Class<StatusItem> classItem, int nNum)
 	if ( siUpdate != None )
 	{
 		siUpdate.IncrementCount(nNum);
+		
+		// DivingDeep39: OnCountIncremented();
+		// Omega: Added to facilitate child classes that need to know what was updated
 		OnCountIncremented(siUpdate);
+		
 		return True;
 	}
 	return False;
@@ -418,12 +420,22 @@ function bool IncrementCountPotential (Class<StatusItem> classItem, int nNum)
 	if ( siUpdate != None )
 	{
 		siUpdate.IncrementCountPotential(nNum);
+		
+		// DivingDeep39: OnCountIncremented();
+		// Omega: Added to facilitate child classes that need to know what was updated
 		OnCountIncremented(siUpdate);
+		
 		return True;
 	}
 	return False;
 }
 
+// DivingDeep39:
+/*function OnCountIncremented()
+{
+}*/
+
+// Omega: Added param to facilitate child classes that need to know what was updated
 function OnCountIncremented(StatusItem Item)
 {
 
@@ -455,7 +467,7 @@ function int CalcFadeValue (bool bIn, float fCurrTime, float fTotalTime)
 			Log("Error:  Error in fade value calculation");
 			nFadeValue = Clamp(nFadeValue, 127, 255);
 		}
-	} 
+	}
 	else 
 	{
 		nFadeValue = 255 - (128 * fFadeRatio);
@@ -535,7 +547,6 @@ function CalcFlyXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeig
   }
 }
 
-// Omega: MATH FUNCTIONS. WOOO!
 function float GetScaleFactor (int nCanvasSizeX)
 {
 	local float fScale;
@@ -672,9 +683,12 @@ function float floatGetHHUDScale(float x, float y)
 event PreBeginPlay()
 {
 	CurrEffectType = GameEffectType;
+	
+	// DivingDeep39: Omega:
 	PlayerHarry = Harry(Level.playerHarryActor);
 }
 
+// DivingDeep39: Omega
 event PostBeginPlay()
 {
 	Super.PostBeginPlay();
@@ -684,6 +698,7 @@ event PostBeginPlay()
 
 auto state Idle
 {
+	//DivingDeep39: function OnCountIncremented()
 	function OnCountIncremented(StatusItem SI)
 	{
 		if ( (CurrEffectType == ET_Permanent) || (CurrEffectType == ET_Menu) )
@@ -746,7 +761,7 @@ state EffectIn
 		{
 			return 255;
 		}
-  	}
+  }
   
 	function GetGroupCurrXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nX, out int nY)
 	{
@@ -775,6 +790,7 @@ state Hold
 		GotoState('EffectOut');
 	}
   
+	// DivingDeep39: OnCountIncremented()
 	function OnCountIncremented(StatusItem SI)
 	{
 		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
@@ -812,6 +828,7 @@ state EffectOut
 		}
 	}
   
+	// DivingDeep39: function OnCountIncremented()
 	function OnCountIncremented(StatusItem SI)
 	{
 		if ( (CurrEffectType != ET_Permanent) || (CurrEffectType == ET_Menu) )
@@ -865,7 +882,7 @@ defaultproperties
 
     // DrawType=0
 	DrawType=DT_None 
-
+	
 	// Omega: Vars to change for specific groups
 	ScreenPctToAlignTo=0
 	AlignmentType=AT_None

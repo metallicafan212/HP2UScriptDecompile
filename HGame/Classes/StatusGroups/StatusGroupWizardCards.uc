@@ -22,6 +22,7 @@ const nCARDTYPE_GOLD= 2;
 const nCARDTYPE_SILVER= 1;
 const nCARDTYPE_BRONZE= 0;
 
+// DivingDeep39: Omega:
 /*function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
 	GetGroupFinalXY_2(bMenuMode, Canvas.SizeX, Canvas.SizeY, nIconWidth, nIconHeight, nOutX, nOutY);
@@ -416,5 +417,6 @@ defaultproperties
 	// Metallicafan212:	Missing for some reason
 	MenuProps=Menu_Never
 	
+	// DivingDeep39: Omega:
 	AlignmentType=AT_Right
 }

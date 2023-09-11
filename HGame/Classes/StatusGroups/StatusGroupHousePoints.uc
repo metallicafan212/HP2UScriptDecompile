@@ -11,6 +11,7 @@ event PostBeginPlay()
 	CutName = strCUT_NAME;
 }
 
+// DivingDeep39: Omega:
 /*function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
 	GetGroupFinalXY_2(bMenuMode, Canvas.SizeX, Canvas.SizeY, nIconWidth, nIconHeight, nOutX, nOutY);
@@ -228,20 +229,6 @@ function AdjustIfTie (out StatusItem siAdjust, StatusItem siCompare1, StatusItem
 			return;
 		}
 	}
-	/*
-	if ( siAdjust.nCount > 0 )
-	{
-		if ( (siAdjust.nCount == siCompare1.nCount) || (siAdjust.nCount == siCompare2.nCount) || (siAdjust.nCount == siCompare3.nCount) )
-		{
-			--siAdjust.nCount;
-		} 
-		else 
-		{
-			return;
-		}
-		goto JL0000;
-	}
-	*/
 	
 	// Metallicafan212:	Another loop
 	while(true)
@@ -258,21 +245,6 @@ function AdjustIfTie (out StatusItem siAdjust, StatusItem siCompare1, StatusItem
 			return;
 		}
 	}
-	
-	/*
-	if ( True )
-	{
-		if ( (siAdjust.nCount == siCompare1.nCount) || (siAdjust.nCount == siCompare2.nCount) || (siAdjust.nCount == siCompare3.nCount) )
-		{
-			++siAdjust.nCount;
-		} 
-		else 
-		{
-			return;
-		}
-		goto JL0093;
-	}
-	*/
 }
 
 function bool IsHouseAhead (Class<StatusItem> classItem)
@@ -288,6 +260,7 @@ function bool IsHouseAhead (Class<StatusItem> classItem)
 	siHufflepuffPts 	= GetStatusItem(Class'StatusItemHufflePuffPts');
 	siSlytherinPts 		= GetStatusItem(Class'StatusItemSlytherinPts');
 	siWinning 			= siGryffindorPts;
+	
 	if ( siSlytherinPts.nCount > siWinning.nCount )
 	{
 		siWinning = siSlytherinPts;
@@ -314,6 +287,7 @@ function PutGryffInLead()
 	nRavenPts 	= GetStatusItem(Class'StatusItemRavenclawPts').GetCount();
 	nHuffPts 	= GetStatusItem(Class'StatusItemHufflePuffPts').GetCount();
 	nSlythPts 	= GetStatusItem(Class'StatusItemSlytherinPts').GetCount();
+	
 	if ( nHuffPts <= nRavenPts )
 	{
 		nHuffPts = nRavenPts + RandRange(1.0,10.0);
@@ -343,5 +317,6 @@ defaultproperties
 
     fTotalEffectOutTime=0.20
 	
+	// DivingDeep39: Omega:
 	AlignmentType=AT_Right
 }

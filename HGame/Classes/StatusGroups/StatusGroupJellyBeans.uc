@@ -4,6 +4,7 @@
 
 class StatusGroupJellybeans extends StatusGroup;
 
+// DivingDeep39: Omega:
 /*function GetGroupFinalXY (bool bMenuMode, Canvas Canvas, int nIconWidth, int nIconHeight, out int nOutX, out int nOutY)
 {
 	GetGroupFinalXY_2(bMenuMode, Canvas.SizeX, Canvas.SizeY, nIconWidth, nIconHeight, nOutX, nOutY);
@@ -38,5 +39,6 @@ defaultproperties
 
     fTotalEffectOutTime=0.30
 	
+	// DivingDeep39: Omega:
 	AlignmentType=AT_Left
 }

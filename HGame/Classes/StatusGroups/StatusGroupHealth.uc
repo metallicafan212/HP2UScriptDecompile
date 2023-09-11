@@ -30,5 +30,6 @@ defaultproperties
 
     GameEffectType=ET_Permanent
 	
+	// DivingDeep39: Omega:
 	AlignmentType=AT_Left
 }

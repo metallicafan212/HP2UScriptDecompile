@@ -78,7 +78,7 @@ function Start (HChar EnemyIn)
 		
 		default:
 			Log("ERROR: Missing enemy health enum");
-			textureBarFull = Texture(DynamicLoadObject("HP2_Menu.Icon.HP2EnemyHealthWizard",Class'Texture'));
+			textureBarFull = Texture(DynamicLoadObject(strBAR_DUELLIST,Class'Texture'));
 			break;
 	}
 	GotoState('DisplayEnemyHealth');

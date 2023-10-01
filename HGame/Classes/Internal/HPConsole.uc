@@ -811,7 +811,7 @@ exec function giveAllCards()
 }
 
 // Metallicafan212:	Sigh... We have to do this so controllers can open the menu
-exec function TogglePauseMenu()
+exec function AllowedInMenus TogglePauseMenu()
 {
 	//log("Toggle pause menu");
 	
@@ -819,7 +819,7 @@ exec function TogglePauseMenu()
 }
 
 // Metallicafan212:	To be able to open and close the map
-exec function ToggleMapMenu()
+exec function AllowedInMenus ToggleMapMenu()
 {
 	log("Toggle map");
 	menuBook.ToggleMap();

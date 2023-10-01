@@ -299,25 +299,28 @@ simulated function PostRender (Canvas Canvas)
 		} 
 		else 
 		{
-			if ( managerEnemyHealth != None )
+			if( !bHideHud )
 			{
-				managerEnemyHealth.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-			}
-			if ( managerQuidditchBar != None )
-			{
-				managerQuidditchBar.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-			}
-			if ( managerMagicStrength != None )
-			{
-				managerMagicStrength.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-			}
-			if ( managerCountdownTimer != None )
-			{
-				managerCountdownTimer.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-			}
-			if ( managerSpellSelector != None )
-			{
-				managerSpellSelector.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+				if ( managerEnemyHealth != None )
+				{
+					managerEnemyHealth.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+				}
+				if ( managerQuidditchBar != None )
+				{
+					managerQuidditchBar.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+				}
+				if ( managerMagicStrength != None )
+				{
+					managerMagicStrength.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+				}
+				if ( managerCountdownTimer != None )
+				{
+					managerCountdownTimer.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+				}
+				if ( managerSpellSelector != None )
+				{
+					managerSpellSelector.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+				}
 			}
 		}
     
@@ -336,19 +339,22 @@ simulated function PostRender (Canvas Canvas)
 			CurrVendorManager.RenderHud(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
 		}
     
-		if ( managerChallenge != None )
+		if( !bHideHud )
 		{
-			managerChallenge.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-		}
-    
-		if ( managerQuidScore != None )
-		{
-			managerQuidScore.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
-		}
-    
-		if ( managerSpellLesson != None )
-		{
-			managerSpellLesson.RenderHudItems(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			if ( managerChallenge != None )
+			{
+				managerChallenge.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+		
+			if ( managerQuidScore != None )
+			{
+				managerQuidScore.RenderHudItemManager(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
+		
+			if ( managerSpellLesson != None )
+			{
+				managerSpellLesson.RenderHudItems(Canvas,bInGameMenuUp,bFullCutMode,bHalfCutMode);
+			}
 		}
 		
 		DrawPopup(Canvas);

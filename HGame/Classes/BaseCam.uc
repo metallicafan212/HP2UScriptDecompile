@@ -613,10 +613,13 @@ function ApplyMouseXToDestYaw (float fTimeDelta, optional bool bApplyToBossOffse
 	{
 		fMouseDeltaX = MAX_MOUSE_DELTA_X;
 	} 
+	// Metallicafan212:	Fix high FPS mouse movement speeding up
+	/*
 	else if ( fMouseDeltaX < MIN_MOUSE_DELTA_X )
     {
 		fMouseDeltaX = MIN_MOUSE_DELTA_X;
     }
+	*/
 	
 	if (  !bApplyToBossOffset )
 	{

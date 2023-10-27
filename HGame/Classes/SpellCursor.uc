@@ -217,7 +217,7 @@ function UpdateCursor (optional bool bJustStopAtClosestPawnOrWall)
     } 
     if ( bEmit && bDebugMode )
     {
-      PlayerHarry.ClientMessage(" TraceActors Hit actor -> " $ string(HitActor));
+      PlayerHarry.ClientMessage(" TraceActors Hit actor -> " $ string(aHitActor));
     }
     if (  !bHitActor &&  !aHitActor.bHidden )
     {
@@ -237,7 +237,7 @@ function UpdateCursor (optional bool bJustStopAtClosestPawnOrWall)
 		 {
 		   continue;
 		 }
-         if ( spellTrigger(aHitActor).bHitJustFromFront &&  !IsHarryFacingTarget(HitActor) )
+         if ( spellTrigger(aHitActor).bHitJustFromFront &&  !IsHarryFacingTarget(aHitActor) )
          {
            continue;
          } 

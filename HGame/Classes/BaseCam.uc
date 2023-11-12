@@ -1290,7 +1290,8 @@ function bool CutCommand_ProcessFlash (string Command, optional string cue, opti
 	local float fTime;
 	local int I;
 
-	A = 255.0;
+	// Metallicafan212:	New engine uses reverse alpha for things like tiles (where alpha was defaulted to 0), so this must be set to 0
+	A = 0.0;//255.0;
 	bUseDefault = True;
 	fTime = 0.25;
 	for( I = 2; I < 8; I++ )

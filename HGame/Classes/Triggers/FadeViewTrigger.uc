@@ -46,7 +46,8 @@ defaultproperties
 
     fadetime=0.25
 
-    A=255.00
+	// Metallicafan212:	New engine needs a value of 0 to match tile alpha
+    A=0.0//255.00
 
     R=255.00
 

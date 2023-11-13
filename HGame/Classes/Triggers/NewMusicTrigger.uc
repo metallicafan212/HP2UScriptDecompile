@@ -7,6 +7,10 @@ class NewMusicTrigger extends Trigger;
 var() string 		Song;
 var() float 		FadeInTime;
 var() float 		FadeOutTime;
+
+// Metallicafan212:	Initial timestamp (because why not)
+var() float			Timestamp;
+
 var() bool 			FadeOutAllSongs;
 
 // Metallicafan212:	M212 oneshot music type (doesn't loop)
@@ -68,7 +72,7 @@ function ProcessTrigger ()
 		{
 			StopAllMusic(FadeOutTime);
 		}
-		SongHandle = PlayMusic(Song,FadeInTime);
+		SongHandle = PlayMusic(Song, FadeInTime, Timestamp, bOnceOnly);
 	}
 }
 

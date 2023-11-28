@@ -1,0 +1,24 @@
+blank
+label
+quid:button bBroomAction
+
+
+
+
+label
+duel:button bDuelCycleSpell
+
+
+
+label
+ingame:MoveForward
+ingame:MoveBackward
+ingame:RotLeft
+ingame:RotRight
+ingame:Jump
+ingame:AltFire
+ingame:button bDrinkWiggenwell
+ingame:StrafeLeft
+ingame:StrafeRight
+ingame:ToggleMapMenu
+ingame:button bSkipCutScene

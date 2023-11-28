@@ -1,0 +1,19 @@
+blank
+label
+quid:button bBroomAction
+
+
+
+
+label
+duel:button bDuelCycleSpell
+
+
+
+
+label
+ingame:Jump
+ingame:AltFire
+ingame:button bDrinkWiggenwell
+ingame:ToggleMapMenu
+interface:button bSkipCutScene

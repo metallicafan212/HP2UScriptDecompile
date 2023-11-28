@@ -1,0 +1,23 @@
+label
+quid:button bBroomAction
+
+label
+duel:button bDuelCycleSpell
+label
+ingame:Jump
+ingame:duck
+ingame:button bDrinkWiggenwell
+ingame:ToggleMapMenu
+interface:button bSkipCutScene
+
+label
+ingame:AltFire
+ingame:ReloadWeapon
+ingame:NextWeapon
+ingame:PrevWeapon
+ingame:NextItem
+ingame:PrevItem
+ingame:ActivateItem
+
+label
+ingame:FPSMode

@@ -1,0 +1,46 @@
+blank
+label
+quid:button bBroomAction
+
+
+
+
+label
+duel:button bDuelCycleSpell
+
+
+
+label
+ingame:MoveForward
+ingame:MoveBackward
+ingame:RotLeft
+ingame:RotRight
+ingame:Jump
+ingame:duck
+ingame:button bDrinkWiggenwell
+ingame:StrafeLeft
+ingame:StrafeRight
+ingame:ToggleMapMenu
+ingame:button bSkipCutScene
+label
+ingame:AltFire
+ingame:Button bDuelRictusempra | Switchweapon 1
+ingame:BUTTON BDUELMIMBLEWIMBLE | SWITCHWEAPON 2
+ingame:Button bDuelExpelliarmus | Switchweapon 3
+ingame:Switchweapon 4
+ingame:Switchweapon 5
+ingame:Switchweapon 6
+ingame:Switchweapon 7
+ingame:Switchweapon 8
+ingame:Switchweapon 9
+
+label
+ingame:ReloadWeapon
+ingame:NextWeapon
+ingame:PrevWeapon
+ingame:NextItem
+ingame:PrevItem
+ingame:ActivateItem
+
+label
+ingame:FPSMode

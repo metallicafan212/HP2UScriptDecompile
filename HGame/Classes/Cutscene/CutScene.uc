@@ -53,6 +53,11 @@ function CutCue (string cue)
 
 event OnResolveGameState ()
 {
+	// Metallicafan212:	Cache the reference
+	local Harry pHarry;
+	
+	pHarry = Harry(Level.PlayerHarryActor);
+	
 	if (  !bInCurrentGameState )
 	{
 		GotoState('disabled');
@@ -64,13 +69,19 @@ event OnResolveGameState ()
 		Log("*** " $ string(self) $ " is *IN* the current GameState. CurrentGameState = " $ harry(Level.PlayerHarryActor).CurrentGameState);
 		if ( bDelayLevelFadeIn && bLevelLoadStarts )
 		{
-			if ( bPlayOnce && (nPlayedCount > 0) )
+			//Log("Potential black screen cutscene: " $self$ " at time: " $Level.TimeSeconds);
+			// Omega: Return if we're above 0 seconds, as we're likely to be a save
+			if ( bPlayOnce && (nPlayedCount > 0) || Level.TimeSeconds != 0.00)
 			{
+				Log("*** " $ string(self) $ " Not setting faderate because we've either been played or loaded a save! Level time: " $Level.TimeSeconds);
 				return;
 			} 
 			else 
 			{
-				harry(Level.PlayerHarryActor).FadeRate = 0.0;
+				//harry(Level.PlayerHarryActor).FadeRate = 0.0;
+				pHarry.FadeRate = 0.0;
+				pHarry.ConstantGlowFog.W = -1.0;
+				
 			}
 		}
 	}

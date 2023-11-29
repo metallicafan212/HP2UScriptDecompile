@@ -36,6 +36,37 @@ function RepositionChildControls()
 {
 }
 
+// Omega: This sucks but in order to do this, we need a specific execution timing that basically involves directly copying this. Man
+function UWindowDialogControl CreateAlignedControl(class<UWindowDialogControl> ControlClass, float X, float Y, float W, float H, optional UWindowWindow OwnerWindow, 
+optional EAlignmentType Alignment, optional float ScreenPCT)
+{
+	local UWindowDialogControl C;
+
+	C = UWindowDialogControl(CreateWindow(ControlClass, X, Y, W, H, OwnerWindow));
+	C.Register(Self);
+	C.Notify(C.DE_Created);
+	C.AlignmentType = Alignment;
+	C.ScreenPctToAlignTo = ScreenPCT;
+
+	if(TabLast == None)
+	{
+		TabLast = C;
+		C.TabNext = C;
+		C.TabPrev = C;
+	}
+	else
+	{
+		C.TabNext = TabLast.TabNext;
+		C.TabPrev = TabLast;
+		TabLast.TabNext.TabPrev = C;
+		TabLast.TabNext = C;
+
+		TabLast = C;
+	}
+
+	Log("Created Aligned Control: " $C$ " Aligned on: " $C.AlignmentType.EnumName(C.AlignmentType));
+	return C;
+}
 // Metallicafan212:	Override version of the UWindow function, so we can auto scale on Y
 function UWindowDialogControl CreateControl(class<UWindowDialogControl> ControlClass, float X, float Y, float W, float H, optional UWindowWindow OwnerWindow)
 {
@@ -95,8 +126,15 @@ function PreOpenBook()
 {
 }
 
-function CreateBackPageButton (optional int nX, optional int nY)
+// Omega: Alignment added
+function CreateBackPageButton (optional int nX, optional int nY, optional EAlignmentType Alignment)
 {
+	// Omega: If blank, use this alignment
+	if(Alignment == AT_None)
+	{
+		Alignment = AT_Right;
+	}
+
 	if ( nX == 0 )
 	{
 		nX = 582;
@@ -110,7 +148,8 @@ function CreateBackPageButton (optional int nX, optional int nY)
 		textureReturnNorm = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuBackToGame",Class'Texture'));
 		textureReturnRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuBackToGameWet",Class'WetTexture'));
 	}
-	BackPageButton = HGameButton(CreateControl(Class'HGameButton', nX, nY,48.0,48.0));
+	//BackPageButton = HGameButton(CreateControl(Class'HGameButton', nX, nY,48.0,48.0));
+	BackPageButton = HGameButton(CreateAlignedControl(Class'HGameButton', nX, nY,48.0,48.0,,Alignment));
 	BackPageButton.UpTexture = textureReturnNorm;
 	BackPageButton.DownTexture = textureReturnNorm;
 	BackPageButton.OverTexture = textureReturnNorm;
@@ -120,7 +159,7 @@ function CreateBackPageButton (optional int nX, optional int nY)
 }
 
 // Metallicafan212:	Don't think this is used, so I'm not going to fix the jump shit
-//this is used lol -AdamJD
+// This is used lol -AdamJD
 function CreateTitleButton (string strTitle, optional int nXPos, optional int nYPos)
 {
 	local bool bCenter;
@@ -172,9 +211,17 @@ function SetBackPageToolTip (bool bBackPage)
 	}
 }
 
+
+// Omega: Correct this:
 function int GetStatusY()
 {
-  return WinHeight - 26;
+	local float HScale;
+	// Omega: Scale the GetStatusY function
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+
+	//return (WinHeight * HScale) - 26;
+	return (WinHeight - 26) * HScale;
+	//return WinHeight - 26;
 }
 
 function Notify (UWindowDialogControl C, byte E)
@@ -251,7 +298,13 @@ function HPMessageBox doHPMessageBox (string Msg, string textButton1, optional s
 {
 	local HPMessageBox W;
 
-	W = HPMessageBox(Root.CreateWindow(Class'HPMessageBox',(640.0 - 246) / 2,(480.0 - 102) / 2,246.0,150.0,self));
+	local float HScale;
+	
+	// Metallicafan212:	Cache it
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+
+	// Omega: Scale the X reduction by the HScale:
+	W = HPMessageBox(Root.CreateWindow(Class'HPMessageBox',(640.0 - (246) * HScale) / 2,(480.0 - 102) / 2,246.0,150.0,self));
 	W.Setup(Msg,textButton1,textButton2,TimeOut);
 	Root.ShowModal(W);
 	return W;

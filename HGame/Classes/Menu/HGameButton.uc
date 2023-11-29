@@ -83,7 +83,8 @@ function Resized()
 	WinTop		= (WY * HScale) + YOffset;
 	WinWidth	= WW * HScale;
 	WinHeight	= WH * HScale;
-	WinLeft		= WX + XOffset;
+	// Omega: Align our button based on its alignment type
+	WinLeft		= AlignButton(WX + XOffset);
 	
 	//RegionScale = GetHeightScale();
 

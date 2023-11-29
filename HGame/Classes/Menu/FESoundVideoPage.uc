@@ -4,6 +4,10 @@
 
 class FESoundVideoPage extends baseFEPage;
 
+Const HUDScaleMult = 100.0;
+Const TextScaleMult = 100.0;
+Const TextScaleDecimals = 4;
+
 var string GameRenderDriver;
 var bool bInitialized;
 var string OldSettings;
@@ -65,6 +69,21 @@ var float fLeftMarginIndent;
 var float fRightMargin;
 var float fRightMarginIndent;
 
+// Omega: New settings being added here:
+// Omega: In HUD.HUD4By3ScalePercent
+var HGameHSlider 		HUDScaleSlider;
+var HGameLabelControl 	HUDScaleLabel;
+var localized string 	HUDScaleText;
+var string 				HUDScaleDisplayText;
+var localized string 	HUDScaleToolText;
+
+// Omega: In PlayerPawn.ExtraFontScale
+var HGameHSlider 		TextScaleSlider;
+var HGameLabelControl 	TextScaleLabel;
+var localized string 	TextScaleText; // lol
+var string 				TextScaleDisplayText;
+var localized string 	TextScaleToolText;
+
 function LocalizeStrings()
 {
 	local int I;
@@ -92,10 +111,17 @@ function LocalizeStrings()
 	ConfirmSettingsText = GetLocalFEString("Options_0048");
 	ConfirmSettingsCancelTitle = GetLocalFEString("Options_0049");
 	ConfirmSettingsCancelText = GetLocalFEString("Options_0050");
+
+	// Omega: New text
+	HUDScaleText = Localize("all", "M212MenuHUDCenter", "M212Menu");
+	HUDScaleToolText = Localize("all", "M212MenuHUDCenterToolTip", "M212Menu");
+
+	TextScaleText = Localize("all", "M212MenuFontScale", "M212Menu");
+	TextScaleToolText = Localize("all", "M212MenuFontScaleToolTip", "M212Menu");
 }
 
 function Created()
-{  
+{
 	local int ctlX;
 	local int ctlY;
 	local int ctlW;
@@ -127,7 +153,9 @@ function Created()
 	offsetY = 0;
 	ctlX = 180 - offsetX;
 	labelX = ctlX - 80;
-	ctlY = 90 - offsetY;
+	// Omega: Start a bit higher up
+	ctlY = 50 - offsetY;
+	//ctlY = 90 - offsetY;
 	ctlH = 17;
 	ctlW = 144;
 	fHalfX = 640.0 / 2;
@@ -141,7 +169,7 @@ function Created()
     //AdamJD:	From the demo/s, this properly aligns the text
     fLeftMargin = fEighthX - fThirtySecondX;
     fLeftMarginIndent = fLeftMargin + fEighthX + fThirtySecondX;
-	
+    
 	fRightMargin = fHalfX + fEighthX;
 	fRightMarginIndent = fRightMargin + fSixteenthX;
 	fLeftMargin += offsetX;
@@ -157,18 +185,18 @@ function Created()
 	labelHeight = 24;
 	textHeight = 10.0;
 	textOffsetY = buttonHeight / 2 - textHeight / 2;
-	VideoLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMargin,ctlY,labelWidth,1.0));
+	VideoLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMargin,ctlY,labelWidth,1.0,,AT_Center));
 	VideoLabel.SetText(videoText);
 	VideoLabel.SetFont(1);
 	VideoLabel.TextColor = GoupLabelTextColor;
 	ctlY += 40;
 	I = 0;
-
-	ResolutionLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
+  
+	ResolutionLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight,,AT_Center));
 	ResolutionLabel.SetText(ResolutionText);
 	ResolutionLabel.SetFont(1);
 	ResolutionLabel.TextColor = LabelTextColor;
-	ResolutionCombo = HPMenuOptionCombo(CreateControl(Class'HPMenuOptionCombo',fLeftMarginIndent,ctlY,buttonWidth,buttonHeight));
+	ResolutionCombo = HPMenuOptionCombo(CreateAlignedControl(Class'HPMenuOptionCombo',fLeftMarginIndent,ctlY,buttonWidth,buttonHeight,,AT_Center));
 	ResolutionCombo.SetFont(1);
 	ResolutionCombo.SetEditable(False);
 	ResolutionCombo.EditBoxWidth = buttonWidth;
@@ -177,24 +205,26 @@ function Created()
 	ctlY += vertSpacing[I++ ];
   
 	/*
-	ColorDepthLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
+	ColorDepthLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
 	ColorDepthLabel.SetText(ColorDepthText);
 	ColorDepthLabel.SetFont(1);
 	ColorDepthLabel.TextColor = LabelTextColor;
-	ColorDepthCombo = HPMenuOptionCombo(CreateControl(Class'HPMenuOptionCombo',fLeftMarginIndent,ctlY,buttonWidth,buttonHeight));
+	ColorDepthCombo = HPMenuOptionCombo(CreateAlignedControl(Class'HPMenuOptionCombo',fLeftMarginIndent,ctlY,buttonWidth,buttonHeight));
 	ColorDepthCombo.SetFont(1);
 	ColorDepthCombo.SetEditable(False);
 	ColorDepthCombo.EditBoxWidth = buttonWidth;
 	ColorDepthCombo.TextColor = LabelTextColor;
 	ColorDepthCombo.SetEditTextColor(ButtonTextColor);
 	*/
-	ctlY += vertSpacing[I++ ];
+	// Omega: Hammond you forgot to disable the vertical space added for it
+	//ctlY += vertSpacing[I++ ];
+	VertSpacing[I++];
   
-	TextureDetailLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
+	TextureDetailLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight,,AT_Center));
 	TextureDetailLabel.SetText(TextureDetailText);
 	TextureDetailLabel.SetFont(1);
 	TextureDetailLabel.TextColor = LabelTextColor;
-	TextureDetailCombo = HPMenuOptionCombo(CreateControl(Class'HPMenuOptionCombo',fLeftMarginIndent,ctlY,buttonWidth,buttonHeight));
+	TextureDetailCombo = HPMenuOptionCombo(CreateAlignedControl(Class'HPMenuOptionCombo',fLeftMarginIndent,ctlY,buttonWidth,buttonHeight,,AT_Center));
 	TextureDetailCombo.SetFont(1);
 	TextureDetailCombo.SetEditable(False);
 	TextureDetailCombo.EditBoxWidth = buttonWidth;
@@ -205,21 +235,24 @@ function Created()
 	TextureDetailCombo.AddItem(DetailLevel[3],"Low");
 	ctlY += 10 + vertSpacing[I++ ];
   
-	ObjectDetailLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
+	ObjectDetailLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight,,AT_Center));
 	ObjectDetailLabel.SetText(ObjectDetailText);
 	ObjectDetailLabel.SetFont(1);
 	ObjectDetailLabel.TextColor = LabelTextColor;
-	ObjectDetailSlider = HPMenuOptionHSlider(CreateControl(Class'HPMenuOptionHSlider',fLeftMarginIndent,ctlY,SliderWidth,sliderHeight));
+	ObjectDetailSlider = HPMenuOptionHSlider(CreateAlignedControl(Class'HPMenuOptionHSlider',fLeftMarginIndent,ctlY,SliderWidth,sliderHeight,,AT_Center));
 	ObjectDetailSlider.bNoSlidingNotify = True;
+	// Omega: this is the correct range:
 	ObjectDetailSlider.SetRange(0.0,4.0,1);
+	// Omega: Better Object detail range
+	//ObjectDetailSlider.SetRange(0.0,15.0,1);
 	ObjectDetailSlider.SliderWidth = SliderWidth;
 	ctlY += 32;
   
-	ObjectDetailLoText = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMarginIndent,ctlY,labelWidth,labelHeight));
+	ObjectDetailLoText = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMarginIndent,ctlY,labelWidth,labelHeight,,AT_Center));
 	ObjectDetailLoText.SetText(VolumeLoText);
 	ObjectDetailLoText.SetFont(0);
 	ObjectDetailLoText.TextColor = GoupLabelTextColor;
-	ObjectDetailHiText = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMarginIndent + SliderWidth - 20,ctlY,labelWidth,labelHeight));
+	ObjectDetailHiText = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMarginIndent + SliderWidth - 20,ctlY,labelWidth,labelHeight,,AT_Center));
 	ObjectDetailHiText.SetText(VolumeHiText);
 	ObjectDetailHiText.SetFont(0);
 	ObjectDetailHiText.TextColor = GoupLabelTextColor;
@@ -227,58 +260,94 @@ function Created()
 	ObjectDetailHiText.ResizeRemoval = 20;
 	ctlY += vertSpacing[I++ ];
   
-	BrightnessLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight));
+	BrightnessLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight,,AT_Center));
 	BrightnessLabel.SetText(BrightnessText);
 	BrightnessLabel.SetFont(1);
 	BrightnessLabel.TextColor = LabelTextColor;
-	BrightnessSlider = HPMenuOptionHSlider(CreateControl(Class'HPMenuOptionHSlider',fLeftMarginIndent,ctlY,SliderWidth,sliderHeight));
+
+	BrightnessSlider = HPMenuOptionHSlider(CreateAlignedControl(Class'HPMenuOptionHSlider',fLeftMarginIndent,ctlY,SliderWidth,sliderHeight,,AT_Center));
 	BrightnessSlider.bNoSlidingNotify = True;
 	BrightnessSlider.SetRange(2.0,10.0,1);
 	BrightnessSlider.SliderWidth = SliderWidth;
 	ctlY += 32;
   
-	BrightnessLoText = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMarginIndent,ctlY,labelWidth,labelHeight));
+	BrightnessLoText = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMarginIndent,ctlY,labelWidth,labelHeight,,AT_Center));
 	BrightnessLoText.SetText(VolumeLoText);
 	BrightnessLoText.SetFont(0);
 	BrightnessLoText.TextColor = GoupLabelTextColor;
-	BrightnessHiText = HGameLabelControl(CreateControl(Class'HGameLabelControl',fLeftMarginIndent + SliderWidth - 20,ctlY,labelWidth,labelHeight));
+	BrightnessHiText = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMarginIndent + SliderWidth - 20,ctlY,labelWidth,labelHeight,,AT_Center));
 	BrightnessHiText.SetText(VolumeHiText);
 	BrightnessHiText.SetFont(0);
 	BrightnessHiText.TextColor = GoupLabelTextColor;
 	BrightnessHiText.bEnableWidthResize = true;
 	BrightnessHiText.ResizeRemoval = 20;
+
+	// Omega: New elements for HUD and Text scale
+	/*HUDScaleSlider
+	HUDScaleLabel
+	TextScaleSlider
+	TextScaleLabel
+	HUDScaleMult 
+	TextScaleMult*/
+	// Omega: The other elements use 40 too
+	ctlY += 30;
+	HUDScaleLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight,,AT_Center));
+	HUDScaleLabel.SetText(HUDScaleText);
+	HUDScaleLabel.SetFont(1);
+	HUDScaleLabel.TextColor = LabelTextColor;
+
+	HUDScaleSlider = HPMenuOptionHSlider(CreateAlignedControl(Class'HPMenuOptionHSlider',fLeftMarginIndent,ctlY,SliderWidth,sliderHeight,,AT_Center));
+	HUDScaleSlider.bNoSlidingNotify = True;
+	HUDScaleSlider.SetRange(0.0,1.0 * HUDScaleMult,1);
+	HUDScaleSlider.SliderWidth = SliderWidth;
+	// Omega: Do sliders really not support tooltips???
+	//HUDScaleSlider.ToolTipString = HUDScaleToolText;
+
+	ctlY += 40;
+	TextScaleLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fLeftMargin,ctlY + textOffsetY,labelWidth,labelHeight,,AT_Center));
+	TextScaleLabel.SetText(TextScaleText);
+	TextScaleLabel.SetFont(1);
+	TextScaleLabel.TextColor = LabelTextColor;
+
+	TextScaleSlider = HPMenuOptionHSlider(CreateAlignedControl(Class'HPMenuOptionHSlider',fLeftMarginIndent,ctlY,SliderWidth,sliderHeight,,AT_Center));
+	TextScaleSlider.bNoSlidingNotify = True;
+	TextScaleSlider.SetRange(1.0 * TextScaleMult,1.5 * TextScaleMult,1);
+	TextScaleSlider.SliderWidth = SliderWidth;
+	//TextScaleSlider.ToolTipString = TextScaleToolText;
+
+	// end of new elements
   
 	ctlY += vertSpacing[I++ ];
 	ctlY = 90 - offsetY;
 	ctlX = 380 - offsetX;
 	labelX = 470 - offsetX;
   
-	AudioLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fRightMargin,ctlY,labelWidth,labelHeight));
+	AudioLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fRightMargin,ctlY,labelWidth,labelHeight,,AT_Center));
 	AudioLabel.SetText(audioText);
 	AudioLabel.SetFont(1);
 	AudioLabel.TextColor = GoupLabelTextColor;
 	ctlY += 30;
   
 	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
-	MusicVolumeLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',fRightMargin,ctlY + textOffsetY,labelWidth,labelHeight));
+	MusicVolumeLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',fRightMargin,ctlY + textOffsetY,labelWidth,labelHeight,,AT_Center));
 	MusicVolumeLabel.SetText( MusicVolumeText $" - " $int(MusicVolumeSlider.Value) );
 	MusicVolumeLabel.SetFont(1);
 	MusicVolumeLabel.TextColor = LabelTextColor;
 	ctlY += 30;
   
 	MusicVolume = int(float(GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.AudioDevice MusicVolume")) * 100);
-	MusicVolumeSlider = HPMenuOptionHSlider(CreateControl(class'HPMenuOptionHSlider', fRightMargin, ctlY, SliderWidth, sliderHeight));
+	MusicVolumeSlider = HPMenuOptionHSlider(CreateAlignedControl(class'HPMenuOptionHSlider', fRightMargin, ctlY, SliderWidth, sliderHeight,,AT_Center));
 	MusicVolumeSlider.SetRange(0.0, 100.0, 1);
 	MusicVolumeSlider.SliderWidth = SliderWidth;
 	MusicVolumeSlider.SetValue(MusicVolume);
 	MusicVolumeSlider.SetText("");
 	ctlY += 32;
   
-	MusicVolumeLoText = HGameLabelControl(CreateControl(class'HGameLabelControl', fRightMargin, ctlY, labelWidth, labelHeight));
+	MusicVolumeLoText = HGameLabelControl(CreateAlignedControl(class'HGameLabelControl', fRightMargin, ctlY, labelWidth, labelHeight,,AT_Center));
 	MusicVolumeLoText.SetText(VolumeLoText);
 	MusicVolumeLoText.SetFont(0);
 	MusicVolumeLoText.TextColor = GoupLabelTextColor;
-	MusicVolumeHiText = HGameLabelControl(CreateControl(class'HGameLabelControl', (fRightMargin + SliderWidth) - 20, ctlY, labelWidth, labelHeight));
+	MusicVolumeHiText = HGameLabelControl(CreateAlignedControl(class'HGameLabelControl', (fRightMargin + SliderWidth) - 20, ctlY, labelWidth, labelHeight,,AT_Center));
 	MusicVolumeHiText.SetText(VolumeHiText);
 	MusicVolumeHiText.SetFont(0);
 	MusicVolumeHiText.TextColor = GoupLabelTextColor;
@@ -287,25 +356,25 @@ function Created()
 	ctlY += 30;
   
 	Log("Options::SoundVideoPage: MusicVolume " $ string(MusicVolume));
-	SoundVolumeLabel = HGameLabelControl(CreateControl(class'HGameLabelControl', fRightMargin, ctlY + textOffsetY, labelWidth, labelHeight));
+	SoundVolumeLabel = HGameLabelControl(CreateAlignedControl(class'HGameLabelControl', fRightMargin, ctlY + textOffsetY, labelWidth, labelHeight,,AT_Center));
 	SoundVolumeLabel.SetText( SoundVolumeText $ " - " $int(SoundVolumeSlider.Value) );
 	SoundVolumeLabel.SetFont(1);
 	SoundVolumeLabel.TextColor = LabelTextColor;
 	ctlY += 30;
   
 	SoundVolume = int(float(GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.AudioDevice SoundVolume")) * 100); 
-	SoundVolumeSlider = HPMenuOptionHSlider(CreateControl(class'HPMenuOptionHSlider', fRightMargin, ctlY, SliderWidth, sliderHeight));
+	SoundVolumeSlider = HPMenuOptionHSlider(CreateAlignedControl(class'HPMenuOptionHSlider', fRightMargin, ctlY, SliderWidth, sliderHeight,,AT_Center));
 	SoundVolumeSlider.SetRange(0.0, 100.0, 1);
 	SoundVolumeSlider.SliderWidth = SliderWidth;
 	SoundVolumeSlider.SetValue(SoundVolume);
 	SoundVolumeSlider.SetText("");
 	ctlY += 32;
   
-	SoundVolumeLoText = HGameLabelControl(CreateControl(class'HGameLabelControl', fRightMargin, ctlY, labelWidth, labelHeight));
+	SoundVolumeLoText = HGameLabelControl(CreateAlignedControl(class'HGameLabelControl', fRightMargin, ctlY, labelWidth, labelHeight,,AT_Center));
 	SoundVolumeLoText.SetText(VolumeLoText);
 	SoundVolumeLoText.SetFont(0);
 	SoundVolumeLoText.TextColor = GoupLabelTextColor;
-	SoundVolumeHiText = HGameLabelControl(CreateControl(class'HGameLabelControl', (fRightMargin + SliderWidth) - 20, ctlY, labelWidth, labelHeight));
+	SoundVolumeHiText = HGameLabelControl(CreateAlignedControl(class'HGameLabelControl', (fRightMargin + SliderWidth) - 20, ctlY, labelWidth, labelHeight,,AT_Center));
 	SoundVolumeHiText.SetText(VolumeHiText);
 	SoundVolumeHiText.SetFont(0);
 	SoundVolumeHiText.TextColor = GoupLabelTextColor;
@@ -388,21 +457,28 @@ function LoadAvailableSettings()
 	local string ResY;
 	
 	local bool   bIsFull;
-	
-	bIsFull = bool(GetPlayerOwner().ConsoleCommand("IsFullscreen"));
 
-	GameRenderDriver = GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine GameRenderDevice");
+	// Omega: Cache this:
+	local PlayerPawn PP;
+	local HUD Hud;
+
+	PP = GetPlayerOwner();
+	Hud = PP.myHUD;
+	
+	bIsFull = bool(PP.ConsoleCommand("IsFullscreen"));
+
+	GameRenderDriver = PP.ConsoleCommand("get ini:Engine.Engine GameRenderDevice");
 	bInitialized = False;
 	ResolutionCombo.Clear();
-	GetPlayerOwner().ClientMessage("GameRenderDriver:" $ GameRenderDriver);
-	//if ( GetPlayerOwner().IsSoftwareRendering() )
+	PP.ClientMessage("GameRenderDriver:" $ GameRenderDriver);
+	//if ( PP.IsSoftwareRendering() )
 	//{
 	//	ResolutionCombo.AddItem("512x384");
 	//	ResolutionCombo.SetValue("512x384");
 	//} 
 	//else 
 	//{
-	ParseString = GetPlayerOwner().ConsoleCommand("GetRes");
+	ParseString = PP.ConsoleCommand("GetRes");
 		
 	log(ParseString);
 		
@@ -421,15 +497,15 @@ function LoadAvailableSettings()
 		p = InStr(ParseString," ");
 	}
 	
-	//strIsFullscreen = GetPlayerOwner().ConsoleCommand("IsFullscreen");
+	//strIsFullscreen = PP.ConsoleCommand("IsFullscreen");
 		
 	// Metallicafan212:	Wow, you could've casted there dumbo
 	if ( bIsFull )//bool(strIsFullscreen) )
 	{
 		Log("I think we are in fullscreen mode");
-		strCurrentRes = GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.ViewportManager FullscreenViewportX");
+		strCurrentRes = PP.ConsoleCommand("get ini:Engine.Engine.ViewportManager FullscreenViewportX");
 		strCurrentRes = strCurrentRes $ "x";
-		strCurrentRes = strCurrentRes $ GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.ViewportManager FullscreenViewportY");
+		strCurrentRes = strCurrentRes $ PP.ConsoleCommand("get ini:Engine.Engine.ViewportManager FullscreenViewportY");
 	} 
 	else 
 	{
@@ -439,12 +515,12 @@ function LoadAvailableSettings()
 		//ResolutionCombo.AddItem("1440x1080");
 		//ResolutionCombo.Sort();
 			
-		strCurrentRes = GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.ViewportManager WindowedViewportX");
+		strCurrentRes = PP.ConsoleCommand("get ini:Engine.Engine.ViewportManager WindowedViewportX");
 		strCurrentRes = strCurrentRes $ "x";
-		strCurrentRes = strCurrentRes $ GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.ViewportManager WindowedViewportY");
+		strCurrentRes = strCurrentRes $ PP.ConsoleCommand("get ini:Engine.Engine.ViewportManager WindowedViewportY");
 	}
     
-	GetPlayerOwner().ClientMessage("strIsFullscreen:" $ strIsFullscreen $ "strCurrentRes:" $ strCurrentRes);
+	PP.ClientMessage("strIsFullscreen:" $ strIsFullscreen $ "strCurrentRes:" $ strCurrentRes);
 	Log("Setting our ResolutionCombo to:" $ strCurrentRes);
 	ResolutionCombo.SetValue(strCurrentRes);
 	//}
@@ -452,9 +528,9 @@ function LoadAvailableSettings()
 	// Metallicafan212:	Not needed
 	/*
 	ColorDepthCombo.Clear();
-	if ( GetPlayerOwner().IsSoftwareRendering() )
+	if ( PP.IsSoftwareRendering() )
 	{
-		ParseString = GetPlayerOwner().ConsoleCommand("GetColorDepths");
+		ParseString = PP.ConsoleCommand("GetColorDepths");
 		p = InStr(ParseString," ");
 		if ( p != -1 )
 		{
@@ -464,7 +540,7 @@ function LoadAvailableSettings()
 	} 
 	else 
 	{
-		ParseString = GetPlayerOwner().ConsoleCommand("GetColorDepths");
+		ParseString = PP.ConsoleCommand("GetColorDepths");
 		p = InStr(ParseString," ");
 		while ( p != -1 )
 		{
@@ -474,17 +550,17 @@ function LoadAvailableSettings()
 		}
    
 		ColorDepthCombo.AddItem(ParseString @ BitsText,ParseString);
-		CurrentDepth = GetPlayerOwner().ConsoleCommand("GetCurrentColorDepth");
+		CurrentDepth = PP.ConsoleCommand("GetCurrentColorDepth");
 		ColorDepthCombo.SetValue(CurrentDepth @ BitsText,CurrentDepth);
 	}
 	*/
 	
-	Brightness = int(float(GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.ViewportManager Brightness")) * 10);
+	Brightness = int(float(PP.ConsoleCommand("get ini:Engine.Engine.ViewportManager Brightness")) * 10);
 	BrightnessSlider.SetValue(Brightness);
-	OldTextureDetail = Max(0,TextureDetailCombo.FindItemIndex2(GetPlayerOwner().ConsoleCommand("get ini:Engine.Engine.ViewportManager TextureDetail")));
+	OldTextureDetail = Max(0,TextureDetailCombo.FindItemIndex2(PP.ConsoleCommand("get ini:Engine.Engine.ViewportManager TextureDetail")));
 	TextureDetailCombo.SetSelectedIndex(OldTextureDetail);
-	
-	switch (GetPlayerOwner().ObjectDetail)
+	// Omega:
+	switch (PP.ObjectDetail)
 	{
 		case ObjectDetailVeryLow:
 			ObjectDetailSlider.SetValue(0.0);
@@ -501,7 +577,18 @@ function LoadAvailableSettings()
 		case ObjectDetailVeryHigh:
 			ObjectDetailSlider.SetValue(4.0);
 			break;
+		
 	}
+
+	// Omega: Now initialize HUDScale and TextScale
+	HUDScaleSlider.SetValue(Hud.HUD4By3ScalePercent * HUDScaleMult);
+	//HUDScaleDisplayText
+	HUDScaleLabel.SetText(HUDScaleText$ " - " $Int(Hud.HUD4By3ScalePercent * HUDScaleMult)$ "%");
+
+	TextScaleSlider.SetValue(PP.ExtraFontScale * TextScaleMult);
+	//TextScaleDisplayText
+	TextScaleLabel.SetText(TextScaleText$ " - " $Left(String(PP.ExtraFontScale), TextScaleDecimals)$ "X");
+
 	bInitialized = True;
 }
 
@@ -513,7 +600,7 @@ function SettingsChanged()
 	{
 		OldSettings = GetPlayerOwner().ConsoleCommand("GetCurrentRes") $ "x32"; //$ GetPlayerOwner().ConsoleCommand("GetCurrentColorDepth");
 		
-		// Metallicafan212:	Force 32 but color
+		// Metallicafan212:	Force 32 butt color
 		NewSettings = ResolutionCombo.GetValue() $ "x32"; //$ ColorDepthCombo.GetValue2();
 		if ( NewSettings != OldSettings )
 		{
@@ -528,22 +615,24 @@ function SettingsChanged()
 
 function WindowDone (UWindowWindow W)
 {
-  if ( W == ConfirmSettings )
-  {
-    if ( (ConfirmSettings.Result == "") || (ConfirmSettings.Result == GetLocalFEString("Main_Menu_0009")) )
-    {
-      if ( ConfirmSettings.bClosedFromTick )
-      {
-        HPConsole(Root.Console).ResTimeOutSettings = OldSettings;
-      } else {
-        GetPlayerOwner().ConsoleCommand("SetRes " $ OldSettings);
-      }
-      LoadAvailableSettings();
-      GetPlayerOwner().SaveConfig();
-      doHPMessageBox(ConfirmSettingsCancelText,GetLocalFEString("Shared_Menu_0008"));
-    }
-    ConfirmSettings = None;
-  }
+	if ( W == ConfirmSettings )
+	{
+		if ( (ConfirmSettings.Result == "") || (ConfirmSettings.Result == GetLocalFEString("Main_Menu_0009")) )
+		{
+			if ( ConfirmSettings.bClosedFromTick )
+			{
+				HPConsole(Root.Console).ResTimeOutSettings = OldSettings;
+			} 
+			else 
+			{
+				GetPlayerOwner().ConsoleCommand("SetRes " $ OldSettings);
+			}
+			LoadAvailableSettings();
+			GetPlayerOwner().SaveConfig();
+			doHPMessageBox(ConfirmSettingsCancelText,GetLocalFEString("Shared_Menu_0008"));
+		}
+		ConfirmSettings = None;
+	}
 }
 
 function HideWindow()
@@ -618,7 +707,7 @@ function ObjectDetailChanged()
 
 function MusicVolumeChanged()
 {
-	//UTPT didn't decompile this (added from UEExplorer) -AdamJD
+	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
 	MusicVolumeLabel.SetText( MusicVolumeText $" - " $int(MusicVolumeSlider.Value) );
 	GetPlayerOwner().ConsoleCommand("SETVOLUMES MUSIC=" $(MusicVolumeSlider.Value / 100));
 	GetPlayerOwner().ConsoleCommand("set ini:Engine.Engine.AudioDevice MusicVolume "$(MusicVolumeSlider.Value / 100));
@@ -626,10 +715,32 @@ function MusicVolumeChanged()
 
 function SoundVolumeChanged()
 {
-	//UTPT didn't decompile this (added from UEExplorer) -AdamJD
+	//UTPT didn't decompile this(added from UEExplorer) -AdamJD
 	SoundVolumeLabel.SetText( SoundVolumeText $" - " $int(SoundVolumeSlider.Value) );
 	GetPlayerOwner().ConsoleCommand("SETVOLUMES SOUND=" $(SoundVolumeSlider.Value / 100));
 	GetPlayerOwner().ConsoleCommand("set ini:Engine.Engine.AudioDevice SoundVolume "$(SoundVolumeSlider.Value / 100));
+}
+
+// Omega: New elements updated:
+function HUDScaleChanged()
+{
+	local HUD Hud;
+	Hud = GetPlayerOwner().myHUD;
+	Hud.HUDScale(HUDScaleSlider.Value / HUDScaleMult);
+	Root.ResolutionChanged(Root.RealWidth, Root.RealHeight);
+
+	HUDScaleLabel.SetText(HUDScaleText$ " - " $Int(Hud.HUD4By3ScalePercent * HUDScaleMult)$ "%");
+	// Omega: HUDScale calls it
+	//SaveConfig();
+}
+
+function TextScaleChanged()
+{
+	local PlayerPawn PP;
+	PP = GetPlayerOwner();
+	PP.ExtraFontScale = TextScaleSlider.Value / TextScaleMult;
+	PP.SaveConfig();
+	TextScaleLabel.SetText(TextScaleText$ " - " $Left(String(PP.ExtraFontScale), TextScaleDecimals)$ "X");
 }
 
 function Notify (UWindowDialogControl C, byte E)
@@ -661,13 +772,42 @@ function Notify (UWindowDialogControl C, byte E)
 				case SoundVolumeSlider:
 					SoundVolumeChanged();
 					break;
+				// Omega: New elements
+				case HUDScaleSlider:
+					HUDScaleChanged();
+					break;
+				case TextScaleSlider:
+					TextScaleChanged();
+					break;
 			}
 			break;
 		case DE_Click:
 			switch (C)
 			{
 				case BackPageButton:
-				FEBook(book).DoEscapeFromPage();
+					FEBook(book).DoEscapeFromPage();
+			}
+			break;
+		case DE_MouseEnter:
+			switch (C)
+			{
+				case HUDScaleSlider:
+					ToolTip(HUDScaleToolText);
+					break;
+				case TextScaleSlider:
+					ToolTip(TextScaleToolText);
+					break;
+			}
+			break;
+		case DE_MouseLeave:
+			switch (C)
+			{
+				case HUDScaleSlider:
+					ToolTip("");
+					break;
+				case TextScaleSlider:
+					ToolTip("");
+					break;
 			}
 			break;
 	}

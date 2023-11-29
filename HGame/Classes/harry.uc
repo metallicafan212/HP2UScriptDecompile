@@ -301,7 +301,9 @@ var travel ChallengeScoreType ChallengeScores[4];
 var bool bForceBlackScreen;
 var travel bool bHarryKilled;
 var int iMinHealthAfterDeath;
-
+// DivingDeep39: Used for ObjectiveId's localization and section
+var travel string strObjectiveIntFile;
+var travel string strObjectiveSection;
 
 event PreBeginPlay()
 {
@@ -5428,6 +5430,8 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
 	{
 		myHUD.EndCutScene();
 		DestroyControllers();
+		// DivingDeep39: Destroy TurnToController
+		DestroyTurnToPermanentController();
 		SendPlayerCaptureMessages(False);
 		bIsCaptured = False;
 		GotoState('PlayerWalking');
@@ -5539,13 +5543,18 @@ function bool CutCommand (string Command, optional string cue, optional bool bFa
 	} 
 	else if ( sActualCommand ~= "RunCredits" )
 	{
-		menuBook = HPConsole(Player.Console).menuBook;
-		if ( menuBook != None )
-		{
-			menuBook.RunTheCredits();
-			CutCue(cue);
-			return True;
-		}
+		HPConsole(Player.Console).menuBook.RunTheCredits();
+        CutCue(cue);
+        return True;
+
+        // Omega: menuBook deprecated because of its game busting potential:
+        /*menuBook = HPConsole(Player.Console).menuBook;
+        if ( menuBook != None )
+        {
+            menuBook.RunTheCredits();
+            CutCue(cue);
+            return True;
+        }*/
 	} 
 	else if ( sActualCommand ~= "ResetLevel" )
 	{

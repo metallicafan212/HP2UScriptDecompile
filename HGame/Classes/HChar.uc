@@ -65,6 +65,12 @@ var(WatchForHarry) name EventName;
 var Actor aListenToMe;
 var bool bCapturedFromStateIdle;
 
+// DivingDeep39: New variables for Bump Lines customization.
+var(BumpLinesM212) string BumpSetFile;
+var(BumpLinesM212) string LocalizationFile;
+var(BumpLinesM212) string Package;
+var(BumpLinesM212) string Section;
+
 
 function bool ShouldStartLookingForHarry()
 {
@@ -706,7 +712,9 @@ function DoBumpLine (optional bool bJustTalk, optional string AlternateBumpLineS
 	{
 		sSetID = AlternateBumpLineSet;
 		Level.PlayerHarryActor.ClientMessage("BUMPLINES:" $ string(self) $ " looking for BumpLineSet:" $ sSetID);
-		sSayTextID = Localize(sSetID, "line" $(Rand(int(Localize(sSetID, "Count", "BumpSet")))), "BumpSet");
+		// DivingDeep39: Replaced "BumpSet" with the BumpSetFile var.
+		//sSayTextID = Localize(sSetID, "line" $(Rand(int(Localize(sSetID, "Count", "BumpSet")))), "BumpSet");
+		sSayTextID = Localize(sSetID, "line" $(Rand(int(Localize(sSetID, "Count", BumpSetFile)))), BumpSetFile);
 	} 
 	else 
 	{
@@ -722,23 +730,31 @@ function DoBumpLine (optional bool bJustTalk, optional string AlternateBumpLineS
 		Level.PlayerHarryActor.ClientMessage("BUMPLINES:" $ string(self) $ " looking for BumpLineSet:" $ BumpLineSet);
 		if ( bDoRandomBumpLine )
 		{
-			rm = int(Localize(sSetID, "Count", "BumpSet"));
+			// DivingDeep39: Replaced "BumpSet" with the BumpSetFile var.
+			//rm = int(Localize(sSetID, "Count", "BumpSet"));
+			rm = int(Localize(sSetID, "Count", BumpSetFile));
 			ri = Rand(rm);
 			if ( ri == lastRandomBumpLine )
 			{
 				ri = (ri + 1) % rm;
 				lastRandomBumpLine = ri;
 			}
-			sSayTextID = Localize(sSetID, "line" $ri,"BumpSet");
+			// DivingDeep39: Replaced "BumpSet" with the BumpSetFile var.
+			//sSayTextID = Localize(sSetID, "line" $ri,"BumpSet");
+			sSayTextID = Localize(sSetID, "line" $ri,BumpSetFile);
 		} 
 		else 
 		{
-			sSayTextID = Localize(sSetID, "line" $curBumpLine,"BumpSet");
+			// DivingDeep39: Replaced "BumpSet" with the BumpSetFile var.
+			//sSayTextID = Localize(sSetID, "line" $curBumpLine,"BumpSet");
+			sSayTextID = Localize(sSetID, "line" $curBumpLine,BumpSetFile);
 			curBumpLine++ ;
 			if ( InStr(sSayTextID,"<") > -1 )
 			{
 				curBumpLine = 0;
-				sSayTextID = Localize(sSetID,"line" $curBumpLine,"BumpSet");
+				// DivingDeep39: Replaced "BumpSet" with the BumpSetFile var.
+				//sSayTextID = Localize(sSetID,"line" $curBumpLine,"BumpSet");
+				sSayTextID = Localize(sSetID,"line" $curBumpLine,BumpSetFile);
 			}
 		}
 		if ( InStr(sSayTextID, "<") > -1 )
@@ -748,7 +764,9 @@ function DoBumpLine (optional bool bJustTalk, optional string AlternateBumpLineS
 		}
 	}
 	Level.PlayerHarryActor.ClientMessage("BUMPLINES:" $ string(self) $ " looking for BumpLine ID:" $ sSayTextID);
-	sSayText = Localize("all",sSayTextID,"BumpDialog");
+	// DivingDeep39: Replaced " "all" " and "BumpDialog" with the Section and LocalizationFile vars.
+	//sSayText = Localize("all",sSayTextID,"BumpDialog");
+	sSayText = Localize(Section,sSayTextID,LocalizationFile);
 	if ( InStr(sSayText,"<?") > -1 )
 	{
 		Level.PlayerHarryActor.ClientMessage("ERROR BUMPLINES:" $ string(self) $ " couldn't find BumpLine ID:" $ sSayTextID $ " from BumpLineSet:" $ BumpLineSet);
@@ -762,7 +780,9 @@ function DoBumpLine (optional bool bJustTalk, optional string AlternateBumpLineS
 		Level.PlayerHarryActor.CutCommand("capture");
 	}
 	CutNotifyActor = self;
-	dlgSound = Sound(DynamicLoadObject("AllDialog." $sSayTextID,Class'Sound'));
+	// DivingDeep39: Replaced "AllDialog" with the Package var.
+	//dlgSound = Sound(DynamicLoadObject("AllDialog." $sSayTextID,Class'Sound'));
+	dlgSound = Sound(DynamicLoadObject(Package$"."$sSayTextID,Class'Sound'));
 	if ( dlgSound != None )
 	{
 		sndLen = GetSoundDuration(dlgSound);
@@ -1218,4 +1238,13 @@ defaultproperties
     bGestureFaceHorizOnly=False
 
     Buoyancy=118.80
+	
+	// DivingDeep39: New vars' defaults for stock compatibility
+	BumpSetFile="BumpSet"
+	
+	LocalizationFile="BumpDialog"	
+	
+	Package="AllDialog"
+	
+	Section="All"
 }

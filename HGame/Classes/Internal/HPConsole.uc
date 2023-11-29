@@ -33,6 +33,10 @@ var float fSlomoSpeed;
 var string CutSkippingString;
 var bool bVendorBar;
 
+// Omega: Whether we can do menu switching at the moment
+var bool bLockMenus;
+
+
 exec function DestroyClass (string Input)
 {
 	harry(Viewport.Actor).DestroyClass(Input);
@@ -813,6 +817,11 @@ exec function giveAllCards()
 // Metallicafan212:	Sigh... We have to do this so controllers can open the menu
 exec function AllowedInMenus TogglePauseMenu()
 {
+	// Omega: Return if we are not allowed
+	if(bLockMenus)
+	{
+		return;
+	}
 	//log("Toggle pause menu");
 	
 	menuBook.TogglePauseMenu();
@@ -821,6 +830,11 @@ exec function AllowedInMenus TogglePauseMenu()
 // Metallicafan212:	To be able to open and close the map
 exec function AllowedInMenus ToggleMapMenu()
 {
+	// Omega: Return if we are not allowed
+	if(bLockMenus)
+	{
+		return;
+	}
 	log("Toggle map");
 	menuBook.ToggleMap();
 }

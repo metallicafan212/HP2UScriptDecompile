@@ -34,7 +34,7 @@ function Created()
 	
 	for(I = 0; I < 4; I++)
 	{
-		NameButtons[I] = HGameButton(CreateControl(Class'HGameButton', 100.0, nStartY + I * 26, 200.0, 20.0));
+		NameButtons[I] = HGameButton(CreateAlignedControl(Class'HGameButton', 100.0, nStartY + I * 26, 200.0, 20.0,,AT_Center));
 		NameButtons[I].SetFont(4);
 		NameButtons[I].TextColor.R 	= 255;
 		NameButtons[I].TextColor.G 	= 255;
@@ -42,7 +42,7 @@ function Created()
 		NameButtons[I].Align 		= TA_Left; //from UWindowBase.uc in the proto -AdamJD 
 		NameButtons[I].bShadowText 	= True;
 	
-		ScoreButtons[I] = HGameButton(CreateControl(Class'HGameButton', 440.0, nStartY + I * 26, 200.0, 20.0));
+		ScoreButtons[I] = HGameButton(CreateAlignedControl(Class'HGameButton', 440.0, nStartY + I * 26, 200.0, 20.0,,AT_Center));
 		ScoreButtons[I].SetFont(4);
 		ScoreButtons[I].TextColor.R = 255;
 		ScoreButtons[I].TextColor.G = 255;
@@ -73,15 +73,16 @@ function RepositionChildControls()
 	
 	Super.RepositionChildControls();
 	
+	// Omega: Centering will take care of scaling issues...
 	// Metallicafan212:	Move the name buttons over to the left, the score buttons to the right
-	for(i = 0; i < 4; i++)
+	/*for(i = 0; i < 4; i++)
 	{
 		NameButtons[i].WX = 100.0 * HScale;
 		NameButtons[i].Resized();
 		
 		ScoreButtons[i].WX = 440.0 + Offset;//440.0 / HScale;
 		ScoreButtons[i].Resized();
-	}
+	}*/
 }
 
 function Notify (UWindowDialogControl C, byte E)

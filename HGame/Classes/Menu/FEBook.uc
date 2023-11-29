@@ -27,8 +27,15 @@ class FEBook extends baseFEBook;
 #exec Texture Import File=Textures\InGamePage\RBot.png		GROUP=FEBook	Name=FEBRight	COMPRESSION=3 UPSCALE=1 Mips=0 Flags=536870914
 #exec Texture Import File=Textures\InGamePage\Back.png		GROUP=FEBook	Name=FEBack		COMPRESSION=1 UPSCALE=1 Mips=0 Flags=0
 
+// Omega: Map Back:
+#exec Texture Import File=Textures\InGamePage\MapBG.png		GROUP=FEBook	Name=FEMapBack		COMPRESSION=1 UPSCALE=1 Mips=0 Flags=0
+
 // Metallicafan212:	Test
 //#exec Texture Import File=Textures\DeusEx.png				GROUP=FEBook	Name=FEDX		COMPRESSION=1 UPSCALE=1 MIPS=1 FLAGS=0
+
+// Omega: Since we made the graphics slightly bigger on accident (stock draws a clipped area, we un-clipped before redrawing in photoshop)
+// we need to reduce the size of our background assets
+Const FEMainSizeMult = 0.9333333333333333;
 
 // Metallicafan212:	Texture vars for these
 var Texture FEBot;
@@ -38,6 +45,9 @@ var Texture FEBL;
 var Texture FETR;
 var Texture FEBR;
 var Texture FEBackground;
+
+// Omega: Map background color:
+var Texture FEMapBackground;
 
 // Metallicafan212:	Optional middle "flavor" texture
 var Texture FEMid;
@@ -86,6 +96,8 @@ var bool bShowBackground;
 // Metallicafan212:	To show the custom main page background
 var bool bShowMainBack;
 var bool bShowNewBack;
+// Omega: New map back
+var bool bShowMapBack;
 
 var bool bDrawLogo;
 var bool bInEndGame;
@@ -96,7 +108,9 @@ var bool bShowSplash;
 var float fShowSplashTime;
 var bool bNewGame;
 var bool bGamePlaying;
-var UWindowWrappedTextArea StatusBarTextWindow;
+//var UWindowWrappedTextArea StatusBarTextWindow;
+// Omega: Scaling asset:
+var M212WrappedTextArea	StatusBarTextWindow;
 var bool bResolutionChanged;
 var Background InGameBackground;
 var Background Back1Background;
@@ -176,6 +190,16 @@ function ResolutionChanged (float W, float H)
 
 function ChangePage (baseFEPage Page)
 {
+	// Omega: Moved above the ShowWindow call so we don't override new GUIs
+	// Modders shouldn't need to edit FEBook for any real reason, keeps it easier to maintain
+	// Metallicafan212:	Default to false
+	bShowBackground = False;
+	
+	bShowMainBack = false;
+	bShowNewBack = false;
+	// Omega: New map back
+	bShowMapBack = false;
+
 	Log("ChangePage" @ string(Page));
 	if ( curPage != Page )
 	{
@@ -194,12 +218,6 @@ function ChangePage (baseFEPage Page)
 			}
 		}
 	}
-	
-	// Metallicafan212:	Default to false
-	bShowBackground = False;
-	
-	bShowMainBack = false;
-	bShowNewBack = false;
 	
 	switch (curPage)
 	{
@@ -296,6 +314,7 @@ function ChangePage (baseFEPage Page)
 			break;
     
 		case MapPage:
+			bShowMapBack = true;
 			break;
 		
 		case None:
@@ -412,10 +431,14 @@ function Created()
 	bNewGame 	= False;
 	DismissButton = HGameSmallButton(CreateControl(Class'HGameSmallButton', WinWidth - 10, 0.0, 10.0, 10.0));
 	DismissButton.SetFont(4);
-	StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea', 0.0, WinHeight - 26, 500.0, 26.0));
+	// Omega: Correct the ToolTip text positioning:
+	//StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea', 0.0, WinHeight - 26, 500.0, 26.0));
+	StatusBarTextWindow = M212WrappedTextArea(CreateControl(Class'M212WrappedTextArea', 0.0, WinHeight - 26, 500.0, 26.0));
+	StatusBarTextWindow.AlignmentType = AT_Left;
 	StatusBarTextWindow.Clear();
 	StatusBarTextWindow.AddText("");
 	StatusBarTextWindow.Font = 4;
+	StatusBarTextWindow.Resized();
 	bShowBackground = True;
 	InGamePage = FEInGamePage(CreateWindow(Class'FEInGamePage', 0.0, 0.0, WinWidth, WinHeight));
 	InGamePage.book = self;
@@ -594,13 +617,22 @@ function Paint (Canvas Canvas, float X, float Y)
 	// Metallicafan212:	Moved from FEInGamePage
 	Canvas.bNoUVClamp = true;
 	
-	if(bShowNewBack)
+	// Omega: Just hijack the background drawing for the Map back since it's a singular color
+	if(bShowNewBack || bShowMapBack)
 	{
 		// Metallicafan212:	Paint the background layer
 		Canvas.SetPos(0, 0);
 		Canvas.SetClip(Canvas.SizeX, Canvas.SizeY);
-		Canvas.DrawTileClipped(FEBackground, Canvas.SizeX, Canvas.SizeY, 0.0, 0.0, Canvas.SizeX * 2.5, Canvas.SizeY * 2.5);
-		
+		if(bShowNewBack)
+		{
+			Canvas.DrawTileClipped(FEBackground, Canvas.SizeX, Canvas.SizeY, 0.0, 0.0, Canvas.SizeX * 2.5, Canvas.SizeY * 2.5);
+		}
+		else
+		if(bShowMapBack)
+		{
+			Canvas.DrawTileClipped(FEMapBackground, Canvas.SizeX, Canvas.SizeY, 0.0, 0.0, Canvas.SizeX * 2.5, Canvas.SizeY * 2.5);
+		}
+				
 		// Metallicafan212:	We need to scale the pos to the middle of the screen
 		if(FEMid != none)
 		{
@@ -635,32 +667,37 @@ function Paint (Canvas Canvas, float X, float Y)
 	
 	if(bShowMainBack)
 	{
+		// Omega: At 1388x1048 stock takes up 210 pixels on top
+		// We take up 225. Same on bottom
+		// Therefore we need to be 0.9333333333333333 x the scale
+		// Cost for it: FEMainSizeMult
+
 		// Metallicafan212:	Now draw the top
 		// 					Middle first
 		Canvas.SetPos(0, 0);
-		Canvas.DrawTile(FETop, Canvas.SizeX, 128 * fScaleFactor, 0.0, 0.0, FETop.USize, FETop.VSize);
+		Canvas.DrawTile(FETop, Canvas.SizeX, FEMainSizeMult * 128 * fScaleFactor, 0.0, 0.0, FETop.USize, FETop.VSize);
 			
 		// Metallicafan212:	Left bracket
 		Canvas.SetPos(0, 0);
-		Canvas.DrawIcon(FETL, fScaleFactor * (128.0 / FETL.VSize));
+		Canvas.DrawIcon(FETL, FEMainSizeMult * fScaleFactor * (128.0 / FETL.VSize));
 			
 		// Metallicafan212:	Right bracket
-		Canvas.SetPos(Canvas.SizeX - (128.0 * fScaleFactor), 0);
-		Canvas.DrawIcon(FETR, fScaleFactor * (128.0 / FETL.VSize));
+		Canvas.SetPos(Canvas.SizeX - (128.0 * fScaleFactor * FEMainSizeMult), 0);
+		Canvas.DrawIcon(FETR, FEMainSizeMult * fScaleFactor * (128.0 / FETL.VSize));
 			
 		// Metallicafan212:	Draw the bottom
 		//					Middle first
-		Canvas.SetPos(0, Canvas.SizeY - (128.0 * fScaleFactor));
+		Canvas.SetPos(0, Canvas.SizeY - (128.0 * fScaleFactor * FEMainSizeMult));
 			
-		Canvas.DrawTile(FEBot, Canvas.SizeX, 128 * fScaleFactor, 0.0, 0.0, FETop.USize, FETop.VSize);
+		Canvas.DrawTile(FEBot, Canvas.SizeX, FEMainSizeMult * 128 * fScaleFactor, 0.0, 0.0, FETop.USize, FETop.VSize);
 			
 		// Metallicafan212:	Left bracket
-		Canvas.SetPos(0, Canvas.SizeY - (128.0 * fScaleFactor));
-		Canvas.DrawIcon(FEBL, fScaleFactor * (128.0 / FETL.VSize));
+		Canvas.SetPos(0, Canvas.SizeY - (128.0 * fScaleFactor * FEMainSizeMult));
+		Canvas.DrawIcon(FEBL, FEMainSizeMult * fScaleFactor * (128.0 / FETL.VSize));
 			
 		// Metallicafan212:	Right bracket
-		Canvas.SetPos(Canvas.SizeX - (128.0 * fScaleFactor), Canvas.SizeY - (128.0 * fScaleFactor));
-		Canvas.DrawIcon(FEBR, fScaleFactor * (128.0 / FETL.VSize));
+		Canvas.SetPos(Canvas.SizeX - (128.0 * fScaleFactor * FEMainSizeMult), Canvas.SizeY - (128.0 * fScaleFactor * FEMainSizeMult));
+		Canvas.DrawIcon(FEBR, FEMainSizeMult * fScaleFactor * (128.0 / FETL.VSize));
 	}
 	
 	// Metallicafan212:	After the InGamePage bars, render on top
@@ -708,6 +745,7 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	C.bNoSmooth = bOldNoSmooth;
 }
 
+// Omega: Stock version
 function OpenBook (optional string pageName)
 {
 	if ( HPConsole(Root.Console).bLocked )
@@ -1181,5 +1219,7 @@ defaultproperties
 	FETR=Texture'HGame.FEBook.FETRight'
     FEBR=Texture'HGame.FEBook.FEBRight'
 	FEBackground=Texture'HGame.FEBook.FEBack'
+	// Omega: New map BG
+	FEMapBackground=Texture'HGame.FEBook.FEMapBack'
 	//FEMid=Texture'HGame.FEBook.FEDX'
 }

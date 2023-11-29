@@ -25,6 +25,7 @@ function ResolutionChanged(float W, float H)
 function Resized()
 {
 	local float HScale;
+	local bool bSavedResize;
 	
 	Super.Resized();
 	
@@ -33,20 +34,49 @@ function Resized()
 	// Metallicafan212:	Scale our wanted values
 	//if (bEnableWidthResize)
 	//	WinLeft = WX - ((WX * HScale) / 8.0);
+
+	bSavedResize = bEnableWidthResize;
+	// Omega: Scale first, then if we need to override it, do that:
+
+	// Omega: Hack for Aligned icons:
+	if(AlignmentType != AT_None)
+	{
+		bEnableWidthResize = False;
+	}
+
+	if(Align == TA_Left)
+	{
+		WinLeft		= AlignButton(WX);
+	}
+	else if(Align == TA_Center)
+	{
+		WinLeft		= AlignButton(WX + (WW * 0.5)) - (WW * 0.5);
+	}
+	else if(Align == TA_Right)
+	{
+		WinLeft		= AlignButton(WX + (WW)) - (WW);
+	}
+	
 	
 	if(bEnableWidthResize)
+	{
+		WinLeft	= WinLeft + ResizeRemoval - (ResizeRemoval / (HScale * HScale));
+	}
+	/*if(bEnableWidthResize)
 	{
 		WinLeft = WX + ResizeRemoval;
 		
 		WinLeft = WinLeft - (ResizeRemoval / (HScale * HScale));
-	}
-		
+	}*/
+	
 	WinTop		= WY * HScale;
 	
 	//if(Align != TA_Center)
 	//	WinWidth	= WW * HScale;
 	
 	WinHeight	= WH * HScale;
+
+	bEnableWidthResize = bSavedResize;
 }
 
 function Created()

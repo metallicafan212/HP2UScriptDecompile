@@ -34,11 +34,12 @@ const nNUM_PAGES_GOLD= 1;
 const nNUM_PAGES_SILVER= 4;
 const nNUM_PAGES_BRONZE= 5;
 const nCARDS_PER_SET= 10;
-enum ECardGroup {
+var enum ECardGroup 
+{
   CardGroup_Bronze,
   CardGroup_Silver,
   CardGroup_Gold
-};
+} CurrCardGroup;
 
 var int HarrysGold[11];
 var int HarrysSilver[40];
@@ -84,7 +85,6 @@ var string strCardCountSilver;
 var string strCardCountGold;
 var int nBronzeHealthBars;
 var int nSilverKeys;
-var ECardGroup CurrCardGroup;
 var int nCurrPage;
 var int nCurrItemOnPage;
 var int nCurrNumPages;
@@ -123,7 +123,7 @@ function Created()
 	textureSilverKey 		= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2SilverCardKey",Class'Texture'));
 	textureBronzeHealth 	= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2FolioBronzeHealth",Class'Texture'));
   
-	HarryCardBmp = HGameButton(CreateWindow(Class'HGameButton',480.0,50.0,128.0,128.0));
+	HarryCardBmp = HGameButton(CreateAlignedControl(Class'HGameButton',480.0,50.0,128.0,128.0,,AT_Center));
 	HarryCardBmp.Register(self);
 	HarryCardBmp.bDisabled = True;
 	HarryCardBmp.bStretched = True;
@@ -147,12 +147,16 @@ function Created()
 	{
 		SmallCardBmp[I].Register(self);
 		SmallCardBmp[I].bStretched = True;
+		
+		// Omega: Set up an alignment for it:
+		SmallCardBmp[I].AlignmentType = AT_Center;
+		SmallCardBmp[I].Resized();
 	
 		// Metallicafan212:	Correct the card images
 		SmallCardBmp[i].WW = 60.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 		SmallCardBmp[i].WH = 60.0 / Class'M212HScale'.Static.UWindowGetHeightScale(Root);
 	}
-	GoldButton = HGameButton(CreateWindow(Class'HGameButton',12.0,70.0,50.0,48.0));
+	GoldButton = HGameButton(CreateAlignedControl(Class'HGameButton',12.0,70.0,50.0,48.0,,AT_Left));
 	GoldButton.Register(self);
 	GoldButton.UpTexture = textureGoldNormal;
 	GoldButton.DownTexture = textureGoldNormal;
@@ -160,7 +164,7 @@ function Created()
 	GoldButton.ToolTipString = GetLocalFEString("Folio_Menu_0003");
 	GoldButton.DownSound = Sound'GUI_Esc_Click3';
 	
-	SilverButton = HGameButton(CreateWindow(Class'HGameButton',12.0,125.0,50.0,48.0));
+	SilverButton = HGameButton(CreateAlignedControl(Class'HGameButton',12.0,125.0,50.0,48.0,,AT_Left));
 	SilverButton.Register(self);
 	SilverButton.UpTexture = textureSilverNormal;
 	SilverButton.DownTexture = textureSilverNormal;
@@ -168,7 +172,7 @@ function Created()
 	SilverButton.ToolTipString = GetLocalFEString("Folio_Menu_0004");
 	SilverButton.DownSound = Sound'GUI_Esc_Click3';
   
-	BronzeButton = HGameButton(CreateWindow(Class'HGameButton',12.0,180.0,50.0,48.0));
+	BronzeButton = HGameButton(CreateAlignedControl(Class'HGameButton',12.0,180.0,50.0,48.0,,AT_Left));
 	BronzeButton.Register(self);
 	BronzeButton.UpTexture = textureBronzeNormal;
 	BronzeButton.DownTexture = textureBronzeNormal;
@@ -176,21 +180,21 @@ function Created()
 	BronzeButton.ToolTipString = GetLocalFEString("Folio_Menu_0005");
 	BronzeButton.DownSound = Sound'GUI_Esc_Click3';
   
-	ForwardButton = HGameButton(CreateWindow(Class'HGameButton',605.0,316.0,32.0,32.0));
+	ForwardButton = HGameButton(CreateAlignedControl(Class'HGameButton',605.0,316.0,32.0,32.0,,AT_Right));
 	ForwardButton.Register(self);
 	ForwardButton.UpTexture = textureRightUp;
 	ForwardButton.DownTexture = textureRightUp;
 	ForwardButton.OverTexture = textureRightUp;
 	ForwardButton.ToolTipString = GetLocalFEString("Folio_Menu_0001");
   
-	BackButton = HGameButton(CreateWindow(Class'HGameButton',5.0,316.0,32.0,32.0));
+	BackButton = HGameButton(CreateAlignedControl(Class'HGameButton',5.0,316.0,32.0,32.0,,AT_Left));
 	BackButton.Register(self);
 	BackButton.UpTexture = textureLeftUp;
 	BackButton.DownTexture = textureLeftUp;
 	BackButton.OverTexture = textureLeftUp;
 	BackButton.ToolTipString = GetLocalFEString("Folio_Menu_0002");
   
-	NextPageLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',605.0 - 100 - 5,316.0 + 5,100.0,28.0));
+	NextPageLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',605.0 - 100 - 5,316.0 + 5,100.0,28.0,,AT_Right));
 	NextPageLabel.SetFont(4);
 	NextPageLabel.TextColor.R = 255;
 	NextPageLabel.TextColor.G = 255;
@@ -198,7 +202,7 @@ function Created()
   
 	NextPageLabel.Align = TA_Right; //from UWindowBase.uc in the proto -AdamJD 
 	NextPageLabel.bShadowText = True;
-	PreviousPageLabel = HGameLabelControl(CreateControl(Class'HGameLabelControl',5.0 + 32 + 5,316.0 + 5,100.0,28.0));
+	PreviousPageLabel = HGameLabelControl(CreateAlignedControl(Class'HGameLabelControl',5.0 + 32 + 5,316.0 + 5,100.0,28.0,,AT_Left));
 	PreviousPageLabel.SetFont(4);
 	PreviousPageLabel.TextColor.R = 255;
 	PreviousPageLabel.TextColor.G = 255;
@@ -213,358 +217,389 @@ function Created()
 
 function SetCardCountData()
 {
-  local HGameLabelControl LabelControl;
+	local HGameLabelControl LabelControl;
 
-  strCardCountBronze = string(nHarrysBronzeCount) $ "/" $ string(ArrayCount(HarrysBronze));
-  nBronzeHealthBars = nHarrysBronzeCount / nCARDS_PER_SET;
-  strCardCountSilver = string(nHarrysSilverCount) $ "/" $ string(ArrayCount(HarrysSilver));
-  nSilverKeys = nHarrysSilverCount / nCARDS_PER_SET;
-  strCardCountGold = string(nHarrysGoldCount) $ "/" $ string(ArrayCount(HarrysGold));
+	strCardCountBronze = string(nHarrysBronzeCount) $ "/" $ string(ArrayCount(HarrysBronze));
+	nBronzeHealthBars = nHarrysBronzeCount / nCARDS_PER_SET;
+	strCardCountSilver = string(nHarrysSilverCount) $ "/" $ string(ArrayCount(HarrysSilver));
+	nSilverKeys = nHarrysSilverCount / nCARDS_PER_SET;
+	strCardCountGold = string(nHarrysGoldCount) $ "/" $ string(ArrayCount(HarrysGold));
 }
 
 function ShowWindow()
 {
-  UpdateDisplayDetails();
-  Super.ShowWindow();
+	UpdateDisplayDetails();
+	Super.ShowWindow();
 }
 
 function PreOpenBook()
 {
-  ShowWindow();
+  	ShowWindow();
 }
 
 function SetLargeCardProps (Class<WizardCardIcon> classWC)
 {
-  local string strDescId;
+	local string strDescId;
 
-  classCurWC = classWC;
-  textureCurrLargeCard = classWC.Default.textureBig;
-  strDescId = classWC.Default.strDescriptionId;
-  if ( strDescId == "" )
-  {
-    strCurrDesc = "";
-  } else {
-    strCurrDesc = GetLocalFEString(strDescId);
-  }
+	classCurWC = classWC;
+	textureCurrLargeCard = classWC.Default.textureBig;
+	strDescId = classWC.Default.strDescriptionId;
+	if ( strDescId == "" )
+	{
+		strCurrDesc = "";
+	}
+	else
+	{
+		strCurrDesc = GetLocalFEString(strDescId);
+	}
 }
 
 function UpdateDisplayDetails()
 {
-  UpdatePreviousNextButtons();
-  UpdatePageCards();
-  UpdateGroupButtonTextures();
+	UpdatePreviousNextButtons();
+	UpdatePageCards();
+	UpdateGroupButtonTextures();
 }
 
 function UpdatePreviousNextButtons()
 {
-  BackButton.bDisabled = nCurrPage == 0;
-  if ( CurrCardGroup == CardGroup_Gold )
-  {
-    ForwardButton.bDisabled = True;
-  } else {
-    ForwardButton.bDisabled = nCurrPage == (nCurrNumPages - 1);
-  }
-  if ( BackButton.bDisabled == True )
-  {
-    BackButton.HideWindow();
-  } else {
-    BackButton.ShowWindow();
-  }
-  if ( ForwardButton.bDisabled == True )
-  {
-    ForwardButton.HideWindow();
-  } else {
-    ForwardButton.ShowWindow();
-  }
-  switch (nCurrPage)
-  {
-    case 0:
-    PreviousPageLabel.SetText("");
-    if ( CurrCardGroup == CardGroup_Gold )
-    {
-      NextPageLabel.SetText("");
-    } else {
-      NextPageLabel.SetText(strPAGE1);
-    }
-    break;
-    case 1:
-    PreviousPageLabel.SetText(strPAGE0);
-    if ( CurrCardGroup == CardGroup_Gold )
-    {
-      NextPageLabel.SetText("");
-    } else {
-      NextPageLabel.SetText(strPAGE2);
-    }
-    break;
-    case 2:
-    PreviousPageLabel.SetText(strPAGE1);
-    if ( CurrCardGroup == CardGroup_Gold )
-    {
-      NextPageLabel.SetText("");
-    } else {
-      NextPageLabel.SetText(strPAGE3);
-    }
-    break;
-    case 3:
-    PreviousPageLabel.SetText(strPAGE2);
-    if ( CurrCardGroup == CardGroup_Bronze )
-    {
-      NextPageLabel.SetText(strPAGE4);
-    } else {
-      NextPageLabel.SetText("");
-    }
-    break;
-    case 4:
-    PreviousPageLabel.SetText(strPAGE3);
-    NextPageLabel.SetText("");
-    break;
-    default:
-    PreviousPageLabel.SetText("");
-    NextPageLabel.SetText("");
-    break;
-  }
+	BackButton.bDisabled = nCurrPage == 0;
+	if ( CurrCardGroup == CardGroup_Gold )
+	{
+		ForwardButton.bDisabled = True;
+	} 
+	else 
+	{
+		ForwardButton.bDisabled = nCurrPage == (nCurrNumPages - 1);
+	}
+	if ( BackButton.bDisabled == True )
+	{
+		BackButton.HideWindow();
+	} 
+	else 
+	{
+		BackButton.ShowWindow();
+	}
+	if ( ForwardButton.bDisabled == True )
+	{
+		ForwardButton.HideWindow();
+	} 
+	else 
+	{
+		ForwardButton.ShowWindow();
+	}
+	switch (nCurrPage)
+	{
+		case 0:
+			PreviousPageLabel.SetText("");
+			if ( CurrCardGroup == CardGroup_Gold )
+			{
+				NextPageLabel.SetText("");
+			} 
+			else 
+			{
+				NextPageLabel.SetText(strPAGE1);
+			}
+			break;
+		case 1:
+			PreviousPageLabel.SetText(strPAGE0);
+			if ( CurrCardGroup == CardGroup_Gold )
+			{
+				NextPageLabel.SetText("");
+			} 
+			else 
+			{
+				NextPageLabel.SetText(strPAGE2);
+			}
+			break;
+		case 2:
+			PreviousPageLabel.SetText(strPAGE1);
+			if ( CurrCardGroup == CardGroup_Gold )
+			{
+				NextPageLabel.SetText("");
+			} 
+			else 
+			{
+				NextPageLabel.SetText(strPAGE3);
+			}
+			break;
+		case 3:
+			PreviousPageLabel.SetText(strPAGE2);
+			if ( CurrCardGroup == CardGroup_Bronze )
+			{
+				NextPageLabel.SetText(strPAGE4);
+			} 
+			else 
+			{
+				NextPageLabel.SetText("");
+			}
+			break;
+		case 4:
+			PreviousPageLabel.SetText(strPAGE3);
+			NextPageLabel.SetText("");
+			break;
+		default:
+			PreviousPageLabel.SetText("");
+			NextPageLabel.SetText("");
+			break;
+	}
+	
+	// Omega: Hack to fix the elements breaking on page change
+	ResolutionChanged(Root.RealWidth, Root.RealHeight);
 }
 
 function UpdatePageCards()
 {
-  local int I;
-  local StatusGroupWizardCards sgCards;
-  local StatusItemWizardCards siCards;
-  local Class<Actor> classWC;
-  local int nCardId;
-  local int nCardIdx;
+	local int I;
+	local StatusGroupWizardCards sgCards;
+	local StatusItemWizardCards siCards;
+	local Class<Actor> classWC;
+	local int nCardId;
+	local int nCardIdx;
 
-  sgCards = StatusGroupWizardCards(PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupWizardCards'));
-  switch (CurrCardGroup)
-  {
-    case CardGroup_Bronze:
-    siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemBronzeCards'));
-    break;
-    case CardGroup_Silver:
-    siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemSilverCards'));
-    break;
-    case CardGroup_Gold:
-    siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemGoldCards'));
-    break;
-    default:
-    Log("ERROR: Invalid card group in FEFoliPage " $ string(CurrCardGroup));
-    break;
-  }
-  textureCurrLargeCard = textureBigEmptyCard;	 //Texture'WizCardMissingBigTexture';
-  classCurWC = None;
-  strCurrDesc = "";
+	sgCards = StatusGroupWizardCards(PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupWizardCards'));
+	switch (CurrCardGroup)
+	{
+		case CardGroup_Bronze:
+			siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemBronzeCards'));
+			break;
+		case CardGroup_Silver:
+			siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemSilverCards'));
+			break;
+		case CardGroup_Gold:
+			siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemGoldCards'));
+			break;
+		default:
+			Log("ERROR: Invalid card group in FEFoliPage " $ string(CurrCardGroup));
+			break;
+	}
+	textureCurrLargeCard = textureBigEmptyCard;	 //Texture'WizCardMissingBigTexture';
+	classCurWC = None;
+	strCurrDesc = "";
 
-  for(I = 0; I < ArrayCount(SmallCardBmp); I++)
-  {
-    nCardIdx = I + (nCurrPage * ArrayCount(SmallCardBmp));
-    if ( CurrCardGroup == CardGroup_Bronze )
-    {
-      nCardId = HarrysBronze[nCardIdx];
-    } else //{
-      if ( CurrCardGroup == CardGroup_Silver )
-      {
-        nCardId = HarrysSilver[nCardIdx];
-      } else {
-        nCardId = HarrysGold[nCardIdx];
-      }
-    //}
-    if ( nCardId != 0 )
-    {
-      classWC = siCards.GetCardClassFromId(nCardId);
-      if ( classWC != Class'WCPotter' )
-      {
-        SmallCardBmp[I].UpTexture = Class<WizardCardIcon>(classWC).Default.textureBig;
-        if ( I == nCurrItemOnPage )
-        {
-          SetLargeCardProps(Class<WizardCardIcon>(classWC));
-        }
-      } else {
-        SmallCardBmp[I].UpTexture = textureSmallEmptyCard; 		//Texture'WizCardMissingSmallTexture';
-      }
-    } else {
-      SmallCardBmp[I].UpTexture = textureSmallEmptyCard;		//Texture'WizCardMissingSmallTexture';
-    }
-    SmallCardBmp[I].DownTexture = SmallCardBmp[I].UpTexture;
-    SmallCardBmp[I].OverTexture = SmallCardBmp[I].UpTexture;
-  }
-  if ( CurrCardGroup == CardGroup_Gold )
-  {
-    classWC = Class'WCPotter';
-    if ( siCards.IsOwnedByHarry(Class<WizardCardIcon>(classWC).Default.Id) )
-    {
-      HarryCardBmp.ShowWindow();
-      HarryCardBmp.bDisabled = False;
-      HarryCardBmp.UpTexture = Class<WizardCardIcon>(classWC).Default.textureBig;
-      HarryCardBmp.DownTexture = HarryCardBmp.UpTexture;
-      HarryCardBmp.OverTexture = HarryCardBmp.UpTexture;
-      if ( nCurrItemOnPage == ArrayCount(SmallCardBmp) )
-      {
-        SetLargeCardProps(Class<WizardCardIcon>(classWC));
-      }
-    } else {
-      HarryCardBmp.HideWindow();
-      HarryCardBmp.bDisabled = True;
-    }
-  } else {
-    HarryCardBmp.HideWindow();
-    HarryCardBmp.bDisabled = True;
-  }
-  HiliteCurrCard();
+	for(I = 0; I < ArrayCount(SmallCardBmp); I++)
+	{
+		nCardIdx = I + (nCurrPage * ArrayCount(SmallCardBmp));
+		if ( CurrCardGroup == CardGroup_Bronze )
+		{
+			nCardId = HarrysBronze[nCardIdx];
+		} 
+		else
+		if ( CurrCardGroup == CardGroup_Silver )
+		{
+			nCardId = HarrysSilver[nCardIdx];
+		} 
+		else 
+		{
+			nCardId = HarrysGold[nCardIdx];
+		}
+		
+		if ( nCardId != 0 )
+		{
+			classWC = siCards.GetCardClassFromId(nCardId);
+			if ( classWC != Class'WCPotter' )
+			{
+				SmallCardBmp[I].UpTexture = Class<WizardCardIcon>(classWC).Default.textureBig;
+				if ( I == nCurrItemOnPage )
+				{
+					SetLargeCardProps(Class<WizardCardIcon>(classWC));
+				}
+			} 
+			else 
+			{
+				SmallCardBmp[I].UpTexture = textureSmallEmptyCard; 		//Texture'WizCardMissingSmallTexture';
+			}
+		}
+		else 
+		{
+			SmallCardBmp[I].UpTexture = textureSmallEmptyCard;		//Texture'WizCardMissingSmallTexture';
+		}
+
+		SmallCardBmp[I].DownTexture = SmallCardBmp[I].UpTexture;
+		SmallCardBmp[I].OverTexture = SmallCardBmp[I].UpTexture;
+	}
+	if ( CurrCardGroup == CardGroup_Gold )
+	{
+		classWC = Class'WCPotter';
+		if ( siCards.IsOwnedByHarry(Class<WizardCardIcon>(classWC).Default.Id) )
+		{
+			HarryCardBmp.ShowWindow();
+			HarryCardBmp.bDisabled = False;
+			HarryCardBmp.UpTexture = Class<WizardCardIcon>(classWC).Default.textureBig;
+			HarryCardBmp.DownTexture = HarryCardBmp.UpTexture;
+			HarryCardBmp.OverTexture = HarryCardBmp.UpTexture;
+			if ( nCurrItemOnPage == ArrayCount(SmallCardBmp) )
+			{
+				SetLargeCardProps(Class<WizardCardIcon>(classWC));
+			}
+		} 
+		else 
+		{
+			HarryCardBmp.HideWindow();
+			HarryCardBmp.bDisabled = True;
+		}
+	} 
+	else 
+	{
+		HarryCardBmp.HideWindow();
+		HarryCardBmp.bDisabled = True;
+	}
+	HiliteCurrCard();
 }
 
 function UpdateGroupButtonTextures()
 {
-  switch (CurrCardGroup)
-  {
-    case CardGroup_Bronze:
-		GoldButton.UpTexture = textureGoldNormal;
-		GoldButton.DownTexture = textureGoldNormal;
-		GoldButton.OverTexture = textureGoldNormal;
-		SilverButton.UpTexture = textureSilverNormal;
-		SilverButton.DownTexture = textureSilverNormal;
-		SilverButton.OverTexture = textureSilverNormal;
-		BronzeButton.UpTexture = textureBronzeHilite;
-		BronzeButton.DownTexture = textureBronzeHilite;
-		BronzeButton.OverTexture = textureBronzeHilite;
-		break;
-    case CardGroup_Silver:
-		GoldButton.UpTexture = textureGoldNormal;
-		GoldButton.DownTexture = textureGoldNormal;
-		GoldButton.OverTexture = textureGoldNormal;
-		SilverButton.UpTexture = textureSilverHilite;
-		SilverButton.DownTexture = textureSilverHilite;
-		SilverButton.OverTexture = textureSilverHilite;
-		BronzeButton.UpTexture = textureBronzeNormal;
-		BronzeButton.DownTexture = textureBronzeNormal;
-		BronzeButton.OverTexture = textureBronzeNormal;
-		break;
-    case CardGroup_Gold:
-		GoldButton.UpTexture = textureGoldHilite;
-		GoldButton.DownTexture = textureGoldHilite;
-		GoldButton.OverTexture = textureGoldHilite;
-		SilverButton.UpTexture = textureSilverNormal;
-		SilverButton.DownTexture = textureSilverNormal;
-		SilverButton.OverTexture = textureSilverNormal;
-		BronzeButton.UpTexture = textureBronzeNormal;
-		BronzeButton.DownTexture = textureBronzeNormal;
-		BronzeButton.OverTexture = textureBronzeNormal;
-		break;
-    default:
-		break;
-  }
+	switch (CurrCardGroup)
+	{
+		case CardGroup_Bronze:
+			GoldButton.UpTexture = textureGoldNormal;
+			GoldButton.DownTexture = textureGoldNormal;
+			GoldButton.OverTexture = textureGoldNormal;
+			SilverButton.UpTexture = textureSilverNormal;
+			SilverButton.DownTexture = textureSilverNormal;
+			SilverButton.OverTexture = textureSilverNormal;
+			BronzeButton.UpTexture = textureBronzeHilite;
+			BronzeButton.DownTexture = textureBronzeHilite;
+			BronzeButton.OverTexture = textureBronzeHilite;
+			break;
+		case CardGroup_Silver:
+			GoldButton.UpTexture = textureGoldNormal;
+			GoldButton.DownTexture = textureGoldNormal;
+			GoldButton.OverTexture = textureGoldNormal;
+			SilverButton.UpTexture = textureSilverHilite;
+			SilverButton.DownTexture = textureSilverHilite;
+			SilverButton.OverTexture = textureSilverHilite;
+			BronzeButton.UpTexture = textureBronzeNormal;
+			BronzeButton.DownTexture = textureBronzeNormal;
+			BronzeButton.OverTexture = textureBronzeNormal;
+			break;
+		case CardGroup_Gold:
+			GoldButton.UpTexture = textureGoldHilite;
+			GoldButton.DownTexture = textureGoldHilite;
+			GoldButton.OverTexture = textureGoldHilite;
+			SilverButton.UpTexture = textureSilverNormal;
+			SilverButton.DownTexture = textureSilverNormal;
+			SilverButton.OverTexture = textureSilverNormal;
+			BronzeButton.UpTexture = textureBronzeNormal;
+			BronzeButton.DownTexture = textureBronzeNormal;
+			BronzeButton.OverTexture = textureBronzeNormal;
+			break;
+		default:
+			break;
+	}
 }
 
 function Notify (UWindowDialogControl C, byte E)
 {
-  local int I;
+	local int I;
 
-  if ( E == DE_Click )
-  {
-    switch (C)
-    {
-      case ForwardButton:
-      if ( nCurrPage < nCurrNumPages - 1 )
-      {
-        ++nCurrPage;
-        UpdateDisplayDetails();
-      }
-      break;
-      case BackButton:
-      if ( nCurrPage > 0 )
-      {
-        --nCurrPage;
-        UpdateDisplayDetails();
-      }
-      break;
-      case BronzeButton:
-      if ( CurrCardGroup != CardGroup_Bronze )
-      {
-        CurrCardGroup = CardGroup_Bronze;
-        nCurrPage = 0;
-        nCurrItemOnPage = 0;
-        nCurrNumPages = nNUM_PAGES_BRONZE;
-        UpdateDisplayDetails();
-      }
-      break;
-      case SilverButton:
-      if ( CurrCardGroup != CardGroup_Silver )
-      {
-        CurrCardGroup = CardGroup_Silver;
-        nCurrPage = 0;
-        nCurrItemOnPage = 0;
-        nCurrNumPages = nNUM_PAGES_SILVER;
-        UpdateDisplayDetails();
-      }
-      break;
-      case GoldButton:
-      if ( CurrCardGroup != CardGroup_Gold )
-      {
-        CurrCardGroup = CardGroup_Gold;
-        nCurrPage = 0;
-        nCurrItemOnPage = 0;
-        nCurrNumPages = nNUM_PAGES_GOLD;
-        UpdateDisplayDetails();
-      }
-      break;
-      case HarryCardBmp:
-      nCurrItemOnPage = ArrayCount(SmallCardBmp);
-      UpdateDisplayDetails();
-      break;
-      case BackPageButton:
-      FEBook(book).DoEscapeFromPage();
-      break;
-	  default:
-	  for(I = 0; I != ArrayCount(SmallCardBmp); ++I)
-      {
-        if ( SmallCardBmp[I] == C )
-        {
-          nCurrItemOnPage = I;
-          UpdateDisplayDetails();
-		  break;
-        }
-      }
-	  break;
-    }
-  } else //{
-    if ( E == DE_MouseEnter )
-    {
-      switch (C)
-      {
-        case ForwardButton:
-        SetRollover(ForwardButton,textureRightOver,None,False);
-        break;
-        case BackButton:
-        SetRollover(BackButton,textureLeftOver,None,False);
-        break;
-        case GoldButton:
-        SetRollover(GoldButton,textureGoldWet,Sound'GUI_Esc_Rollover1',True);
-        break;
-        case SilverButton:
-        SetRollover(SilverButton,textureSilverWet,Sound'GUI_Esc_Rollover1',True);
-        break;
-        case BronzeButton:
-        SetRollover(BronzeButton,textureBronzeWet,Sound'GUI_Esc_Rollover1',True);
-        break;
-        default:
-      }
-    } else //{
-      if ( E == DE_MouseLeave )
-      {
-        switch (C)
-        {
-          case ForwardButton:
-          case BackButton:
-          case GoldButton:
-          case SilverButton:
-          case BronzeButton:
-          ClearRollover();
-          break;
-          default:
-        }
-      }
-    //}
-  //}
-  Super.Notify(C,E);
+	if ( E == DE_Click )
+	{
+		switch (C)
+		{
+			case ForwardButton:
+				if ( nCurrPage < nCurrNumPages - 1 )
+				{
+					++nCurrPage;
+					UpdateDisplayDetails();
+				}
+				break;
+			case BackButton:
+				if ( nCurrPage > 0 )
+				{
+					--nCurrPage;
+					UpdateDisplayDetails();
+				}
+				break;
+			case BronzeButton:
+				if ( CurrCardGroup != CardGroup_Bronze )
+				{
+					CurrCardGroup = CardGroup_Bronze;
+					nCurrPage = 0;
+					nCurrItemOnPage = 0;
+					nCurrNumPages = nNUM_PAGES_BRONZE;
+					UpdateDisplayDetails();
+				}
+				break;
+			case SilverButton:
+				if ( CurrCardGroup != CardGroup_Silver )
+				{
+					CurrCardGroup = CardGroup_Silver;
+					nCurrPage = 0;
+					nCurrItemOnPage = 0;
+					nCurrNumPages = nNUM_PAGES_SILVER;
+					UpdateDisplayDetails();
+				}
+				break;
+			case GoldButton:
+				if ( CurrCardGroup != CardGroup_Gold )
+				{
+					CurrCardGroup = CardGroup_Gold;
+					nCurrPage = 0;
+					nCurrItemOnPage = 0;
+					nCurrNumPages = nNUM_PAGES_GOLD;
+					UpdateDisplayDetails();
+				}
+				break;
+			case HarryCardBmp:
+				nCurrItemOnPage = ArrayCount(SmallCardBmp);
+				UpdateDisplayDetails();
+				break;
+				case BackPageButton:
+				FEBook(book).DoEscapeFromPage();
+				break;
+			default:
+				for(I = 0; I != ArrayCount(SmallCardBmp); ++I)
+				{
+					if ( SmallCardBmp[I] == C )
+					{
+					nCurrItemOnPage = I;
+					UpdateDisplayDetails();
+					break;
+					}
+				}
+				break;
+		}
+	} 
+	else
+		if ( E == DE_MouseEnter )
+		{
+			switch (C)
+			{
+				case ForwardButton:
+					SetRollover(ForwardButton,textureRightOver,None,False);
+					break;
+				case BackButton:
+					SetRollover(BackButton,textureLeftOver,None,False);
+					break;
+				case GoldButton:
+					SetRollover(GoldButton,textureGoldWet,Sound'GUI_Esc_Rollover1',True);
+					break;
+				case SilverButton:
+					SetRollover(SilverButton,textureSilverWet,Sound'GUI_Esc_Rollover1',True);
+					break;
+				case BronzeButton:
+					SetRollover(BronzeButton,textureBronzeWet,Sound'GUI_Esc_Rollover1',True);
+					break;
+				default:
+			}
+		}
+		else
+		if ( E == DE_MouseLeave )
+		{
+			switch (C)
+			{
+				case ForwardButton:
+				case BackButton:
+				case GoldButton:
+				case SilverButton:
+				case BronzeButton:
+					ClearRollover();
+					break;
+				default:
+			}
+		}
+	Super.Notify(C,E);
 }
 
 function float GetDHeightScale()
@@ -693,6 +728,8 @@ function PaintLargeCard (Canvas Canvas, float fScaleFactor)
 	{
 		nLargeCardX = Canvas.SizeX / 2 - textureCurrLargeCard.USize / 2;
 		nLargeCardY = nLARGE_CARD_Y + (textureCurrLargeCard.VSize * fScaleFactor - textureCurrLargeCard.VSize) / 2;
+
+		// Omega: 3D Card drawing:
 		if ( (classCurWC != None) && classCurWC.Default.bIsLayered )
 		{
 			GetMouseXY(MouseX,MouseY);
@@ -730,32 +767,34 @@ function PaintLargeCard (Canvas Canvas, float fScaleFactor)
 
 function PaintWizardText (Canvas Canvas, float fScaleFactor)
 {
-  local Color colorText;
-  local Font fontText;
+	local Color colorText;
+	local Font fontText;
 
-  switch (CurrCardGroup)
-  {
-    case CardGroup_Bronze:
-    colorText = colorBronze;
-    break;
-    case CardGroup_Silver:
-    colorText = colorSilver;
-    break;
-    case CardGroup_Gold:
-    colorText = colorGold;
-    break;
-    default:
-    break;
-  }
-  Canvas.SetPos(nWIZARD_TEXT_X,nWIZARD_TEXT_Y * fScaleFactor);
-  Canvas.DrawTile(textureDescBkgrd,Canvas.SizeX,80.0 * fScaleFactor,0.0,0.0,1.0,1.0);
-  if ( Canvas.SizeX <= 512 )
-  {
-    fontText = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
-  } else {
-    fontText = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
-  }
-  HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strCurrDesc,0,nWIZARD_TEXT_Y * fScaleFactor, nWIZARD_TEXT_H * fScaleFactor, colorText,fontText);
+	switch (CurrCardGroup)
+	{
+		case CardGroup_Bronze:
+			colorText = colorBronze;
+			break;
+		case CardGroup_Silver:
+			colorText = colorSilver;
+			break;
+		case CardGroup_Gold:
+			colorText = colorGold;
+			break;
+		default:
+			break;
+	}
+	Canvas.SetPos(nWIZARD_TEXT_X,nWIZARD_TEXT_Y * fScaleFactor);
+	Canvas.DrawTile(textureDescBkgrd,Canvas.SizeX,80.0 * fScaleFactor,0.0,0.0,1.0,1.0);
+	if ( Canvas.SizeX <= 512 )
+	{
+		fontText = baseConsole(PlayerHarry.Player.Console).LocalSmallFont;
+	} 
+	else 
+	{
+		fontText = baseConsole(PlayerHarry.Player.Console).LocalMedFont;
+	}
+	HPHud(PlayerHarry.myHUD).DrawCutStyleText(Canvas,strCurrDesc,0,nWIZARD_TEXT_Y * fScaleFactor, nWIZARD_TEXT_H * fScaleFactor, colorText,fontText);
 }
 
 function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
@@ -773,7 +812,7 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
 	// Metallicafan212:	Height scaling
 	local float HScale;
 	
-	local float fHWindowScaleFactor;
+	local float fHWindowScaleFactor, FourByThreeDiv;
 	
 	// Metallicafan212:	Cache this stupid value
 	local float Over;
@@ -785,6 +824,8 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
 	fWindowScaleFactor = Canvas.SizeX / WinWidth;
 	
 	fHWindowScaleFactor = fWindowScaleFactor * HScale;
+
+	FourByThreeDiv = HUDScaledHScale();
 	
 	Over = fHWindowScaleFactor * 40;
 	
@@ -823,7 +864,10 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
 	Canvas.SetPos(BronzeButton.WinLeft * fWindowScaleFactor + Over - fXTextLen / 2, (BronzeButton.WinTop * fWindowScaleFactor + Over - fYTextLen / 2));
 	Canvas.DrawShadowText(strCardCountBronze,colorOffWhite,colorBlack);
 	
-	nXPos = (BronzeButton.WinLeft + BronzeButton.WinWidth + 24) * fHWindowScaleFactor; 
+	//nXPos = (BronzeButton.WinLeft + BronzeButton.WinWidth + 24) * fHWindowScaleFactor; 
+
+	// Omega: Scale by the 4:3 div. This really isn't right but I'm not sure why the math is really wrong in the first place...
+	nXPos = ((BronzeButton.WinLeft/FourByThreeDiv) + BronzeButton.WinWidth + (24 * FourByThreeDiv)) * fHWindowScaleFactor;
 	//nYPos = BronzeButton.WinTop * fWindowScaleFactor * HScale;
 	
 	//AdamJD(2023):	Scale the health bars near the bronze card button in widescreen
@@ -836,7 +880,10 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
 		nXPos += 14 * fHWindowScaleFactor;
 	}
 	
-	nXPos = (SilverButton.WinLeft + SilverButton.WinWidth + 24) * fHWindowScaleFactor;
+	//nXPos = (SilverButton.WinLeft + SilverButton.WinWidth + 24) * fHWindowScaleFactor;
+
+	// Omega: Scale by the 4:3 div
+	nXPos = ((SilverButton.WinLeft/FourByThreeDiv) + SilverButton.WinWidth + (24 * FourByThreeDiv)) * fHWindowScaleFactor;
 	//nYPos = SilverButton.WinTop * fWindowScaleFactor * HScale;
 	
 	//AdamJD(2023):	Scale the keys near the silver card button in widescreen
@@ -854,7 +901,11 @@ function PaintCardStatData (Canvas Canvas, float fCanvasScaleFactor)
 
 function int GetStatusY()
 {
-	return nSTATUS_BAR_Y;
+	local float HScale;
+	// Omega: Scale the GetStatusY function
+	HScale = Class'M212HScale'.Static.UWindowGetHeightScale(Root);
+
+	return nSTATUS_BAR_Y * HScale;
 }
 
 function PreSwitchPage()
@@ -868,75 +919,75 @@ function PreSwitchPage()
 
 function InitHarryOwnedCards()
 {
-  local int I;
-  local int J;
-  local int nCardId;
-  local StatusGroupWizardCards sgCards;
-  local StatusItemWizardCards siCards;
+	local int I;
+	local int J;
+	local int nCardId;
+	local StatusGroupWizardCards sgCards;
+	local StatusItemWizardCards siCards;
 
-  sgCards = StatusGroupWizardCards(PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupWizardCards'));
-  
-  siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemGoldCards'));
-  StatusItemGoldCards(siCards).MoveHarryCardToEnd();
-  nHarrysGoldCount = 0;
-  for(I = 0; I < ArrayCount(HarrysGold); I++)
-  {
-    nCardId = siCards.GetCardId(I);
-    if ( nCardId > 0 )
-    {
-      if ( siCards.IsOwnedByHarry(nCardId) )
-      {
-        HarrysGold[nHarrysGoldCount] = nCardId;
-        nHarrysGoldCount++;
-      }
-    }
-  }
-  for(I = nHarrysGoldCount; I < ArrayCount(HarrysGold); I++)
-  {
-    HarrysGold[I] = 0;
-  }
-  
-  siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemSilverCards'));
-  nHarrysSilverCount = 0;
-  for(I = 0; I < ArrayCount(HarrysSilver); I++)
-  {
-    nCardId = siCards.GetCardId(I);
-    if ( nCardId > 0 )
-    {
-      if ( siCards.IsOwnedByHarry(nCardId) == True )
-      {
-        HarrysSilver[nHarrysSilverCount] = nCardId;
-        nHarrysSilverCount++;
-      }
-    }
-  }
-  for(I = nHarrysSilverCount; I < ArrayCount(HarrysSilver); I++)
-  {
-    HarrysSilver[I] = 0;
-  }
-  
-  siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemBronzeCards'));
-  nHarrysBronzeCount = 0;
-  for(I = 0; I < ArrayCount(HarrysBronze); I++)
-  {
-    nCardId = siCards.GetCardId(I);
-    if ( nCardId > 0 )
-    {
-      if ( siCards.IsOwnedByHarry(nCardId) == True )
-      {
-        HarrysBronze[nHarrysBronzeCount] = nCardId;
-        nHarrysBronzeCount++;
-      }
-    }
-	else
+	sgCards = StatusGroupWizardCards(PlayerHarry.managerStatus.GetStatusGroup(Class'StatusGroupWizardCards'));
+	
+	siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemGoldCards'));
+	StatusItemGoldCards(siCards).MoveHarryCardToEnd();
+	nHarrysGoldCount = 0;
+	for(I = 0; I < ArrayCount(HarrysGold); I++)
 	{
-		I++;
+		nCardId = siCards.GetCardId(I);
+		if ( nCardId > 0 )
+		{
+			if ( siCards.IsOwnedByHarry(nCardId) )
+			{
+				HarrysGold[nHarrysGoldCount] = nCardId;
+				nHarrysGoldCount++;
+			}
+		}
 	}
-  }
-  for(I = nHarrysBronzeCount; I < ArrayCount(HarrysBronze); I++)
-  {
-    HarrysBronze[I] = 0;
-  }
+	for(I = nHarrysGoldCount; I < ArrayCount(HarrysGold); I++)
+	{
+		HarrysGold[I] = 0;
+	}
+	
+	siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemSilverCards'));
+	nHarrysSilverCount = 0;
+	for(I = 0; I < ArrayCount(HarrysSilver); I++)
+	{
+		nCardId = siCards.GetCardId(I);
+		if ( nCardId > 0 )
+		{
+			if ( siCards.IsOwnedByHarry(nCardId) == True )
+			{
+				HarrysSilver[nHarrysSilverCount] = nCardId;
+				nHarrysSilverCount++;
+			}
+		}
+	}
+	for(I = nHarrysSilverCount; I < ArrayCount(HarrysSilver); I++)
+	{
+		HarrysSilver[I] = 0;
+	}
+	
+	siCards = StatusItemWizardCards(sgCards.GetStatusItem(Class'StatusItemBronzeCards'));
+	nHarrysBronzeCount = 0;
+	for(I = 0; I < ArrayCount(HarrysBronze); I++)
+	{
+		nCardId = siCards.GetCardId(I);
+		if ( nCardId > 0 )
+		{
+			if ( siCards.IsOwnedByHarry(nCardId) == True )
+			{
+				HarrysBronze[nHarrysBronzeCount] = nCardId;
+				nHarrysBronzeCount++;
+			}
+		}
+		else
+		{
+			I++;
+		}
+	}
+	for(I = nHarrysBronzeCount; I < ArrayCount(HarrysBronze); I++)
+	{
+		HarrysBronze[I] = 0;
+	}
 }
 
 function SetInitialSelection()

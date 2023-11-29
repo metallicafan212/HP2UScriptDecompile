@@ -85,15 +85,15 @@ function PreSwitchPage()
 				{
 					playedCount++;
 				}
-			}
-			if ( playedCount >= 5 )
-			{
-				PlayerHarry.quidGameResults[5].bLocked= False;
-			}
-			if ( (PlayerHarry.quidGameResults[5].myScore > 0) || (PlayerHarry.quidGameResults[5].OpponentScore > 0) )
-			{
-				PlayerHarry.quidGameResults[5].bLocked= False;
-			}
+		}
+		if ( playedCount >= 5 )
+		{
+			PlayerHarry.quidGameResults[5].bLocked= False;
+		}
+		if ( (PlayerHarry.quidGameResults[5].myScore > 0) || (PlayerHarry.quidGameResults[5].OpponentScore > 0) )
+		{
+			PlayerHarry.quidGameResults[5].bLocked= False;
+		}
 		}
 	}
   
@@ -257,7 +257,7 @@ function Created()
 	startX = (WinWidth / 2) - ((3 * gameBoxWidth + (2 * 64)) / 2);
 	startY = 100;
 	
-	PlayerHarry = harry(HPConsole(Root.Console).Viewport.Actor);
+	playerHarry=Harry(HPConsole(root.console).Viewport.Actor);
 
     CreateBackPageButton();
 	CreateTitleButton(GetLocalFEString("Quidditch_0007"));
@@ -275,7 +275,7 @@ function Created()
 			col = i;
 		}
 
-		matchLabel[i]					= HGameLabelControl(CreateControl(class'HGameLabelControl', startX + (col * gameSpaceX), startY + (row * gameSpaceY) - 20, gameBoxWidth, 30));
+		matchLabel[i]					= HGameLabelControl(CreateAlignedControl(class'HGameLabelControl', startX + (col * gameSpaceX), startY + (row * gameSpaceY) - 20, gameBoxWidth, 30,,AT_Center));
 		matchLabel[i].setFont(4);
 		matchLabel[i].TextColor.r		= 215;
 		matchLabel[i].TextColor.g		= 100;
@@ -283,19 +283,19 @@ function Created()
 		matchLabel[i].Align				= TA_Center;
 		matchLabel[i].bShadowText		= true;
 
-		myCrests[i] 					= HGameButton(CreateControl(class'HGameButton', startX + (col * gameSpaceX), startY + (row * gameSpaceY) + 5, 64, 64));
+		myCrests[i] 					= HGameButton(CreateAlignedControl(class'HGameButton', startX + (col * gameSpaceX), startY + (row * gameSpaceY) + 5, 64, 64,,AT_Center));
 		myCrests[i].Align				= TA_Center;
 		myCrests[i].UpTexture			= crestIcons[0]; 
 		myCrests[i].DownTexture			= crestIcons[0]; 
 		myCrests[i].OverTexture			= crestIcons[0]; 
 
-		opponentCrests[i]				= HGameButton(CreateControl(class'HGameButton', startX + (col * gameSpaceX) + (64 / Class'M212HScale'.Static.UWindowGetHeightScale(Root)), startY + (row * gameSpaceY) + 5, 64, 64));
+		opponentCrests[i]				= HGameButton(CreateAlignedControl(class'HGameButton', startX + (col * gameSpaceX) + (64 / Class'M212HScale'.Static.UWindowGetHeightScale(Root)), startY + (row * gameSpaceY) + 5, 64, 64,,AT_Center));
 		opponentCrests[i].Align			= TA_Center;
 		opponentCrests[i].UpTexture		= crestIcons[1+(i%3)]; 
 		opponentCrests[i].DownTexture	= crestIcons[1+(i%3)]; 
 		opponentCrests[i].OverTexture	= crestIcons[1+(i%3)]; 
 
-		startGameButtons[i]					= HGameButton(CreateControl(class'HGameButton', startX + (col * gameSpaceX), startY + (row * gameSpaceY), gameBoxWidth, gameBoxHeight));
+		startGameButtons[i]					= HGameButton(CreateAlignedControl(class'HGameButton', startX + (col * gameSpaceX), startY + (row * gameSpaceY), gameBoxWidth, gameBoxHeight,,AT_Center));
 		
 		// Metallicafan212:	Force it to stretch
 		startGameButtons[i].bStretchTex 	= true;
@@ -308,7 +308,7 @@ function Created()
 		startGameButtons[i].DownTexture		= Texture 'QuidMatchBoxTexture'; 
 		startGameButtons[i].OverTexture		= Texture 'QuidMatchBoxTexture'; 
 
-		myScores[i]							= HGameLabelControl(CreateControl(class'HGameLabelControl',startX + (col * gameSpaceX), startY + (row * gameSpaceY) + 5 + 64,64,20));
+		myScores[i]							= HGameLabelControl(CreateAlignedControl(class'HGameLabelControl',startX + (col * gameSpaceX), startY + (row * gameSpaceY) + 5 + 64,64,20,,AT_Center));
 		myScores[i].setFont(4);
 		myScores[i].TextColor.r				= 255;
 		myScores[i].TextColor.g				= 255;
@@ -317,7 +317,7 @@ function Created()
 		myScores[i].bShadowText				= true;
 		myScores[i].setText("");
 
-		opponentScores[i]					= HGameLabelControl(CreateControl(class'HGameLabelControl', startX + (col * gameSpaceX) + (64 / Class'M212HScale'.Static.UWindowGetHeightScale(Root)), startY + (row * gameSpaceY) + 5 + 64,64,20));
+		opponentScores[i]					= HGameLabelControl(CreateAlignedControl(class'HGameLabelControl', startX + (col * gameSpaceX) + (64 / Class'M212HScale'.Static.UWindowGetHeightScale(Root)), startY + (row * gameSpaceY) + 5 + 64,64,20,,AT_Center));
 		opponentScores[i].setFont(F_HPMenuLarge);
 		opponentScores[i].TextColor.r		= 255;
 		opponentScores[i].TextColor.g		= 255;
@@ -326,14 +326,14 @@ function Created()
 		opponentScores[i].bShadowText		= true;
 		opponentScores[i].setText("");
 
-		myPoints[i]= HGameLabelControl(CreateControl(class'HGameLabelControl', startX + (col * gameSpaceX) + 32, startY + (row * gameSpaceY) + 100, 64, 20));
+		myPoints[i]= HGameLabelControl(CreateAlignedControl(class'HGameLabelControl', startX + (col * gameSpaceX) + 32, startY + (row * gameSpaceY) + 100, 64, 20,,AT_Center));
 		myPoints[i].setFont(F_HPMenuLarge);
 		myPoints[i].TextColor.r= 255;
 		myPoints[i].TextColor.g= 255;
 		myPoints[i].TextColor.b= 255;
 		myPoints[i].Align= TA_Center;
 		myPoints[i].bShadowText= true;
-		myPoints[i].SetText("");
+		myPoints[i].setText("");
 	}
 	
     matchLabel[0].SetText(GetLocalFEString("Quidditch_0009"));
@@ -342,13 +342,13 @@ function Created()
     matchLabel[3].SetText(GetLocalFEString("Quidditch_0012"));
     matchLabel[4].SetText(GetLocalFEString("Quidditch_0013"));
     matchLabel[5].SetText(GetLocalFEString("Quidditch_0014"));
-    QArmorButton= HGameButton(CreateControl(Class'HGameButton',5.0,5.0,64.0,64.0));
+    QArmorButton= HGameButton(CreateAlignedControl(Class'HGameButton',5.0,5.0,64.0,64.0,,AT_Center));
     QArmorButton.ToolTipString= GetLocalFEString("Main_Menu_0012");
     QArmorButton.UpTexture= Texture(DynamicLoadObject("HP2_Menu.Icons.HP2QuidditchArmor",Class'Texture'));
     QArmorButton.OverTexture= QArmorButton.UpTexture;
     QArmorButton.DownTexture= QArmorButton.OverTexture;
     QArmorButton.DownSound= None;
-    NimbusButton= HGameButton(CreateControl(Class'HGameButton',570.0,5.0,64.0,64.0));
+    NimbusButton= HGameButton(CreateAlignedControl(Class'HGameButton',570.0,5.0,64.0,64.0,,AT_Center));
     NimbusButton.ToolTipString= GetLocalFEString("Main_Menu_0013");
     NimbusButton.UpTexture= Texture(DynamicLoadObject("HP2_Menu.Hud.HP2Nimbus2001",Class'Texture'));
     NimbusButton.OverTexture= NimbusButton.UpTexture;
@@ -366,51 +366,53 @@ function LaunchQuidditch()
 
 function WindowDone (UWindowWindow W)
 {
-  if ( W == ConfirmReplay )
-  {
-    if ( ConfirmReplay.Result == ConfirmReplay.button1.Text )
-    {
-      HPConsole(Root.Console).Viewport.Actor.ClientMessage("Launching Quidditch match " $ string(PlayerHarry.curQuidMatchNum));
-      LaunchQuidditch();
-    }
-    ConfirmReplay = None;
-  }
+	if ( W == ConfirmReplay )
+	{
+		if ( ConfirmReplay.Result == ConfirmReplay.button1.Text )
+		{
+			HPConsole(Root.Console).Viewport.Actor.ClientMessage("Launching Quidditch match " $ string(PlayerHarry.curQuidMatchNum));
+			LaunchQuidditch();
+		}
+		ConfirmReplay = None;
+	}
 }
 
 function Notify (UWindowDialogControl C, byte E)
 {
-  local int I;
+	local int I;
 
-  if ( E == DE_Click )
-  {
-    if ( C == BackPageButton )
-    {
-      FEBook(book).DoEscapeFromPage();
-    }
+	if ( E == DE_Click )
+	{
+		if ( C == BackPageButton )
+		{
+			FEBook(book).DoEscapeFromPage();
+		}
 
-	for(I = 0; I < ArrayCount(startGameButtons); I++)
-    {
-      if ( startGameButtons[I] == C )
-      {
-        PlayerHarry.curQuidMatchNum = I;
-        if ( PlayerHarry.quidGameResults[I].bLocked )
-        {
-          return;
-        }
-        if ( (FEBook(book).prevPage == FEBook(book).InGamePage) &&  !PlayerHarry.bWithOlly )
-        {
-          return;
-        }
-        if ( PlayerHarry.quidGameResults[I].bWon )
-        {
-          ConfirmReplay = doHPMessageBox(GetLocalFEString("Quidditch_0017"),GetLocalFEString("Shared_Menu_0003"),GetLocalFEString("Shared_Menu_0004"));
-        } else {
-          HPConsole(Root.Console).Viewport.Actor.ClientMessage("Launching Quidditch match " $ string(PlayerHarry.curQuidMatchNum));
-          LaunchQuidditch();
-        }
-      }
-    }
-  }
-  Super.Notify(C,E);
+		for(I = 0; I < ArrayCount(startGameButtons); I++)
+		{
+			if ( startGameButtons[I] == C )
+			{
+				PlayerHarry.curQuidMatchNum = I;
+				if ( PlayerHarry.quidGameResults[I].bLocked )
+				{
+					return;
+				}
+				if ( (FEBook(book).prevPage == FEBook(book).InGamePage) &&  !PlayerHarry.bWithOlly )
+				{
+					return;
+				}
+				if ( PlayerHarry.quidGameResults[I].bWon )
+				{
+					ConfirmReplay = doHPMessageBox(GetLocalFEString("Quidditch_0017"),GetLocalFEString("Shared_Menu_0003"),GetLocalFEString("Shared_Menu_0004"));
+				}
+				else 
+				{
+					HPConsole(Root.Console).Viewport.Actor.ClientMessage("Launching Quidditch match " $ string(PlayerHarry.curQuidMatchNum));
+					LaunchQuidditch();
+				}
+			}
+		}
+	}
+	Super.Notify(C,E);
 }
 

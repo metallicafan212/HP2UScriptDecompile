@@ -49,7 +49,7 @@ function Resized()
 	
 	// Metallicafan212:	Move it down
 	button1.WY 			= 75.0; //* HScale;
-	button2.WY 			= 75.0; //* HScale;
+	button2.WY 			= 75.0; //* HScale;	
 	button1.Resized();
 	button2.Resized();
 	button2.WinLeft 	= (WinWidth - button2.WinWidth) - (24 * HScale);//138.0 * HScale;
@@ -99,7 +99,7 @@ function DrawStretchedTextureSegment( Canvas C, float X, float Y, float W, float
 	
 	// Metallicafan212:	Make it scale the height up?
 	C.DrawTileClipped( Tex, W * Root.GUIScale * HScale, H * Root.GUIScale * HScale, tX, tY, tW, tH * HScale);
-	
+		
 	C.SetClip(ClipX, ClipY);
 	C.SetOrigin(OrgX, OrgY);
 	

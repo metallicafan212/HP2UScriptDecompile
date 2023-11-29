@@ -14,28 +14,28 @@ function Created()
 	CreateBackPageButton();
 	
 	CreateTitleButton(GetLocalFEString("Report_Card_0004"));
-	GryffButton = HGameButton(CreateControl(Class'HGameButton',152.0,110.0,70.0,98.0));
+	GryffButton = HGameButton(CreateAlignedControl(Class'HGameButton',152.0,110.0,70.0,98.0,,AT_Center));
 	GryffButton.ToolTipString = GetLocalFEString("InGameMenu_0009");
 	GryffButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrest",Class'Texture'));
 	GryffButton.OverTexture = GryffButton.UpTexture;
 	GryffButton.DownTexture = GryffButton.OverTexture;
 	GryffButton.DownSound = None;
   
-	HuffButton = HGameButton(CreateControl(Class'HGameButton',152.0,252.0,70.0,98.0));
+	HuffButton = HGameButton(CreateAlignedControl(Class'HGameButton',152.0,252.0,70.0,98.0,,AT_Center));
 	HuffButton.ToolTipString = GetLocalFEString("InGameMenu_0010");
 	HuffButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2HufflepuffCrest",Class'Texture'));
 	HuffButton.OverTexture = HuffButton.UpTexture;
 	HuffButton.DownTexture = HuffButton.OverTexture;
 	HuffButton.DownSound = None;
   
-	RaveButton = HGameButton(CreateControl(Class'HGameButton',428.0,110.0,70.0,98.0));
+	RaveButton = HGameButton(CreateAlignedControl(Class'HGameButton',428.0,110.0,70.0,98.0,,AT_Center));
 	RaveButton.ToolTipString = GetLocalFEString("InGameMenu_0011");
 	RaveButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2RavenclawCrest",Class'Texture'));
 	RaveButton.OverTexture = RaveButton.UpTexture;
 	RaveButton.DownTexture = RaveButton.OverTexture;
 	RaveButton.DownSound = None;
   
-	SlythButton = HGameButton(CreateControl(Class'HGameButton',428.0,252.0,70.0,98.0));
+	SlythButton = HGameButton(CreateAlignedControl(Class'HGameButton',428.0,252.0,70.0,98.0,,AT_Center));
 	SlythButton.ToolTipString = GetLocalFEString("InGameMenu_0012");
 	SlythButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2SlytherinCrest",Class'Texture'));
 	SlythButton.OverTexture = SlythButton.UpTexture;

@@ -290,6 +290,9 @@ function Resized()
 	WinTop				= WY * HScale;
 	WinWidth			= WW * HScale;
 	WinHeight			= WH * HScale;
+
+	// Omega: Align our button based on its alignment type
+	WinLeft		= AlignButton(WX);
 	
 	VertSB.WinHeight 	= WinHeight - 2 * VBorder;
 	

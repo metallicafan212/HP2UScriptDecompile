@@ -227,13 +227,23 @@ function PaintObjectiveText (Canvas Canvas, float fScaleFactor)
 	local Font fontText;
 	local Color colorText;
 	local harry PlayerHarry;
+	// DivingDeep39: Used for setting the localization file and section
+	local string strObjectiveIntFile, strObjectiveSection;
 	
 
 	PlayerHarry = harry(Root.Console.Viewport.Actor);
 	strObjectiveId = PlayerHarry.strObjectiveId;
+	
+	// DivingDeep39: Grab the Section and Localization File from Harry.uc
+	strObjectiveSection = PlayerHarry.strObjectiveSection;
+	strObjectiveIntFile = PlayerHarry.strObjectiveIntFile;
+
 	if ( strObjectiveId != "" )
 	{
-		strObjective = Localize("All",strObjectiveId,"HPDialog");
+		// DivingDeep39: Replaced with function below
+		//strObjective = Localize("All",strObjectiveId,"HPDialog");
+		strObjective = Localize(strObjectiveSection,strObjectiveId,strObjectiveIntFile);
+		
 		strObjective = PlayerHarry.HandleFacialExpression(strObjective,0,True);
 		if ( Canvas.SizeX <= 512 )
 		{
@@ -317,98 +327,98 @@ function Created()
 	//HScale = GetHeightScale();
 	
 	// Metallicafan212:	Weld button
-	PotionsButton = HGameButton(CreateControl(Class'HGameButton', 30.0, 16.0, 64.0, 64.0));
+	PotionsButton = HGameButton(CreateAlignedControl(Class'HGameButton', 30.0, 16.0, 64.0, 64.0,,AT_Left));
 	PotionsButton.ToolTipString = GetLocalFEString("InGameMenu_0020");
 	PotionsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWPotion",Class'Texture'));
 	PotionsButton.OverTexture = PotionsButton.UpTexture;
 	PotionsButton.DownTexture = PotionsButton.OverTexture;
 	PotionsButton.DownSound = None;
   
-	FMucusButton = HGameButton(CreateControl(Class'HGameButton',110.0,16.0,64.0,64.0));
+	FMucusButton = HGameButton(CreateAlignedControl(Class'HGameButton',110.0,16.0,64.0,64.0,,AT_Left));
 	FMucusButton.ToolTipString = GetLocalFEString("InGameMenu_0008");
 	FMucusButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuFMucus",Class'Texture'));
 	FMucusButton.OverTexture = FMucusButton.UpTexture;
 	FMucusButton.DownTexture = FMucusButton.OverTexture;
 	FMucusButton.DownSound = None;
 	
-	WBarkButton = HGameButton(CreateControl(Class'HGameButton',192.0,16.0,64.0,64.0));
+	WBarkButton = HGameButton(CreateAlignedControl(Class'HGameButton',192.0,16.0,64.0,64.0,,AT_Left));
 	WBarkButton.ToolTipString = GetLocalFEString("InGameMenu_0019");
 	WBarkButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWBark",Class'Texture'));
 	WBarkButton.OverTexture = WBarkButton.UpTexture;
 	WBarkButton.DownTexture = WBarkButton.OverTexture;
 	WBarkButton.DownSound = None;
   
-	BeansButton = HGameButton(CreateControl(Class'HGameButton',416.0,16.0,64.0,64.0));
+	BeansButton = HGameButton(CreateAlignedControl(Class'HGameButton',416.0,16.0,64.0,64.0,,AT_Right));
 	BeansButton.ToolTipString = GetLocalFEString("InGameMenu_0013");
 	BeansButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuJellyBeans",Class'Texture'));
 	BeansButton.OverTexture = BeansButton.UpTexture;
 	BeansButton.DownTexture = BeansButton.OverTexture;
 	BeansButton.DownSound = None;
 	
-	SecretsButton = HGameButton(CreateControl(Class'HGameButton',532.0,16.0,64.0,64.0));
+	SecretsButton = HGameButton(CreateAlignedControl(Class'HGameButton',532.0,16.0,64.0,64.0,,AT_Right));
 	SecretsButton.ToolTipString = GetLocalFEString("Report_Card_0006");
 	SecretsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuSecrets",Class'Texture'));
 	SecretsButton.OverTexture = SecretsButton.UpTexture;
 	SecretsButton.DownTexture = SecretsButton.OverTexture;
 	SecretsButton.DownSound = None;
   
-	HousepointsButton = HGameButton(CreateControl(Class'HGameButton',278.0,5.0,70.0,98.0));
+	HousepointsButton = HGameButton(CreateAlignedControl(Class'HGameButton',278.0,5.0,70.0,98.0,,AT_Center));
 	HousepointsButton.ToolTipString = GetLocalFEString("InGameMenu_0046");
 	HousepointsButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2GriffindorCrest",Class'Texture'));
 	HousepointsButton.OverTexture = HousepointsButton.UpTexture;
 	HousepointsButton.DownTexture = HousepointsButton.OverTexture;
 	HousepointsButton.DownSound = soundTopClick;
 	
-	ChallengesButton = HGameButton(CreateControl(Class'HGameButton',146.0,114.0,64.0,64.0));
+	ChallengesButton = HGameButton(CreateAlignedControl(Class'HGameButton',146.0,114.0,64.0,64.0,,AT_Center));
 	ChallengesButton.ToolTipString = GetLocalFEString("InGameMenu_0044");
 	ChallengesButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuChallenges",Class'Texture'));
 	ChallengesButton.OverTexture = ChallengesButton.UpTexture;
 	ChallengesButton.DownTexture = ChallengesButton.OverTexture;
 	ChallengesButton.DownSound = soundMiddleClick;
 	
-	DuelButton = HGameButton(CreateControl(Class'HGameButton',146.0,248.0,64.0,64.0));
+	DuelButton = HGameButton(CreateAlignedControl(Class'HGameButton',146.0,248.0,64.0,64.0,,AT_Center));
 	DuelButton.ToolTipString = GetLocalFEString("InGameMenu_0043");
 	DuelButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuWizardDuel",Class'Texture'));
 	DuelButton.OverTexture = DuelButton.UpTexture;
 	DuelButton.DownTexture = DuelButton.OverTexture;
 	DuelButton.DownSound = soundMiddleClick;
   
-	FolioButton = HGameButton(CreateControl(Class'HGameButton',252.0,134.0,136.0,168.0));
+	FolioButton = HGameButton(CreateAlignedControl(Class'HGameButton',252.0,134.0,136.0,168.0,,AT_Center));
 	FolioButton.ToolTipString = GetLocalFEString("InGameMenu_0004");
 	FolioButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuFolioButtonIdle",Class'Texture'));
 	FolioButton.OverTexture = FolioButton.UpTexture;
 	FolioButton.DownTexture = FolioButton.OverTexture;
 	FolioButton.DownSound = soundFolioClick;
   
-	MapButton = HGameButton(CreateControl(Class'HGameButton',438.0,114.0,64.0,64.0));
+	MapButton = HGameButton(CreateAlignedControl(Class'HGameButton',438.0,114.0,64.0,64.0,,AT_Center));
 	MapButton.ToolTipString = GetLocalFEString("InGameMenu_0045");
 	MapButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2Maps",Class'Texture'));
 	MapButton.OverTexture = MapButton.UpTexture;
 	MapButton.DownTexture = MapButton.OverTexture;
 	MapButton.DownSound = soundMiddleClick;
   
-	QuidditchButton = HGameButton(CreateControl(Class'HGameButton',438.0,248.0,64.0,64.0));
+	QuidditchButton = HGameButton(CreateAlignedControl(Class'HGameButton',438.0,248.0,64.0,64.0,,AT_Center));
 	QuidditchButton.ToolTipString = GetLocalFEString("InGameMenu_0042");
 	QuidditchButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuidditch",Class'Texture'));
 	QuidditchButton.OverTexture = QuidditchButton.UpTexture;
 	QuidditchButton.DownTexture = QuidditchButton.OverTexture;
 	QuidditchButton.DownSound = soundMiddleClick;
   
-	QuitButton = HGameButton(CreateControl(Class'HGameButton',12.0,338.0,48.0,48.0));
+	QuitButton = HGameButton(CreateAlignedControl(Class'HGameButton',12.0,338.0,48.0,48.0,,AT_Left));
 	QuitButton.ToolTipString = GetLocalFEString("InGameMenu_0002");
 	QuitButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuQuit",Class'Texture'));
 	QuitButton.OverTexture = QuitButton.UpTexture;
 	QuitButton.DownTexture = QuitButton.OverTexture;
 	QuitButton.DownSound = soundBottomClick;
   
-	InputButton = HGameButton(CreateControl(Class'HGameButton',72.0,338.0,48.0,48.0));
+	InputButton = HGameButton(CreateAlignedControl(Class'HGameButton',72.0,338.0,48.0,48.0,,AT_Left));
 	InputButton.ToolTipString = GetLocalFEString("InGameMenu_0047");
 	InputButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2Options",Class'Texture'));
 	InputButton.OverTexture = InputButton.UpTexture;
 	InputButton.DownTexture = InputButton.OverTexture;
 	InputButton.DownSound = soundBottomClick;
   
-	SoundVideoButton = HGameButton(CreateControl(Class'HGameButton',520.0,338.0,48.0,48.0));
+	SoundVideoButton = HGameButton(CreateAlignedControl(Class'HGameButton',520.0,338.0,48.0,48.0,,AT_Right));
 	SoundVideoButton.ToolTipString = GetLocalFEString("InGameMenu_0048");
 	SoundVideoButton.UpTexture = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuSoundOptions",Class'Texture'));
 	SoundVideoButton.OverTexture = SoundVideoButton.UpTexture;
@@ -429,7 +439,7 @@ function Created()
 	
 	if ( HPConsole(Root.Console).bDebugMode )
 	{
-		CreditsButton = HGameButton(CreateControl(Class'HGameButton',135.0,338.0,48.0,48.0));
+		CreditsButton = HGameButton(CreateAlignedControl(Class'HGameButton',135.0,338.0,48.0,48.0,,AT_Left));
 		CreditsButton.ToolTipString = "Credits";
 		CreditsButton.UpTexture = InputButton.UpTexture;
 		CreditsButton.OverTexture = CreditsButton.UpTexture;
@@ -483,7 +493,7 @@ function Notify (UWindowDialogControl C, byte E)
 				break;
       
 			case QuitButton:
-				ConfirmQuit = doHPMessageBox(GetLocalFEString("InGameMenu_0026"),GetLocalFEString("Shared_Menu_0003"),GetLocalFEString("Shared_Menu_0004"));
+				ConfirmQuit = doHPMessageBox(GetLocalFEString("InGameMenu_0026"), GetLocalFEString("Shared_Menu_0003"), GetLocalFEString("Shared_Menu_0004"));
 				break;
       
 			case BackPageButton:

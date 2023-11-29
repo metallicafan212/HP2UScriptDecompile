@@ -76,7 +76,9 @@ var int MapButtonIdx[4];
 var int NumMapButtons[4];
 var sHarryLocInfo HarryLocInfo[43];
 var HGameButton HarryLocationButton;
-var UWindowWrappedTextArea StatusBarTextWindow;
+//var UWindowWrappedTextArea StatusBarTextWindow;
+// Omega: Scaling asset:
+var M212WrappedTextArea	StatusBarTextWindow;
 var int nCurrPage;
 var int HarryLocX;
 var int HarryLocY;
@@ -187,9 +189,10 @@ function Created()
 	HarryLocationButton.bDisabled = True;
 	HarryLocationButton.HideWindow();
 	
-	CreateBackPageButton();
+	// Omega: Default back button aligned to center instead of to the right
+	CreateBackPageButton(0,0,AT_Center);
 	
-	StatusBarTextWindow = UWindowWrappedTextArea(CreateControl(Class'UWindowWrappedTextArea',16.0,WinHeight - 26,500.0,26.0));
+	StatusBarTextWindow = M212WrappedTextArea(CreateControl(Class'M212WrappedTextArea',16.0,WinHeight - 26,500.0,26.0));
 	StatusBarTextWindow.Clear();
 	StatusBarTextWindow.AddText("");
 	StatusBarTextWindow.Font = F_HPMenuLarge;

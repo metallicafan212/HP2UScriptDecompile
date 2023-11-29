@@ -369,8 +369,10 @@ function bool ParseCommand (string Command)
 	local name N;
 	// Omega: Used for the Goto command's clear cues parameter
 	local bool bClearCues;
+	// DivingDeep39: Used for Comment's and ObjectiveId's section and localization
+	local string m212, idCom, tempSec, tempInt, secCom, intCom;
 
-	subjectPart = ParseDelimitedString(Command," ",1,False);
+	subjectPart = ParseDelimitedString(Command," ",1,False);	
 	if ( Len(subjectPart) == 0 )
 	{
 		return True;
@@ -548,7 +550,57 @@ function bool ParseCommand (string Command)
 			break;
 		
 		case "COMMENT":
-			questionString = Localize("all",ParseDelimitedString(Command," ",2,True),"HPMenu");
+			// DivingDeep: Added custom localization support to Comment CutCommand
+			// EX: Comment idCom Section=secCom Localize=intCom (Section and Localize are optional)
+			//questionString = Localize("all",ParseDelimitedString(Command," ",2,True),"HPMenu");
+			idCom = ParseDelimitedString(Command," ",2,False);
+			
+			I = 3;
+		
+			m212 = ParseDelimitedString( command, " ", I, false );
+			
+			while ( m212 != "" )
+			{
+				if(Left(m212, 8) ~= "Section=")
+				{
+					// DivingDeep39: Parse Section's temporary var
+					tempSec = (ParseDelimitedString(m212, "=", 2, false));
+				}
+				
+				if(Left(m212, 9) ~= "Localize=")
+				{
+					// DivingDeep39: Parse Localize's temporary var
+					tempInt = (ParseDelimitedString(m212, "=", 2, false));
+				}
+
+				I++;
+				m212 = ParseDelimitedString( command, " ", I, false );
+			}
+			
+			if ( tempSec == "" )
+			{
+				// DivingDeep39: If Section is missing or empty, use "All" as default
+				secCom = "All";
+			}
+			else
+			{
+				secCom = tempSec;
+				Log("Comment: Setting Section to: " $ secCom );
+			}
+			
+			if ( tempInt == "" )
+			{
+				// DivingDeep39: If Localize is missing or empty, use "HPMenu" as default
+				intCom = "HPMenu";
+			}
+			else
+			{
+				intCom = tempInt;
+				Log("Comment: Setting Localization File to: " $ intCom );				
+			}
+			
+			questionString = Localize(secCom,idCom,intCom);
+			
 			HPHud(harry(Level.PlayerHarryActor).myHUD).managerCutScene.SetCutCommentText(questionString);
 			return True;
 			break;
@@ -676,11 +728,57 @@ function bool ParseCommand (string Command)
 				return true;
 			}
 	}
-	// EX: SetObjectiveId SomeLine
-	// Will set the pause menu's objective text to some line inside of the HPDialog subtitles
+	// DivingDeep39: Added custom localization support to Objectives
+	// EX: SetObjectiveId SomeLine Section=sectId Localize=intFile (Section and Localize are optional)
+	// Will set the pause menu's objective text to some line inside of any specified section and subtitle file
 	if ( subjectPart ~= "SetObjectiveId" )
 	{
 		harry(Level.PlayerHarryActor).SetObjectiveTextId(ParseDelimitedString(Command," ",2,False));
+		
+		I = 3;
+		
+		m212 = ParseDelimitedString( command, " ", I, false );
+		
+		while ( m212 != "" )
+        {
+            if(Left(m212, 8) ~= "Section=")
+            {
+                // DivingDeep39: Parse Section's temporary var
+				tempSec = (ParseDelimitedString(m212, "=", 2, false));
+            }
+            
+            if(Left(m212, 9) ~= "Localize=")
+            {
+                // DivingDeep39: Parse Localize's temporary var
+				tempInt = (ParseDelimitedString(m212, "=", 2, false));
+            }
+
+            I++;
+            m212 = ParseDelimitedString( command, " ", I, false );
+        }
+		
+		if ( tempSec == "" )
+		{
+			// DivingDeep39: If Section is missing or empty, use "All" as default
+			harry(Level.PlayerHarryActor).strObjectiveSection = "All";
+		}
+		else
+		{
+			harry(Level.PlayerHarryActor).strObjectiveSection = tempSec;
+			Log("SetObjectiveId: Setting Section to: " $ harry(Level.PlayerHarryActor).strObjectiveSection );
+		}
+		
+		if ( tempInt == "" )
+		{
+			// DivingDeep39: If Localize is missing or empty, use "HPDialog" as default
+			harry(Level.PlayerHarryActor).strObjectiveIntFile = "HPDialog";	
+		}
+		else
+		{
+			harry(Level.PlayerHarryActor).strObjectiveIntFile = tempInt;
+			Log("SetObjectiveId: Setting Localization File to: " $ harry(Level.PlayerHarryActor).strObjectiveIntFile );
+		}
+		
 		return True;
 	}
 

@@ -84,7 +84,9 @@ function Resized()
 	WinTop		= WY * HScale;
 	WinWidth	= WW * HScale;
 	WinHeight	= WH * HScale;
-	WinLeft		= WX;
+	//WinLeft		= WX;
+	// Omega: Align our button based on its alignment type
+	WinLeft		= AlignButton(WX);
 	
 	EditBoxWidth	= WEditBoxWidth * HScale;
 	

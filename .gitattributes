@@ -2,7 +2,7 @@
 * text=auto
 
 # Metallicafan212: Always do system line endings for UC
-*uc text
+*.uc text
 
 # Metallicafan212: Always do windows line endings
 *.gin text eol=crlf

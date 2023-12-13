@@ -1,5 +1,5 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
-* text=auto
+* text eol=crlf 
 
 # Metallicafan212: Always do system line endings for UC
 *.uc text
@@ -7,7 +7,6 @@
 # Metallicafan212: Always do windows line endings
 *.gin text eol=crlf
 *.int text eol=crlf
-
 *.bra text eol=crlf
 *.che text eol=crlf
 *.dan text eol=crlf

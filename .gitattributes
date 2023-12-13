@@ -3,28 +3,28 @@
 *.usa text eol=crlf
 *.int text eol=crlf
 
-# Metallicafan212: Always do windows line endings
-*.gin text diff eol=crlf
-*.bra text diff eol=crlf
-*.che text diff eol=crlf
-*.dan text diff eol=crlf
-*.dut text diff eol=crlf
-*.fin text diff eol=crlf
-*.fre text diff eol=crlf
-*.ger text diff eol=crlf
-*.gre text diff eol=crlf
-*.ita text diff eol=crlf
-*.jap text diff eol=crlf
-*.kor text diff eol=crlf
-*.nor text diff eol=crlf
-*.pol text diff eol=crlf
-*.por text diff eol=crlf
-*.rus text diff eol=crlf
-*.sim text diff eol=crlf
-*.spa text diff eol=crlf
-*.swe text diff eol=crlf
-*.tha text diff eol=crlf
-*.tra text diff eol=crlf
+# Metallicafan212: Fuck it, prevent modification, as git can't be trusted to leave utf-16 alone for some reason
+*.gin binary
+*.bra binary
+*.che binary
+*.dan binary
+*.dut binary
+*.fin binary
+*.fre binary
+*.ger binary
+*.gre binary
+*.ita binary
+*.jap binary
+*.kor binary
+*.nor binary
+*.pol binary
+*.por binary
+*.rus binary
+*.sim binary
+*.spa binary
+*.swe binary
+*.tha binary
+*.tra binary
 
 # Metallicafan212: Binary files
 *.u binary

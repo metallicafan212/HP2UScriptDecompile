@@ -1,5 +1,5 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
-* text eol=crlf 
+* text=auto
 
 # Metallicafan212: Always do system line endings for UC
 *.uc text
@@ -38,3 +38,4 @@
 *.psa binary
 *.psk binary
 *.db binary
+*.utx binary

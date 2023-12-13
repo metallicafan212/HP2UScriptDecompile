@@ -28,3 +28,13 @@
 *.swe text diff eol=crlf
 *.tha text diff eol=crlf
 *.tra text diff eol=crlf
+
+# Metallicafan212: Binary files
+*.u binary
+*.png binary
+*.bmp binary
+*.pcx binary
+*.wav binary
+*.psa binary
+*.psk binary
+*.db binary

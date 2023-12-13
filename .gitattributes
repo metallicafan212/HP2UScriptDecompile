@@ -3,28 +3,28 @@
 
 # Metallicafan212: Always do system line endings for UC
 *.uc text
+*.usa text eol=crlf
+*.int text eol=crlf
 
 # Metallicafan212: Always do windows line endings
-*.gin text eol=crlf
-*.int text eol=crlf
-*.bra text eol=crlf
-*.che text eol=crlf
-*.dan text eol=crlf
-*.dut text eol=crlf
-*.fin text eol=crlf
-*.fre text eol=crlf
-*.ger text eol=crlf
-*.gre text eol=crlf
-*.ita text eol=crlf
-*.jap text eol=crlf
-*.kor text eol=crlf
-*.nor text eol=crlf
-*.pol text eol=crlf
-*.por text eol=crlf
-*.rus text eol=crlf
-*.sim text eol=crlf
-*.spa text eol=crlf
-*.swe text eol=crlf
-*.tha text eol=crlf
-*.tra text eol=crlf
-*.usa text eol=crlf
+*.gin text diff eol=crlf
+*.bra text diff eol=crlf
+*.che text diff eol=crlf
+*.dan text diff eol=crlf
+*.dut text diff eol=crlf
+*.fin text diff eol=crlf
+*.fre text diff eol=crlf
+*.ger text diff eol=crlf
+*.gre text diff eol=crlf
+*.ita text diff eol=crlf
+*.jap text diff eol=crlf
+*.kor text diff eol=crlf
+*.nor text diff eol=crlf
+*.pol text diff eol=crlf
+*.por text diff eol=crlf
+*.rus text diff eol=crlf
+*.sim text diff eol=crlf
+*.spa text diff eol=crlf
+*.swe text diff eol=crlf
+*.tha text diff eol=crlf
+*.tra text diff eol=crlf

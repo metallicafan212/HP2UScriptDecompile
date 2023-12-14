@@ -1,4 +1,5 @@
 [All]
+M212MenuControllerVibration=Kontrollens vibration
 M212MenuFontScale=Typsnittsskala
 M212MenuFontScaleToolTip=Skalar spelets typsnitt upp och ner i storlek.
 M212MenuHUDCenter=Menycentrering

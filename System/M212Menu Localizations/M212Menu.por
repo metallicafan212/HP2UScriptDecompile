@@ -1,10 +1,11 @@
 [All]
+M212MenuControllerVibration=Vibração do Comando
 M212MenuFontScale=Tamanho da Fonte
 M212MenuFontScaleToolTip=Aumenta e diminui o tamanho da fonte do jogo.
 M212MenuHUDCenter=Centralização do Menu
 M212MenuHUDCenterToolTip=Move os elementos do Menu e do HUD para uma proporção de 4:3.
-M212MenuControllerSensitivity=Sensibilidade dos manípulos
-M212MenuMouseSmooth=Suavização da câmera
+M212MenuControllerSensitivity=Sensibilidade dos Manípulos
+M212MenuMouseSmooth=Suavização da Câmera
 M212MenuNextPage=Página seguinte
 M212MenuPrevPage=Página anterior
 M212KeyboardMenu=Controles de Teclado e Rato

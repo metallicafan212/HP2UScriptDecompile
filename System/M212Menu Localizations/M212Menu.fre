@@ -1,4 +1,5 @@
 [All]
+M212MenuControllerVibration=Vibration de la manette
 M212MenuFontScale=Mise à l'échelle des polices
 M212MenuFontScaleToolTip=Agrandit et diminue la taille de la police du jeu.
 M212MenuHUDCenter=Centrage des menus

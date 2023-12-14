@@ -64,6 +64,10 @@ var 	localized string 	MouseInvertText;
 var 	HGameCheckbox 		MouseSmoothCheck;
 var 	localized string 	MouseSmoothText;
 
+// DivingDeep39: Controller Vibration checkbox
+var 	HGameCheckbox 		ControllerVibrationCheck;
+var 	localized string 	ControllerVibrationText;
+
 // Omega: Mouse Sensitivity:
 var 	HGameHSlider 		SensitivitySlider;
 var 	HGameLabelControl 	MouseSensitivityLabel;
@@ -235,6 +239,9 @@ function LocalizeStrings()
 
 	// Omega: Controller sensitivity:
 	ControllerSensitivityText 	= Localize("all", "M212MenuControllerSensitivity", "M212Menu");
+	
+	// DivingDeep39: Controller Vibration:
+	ControllerVibrationText	= Localize("all", "M212MenuControllerVibration", "M212Menu");
 }
 
 function BindPageCreate()
@@ -403,6 +410,14 @@ function Created()
 	AutoCenterCamCheck.SetText(AutoCenterCamText);
 	AutoCenterCamCheck.SetFont(0);
 	AutoCenterCamCheck.TextColor = LabelTextColor;
+	ctlY += 24;
+	
+	// DivingDeep39: Controller Vibration:
+	ControllerVibrationCheck = HPMenuOptionCheckBox(CreateAlignedControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0,,AT_Center));
+	ControllerVibrationCheck.bChecked = harry(GetPlayerOwner()).bUseControllerVibration;
+	ControllerVibrationCheck.SetText(ControllerVibrationText);
+	ControllerVibrationCheck.SetFont(0);
+	ControllerVibrationCheck.TextColor = LabelTextColor;
 	ctlY += 24;
 	
 	AutoJumpCheck = HPMenuOptionCheckBox(CreateAlignedControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0,,AT_Center));
@@ -757,6 +772,14 @@ function MouseInvertChanged()
 	GetPlayerOwner().InvertMouse(MouseInvertCheck.bChecked);
 	GetPlayerOwner().ConsoleCommand("set ini:Engine.PlayerPawn bInvertMouse " $ AutoCenterCamCheck.bChecked);
 	Log("MouseInvert changed to " $ string(MouseInvertCheck.bChecked));
+}
+
+// DivingDeep39: Controller Vibration
+function ControllerVibrationChanged()
+{
+	GetPlayerOwner().bUseControllerVibration = ControllerVibrationCheck.bChecked;
+	GetPlayerOwner().ConsoleCommand("set ini:Engine.PlayerPawn bUseControllerVibration " $ ControllerVibrationCheck.bChecked);
+	Log("bUseControllerVibration changed to " $ string(ControllerVibrationCheck.bChecked));
 }
 
 function AutoCenterCamChanged()
@@ -1185,6 +1208,11 @@ function Notify (UWindowDialogControl C, byte E)
 					
 				case MouseInvertCheck:
 					MouseInvertChanged();
+					break;
+					
+				// DivingDeep39: Controller Vibration
+				case ControllerVibrationCheck:
+					ControllerVibrationChanged();
 					break;
 					
 				case AutoCenterCamCheck:

@@ -14,6 +14,10 @@ var() ParticleFX fxEdgeSparkles[12];
 var() Class<ParticleFX> fxEdgeSparklesClass;
 var() float fDistanceForAreaEffects;
 var() float fDistanceForEdgeEffects;
+// DivingDeep39: Vars for customizable Sound and Volume
+var(LumosSparklesM212) Sound SparklesSound;
+var(LumosSparklesM212) float SparklesSoundVolume;
+
 var float fDistanceToLumosSource;
 
 function PostBeginPlay()
@@ -110,7 +114,9 @@ function TurnOnEdgeEffects()
     fxEdgeSparkles[11].SetLocation(Location + Vec( -(fBoxWidth / 2), -(fBoxDepth / 2),0.0));
     fxEdgeSparkles[11].SourceHeight.Base = fBoxHeight;
   }
-  PlaySound(Sound'Lumos_glow_loop',SLOT_Interact,0.5,True,,,,True);
+  // DivingDeep39: Replaced the original function to insert new vars
+  //PlaySound(Sound'Lumos_glow_loop',SLOT_Interact,0.5,True,,,,True);
+  PlaySound(SparklesSound,SLOT_Interact,SparklesSoundVolume,True,,,,True);
 }
 
 function TurnOffEdgeEffects()
@@ -219,4 +225,9 @@ defaultproperties
 
     // CollideType=2
 	CollideType=CT_Box
+	
+	// DivingDeep39: New vars defaults
+	SparklesSound=Sound'Lumos_glow_loop'
+	
+	SparklesSoundVolume=0.5
 }

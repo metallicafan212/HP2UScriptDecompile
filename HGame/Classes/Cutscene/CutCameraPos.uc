@@ -13,5 +13,5 @@ defaultproperties
     Texture=Texture'HGame.Icons.CutCamIcon'
 
     DrawScale=0.50
-
+	bDisplayFOVCone=true
 }

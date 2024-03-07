@@ -16,6 +16,7 @@ var()	string				ControlMapFile_Controller;
 var()	string				ControlLangFile_Controller;
 // Omega: In case I need to change this later
 var()	string				Delimiter;
+var()	string 				FlagChar;	// labels our flags
 
 var()	string				M212MenuLocalizationFile;
 
@@ -33,7 +34,7 @@ var		Array<String>		RealKeyName; 		// So we can more easily map out our key name
 var		Array<String>		LocalizedKeyName; 	// User visible name of our keys, loaded from translation files
 //=============================================================================================
 // What keys are allowed to only be used and managed by controllers
-var		Array<int>			ControllerKeys;		
+var		Array<int>			ControllerKeys;
 /*
 200 "XInput DPad Up"
 201 "XInput DPad Down"
@@ -168,7 +169,7 @@ struct SBoundKey
 	// same category, same as stock. However, we now have an expressive way of 
 	// determining what our category is, using the ControlMaps. See the parsing
 	// code for more details there
-	var		int				KeyNum;
+	var		EInputKey		KeyNum;
 	var		string			RawCmd;
 	var		array<string>	Commands;
 	var		array<string>	Categories;
@@ -199,7 +200,14 @@ struct SCachedElement
 	// Omega: Actual command associated with our element
 	var		string			BindCommand;
 	// Omega: Key numbers associated with our element's binding
-	var		Array<int>		iBoundKeys;
+	var		Array<EInputKey>		iBoundKeys;
+	
+	// Metallicafan212:	If this map is supposed to be allowed in menus (ToggleMapMenu, TogglePauseMenu)
+	//var		bool			bAllowInMenus;
+
+	// Omega: Not scalable, if we're going to be requiring flags, we might as well prepare for more flags
+	// Than just AllowedInMenus. So this menu shouldn't specifically care about them
+	var 	Array<String>	BindFlags;
 };
 
 var		Array<SCachedElement>		CachedElement;
@@ -224,6 +232,10 @@ struct 	SMenuElement
 
 // Omega: Our array of elements
 var 	Array<SMenuElement>		Element;
+
+// Omega: Kill me please
+var name TempName;
+var string TempString;
 
 //==============================================================================
 //								End of Data
@@ -254,6 +266,126 @@ function String GetBindString(String Command, optional out int Index)
 function String GetBindStringFromIndex(int Index)
 {
 	return CachedElement[Index].ControlString;
+}
+
+// Omega: Get the key nums of a bind
+function array<EInputKey> GetBindKeys(String Command, optional out int Index)
+{
+	local int i;
+	local array<EInputKey> ret;
+	for(i = 0; i < CachedElement.Length; i++)
+	{
+		if(CachedElement[i].BindCommand ~= Command)
+		{
+			Index = i;
+			return CachedElement[i].iBoundKeys;
+		}
+	}
+
+	return ret;
+}
+
+// Omega: Get our bind's flags
+function Array<String> GetBindFlags(String Command, optional out int Index)
+{
+	local int i;
+	local Array<String> A;
+	for(i = 0; i < CachedElement.Length; i++)
+	{
+		if(CachedElement[i].BindCommand ~= Command)
+		{
+			Index = i;
+			return CachedElement[i].BindFlags;
+		}
+	}
+
+	return A;
+}
+
+// Omega: Check if we have a specific bind flag
+function bool BindHasFlag(String Command, String Flag, optional out int Index)
+{
+	local int i;
+
+	for(i = 0; i < CachedElement.Length; i++)
+	{
+		if(CachedElement[i].BindCommand ~= Command)
+		{
+			Index = i;
+		}
+	}
+
+	for(i = 0; i < CachedElement[Index].BindFlags.Length; i++)
+	{
+		if(CachedElement[Index].BindFlags[i] ~= Flag)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+function bool IndexHasFlag(int Index, String Flag)
+{
+	local int i;
+
+	for(i = 0; i < CachedElement[Index].BindFlags.Length; i++)
+	{
+		if(CachedElement[Index].BindFlags[i] ~= Flag)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
+// Omega: Check out and return all binds that have this flag, plus the keys we are bound to
+// This does not clear your out array
+function Array<String> AllBindsWithFlag(String Flag, out Array<EInPutKey> Keys)
+{
+	local Array<String> Ret;
+	local int i, j;
+
+	for(i = 0; i < CachedElement.Length; i++)
+	{
+		if(IndexHasFlag(i, Flag))
+		{
+			Ret.AddItem(CachedElement[i].BindCommand);
+
+			// Omega: Add our unique keys
+			for(j = 0; j < CachedElement[i].iBoundKeys.Length; j++)
+			{
+				if(!Keys.Contains(CachedElement[i].iBoundKeys[j]))
+				{
+					Keys.AddItem(CachedElement[i].iBoundKeys[j]);
+				}
+			}
+		}
+	}
+
+	return Ret;
+}
+
+function AllKeysWithFlag(String Flag, out Array<EInputKey> Keys)
+{
+	local int i, j;
+
+	for(i = 0; i < CachedElement.Length; i++)
+	{
+		if(IndexHasFlag(i, Flag))
+		{
+			// Omega: Add our unique keys
+			for(j = 0; j < CachedElement[i].iBoundKeys.Length; j++)
+			{
+				if(!Keys.Contains(CachedElement[i].iBoundKeys[j]))
+				{
+					Keys.AddItem(CachedElement[i].iBoundKeys[j]);
+				}
+			}
+		}
+	}
 }
 
 // Omega: Must be in the file or recursively creates menus because of parent...
@@ -373,6 +505,8 @@ function ShowWindow()
 
 	// Omega: Move us back to page 0
 	SetupControlPage(0);
+
+	//FEBook(ParentWindow).prevPage = prevPageSaved;
 }
 
 // Omega: Correct this:
@@ -527,8 +661,9 @@ function Notify (UWindowDialogControl C, byte E)
 			{
 				case(BackPageButton):
 					FEBook(book).DoEscapeFromPage();
+					//FEBook(book).ChangePage(FEParent);
 					// Omega: Restore the previous page
-					FEBook(ParentWindow).prevPage = prevPageSaved;
+					//FEBook(ParentWindow).prevPage = prevPageSaved;
 					return;
 
 				case(NextPageButton):
@@ -663,22 +798,28 @@ function CheckClick(UWindowDialogControl C)
 }
 
 // Omega: Nitty gritty implementation
-function bool KeyEvent (byte KeyNo, byte Action, float Delta)
+function bool KeyEvent (EInputKey KeyNo, EInputAction Action, float Delta)
 {
-	local int iAction;
-	iAction = Action;
+	//local int iAction;
+	//iAction = Action;
 
+	// Omega: Make sure we handle F4 safely
+	if(KeyNo == IK_F4)
+	{
+		Log("Tried to exit Bind Page with F4, make sure we fix our binds!!!!");
+		FEParent.ProcessAllowedMenuBinds();
+	}
 	// Omega: Let the controller scroll through the pages on left and right shoulder
 	// Action == IST_Press
-	if(!bPolling && iAction == 1)
+	if(!bPolling && Action == IST_Press)
 	{
 		// Xinput left shoulder
-		if(KeyNo == 208 && !PrevPageButton.bDisabled)
+		if(KeyNo == IK_XBLShoulder && !PrevPageButton.bDisabled)
 		{
 			Notify(PrevPageButton, DE_Click);
 		}
 		// XInput right shoulder
-		if(KeyNo == 209 && !NextPageButton.bDisabled)
+		if(KeyNo == IK_XBRShoulder && !NextPageButton.bDisabled)
 		{
 			Notify(NextPageButton, DE_Click);
 		}
@@ -686,7 +827,7 @@ function bool KeyEvent (byte KeyNo, byte Action, float Delta)
 
 	// Omega: Check axis
 	// Action == IST_Axis
-	if(iAction == 4 && bPolling && ControllerKeys.Contains(KeyNo) && bControllerMenu)
+	if(Action == IST_Axis && bPolling && ControllerKeys.Contains(KeyNo) && bControllerMenu)
 	{
 		// Omega: Check an axis if it's pressed very hard
 		if(bControllerMenu && KeyNo < RealKeyName.Length && ABS(Delta) > ControllerDeadZone)
@@ -702,7 +843,7 @@ function bool KeyEvent (byte KeyNo, byte Action, float Delta)
 
 	//Log("KeyEvent called! KeyNo = '" $ string(KeyNo) $ "' Action = " $ string(Action));
 	// Omega: Check keyboard or button key
-	if ( Action == 1 && bPolling && KeyNo >= 5 )
+	if ( Action == IST_Press && bPolling && KeyNo >= IK_Mouse4 )
 	{
 		/*if(bControllerMenu && KeyNo < RealKeyName.Length)
 		{
@@ -720,7 +861,7 @@ function bool KeyEvent (byte KeyNo, byte Action, float Delta)
 	return Super.KeyEvent(KeyNo,Action,Delta);
 }
 
-function ProcessKey(int KeyNo)
+function ProcessKey(EInputKey KeyNo)
 {
 	local string KeyName;
 
@@ -742,15 +883,15 @@ function ProcessKey(int KeyNo)
 		return;
 	}*/
 	// Omega: We're not limiting our keybinds hard at all. Escape is the only reservation
-	if(!bControllerMenu && ((KeyName == "") || KeyName == "Escape" || ControllerKeys.Contains(KeyNo)))
+	if(!bControllerMenu && ((KeyName == "") || KeyNo == IK_Escape || ControllerKeys.Contains(KeyNo)))//KeyName == "Escape" || ControllerKeys.Contains(KeyNo)))
 	{
 		Log("Keyboard doesn't have bind, or reserved for utility:");
 		return;
 	}
 	else
 	//204 "XInput Start", 224 "XInput Left Stick X", 225 "XInput Left Stick Y", 232 "XInput Right Stick X", 233 "XInput Right Stick Y"
-	if(bControllerMenu && ((KeyName == "") || !ControllerKeys.Contains(KeyNo) || KeyNo == 204 || KeyNo == 224 || KeyNo == 225
-	|| KeyNo == 232 || KeyNo == 233))
+	if(bControllerMenu && ((KeyName == "") || !ControllerKeys.Contains(KeyNo) || KeyNo == IK_XBStart || KeyNo == IK_XBLeftStickX || KeyNo == IK_XBLeftStickY
+	|| KeyNo == IK_XBRightStickX || KeyNo == IK_XBRightStickY))
 	{
 		log("Controller doesn't have bind, or reserved for utility: " $KeyNo$ " Key name: " $KeyName);
 		return;
@@ -761,6 +902,9 @@ function ProcessKey(int KeyNo)
 	// Omega: Actually bind the key here, then save the config:
 	BindKey(KeyNo, KeyName);
 	GetPlayerOwner().SaveConfig();
+	
+	// Metallicafan212:	Reprocess the allowed menu binds
+	FEParent.ProcessAllowedMenuBinds();
 }
 
 // Omega: Yeah, we're faking the button sound. Deal with it
@@ -776,6 +920,10 @@ function PlayClick()
 //						Parsing Control Map and Language
 //==============================================================================
 
+// Omega: Until Metallica comes up with some better system so we don't need tons of 
+// classes as an alternative to multiple configs, simplistic scripted control maps
+// are the solution
+
 function ParseControlMap()
 {
 	local int i;
@@ -786,6 +934,8 @@ function ParseControlMap()
 		// Omega: We need to add to the array, it doesn't auto-add to struct arrays like other elements
 		CachedElement.Add();
 
+		// Omega: Pre-filter flags
+		ParseFlags(i);
 		// Omega: If we don't have a valid command here, we treat as a bind: "category:bind" format
 		if(!ParseControlCommand(i))
 		{
@@ -796,6 +946,44 @@ function ParseControlMap()
 		ParseControlNames(i);
 	}
 }
+
+function ParseFlags(int Index)
+{
+	local string S;
+	local name N;
+	local PlayerPawn PP;	// God, why the fuck is ParseDelimitedString in Actor lmfao
+	PP = GetPlayerOwner();
+
+	//Log("Checking for flags in string: " $ControlMap[Index]$ ": " $InStr(ControlMap[Index], FlagChar));
+	// Omega: Iterate through our string and figure out all instances of the bind flag being there
+	While(InStr(ControlMap[Index], FlagChar) != -1 && ControlMap[Index] != "")
+	{
+		// Omega: Grab the element that has our FlagChar, then assign ControlMap[Index] back to the remainder of the string
+		S = PP.ParseDelimitedString(ControlMap[Index], Delimiter, 1, false);
+		//Log("Checking if " $S$ " has a flag symbol or no");
+		if(InStr(S, FlagChar) != -1 && S != "")
+		{
+			//N = 'Beans';
+			S = Right(S, Len(S) - 1);
+			// Omega: I am going insane
+			// nope, doesn't work. AAAAAAAAAAAAAAAAAAAAAA
+			//TempString = S;
+			//TempName = Name(TempString);
+			//N = Name(S);
+			// Omega: reverting back to a string and we'll just do some extra work in the checks...
+			// Love this engine's half-implemented features at times
+			Log("Adding flag: " $S$ " From : " $ControlMap[Index]);
+			CachedElement[Index].BindFlags.Additem(S);
+			ControlMap[Index] = PP.ParseDelimitedString(ControlMap[Index], Delimiter, 2, true);
+		}
+	}
+}
+
+function name ToNamePleaseHelpMe(string In)
+{
+	return name(In);
+}
+
 // Omega: Handles checking for control commands and sets our elements up correctly
 // Label will read the language file for a label, blank will be a blank element slot
 // Otherwise, we're a command, and we need to be treated as a command.
@@ -1043,8 +1231,7 @@ function LoadExistingKeys()
 			//Log(Self $" Not a controller menu and the key number contains a controller key: " $i);
 			bBind = False;
 		}
-		else
-		if(bControllerMenu && !ControllerKeys.Contains(i))
+		else if(bControllerMenu && !ControllerKeys.Contains(i))
 		{
 			//Log(Self $" Is a controller menu and the key number doesn't contain a controller key: " $i);
 			bBind = False;
@@ -1064,7 +1251,7 @@ function LoadExistingKeys()
 
 				// Omega: Set up the bound key list here as well:
 				BoundKey.Add();
-				BoundKey[BoundKey.Length - 1].KeyNum = i;
+				BoundKey[BoundKey.Length - 1].KeyNum = EInputKey(i);
 				BoundKey[BoundKey.Length - 1].RawCMD = Alias;
 
 				// Omega: Check our cached element list for the bind now
@@ -1073,7 +1260,7 @@ function LoadExistingKeys()
 					// Omega: check if the bind command is not blank, and check if it's in our string
 					if(CachedElement[j].BindCommand != "" && InStr(Alias, Caps(CachedElement[j].BindCommand)) != -1)
 					{
-						CachedElement[j].iBoundKeys.AddItem(i);
+						CachedElement[j].iBoundKeys.AddItem(EInputKey(i));
 						// Set up bound key list here too
 						BoundKey[BoundKey.Length - 1].Commands.AddItem(Caps(CachedElement[j].BindCommand));	// Command
 						BoundKey[BoundKey.Length - 1].Categories.AddItem(CachedElement[j].Category);		// Category
@@ -1147,10 +1334,11 @@ function bool ValidateUnknownCommand(int Index, string Command)
 }
 
 // Omega: Actually bind the key and handle collisions
-function BindKey(int iKey, string KeyName)
+function BindKey(EInputKey iKey, string KeyName)
 {
-	local int i, j, PreserveKey;
-	local Array<int> CurrentKeys, RemoveKeys;
+	local int i, j;
+	local EInputKey PreserveKey;
+	local Array<EInputKey> CurrentKeys, RemoveKeys;
 	// Omega: Make the fun noise since left click also causes this
 	// Interestingly enough is an inconsistency in stock... wonder if anyone will notice this change here to mine
 	// Yeah it's a bit hacky. live with it
@@ -1223,10 +1411,11 @@ function BindKey(int iKey, string KeyName)
 }
 
 // Omega: Seperate this out so BindKey is more high-level, and this is the nitty gritty, hitting the griddy
-function BindNewKey(int iKey)
+function BindNewKey(EInputKey iKey)
 {
-	local int i, j, PreserveKey, ElementCollision;
-	local Array<int> CurrentKeys, RemoveKeys, NewKeys;
+	local int i, j, ElementCollision;
+	local EInputKey PreserveKey;
+	local /*Array<int>*/ Array<EInputKey> CurrentKeys, RemoveKeys, NewKeys;
 	local bool bCollidedElement;
 
 	// Omega: Easy backup of keys
@@ -1325,7 +1514,7 @@ function BindNewKey(int iKey)
 }
 
 // Omega: Add a command, with its category
-function AddBoundCommand(int iKey, string Command, string Category)
+function AddBoundCommand(EInputKey iKey, string Command, string Category)
 {
 	local int i, KeyIndex;
 
@@ -1467,6 +1656,7 @@ defaultproperties
 	ControlLangFile_Controller="M212ControlMap_Controller_Lang"
 
 	Delimiter=":"
+	FlagChar="@"
 
 	HeaderKeyboardID="M212KeyboardMenu"
 	HeaderControllerID="M212ControllerMenu"

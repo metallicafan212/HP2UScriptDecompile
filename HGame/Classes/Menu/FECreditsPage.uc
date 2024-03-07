@@ -19,14 +19,14 @@ function Paint (Canvas C, float MouseX, float MouseY)
   Super.Paint(C,MouseX,MouseY);
 }
 
-function bool KeyEvent (byte Key, byte Action, float Delta)
+function bool KeyEvent(EInputKey Key, EInputAction Action, float Delta)
 {
   // if ( (bool(Action) == 1) && ((bool(Key) == 27) || (bool(Key) == 32)) )
-  if( (Action == 1) && (Key == 27 || Key == 32) ) 
-  {
-    Root.EnableMouse();
-  }
-  return False;
+	if( (Action == IST_Press) && (Key == IK_Escape || Key == IK_Space) ) 
+	{
+		Root.EnableMouse();
+	}
+	return False;
 }
 
 function ShowWindow()

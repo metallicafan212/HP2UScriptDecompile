@@ -68,6 +68,10 @@ var 	localized string 	MouseSmoothText;
 var 	HGameCheckbox 		ControllerVibrationCheck;
 var 	localized string 	ControllerVibrationText;
 
+// DivingDeep39: Keyboard Look checkbox
+var 	HGameCheckbox 		KeyboardLookCheck;
+var 	localized string 	KeyboardLookText;
+
 // Omega: Mouse Sensitivity:
 var 	HGameHSlider 		SensitivitySlider;
 var 	HGameLabelControl 	MouseSensitivityLabel;
@@ -239,9 +243,65 @@ function LocalizeStrings()
 
 	// Omega: Controller sensitivity:
 	ControllerSensitivityText 	= Localize("all", "M212MenuControllerSensitivity", "M212Menu");
-	
+
 	// DivingDeep39: Controller Vibration:
 	ControllerVibrationText	= Localize("all", "M212MenuControllerVibration", "M212Menu");
+	
+	// DivingDeep39: Keyboard Look:
+	KeyboardLookText = Localize("all", "M212MenuKeyboardLook", "M212Menu");
+}
+
+// Omega: Has one hard-coded check for TogglePauseMenu
+function ProcessAllowedMenuBinds()
+{
+	local int 						i, j;
+	//local M212FEBindPage.SBoundKey 	K;
+	local string 					Cmd;
+	local WindowConsole				Console;
+	//local array<EInputKey>			NewKeys;
+	local array<String>				AllowedBinds;
+	
+	Console = WindowConsole(GetPlayerOwner().Player.Console);
+	
+	// Metallicafan212:	Clear out the previous binds
+	Console.AllowedKeysOrActionsInMenu.Empty();
+	
+	// Metallicafan212:	Loop both pages
+	for(i = 0; i < BindPage.BoundKey.Length; i++)
+	{
+		//K = BindPage.BoundKey[i];
+		
+		// Metallicafan212:	Loop through the sub array...
+		for(j = 0; j < BindPage.BoundKey[i].Commands.Length; j++)//K.Commands.Length; j++)
+		{
+			Cmd = BindPage.BoundKey[i].Commands[j];
+			if(Cmd ~= "TogglePauseMenu")
+			{
+				// Metallicafan212:	Marked "safe"
+				Console.AllowedKeysOrActionsInMenu.AddItem(BindPage.BoundKey[i].KeyNum);
+			}
+		}
+	}
+	
+	for(i = 0; i < BindPageController.BoundKey.Length; i++)
+	{
+		//K = BindPageController.BoundKey[i];
+		
+		// Metallicafan212:	Loop through the sub array...
+		for(j = 0; j < BindPageController.BoundKey[i].Commands.Length; j++)//K.Commands.Length; j++)
+		{
+			Cmd = BindPageController.BoundKey[i].Commands[j];
+			if(Cmd ~= "TogglePauseMenu")
+			{
+				// Metallicafan212:	Marked "safe"
+				Console.AllowedKeysOrActionsInMenu.AddItem(BindPageController.BoundKey[i].KeyNum);
+			}
+		}
+	}
+
+	// Omega: Give us our allowed keys
+	BindPage.AllKeysWithFlag("Menuable", Console.AllowedKeysOrActionsInMenu);
+	BindPageController.AllKeysWithFlag("Menuable", Console.AllowedKeysOrActionsInMenu);
 }
 
 function BindPageCreate()
@@ -270,6 +330,8 @@ function BindPageCreate()
 		textureReturnNorm = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuBackToGame",Class'Texture'));
 		textureReturnRO = Texture(DynamicLoadObject("HP2_Menu.Icons.HP2MenuBackToGameWet",Class'WetTexture'));
 	}*/
+	// Metallicafan212:	Initialize the allowable menu binds
+	ProcessAllowedMenuBinds();
 
 	TexBindPageNorm				=	Texture(DynamicLoadObject(StringBindPageTex,Class'Texture'));
 	TexBindPageControllerNorm	=	Texture(DynamicLoadObject(StringBindPageControllerTex,Class'Texture'));
@@ -404,6 +466,15 @@ function Created()
 	MouseInvertCheck.TextColor = LabelTextColor;
 	ctlY += 24;
 	Log("ini:Engine.PlayerPawn bInvertMouse -> " $ string(MouseInvertCheck.bChecked));
+	
+	// DivingDeep39: Keyboard Look:
+	KeyboardLookCheck = HPMenuOptionCheckBox(CreateAlignedControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0,,AT_Center));
+	KeyboardLookCheck.bChecked = harry(GetPlayerOwner()).bEnableKBMove;
+	KeyboardLookCheck.SetText(KeyboardLookText);
+	KeyboardLookCheck.SetFont(0);
+	KeyboardLookCheck.TextColor = LabelTextColor;
+	ctlY += 24;
+	Log("ini:Engine.PlayerPawn bEnableKBMove -> " $ string(KeyboardLookCheck.bChecked));
 
 	AutoCenterCamCheck = HPMenuOptionCheckBox(CreateAlignedControl(class'HPMenuOptionCheckBox', ctlX, ctlY, 160.0, 1.0,,AT_Center));
 	AutoCenterCamCheck.bChecked = harry(GetPlayerOwner()).bAutoCenterCamera;
@@ -772,6 +843,14 @@ function MouseInvertChanged()
 	GetPlayerOwner().InvertMouse(MouseInvertCheck.bChecked);
 	GetPlayerOwner().ConsoleCommand("set ini:Engine.PlayerPawn bInvertMouse " $ AutoCenterCamCheck.bChecked);
 	Log("MouseInvert changed to " $ string(MouseInvertCheck.bChecked));
+}
+
+// DivingDeep39: Keyboard Look
+function KeyboardLookChanged()
+{
+	GetPlayerOwner().bEnableKBMove = KeyboardLookCheck.bChecked;
+	GetPlayerOwner().ConsoleCommand("set ini:Engine.PlayerPawn bEnableKBMove " $ KeyboardLookCheck.bChecked);
+	Log("bEnableKBMove changed to " $ string(KeyboardLookCheck.bChecked));
 }
 
 // DivingDeep39: Controller Vibration
@@ -1154,21 +1233,28 @@ function ProcessKey(int KeyNo)
 	GetPlayerOwner().SaveConfig();
 }
 
-function bool KeyEvent (byte KeyNo, byte Action, float Delta)
+function bool KeyEvent(EInputKey Key, EInputAction Action, float Delta)
 {
+	// Omega: This is a HORRIBLE hack lol
+	if(Key == IK_Escape)
+	{
+		FEBook(Book).PrevPage = FEBook(Book).InGamePage;
+		//FEBook(Book).ChangePage(FEBook(Book).InGamePage);
+	}
+
 	// Omega: Bro this spams so hard with a controller lmfaoo
 	//Log("KeyEvent called! KeyNo = '" $ string(KeyNo) $ "' Action = " $ string(Action));
-	if ( Action == 1 && bPolling && KeyNo >= 5 )
+	if ( Action == IST_Press && bPolling && Key >= IK_Mouse4 )
 	{
 		//Log("ProcessKey called! KeyNo = '" $ string(KeyNo) $ "Action = " $ string(Action));
 		//ProcessKey(EInputKey(KeyNo));
-		ProcessKey(KeyNo);
+		ProcessKey(Key);
 		bPolling = False;
 		SelectedButton.bDisabled = False;
 		return True;
 	}
 	
-	return Super.KeyEvent(KeyNo,Action,Delta);
+	return Super.KeyEvent(Key, Action, Delta);
 }
 
 function Notify (UWindowDialogControl C, byte E)
@@ -1215,6 +1301,11 @@ function Notify (UWindowDialogControl C, byte E)
 					ControllerVibrationChanged();
 					break;
 					
+				// DivingDeep39: Keyboard Look
+				case KeyboardLookCheck:
+					KeyboardLookChanged();
+					break;
+					
 				case AutoCenterCamCheck:
 					AutoCenterCamChanged();
 					break;
@@ -1237,7 +1328,10 @@ function Notify (UWindowDialogControl C, byte E)
 			switch (C)
 			{
 				case BackPageButton:
-					FEBook(book).DoEscapeFromPage();
+					// Omega: Wow, these levels of hackiness don't work either. Oh well!
+					//FEBook(Book).PrevPage = FEBook(Book).InGamePage;
+					//FEBook(book).DoEscapeFromPage();
+					FEBook(Book).ChangePage(FEBook(Book).InGamePage);
 					return;
 					
 				// Omega: Save the previous page before heading into here

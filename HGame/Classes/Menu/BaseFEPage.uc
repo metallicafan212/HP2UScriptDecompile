@@ -64,9 +64,10 @@ optional EAlignmentType Alignment, optional float ScreenPCT)
 		TabLast = C;
 	}
 
-	Log("Created Aligned Control: " $C$ " Aligned on: " $C.AlignmentType.EnumName(C.AlignmentType));
+	//Log("Created Aligned Control: " $C$ " Aligned on: " $C.AlignmentType.EnumName(C.AlignmentType));
 	return C;
 }
+
 // Metallicafan212:	Override version of the UWindow function, so we can auto scale on Y
 function UWindowDialogControl CreateControl(class<UWindowDialogControl> ControlClass, float X, float Y, float W, float H, optional UWindowWindow OwnerWindow)
 {
@@ -108,7 +109,8 @@ function UWindowDialogControl CreateControl(class<UWindowDialogControl> ControlC
 	return C;
 }
 
-function PreSwitchPage ()
+// Omega: Called when switching pages
+function PreSwitchPage()
 {
 	local bool bBackPage;
 
@@ -120,6 +122,12 @@ function PreSwitchPage ()
 	harry(Root.Console.Viewport.Actor).ClientMessage("Preswitch Page " $ string(FEBook(book).prevPage) $ " " $ string(FEBook(book).curPage));
 	SetBackPageToolTip(bBackPage);
 	ClearRollover();
+}
+
+// Omega: Called at the end of opening a new page on CurPage
+function PostSwitchPage()
+{
+
 }
 
 function PreOpenBook()
@@ -210,7 +218,6 @@ function SetBackPageToolTip (bool bBackPage)
 		}
 	}
 }
-
 
 // Omega: Correct this:
 function int GetStatusY()
@@ -318,7 +325,7 @@ function WindowEvent (WinMessage Msg, Canvas C, float X, float Y, int Key)
 	}
 }
 
-function bool KeyEvent (byte Key, byte Action, float Delta)
+function bool KeyEvent(EInputKey Key, EInputAction Action, float Delta)//(byte Key, byte Action, float Delta)
 {
 	return False;
 }

@@ -15,5 +15,5 @@ label
 ingame:Jump
 ingame:AltFire
 ingame:button bDrinkWiggenwell
-ingame:ToggleMapMenu
+@Menuable:ingame:ToggleMapMenu
 interface:button bSkipCutScene

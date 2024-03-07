@@ -82,6 +82,19 @@ var name PersistentState;
 var name PersistentLeadingActor;
 var name PersistentNavPName;
 
+// Omega: To get rid of this horrible switch statement
+struct SDuelInfo
+{
+	var() float DuelistBeans;
+	var() Mesh DuelMesh;
+	var() Array<Material> DuelSkins;
+	var() String OurDuelLevelName;
+};
+var(Duels) Array<SDuelInfo> Duels;
+var(Duels) int iMinDuelGState;
+var(Duels) Array<int> iDuelGStateBlacklist;
+var(Duels) bool bAllowGoyleInDuel;
+
 
 event PostBeginPlay()
 {
@@ -931,7 +944,7 @@ function bool IsDuelVendor()
   return True;
 }
 
-function SetEverythingForTheDuel()
+/*function SetEverythingForTheDuel()
 {
   local string DuelLevelName;
   local int nGameState;
@@ -1061,6 +1074,58 @@ function SetEverythingForTheDuel()
     DuelLevelTrigger.NewMapName = DuelLevelName;
     DuelLevelTrigger.SetCollision(False,False,False);
   }
+}*/
+
+function SetEverythingForTheDuel ()
+{
+	local string DuelLevelName;
+	local int nGameState;
+
+	if(PlayerHarry.bIsGoyle && !bAllowGoyleInDuel)
+	{
+		return;
+	}
+
+	// Omega: Validate rank and rank data
+	if(DuelRank <= 0 || DuelRank > Duels.Length)
+	{
+		return;
+	}
+
+	if ( DuelRank > PlayerHarry.DuelRankHarry )
+	{
+		return;
+	}
+
+	// Omega: Now validate the gamestate data
+	nGameState = PlayerHarry.ConvertGameStateToNumber();
+	if(nGameState < iMinDuelGstate)
+	{
+		return;
+	}
+
+	if(iDuelGStateBlacklist.Contains(nGameState))
+	{
+		return;
+	}
+	// Omega: Now that we've passed all of that, we can unhide and give ourselves our duellist's look
+	bHidden = False;
+	SetCollision(True,True,True);
+
+	DuelBeans = Duels[DuelRank - 1].DuelistBeans;
+	DuelLevelName = Duels[DuelRank - 1].OurDuelLevelName;
+	Mesh = Duels[DuelRank - 1].DuelMesh;
+	Skins = Duels[DuelRank - 1].DuelSkins;
+
+	if ( DuelLevelTrigger == None )
+	{
+		DuelLevelTrigger = Spawn(Class'TriggerChangeLevel',,,);
+	}
+	if ( DuelLevelTrigger != None )
+	{
+		DuelLevelTrigger.NewMapName = DuelLevelName;
+		DuelLevelTrigger.SetCollision(False,False,False);
+	}
 }
 
 defaultproperties
@@ -1100,4 +1165,23 @@ defaultproperties
     bSnapToPatrolPoint=True
 
     bDoEyeBlinks=True
+	
+	// Omega: Default stuff
+	bAllowGoyleInDuel=false
+	iMinDuelGstate=80
+	iDuelGStateBlacklist(0)=120
+	iDuelGStateBlacklist(1)=150
+	iDuelGStateBlacklist(2)=160
+	iDuelGStateBlacklist(3)=170
+
+	Duels(0)=(DuelistBeans=10,OurDuelLevelName="Duel01",DuelMesh=SkeletalMesh'skhp2_genmale2Mesh',DuelSkins=(Texture'skhp2_genmale1_1Tex0',Texture'skhp2_genmale1_1Tex1'))
+	Duels(1)=(DuelistBeans=15,OurDuelLevelName="Duel02",DuelMesh=SkeletalMesh'skhp2_genfemale1Mesh',DuelSkins=(Texture'skhp2_genfemale1_6Tex0',Texture'skhp2_genfemale1_6Tex1'))
+	Duels(2)=(DuelistBeans=20,OurDuelLevelName="Duel03",DuelMesh=SkeletalMesh'skhp2_genfemale1Mesh',DuelSkins=(Texture'skhp2_genfemale1_4Tex0',Texture'skhp2_genfemale1_4Tex1'))
+	Duels(3)=(DuelistBeans=25,OurDuelLevelName="Duel04",DuelMesh=SkeletalMesh'skhp2_genmale2Mesh',DuelSkins=(Texture'skhp2_genmale1_3Tex0',Texture'skhp2_genmale1_3Tex1'))
+	Duels(4)=(DuelistBeans=35,OurDuelLevelName="Duel05",DuelMesh=SkeletalMesh'skhp2_genmale1Mesh',DuelSkins=(Texture'skhp2_genmale1_0Tex0',Texture'skhp2_genmale1_0Tex1'))
+	Duels(5)=(DuelistBeans=50,OurDuelLevelName="Duel06",DuelMesh=SkeletalMesh'skhp2_genfemale2Mesh',DuelSkins=(Texture'skhp2_genfemale1_3Tex0',Texture'skhp2_genfemale1_3Tex1'))
+	Duels(6)=(DuelistBeans=70,OurDuelLevelName="Duel07",DuelMesh=SkeletalMesh'skhp2_genmale2Mesh',DuelSkins=(Texture'skhp2_genmale1_7Tex0',Texture'skhp2_genmale1_7Tex1'))
+	Duels(7)=(DuelistBeans=100,OurDuelLevelName="Duel08",DuelMesh=SkeletalMesh'skhp2_genfemale1Mesh',DuelSkins=(Texture'skhp2_genfemale1_2Tex0',Texture'skhp2_genfemale1_2Tex1'))
+	Duels(8)=(DuelistBeans=150,OurDuelLevelName="Duel09",DuelMesh=SkeletalMesh'skhp2_genfemale1Mesh',DuelSkins=(Texture'skhp2_genfemale1_0Tex0',Texture'skhp2_genfemale1_0Tex1'))
+	Duels(9)=(DuelistBeans=200,OurDuelLevelName="Duel10",DuelMesh=SkeletalMesh'skhp2_genmale1Mesh',DuelSkins=(Texture'skhp2_genmale1_2Tex0',Texture'skhp2_genmale1_2Tex1'))
 }

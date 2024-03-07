@@ -82,10 +82,12 @@ function DrawBorder (Canvas Canvas)
 	if ( Level.PlayerHarryActor.bIsCaptured )
 	{
 		Canvas.SetPos(0.0,0.0);
-		Canvas.DrawTile(textureBorder,Canvas.SizeX,fCurrBorderHeight,0.0,0.0,1.0,1.0);
+		// Metallicafan212:	Fuck it, prevent AA issues
+		Canvas.DrawTile(textureBorder, Canvas.SizeX + 1, fCurrBorderHeight, 0.0, 0.0, textureBorder.USize, textureBorder.VSize);
 	}
-	Canvas.SetPos(0.0,Canvas.SizeY - fCurrBorderHeight);
-	Canvas.DrawTile(textureBorder,Canvas.SizeX,fCurrBorderHeight,0.0,0.0,1.0,1.0);
+	Canvas.SetPos(0.0, Canvas.SizeY - fCurrBorderHeight);
+	// Metallicafan212:	Same here
+	Canvas.DrawTile(textureBorder, Canvas.SizeX + 1, fCurrBorderHeight + 1, 0.0, 0.0, textureBorder.USize, textureBorder.VSize);
 }
 
 function SetCurrBorderHeight (Canvas Canvas)

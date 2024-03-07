@@ -1,5 +1,6 @@
 [All]
-M212MenuControllerVibration=Controller wijzigen
+M212MenuKeyboardLook=Pijltoetsenbeweging
+M212MenuControllerVibration=Controllertrilling
 M212MenuFontScale=Lettergrootte
 M212MenuFontScaleToolTip=Pas de grootte van het lettertype aan.
 M212MenuHUDCenter=Menu centreren

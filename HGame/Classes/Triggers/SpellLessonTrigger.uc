@@ -682,18 +682,20 @@ function float SayLessonDialog (string strDialogID, bool bDisplayText)
 	{
 		fSoundLen = GetSoundDuration(soundDialog);
 		fSoundLen += 0.5;
-		
 		if ( Professor != None )
 		{
-			
-			Professor.PlaySound(soundDialog,,,,10000.0,,True);
+			// Omega: No slot now means no lipsync and stuff... and they clearly want the professors 
+			// to actually speak so I'mma just copy the normal parameters for dialogue lines
+			//PlaySound(dlgSound, SLOT_TALK,1.4 , , 10000, , true);
+			//Professor.PlaySound(soundDialog,,,,10000.0,,True);
+			Professor.PlaySound(soundDialog, SLOT_TALK, 1.4 , , 10000, , true);
 		} 
 		else 
 		{
 			Professor.PlaySound(soundDialog,,,,10000.0,,True);
 		}
-	} 
-	else
+	}
+	else 
 	{
 		fSoundLen = Len(strDialog) * 0.01 + 3.0;
 	}

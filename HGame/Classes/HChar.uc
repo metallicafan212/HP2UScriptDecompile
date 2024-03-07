@@ -52,7 +52,11 @@ var Vector vTemp;
 var int iCanSeeHarryCounter;
 var bool bTempDontLookForHarry;
 var Vector vLastPosition;
-var int iStuckCounter;
+
+// DivingDeep39: Replaced with float var fStuckTimer
+//var int iStuckCounter;
+var float fStuckTimer;
+
 var bool bDoStuckChecking;
 var(WatchForHarry) name BaseWatchAnim[3];
 var(WatchForHarry) string BaseWatchSound[3];
@@ -217,7 +221,11 @@ state followHarry
 	function BeginState()
 	{
 		vLastPosition = vect(0.00,0.00,0.00);
-		iStuckCounter = 0;
+		
+		// DivingDeep39: Setting default to 4.0 seconds
+		//iStuckCounter = 0;
+		fStuckTimer = 4.0;
+		
 		iCanSeeHarryCounter = 0;
 		TriggerEvent('SilenceTwo',None,None);
 		TriggerEvent('ChaseMusic',None,None);
@@ -227,8 +235,13 @@ state followHarry
 	{
 		if ( VSize2D(Location - vLastPosition) < 1 )
 		{
-			iStuckCounter++;
-			if ( iStuckCounter > 4 )
+			// DivingDeep39: Instead of counting up, let's count down
+			//iStuckCounter++;
+			fStuckTimer -= dtime;
+			
+			// DivingDeep39: If countdown reaches 0, change state
+			//if ( iStuckCounter > 4 )
+			if ( fStuckTimer <= 0.0 )
 			{
 				bTempDontLookForHarry = True;
 				GotoState('RandomLookForHarry');
@@ -236,7 +249,9 @@ state followHarry
 		} 
 		else 
 		{
-			iStuckCounter = 0;
+			// DivingDeep39: Setting default to 4.0 seconds
+			//iStuckCounter = 0;
+			fStuckTimer = 4.0;
 		}
 		vLastPosition = Location;
 	}
@@ -278,7 +293,11 @@ state RandomLookForHarry
 	function BeginState()
 	{
 		vLastPosition = vect(0.00,0.00,0.00);
-		iStuckCounter = 0;
+		
+		// DivingDeep39: Setting default to 4.0 seconds
+		//iStuckCounter = 0;
+		fStuckTimer = 4.0;
+		
 		bDoStuckChecking = True;
 		iCanSeeHarryCounter = 0;
 		bPlayRunAnim = True;
@@ -297,18 +316,29 @@ state RandomLookForHarry
 	  {
 		  if ( VSize2D(Location - vLastPosition) < 1 )
 		  {
-		      iStuckCounter++;
-		      if ( iStuckCounter > 4 )
+		      // DivingDeep39: Instead of counting up, let's count down
+			  //iStuckCounter++;
+			  fStuckTimer -= dtime;
+			  
+		      // DivingDeep39: If countdown reaches 0, change state
+			  //if ( iStuckCounter > 4 )
+			  if ( fStuckTimer <= 0.0 )
 		      {
 		          vLastPosition = vect(0.00,0.00,0.00);
-			      iStuckCounter = 0;
+				  
+			      // DivingDeep39: Setting default to 4.0 seconds
+				  //iStuckCounter = 0;
+				  fStuckTimer = 4.0;
+				  
 			      FindNewVTempBasedOnNormal(PlayerHarry.Location - Location);
 			      GotoState('RandomLookForHarry');
 		      }
 		  }
 		  else
 		  {
-		      iStuckCounter = 0;
+		      // DivingDeep39: Setting default to 4.0 seconds
+			  //iStuckCounter = 0;
+			  fStuckTimer = 4.0;
 		  }
 	  }
 	  vLastPosition = Location;
@@ -358,7 +388,11 @@ state RandomLookForHarry
 		FindNewVTempBasedOnNormal((PlayerHarry.Location - Location) * vect(1.00,1.00,0.00));
 		TurnTo(vTemp);
 		bDoStuckChecking = True;
-		iStuckCounter = 0;
+		
+		// DivingDeep39: Setting default to 4.0 seconds
+		//iStuckCounter = 0;
+		fStuckTimer = 4.0;
+		
 		iCanSeeHarryCounter++;
 		if ( iCanSeeHarryCounter > 2 )
 		{

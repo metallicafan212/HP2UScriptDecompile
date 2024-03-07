@@ -1,4 +1,5 @@
 [All]
+M212MenuKeyboardLook=Movimento com Teclas de Seta
 M212MenuControllerVibration=Vibração do Comando
 M212MenuFontScale=Tamanho da Fonte
 M212MenuFontScaleToolTip=Aumenta e diminui o tamanho da fonte do jogo.

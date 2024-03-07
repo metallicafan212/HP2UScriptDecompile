@@ -1,4 +1,5 @@
 [All]
+M212MenuKeyboardLook=Retningstaster Manøvrering
 M212MenuControllerVibration=Controllervibration
 M212MenuFontScale=Skrifttypeskalering
 M212MenuFontScaleToolTip=Skalerer spillets skrifttype op og ned i størrelse.

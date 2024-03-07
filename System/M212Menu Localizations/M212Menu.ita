@@ -1,4 +1,5 @@
 [All]
+M212MenuKeyboardLook=Movimento con tasti freccia
 M212MenuControllerVibration=Vibrazione controller
 M212MenuFontScale=Dimensione caratteri
 M212MenuFontScaleToolTip=Aumenta e riduce la dimensione dei caratteri del gioco.

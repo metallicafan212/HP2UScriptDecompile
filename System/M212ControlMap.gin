@@ -20,5 +20,5 @@ ingame:AltFire
 ingame:button bDrinkWiggenwell
 ingame:StrafeLeft
 ingame:StrafeRight
-ingame:ToggleMapMenu
+@Menuable:ingame:ToggleMapMenu
 ingame:button bSkipCutScene

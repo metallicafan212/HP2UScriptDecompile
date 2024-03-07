@@ -123,6 +123,9 @@ var transient bool bNeedToStartMusic;
 //AdamJD:	From the demo/s
 var DemoAdDialog DemoAd;
 
+// Omega: Redefinable music:
+var String MusicToPlay;
+
 function SaveSelectedSlot()
 {
 }
@@ -234,7 +237,7 @@ function ChangePage (baseFEPage Page)
 			bShowNewBack = true;
 			
 			break;
-    
+	
 		case SoundVideoPage:
 			//bShowBackground = True;
 			//curBackground = Back1Background;
@@ -244,7 +247,7 @@ function ChangePage (baseFEPage Page)
 			bShowNewBack = true;
 			
 			break;
-    
+	
 		case LangPage:
 			break;
 		
@@ -258,7 +261,7 @@ function ChangePage (baseFEPage Page)
 			bShowNewBack = true;
 			
 			break;
-    
+	
 		case QuidPage:
 			//bShowBackground = True;
 			//curBackground = Back1Background;
@@ -268,7 +271,7 @@ function ChangePage (baseFEPage Page)
 			bShowNewBack = true;
 			
 			break;
-    
+	
 		case DuelPage:
 			//bShowBackground = True;
 			//curBackground = Back1Background;
@@ -278,7 +281,7 @@ function ChangePage (baseFEPage Page)
 			bShowNewBack = true;
 			
 			break;
-    
+	
 		case HousepointsPage:
 			//bShowBackground = True;
 			//curBackground = Back1Background;
@@ -288,7 +291,7 @@ function ChangePage (baseFEPage Page)
 			bShowNewBack = true;
 			
 			break;
-    
+	
 		case ChallengesPage:
 			//bShowBackground = True;
 			//curBackground = Back1Background;
@@ -308,11 +311,11 @@ function ChangePage (baseFEPage Page)
 			bShowNewBack = true;
 			
 			break;
-    
+	
 		case CreditsPage:
 			prevPage = InGamePage;
 			break;
-    
+	
 		case MapPage:
 			bShowMapBack = true;
 			break;
@@ -329,12 +332,16 @@ function ChangePage (baseFEPage Page)
 	{
 		StatusBarTextWindow.WinTop = curPage.GetStatusY();
 	}
+	// Omega: Call the post switch page function I added
+	curPage.PostSwitchPage();
 }
 
 function ChangePagePrevious()
 {
 	if ( (prevPage != None) && (prevPage != curPage) )
 	{
+		// Omega: Handle an edge case because we've set the prevpage to none...
+		curPage.PreSwitchPage();
 		ChangePage(prevPage);
 		prevPage = None;
 	}
@@ -342,83 +349,83 @@ function ChangePagePrevious()
 
 function ChangePageNamed (string Name)
 {
-  switch (Caps(Name))
-  {
-    case "MAIN":
-    ChangePage(MainPage);
-    break;
-    case "INPUT":
-    Log("changepagenamed input");
-    ChangePage(InputPage);
-    break;
-    case "SOUNDVIDEO":
-    Log("changepagenamed soundvideo");
-    ChangePage(SoundVideoPage);
-    break;
-    case "LANG":
-    case "LANGUAGE":
-    ChangePage(LangPage);
-    break;
-    case "INGAME":
-    ChangePage(InGamePage);
-    break;
-    case "FOLIO":
-    Log("changepagenamed folio");
-    ChangePage(FolioPage);
-    break;
-    case "MAP":
-    ChangePage(MapPage);
-    break;
-    case "QUID":
-    case "QUIDDITCH":
-    ChangePage(QuidPage);
-    break;
-    case "DUEL":
-    ChangePage(DuelPage);
-    break;
-    case "HPOINTS":
-    ChangePage(HousepointsPage);
-    break;
-    case "CHALLENGES":
-    ChangePage(ChallengesPage);
-    break;
-    case "CREDITSPAGE":
-    ChangePage(CreditsPage);
-    break;
-    default:
-    Log("UnknownPage in FEBook: " $ Name);
-    break;
-  }
+	switch (Caps(Name))
+	{
+		case "MAIN":
+			ChangePage(MainPage);
+			break;
+		case "INPUT":
+			Log("changepagenamed input");
+			ChangePage(InputPage);
+			break;
+		case "SOUNDVIDEO":
+			Log("changepagenamed soundvideo");
+			ChangePage(SoundVideoPage);
+			break;
+		case "LANG":
+		case "LANGUAGE":
+			ChangePage(LangPage);
+			break;
+		case "INGAME":
+			ChangePage(InGamePage);
+			break;
+		case "FOLIO":
+			Log("changepagenamed folio");
+			ChangePage(FolioPage);
+			break;
+		case "MAP":
+			ChangePage(MapPage);
+			break;
+		case "QUID":
+		case "QUIDDITCH":
+			ChangePage(QuidPage);
+			break;
+		case "DUEL":
+			ChangePage(DuelPage);
+			break;
+		case "HPOINTS":
+			ChangePage(HousepointsPage);
+			break;
+		case "CHALLENGES":
+			ChangePage(ChallengesPage);
+			break;
+		case "CREDITSPAGE":
+			ChangePage(CreditsPage);
+			break;
+		default:
+			Log("UnknownPage in FEBook: " $ Name);
+			break;
+	}
 }
 
 event Tick (float Delta)
 {
-  local bool bTravelItems;
+	local bool bTravelItems;
 
-  if ( _URLToLoad != "" )
-  {
-    HPConsole(Root.Console).bInHubFlow = bTravelItemsOnLoad;
-    if ( bNewGame )
-    {
-      bTravelItems = False;
-      bNewGame = False;
-    } 
-	else 
+	if ( _URLToLoad != "" )
 	{
-      bTravelItems = bTravelItemsOnLoad;
-    }
-    baseConsole(Root.Console).ChangeLevel(_URLToLoad,bTravelItems);
-    _URLToLoad = "";
-    if ( _URLToLoad ~= "startup.unr" )
-    {
-      OpenBook();
-      ChangePageNamed("Main");
-    } 
-	else 
-	{
-      CloseBook();
-    }
-  }
+		HPConsole(Root.Console).bInHubFlow = bTravelItemsOnLoad;
+		if ( bNewGame )
+		{
+			bTravelItems = False;
+			bNewGame = False;
+		} 
+		else 
+		{
+			bTravelItems = bTravelItemsOnLoad;
+		}
+		baseConsole(Root.Console).ChangeLevel(_URLToLoad,bTravelItems);
+		_URLToLoad = "";
+		if ( _URLToLoad ~= "startup.unr" )
+		{
+			OpenBook();
+			ChangePageNamed("Main");
+		} 
+		else 
+		{
+			CloseBook();
+		}
+	}
 }
 
 function Created()
@@ -439,6 +446,7 @@ function Created()
 	StatusBarTextWindow.AddText("");
 	StatusBarTextWindow.Font = 4;
 	StatusBarTextWindow.Resized();
+
 	bShowBackground = True;
 	InGamePage = FEInGamePage(CreateWindow(Class'FEInGamePage', 0.0, 0.0, WinWidth, WinHeight));
 	InGamePage.book = self;
@@ -588,7 +596,8 @@ function Paint (Canvas Canvas, float X, float Y)
 	{
 		if ( nMusicHandle == 0 )
 		{
-			nMusicHandle = GetPlayerOwner().PlayMusic("sm_dia_Ambient02_01.ogg",0.5);
+			//nMusicHandle = GetPlayerOwner().PlayMusic("sm_dia_Ambient02_01.ogg",0.5);
+			nMusicHandle = GetPlayerOwner().PlayMusic(MusicToPlay,0.5);
 		}
 		bNeedToStartMusic = False;
 	}
@@ -632,7 +641,8 @@ function Paint (Canvas Canvas, float X, float Y)
 		{
 			Canvas.DrawTileClipped(FEMapBackground, Canvas.SizeX, Canvas.SizeY, 0.0, 0.0, Canvas.SizeX * 2.5, Canvas.SizeY * 2.5);
 		}
-				
+		
+		
 		// Metallicafan212:	We need to scale the pos to the middle of the screen
 		if(FEMid != none)
 		{
@@ -778,6 +788,7 @@ function CloseBook()
 		bNeedToStartMusic = False;
 		GetPlayerOwner().StopMusic(nMusicHandle,0.0);
 		nMusicHandle = 0;
+		MusicToPlay = Default.MusicToPlay;
 	}
 	Log(" */**/** CloseBook Called!!! ");
 	curPage.ClearRollover();
@@ -792,6 +803,36 @@ function CloseBook()
 	{
 		ShowCredits();
 	}
+}
+
+// Omega: Some custom music functions
+function StopMusic()
+{
+	if ( nMusicHandle != 0 )
+	{
+		bNeedToStartMusic = False;
+		GetPlayerOwner().StopMusic(nMusicHandle,0.0);
+		nMusicHandle = 0;
+		MusicToPlay = Default.MusicToPlay;
+	}
+}
+// Omega: Start a new song
+function PlayMusic(optional string NewMusic)
+{
+	StopMusic();
+	if(NewMusic != "")
+	{
+		MusicToPlay = NewMusic;
+	}
+	else
+	{
+		MusicToPlay = Default.MusicToPlay;
+	}
+
+	// Omega: Stopmusic already checks the nMusicHandle
+	nMusicHandle = GetPlayerOwner().PlayMusic(MusicToPlay,0.5);
+
+	bNeedToStartMusic = False;
 }
 
 function bool IsInGameMenuShowing()
@@ -816,97 +857,100 @@ function HPMessageBox doHPMessageBox (string Msg, string textButton1, optional s
 
 function ExitFromGame()
 {
-  if ( HPConsole(Root.Console).bLocked )
-  {
-    return;
-  }
-  HPConsole(Root.Console).bQuickKeyEnable = False;
-  HPConsole(Root.Console).LaunchUWindow();
-  bGamePlaying = False;
-  ChangePage(MainPage);
+	if ( HPConsole(Root.Console).bLocked )
+	{
+		return;
+	}
+	HPConsole(Root.Console).bQuickKeyEnable = False;
+	HPConsole(Root.Console).LaunchUWindow();
+	bGamePlaying = False;
+	ChangePage(MainPage);
 }
 
 //AdamJD:	From the demo/s
 function DemoAdDialog CreateDemoAdDialog (float fWaitTime)
 {
-  local DemoAdDialog D;
+	local DemoAdDialog D;
 
-  D = DemoAdDialog(Root.CreateWindow(Class'DemoAdDialog',0.0,0.0,640.0,480.0,self));
-  D.Setup(fWaitTime);
-  D.OwnerWindow = self;
-  Root.ShowModal(D);
-  return D;
+	D = DemoAdDialog(Root.CreateWindow(Class'DemoAdDialog',0.0,0.0,640.0,480.0,self));
+	D.Setup(fWaitTime);
+	D.OwnerWindow = self;
+	Root.ShowModal(D);
+	return D;
 }
 
 //AdamJD:	From the demo/s
 function ShowDemoAds (float fWaitTime)
 {
-  if ( HPConsole(Root.Console).bLocked )
-  {
-    return;
-  }
-  HPConsole(Root.Console).bQuickKeyEnable = False;
-  HPConsole(Root.Console).LaunchUWindow();
-  bShowBackground = False;
-  DemoAd = CreateDemoAdDialog(fWaitTime);
+	if ( HPConsole(Root.Console).bLocked )
+	{
+		return;
+	}
+	HPConsole(Root.Console).bQuickKeyEnable = False;
+	HPConsole(Root.Console).LaunchUWindow();
+	bShowBackground = False;
+	DemoAd = CreateDemoAdDialog(fWaitTime);
 }
 
 function WindowDone (UWindowWindow W)
 {
-  bShowBackground = True;
-  
-  if ( W == ConfirmQuitGame )
-  {
-    if ( ConfirmQuitGame.Result == ConfirmQuitGame.button1.Text )
-    {
-      CloseBook();
-      baseConsole(Root.Console).ChangeLevel("startup.unr",False);
-      bGamePlaying = False;
-      OpenBook();
-      ChangePage(MainPage);
-    } else {
-      CloseBook();
-    }
-    ConfirmQuitGame = None;
-  }
-  
-  //AdamJD:	From the demo/s
-  else if ( W == DemoAd )
-  {
-    DemoAd = None;
-    Root.DoQuitGame();
-  }
+	bShowBackground = True;
+	
+	if ( W == ConfirmQuitGame )
+	{
+		if ( ConfirmQuitGame.Result == ConfirmQuitGame.button1.Text )
+		{
+			CloseBook();
+			baseConsole(Root.Console).ChangeLevel("startup.unr",False);
+			bGamePlaying = False;
+			OpenBook();
+			ChangePage(MainPage);
+		} 
+		else 
+		{
+			CloseBook();
+		}
+		ConfirmQuitGame = None;
+	}
+	
+	//AdamJD:	From the demo/s
+	else 
+	if ( W == DemoAd )
+	{
+		DemoAd = None;
+		Root.DoQuitGame();
+	}
 }
 
 function OnLevelLoadDone()
 {
-  if ( bIsOpen && (curPage == MainPage) )
-  {
-    MainPage.ShowWindow();
-  }
+	if ( bIsOpen && (curPage == MainPage) )
+	{
+		MainPage.ShowWindow();
+	}
 }
 
 function EscFromConsole()
 {
-  if ( HPConsole(Root.Console).bLocked )
-  {
-    return;
-  }
-  HPConsole(Root.Console).bQuickKeyEnable = False;
-  HPConsole(Root.Console).LaunchUWindow(True);
-  OpenBook("INGAME");
-  ChangePage(InGamePage);
+	if ( HPConsole(Root.Console).bLocked )
+	{
+		return;
+	}
+	HPConsole(Root.Console).bQuickKeyEnable = False;
+	HPConsole(Root.Console).LaunchUWindow(True);
+	OpenBook("INGAME");
+	ChangePage(InGamePage);
 }
 
 function TurnMapOn()
 {
-  if ( curPage != MapPage )
-  {
-    HPConsole(Root.Console).bQuickKeyEnable = False;
-    HPConsole(Root.Console).LaunchUWindow(True);
-    OpenBook("MAP");
-    ChangePage(MapPage);
-  }
+	if ( curPage != MapPage )
+	{
+		HPConsole(Root.Console).bQuickKeyEnable = False;
+		HPConsole(Root.Console).LaunchUWindow(True);
+		OpenBook("MAP");
+		ChangePage(MapPage);
+	}
 }
 
 function TurnMapOff()
@@ -919,66 +963,66 @@ function TurnMapOff()
 
 function ToggleMap()
 {
-  if ( curPage == MapPage )
-  {
-    CloseBook();
-  } 
-  else 
-  {
-    HPConsole(Root.Console).bQuickKeyEnable = False;
-    HPConsole(Root.Console).LaunchUWindow(True);
-    OpenBook("MAP");
-    ChangePage(MapPage);
-  }
+	if ( curPage == MapPage )
+	{
+		CloseBook();
+	} 
+	else 
+	{
+		HPConsole(Root.Console).bQuickKeyEnable = False;
+		HPConsole(Root.Console).LaunchUWindow(True);
+		OpenBook("MAP");
+		ChangePage(MapPage);
+	}
 }
 
 function DoMapFromConsole()
 {
-  if ( HPConsole(Root.Console).bLocked )
-  {
-    return;
-  }
-  HPConsole(Root.Console).bQuickKeyEnable = False;
-  HPConsole(Root.Console).LaunchUWindow(True);
-  OpenBook("MAP");
-  ChangePage(MapPage);
+	if ( HPConsole(Root.Console).bLocked )
+	{
+		return;
+	}
+	HPConsole(Root.Console).bQuickKeyEnable = False;
+	HPConsole(Root.Console).LaunchUWindow(True);
+	OpenBook("MAP");
+	ChangePage(MapPage);
 }
 
 function ExitFromConsole()
 {
-  if ( HPConsole(Root.Console).bLocked )
-  {
-    return;
-  }
-  HPConsole(Root.Console).bQuickKeyEnable = False;
-  HPConsole(Root.Console).LaunchUWindow();
-  bShowBackground = False;
-  ConfirmQuitGame = doHPMessageBox("Are you sure you want to quit","Yes","No");
-  return;
+	if ( HPConsole(Root.Console).bLocked )
+	{
+		return;
+	}
+	HPConsole(Root.Console).bQuickKeyEnable = False;
+	HPConsole(Root.Console).LaunchUWindow();
+	bShowBackground = False;
+	ConfirmQuitGame = doHPMessageBox("Are you sure you want to quit","Yes","No");
+	return;
 }
 
 function Notify (UWindowDialogControl C, byte E)
 {
-  if ( E == DE_Click )
-  {
-    switch (C)
-    {
-      case DismissButton:
-      CloseBook();
-      break;
-      default:
-	  Log("FEBook::Notify " $ string(C));
-	  break;
-    }
-  }
+	if ( E == DE_Click )
+	{
+		switch (C)
+		{
+			case DismissButton:
+			CloseBook();
+			break;
+			default:
+			Log("FEBook::Notify " $ string(C));
+			break;
+		}
+	}
 }
 
 function WindowEvent (WinMessage Msg, Canvas C, float X, float Y, int Key)
 {
-  if ( (Msg == WM_Paint) ||  !Root.WaitModal() )
-  {
-    Super.WindowEvent(Msg,C,X,Y,Key);
-  }
+	if ( (Msg == WM_Paint) ||  !Root.WaitModal() )
+	{
+		Super.WindowEvent(Msg,C,X,Y,Key);
+	}
 }
 
 // Metallicafan212:	To allow the menu to be toggled on and off
@@ -1022,7 +1066,7 @@ function TogglePauseMenu()
 
 // Metallicafan212:	This is the WORST fucking function here
 //					Imagine fucking hard binding the controls, it actually takes MORE effort
-function bool KeyEvent (byte Key, byte Action, float Delta)
+function bool KeyEvent(EInputKey Key, EInputAction Action, float Delta)//(byte Key, byte Action, float Delta)
 {
 	//AdamJD:	From the demo/s
 	if ( DemoAd != None )
@@ -1139,67 +1183,66 @@ function bool KeyEvent (byte Key, byte Action, float Delta)
 
 function bool DoEscapeFromPage()
 {
-  if ( curPage == InGamePage )
-  {
-    CloseBook();
-    return True;
-  } 
-  //else 
-  //{
-  else if ( curPage != MainPage )
-  {
-    if ( prevPage == None )
-    {
-      CloseBook();
-    } 
+
+	if ( curPage == InGamePage )
+	{
+		CloseBook();
+		return True;
+	} 
+	else 
+	if ( curPage != MainPage )
+	{
+		if ( prevPage == None )
+		{
+			CloseBook();
+		} 
+		else 
+		{
+			ChangePagePrevious();
+		}
+		Log("FEBook: curPage == " $ string(curPage) $ " prevPage == " $ string(prevPage));
+		return True;
+	} 
 	else 
 	{
-      ChangePagePrevious();
-    }
-    Log("FEBook: curPage == " $ string(curPage) $ " prevPage == " $ string(prevPage));
-    return True;
-  } 
-  else 
-  {
-    return True;
-  }
-  //}
+		return True;
+	}
 }
 
 function RunURL (string levURL, bool bTravelItems)
 {
-  Log("runurl");
-  bTravelItemsOnLoad = bTravelItems;
-  _URLToLoad = levURL;
-  bGamePlaying = True;
+	Log("runurl");
+	bTravelItemsOnLoad = bTravelItems;
+	_URLToLoad = levURL;
+	bGamePlaying = True;
 }
 
 function EndGame()
 {
-  bInEndGame = True;
+  	bInEndGame = True;
 }
 
 function RunTheCredits()
 {
-  if ( HPConsole(Root.Console).bLocked )
-  {
-    return;
-  }
-  HPConsole(Root.Console).bQuickKeyEnable = False;
-  OpenBook();
-  ShowCredits();
+	if ( HPConsole(Root.Console).bLocked )
+	{
+		return;
+	}
+	HPConsole(Root.Console).bQuickKeyEnable = False;
+	OpenBook();
+	ShowCredits();
 }
 
 function ShowCredits()
 {
-  bInEndGame = True;
-  if ( CreditsPage == None )
-  {
-    CreditsPage = baseFEPage(CreateWindow(Class'FECreditsPage',0.0,0.0,640.0,480.0));
-    CreditsPage.book = self;
-    CreditsPage.HideWindow();
-  }
-  ChangePageNamed("CREDITSPAGE");
+	bInEndGame = True;
+	if ( CreditsPage == None )
+	{
+		CreditsPage = baseFEPage(CreateWindow(Class'FECreditsPage',0.0,0.0,640.0,480.0));
+		CreditsPage.book = self;
+		CreditsPage.HideWindow();
+	}
+	ChangePageNamed("CREDITSPAGE");
 }
 
 function DoStoryBookInterlude (int StoryBookIdx, name EventWhenDone)
@@ -1208,16 +1251,18 @@ function DoStoryBookInterlude (int StoryBookIdx, name EventWhenDone)
 
 defaultproperties
 {
-    InGameBackground=(p1=Texture'HGame.Icons.FEInGameBackTexture1',p2=Texture'HGame.Icons.FEInGameBackTexture2',p3=Texture'HGame.Icons.FEInGameBackTexture3',p4=Texture'HGame.Icons.FEInGameBackTexture4',p5=Texture'HGame.Icons.FEInGameBackTexture5',p6=Texture'HGame.Icons.FEInGameBackTexture6',durration=999999.00)
+	MusicToPlay="sm_dia_Ambient02_01.ogg"
 
-    Back1Background=(p1=Texture'HGame.Icons.FEBack1Texture1',p2=Texture'HGame.Icons.FEBack1Texture2',p3=Texture'HGame.Icons.FEBack1Texture3',p4=Texture'HGame.Icons.FEBack1Texture4',p5=Texture'HGame.Icons.FEBack1Texture5',p6=Texture'HGame.Icons.FEBack1Texture6',durration=999999.00)
+	InGameBackground=(p1=Texture'HGame.Icons.FEInGameBackTexture1',p2=Texture'HGame.Icons.FEInGameBackTexture2',p3=Texture'HGame.Icons.FEInGameBackTexture3',p4=Texture'HGame.Icons.FEInGameBackTexture4',p5=Texture'HGame.Icons.FEInGameBackTexture5',p6=Texture'HGame.Icons.FEInGameBackTexture6',durration=999999.00)
+
+	Back1Background=(p1=Texture'HGame.Icons.FEBack1Texture1',p2=Texture'HGame.Icons.FEBack1Texture2',p3=Texture'HGame.Icons.FEBack1Texture3',p4=Texture'HGame.Icons.FEBack1Texture4',p5=Texture'HGame.Icons.FEBack1Texture5',p6=Texture'HGame.Icons.FEBack1Texture6',durration=999999.00)
 	
 	FEBot=Texture'HGame.FEBook.FEBottom'
 	FETop=Texture'HGame.FEBook.FETop'
 	FETL=Texture'HGame.FEBook.FETLeft'
 	FEBL=Texture'HGame.FEBook.FEBLeft'
 	FETR=Texture'HGame.FEBook.FETRight'
-    FEBR=Texture'HGame.FEBook.FEBRight'
+	FEBR=Texture'HGame.FEBook.FEBRight'
 	FEBackground=Texture'HGame.FEBook.FEBack'
 	// Omega: New map BG
 	FEMapBackground=Texture'HGame.FEBook.FEMapBack'

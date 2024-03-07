@@ -471,7 +471,7 @@ function WindowDone (UWindowWindow W)
 	}
 }
 
-function bool KeyEvent (byte Key, byte Action, float Delta)
+function bool KeyEvent(EInputKey Key, EInputAction Action, float Delta)
 {
 	return False;
 }

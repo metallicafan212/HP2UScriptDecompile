@@ -1,4 +1,5 @@
 [All]
+M212MenuKeyboardLook=Keyboard Look
 M212MenuControllerVibration=Controller Vibration
 M212MenuFontScale=Font Scaling
 M212MenuFontScaleToolTip=Scales the game's font up and down in size.

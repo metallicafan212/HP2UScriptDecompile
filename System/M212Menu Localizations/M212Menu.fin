@@ -1,4 +1,5 @@
 [All]
+M212MenuKeyboardLook=Nuolinäppäinliike
 M212MenuControllerVibration=Ohjaimen värähtely
 M212MenuFontScale=Fontin skaalaus
 M212MenuFontScaleToolTip=Skaalaa pelin fontin kokoa ylös ja alas.

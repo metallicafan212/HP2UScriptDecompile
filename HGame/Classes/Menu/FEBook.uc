@@ -674,6 +674,9 @@ function Paint (Canvas Canvas, float X, float Y)
 	// Metallicafan212:	Render on top the background fill layer
 	if(CurPage.ExBackLayering != None)
 		CurPage.ExBackLayering.static.AfterBackgroundLayer(Canvas, CurPage);
+		
+	// Metallicafan212:	Fix UV clamping issues
+	Canvas.bNoUVClamp = false;
 	
 	if(bShowMainBack)
 	{
@@ -714,7 +717,7 @@ function Paint (Canvas Canvas, float X, float Y)
 	if(CurPage.ExBackLayering != None)
 		CurPage.ExBackLayering.static.AfterLayering(Canvas, CurPage);
 	
-	Canvas.bNoUVClamp = false;
+	//Canvas.bNoUVClamp = false;
 	
 	if ( bShowBackground )
 	{

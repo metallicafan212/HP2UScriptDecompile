@@ -580,11 +580,17 @@ function ShowConsole()
 
 function HideConsole()
 {
-  bShowConsole = False;
-  if ( bCreatedRoot )
-  {
-    ConsoleWindow.HideWindow();
-  }
+	bShowConsole = False;
+	if ( bCreatedRoot )
+	{
+		ConsoleWindow.HideWindow();
+	}
+  
+	// Omega: Added to prevent closing the console from getting the mouse stuck on-screen, requiring an F4 press
+	if(!Root.bUWindowActive)
+	{
+		CloseUWindow();
+	}
 }
 
 function ChangeLevel (string lev, bool flag)

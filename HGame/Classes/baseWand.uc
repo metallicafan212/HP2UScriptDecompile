@@ -690,5 +690,8 @@ defaultproperties
     CollisionHeight=8.00
 
     Mass=50.00
+	
+	// Metallicafan212:	Needed to restore base UE1 behavior to weapons
+	bRespectHidden=true
 
 }

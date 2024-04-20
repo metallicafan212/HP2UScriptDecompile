@@ -219,23 +219,39 @@ function CutError (string Str)
 function bool GetNextLine (out string Line)
 {
 	local int eolIndex;
+	local int OldEOL;
 	local string TempStr;
 
 	if ( curScriptPosition >= Len(Script) )
 	{
 		return False;
 	}
-
+	
+	// Metallicafan212:	Fix this shit!!!! They test for \r instead of \n!!!!
+	//					Guys, imagine actually making your code portable!
 	TempStr = Mid(Script,curScriptPosition);
-	eolIndex = InStr(TempStr,Chr(13));
+	//eolIndex = InStr(TempStr,Chr(13));
+	eolIndex = InStr(TempStr, Chr(10));
 
 	if ( eolIndex < 0 )
 	{
-		eolIndex = Len(TempStr);
+		eolIndex = Len(TempStr) + 1;
 	}
-
-	curScriptPosition += eolIndex + 2;
+	
+	curScriptPosition += eolIndex + 1;//eolIndex + 2;
+	
+	// Metallicafan212:	Test for \r now
+	OldEOL 		= eolIndex;
+	eolIndex 	= InStr(TempStr, Chr(13));
+	
+	if(eolIndex < 0)
+	{
+		// Metallicafan212:	Restore, there's no \r
+		eolIndex = OldEOL;
+	}
+	
 	Line = Left(TempStr,eolIndex);
+	
 	return True;
 }
 
@@ -372,7 +388,7 @@ function bool ParseCommand (string Command)
 	// DivingDeep39: Used for Comment's and ObjectiveId's section and localization
 	local string m212, idCom, tempSec, tempInt, secCom, intCom;
 
-	subjectPart = ParseDelimitedString(Command," ",1,False);	
+	subjectPart = ParseDelimitedString(Command," ",1,False);
 	if ( Len(subjectPart) == 0 )
 	{
 		return True;

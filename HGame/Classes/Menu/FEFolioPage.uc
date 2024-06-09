@@ -727,14 +727,14 @@ function PaintLargeCard (Canvas Canvas, float fScaleFactor)
 	if ( Canvas.SizeX > WinWidth )
 	{
 		nLargeCardX = Canvas.SizeX / 2 - textureCurrLargeCard.USize / 2;
-		nLargeCardY = nLARGE_CARD_Y + (textureCurrLargeCard.VSize * fScaleFactor - textureCurrLargeCard.VSize) / 2;
+		nLargeCardY = nLARGE_CARD_Y + ((textureCurrLargeCard.VSize * fScaleFactor - textureCurrLargeCard.VSize) / 2);
 
 		// Omega: 3D Card drawing:
 		if ( (classCurWC != None) && classCurWC.Default.bIsLayered )
 		{
 			GetMouseXY(MouseX,MouseY);
-			offX = (MouseX - Canvas.SizeX / 2) / Canvas.SizeX / 2;
-			offY = (MouseY - Canvas.SizeY / 2) / Canvas.SizeY / 2;
+			offX = (MouseX - (Canvas.SizeX / 2)) / (Canvas.SizeX / 2);
+			offY = (MouseY - (Canvas.SizeY / 2)) / (Canvas.SizeY / 2);
 			offX *= 6;
 			offY *= 6;
 			if ( classCurWC.Default.bLastLayerIsFire )
@@ -743,11 +743,11 @@ function PaintLargeCard (Canvas Canvas, float fScaleFactor)
 			} 
 			else 
 			{
-				Canvas.SetPos(nLargeCardX + offX * 2,nLargeCardY + offY * 2);
+				Canvas.SetPos(nLargeCardX + (offX * 2),nLargeCardY + (offY * 2));
 			}
 			
 			Canvas.DrawIcon(classCurWC.Default.textureLayers[2],1.0);
-			Canvas.SetPos(nLargeCardX + offX * 1,nLargeCardY + offY * 1);
+			Canvas.SetPos(nLargeCardX + offX * 1,nLargeCardY + (offY * 1));
 			Canvas.DrawIcon(classCurWC.Default.textureLayers[1],1.0);
 			Canvas.SetPos(nLargeCardX,nLargeCardY);
 			Canvas.DrawIcon(classCurWC.Default.textureLayers[0],1.0);
@@ -760,7 +760,7 @@ function PaintLargeCard (Canvas Canvas, float fScaleFactor)
 	} 
 	else 
 	{
-		Canvas.SetPos(nLARGE_CARD_X * fScaleFactor,4.0 * fScaleFactor);
+		Canvas.SetPos(nLARGE_CARD_X * fScaleFactor,nLargeCardY * fScaleFactor);
 		Canvas.DrawIcon(textureCurrLargeCard,fScaleFactor);
 	}
 }

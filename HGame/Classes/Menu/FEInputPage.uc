@@ -1602,7 +1602,7 @@ defaultproperties
 
     //InGame_VertSpacing(10)=32
 
-    InQuidditch_LabelList="Quidditch Action"
+    InQuidditch_LabelList(0)="Quidditch Action"
 
     //InQuidditch_VertSpacing(0)=32
 
@@ -1611,7 +1611,7 @@ defaultproperties
 	// Omega: replaced with int
 	InQuidditch_VertSpacing=32
 
-    InWizardDuel_LabelList="Cycle Spell"
+    InWizardDuel_LabelList(0)="Cycle Spell"
 
     InWizardDuel_VertSpacing=32
 

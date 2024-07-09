@@ -6410,4 +6410,7 @@ defaultproperties
     Buoyancy=118.80
 
     RotationRate=(Pitch=20000,Yaw=70000,Roll=3072)
+	
+	// Metallicafan212:	Tune moveto/movetoward closer to what stock HP2 was
+	MinMoveDestDist=75.0
 }

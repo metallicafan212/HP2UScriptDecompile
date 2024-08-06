@@ -2,8 +2,11 @@
 // NewMusicTrigger.
 //================================================================================
 
-class NewMusicTrigger extends Trigger;
+// Metallicafan212:	All of this behavior and variables have been rolled into MusicTrigger in Engine.
+//					This was done to have one source of this music behavior to use in all HP2 engine enhanced games (UT, HP1, etc.).
+class NewMusicTrigger extends MusicTrigger;//Trigger;
 
+/*
 var() string 		Song;
 var() float 		FadeInTime;
 var() float 		FadeOutTime;
@@ -83,3 +86,4 @@ defaultproperties
 	// Omega: added to match stock behavior
 	bAllowOnlyOneTrack=True
 }
+*/

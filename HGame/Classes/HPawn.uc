@@ -2014,6 +2014,6 @@ defaultproperties
 
     Mesh=SkeletalMesh'HProps.skSundialMesh'
 	
-		// Metallicafan212:	Tune moveto/movetoward closer to what stock HP2 was
+	// Metallicafan212:	Tune moveto/movetoward closer to what stock HP2 was
 	MinMoveDestDist=75.0
 }

@@ -2,7 +2,12 @@
 // M212FEBindPage: Creates a binding page based on externally loaded data, and switches modes
 // depending on controller, or not the controller binding mode. Linked to FEInputPage closely.
 //=============================================================================================
-Class M212FEBindPage based on baseFEPage;
+Class M212FEBindPage based on baseFEPage
+	Config(user);
+
+
+// Omega: User config variables
+var() 	GlobalConfig bool 	bShowReloadButton;
 
 //=============================================================================================
 // Omega: Main user variables
@@ -35,34 +40,6 @@ var		Array<String>		LocalizedKeyName; 	// User visible name of our keys, loaded 
 //=============================================================================================
 // What keys are allowed to only be used and managed by controllers
 var		Array<int>			ControllerKeys;
-/*
-200 "XInput DPad Up"
-201 "XInput DPad Down"
-202 "XInput DPad Left"
-203 "XInput DPad Right"
-204 "XInput Start"
-205 "XInput Select"
-206 "XInput Left Thumb"
-207 "XInput Right Thumb"
-208 "XInput Left Shoulder"
-209 "XInput Right Shoulder"
-210 "XInput A"
-211 "XInput B"
-212 "XInput X"
-213 "XInput Y"
-214 "Joy15"
-215 "Joy16"
-224 "XInput Left Stick X"
-225 "XInput Left Stick Y"
-226 "XInput Left Trigger"
-227 "XInput Right Trigger"
-232 "XInput Right Stick X"
-233 "XInput Right Stick Y"
-240 "JoyPovUp"
-241 "JoyPovDown"
-242 "JoyPovLeft"
-243 "JoyPovRight"
-*/
 var		float				ControllerDeadZone;	// Dead zone for binding an axis, it's pretty high so
 												// you're *definitely* sure you were trying to bind it
 												// and not something else
@@ -188,6 +165,9 @@ struct SCachedElement
 	// Omega: Our element type. Blank will have no visible instances, control will have both 
 	//classes active, label will have 
 	var		EElementType	ElementType;
+
+	// Omega: Searchable element name for our command
+	var 	string 			ElementName;
 	
 	// Omega: Category: Only binds from the same category cancel each other out
 	var		string			Category;
@@ -870,18 +850,6 @@ function ProcessKey(EInputKey KeyNo)
 	//Log("InputPage selection:" $ string(Selection) $ " has AliasNames1:'" $ AliasNames1[Selection] $ "' attempt to set as " $ string(KeyNo) $ ":" $ KeyName);
 	//PlayClick();
 	
-	/*if ( (KeyName == "") || (KeyName == "Escape") 
-	// Metallicafan212:	F1-F9
-	|| (KeyNo >= 112) && (KeyNo <= 121) 
-	// Metallicafan212:	0-9
-	|| (KeyNo >= 48) && (KeyNo <= 57) 
-	// Metallicafan212: Fucking unknown????
-	|| (KeyNo == 91) || (KeyNo == 92) || (KeyNo == 93) 
-	// Metallicafan212: Mouse wheel
-	|| (KeyNo == 236) || (KeyNo == 237) )
-	{
-		return;
-	}*/
 	// Omega: We're not limiting our keybinds hard at all. Escape is the only reservation
 	if(!bControllerMenu && ((KeyName == "") || KeyNo == IK_Escape || ControllerKeys.Contains(KeyNo)))//KeyName == "Escape" || ControllerKeys.Contains(KeyNo)))
 	{
@@ -1721,29 +1689,29 @@ defaultproperties
 
 
 	// Omega: XInput variables: See variable definition to match this list with the actual inputs
-	ControllerKeys(0)=200
-	ControllerKeys(1)=201
-	ControllerKeys(2)=202
-	ControllerKeys(3)=203
-	ControllerKeys(4)=204
-	ControllerKeys(5)=205
-	ControllerKeys(6)=206
-	ControllerKeys(7)=207
-	ControllerKeys(8)=208
-	ControllerKeys(9)=209
-	ControllerKeys(10)=210
-	ControllerKeys(11)=211
-	ControllerKeys(12)=212
-	ControllerKeys(13)=213
-	ControllerKeys(14)=214
-	ControllerKeys(15)=215
-	ControllerKeys(16)=224
-	ControllerKeys(17)=225
-	ControllerKeys(18)=226
-	ControllerKeys(19)=227
-	ControllerKeys(20)=232
-	ControllerKeys(21)=233
-	ControllerKeys(22)=240
-	ControllerKeys(23)=241
-	ControllerKeys(24)=243
+	// Metallicafan212:	This should really be done dynamically....
+	ControllerKeys(0)=195
+	ControllerKeys(1)=196
+	ControllerKeys(2)=197
+	ControllerKeys(3)=198
+	ControllerKeys(4)=199
+	ControllerKeys(5)=200
+	ControllerKeys(6)=201
+	ControllerKeys(7)=202
+	ControllerKeys(8)=203
+	ControllerKeys(9)=204
+	ControllerKeys(10)=205
+	ControllerKeys(11)=206
+	ControllerKeys(12)=207
+	ControllerKeys(13)=208
+	ControllerKeys(14)=209
+	ControllerKeys(15)=210
+	ControllerKeys(16)=211
+	ControllerKeys(17)=212
+	ControllerKeys(18)=213
+	ControllerKeys(19)=214
+	ControllerKeys(20)=215
+	ControllerKeys(21)=216
+	ControllerKeys(22)=217
+	ControllerKeys(23)=218
 }

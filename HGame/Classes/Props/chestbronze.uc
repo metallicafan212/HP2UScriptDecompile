@@ -14,47 +14,45 @@ var() bool bMakeSpawnPersistent;
 var bool bOpened;
 var int iBean;
 
+//AdamJD: HP1 style chests	
+var() bool bSpawnAllAtOnce;
+
 function int GetMaxEjectedObjects()
 {
-  // return 8;
   return nMAX_EJECTED_OBJECTS;
 }
 
 function SetupRandomBeans()
 {
-  //local int iBean;
   local int iBeanObject;
 
-  // iBean = 0;
-  // if ( iBean < iNumberOfBeans )
   for(iBeanObject = 0; iBeanObject < iNumberOfBeans; iBeanObject++)
   {
     if ( Rand(100) < (30 - (PlayerHarry.GetHealth() * 30)) && iBeanObject == 0 )
     {
       EjectedObjects[iBeanObject] = Class'ChocolateFrog';
-    } else {
+    } 
+	else 
+	{
       switch (Rand(5))
       {
         case 0:
-        EjectedObjects[iBeanObject] = Class'BlueJellyBean';
-        break;
+			EjectedObjects[iBeanObject] = Class'BlueJellyBean';
+			break;
         case 1:
-        EjectedObjects[iBeanObject] = Class'GreenJellyBean';
-        break;
+			EjectedObjects[iBeanObject] = Class'GreenJellyBean';
+			break;
         case 2:
-        EjectedObjects[iBeanObject] = Class'SpottedJellyBean';
-        break;
+			EjectedObjects[iBeanObject] = Class'SpottedJellyBean';
+			break;
         case 3:
-        EjectedObjects[iBeanObject] = Class'GreenPurpleCheckerBean';
-        break;
+			EjectedObjects[iBeanObject] = Class'GreenPurpleCheckerBean';
+			break;
         case 4:
-        EjectedObjects[iBeanObject] = Class'RedBlackStripeBean';
-        break;
-        default:
+			EjectedObjects[iBeanObject] = Class'RedBlackStripeBean';
+			break;
       }
     }
-    // iBean++;
-    // goto JL0007;
   }
 }
 
@@ -126,11 +124,12 @@ state turnover
     newSpawn = FancySpawn(EjectedObjects[iBean],,,Dir,Rotation); 
     if ( newSpawn.IsA('ChocolateFrog') )
     {
-      newSpawn.Velocity = Vel * 2;
-      bPlayBeanSound = True;
-    } else //{
-      if ( newSpawn.IsA('WizardCardIcon') )
-      {
+	    newSpawn.Velocity = Vel * 2;
+        bPlayBeanSound = True;
+    } 
+	else
+    if ( newSpawn.IsA('WizardCardIcon') )
+    {
         Vel = ObjectStartVelocity[iBean];
         Vel.X += 20;
         SpawnDirection = Rotation;
@@ -154,55 +153,59 @@ state turnover
         }
         newSpawn.SetLocation(Location + newSpawn.Velocity);
         bPlayWCardSound = True;
-      } else {
+    } 
+	else 
+	{
         newSpawn.Velocity = Vel;
         bPlayBeanSound = True;
         newSpawn.SetPhysics(PHYS_Falling);
-      }
-    //}
+    }
     newSpawn.bPersistent = bMakeSpawnPersistent;
     if ( bPlayWCardSound )
     {
       PlaySound(Sound'vendor_spawn_WC');
-    } else //{
-      if ( bPlayBeanSound )
-      {
+    } 
+	else
+    if ( bPlayBeanSound )
+    {
         switch (Rand(3))
         {
           case 0:
-          PlaySound(Sound'spawn_bean01');
-          break;
+			  PlaySound(Sound'spawn_bean01');
+			  break;
           case 1:
-          PlaySound(Sound'spawn_bean02');
-          break;
+			  PlaySound(Sound'spawn_bean02');
+			  break;
           case 2:
-          PlaySound(Sound'spawn_bean03');
-          break;
-          default:
+			  PlaySound(Sound'spawn_bean03');
+			  break;
         }
-      }
-    //}
+    }
   }
+ 
  begin:
   bProjTarget = False;
   eVulnerableToSpell =  SPELL_None;
   PlaySound(Sound'wood_chest_open');
   PlayAnim('Open');
   FinishAnim();
+  
   if ( bRandomBeans )
   {
-// JL0039:
     SetupRandomBeans();
   }
-  // iBean = 0;
-  // if ( iBean < iNumberOfBeans )
+  
   for(iBean = 0; iBean < iNumberOfBeans; iBean++)
   {
     generateobject();
-    Sleep(RandRange(0.3,0.6));
-    // iBean++;
-    // goto JL0039;
+	
+	//AdamJD:	Will make them all come out at once if true
+	if(!bSpawnAllAtOnce)
+	{
+		Sleep(RandRange(0.3,0.6));
+	}
   }
+  
   LoopAnim('End');
 }
 
@@ -262,10 +265,8 @@ defaultproperties
 
     bMakeSpawnPersistent=True
 
-    // Physics=2
 	Physics=PHYS_Falling
 
-    // eVulnerableToSpell=1
 	eVulnerableToSpell=SPELL_Alohomora
 
     CentreOffset=(X=0.00,Y=0.00,Z=20.00)
@@ -280,6 +281,5 @@ defaultproperties
 
     CollisionHeight=24.00
 
-    // CollideType=2
 	CollideType=CT_Box
 }
